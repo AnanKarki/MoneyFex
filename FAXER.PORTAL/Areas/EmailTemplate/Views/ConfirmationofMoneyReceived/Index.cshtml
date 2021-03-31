@@ -1,0 +1,26 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+
+    <p>
+        Dear @ViewBag.FaxerName
+    </p>
+    <br />
+    <p>
+        Hurray!
+    </p>
+    <p>
+        This is to confirm that, a total of @ViewBag.ReceiverCurrency was received today by @ViewBag.ReceiverName in @ViewBag.AgentCity, @ViewBag.AgentCountry.
+    </p>
+
+    <br />
+    <p>
+        It was a pleasure doing business with you
+    </p>
+    <br />
+   
+</div>

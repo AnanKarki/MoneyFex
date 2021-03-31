@@ -1,0 +1,59 @@
+﻿
+
+
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p> <b>Virtual Account Deposit  bank transfer</b></p>
+    <br />
+    <p>
+        Name of Sender: <b> @ViewBag.FaxerName</b>
+    </p>
+    @if (ViewBag.FaxerAccountNo != null)
+    {
+        <p>
+            Account No of Sender : <b> @ViewBag.FaxerAccountNo</b>
+        </p>
+    }
+    <p>
+        Deposit Amount : <b> @ViewBag.Amount</b>
+    </p>
+    @if (ViewBag.ReceivingAmount != null)
+    {
+        <p>
+            Receiving Amount : <b> @ViewBag.ReceivingAmount</b>
+        </p>
+    }
+    <p>
+        Virtual Account No : <b> @ViewBag.CardNumber</b>
+    </p>
+    <p>
+        Account User Name:  <b>@ViewBag.CardUserName</b>
+
+    </p>
+    @if (ViewBag.CardUserCountry != null)
+    {
+        <p>
+            Account User Country:  <b>@ViewBag.CardUserCountry</b>
+
+        </p>
+
+    }
+    @if (ViewBag.CardUserCity != null)
+    {
+        <p>
+            Account User City:  <b>@ViewBag.CardUserCity</b>
+
+        </p>
+    }
+
+
+    <p>
+        Payment Reference : <b> @ViewBag.PaymentReference</b>
+    </p>
+    <p>
+        Bank Reference : <b> @ViewBag.BankReference </b>
+    </p>
+</div>

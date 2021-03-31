@@ -1,0 +1,570 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    var baseurl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+<head>
+    <link rel="stylesheet" href="http://cdn.kendostatic.com/2014.3.1316/styles/kendo.common.min.css" />
+</head>
+<style>
+    .panel-block {
+        padding: 0px;
+    }
+
+    .add-input {
+        float: left;
+    }
+
+    #Usertreeview .k-sprite {
+        background-image: url('/Areas/Admin/Content/images/coloricons-sprite.png');
+    }
+
+    #Usertreeview .k-in {
+        border-style: none;
+        height: 30px;
+        width: 178px;
+    }
+
+    #treeview .k-sprite {
+        background-image: url('/Areas/Admin/Content/images/coloricons-sprite.png');
+    }
+
+    #treeview .k-in {
+        border-style: none;
+        height: 30px;
+        width: 178px;
+    }
+
+    #treeview .k-state-selected {
+        background-color: gray;
+        color: white;
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+        height: 100px;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    #Usertreeview .k-state-selected {
+        background-color: gray;
+        color: white;
+    }
+
+    .rootfolder {
+        background-position: 0 0;
+    }
+
+    .folder {
+        background-position: 0 -16px;
+    }
+
+    .pdf {
+        background-position: 0 -32px;
+    }
+
+    .html {
+        background-position: 0 -48px;
+    }
+
+    .image {
+        background-position: 0 -64px;
+    }
+
+    .vertical {
+        border-left: 1px solid black;
+        height: 1000px;
+        position: absolute;
+        left: 30%;
+        margin-top: -35px
+    }
+
+    .outer {
+        -webkit-user-select: none;
+    }
+
+    .inner {
+        -webkit-user-select: initial;
+    }
+
+    div.first {
+        display: block;
+        background-color: white;
+        height: 6em;
+        width: 10em;
+        text-align: center;
+    }
+
+        div.first:hover {
+            background-color: aqua;
+            cursor: pointer;
+        }
+
+    p.second {
+        position: relative;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    }
+
+    .second input[type='checkbox'] {
+        transform: translateY(15%);
+        cursor: pointer;
+    }
+
+    .appbtn {
+        /*display: inline-block;
+        padding: 8px 8px;
+        margin-bottom: 0;
+        font-size: 13px;
+        font-weight: normal;
+        line-height: 1.428571429;*/
+        border-radius: 3px;
+        position: relative;
+        padding: 15px 5px;
+        margin: 0 0 10px 10px;
+        min-width: 135px;
+        height: 96px;
+        text-align: center;
+        color: #666;
+        border: 1px solid #ddd;
+        background-color: #f4f4f4;
+        font-size: 12px;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
+        content: ">";
+    }
+
+    .doctable td a:link {
+        text-decoration: none;
+    }
+
+    .doctable td a:visited {
+        text-decoration: none;
+    }
+
+    .doctable td a:hover {
+        text-decoration: underline;
+    }
+
+    .doctable td a:active {
+        text-decoration: underline;
+    }
+
+    th, td {
+        white-space: normal !important;
+        line-height: 22px;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12 ">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5>Compliance Document</h5>
+                                    <hr>
+                                </div>
+                                <div class="card-block">
+                                    <div class="form-row">
+
+
+
+                                        <div class="col-sm-4 k-content" style="height:500px;overflow-y:auto">
+                                            <div data-bind="with:$root.File">
+                                                <label>Sender Type</label>
+                                                <select data-bind="options: $root.SenderType,
+                                                               optionsText: 'Name',
+                                                               optionsValue: 'Id',
+                                                               value: SenderType,
+                                                               event:{'change' : $root.getTreeData}"
+                                                        class="form-control">
+                                                </select>
+                                            </div>
+
+                                            <div id="treeview"></div>
+                                        </div>
+
+
+                                        <div id="FolderFileView" class="col-sm-3 demo-section k-content" style="display:none;height:500px; overflow-y:auto">
+                                            <!--ko if:$root.UserFolders().length != 0-->
+                                            <button id="downlaodallfile" type="button" data-bind="click:$root.DownloadAllFile" class="btn btn-default btn-sm col-lg-offset-1">
+                                                <i class="fa fa-download text-success"></i>Download All File
+                                            </button>
+
+                                            <!--/ko-->
+                                            <br />
+                                            <div id="Usertreeview"></div>
+
+
+                                        </div>
+
+                                        <div class="col-lg-5" id="FileView" style="display:none;height:500px; overflow-y:auto">
+                                            <div>
+                                                <div data-bind="foreach:Files">
+
+                                                    <table>
+                                                        <tr>
+                                                            <td>
+                                                                <h4 data-bind="text:SenderName" style="float:right;">
+                                                                </h4>
+                                                                <a href="#" data-bind="click:$root.GoBackToFolder" style="float:left;"><i class="fa fa-arrow-left"></i></a>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <br />
+                                            <!--ko if:$root.Files().length==0-->
+                                            <text class="text-center" id="filenotfound">No files found</text>
+                                            <!--/ko-->
+
+                                            <div data-bind="foreach:Files">
+                                                <a data-bind="click:$root.OpenDoc" id="btn" class="btn btn-app appbtn">
+                                                    <div class="first" id="first">
+                                                        <div class="Clean" data-bind="attr: { id: Id }">
+                                                            <img class="img-rounded " style="cursor:pointer;width:50px;height:50px" data-bind="attr: {src: Url()}">
+                                                        </div>
+                                                        <span class=""><span data-bind="text:Name"></span>.<span data-bind="text:FileExtension"></span></span>
+                                                    </div>
+                                                </a>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Areas/Admin/css/knockout-3.4.2.js"></script>
+    <script src="~/Areas/Admin/css/Riddha.Globals.ko.js"></script>
+    <script src="http://cdn.kendostatic.com/2014.3.1316/js/kendo.all.min.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Script.CompressFile.js"></script>
+    <script src="~/Scripts/jszip.min.js"></script>
+    <script type="text/javascript">
+
+        function FilesModel(item) {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.Name = ko.observable(item.Name || '');
+            self.SenderName = ko.observable(item.SenderName || '');
+            self.SenderType = ko.observable(item.SenderType || '');
+            self.FolderId = ko.observable(item.FolderId || 0);
+            self.Url = ko.observable(item.Url || '');
+            self.IsFiles = ko.observable(item.IsFiles || false);
+            self.FileExtension = ko.observable(item.FileExtension || '');
+            self.FileExtensionIconPath = ko.observable(item.FileExtensionIconPath || '');
+
+        }
+
+        function FoldersModel(item) {
+            var self = this;
+            item = item || {};
+            self.id = ko.observable(item.id || 0);
+            self.text = ko.observable(item.text || '');
+        }
+        function EnableDownload() {
+
+            $("#downlaodallfile").prop('disabled', false);
+        }
+        function DisabledDownload() {
+
+            $("#downlaodallfile").prop('disabled', true);
+        }
+
+        function complianceDocumentController()
+        {
+
+            var self = this;
+            var url = "/Admin/ComplianceDocument";
+            self.File = ko.observable(new FilesModel());
+            self.Files = ko.observableArray([]);
+            self.SelectedCountryFolderId = ko.observableArray(0);
+            self.CountryFolders = ko.observableArray([]);
+            self.SelectedFile = ko.observable();
+            self.SelectedFolderId = ko.observable();
+            self.UserFolders = ko.observableArray([]);
+            self.SenderType = ko.observableArray([
+                { Name: 'Sender', Id:0 },
+                { Name: 'Business', Id:1 }
+            ]);
+            getTreeData();
+            function getTreeData() {
+                debugger;
+                var senderType = self.File().SenderType();
+                Riddha.ajax.get(url + "/GetCountryFolder?senderType=" + senderType, null)
+                    .done(function (result) {
+                        var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FoldersModel);
+                        self.CountryFolders(data);
+                        treeview.dataSource.data(result.Data);
+
+                    });
+            }
+            var treeview = $("#treeview").kendoTreeView({
+                loadOnDemand: false
+            }).data("kendoTreeView"),
+
+                handleTextBox = function (callback) {
+                    return function (e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                            callback(e);
+                        }
+                    };
+                };
+            var UserCountrytreeView = $("#Usertreeview").kendoTreeView({
+                loadOnDemand: false
+            }).data("kendoTreeView"),
+
+                handleTextBox = function (callback) {
+                    return function (e) {
+                        if (e.type != "keypress" || kendo.keys.ENTER == e.keyCode) {
+                            callback(e);
+                        }
+                    };
+                };
+
+
+            function GetUserByCountryId() {
+
+                var selectedNode = treeview.select();
+                var item = treeview.dataItem(selectedNode);
+                if (item != undefined) {
+                    if (item.parentId == null) {
+                        var senderType = self.File().SenderType();
+                        Riddha.ajax.get(url + "/GetUserByCountryId?CountryId=" + item.id + "&senderType=" + senderType)
+                            .done(function (result) {
+                                var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FoldersModel);
+                                self.UserFolders(data);
+                                UserCountrytreeView.dataSource.data(result.Data);
+                                self.Files([]);
+                                $("#FolderFileView").show();
+                                $("#filenotfound").hide();
+                                $("#FileView").hide();
+                            });
+                    }
+
+
+                }
+            }
+
+            function GetFilesBySenderDocumentationId() {
+                var selectedNode = UserCountrytreeView.select();
+                var item = UserCountrytreeView.dataItem(selectedNode);
+                self.SelectedFolderId(item.id);
+                if (item != undefined) {
+                    Riddha.ajax.get(url + "/GetFilesBySenderDocumentationId?senderDoumentationId=" + item.id)
+                        .done(function (result) {
+                            var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FilesModel);
+                            self.Files(data);
+                            $("#FolderFileView").hide();
+                            $("#FileView").show();
+                            $("#filenotfound").show();
+
+                        });
+                }
+            }
+            function GetFilesBySenderId() {
+                var selectedNode = UserCountrytreeView.select();
+                var item = UserCountrytreeView.dataItem(selectedNode);
+                self.SelectedFolderId(item.id);
+                if (item != undefined) {
+                    Riddha.ajax.get(url + "/GetFilesBySenderId?senderId=" + item.id)
+                        .done(function (result) {
+                            var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FilesModel);
+                            self.Files(data);
+                            $("#FolderFileView").hide();
+                            $("#FileView").show();
+                            $("#filenotfound").show();
+                        });
+                }
+            }
+
+            function GetFileBySenderIdinCountryTreeView() {
+
+                var selectedNode = treeview.select();
+                var item = treeview.dataItem(selectedNode);
+                self.SelectedFolderId(item.id);
+                if (item != undefined) {
+
+                    if (item.parentId != null) {
+                        Riddha.ajax.get(url + "/GetFilesBySenderDocumentationId?senderDoumentationId=" + item.id)
+                            .done(function (result) {
+                                var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FilesModel);
+                                self.Files(data);
+                                $("#FileView").show();
+                            $("#FolderFileView").hide();
+
+                            });
+                    }
+
+
+                }
+            }
+
+            function GetFilesByFolderId() {
+                var id = 0;
+                var selectedNode = treeview.select();
+                var item = treeview.dataItem(selectedNode);
+
+
+                if ((id == undefined || id == 0) && item != undefined) {
+
+                    id = item.id;
+                    self.SelectedFile(new FilesModel({
+                        Id: item.id,
+                        Name: item.te,
+
+                    }));
+                }
+
+                Riddha.ajax.get(url + "/GetFilesByFolder?CountryId=" + id)
+                    .done(function (result) {
+
+                        var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), FilesModel);
+
+                        self.Files(data);
+                        self.SelectedCountryFolderId(id);
+
+                    });
+
+            }
+
+
+            $(document).on('click', '#Usertreeview', function () {
+                GetFilesBySenderDocumentationId();
+
+            });
+
+            $(document).on('click', '#treeview', function () {
+                //GetFilesByFolderId();
+                GetUserByCountryId();
+                GetFileBySenderIdinCountryTreeView();
+            });
+
+            self.GoBackToFolder = function () {
+                $("#FolderFileView").show();
+                $("#FileView").hide();
+            }
+
+            self.OpenDoc=function(item) {
+
+                //window.open(src, "_blank");
+                if (item.Url().length > 200) {
+                    //$("#docSrc").attr('src', src);
+                    //window.open(src, "_blank");
+
+                    var image = new Image();
+                    image.src = item.Url();
+
+                    var w = window.open("");
+                    w.document.write(image.outerHTML);
+
+                }
+                else {
+                    $("#docSrc").attr('src', item.Url());
+                    window.open('@baseurl' + '/' + item.Url(), "_blank");
+                }
+
+            }
+
+            self.Download = function () {
+
+                //var compression = new FileCompressionController();
+                var ids = "";
+                var Urls = [];
+                ko.utils.arrayForEach(self.Files(), function (item) {
+
+                        Urls.push(new CompressionFileModel({
+                            Name: item.Name(),
+                            Ext: item.FileExtension(),
+                            FilePath: item.Url()
+                        }));;
+
+                });
+                if (Urls.length == 0) {
+                    Riddha.UI.Toast("Select files to download", 0);
+                    return;
+                }
+                var folderName = ko.utils.arrayFirst(self.UserFolders(), function (item) {
+                    return item.id() == self.SelectedFolderId();
+                });
+                compressed_img(Urls, "ComplianceDoc - " + (folderName.text() || ''));
+            };
+
+            self.DownloadAllFile = function () {
+
+                GetFilesByFolderId();
+                var Urls = [];
+                var FolderUrls = [];
+                ko.utils.arrayForEach(self.Files(), function (item) {
+                    if (item.IsFiles() == true) {
+                        Urls.push(new CompressionFileModel({
+                            Name: item.Name(),
+                            Ext: item.FileExtension(),
+                            FilePath: item.Url(),
+                            Id: item.FolderId(),
+
+                        }));
+                    } else {
+                        FolderUrls.push(new CompressionFileModel({
+                            Name: item.Name(),
+                            Ext: item.FileExtension(),
+                            FilePath: item.Url(),
+                            Id: item.Id(),
+
+                        }));
+                    }
+
+                });
+
+
+                var folderName = ko.utils.arrayFirst(self.CountryFolders(), function (item) {
+                    return item.id() == self.SelectedCountryFolderId();
+                });
+
+                compressed_imgByFloders(FolderUrls, Urls, "ComplianceDoc - " + (folderName.text() || ''));
+            };
+        }
+
+        var objCompliance = new complianceDocumentController();
+        ko.applyBindings(objCompliance, document.getElementById("partial-render"));
+
+
+
+    </script>
+
+
+
+}

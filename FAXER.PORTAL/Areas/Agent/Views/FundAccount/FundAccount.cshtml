@@ -1,0 +1,51 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentFundAccountViewModel
+@{
+    ViewBag.Title = "FundAccount";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+
+                <!--  -->
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <!--  -->
+                    <div class=" dashboard_body">
+                        <h2>Fund Account  </h2>
+                        <hr>
+                        <div class=" clearfix">
+
+                            @Html.HiddenFor(x => x.AgentId)
+                            @Html.HiddenFor(x => x.City)
+                            @Html.HiddenFor(x => x.AgentCountry)
+                            @Html.HiddenFor(x => x.AgentCountryCurrency)
+                            @Html.HiddenFor(x => x.AgentCountryCurrencySymbol)
+                            @Html.HiddenFor(x => x.AgentName)
+                            <div class="col-lg-6 col-lg-offset-3 text-center">
+                                <div class="form-group mb20">
+                                    <h3 class="text-center">Amount</h3>
+                                    <div class="input-group">
+                                        <div class="input-group-addon">@Model.AgentCountryCurrency</div>
+                                        @Html.TextBoxFor(x => x.Amount, new { @class = "form-control", @placeholder = "Enter Amount", @type = "number", @id = "exampleInputAmount" })
+
+
+                                    </div>
+
+                                    @Html.ValidationMessage("Amount", "", new { @class = "text-danger" })
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Continue</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </section>
+}

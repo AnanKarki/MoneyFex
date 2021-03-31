@@ -1,0 +1,75 @@
+﻿@model FAXER.PORTAL.Models.SenderTopUpSupplierAbroadVm
+
+@{
+    ViewBag.Title = "TopUpSupplierAbroad";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Top-up an Account </h3>
+                        <hr>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.Supplier, (IEnumerable<SelectListItem>)ViewBag.Suppliers, "Select Supplier", new { @class = "form-blue", @id = "SupplierId" })
+                            @Html.ValidationMessageFor(model => model.Supplier, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+
+                        <div class="form-group  ">
+                            @Html.TextBoxFor(model => model.WalletNo, new { @class = "form-blue", @placeholder = "Enter Supplier Name or Wallet No." , @id = "WalletId" })
+                            @Html.ValidationMessageFor(model => model.WalletNo, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $('#SupplierId').on('change', function () {
+
+            $('#WalletId').val(this.value);
+        });
+
+
+        function FilterSuppliers() {
+
+            var countryCode = $("#Country").val();
+            window.location.href = "/SenderPayBills/SenderTopUpServices?country=" + countryCode;
+        }
+    </script>
+}

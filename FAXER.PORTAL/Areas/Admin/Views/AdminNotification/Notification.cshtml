@@ -1,0 +1,77 @@
+﻿@model List<FAXER.PORTAL.Models.NotificationViewModel>
+@{
+    ViewBag.Title = "Notification";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="card" style="">
+
+                        <div class="card-header border-bottom">
+                            
+                        </div>
+
+                        <div class="card-body">
+
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <hr />
+                                    <div class="  ">
+                                        <h3> Notification (<b>@Model.Count()</b>)</h3>
+                                        <hr>
+
+                                        <ul class="notification-list">
+
+                                            <div class="drop-content">
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    <li>
+                                                        <div class=" pd-l0">
+                                                            <a href="">
+                                                                <h5>@item.Title</h5>@item.Message<p>@item.Time</p>
+                                                                <p class="time">@item.HourAgo</p>
+                                                            </a>
+                                                        </div>
+                                                    </li>
+                                                }
+                                                <!--  -->
+
+
+
+                                            </div>
+                                        </ul>
+
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                   
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+

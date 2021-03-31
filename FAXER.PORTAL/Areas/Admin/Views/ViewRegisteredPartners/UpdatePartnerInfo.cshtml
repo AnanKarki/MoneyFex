@@ -1,0 +1,275 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.RegisterAPartnerViewModel
+@{
+    ViewBag.Title = "UpdatePartnerInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpdatePartnerInfo</h2>
+
+@using (Html.BeginForm("UpdatePartnerInfo", "ViewRegisteredPartners", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Update Partner Info</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="/Admin/ViewRegisteredPartners" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Registered Partners</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Update Partner Info</li>
+                    </ol>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+
+                        <form action="#" class="form-horizontal">
+                            <div class="form-body">
+                                <h3 class="box-title">Partner Details</h3>
+
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Partner Name </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Partner License/Opration No. </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(model => model.LicenseNo, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LicenseNo, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Name of Contact Person</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.ContactPersonName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ContactPersonName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Partner type</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(model => model.PartnerType, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PartnerType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+
+
+
+                                <h3 class="box-title">Partner Contact Details</h3>
+
+
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Address 1 <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Address 2</label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>State/Province/Region  <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model=>model.Id)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Zip/Postal Code  <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>City <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Country <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Country, new { @class="form-control", @readonly="readonly"})
+                                        @Html.HiddenFor(model=>model.PartnerLogoUrl)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Phone Number <span class="required">*</span></label>
+                                </div>
+                                <div class="col-lg-1">
+                                    @Html.TextBoxFor(model => model.CountryPhoneCode, new { @class = "form-control", @id = "code", @readonly = "readonly" })
+
+
+                                </div>
+                                <div class="col-lg-3 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Email Address <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @readonly="readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Website <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Website, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Website, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Partner Logo <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+
+                                        <input type="file" name="partnerLogo" class="form-control" onchange="changeImg();">
+                                        @Html.ValidationMessageFor(model => model.PartnerLogoUrl, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <img id="displayImg" src="@Model.PartnerLogoUrl" style="height:100px; width:100px;"/>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+
+                                <div class="clearfix"></div>
+
+
+
+
+                            </div>
+                            <div class="form-actions text-center">
+                                <button type="submit" class="btn btn-success btn-rounded"> <i class="fa fa-check"></i> Update Info </button>
+                                <a href="/Admin/ViewRegisteredPartners" type="button" class="btn btn-danger btn-rounded">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+            <!--/.row -->
+            <!--row -->
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+        function changeImg() {
+            $("#displayImg").hide();
+
+
+        }
+
+
+    </script>
+    
+    }

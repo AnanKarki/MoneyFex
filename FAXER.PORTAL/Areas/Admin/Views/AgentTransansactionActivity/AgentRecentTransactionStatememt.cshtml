@@ -1,0 +1,212 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Agent.Models.DailyTransactionStatementListVm>
+@{
+    ViewBag.Title = "AgentRecentTransactionStatememt";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">
+                                        Recent Transactions
+                                    </h4>
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="dates" class="form-control form-control-round form-control-bold" placeholder="From to Date" id="dates" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("SendingCountry", (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control form-control-round form-control-bold", @id = "SendingCountry", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("ReceivingCountry", (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select ReceivingCountry Country", new { @class = "form-control form-control-round form-control-bold", @id = "ReceivingCountry", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+
+                                                <input type="text" placeholder="Search By Status" class="form-control form-control-round form-control-bold" name="Status" id="Status" value="@ViewBag.Status" onchange="filter();">
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By ReceiverName " class="form-control form-control-round form-control-bold" name="ReceiverName" id="ReceiverName" value="@ViewBag.ReceiverName" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Identifier " class="form-control form-control-round form-control-bold" name="Identifier" id="Identifier" value="@ViewBag.Identifier" onchange="filter();">
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Sending Country</th>
+                                                    <th>Receiving Country</th>
+                                                    <th>Agent</th>
+                                                    <th>Receiver</th>
+                                                    <th>Amount + Fee + Commission</th>
+
+                                                    <th>Identifier</th>
+                                                    <th>Date & Time</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.SendingCountry</td>
+                                                        <td>@item.ReceivingCountry</td>
+                                                        <td><a href="">@item.StaffName</a></td>
+                                                        <td><a href="">@item.ReceiverName</a></td>
+                                                        <td>@item.Currency @item.Amount<br>@item.Currency @item.Fee<br>@item.Currency @item.AgentCommission</td>
+
+
+                                                        @if (item.TransferMethod == "Bank Deposit")
+                                                        {
+
+                                                            <td>
+                                                                <a href="@Url.Action("Index","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit, AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                        else if (item.TransferMethod == "Cash Pickup")
+                                                        {
+                                                            <td>
+                                                                <a href="@Url.Action("Index","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.CashPickUp, AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+
+                                                        else if (item.TransferMethod == "Service Payment")
+                                                        {
+                                                            <td>
+                                                                <a href="@Url.Action("Index ","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.PayBillsMonthly, AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                        else if (item.TransferMethod == "Bill Payment")
+                                                        {
+                                                            <td>
+                                                                <a href="@Url.Action("Index","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.PayBillsTopUp, AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                        else if (item.TransferMethod == "KiiPay Wallet")
+                                                        {
+                                                            <td>
+                                                                <a href="@Url.Action("Index","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.KiiPayWallet, AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                        else if (item.TransferMethod == "Mobile Wallet")
+                                                        {
+                                                            <td>
+                                                                <a href="@Url.Action("Index","TranscationDetails" , new { @Area = "Admin", id = item.Id, transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.OtherWalletTransfer , AgentId = @item.AgentId })">
+                                                                    @item.TransactionIdentifier
+                                                                </a>
+                                                            </td>
+                                                        }
+                                                        <td>@item.DateAndTime</td>
+                                                        <td>@item.StatusName</td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                           Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("AgentRecentTransactionStatememt",
+                                                            new { @page = page }))
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                @section scripts{
+                    <script type="text/javascript">
+
+                        function filter() {
+
+                            var SendingCountry = $("#SendingCountry").val();
+                            var ReceivingCountry = $("#ReceivingCountry").val();
+                            var Status = $("#Status").val();
+                            var ReceiverName = $("#ReceiverName").val();
+                            var Identifier = $("#Identifier").val();
+                            var date = $('input[name="dates"]').val();
+
+                            window.location.href = "/Admin/AgentTransansactionActivity/AgentRecentTransactionStatememt?date=" + date + "&SendingCountry=" +
+                                SendingCountry + "&ReceivingCountry=" + ReceivingCountry + "&Status=" + Status
+                                + "&ReceiverName=" + ReceiverName + "&Identifier=" + Identifier;
+
+                        }
+                        $(".applyBtn").click(function () {
+                            filter();
+                        });
+
+                    </script>
+                }

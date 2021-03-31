@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "PaymentSuccess";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol  @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard </h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                <div class="login_signup mb50 clearfix text-center">
+
+                    <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                    <h2 class=" ">You've sent <span class="text-primary">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol @ViewBag.Amount </span> to @ViewBag.ReceiverName</h2>
+                                                                                          
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <a href="@Url.Action("Index")" class="btn btn-primary btn-lg mb30">Send More Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center> 
+                            <a href="@Url.Action("Index","Dashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard</a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+
+
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>

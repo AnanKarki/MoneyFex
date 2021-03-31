@@ -1,0 +1,135 @@
+.mf-home-page {}
+
+.mf-home-page .exchange-rate-holder {
+    font-size: 20px;
+}
+
+.mf-home-page .estimate-calculator dl dt {
+    font-size: 20px;
+}
+
+.mf-home-page h1 {
+    font-size: 5em;
+    line-height: 1.2;
+}
+.form-home-page
+{
+  margin-bottom: 15px;
+  clear: both !important;
+}
+.form-home-page label {
+    display: inline-block !important;
+    padding: 0;
+    line-height: normal;
+    min-height: auto;
+}
+ 
+.form-home-page .radio, .checkbox {
+    float: left;
+}
+.form-home-page input, .form-home-page select{
+       width: 100%;
+       min-width: 100px;
+       border: solid 2px #02b6ff;
+       border-radius: 10px;
+       padding: 18px 15px;
+       font-size: 20px;
+       display: inline-block;
+       padding-left: 50px;
+}
+.align-middle {
+    vertical-align: middle!important;
+}
+.pattern3
+{
+ background: #fff url(../images/pattern2.png) no-repeat 0 0;
+}
+.form-home-page .niceCountryInputMenu 
+{
+   width: 100%;
+   min-width: 100px;
+   border: solid 2px #02b6ff;
+   border-radius: 10px;
+   padding: 16px 8px;
+   display: block;
+   margin-top: 1px;
+   position: relative;
+}.form-home-page .niceCountryInputMenu span {
+    font-size: 20px;
+}
+.countr-code-home {
+    position: absolute;
+    z-index: 9;
+    padding: 20px 0 0 15px;
+    left: 0;
+}
+ ul.small-nav {
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul.small-nav li {
+    display: inline-block;
+}
+
+ul.small-nav li a {
+    padding: 1px 15px;
+    color: #014667;
+     letter-spacing: 2px;
+}
+ul.small-nav li a:hover, ul.small-nav li a:focus {
+    color: #02b6ff;
+}
+.label-fontsize .radio {
+    font-size: 18px;
+}
+.form-home {
+    margin-bottom: 20px;
+    clear: both !important;
+}
+@media only screen and (max-width: 768px) {
+
+.mf-home-page h1 {
+    font-size: 32px;
+    }
+
+    .niceCountryInputMenuDropdownContent  
+    {
+      width: 100%;
+    }
+    .niceCountryInputMenuFilter
+    {
+      width: 100% !important;
+    }
+}
+button.btn-transfer, a.btn-transfer, input.btn-transfer {
+    background: #02b6ff;
+    color: #fff;
+    border: 0;
+    outline: 0;
+    padding: 10px 50px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+button.btn-transfer:hover, button.btn-transfer:focus, 
+a.btn-transfer:hover, a.btn-transfer:focus, 
+input.btn-transfer:hover, input.btn-transfer:focus {
+   background: #003d55;
+    color: #fff;
+}
+.navbar-default
+{
+  overflow: unset;
+      padding: 5px 0;
+      border-radius: 0 !important;
+}
+.footer a {
+    color: #fff;
+}

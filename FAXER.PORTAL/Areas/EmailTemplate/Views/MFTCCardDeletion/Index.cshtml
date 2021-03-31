@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+<div style="padding:20px">
+
+
+    <p>
+        Dear Admin,
+    </p>
+    <p>
+        A MoneyFex Virtual Account registered with the following information has been deleted by : @ViewBag.NameOfDeleter
+    </p>
+    <br />
+    <br />
+
+
+    Account No: @ViewBag.MFTCNo
+    <br />
+    Account User Name : @ViewBag.NameOnMFTCard
+    <br />
+    Account User Date of Birth : @ViewBag.DOBOfCardUser
+    <br />
+    Account User Country : @ViewBag.CardUserHistory
+    <br />
+    Account User City: @ViewBag.CardUserCity
+    <br />
+    Amount on Account: @ViewBag.AmountOnCard
+    <br />
+    <br />
+
+    Please make a refund to this user accordingly.
+    <br />
+
+
+</div>

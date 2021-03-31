@@ -1,0 +1,120 @@
+﻿@model FAXER.PORTAL.Models.PreviousPayeeViewModel
+@{
+    ViewBag.Title = "PreviousPayee";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var AccountNumber = "";
+    if (Model != null) {
+
+        AccountNumber = Model.BusinessMFCode ?? "";
+    }
+}
+
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Pay for goods & services abroad</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h3>Have you made a payment to this Service Provider before ?</h3>
+
+
+                    <div class="col-lg-6">
+                        <br>
+                        <label for="chkYes">
+                            <input type="radio" id="chkYes" name="chkPinNo" class="" /> Yes
+                        </label>
+                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;
+                        <label for="chkNo">
+                            <input type="radio" id="chkNo" name="chkPinNo" class="" /> No
+                        </label>
+
+                        <hr>
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div id="dvPinNo" style="display:none" class="col-lg-6">
+
+                        @Html.DropDownListFor(model => model.BusinessMFCode, (IEnumerable<SelectListItem>)ViewBag.PreviousPayee, "Select a previous payee", new { @class = "form-control", id = "txtPinNo" })
+
+                    </div>
+
+
+
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        var AccountNumber = '@AccountNumber';
+        if (AccountNumber != "") {
+
+            $("#chkYes").prop("checked", true);
+            $("#dvPinNo").show();
+
+
+        }
+
+    </script>
+}

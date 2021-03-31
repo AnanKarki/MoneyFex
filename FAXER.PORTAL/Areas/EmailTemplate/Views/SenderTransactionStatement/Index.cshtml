@@ -1,0 +1,265 @@
+﻿
+@model FAXER.PORTAL.Areas.Admin.ViewModels.NewSenderTransactionViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+
+@*<div>
+    <h3 style="color:blue">@ViewBag.SenderName </h3>
+
+    <h5><b>AccountNo: @ViewBag.SenderAccountNo</b> </h5>
+
+    <h5><b>Country:@ViewBag.SenderCountry </b></h5>
+</div>
+<br />
+
+<div class="table-responsive ">
+
+    <table class="table table-bordered" cellspacing="0" width="300%">
+
+        <thead>
+
+            <tr>
+                <td colspan="13" class="text-center">
+                    Transaction Metre
+                </td>
+            </tr>
+            <tr>
+
+                <td><b>Month</b></td>
+                <td><b>Jan</b></td>
+                <td><b>Feb</b></td>
+                <td><b>March</b></td>
+                <td><b>April</b></td>
+                <td><b>May</b></td>
+                <td><b>June</b></td>
+                <td><b>July</b></td>
+                <td><b>Aug</b></td>
+                <td><b>Sep</b></td>
+                <td><b>Oct</b></td>
+                <td><b>Nov</b></td>
+                <td><b>Dec</b></td>
+            </tr>
+        </thead>
+        <tbody style="margin-bottom: 30px !important;">
+
+
+            <tr>
+                <td> Amount</td>
+                <td> @Model.Monthly.Jan   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Feb   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.March @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.April @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.May   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Jun   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.July  @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Aug   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Sep   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Oct   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Nov   @Model.Monthly.Currency</td>
+                <td> @Model.Monthly.Dec   @Model.Monthly.Currency</td>
+
+            </tr>
+
+
+
+        </tbody>
+
+    </table>
+
+</div>
+<br />
+
+
+<div class="table-responsive">
+    <table class="table table-bordered" cellspacing="0" width="300%">
+        <thead>
+            <tr>
+                <td><b>SN</b></td>
+                <td><b>Transaction Id</b></td>
+                <td><b>Receiver</b></td>
+                <td><b>Date</b></td>
+                <td><b>Last 4 Digits</b></td>
+                <td><b>Card Issuer</b></td>
+                <td><b>Amount</b></td>
+                <td><b>Fee</b></td>
+                <td><b>Billing Address</b></td>
+                <td><b>Status</b></td>
+            </tr>
+        </thead>
+        <tbody style="margin-bottom: 30px !important;">
+
+            @{ int i = 0;}
+            @foreach (var item in Model.TransactionListDownload)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.ReceiptNo</td>
+                    <td>@item.Receiver</td>
+                    <td>@item.Date</td>
+                    <td>@item.Last4Digits</td>
+                    <td>@item.CardIssuer</td>
+                    <td>@item.CountryCurrency @item.Amount</td>
+                    <td>@item.Fee</td>
+                    <td>@item.BillingAddress</td>
+                    <td>@item.Status</td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+
+</div>*@
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom row">
+                                    <div class="col-lg-9 col-md-6">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">
+                                            <label class="text-primary">@ViewBag.SenderName </label><span>
+                                                Account No: @ViewBag.SenderAccountNo
+                                                <br>Country: @ViewBag.SenderCountry
+                                            </span>
+                                        </h4>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="13" align="center"><h5 class="mb-0">Transaction Meter</h5></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Month</b></td>
+                                                    <td>Jan</td>
+                                                    <td>Fab</td>
+                                                    <td>Mar</td>
+                                                    <td>April</td>
+                                                    <td>May</td>
+                                                    <td>June</td>
+                                                    <td>July</td>
+                                                    <td>Aug</td>
+                                                    <td>Sep</td>
+                                                    <td>Oct</td>
+                                                    <td>Nov</td>
+                                                    <td>Dec</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Amount</b></td>
+                                                    <td> @Model.Monthly.Jan   </td>
+                                                    <td> @Model.Monthly.Feb   </td>
+                                                    <td> @Model.Monthly.March </td>
+                                                    <td> @Model.Monthly.April </td>
+                                                    <td> @Model.Monthly.May   </td>
+                                                    <td> @Model.Monthly.Jun   </td>
+                                                    <td> @Model.Monthly.July  </td>
+                                                    <td> @Model.Monthly.Aug   </td>
+                                                    <td> @Model.Monthly.Sep   </td>
+                                                    <td> @Model.Monthly.Oct   </td>
+                                                    <td> @Model.Monthly.Nov   </td>
+                                                    <td> @Model.Monthly.Dec   </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-lg-4" style="float:left">
+
+                                            <a id="downloadButton" title="" class="btn btn-primary mb20 pull-left" onclick="downloadStatement();">Download Statement</a>
+                                        </div>
+
+
+                                        <div class="col-lg-4" style="float:right">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Tranasaction Id" class="form-control form-control-round form-control-bold" name="ReceiptNo" id="ReceiptNo" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered ">
+
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Receiver</th>
+                                                    <th>Date</th>
+                                                    <th>Last 4 digits</th>
+                                                    <th>Card Issuer</th>
+
+                                                    <th>Amount</th>
+                                                    <th>Fee</th>
+                                                    <th>Billing Address</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model.TransactionListDownload)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.ReceiptNo</td>
+                                                        <td>@item.Receiver</td>
+                                                        <td>@item.Date</td>
+                                                        <td>@item.Last4Digits</td>
+                                                        <td>@item.CardIssuer</td>
+                                                        <td>@item.CountryCurrency @item.Amount</td>
+                                                        <td>@item.Fee</td>
+                                                        <td>@item.BillingAddress</td>
+                                                        <td>@item.Status</td>
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

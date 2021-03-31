@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+
+
+    <p>
+        Dear @ViewBag.FaxerName,
+    </p>
+
+    <p>
+        This is to confirm that you have successfully remove auto payment of @ViewBag.AutoTopUpAmount
+        @ViewBag.CountryCurrencySymbol
+        from @ViewBag.BusinessMerchantName.
+    </p>
+    <p>
+        You can add auto payment to a merchant by going to the <i><strong>Standing Orders</strong></i> section of your dashboard.
+    </p>
+    
+    <table style="width:80%; margin-left:70px ">
+        <tbody>
+            <tr>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoTopUp"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+           
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.PayforGoodsBusinessMerchant"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/23.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

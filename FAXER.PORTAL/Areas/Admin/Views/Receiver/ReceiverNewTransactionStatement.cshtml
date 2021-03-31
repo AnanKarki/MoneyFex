@@ -1,0 +1,182 @@
+﻿
+@using PagedList;
+@using PagedList.Mvc;
+@model FAXER.PORTAL.Areas.Admin.ViewModels.NewReceiverTransactionStatement
+@{
+    ViewBag.Title = "ReceiverNewTransactionStatement";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom row">
+                                    <div class="col-lg-9 col-md-6">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">
+                                            <label class="text-primary">@ViewBag.ReceiverName </label><span>
+                                                Telephone: @ViewBag.ReceiverTelephoneNo
+                                                <br>Country: @ViewBag.ReceiverCountryName
+                                            </span>
+                                        </h4>
+                                    </div>
+
+
+                                    <div class=" col-lg-3 col-md-6 form-group">
+                                        @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Year, "Select Year", new { @class = "form-control", @id = "Year", @onchange = "filter();" })
+
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td colspan="13" align="center"><h5 class="mb-0">Transaction Meter</h5></td>
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Month</b></td>
+                                                    <td>Jan</td>
+                                                    <td>Fab</td>
+                                                    <td>Mar</td>
+                                                    <td>April</td>
+                                                    <td>May</td>
+                                                    <td>June</td>
+                                                    <td>July</td>
+                                                    <td>Aug</td>
+                                                    <td>Sep</td>
+                                                    <td>Oct</td>
+                                                    <td>Nov</td>
+                                                    <td>Dec</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td><b>Amount</b></td>
+                                                    <td> @Model.Monthly.Jan   </td>
+                                                    <td> @Model.Monthly.Feb   </td>
+                                                    <td> @Model.Monthly.March </td>
+                                                    <td> @Model.Monthly.April </td>
+                                                    <td> @Model.Monthly.May   </td>
+                                                    <td> @Model.Monthly.Jun   </td>
+                                                    <td> @Model.Monthly.July  </td>
+                                                    <td> @Model.Monthly.Aug   </td>
+                                                    <td> @Model.Monthly.Sep   </td>
+                                                    <td> @Model.Monthly.Oct   </td>
+                                                    <td> @Model.Monthly.Nov   </td>
+                                                    <td> @Model.Monthly.Dec   </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <div>
+                                        <div class="col-lg-4" style="float:left">
+
+                                            <a id="downloadButton" title="" class="btn btn-primary mb20 pull-left" onclick="downloadStatement();">Download Statement</a>
+                                        </div>
+
+
+                                        <div class="col-lg-4" style="float:right">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Tranasaction Id" class="form-control form-control-round form-control-bold" name="ReceiptNo" id="ReceiptNo" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        @*<table id="custom-btn" class="table table-striped table-bordered nowrap">*@
+                                        <table class="table table-striped table-bordered">
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Transaction ID</th>
+                                                    <th>Sender</th>
+                                                    <th>Date</th>
+                                                    <th>Bank Wallet Number</th>
+                                                    <th>Bank Wallet Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Fee</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model.TransactionList)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.Identifier</td>
+                                                        <td>@item.SenderName</td>
+                                                        <td>@item.DateTime</td>
+                                                        <td>@item.BanKWalletNumber</td>
+                                                        <td>@item.BanKWalletName</td>
+                                                        <td>@item.ReceiverCountryCurrency @item.Amount</td>
+                                                        <td>@item.Fee</td>
+                                                        <td>@item.Status</td>
+
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+
+
+                                        Page @(Model.TransactionList.PageCount < Model.TransactionList.PageNumber ? 0 :
+                                        Model.TransactionList.PageNumber) of @Model.TransactionList.PageCount
+
+                                        @Html.PagedListPager(Model.TransactionList, page => Url.Action("ReceiverNewTransactionStatement",
+                                          new { @page = page, @ReceiverId = ViewBag.ReceiverId }))
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+            var ReceiptNo = $("#ReceiptNo").val();
+            var year=$("#Year").val();
+            var ReceiverId = '@ViewBag.ReceiverId';
+            window.location.href = "/Admin/Receiver/ReceiverNewTransactionStatement?ReceiverId=" + ReceiverId + "&year=" + year + "&ReceiptNo=" + ReceiptNo;
+
+        }
+
+        function downloadStatement() {
+            var year = $("#Year").val();
+            var ReceiverId = '@ViewBag.ReceiverId';
+            window.location.href = "/Admin/Receiver/DownloadStatement?ReceiverId=" + ReceiverId + "&year=" + year;
+        }
+
+    </script>
+}

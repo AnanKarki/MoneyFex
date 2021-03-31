@@ -1,0 +1,215 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredPartnersViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    string[] Alpha = ViewBag.Alpha;
+}
+}
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("@ViewBag.Message", @ViewBag.ToastrVal);
+    };
+    </script>
+}
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-header">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <div class="d-inline">
+                                    <h4>Registered Partners</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.php"> <i class="feather icon-home"></i> </a>
+                                    </li>
+
+                                    <li class="breadcrumb-item">
+                                        <a href="#!">Registered Partners</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="page-body">
+                    <div class="row">
+                        <!--  -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Registered Partners</b></p>
+                                            <h4 class="m-b-0">   @ViewBag.TotalRegisteredPartner</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-users f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Active Partners</b></p>
+                                            <h4 class="m-b-0">@ViewBag.TotatActivePartner</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Inactive Partners</b></p>
+                                            <h4 class="m-b-0">@ViewBag.TotalInActivePartner</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-book f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-block">
+                                    <div class="row ">
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control form-control-round form-control-bold", id = "Country", onchange = "filter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control form-control-round form-control-bold", id = "City", onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input name="Search" class="form-control form-control-round form-control-bold" id="search" placeholder="Search Receiver" onkeyup="filter();">
+
+                                            </div>
+                                            <!--  -->
+                                        </div>
+                                    </div>
+
+                                    <div class="m-b-15">
+
+
+                                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#email">Send Email</button>
+
+
+                                        <button class="btn btn-secondary btn-round" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+                                        <a href="register-partner.php" class="btn btn-warning btn-round">Register a Partner</a>
+
+
+
+                                    </div>
+                                    <div class="  row row-eq-height>.alpha-box" id="search-result">
+                                        <!--  -->
+                                        @foreach (var item in Alpha)
+                                        {
+                                            <div class=" col-lg-4">
+                                                <div class="list-tag alpha-box p-20 m-b-30">
+
+
+                                                    <h2 class="text-bold"> @item.ToUpper()</h2>
+                                                    <ul class="scroll-list">
+
+                                                        @foreach (var data in Model)
+                                                        {
+                                                            if (data.FirstLetterOfPartner.StartsWith(item))
+                                                            {
+
+
+                                                                <li><a href="@Url.Action("PartnerDashBoard", "PartnerPaymentCommission", new { PartnerId = data.Id })"> @data.NameOfPartner  </a></li>
+
+
+                                                            }
+
+
+                                                            <!--  -->
+                                                        }
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="styleSelector">
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function filter() {
+
+            var Country = $("#Country").val();
+            var City = $("#City").val();
+            var Search = $("#Search").val();
+            window.location.href = "/Admin/PartnerPaymentCommission/Index?Country=" + Country + "&City=" + City + "&Search=" + Search;
+
+        }
+
+        jQuery("input[name='Search']").val('@ViewBag.Search');
+
+
+    </script>
+
+}

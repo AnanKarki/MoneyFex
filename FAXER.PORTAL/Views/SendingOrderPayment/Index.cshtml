@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class="dashboard_body">
+
+                    <div class=" clearfix">
+                        <h3> Standing Order Payments</h3>
+
+
+                        <div class="clearfix">
+
+                        </div>
+                        <hr>
+                        <div class="mobile_design text-center">
+
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("SenderSendingBusinessOrdersIndex","SenderBusinesStandingOrders")">
+
+                                        <div class="das-icon">
+                                            <img src="~/Content/images/icon/svg/business-standing.svg">
+                                        </div>
+                                        <h4>Business Standing Orders</h4>
+
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("SenderKiiPayWalletStandingOrdersIndex","SenderKiiPayWalletStandingOrders")">
+                                        <div class="das-icon">
+                                            <img src="~/Content/images/icon/svg/wallet-standing.svg">
+                                        </div>
+                                        <h4>KiiPay Wallet Standing Orders</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+                            <div class="clearfix">
+                                <hr>
+                            </div>
+
+
+                            <a href="dashboard.php"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Dashboard</a>
+                        </div>
+                    </div>
+
+                </div>
+
+             
+
+            </div>
+        </div>
+    </div>
+
+</section>
+
+
+

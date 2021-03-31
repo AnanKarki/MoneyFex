@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetThreeDView</title>
+</head>
+<body>
+    <div>
+        <form name="form" id="acsurl" method="post" action="@ViewBag.acsurl">
+            <div>
+                <input type="hidden" name="PaReq" id="pareq" value="@ViewBag.pareq" />
+                <input type="hidden" name="TermUrl" id="termurl"  value="@ViewBag.termurl"/>
+                <input type="hidden" name="MD" id="md" value="@ViewBag.md"/>
+                <button type="submit" value="submit" id="btn">Pay Now</button>
+            </div>
+        </form>
+
+
+    </div>
+    <script type="text/javascript">
+
+        
+        window.onload = function (){
+        
+        $("#acsurl").submit();
+
+        }
+    </script>
+</body>
+</html>

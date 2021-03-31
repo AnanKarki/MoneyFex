@@ -1,0 +1,87 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+    <h4 style="text-align:center">
+        Payer Confirmation of Payment Receipt
+    </h4>
+
+
+
+    
+    <center>
+        <table width="100%">
+
+            <tbody>
+                <tr>
+                    <td><b>MF Receipt Number</b></td>
+                    <td><b>@ViewBag.ReceiptNumber</b></td>
+                </tr>
+                <tr>
+                    <td><b>Date</b></td>
+                    <td><b>@ViewBag.Date</b></td>
+                </tr>
+                <tr>
+                    <td><b>Time</b></td>
+                    <td><b>@ViewBag.Time</b></td>
+                </tr>
+                <tr>
+                    <td><b>Payer's Full Name</b></td>
+                    <td><b>@ViewBag.FaxerFullName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Payer's Country</b></td>
+                    <td><b>@ViewBag.FaxerCountry</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business Merchant Name</b></td>
+                    <td><b>@ViewBag.BusinessMerchantName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business Virtual Account No</b></td>
+                    <td><b>@ViewBag.BusinessMFCode</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business Country</b></td>
+                    <td><b>@ViewBag.BusinessCountry</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business City</b></td>
+                    <td><b>@ViewBag.BusinessCity</b></td>
+                </tr>
+                <tr>
+                    <td><b>Amount Paid To Business</b></td>
+                    <td><b>@ViewBag.AmountPaid</b></td>
+                </tr>
+                <tr>
+                    <td><b>Exchange Rates</b></td>
+                    <td><b>@ViewBag.ExchangeRate</b></td>
+                </tr>
+                <tr>
+                    <td><b>Fees</b></td>
+                    <td><b>@ViewBag.Fee</b></td>
+
+                </tr>
+                <tr>
+                    <td><b>Total Amount +  Fees</b></td>
+                    <td>
+                        <b>
+                            @ViewBag.TotalSentAmount
+                        </b>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td><b>Amount Paid in Business Local Currency</b></td>
+                    <td><b>@ViewBag.AmountInLocalCurrency</b></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </center>
+</div>
+

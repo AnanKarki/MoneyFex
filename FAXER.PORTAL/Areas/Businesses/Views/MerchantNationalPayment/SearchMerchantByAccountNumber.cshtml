@@ -1,0 +1,174 @@
+﻿
+@{
+    ViewBag.Title = "SearchMerchantByAccountNumber";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+
+
+<style>
+    .ui-autocomplete {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        float: left;
+        display: none;
+        min-width: 160px;
+        padding: 4px 0;
+        margin: 0 0 10px 25px;
+        list-style: none;
+        background-color: #ffffff;
+        border-color: #ccc;
+        border-color: black;
+        border-style: double;
+        border-width: 1px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+        *border-right-width: 2px;
+        *border-bottom-width: 2px;
+    }
+
+    .ui-menu-item > a.ui-corner-all {
+        display: block;
+        padding: 3px 15px;
+        clear: both;
+        font-weight: normal;
+        line-height: 18px;
+        color: #fffdd0;
+        white-space: nowrap;
+        text-decoration: none;
+    }
+
+    .ui-state-hover, .ui-state-active {
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #0088cc;
+        border-radius: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        background-image: none;
+    }
+</style>
+
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Search service provider</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+
+                <div class="form-group">
+
+
+                    @*@Html.TextBox("BusinessName", new { @class = "form-control", @name = "BusinessName", @placeholder = "Search MoneyFex Merchant Name", @id = "BusinessName" })*@
+
+                    <input type="text" name="BusinessName" id="BusinessName" placeholder="Search service provider  business name" class="form-control" value="@ViewBag.BusinessName">
+                    <input type="hidden" name="MerchantAccountNo" id="MerchantAccountNo" placeholder="Search service provider Account no." class="form-control" value="@ViewBag.MerchantAccountNo">
+                    @*@Html.ValidationMessage("NoCardFound", "", new { @class = "text-danger" })*@
+                    @if (TempData["InvalidMFBCCard"] != null)
+                    {
+
+                        <label class="text-danger">@TempData["InvalidMFBCCard"]</label>
+                    }
+
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+
+
+                <a href="@Url.Action("Index")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <a class="fbtn btn-next" onclick="SearchMerchant()">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+
+                <br />
+                <a href="@Url.Action("Index")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+
+    <script src="~/Scripts/jquery.min.js"></script>
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/menumaker.js"></script>
+    <!-- animsition -->
+    <script type="text/javascript" src="~/Scripts/animsition.js"></script>
+    <script type="text/javascript" src="~/Scripts/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="~/Scripts/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/Scripts/sticky-header.js"></script>
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Scripts/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/slider-carousel.js"></script>
+    <script type="text/javascript" src="~/Scripts/service-carousel.js"></script>
+    <!-- Back to top script -->
+    <script src="~/Scripts/back-to-top.js" type="text/javascript"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $('#BusinessName').autocomplete({
+                source: '/Businesses/MerchantNationalPayment/getmerchants',
+                select: function (event, ui) {
+                    //set tagids to save
+
+                    $("#MerchantAccountNo").val(ui.item.id);
+
+                    //tags for display
+                    this.value = ui.item.value;
+
+                    //return false;
+                }
+            });
+        });
+        function SearchMerchant() {
+
+            var AccountNumber = $("#MerchantAccountNo").val();
+            window.location.href = "/Businesses/MerchantNationalPayment/MerchantDetails?MerchantAccountNo=" + AccountNumber;
+        }
+    </script>
+
+}
+
+

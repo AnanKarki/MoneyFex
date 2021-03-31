@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = "HurrayMessage";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Transfer Money Confirmation </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="completed-payment text-center">
+                <h3>Your Transaction has been Completed</h3>
+                <h4>We've sent the MFCN Number and Receipt to your email address</h4>
+                <div class=" ">
+                    <div class="white-bg boxednew">
+
+                        <h3 style="color:#333;">Your Transaction Details:</h3>
+                        <div class="table-responsive text-left">
+                            <table class="table table-bordered">
+
+                                <tbody>
+                                    <tr>
+                                        <td>MFCN Number</td>
+                                        <td>@ViewBag.MFCN</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receiver</td>
+                                        <td>@ViewBag.ReceiverName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receiver Country</td>
+                                        <td>@ViewBag.ReceiverCountry</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sent Amount</td>
+                                        <td>@ViewBag.SentAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receive Amount</td>
+                                        <td>@ViewBag.ReceiveAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Exchange Rate</td>
+                                        <td>@ViewBag.ExchangeRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receive Option</td>
+                                        <td>@ViewBag.ReceiveOption</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix">
+
+                </div>
+                <br>
+                <a href="@Url.Action("Index","DashBoard")" title="" class="btn btn-primary">Go to your Dashboard  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>
+<!--  -->
+
+

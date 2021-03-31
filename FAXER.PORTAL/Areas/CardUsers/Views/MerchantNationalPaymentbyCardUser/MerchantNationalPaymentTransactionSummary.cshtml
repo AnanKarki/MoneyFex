@@ -1,0 +1,212 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUser_MerchantNationalPaymentTransactionSummaryViewModel
+@{
+    decimal transactionAmount = FAXER.PORTAL.Common.CardUserSession.MerchantNationalPayingAmount_CardUserViewModel.FaxingAmount;
+    ViewBag.Title = "MerchantNationalPaymentTransactionSummary";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Pay for goods &  services</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+
+<form method="post" id="payNowForm">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Service Provider's Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>You are Paying To:</b></p>
+                                <p>@Model.ReceiverName<br>Provider's Account No : @Model.ReceiverAccountNo</p>
+                                <p>
+                                    <a href="@Url.Action("SearchMerchantByAccountNo")" class="theme-color">Change Business Merchant</a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Your Personal Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Contact Information</b></p>
+                                <p>
+                                    @Model.CardUserName<br>@Model.CardUserPhoneNumber<br>
+                                    @Model.CardUserEmail
+                                </p>
+                                <p> <b>Country of Operation</b><br>@Model.CardUserCountry</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="clearfix"></div>
+
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Your Payment Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Card Information</b></p>
+                                <p><b>@Model.SenderMFTCCardNumber</b> </p>
+                                <p>
+                                    <b>Your home Billing Address</b><br>@Model.streetAddress
+                                    @Model.City
+                                    @Model.PostalCode
+                                    @Model.State
+                                </p>
+                                @Html.HiddenFor(model => model.SendSms, new { id = "sendSms" })
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center"> Your Transaction Details</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Transaction Total</b><br>Amount Paid : @Model.TotalAmount @FAXER.PORTAL.Common.CardUserSession.FaxingCurrency</p>
+
+
+                                <a href="@Url.Action("PayingAmount")" title="">Change Transaction Amount</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <a href="@Url.Action("PayingAmount")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    @if (ViewBag.SendSMS == true)
+                    {
+                        <a class="fbtn btn-next" onclick="showPopUp();">Pay Now <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    }
+                    else
+                    {
+                        <button type="submit" class="fbtn btn-next">Send Now <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    }
+                    <br />
+                    <a href="@Url.Action("PayingAmount")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<!--  -->
+
+<div class="modal " id="SMSModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex SMS Alert</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-info-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <h4>Will you like to send an SMS notification to the receiver for this tranaction?</h4>
+                            <button disabled> <a title="Sms fee will be duducted from your account">Learn More</a></button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a onclick="postFormwithSms()" ; class="btn btn-sm btn-primary">Yes<i class="" aria-hidden="true"></i></a>
+                <a onclick="postFormwithOutSms()" class="btn btn-sm btn-danger">No<i class="" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function showPopUp() {
+            $("#SMSModal").modal('show');
+        };
+
+        function postFormwithSms() {
+            debugger;
+            $("#sendSms").val(true);
+            $("#payNowForm").submit();
+        };
+
+        function postFormwithOutSms() {
+            debugger;
+            //$("#sendSms").val(false);
+            $("#payNowForm").submit();
+
+        };
+
+        function CheckBalanceForMessage() {
+            var transactionAmount = @transactionAmount
+                $.getJSON("/MerchantNationalPaymentbyCardUser/CheckBalanceForMessage?trasnctionAmount=" + transactionAmount, function (data) {
+                if (data.send == true) {
+
+                }
+            });
+        }
+
+    </script>
+}

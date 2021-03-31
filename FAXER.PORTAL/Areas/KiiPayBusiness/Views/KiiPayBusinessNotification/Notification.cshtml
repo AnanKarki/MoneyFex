@@ -1,0 +1,58 @@
+﻿@model List<FAXER.PORTAL.Models.NotificationViewModel>
+    @{
+        ViewBag.Title = "Notification";
+        Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+    }
+
+
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+
+
+
+                    <div class="dashboard_body">
+
+                        <div class="  ">
+                            <h3> Notification (<b>@Model.Count()</b>)</h3>
+                            <hr>
+
+                            <ul class="notification-list">
+
+                                <div class="drop-content">
+
+                                    @foreach (var item in Model)
+                                    {
+                                        <li>
+                                            <div class=" pd-l0">
+                                                <a href="">
+                                                    <h5>@item.Title</h5>@item.Message<p>@item.Time</p>
+                                                    <p class="time">@item.HourAgo</p>
+                                                </a>
+                                            </div>
+                                        </li>
+                                    }
+                                    <!--  -->
+                              
+
+
+                                </div>
+                            </ul>
+
+
+
+                        </div>
+
+                    </div>
+                    <!--  -->
+
+
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+    </section>

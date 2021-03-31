@@ -1,0 +1,269 @@
+﻿@model FAXER.PORTAL.Models.MFCareerViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="page-header" style="background:  url(images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+                <ol class="breadcrumb ">
+                    <li> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="active">Current Vacancies</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" ">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="  mb80 mt20">
+                    <h1 class="page-new">Current Vacancies</h1>
+                    <div class="contact-form mb60">
+                        <div class=" ">
+                            <div class="row">
+                                <div class="col-lg-12 pdl20">
+                                    <div class="mb60  section-title text-left  col-lg-12">
+                                        <!-- section title start-->
+
+                                        <h4>Opportunities are broad and veried MoneyFex Service, if you want to be challenged, devloped and fascinated in a career to be proud of, then the opportunity is now !</h4>
+                                    </div>
+                                    @if (Model.CareerList.Count == 0)
+                                    {
+                                        <p> There is no vacancy available at the moment, please check again later.</p>
+                                    }
+                                    else
+                                    {
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead class="thead-default">
+                                                    <tr>
+                                                        <th>Job Title </th>
+                                                        <th>Description</th>
+                                                        <th>Location</th>
+                                                        <th>Contract Type</th>
+                                                        <th>Salary</th>
+                                                        <th>Closing Date</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach (var item in Model.CareerList)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.JobTitle</td>
+                                                            <td>@item.JobDescription</td>
+                                                            <td>@item.Location</td>
+                                                            <td>@item.ContractType</td>
+                                                            <td>@item.SalaryRange</td>
+                                                            <td>@item.ClosingDate</td>
+                                                            <input type="hidden" id="@item.Id" value="@item.JobTitle">
+                                                            <td><button type="button" class="btn btn-sm btn-success" onclick="ApplyForJob(@item.Id)">Apply</button></td>
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.section title start-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@*@if (ViewBag.Success == null)
+    {
+
+
+    }*@
+
+
+<div id="Completion" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-left: 17px;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4>Job application submission success.</h4>
+                <hr>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <p>Thank you for applying to the position at MoneyFex.</p>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal" aria-hidden="true">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add note ad -->
+
+</div>
+@using (Html.BeginForm("Index", "MFCareer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <form method="post" enctype="multipart/form-data">
+        <div id="JobApply" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none; padding-left: 17px;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div class="col-lg-12">
+                                        <!-- logo -->
+                                        <div class="logo">
+                                            <img src="/images/logo.png" alt=" ">
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-lg-12" style="color:blue;background-color:aliceblue;">
+                                        <br />
+                                        <br />
+                                        <br />
+                                        <h3>Job Application Form</h3>
+                                        <br / >
+                                        <br />
+                                        <br />
+                                    </div>
+                                    <div class="form-row">
+
+
+                                        <div class="col-lg-4">
+                                            @Html.Label("Name")
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-6">
+                                            @Html.HiddenFor(x => x.JobId, new { @id = "jobId" })
+                                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "Last Name" })
+                                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                                        </div>
+
+
+
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-6">
+                                            @Html.Label("Telephone No")
+                                            @Html.TextBoxFor(x => x.Telephone, new { @class = "form-control", @placeholder = "Telephone" })
+                                            @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="col-lg-6">
+                                            @Html.Label("Email")
+                                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @placeholder = "Email" })
+                                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-lg-6">
+                                            @Html.Label("Select Country or Residence")
+                                            @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            @Html.Label("Enter a City")
+                                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control", @placeholder = "City" } })
+                                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-lg-6">
+                                            @Html.Label("Postion Applied For ")
+                                            @Html.TextBoxFor(model => model.Position, new { @class = "form-control", @placeholder = "Position Applied For" , @id="Position"})
+                                            @Html.ValidationMessageFor(x => x.Position, "", new { @class = "text-danger" })
+
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-6">
+                                            <label> Upload CV</label>
+                                            <input type="file" name="CV" id="">
+                                            @Html.ValidationMessageFor(model => model.CVURL, "", new { @class = "text-danger" })
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <label> Upload Supporting Statement</label>
+                                            <br />
+
+                                            <input type="file" name="Statement" id="">
+                                            @Html.ValidationMessageFor(model => model.SupportingStatementURL, "", new { @class = "text-danger" })
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- add note ad -->
+
+        </div>
+    </form>
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        function ApplyForJob(Id , title) {
+            $("#jobId").val(Id);
+            var Jontitle = document.getElementById(Id).value;
+            $("#Position").val(Jontitle);
+            $("#JobApply").modal("show");
+
+
+        }
+        window.onload = function () {
+
+            var val = "@ViewBag.InvalidModel";
+            if (val == "True") {
+                $("#JobApply").modal("show");
+            }
+
+            var successful = "@ViewBag.successful";
+            if (successful == "True") {
+                $("#Completion").modal("show");
+            }
+
+
+        }
+
+    </script>
+}
+

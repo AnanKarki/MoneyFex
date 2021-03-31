@@ -1,0 +1,340 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.ViewStaffPayslipViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@if (ViewBag.Message == "Deleted Successfully !")
+{
+    <script type="text/javascript">
+    window.onload = function () {
+
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+else if (ViewBag.Message == "Operation Unsuccessful !")
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        debugger;
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+};
+@if (ViewBag.Message == "Added Successfully!")
+{
+    <script type="text/javascript">
+    window.onload = function () {
+
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+else if (ViewBag.Message == "Update Successfully!")
+{
+    <script type="text/javascript">
+    window.onload = function () {
+
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+
+}
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Master View - Staff Payslip</h4>
+                </div>
+                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Master View - Staff Payslip</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+            <div class=" row">
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Year, "Choose Year", new { @class = "form-control", id = "year", onchange = "Fliter();" })
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="form-group">
+                        @Html.DropDownList("Month", ), new { @class = "form-control", id = "month", onchange = "Fliter();" })
+                    </div>
+                </div>
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+
+                                <thead>
+
+
+                                    <tr>
+                                        <td>SN</td>
+                                        <td>Staff Name</td>
+                                        <td>Staff MFSCode</td>
+                                        <td>Staff Country</td>
+                                        <td>Staff City</td>
+                                        <td>Payslip Month</td>
+                                        <td>Payslip Year</td>
+                                        <td>Staff Status</td>
+                                        <td>Payslip PDF</td>
+                                        <td>Action</td>
+                                    </tr>
+
+
+                                </thead>
+                                <tbody>
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.StaffName </td>
+                                            <td>@item.StaffMFSCode </td>
+                                            <td>@item.StaffCountry</td>
+                                            <td>@item.StaffCity</td>
+                                            <td>@item.PayslipMonth    </td>
+                                            <td>@item.PayslipYear</td>
+                                            <td>@item.StaffStatus</td>
+                                            <td><a href="@item.PayslipPDF" target="_blank" class="btn btn-sm btn-rounded" style="background-color:orange; color:black; ">Payslip PDF</a></td>
+                                            <td><a href="@Url.Action("DeleteStaffPayslip","ViewStaffPayslip",new{ @id=item.Id})" class="btn btn-sm btn-rounded" style="background-color:red; color:white;"> Delete</a></td>
+
+
+                                        </tr>
+
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Staff Payslip</h4>
+                                    <a href="@Url.Action("AddStaffPayslip", "ViewStaffPayslip")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5">
+                                        </i> Add Payslip
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control   form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control   form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Year, "Choose Year", new { @class = "form-control   form-control-round form-control-bold", id = "year", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control   form-control-round form-control-bold" id="Month" onchange="Fliter();">
+                                                    <option value="0">Select Month</option>
+                                                    <option value="1">January</option>
+                                                    <option value="2">February</option>
+                                                    <option value="3">March</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">May</option>
+                                                    <option value="6">June</option>
+                                                    <option value="7">July</option>
+                                                    <option value="8">August</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Staff Name" class="form-control form-control-round form-control-bold" name="StaffName" id="StaffName" value="@ViewBag.StaffName" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Reference" class="form-control form-control-round form-control-bold" name="Reference" id="Reference" value="@ViewBag.Reference" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By status" class="form-control form-control-round form-control-bold" name="status" id="status" value="@ViewBag.status" onchange="Fliter();">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Staff Name</th>
+                                                    <th>Reference</th>
+                                                    <th>Month</th>
+                                                    <th>Year</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @{int i = 1;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><i class="flag flag-icon flag-icon-@item.StaffCountryFlag"></i> @item.StaffCountry </td>
+                                                        <td>@item.StaffCity</td>
+                                                        <td><a href="">@item.StaffName</a></td>
+
+                                                        <td><a href="">@item.StaffMFSCode</a>  </td>
+                                                        <td>@item.PayslipMonth </td>
+                                                        <td>@item.PayslipYear</td>
+                                                        <td><span class="text-success">@item.StaffStatus</span></td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("AddStaffPayslip", "ViewStaffPayslip", new { id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+
+                                                        </td>
+                                                        @{ i++;}
+                                                    </tr>
+
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var year = document.getElementById("year").value;
+            var month = document.getElementById("Month").value;
+            var StaffName = $("#StaffName").val();
+
+            var Reference = $("#Reference").val();
+            var status = $("#status").val();
+            window.location.href = "/Admin/ViewStaffPayslip/Index?CountryCode=" + country + "&City=" + city + "&Year=" + year + "&Month=" + month +
+                "&StaffName=" + StaffName + "&Reference=" + Reference + "&status=" + status;
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/ViewStaffPayslip/DeleteStaffPayslip?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+
+
+
+    </script>
+}

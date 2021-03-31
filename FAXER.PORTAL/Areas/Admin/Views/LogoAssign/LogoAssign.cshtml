@@ -1,0 +1,277 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.LogoAssignViewModel
+@{
+    ViewBag.Title = "LogoAssign";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+{
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="card" style="">
+
+                            <div class="card-header border-bottom">
+                                <div style="float:left;">
+                                    <h2 class="f-left f-left m-t-5 m-b-0">Assign Logos</h2>
+                                </div>
+                                <div style="float:right;">
+
+                                    <a href="@Url.Action("Index","LogoAssign")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">
+                                        <i class="icofont icofont-eye m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="card-body">
+
+
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <hr />
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                              
+                                            @Html.HiddenFor(x => x.Master.Id)
+                                            <div class="form-group">
+
+                                                <label>Sending Country</label>
+                                                @Html.DropDownListFor(x => x.Master.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.sendingcountries, "Select Sending Country", new { @class = "form-control", @id = "SendingCountry" })
+                                                @Html.ValidationMessageFor(x => x.Master.SendingCountry, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                              
+                                              
+
+                                            <div class="form-group">
+
+                                                <label>Receiving Country</label>
+                                                @Html.DropDownListFor(x => x.Master.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control", @id = "ReceivingCountry" })
+                                                @Html.ValidationMessageFor(x => x.Master.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                            <div class="form-group">
+
+                                                <label>Services</label>
+                                                @Html.EnumDropDownListFor(x => x.Master.Services, new { @class = "form-control", @id = "Services", @onchange = "filter();" })
+                                                @Html.ValidationMessageFor(x => x.Master.Services, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label>Label Text</label>
+                                                @Html.TextBoxFor(x => x.Master.Label, new { @class = "form-control", @placeholder = "Enter Text" })
+                                                @Html.ValidationMessageFor(x => x.Master.Label, "", new { @class = "text-danger" })
+
+                                            </div>
+
+
+
+                                            <div class="box-border row">
+                                                <div class="col-lg-12">
+                                                    <h6 class="m-b-20">Select Services</h6>
+
+                                                </div>
+                                                @{
+                                                    int i = 0;
+                                                    foreach (var item in Model.Details)
+                                                    {
+                                                        <div class="col-sm-4 text-center @i" , id="@i">
+                                                            <label for="checkbox1" class="custom-checkbox">
+                                                                <img src="@item.ImageUrl" alt="" width="40">
+                                                                <div class="text">@item.LogoUpload</div>
+                                                                @Html.CheckBoxFor(x => Model.Details[i].IsChecked)
+                                                                @Html.HiddenFor(x => Model.Details[i].LogoUpload)
+                                                                @Html.HiddenFor(x => Model.Details[i].LogoUploadId)
+
+                                                                <span class="checkmark"></span>
+
+                                                            </label>
+                                                        </div>
+
+                                                        i = i + 1;
+                                                    }
+                                                }
+                                            </div>
+                                            @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index", "LogoAssign")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+}*@
+
+@using (Html.BeginForm())
+{
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Assign Logos</h4>
+                                        <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </button>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(x => x.Master.Id)
+
+
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.Master.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.sendingcountries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.Master.SendingCountry, "", new { @class = "text-danger" })
+
+
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.Master.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.Master.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Services</label>
+                                                    @Html.EnumDropDownListFor(x => x.Master.Services, new { @class = "form-control   form-control-round form-control-bold", @id = "Services", @onchange = "filter();" })
+                                                    @Html.ValidationMessageFor(x => x.Master.Services, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Label Text</label>
+                                                    @Html.TextBoxFor(x => x.Master.Label, new { @class = "form-control form-control-round form-control-bold", @placeholder = "Enter Text" })
+                                                    @Html.ValidationMessageFor(x => x.Master.Label, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <!--  -->
+
+
+                                                <h5 class="m-b-15">Service Provider</h5>
+                                                <div class="box-border row">
+                                                    <div class="col-lg-12">
+                                                        <h6 class="m-b-20">Service Provider Logo</h6>
+
+                                                    </div>
+                                                    <!--  -->
+
+                                                    @{
+                                                        int i = 0;
+                                                        foreach (var item in Model.Details)
+                                                        {
+                                                            <div class="col-sm-4 text-center @i" , id="@i">
+                                                                <label for="checkbox1" class="custom-checkbox">
+                                                                    <img src="@item.ImageUrl" alt="" width="40">
+                                                                    <div class="text">@item.LogoUpload</div>
+                                                                    @Html.CheckBoxFor(x => Model.Details[i].IsChecked)
+                                                                    @Html.HiddenFor(x => Model.Details[i].LogoUpload)
+                                                                    @Html.HiddenFor(x => Model.Details[i].LogoUploadId)
+
+                                                                    <span class="checkmark"></span>
+
+                                                                </label>
+                                                            </div>
+
+                                                            i = i + 1;
+                                                        }
+                                                    }
+
+                                                    <!--  -->
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "LogoAssign")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var sendingCountry = $("#SendingCountry").val();
+            var receinvingCountry = $("#ReceivingCountry").val();
+            var services = $("#Services").val();
+            window.location.href = "/Admin/LogoAssign/LogoAssign?SendingCountry=" + sendingCountry + "&ReceivingCountry=" + receinvingCountry + "&Services=" + services ;
+
+        }
+        $("#Services").val('@ViewBag.Services');
+
+
+    </script>
+}
+
+

@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.NameOfBusinessUser
+    </p>
+    <p>
+        MoneyFex Business Card (MFBC) - Usage Alert!
+    </p>
+    <br />
+    <p>
+        A MoneyFex Business card registered with the following details:
+    </p>
+    <p>
+        <strong>MFBC Number:</strong> @ViewBag.MFBCCardNumber
+    </p>
+    <p>
+        <strong>Name on MFBC Card:</strong> @ViewBag.CarduserName
+    </p>
+    <p>
+        <strong>Country of Registered Card User:</strong> @ViewBag.CardUserCountry
+    </p>
+    <p>
+        <strong>City of Registered Card User:</strong> @ViewBag.CardUserCity
+    </p>
+    <br />
+    <p>
+        Has been used to withdraw money or pay for goods and/or Services in the City of @ViewBag.CityofPayingAgentOrRegisteredMerchant
+        .
+    </p>
+    <p>
+        The balance amount on this card is @ViewBag.BalanceOnCard
+    </p>
+    <br />
+    <p>
+        You card stop this alert by clicking on 
+        <a href="" >
+            <button type="" style="background: #333;
+               border-radius: 30px;
+               border: 0;
+               color: #fff;
+               padding: 8px 15px; cursor: pointer;">
+                Stop Alerts
+            </button>
+        </a>
+    </p>
+    <br />
+    
+</div>

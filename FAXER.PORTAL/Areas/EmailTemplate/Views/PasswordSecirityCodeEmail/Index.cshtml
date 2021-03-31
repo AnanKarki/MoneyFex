@@ -1,0 +1,26 @@
+﻿
+@{
+    /**/
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.UserName,
+    </p>
+    <p>
+        Please find the Password Reset Security Code for your MoneyFex account below.
+    </p>
+    <p>
+        Password Reset Security Code: @ViewBag.SecurityCode
+    </p>
+
+    <p>
+        If you have not requested for this security code, please contact MoneyFex Customer Service Immediately.
+    </p>
+   
+
+</div>
+

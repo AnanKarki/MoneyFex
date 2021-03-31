@@ -1,0 +1,136 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewMFTCCardUsageViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Virtual Account Withdrawal Usage</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Virtual Account Withdrawal Usage</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="csv display wrap " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2"><strong>SN.</strong></td>
+                                    <td rowspan="2"><strong>Sender's Name</strong></td>
+                                    <td rowspan="2"><strong>Card User's Full Name</strong></td>
+                                    <td colspan="4" align="center"><strong>Recever's Photo ID</strong></td>
+                                    <td rowspan="2"><strong>Virtual Account Number</strong></td>
+                                    <td rowspan="2"><strong>Amount on Virtual Account</strong></td>
+                                    <td colspan="3" align="center"><strong>Money Withdrawal</strong></td>
+                                    <td colspan="3" align="center"><strong>Agent</strong></td>
+                                    <td rowspan="2" align="center"><strong>Withdrawal Receipt</strong></td>
+                                    @* <td rowspan="2" align="center"><strong>Payment Rejection</strong></td>*@
+                                </tr>
+
+
+                                <tr>
+                                    <td><b>Type</b></td>
+                                    <td><b>No.</b></td>
+                                    <td><b>Exp Date</b></td>
+                                    <td><b>Issuing Country</b></td>
+                                    <!--  -->
+                                    <td><b>Amt</b></td>
+                                    <td><b>Time</b></td>
+                                    <td><b>Date</b></td>
+
+                                    <!--  -->
+                                    <td><b>Verifier</b></td>
+                                    <td><b>Name</b></td>
+                                    <td><b>MFS Code</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model.ViewMFTCCardWithdrawals)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.FaxerFirstName @item.FaxerMiddleName @item.FaxerLastName</td>
+                                        <td>@item.CardUserFirstName @item.CardUserMiddleName @item.CardUserLastName</td>
+                                        <td>@item.ReceiverIDType </td>
+                                        <td> @item.ReceiverIDNumber</td>
+                                        <td>@item.ReceiverIDExpDate</td>
+                                        <td>@item.ReceiverIDIssuingCountry</td>
+                                        <td>@item.MFTCCardNumber</td>
+                                        <td>@item.AmountOnMFTCCard @item.Currency</td>
+
+                                        <td>@item.WithdrawalAmount @item.Currency</td>
+                                        <td>@item.WithdrawalTime</td>
+                                        <td>@item.WithdrawalDate</td>
+                                        <td>@item.AgentVerifier</td>
+                                        <td>@item.AgentName</td>
+                                        <td>@item.AgentMFSCode</td>
+                                        <td align="center"><a href="@Url.Action("PrintReceipt","ViewMFTCCardUsage", item)" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a></td>
+                                        @*<td>PaymentRej</td>*@
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMFTCCardUsage/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

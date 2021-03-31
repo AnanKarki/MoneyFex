@@ -1,0 +1,136 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFTCCarduserDetailsViewModel
+@{
+    ViewBag.Title = "SearchMFTCCardUser";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+<form method="post">
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <h1>Virtual Account Deposit</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <h4>Virtual Account User's Details</h4>
+                <hr>
+                <div class="col-lg-8 ">
+
+
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <label>Name  </label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.CardUserName, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model=>model.CardUserName, "", new { @class="text-danger"})
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <label>Account Number</label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.MFTCCardNo, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <label>Registered City </label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.CarduserCity, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <label>
+                           Registered Country
+                        </label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.CardUserCountry, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <br>
+                    <!--  -->
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>@Html.CheckBoxFor(model => model.Confirm)  I confirm that this is the account that i wish to make payment to, I have contacted the account user and agreed on the exact amount.</label>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Confirm, "", new { @class = "text-danger" })
+                    </div>
+                    <!--  -->
+
+                </div>
+                @Html.HiddenFor(model=>model.Phone)
+                @Html.HiddenFor(model=>model.Email)
+                <div class="col-lg-4 ">
+                    <div class="cardbody">
+
+                        <h3 class="text-primary  ">@Model.CardUserName</h3>
+                        <i class="fa fa-map-mark"></i> @Model.CarduserCity, @Model.CardUserCountry
+                        <br>
+                        <i class="fa fa-phone"></i>  @Model.Phone<br>
+                        <i class="fa fa-envelope"></i>  <a href="mailto:@Model.Email">@Model.Email</a><br>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+
+                    <a href="@Url.Action("Index")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("Index")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+</form>

@@ -1,0 +1,96 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.SignUpViewModel.KiiPayBusinessBillPaymentInfoVM
+@{
+    ViewBag.Title = "BillPaymentInfo";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <!--  -->
+    <div class="real_form pattern2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup text-center">
+                        <div class="text-center">
+                            <h3>Bill Payment </h3>
+                        </div>
+                        <hr>
+                        <form>
+                            <div class="pinside20">
+
+                                <div class="boardered-blue pinside20">
+                                    <!--  -->
+                                    <div class="form-group text-left">
+                                        <h4>Does your company issue bills to customers?  </h4>
+
+
+                                        <label> @Html.CheckBoxFor(model => model.DoesBillIsIssuedToCustomer, new { @onclick = "CheckedEvent()" }) Yes</label>
+                                        <label> <input type="checkbox" name="yesno" onclick="CheckedEvent()"> No</label>
+
+                                    </div>
+                                    <!--  -->
+
+
+
+                                </div>
+
+                                <!--  -->
+                                <div class="form-group text-right mt10">
+                                    How it works <a href="avoide:javascript;" data-placement="bottom" data-toggle="popover" data-content="This allows your customers to pay their bills directly to your company's KiiPay Account">
+                                        <i class="fa fa-question-circle fa-lg" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+
+
+
+                            </div>
+                            <div class="clearfix">
+                                <hr>
+                            </div>
+                            <!--  -->
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Finish Setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                            </div>
+                            <!--  -->
+
+                            <div class="clearfix">
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function CheckedEvent() {
+            debugger;
+
+            if (event.target.checked == true) {
+                $("input[type=checkbox]").prop('checked', false)
+                event.target.checked = true
+            } else {
+
+                $("input[type=checkbox]").prop('checked', true)
+                event.target.checked = false;
+            }
+
+        }
+    </script>
+}

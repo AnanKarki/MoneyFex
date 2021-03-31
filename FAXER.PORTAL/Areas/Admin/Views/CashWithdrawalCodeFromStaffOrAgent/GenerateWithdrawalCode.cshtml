@@ -1,0 +1,176 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.GenerateCashWithdrawalCodeVM
+@{
+    ViewBag.Title = "GenerateWithdrawalCode";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Generate a Code  </h4>
+                                        <a href="@Url.Action("Index","CashWithdrawalCodeFromStaffOrAgent")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Generated Code
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select country", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "Country", @onchange = "GetDropDownData()" })
+                                                        @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                                                  
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select city", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "City", @onchange = "GetDropDownData()" })
+                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                                     
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Agent</label>
+                                                        @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "AgentId", @onchange = "getAgentCode()" })
+                                                        @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+                             
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Account Number</label>
+                                                        @Html.TextBoxFor(model => model.AgentCode, new { @class = "form-control form-control-lg form-control-round form-control-bold" ,disabled="disabled"})
+                                                        @Html.ValidationMessageFor(model => model.AgentCode, "", new { @class = "text-danger" })
+                                                        
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Withdrawal Staff</label>
+                                                        @Html.DropDownListFor(model => model.StaffId, (IEnumerable<SelectListItem>)ViewBag.Staffs, "Select Withdrawal Staff", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "StaffId", @onchange = "getStaffCode()" })
+                                                        @Html.ValidationMessageFor(model => model.StaffId, "", new { @class = "text-danger" })
+                                                        
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Staff ID</label>
+                                                        @Html.TextBoxFor(model => model.StaffCode, new { @class = "form-control form-control-lg form-control-round form-control-bold" ,disabled="disabled"})
+                                                        @Html.ValidationMessageFor(model => model.StaffCode, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","CashWithdrawalCodeFromStaffOrAgent")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-plus"></i> Generate Code</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+        function GetDropDownData() {
+
+            var countryCode = $("#Country").val();
+            var city = $("#City").val();
+
+            window.location.href = "/Admin/CashWithdrawalCodeFromStaffOrAgent/GenerateWithdrawalCode?CountryCode=" + countryCode + "&City=" + city;
+
+
+        }
+
+        function getAgentCode(id) {
+
+            var id = $("#AgentId").val();
+            $.getJSON("/Admin/CashWithdrawalCodeFromStaffOrAgent/GetAgentCode?AgentId=" + id, function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+                    $(selector).prop('readonly', 'readonly');
+
+                }
+
+            });
+        }
+
+        function getStaffCode(id) {
+
+            var id = $("#StaffId").val();
+            $.getJSON("/Admin/CashWithdrawalCodeFromStaffOrAgent/GetStaffCode?StaffId=" + id, function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+                    $(selector).prop('readonly', 'readonly');
+
+                }
+
+            });
+        }
+
+    </script>
+}

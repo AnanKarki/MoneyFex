@@ -1,0 +1,1236 @@
+﻿@{
+    /**/
+
+    int SenderId = 0;
+    string SenderName = "";
+    string SenderFirstName = "";
+    bool IsBusinessAccount = false;
+    if (FAXER.PORTAL.Common.FaxerSession.LoggedUser != null)
+    {
+        SenderId = FAXER.PORTAL.Common.FaxerSession.LoggedUser.Id;
+        SenderName = FAXER.PORTAL.Common.FaxerSession.LoggedUser.FullName;
+        IsBusinessAccount = FAXER.PORTAL.Common.FaxerSession.LoggedUser.IsBusiness;
+        SenderFirstName = FAXER.PORTAL.Common.FaxerSession.LoggedUser.FirstName;
+    }
+
+    List<string> trackingNo = ViewBag.TrackingNo ?? new List<string>();
+
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFex">
+    <meta name="keywords" content="MoneyFex">
+    <title>
+        Money Transfer - Fast, Easy and Cheap Service
+    </title>
+    <link rel="icon" type="image/x-icon" href="~/Content/images/favicon.ico">
+
+    <!-- Bootstrap -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/style.css" rel="stylesheet">
+    <link href="~/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Content/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animsition.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- slider script -->
+    <!-- Back to top script -->
+    <!-- owl Carousel Css -->
+    <link href="~/Content/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Content/css/owl.theme.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/currency.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/css/niceCountryInput.css">
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    @*<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59b8ed860a46e80012bb442f&product=inline-share-buttons"></script>*@
+    <link href="~/Content/currency/css/flag-icon.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/multi-select.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Content/flag-icons/css/flag-icon.css" rel="stylesheet" />
+
+    <link href="~/Content/daterangepicker/daterangepicker.css" rel="stylesheet" />
+
+
+    <link href="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+
+    @*<link href="~/Content/css/home-page.css" rel="stylesheet" />*@
+    <!-- Global site tag (gtag.js) - Google Analytics →
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-156991705-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-156991705-1');
+    </script>
+
+               -->
+    @foreach (var item in trackingNo)
+    {
+        @Html.Raw(item)
+    }
+</head>
+
+
+
+<body>
+    <div id="loader">
+        <div class="loader">
+        </div>
+    </div>
+
+    <header id="header" class="">
+        @if (FAXER.PORTAL.Common.FaxerSession.LoggedUser != null)
+        {
+            <div class="navbar navbar-default">
+
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-2 col-sm-3 col-xs-6   ">
+                            <!-- logo -->
+                            <div class="logo text-center">
+
+                                <a href="@Url.Action("Index" , "Home")">
+                                    <img src="~/Content/images/logo.png" alt="MoneyFex Service">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-6 col-sm-9 col-xs-6  hidden-md  hidden-lg">
+                            <!-- search start-->
+                            <div class="pull-right text-right">
+
+                                <ul class="after-login-menu pull-right">
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+
+                                            <div class="user_image ">
+                                                <img src="~/Content/images/icon/svg/user.svg">
+                                            </div>
+                                        </a>
+
+
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("SendToDashBoard", "SenderTransferMoneyNow")">Dashboard</a></li>
+                                            @if (IsBusinessAccount)
+                                            {
+                                                <li><a href="@Url.Action("Index", "SenderBusinessProfile")"> Account Profile</a></li>
+
+                                            }
+                                            else
+                                            {
+                                                <li><a href="@Url.Action("Index", "SenderProfile")"> Account Profile</a></li>
+                                            }
+                                            <li><a href="@Url.Action("SavedCreditDebitCard" , "FaxerAccountProfile")">Saved Credit/Debit Card</a></li>
+                                            @*<li><a href="/SendingOrderPayment">Standing Order Payments</a></li>*@
+                                            <li><a href="@Url.Action("Logout", "FaxerAccount")">Logout</a></li>
+
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                        <!-- logo -->
+
+                        <div class="col-lg-6 col-md-6col-sm-6 col-xs-6  pull-right  hidden-sm hidden-xs">
+
+                            <div id="navigation" class="hidden-xs">
+                                <!-- navigation start-->
+                                <ul>
+                                    <li class="dropdown  hidden-xs" id="notificationList">
+                                        <a href="#" class="dropdown-toggle notification  " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                            <span class=""> <i class="fa fa-bell fa-stack-1x fa-inverse"></i></span>
+                                            <span class="badge" data-bind="text:Notifications().length">0</span>
+                                        </a>
+
+                                        <ul class="dropdown-menu notify-drop  dropdown ">
+                                            <div class="notify-drop-title">
+                                                <div class="row">
+                                                    <div class="col-md-6 col-sm-6 col-xs-6" id="count">Notification  (<strong data-bind="text:Notifications().length"></strong>)</div>
+                                                    <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                                </div>
+                                            </div>
+                                            <!-- end notify title -->
+                                            <!-- notify content -->
+                                            <div class="drop-content">
+
+                                                <!-- ko foreach: Notifications() -->
+                                                <li>
+                                                    <div class=" pd-l0">
+
+                                                        <a href="#" onclick="removeNotification(this)">
+                                                            <h5>PAYMENTS</h5>Payment from <span class="text-black" data-bind="text:ReceiverName"> </span> , Amount: <span data-bind="text:Amount">$1000</span> <p data-bind="text:Time">01/02/2019 08:35 AM</p>
+                                                            <p class="time" data-bind="text:HourAgo">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+
+                                                <!-- /ko -->
+
+
+                                            </div>
+                                            <div class="notify-drop-footer text-center">
+                                                <a href="/SenderNotification/Notification"><i class="fa fa-eye"></i> See All  </a>
+                                            </div>
+                                        </ul>
+                                    </li>
+
+
+                                </ul>
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+
+                            <!--   start-->
+
+                            <ul class="after-login-menu">
+                                <li class="nav-item dropdown">
+
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                        <div class="user_details">
+                                            <span class="name"><text style="color:black">Hi @SenderFirstName</text> </span>
+                                        </div>
+                                        <div class="user_image">
+                                            <img src="~/Content/images/icon/svg/user.svg">
+                                        </div>
+                                    </a>
+                                    <a href="@Url.Action("Logout", "FaxerAccount")" class="logout">Sign Out</a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("SendToDashBoard", "SenderTransferMoneyNow")">Dashboard</a></li>
+                                        @if (IsBusinessAccount)
+                                        {
+                                            <li><a href="@Url.Action("Index", "SenderBusinessProfile")"> Account Profile</a></li>
+
+                                        }
+                                        else
+                                        {
+                                            <li><a href="@Url.Action("Index", "SenderProfile")"> Account Profile</a></li>
+                                        }
+
+                                        <li><a href="@Url.Action("SavedCreditDebitCard" , "FaxerAccountProfile")">Saved Credit/Debit Card</a></li>
+                                        @*<li><a href="/SendingOrderPayment">Standing Order Payments</a></li>*@
+                                        <li><a href="@Url.Action("Logout", "FaxerAccount")">Logout</a></li>
+
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </li>
+
+                            </ul>
+                            <!-- /.  end-->
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <nav class="navbar navbar-default">
+
+
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Index" , "Home")">  <img src="~/Content/images/logo.png" alt="MoneyFex Service"></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="@Url.Action("Login" , "FaxerAccount" , new { @IsBusiness = true })">Business</a> </li>
+                            <li> <a href="@Url.Action("Login" , "FaxerAccount")">Personal</a> </li>
+                            <li><a href="@Url.Action("Login" , "FaxerAccount")" class=" ">Log in</a> </li>
+                            @*<li><a href="/FaxerAccount/Register" class=" ">Sign up</a> </li>*@
+                            <li><a href="/SenderSignUp/PersonalLoginInfo" class=" ">Sign up</a> </li>
+
+
+
+                        </ul>
+
+
+                    </div><!-- /.navbar-collapse -->
+                    <div class="pull-right pinside20 hidden-lg hidden-md position-top-center">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><a href="@Url.Action("Login" , "FaxerAccount")">  Login</a></li>
+                        </ul>
+                    </div>
+                </div><!-- /.container-fluid -->
+            </nav>
+        }
+
+
+    </header>
+
+    @RenderBody()
+    <div class="clearfix"></div>
+    <div id="footer">
+
+        <div class="footer">
+            <!-- footer -->
+            <div class="container  ">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6  ">
+                        <div class="widget-footer mt40">
+                            <!-- widget footer -->
+                            <h4>Quick Link</h4>
+                            <ul class="listnone">
+                                <li><a href="@Url.Action("SenderAboutUs","QuickLink")">About Us</a></li>
+                                <li><a href="@Url.Action("Index","NewsHome")">News</a></li>
+                                <li><a href="@Url.Action("SenderCareer","QuickLink")">Career</a></li>
+                                <li><a href="@Url.Action("SenderContact","QuickLink")">Contact Us</a></li>
+                                <li><a href="@Url.Action("SenderFAQ","QuickLink")">FAQ</a></li>
+                                <li><a href="/Agent/AgentLogin/Login">Login as an Agent</a></li>
+                                  <li>@*<a href="/Agent/AgentRegistration/BecomeAuxAgent">Become an Aux Agent</a>*@</li>
+                                @*<li><a href="">Register a Business</a></li>*@
+                                <li><a href="@Url.Action("SenderReportAFraud","QuickLink")">Report a Fraud </a></li>
+                            </ul>
+                        </div>
+                        <!-- /.widget footer -->
+                    </div>
+                    <div class="col-md-3 col-sm-6  ">
+                        <div class="widget-footer mt40">
+                            <!-- widget footer -->
+                            <h4>Tools</h4>
+                            <ul class="listnone">
+                                <li><a href="@Url.Action("Index","FindLocation")">Find Locations</a></li>
+                                <li><a href="@Url.Action("SenderTrackATransfer","QuickLink")">Track a Transfer</a></li>
+                                @*<li><a href="estimate.php">Estimate Transfer Fees</a></li>*@
+                                <li><a href="@Url.Action("SenderHowToSendMoney","QuickLink")">How To Send Money</a></li>
+                                <li><a href="@Url.Action("SenderToPayForGoodsAndServices","QuickLink")">How to Pay for goods and Services</a></li>
+                                <li><a href="@Url.Action("Index","DailyRates")">Daily Rates</a></li>
+
+                            </ul>
+                        </div>
+                        <!-- /.widget footer -->
+                    </div>
+                    <div class="col-md-2 col-sm-6  ">
+                        <div class="widget-footer mt40">
+                            <!-- widget footer -->
+                            <h4>Other Link</h4>
+                            <ul class="listnone">
+                                <li><a href="@Url.Action("SenderSiteTermsOfUse","QuickLink")">Site Terms of use</a></li>
+                                <li><a href="@Url.Action("SenderPrivacyPolicy","QuickLink")">Privacy Policy</a></li>
+                                <li><a href="@Url.Action("SenderTermsAndConditions","QuickLink")">Terms and Conditions</a></li>
+                                <li><a href="@Url.Action("SenderCookiePolicy","QuickLink")">Cookie Policy</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.widget footer -->
+                    </div>
+                    <div class="col-md-4 col-sm-6 text-right ">
+                        <div class="widget-footer pdt80">
+                            <!-- widget footer -->
+                            @*<img src="~/Content/images/google-play.png" width="160">   <img src="~/Content/images/apple-store.png" width="160">*@
+                            <a href="https://play.google.com/store/apps/details?id=com.companyname.riddha.moneyfexmobile" style="border: solid 1px #eee;
+                                 display: inline-block;
+                            border-radius: 8px;">
+                                <img src="~/Content/images/google-play.png" width="160">
+                            </a>
+
+                            <div class="mt20 ">
+                                <a href="https://www.facebook.com/moneyfex" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/company/moneyfex/" target="_blank"><i class="fa fa-linkedin"></i></a>
+                                <a href="https://twitter.com/MoneyFex" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.instagram.com/moneyfex/" target="_blank"><i class="fa fa-instagram"></i></a>
+                            </div>
+                            <br>
+                            <a style="    display: inline-block;
+                        border-radius: 8px;
+                        overflow: hidden;
+                       padding: 5px;
+                       background: #fff;"><img src="~/Content/images/pci-security.png" width="180"> </a>
+
+                        </div>
+                        <!-- /.widget footer -->
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="middle-footer">
+            <div class="container">
+                <div class="row   ">
+                    <div class="col-lg-8 col-md-6 col-xs-12">
+                        <p>
+                            MoneyFex Ltd. 1st floor, North Westgate House Harlow, Essex London CM20 1YS United Kingdom | Company Registration Number : 10105082 MoneyFex is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment service. Registration number: 745989
+
+                        </p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12 text-right  mt20">
+                        Working in partnership with
+                        <img src="~/Content/images/kiipay.png" width="90" class="radius-20  bg-white  ">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.footer -->
+
+    </div>
+    <!-- /.small footer -->
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    @*<script src="~/Content/js/accordion.js"></script>*@
+    <script src="~/Content/js/jquery.min.js"></script>
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Content/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Content/js/slider-carousel.js"></script>
+    <!-- Back to top script -->
+    <!-- Back to top script -->
+    <script src="~/Content/js/back-to-top.js" type="text/javascript"></script>
+    <!-- <link href="select/bootstrap-select.min.css" rel="stylesheet">
+    <link href="select/bootstrap-select-country.min.css" rel="stylesheet">
+    <script src="select/bootstrap-select-country.min.js" type="text/javascript"></script>
+    <script src="select/bootstrap-select.min.js" type="text/javascript"></script> -->
+    <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    <script src="~/Content/js/currency.js"></script>
+    <script src="~/Content/js/currency.js"></script>
+
+    <link href="~/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/datatables/js/jquery.dataTables.min.js"></script>
+
+
+
+    @*<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+        <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+        <script src="/signalr/hubs"></script>*@
+    <script src="~/Content/JS/animsition.js"></script>
+    <script src="~/Content/JS/animsition-script.js"></script>
+
+
+    <script src="~/Content/select2/js/bootstrap-multiselect.js"></script>
+    <script src="~/Content/select2/js/jquery.multi-select.js"></script>
+    <script src="~/Content/select2/js/jquery.quicksearch.js"></script>
+    <script src="~/Content/select2/js/select2.full.min.js"></script>
+    <script src="~/Content/select2/js/select2-custom.js"></script>
+
+    <script>
+        //var countries = [];
+        //function getAllCountriesModel(item) {
+
+        //    var self = this;
+        //    item = item || {};
+        //    self.n = ko.observable(item.n || "");
+        //    self.i = ko.observable(item.i || "");
+        //}
+        //getAllCountries();
+        //async function getAllCountries() {
+
+        //  //////debugger
+
+        //    await Riddha.ajax.get("/Home/allIsoCountries").done(function (result) {
+
+        //      //////debugger
+        //        var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), getAllCountriesModel);
+        //        countries = result.Data;
+        //    });
+
+        //}
+
+        $(document).ready(function () {
+            $("#searchcurency").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#currencylist li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+
+        $(document).ready(function () {
+            $("#searchcurency1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#currencylist1 li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+    <script src="~/Content/js/niceCountryInput.js"></script>
+    <script>
+
+        function SignOut() {
+
+            window.location.href("/FaxerAccount/Logout");
+        }
+
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+        function onChangeCallback(ctr) {
+            console.log("The country was changed: " + ctr);
+            //$("#selectionSpan").text(ctr);
+        }
+
+        $(document).ready(function () {
+            $(".niceCountryInputSelector").each(function (i, e) {
+                new NiceCountryInput(e).init();
+            });
+        });
+
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+
+        $('.amount').text(GetFormattedAmount($('.amount').val()));
+        //$('.amountspan').text(GetFormattedAmount($('.amountspan').text()));
+        function GetFormattedAmount(number, decPlaces, decSep, thouSep) {
+            //////debugger
+            var value = parseFloat(number).toFixed(decPlaces || 2);
+            var numberOnly = value.split('.')[0];
+            var temp = "", result = "";
+            var j = 0;
+            for (var i = numberOnly.length - 1; i >= 0; i--) {
+                if (j == 3 || j == 5 || j == 7 || j == 9 || j == 11) {
+                    temp += thouSep || ","
+                }
+                temp += numberOnly[i];
+                j++;
+            }
+            for (var i = temp.length - 1; i >= 0; i--) {
+
+                result += temp[i];
+
+            }
+            return result + '.' + value.split('.')[1];
+        }
+        $('.amountheader').text(GetFormattedHeaderAmount($('.amountheader').text()));
+        function GetFormattedHeaderAmount(number, decPlaces, decSep, thouSep) {
+            var value = parseFloat(number).toFixed(decPlaces || 0);
+            var numberOnly = value.split('.')[0];
+            var temp = "", result = "";
+            var j = 0;
+            for (var i = numberOnly.length - 1; i >= 0; i--) {
+                if (j == 3 || j == 6 || j == 9 || j == 12 || j == 15) {
+                    temp += thouSep || ","
+                }
+                temp += numberOnly[i];
+                j++;
+            }
+            for (var i = temp.length - 1; i >= 0; i--) {
+
+                result += temp[i];
+
+            }
+            return result;
+        }
+
+        $('.creditcardNumber').keyup(function () {
+
+            //var totallength = this.val().length;
+            //var parts = totallength / 4;
+            //if (parts < 0)
+            //{
+
+            //}
+
+            //////debugger
+            var reg = new RegExp(/^(?=.*\d)[\d ]+$/);
+            console.log(reg.test(this.value));
+            ////debugger;
+            if (!reg.test(this.value) && this.value.length < 2) {
+
+                $(".creditcardNumber").val('');
+                return 0;
+            }
+
+
+
+            var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+            var matches = v.match(/\d{4,16}/g);
+            var match = matches && matches[0] || ''
+            var parts = [];
+
+            for (i = 0, len = match.length; i < len; i += 4) {
+                parts.push(match.substring(i, i + 4))
+            }
+
+            if (parts.length) {
+
+                var number = parts.join(' ');
+                $(".creditcardNumber").val(number);
+            }
+
+
+        })
+
+
+    </script>
+
+    <script src="~/Content/js/slogan-roulette.js"></script>
+    <script>
+        $('#swappable-title').sloganRoulette({
+            autoplay: true,
+            repeat: true,
+            startDelay: 2000,
+            interval: 2000,
+            outClass: "bounceOut",
+            inClass: "bounceIn",
+            slogans: ["Pay Bills", "Request Money", "Transfer Money"]
+        });
+
+
+
+
+
+        // $(document).ready(function() {
+        //     $(window).scroll(function() {
+
+        //         if ($(window).scrollTop() > 150) {
+        //             $('.dbbottom-footer').css('position', 'fixed');
+        //             $('.dbbottom-footer').css('bottom', '0');
+        //         } else if ($(window).scrollTop() <= 150) {
+        //             $('.dbbottom-footer').css('position', '');
+        //             $('.dbbottom-footer').css('top', '');
+        //         }
+        //         if ($('.dbbottom-footer').offset().top + $(".dbbottom-footer").height() > $("#footer").offset().top) {
+        //             $('.dbbottom-footer').css('bottom', -($(".dbbottom-footer").offset().top + $(".dbbottom-footer").height() - $("#footer").offset().top));
+        //         }
+        //     });
+        // });
+
+
+
+
+
+        $(window).load(function (e) {
+
+            $("#bn4").breakingNews({
+                effect: "slide-v",
+                autoplay: true,
+                timer: 4000,
+                color: 'blue',
+                border: false
+            });
+            $("#bn5").breakingNews({
+                effect: "slide-v",
+                autoplay: true,
+                timer: 4000,
+                color: 'blue',
+                border: false
+            });
+
+        });
+
+
+
+
+
+
+
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+        $(document).ready(function () {
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+        });
+        $(function () {
+            $("input[name='chkPinNo']").click(function () {
+                if ($("#chkYes").is(":checked")) {
+                    $("#dvPinNo").show();
+                } else {
+                    $("#dvPinNo").hide();
+                }
+            });
+        });
+        $("input[type='checkbox']").on('change', function () {
+            if ($(this).is(':checked')) {
+                $(this).attr('value', 'true');
+            } else {
+                $(this).attr('value', 'false');
+            }
+
+            // $('#checkbox-value').text($('#checkbox1').val());
+        });
+        $(document).ready(function () {
+            //Initialize tooltips
+            $('.nav-tabs > li a[title]').tooltip();
+
+            //Wizard
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+                var $target = $(e.target);
+
+                if ($target.parent().hasClass('disabled')) {
+                    return false;
+                }
+            });
+
+            $(".next-step").click(function (e) {
+
+                var $active = $('.wizard .nav-tabs li.active');
+                $active.next().removeClass('disabled');
+                nextTab($active);
+
+            });
+            $(".prev-step").click(function (e) {
+
+                var $active = $('.wizard .nav-tabs li.active');
+                prevTab($active);
+
+            });
+        });
+
+    </script>
+    <script src="~/Content/js/bootstrap-select.min.js"></script>
+
+    @*<script>
+
+            var dashBoardHub = $.connection.dashBoardHub;
+            var SenderHub = $.connection.senderHub;
+            $.connection.hub.start().done(function () {
+                console.log('connection started!');
+                var senderId = @SenderId;
+                dashBoardHub.server.addCompanyGroup(senderId);
+                //kitchenHub.server.addKitchenGroup(kitchenGroupId);
+                SenderHub.server.addSender(senderId);
+            });
+            // Create a function that the hub can call to broadcast messages.\
+
+            //var broadcastMessageFunc = [];
+            //dashBoardHub.client.broadcastMessage = function (name, message, amount , Time , hourago ,  data) {
+            //    $.each(broadcastMessageFunc, function (i) {
+            //        broadcastMessageFunc[i](name, message, amount, Time, hourago, data);
+            //    });
+            //};
+
+            var broadcastMessageFunc = [];
+            SenderHub.client.broadcastMessage = function (notificationid,  name, message, amount, Time, hourago, data) {
+                $.each(broadcastMessageFunc, function (i) {
+                    broadcastMessageFunc[i](notificationid ,name, message, amount, Time, hourago, data);
+                });
+            };
+            var addSenderItemfunc = [];
+            SenderHub.client.addItem = function (senderId, message) {
+                $.each(addSenderItemfunc, function (i) {
+                    addSenderItemfunc[i](senderId, message);
+                });
+            }
+            //var addCounterOrderFunc = [];
+            //counterHub.client.addOrder = function (OrderNo, TableNo, id, CompanyId) {
+            //    $.each(addCounterOrderFunc, function (i) {
+            //        addCounterOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+            //    })
+            //};
+            //var deliveredOrderFunc = [];
+            //counterHub.client.orderDelivered = function (OrderNo, TableNo, id, CompanyId) {
+            //    $.each(deliveredOrderFunc, function (i) {
+            //        deliveredOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+            //    })
+            //};
+            //chat.server.send()
+
+
+        </script>*@
+    <script src="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    @*<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>*@
+    <script src="~/Content/js/jszip.min.js"></script>
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="~/Scripts/Riddha/MoneyFex.Global.js"></script>
+    <script src="~/Content/daterangepicker/moment.min.js"></script>
+    <script src="~/Content/daterangepicker/daterangepicker.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+
+                    "displayLength": 10,
+
+                    "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(3, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+
+
+
+
+        $('.print, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'pdf'
+            ],
+            "order": [
+                [3, 'asc']
+            ],
+        });
+
+
+        $('.csv, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'csv'
+            ],
+            "order": [
+                [3, 'asc']
+            ],
+        });
+
+
+        $('.csvprint, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'csv', 'pdf'
+            ],
+            "order": [
+                [3, 'asc']
+            ],
+        });
+
+
+        $('#dates').daterangepicker({
+            buttonClasses: ' btn',
+            autoUpdateInput: true,
+            applyClass: 'btn-primary',
+            cancelClass: 'btn-secondary',
+
+            locale: {
+                format: 'MM/DD/YYYY',
+                separator: '-',
+            }
+        });
+
+    </script>
+
+
+    <script>
+        function NotificationController() {
+
+            var url = "/Notification";
+            self.Notifications = ko.observableArray([]);
+            //self.NotificationFor = ko.observableArray([
+
+            //    { Id: 0, Name: 'KiiPayBusiness' },
+            //    { Id: 1, Name: 'kiiPayPersonal' },
+            //    { Id: 2, Name: 'Sender' },
+            //    { Id: 3, Name: 'Agent' },
+            //    { Id: 4, Name: 'Admin' },
+            //    { Id: 5, Name: 'Staff' },
+
+            //]);
+
+            if (@SenderId > 0)
+            {
+                Riddha.ajax.get(url + "/GetAllNotification?ReceiverId=" + @SenderId + "&notificationFor=" + 2)
+                    .done(function (result) {
+                        self.Notifications(ko.toJS(result.Data));
+                    });
+
+            }
+            //self.sendRealtimeMessage = function (message) {
+            //  //////debugger
+            //    $(".badge").text("1")
+
+            //    //var message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies eros at magna convallis, at maximus velit hendrerit."
+            //    //$("#message").append("<br/>")
+            //    //var dt = new Date();
+            //    //var time = dt.getHours() + ":" + dt.getMinutes();
+            //    //this.alert(message);
+            //    // self.showText("#message", time + "  -  " + message, 0, 1);
+            //}
+
+            //self.showText = function (target, message, index, interval) {
+            //    if (index < message.length) {
+            //        $(target).append(message[index++]);
+            //        this.alert(message);
+            //        setTimeout(function () { self.showText(target, message, index, interval); }, interval);
+            //    }
+            //    $("#message").parent().parent().scrollTop($("#message").parent().parent().height());
+            //}
+
+
+            // Declare a proxy to reference the hub.
+
+            // Create a function that the hub can call to broadcast messages.
+            broadcastMessageFunc.push(function (notificationid, name, message, amount, Time, hourago, data ) {
+
+                //self.sendRealtimeMessage(message);
+
+                // Html encode display name and message.
+                //Riddha.UI.Toast(message, 4, name);
+                var url = "#";
+                //switch (notificationType) {
+                //    case 0:
+                //        url = "/ordermanagement/orderconfirm";
+                //        break;
+                //    case 1:
+                //        url = "/ordermanagement/orderDelivery";
+                //        break;
+                //    case 2:
+                //        url = "/ordermanagement/orderBill";
+                //        break;
+                //    default:
+                //        url = "#";
+
+                //}
+
+                var note = {
+                    NotificationId: notificationid,
+                    ReceiverName: name,
+                    Message: message,
+                    Amount: amount,
+                    Time: Time,
+                    HourAgo: hourago
+
+                };
+                //add notification to ui
+                self.Notifications.push(note);
+
+            });
+            //addKiiPayBusinessItemfunc.push(function (name, message, amount, Time, hourago, data) {
+
+            //    //self.sendRealtimeMessage(message);
+
+            //    // Html encode display name and message.
+            //    //Riddha.UI.Toast(message, 4, name);
+            //    var url = "#";
+            //    //switch (notificationType) {
+            //    //    case 0:
+            //    //        url = "/ordermanagement/orderconfirm";
+            //    //        break;
+            //    //    case 1:
+            //    //        url = "/ordermanagement/orderDelivery";
+            //    //        break;
+            //    //    case 2:
+            //    //        url = "/ordermanagement/orderBill";
+            //    //        break;
+            //    //    default:
+            //    //        url = "#";
+
+            //    //}
+
+            //    var note = {
+
+            //        ReceiverName: name,
+            //        Message: message,
+            //        Amount: amount,
+            //        Time: Time,
+            //        HourAgo: hourago
+
+            //    };
+            //    //add notification to ui
+            //    self.Notifications.push(note);
+
+            //});
+
+        }
+        function removeNotification(control) {
+
+            var context = ko.contextFor(control);
+            var data = ko.dataFor(control);
+            Notifications.remove(data);
+            $.get("/Notification/NoticationSeen?NotificationId=" + data.NotificationId, function (result) {
+
+            })
+
+            console.log(context);
+        }
+
+        function EnableDisableServices(sendingCountry, receivingCountry, callback, receivingCurrency ){
+
+
+          $.getJSON("/EnabledServices/GetTransferServices/", {
+                sendingCountry: sendingCountry,
+                receivingCountry: receivingCountry,
+              receivingCurrency: receivingCurrency
+            }, function (result) {
+
+                    if (result.Data != null) {
+                        //Select = 0 ,
+                        //KiiPayWallet = 1 ,
+                        //BankDeposit = 2 ,
+                        //CahPickUp = 3 ,
+                        //OtherWallet = 4 ,
+                        //PayBills = 5,
+                        //    All = 6
+                        //BankDeposit, CahPickUp, KiiPayWallet, OtherWallet, PayBills
+                        var enabledServices = result.Data;
+                        //debugger;
+
+                        if (enabledServices.includes("KiiPayWallet")) {
+
+                        }
+
+                        if (enabledServices.includes("CahPickUp")) {
+                            $("#casp").removeClass("disabled");
+                            $("#casp img").attr("src", "/Content/images/icon/svg/cash-pickup.svg");
+                            $("#casp input[type='radio']").attr("disabled", false);
+                        }
+                        else {
+
+                            $("#casp").addClass("disabled");
+                            $("#casp img").attr("src", "/Content/images/icon/svg/cash-pickup-disabled.svg");
+                            $("#casp input[type='radio']").attr("disabled", true);
+
+                            //$("#casp input[type='radio']").attr("checked", true);
+                        }
+                        if (enabledServices.includes("OtherWallet")) {
+                            $("#wal").removeClass("disabled");
+                            $("#wal img").attr("src", "/Content/images/icon/svg/mobile-money.svg");
+                            $("#wal input[type='radio']").attr("disabled", false);
+
+                            //$("#wal input[type='radio']").click();
+                        }
+
+                        else {
+
+                            $("#wal").addClass("disabled");
+                            $("#wal img").attr("src", "/Content/images/icon/svg/mobile-money-disabled.svg");
+                            $("#wal input[type='radio']").attr("disabled", true);
+
+                        }
+
+                        if (enabledServices.includes("BankDeposit")) {
+                            $("#bac").removeClass("disabled");
+                            $("#bac img").attr("src", "/Content/images/icon/svg/bank.svg");
+                            $("#bac input[type='radio']").attr("disabled", false);
+
+                            //$("#bac input[type='radio']").click();
+
+                        }
+                        else {
+
+                            $("#bac").addClass("disabled");
+                            $("#bac img").attr("src", "/Content/images/icon/svg/bank-disabled.svg");
+                            $("#bac input[type='radio']").attr("disabled", true);
+
+                        }
+
+                        if (enabledServices.includes("PayBills")) {
+
+                        }
+                        function CheckEnabledRadio() {
+
+                            if
+                            (selectedTransferMethod != "" && selectedTransferMethod != null) {
+                                switch (selectedTransferMethod) {
+                                    case "BankDeposit":
+                                        $("#wal input[type='radio']").attr("checked", false);
+                                        $("#casp input[type='radio']").attr("checked", false);
+                                        if ($("#bac input[type='radio']")[0].disabled == false) {
+                                            $("#bac input[type='radio']").attr("checked", true);
+                                        }
+                                        else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    case "Mobile":
+
+                                        $("#casp input[type='radio']").attr("checked", false);
+                                        $("#bac input[type='radio']").attr("checked", false);
+                                        if ($("#wal input[type='radio']")[0].disabled == false) {
+                                            $("#wal input[type='radio']").attr("checked", true);
+                                        }
+                                        else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    case "CashPickup":
+
+                                        $("#bac input[type='radio']").attr("checked", false);
+                                        $("#wal input[type='radio']").attr("checked", false);
+                                        if ($("#casp input[type='radio']")[0].disabled == false) {
+                                            $("#casp input[type='radio']").attr("checked", true);
+                                        } else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    default:
+                                }
+
+                            }
+                            else {
+
+
+
+                                $("#transferMethod input:radio").each(function () {
+
+
+                                    //if ($(this)[0].disabled == true) {
+
+                                    //    $(this)[0].checked = false;
+                                    //} else {
+
+                                    //    $(this)[0].checked = true;
+                                    //}
+
+                                    //debugger;
+                                    if ($(this)[0].disabled == true) {
+
+                                        $(this)[0].checked = false;
+                                    } else {
+
+                                        $(this)[0].checked = true;
+                                    }
+
+
+                                })
+                            }
+
+
+                        }
+                        CheckEnabledRadio();
+                        if (callback == undefined) {
+
+                            callback = function () { };
+                        }
+                        callback();
+
+                    }
+                    //EnableDisabledTransferMethod();
+
+
+            });
+        }
+        function RefreshRadio() {
+            $("#transferMethod input:radio").each(function () {
+
+
+                //if ($(this)[0].disabled == true) {
+
+                //    $(this)[0].checked = false;
+                //} else {
+
+                //    $(this)[0].checked = true;
+                //}
+
+                //debugger;
+                if ($(this)[0].disabled == true) {
+
+                    $(this)[0].checked = false;
+                } else {
+
+                    $(this)[0].checked = true;
+                }
+
+
+            })
+        }
+
+
+    function EnableDisabledTransferMethod() {
+
+        transferMethod = $("#transferMethod input[type='radio']:checked")[0].id;
+        transferMethodvalue = 0;
+        switch (transferMethod) {
+
+            case "BankAccount":
+                transferMethodvalue = 4;
+                $("#wal").addClass('disabled')
+                $("#bac").removeClass('disabled')
+                $("#casp").addClass('disabled')
+
+                break;
+            case "MobileWallet":
+                transferMethodvalue = 3;
+                $("#bac").addClass('disabled')
+                $("#casp").addClass('disabled')
+                $("#wal").removeClass('disabled')
+
+                break;
+            case "CashPickup":
+                ////debugger;
+                transferMethodvalue = 1;
+                $("#wal").addClass('disabled')
+                $("#bac").addClass('disabled')
+                $("#casp").removeClass('disabled')
+                //window.location.href = "/SenderMobileMoneyTransfer/Index";
+                break;
+            default:
+
+        }
+
+
+    }
+    </script>
+    <script type="text/javascript">
+
+        ko.cleanNode(document.getElementById("notificationList"));
+        var obj = new NotificationController();
+        ko.applyBindings(obj, document.getElementById("notificationList"));
+    </script>
+    <!-- withdrawal-code -->
+    <!-- withdrawal-code -->
+    @RenderSection("scripts", required: false)
+
+
+</body>
+
+</html>
+
+
+
+

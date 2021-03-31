@@ -1,0 +1,102 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.CashPickupInformationViewModel
+
+@{
+    ViewBag.Title = "SenderDetails";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+                <!--  -->
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup   clearfix text-center">
+                        <h3 class="text-left">Sender's Details</h3>
+                        <hr>
+                        <div class="text-left">
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label> Name</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.SenderFullName
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Telephone</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.MobleCode @Model.MobileNo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Email Address</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.Email
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Address</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.AddressLine2 <br>@Model.AddressLine2<br>@Model.CountryCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit"  class="btn btn-primary btn-lg   ">Confirm & Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="javascript:history.back(1)" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </section>
+
+}

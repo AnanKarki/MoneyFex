@@ -1,0 +1,178 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+    var imageUrl = baseUrl + "/Content/flag-icons/fonts/" + ViewBag.CountryCode.ToLower() + ".svg";
+}
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/naira-offer.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h1 style="    font-size: 25px;
+    color: #004468;
+     float: left;
+    margin: 0;">
+                                @*     <span style="width: 35px; height: 35px; line-height: 35px; background: #02b6ff; border-radius: 50%; text-align: center; color: #fff; float: left; margin-right: 10px;"> </span>  *@
+                                <img src="@baseUrl/Content/Images/flag.Jpeg" style="width: 38px; height: 29px; line-height: 35px; border-radius: 50%; text-align: center; color: #fff; float: left; margin-right: 10px;">
+                                @ViewBag.CountryCurrencyName
+                            </h1>
+                        </td>
+                    </tr>
+
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 35px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 22px; margin-bottom: 5px;">Hello @ViewBag.CountryName!</h1>
+                        </td>
+                    </tr>
+
+
+
+
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">We are pleased to announce the launch of our service into @ViewBag.CountryName!  </h1>
+
+
+
+                            <a href="https://play.google.com/store/apps/details?id=com.companyname.riddha.moneyfexmobile">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/google-play.png" style="display: inline-block; width: auto;">
+                            </a>
+
+
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                Thank You<br>
+                                <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                            </h1>
+                        </td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+@*<table class="section" cellpadding="0" cellspacing="0">
+        <tr>
+            <td class="column ngeku-img" width="100" valign="top">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td align="left">
+                                <img src="images/naira-offer.png">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="column" width="20" valign="top">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td> &nbsp; </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+            <td class="column" width="480" valign="top">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <h1 style="    font-size: 25px;
+        color: #004468;
+         float: left;
+        margin: 0;">
+                                    <span style="width: 35px; height: 35px; line-height: 35px; background: #02b6ff; border-radius: 50%; text-align: center; color: #fff; float: left; margin-right: 10px;"> <img src="images/south-african-flag.png"></span> South African Rand
+                                </h1>
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <h1 style="font-size: 35px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 22px; margin-bottom: 5px;">Hello South Africa!  </h1>
+                            </td>
+                        </tr>
+
+
+
+
+
+                        <tr>
+                            <td>
+                                <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                    We are pleased to announce the launch of our service into South Africa!
+                                </h1>
+
+
+
+                                <a href="">
+                                    <img src="images/google-play.png" style="display: inline-block; width: auto;">
+                                </a>
+
+
+
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                    Thank You<br>
+                                    <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                                </h1>
+                            </td>
+                        </tr>
+
+
+
+
+                        <tr>
+                            <td>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>*@

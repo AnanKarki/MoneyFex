@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "NoCard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Start Sending</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <center>
+                        <a href="@Url.Action("UserContactDetails", "TopUpRegestration")" class="btn btn-primary ">Continue with MoneyFex Top-up Card Registration</a>
+                        <p class="or_css">OR</p>
+                        <a href="@Url.Action("index","TopUpSomeoneElseMFTCCard")" class="btn btn-warning">Top-up Someone else's MoneyFax Top-up Card</a>
+                        <p class="or_css">OR</p>
+                        <button type="submit" class="btn btn-default">Continus with Non Card Money Sending</button>
+                    </center>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+

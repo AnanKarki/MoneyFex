@@ -1,0 +1,73 @@
+﻿@model FAXER.PORTAL.SecureTradingPaymentGateway.CustomerResponseVm
+
+@{
+    ViewBag.Title = "ThreeDQueryResponseCallBack";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("DebitCreditCardDetails", "StaffOtherMobileWalletsTransfer", FormMethod.Post, new { @Id = "payform" }))
+{
+    <!--  -->
+
+    @Html.HiddenFor(model => model.MD)
+    @Html.HiddenFor(model => model.parenttransactionreference)
+    @Html.HiddenFor(model => model.PaRes)
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="col-lg-6 col-lg-offset-3">
+
+
+                                        <div class="login_signup mb50 clearfix text-center">
+
+
+                                            <h3>Processing your payment.</h3>
+                                            <h3 class="text-primary"> Processing <img src="~/Content/Images/partners/processing.gif" alt="" width="150"></h3>
+
+
+                                            <h4>
+                                                Do we have your mobile phone number?<br>
+                                                We use these details to provide an extra layer of security when<br> you shop online.
+                                            </h4>
+                                            <h4>It's really important that you update your mobile phone number<br> (and any additional cardholders), as you may not be able to<br> make some purchases online without it.</h4>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <!--  -->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $("#payform").submit();
+
+    </script>
+}

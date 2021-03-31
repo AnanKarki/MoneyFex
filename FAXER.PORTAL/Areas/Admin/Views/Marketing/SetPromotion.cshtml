@@ -1,0 +1,195 @@
+﻿
+@{
+    ViewBag.Title = "SetPromotion";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set New Promotion  </h4>
+                                        <a href="@Url.Action("CurrentPormotion","Marketing")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Promotion
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Promotion Name</label>
+                                                        <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Name">
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                            <option>Select Country</option>
+                                                            <option>United kingdom (GBP)</option>
+                                                            <option>Nigeria (NGN)</option>
+                                                            <option>Cameroon (XAF)</option>
+                                                            <option>Ghana (GHS)</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                            <option>Select City</option>
+                                                            <option>Delhi</option>
+                                                            <option>Kathmandu</option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Target User</label>
+                                                        <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                            <option>Select Target User</option>
+                                                            <option>All</option>
+                                                            <option>Agent </option>
+                                                            <option>Sender</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Promotion Type</label>
+                                                        <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                            <option>Select Type</option>
+                                                            <option>On Exact Amount</option>
+                                                            <option>On Range</option>
+                                                            <option>On Fees</option>
+                                                            <option>Give Away</option>
+                                                        </select>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Amount/Rate</label>
+                                                        <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount/Rate">
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Services</label>
+                                                        <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                            <option>Select Service</option>
+                                                            <option>KiiPay Wallet</option>
+                                                            <option>Bank Deposit</option>
+                                                            <option>Cash Pickup</option>
+                                                            <option>Other Wallet</option>
+                                                            <option>Bill Payment</option>
+                                                            <option>Top-up</option>
+                                                            <option>Service Payment</option>
+
+                                                        </select>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Start Date</label>
+                                                        <input type="text" name="date" class="form-control form-control-lg form-control-round form-control-bold" placeholder="10/24/1984">
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>End Date</label>
+                                                        <input type="text" name="date" class="form-control form-control-lg form-control-round form-control-bold" placeholder="10/24/1984">
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Promotion Code</label>
+                                                        <input type="text" class="form-control form-control-lg form-control-round"
+                                                               placeholder="Enter Promotion Code">
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Promotion Staff</label>
+                                                        <input type="text" class="form-control form-control-lg form-control-round"
+                                                               placeholder="">
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <button type="button" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</button>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

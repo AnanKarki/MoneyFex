@@ -1,0 +1,196 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFBCCardProfileViewModel
+@{
+    ViewBag.Title = "MyBusinessMFBCCardDetails";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Details on MoneyFex Business Card</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <form>
+
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @if (Model != null)
+                            {
+                                <img src="@Model.UserIdentificationURL" class="img-thumbnail" alt="Photo of MoneyFex Top-up Card User">
+                            }
+                            else
+                            {
+                                <img src="~/Areas/Businesses/images/logo.png" class="img-thumbnail" alt="Photo of MoneyFex Top-up Card User">
+
+                            }
+                        </div>
+                    </div>
+
+
+                    @Html.HiddenFor(model => model.CardId, new { id = "CardId" })
+
+                    <div class="clearfix"></div>
+
+                    <br><br>
+
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> Name on MoneyFex Business Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", @readonly = "readonly" })
+                            
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Country of MoneyFex Business Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> City of MoneyFex Business Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.City, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Telephone Number</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Email Address</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.EmailAddres, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Status of MoneyFex Business Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.CardStatus, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Credit on MoneyFex Business Card</label>
+                    </div>
+                    <div class="col-lg-1 nopr">
+                        @Html.TextBoxFor(model => model.CurrencySymbol, new { @class="form-control", @readonly="readonly"})
+                    </div>
+                    <div class="col-lg-3 nopadding">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.AmountOnCard, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-2 nopl">
+                        @Html.TextBoxFor(model=>model.Currency, new { @class="form-control", @readonly="readonly"})
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+
+
+
+
+
+
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 ">
+
+                <a href="@Url.Action("Index" , "BusinessHome")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <!-- top-card-registration-payment.php
+                 -->
+                @if (Model != null)
+                {
+                    if (Model.CardId > 0)
+                    {
+                <a href="@Url.Action("UpdateMyBusinessCardDetails", "MyBusinessMFBCCard", new { cardId = Model.CardId })" class="fbtn btn-next">Update Details on This Card  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    }
+                }
+                <br>
+                <a href="@Url.Action("Index" , "BusinessHome")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->

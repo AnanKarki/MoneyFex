@@ -1,0 +1,75 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.AgentCommissionHisotryViewModel>
+@{
+    ViewBag.Title = "AgentCommissionHistoryOnTransferFee";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            @*<div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Commission On Transfer Fee History</h4>
+            </div>*@
+            @*<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("AddAgentCommission","AgentCommissionSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Add Agent Country Commission</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Agent Commission Setting</li>
+                    </ol>
+
+                </div>*@
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row bg-title">
+                        <h4 class="page-title">Commission On Transfer Fee History</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="csvprint display nowrap" cellspacing="0" width="100%">
+                            <thead>
+
+
+                                <tr>
+                                    @*<th>SN</th>*@
+                                    <th>Agent name</th>
+                                    <th>Service</th>
+                                    <th>Sending </th>
+                                    <th>Receiving </th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                    <tr>
+                                        @*<td>@index</td>*@
+                                        <td>@item.AgentName</td>
+
+                                        <td>@item.TransferSevice</td>
+                                        <td>@item.SendingRate</td>
+                                        <td>@item.ReceivingRate</td>
+                                        <td>@item.CreatedDate</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

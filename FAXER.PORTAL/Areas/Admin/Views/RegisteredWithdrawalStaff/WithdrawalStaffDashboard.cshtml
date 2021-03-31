@@ -1,0 +1,963 @@
+﻿
+@{
+    ViewBag.Title = "WithdrawalStaffDashboard";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+} <div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+
+                    <div class="  d-flex align-items-center flex-row card m-b-30">
+
+                        <div class="card-block">
+                            <h3 class="">Ram Shrestha</h3>
+                            <h5 class="text-primary">Staff ID: 6558545454</h5>
+                        </div>
+
+                        <div class="card-block">
+                            <button class="btn btn-inverse  btn-round m-r-20" data-toggle="modal" data-target="#RegisteredAgentsnotepopup">Note</button>
+                            <button class="btn btn-primary btn-round m-r-20" data-toggle="modal" data-target="#email">Send Email</button>
+                            <button class="btn btn-secondary btn-round m-r-20" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Monthly Withdrawal</b></p>
+                                            <h4 class="m-b-0">$15,000</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Approved Withdrawal</b></p>
+                                            <h4 class="m-b-0">$10,000</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Awaiting Approval</b></p>
+                                            <h4 class="m-b-0">$50,000</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-blue text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Monthly Salary</b></p>
+                                            <h4 class="m-b-0">$ 5,242</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-shopping-cart f-40 text-c-blue"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-header-left ">
+                                        <h5>Employment</h5>
+
+                                    </div>
+
+                                </div>
+                                <div class="card-block-big">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Employer ID
+                                                    </td>
+                                                    <td>6546545</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Title
+                                                    </td>
+                                                    <td>Withdrawal Staff</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Employment
+                                                    </td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        Type
+                                                    </td>
+                                                    <td>Full Time</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Salary
+                                                    </td>
+                                                    <td>GBP20,000</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+
+
+
+                                                <tr>
+                                                    <td>
+                                                        Salary Scale
+                                                    </td>
+                                                    <td>18,000 - 22,000</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Salary Mode
+                                                    </td>
+                                                    <td>Monthly</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Highest Qualification
+                                                    </td>
+                                                    <td>MSc Computing</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Previous Position
+                                                    </td>
+                                                    <td>Null</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Leaving Date
+                                                    </td>
+                                                    <td>Null</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Company's Share
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Days of Holidays
+                                                    </td>
+                                                    <td>21</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Years of Employment
+                                                    </td>
+                                                    <td>8</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card feed-card">
+                                <div class="card-header">
+                                    <h5>Feed</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class=" fa fa-check bg-simple-c-green feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Login <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa  bg-simple-c-pink feed-icon">P</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Perform Transaction<span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa  bg-simple-c-pink feed-icon">B</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Birth Day <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-simple-c-green feed-icon">A</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Compliance Alert <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-simple-c-green feed-icon">T</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Complete Training <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa bg-simple-c-yellow feed-icon">H</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">On Holidays <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Recent Withdrawal </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="search-only table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Agent</th>
+                                                    <th>Account No.</th>
+                                                    <th>Withdrawal Code</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>2 Hours</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>5 Hours</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Yesterday</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Weds</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-02-2019</td>
+                                                </tr>
+
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-08-2019</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-08-2020</td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="cash-withdrawal-history.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Withdrawal History</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="search-only table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Agent</th>
+                                                    <th>Account No.</th>
+                                                    <th>Withdrawal Code</th>
+                                                    <th>Amount</th>
+                                                    <th>Date & Time</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>2 Hours 2pm</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>5 Hours 2pm</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Yesterday 2pm</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Weds 2pm</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-02-2019 2pm</td>
+                                                </tr>
+
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-08-2019 2pm</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>ABC Ltd...</td>
+                                                    <td><a href="">587459862</a></td>
+                                                    <td><a href="">25987</a></td>
+                                                    <td>$50,000</td>
+                                                    <td>Jan-08-2020 2pm</td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="cash-withdrawal-history.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Documentation </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    <th>Document Name</th>
+                                                    <th>Update Date</th>
+                                                    <th>Expiry Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        1
+                                                    </td>
+                                                    <td><a href="">Master Degree</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        2
+                                                    </td>
+                                                    <td><a href="">BSc Degree</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        3
+                                                    </td>
+                                                    <td><a href="">ACCA Qualification</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        4
+                                                    </td>
+                                                    <td><a href="">Proof of Address</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        5
+                                                    </td>
+                                                    <td><a href="">ID</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        6
+                                                    </td>
+                                                    <td><a href="">Residence Permit</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        7
+                                                    </td>
+                                                    <td><a href="">Job Application</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        8
+                                                    </td>
+                                                    <td><a href="">Reference</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        9
+                                                    </td>
+                                                    <td><a href="">Appraisal Report</a></td>
+                                                    <td>Jan-02-2018</td>
+                                                    <td>Jan-02-2022</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="withdrawal-staff-documentation.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Payslip </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Month</th>
+                                                    <th>Reference</th>
+                                                    <th>Due Date</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td><label class="label label-inverse">Coming Up</label></td>
+                                                    <td>November</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><label class="label label-warning">Outstanding</label></td>
+                                                    <td>October</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><label class="label label-success">Paid</label></td>
+                                                    <td>September</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><label class="label label-success">Paid</label></td>
+                                                    <td>August</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td><label class="label label-success">Paid</label></td>
+                                                    <td>July</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td><label class="label label-success">Paid</label></td>
+                                                    <td>June</td>
+                                                    <td><a href="">64498</a></td>
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="withdrawal-staff-payslip.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>Staff Details</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class="table-responsive">
+                                        <table class="table  table-responsive m-b-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">First Name</th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">Raymond</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">Middle Name </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">Smith</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Surname</th>
+                                                    <td class="social-user-name b-none text-muted">John</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Date of Birth</th>
+                                                    <td class="social-user-name b-none text-muted">Jan-09-1998</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Current Address</h5>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 1</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 2</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">City</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">London</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Postcode</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        TW14 8JX
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Time at address</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        2 Year
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Previous Address</h5>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 1</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 2</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">City</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">London</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Postcode</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        TW14 8JX
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Time at address</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        2 Year
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        +977-4545454545
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        user@email.com
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Private Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        user@email.com
+                                                    </td>
+                                                </tr>
+
+
+
+
+
+
+
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Identification Details</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Type</th>
+                                                    <td class="social-user-name b-none text-muted">Passport</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Number</th>
+                                                    <td class="social-user-name b-none text-muted">58745457</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Expiry Date</th>
+                                                    <td class="social-user-name b-none text-muted">Jan-08-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Issuing Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Next of Kin</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Name</th>
+                                                    <td class="social-user-name b-none "> Rita Ebho</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Relationship</th>
+                                                    <td class="social-user-name b-none ">Sister</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address</th>
+                                                    <td class="social-user-name b-none ">60 Manfort Road</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        +977-4545454545
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        user@email.com
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="withdrawal-staff-update-details.php" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update Details</a>
+
+                                        <button type="button" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</button>
+
+
+                                        <button type="button" class="btn btn-danger btn-round  s"><i class="fa fa-remove"></i> Delete</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>Reserved</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    sss
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!--  <div id="styleSelector">
+            </div> -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,194 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisterBusinessViewModel
+@{
+    ViewBag.Title = "ViewRegisteredBusinessMore";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var date = DateTime.Now.ToString("dd/MM/yyyy");
+    var time = DateTime.Now.ToString("HH:mm");
+}
+
+<h2>ViewRegisteredBusinessMore</h2>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+
+                <a href="@Url.Action("Index","ViewRegisterBusiness", new { @CountryCode= FAXER.PORTAL.Common.MiscSession.CountryCode, @City= FAXER.PORTAL.Common.MiscSession.City})" class="btn btn-info btn-rounded waves-effect waves-light"><span class="btn-label"><i class="fa fa-angle-left"></i></span> Back to Registered Business </a>
+
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <ol class="breadcrumb">
+                    <li><a href="index.php">Dashboard</a></li>
+                    <li><a href="@Url.Action("Index","ViewRegisterBusiness")">Registered Business</a></li>
+                    <li class="active">@Model.BusinessName</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table table-bordered  csvprint table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+
+                                    <td rowspan="2"><strong>Business/License Number</strong></td>
+                                    <td rowspan="2"><strong>Contact Person</strong></td>
+
+                                    <td rowspan="2"><strong>Website</strong></td>
+                                    <td rowspan="2"><strong>Notes</strong></td>
+
+                                    <td rowspan="2"><strong>Failed Login </strong></td>
+                                    <td rowspan="2"><strong>Account Status </strong></td>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>@Model.BusinessRegNumber</td>
+                                    <td>@Model.ContactName</td>
+
+                                    <td><a href="">@Model.Website</a></td>
+                                    <td align="center"><a href="" data-toggle="modal" data-target="#notepopup"><i class="fa fa-plus"></i></a></td>
+
+                                    @if (Model.LoginCount == 2)
+                                    {
+                                        <td align="center">
+                                            <input type="checkbox" name="" checked>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td align="center">
+                                            <input type="checkbox" name="">
+                                        </td>
+                                    }
+
+                                    <td>@Model.IsActive</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="notepopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+
+                <div class="modal-body">
+
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12">
+                            <a href="" data-toggle="modal" data-target="#addnote" class="btn btn-sm btn-primary">Add New Note</a>
+                            <div class="clearfix"> <br></div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Notes</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Staff</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.BusinessNoteList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>@item.Note</p>
+                                            </td>
+                                            <td>@item.Date</td>
+                                            <td>@item.Time</td>
+                                            <td>@item.StaffName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addnote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date: @date</th>
+                                        <th>Time: @time</th>
+                                        <th>Staff: @FAXER.PORTAL.Common.StaffSession.LoggedStaff.FirstName  @FAXER.PORTAL.Common.StaffSession.LoggedStaff.MiddleName @FAXER.PORTAL.Common.StaffSession.LoggedStaff.LastName</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            <textarea rows="8" class="form-control" maxlength="2000" id="note" required></textarea>
+                                            <label id="InvalidNote" style="display:none;color:red">Please write a note</label>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <input type="hidden" id="busines_id" name="busines_id" value="@Model.Id">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="AddNewNote()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add note ad -->
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function AddNewNote() {
+            debugger;
+            var business_id = $("#busines_id").val();
+            var note = $("#note").val();
+
+            if (note == "" || note == undefined) {
+                $("#InvalidNote").show();
+
+
+            } else {
+
+                $("#InvalidNote").hide();
+
+                window.location.href = "/Admin/ViewRegisterBusiness/AddBusinessNote?note=" + note + "&KiiPayBusinessInformationId=" + business_id;
+            }
+        }
+    </script>
+}

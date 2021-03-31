@@ -1,0 +1,106 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessLoginViewModel
+@{
+    ViewBag.Title = "FirstLogin";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <h1>Login</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup">
+                    <div class="text-left">
+                        <h4>Welcome to your MoneyFex Business Account</h4>
+                        <p><i>This is your first login screen, please enter and confirm your password before proceeding to your account.</i></p>
+                    </div>
+                    <hr>
+                    <form method="post">
+
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "Email Address" })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.LoginCode, new { @class = "form-control", @placeholder = "Login Code" })
+                                @Html.ValidationMessageFor(model => model.LoginCode, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.password, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+
+                                @Html.ValidationMessageFor(model => model.password, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm Password", @type = "password" })
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                <small id="emailHelp" class="form-text text-muted"><b>Password Policy </b>:<i> Password should contain atleast one upper case, one number, one special character and one lower case</i></small>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-12 ">
+                            <button type="submit" class="fbtn btn-next">Login <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                        <!--  -->
+
+
+
+                        <div class="clearfix"></div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->

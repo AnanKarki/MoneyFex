@@ -1,0 +1,113 @@
+﻿@model List<FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.InvoiceMasterListvm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Pay an Invoice</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+
+
+            <div class="col-lg-3  col-lg-offset-4 ">
+                <div class="form-group">
+
+                    <select id="FilterInvoice" class="form-control" onchange="ChooseFilter()">
+                        <option>Filter Invoice</option>
+                        <option>All</option>
+                        <option value="0">Paid</option>
+                        <option value="1">Unpaid</option>
+                    </select>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="DataTable">
+                            <thead>
+                                <tr>
+                                    <th>Date & Invoice No.</th>
+                                    <th>Sender & Wallet No.</th>
+                                    <th>Amount & Status</th>
+                                    <th>View</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><span class="text-primary">@item.InvoiceDate</span><br>@item.InvoiceNo</td>
+                                        <td>@item.SenderName<br>@item.SenderWalletNo</td>
+                                        <td>@item.CurrencySymbol @item.TotalAmount<br><span class="text-danger">@item.InvoiceStatus</span></td>
+
+                                        <td><a href="@Url.Action("SeeInvoice" , new { Id = item.Id})" class="btn btn-preview btn-small radius-20">See Invoice</a></td>
+                                        <td>
+                                            <a href="@Url.Action("PayInvoiceSummary" , new { Id = item.Id})" class="btn btn-primary radius-20">Pay</a>
+                                        </td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+@section scripts
+    {
+
+    <script type="text/javascript">
+        function ChooseFilter() {
+
+            debugger;
+            var selectedValue = $("#FilterInvoice option:selected").val();
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessPayAnInvoice/Index?invoiceStatus=" + selectedValue;
+
+        }
+    </script>
+}
+<!--  -->
+<!--  -->

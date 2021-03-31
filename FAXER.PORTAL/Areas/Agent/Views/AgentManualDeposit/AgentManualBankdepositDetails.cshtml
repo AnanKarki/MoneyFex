@@ -1,0 +1,166 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentTransactionHistoryViewModel
+
+@{
+    ViewBag.Title = "AgentManualBankdepositDetails";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+@if (Model.FilterKey == FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit)
+{
+    <!-- CashPickUp -->
+    foreach (var item in Model.TransactionHistoryList)
+    {
+
+        <div class="dynamic_bg_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6  col-sm-12 col-xs-12 col-lg-offset-3">
+                        <h1>  @item.BankName/@item.ReceiverName</h1>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <!--  -->
+        <!--  -->
+        <div class="real_form">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-sm-12">
+
+
+                        <div class="col-lg-6  col-sm-12 col-xs-12 col-lg-offset-3">
+
+                            <div class="dt-responsive table-responsive">
+
+                                <div class="progress-circle-text-wraper">
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle  active">
+
+                                        </div>
+                                        <h4>Awaiting Payment</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle last">
+
+                                        </div>
+                                        @*<h4>Not Received</h4>*@
+                                    </div>
+                                    <div class="clearfix">
+
+                                    </div>
+
+
+
+                                    <table class="table table-striped table-bordered nowrap">
+
+
+                                        <tbody>
+                                            <tr></tr>
+                                            <tr>
+                                                <td class="text-left">Sender</td>
+                                                <td class="text-left"> @item.SenderName</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Sending Country</td>
+                                                <td class="text-left"> @item.SenderCountry</td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td class="text-left">Receiver Name</td>
+                                                <td class="text-left"> @item.ReceiverName</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Country</td>
+                                                <td class="text-left"> @item.ReceiverCountry</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Bank Name</td>
+                                                <td class="text-left"> @item.BankName</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Bank Code</td>
+                                                <td class="text-left"> @item.BankCode</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="text-left">Account Number</td>
+                                                <td class="text-left">@item.AccountNumber</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Reference</td>
+                                                <td class="text-left">@item.ReceiptNumber</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <td class="text-left">Sending Amount</td>
+                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountSent</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">@item.ReceiverName will receive</td>
+                                                <td class="text-left"> @item.ReceivingAmount @item.ReceivingCurrrency</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Exchange Rate</td>
+                                                <td class="text-left"> 1 @item.SendingCurrency  = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left">@item.TransactionDate</td>
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+
+                                    <a href="@Url.Action("PrintReceiptOfBankDeposit","AgentDashboard" , new { @Area ="Agent", @TransactionId = item.Id , transactionService = FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit , AgentId = ViewBag.AgentId})" class="btn btn-warning radius-20" target="_blank" style=""><i class="fa fa-print"></i> Print</a>
+
+
+
+
+                                </div>
+
+                     
+                            </div>
+                        </div>
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!--  -->
+  
+
+
+    }
+}
+
+
+
+

@@ -1,0 +1,90 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewPreviousAddressViewModel>
+@{
+    ViewBag.Title = "ViewPreviousAddress";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewPreviousAddress</h2>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <a href="/Admin/ViewRegisteredStaffDetails" class="btn btn-info btn-rounded waves-effect waves-light"><span class="btn-label"><i class="fa fa-angle-left"></i></span> Back to View-Registered Staff Details </a>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li><a href="/Admin/ViewRegisteredStaffDetails">View- Registered Staff Details</a></li>
+                    <li class="active">@ViewBag.StaffName</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+                    <div class="hideoption">
+                        <div class="btn-  pull-left">
+                            <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                            </button>
+                            <button href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+
+                                <tr>
+                                    <td><strong>S.N.</strong></td>
+                                    <td><strong>Address1</strong></td>
+                                    <td><strong>Address2</strong></td>
+                                    <td><strong>City</strong></td>
+                                    <td><strong>State</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>Lived For</strong></td>
+                                </tr>
+
+
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+
+                                        <td>@i</td>
+                                        <td>@item.Address1</td>
+                                        <td>@item.Address2</td>
+                                        <td>@item.City</td>
+                                        <td>@item.State</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.LivedFor</td>
+
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+
+
+
+    </div>
+</div>

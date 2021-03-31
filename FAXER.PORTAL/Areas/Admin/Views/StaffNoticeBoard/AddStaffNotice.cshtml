@@ -1,0 +1,171 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddStaffNoticeViewModel
+@{
+    ViewBag.Title = "AddStaffNotice";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+} 
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Add New Notice  </h4>
+                                        <a href="@Url.Action("Index", "StaffNoticeBoard")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Notice
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label> Country</label>
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "country" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "city" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Staff</label>
+                                                        @Html.DropDownListFor(model => model.StaffId, (IEnumerable<SelectListItem>)ViewBag.Staffs, "Select Staff", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "staffId" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Notice Title</label>
+                                                        @Html.TextBoxFor(model => model.Headline, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "NoticeTitle" })
+                                                        @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Full Notice</label>
+                                                        @Html.TextAreaFor(model => model.FullNotice, new { @class = "form-control form-control-lg   form-control-bold", @id = "FullNotice" })
+                                                        @Html.ValidationMessageFor(model => model.FullNotice, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "StaffNoticeBoard")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <a onclick="Preview()" class="btn btn-primary btn-round pull-right"><i class="fa fa-eye"></i> Preview</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup preview -->
+    <div class="modal fade" id="viewpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body text-justify">
+                    <!--    <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " style="float: left; margin-right: 15px; width: 300px;">  -->
+                    <h5 id="Notice"></h5>
+
+                    <hr>
+                    <p id="NoticePreview"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                    <button onclick="Submit()" class="btn btn-primary btn-round"><i class="fa fa-send"></i> Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup preview -->
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function (e) {
+                var country = $(this).val();
+                window.location.href = "/Admin/StaffNoticeBoard/AddStaffNotice?country=" + country;
+
+            });
+
+
+            $("#city").change(function (e) {
+                var country = $("#country").val();
+                var city = $(this).val();
+                window.location.href = "/Admin/StaffNoticeBoard/AddStaffNotice?country=" + country + "&city=" + city;
+            });
+
+
+
+
+        });
+        function Submit() {
+
+            $("form")[0].submit();
+        }
+        function Preview() {
+
+            var notice = $("#NoticeTitle").val();
+            var fullNotice = $("#FullNotice").val();
+            $("#Notice").text(notice);
+            $("#NoticePreview").text(fullNotice);
+            $("#viewpopup").modal("show");
+        }
+    </script>
+}
+

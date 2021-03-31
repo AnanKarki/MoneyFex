@@ -1,0 +1,1264 @@
+﻿@model FAXER.PORTAL.Models.HomeViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Home Page";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    var ExchangeRate1 = Model.ExchangeRates[0];
+
+    var ExchangeRate2 = Model.ExchangeRates[1];
+
+    var ExchangeRate3 = Model.ExchangeRates[2];
+
+    var SendingCountries = new List<FAXER.PORTAL.Models.CountryViewModel>(ViewBag.SendingCountries);
+    var ReceivingCountries = new List<FAXER.PORTAL.Models.CountryViewModel>(ViewBag.ReceivingCountries);
+
+
+    //string CountryNameWithCur = FAXER.PORTAL.Common.Common.GetCountryCurrency(ViewBag.DefaultReceivingCountry) + " &nbsp;&nbsp; " +
+    //    FAXER.PORTAL.Common.Common.GetCountryName(ViewBag.DefaultReceivingCountry);
+
+    string CountryNameWithCur = ViewBag.DefaultReceivingCurrency + " &nbsp;&nbsp; " +
+        FAXER.PORTAL.Common.Common.GetCountryName(ViewBag.DefaultReceivingCountry);
+
+
+
+
+}
+<style type="text/css" media="screen">
+    .text-new p, .text-new ul {
+        font-size: 20px;
+        font-weight: bold;
+        color: #02b6ff;
+    }
+
+    .mark, mark {
+        background-color: #004468;
+        color: #fff;
+    }
+</style>
+<div class="modal" tabindex="-1" role="dialog" aria-hidden="true" id="SendMoneyAlert" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+
+
+                        <p id="message"></p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*New Design*@
+
+<!-- banner -->
+<!-- banner -->
+@*<section class="section-space80 bg-white   " id="estimate">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row">
+                        <div class="col-lg-2 col-md-2 col-sm-12">
+                            <img src="~/Content/Images/ngekuHome.png" alt="">
+                        </div>
+                        <div class="col-lg-10 col-md-10 col-sm-12 text-new">
+                            <h1 class="text-primary">Halting operation until 30th of October</h1>
+                            <p>Dear valued customers,</p>
+                            <p>We are halting operation for the next three weeks to perform following upgrades:</p>
+                            <ul>
+                                <li>Mobile App Integration</li>
+                                <li>Opening New Currencies</li>
+
+                            </ul>
+
+                            <p>There has been strong demand for Mobile App and new currencies. We want to do both before the busy Christmas period where many of you will be sending money to your loved ones.</p>
+                            <p>
+                                Therefore we need to halt operation for the next three weeks in order to implement necessary upgrades.
+                                <mark>All outstanding transfers will be processed</mark> but we won’t be accepting any new transfer.
+                            </p>
+
+                            <p>Sorry for any inconvenience caused. We’ll be back soon.</p>
+                            <h2 class="text-primary">
+                                Regards<br>
+                                MoneyFex Team
+                            </h2>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>*@
+
+
+<section class="section-space20 bg-white   " id="estimate">
+    <div class="mf-home-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6   col-md-5 col-sm-5 col-xs-12 hidden-xs">
+                    <div class="mt20">
+                        <h1 class="text-primary">
+                            Fast, Easy
+                            and Cheap<br>
+                            Money
+                            Transfer <br>
+                            Service
+
+
+
+                        </h1>
+
+                    </div>
+                </div>
+                @*<div class="col-lg-6   col-md-5 col-sm-5 col-xs-12 ">
+                        <div class="mt40 mb30 row">
+
+
+                            <div class="nakul col-xs-2">
+
+                                <img src="~/Content/Images/ngekuHome.png">
+                            </div>
+
+                            <div class="col-xs-10">
+
+
+                                <p class="text-primary" style="font-size: 40px; line-height: 60px;">
+                                    Dear  valued customers,<br>
+                                    We are carrying out planned
+                                    weekend maintenance work.<br><br>
+
+                                    We will be back <br><br>
+
+                                </p>
+                                <!-- <p>Thanks for your patience.</p>
+                                -->
+                            </div>
+                        </div>
+                    </div> *@
+
+
+                @*<div class="col-lg-6   col-md-5 col-sm-5 col-xs-12 ">
+                        <div class="mt40 mb30 row">
+
+
+                            <div class="nakul col-xs-2">
+                                <img src="~/Content/Images/ngekuHome.png" />
+                            </div>
+
+                            <div class="col-xs-10">
+
+
+                                <p class="text-primary" style="font-size: 20px; line-height: 30px;">
+                                    Hi,<br><br>
+
+                                    First of all a BIG thank you from all of us here at MoneyFex to all of our valuable customers.<br><br>
+                                    We had much stronger demand on our network than we had anticipated. <br><br>
+
+                                    Therefore we must upgrade our platform to be able to give you high quality service. We need to temporarily halt operation to implement technical upgrades. We will be back very soon.<br><br>
+
+                                    Thanks for your patience.
+                                </p>
+
+                                <p><a href="https://www.facebook.com/MoneyFex" target="_blank" style="color: #1877f2;"><i class="fa fa-facebook-square"></i> @@MoneyFex</a></p>
+                            </div>
+                        </div>
+                    </div>*@
+                <div class="col-lg-6   col-md-7 col-sm-7 col-xs-12">
+                    <div class="col-lg-12">
+                        <p id="validationMsg" class="text-danger"></p>
+                        <div class="exchange-rate-wraper-new hidden-lg hidden-md">
+                            <h2 style="font-size:21px">
+                                1&nbsp;<span data-outbound-currency="GBP" name="SendingCurrency"></span>&nbsp;=&nbsp;<span name="ExchangeRate"></span>&nbsp;<span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency"></span>
+                                <a id="IsIntroductoryRate" href="avoide:javascript;" data-container="body" data-toggle="popover" data-placement="top" data-title="Rate Details" data-trigger="focus" data-content="The introductory rate is for your first transfer with MoneyFex">  <i class="fa fa-question"></i>  </a>
+                            </h2>
+
+                            <p id="IsIntroductoryFee">
+                                Fee:
+                                <del>
+                                    <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                </del> (No fee for the first transaction)
+                            </p>
+
+                            <p id="IsNotIntroductoryFee" style="display:none">
+                                Fee: <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                            </p>
+                        </div>
+                        <div class="exchange-rate-wraper-new hidden-xs hidden-sm">
+                            <h2>
+                                1&nbsp;<span data-outbound-currency="GBP" name="SendingCurrency"></span>&nbsp;=&nbsp;<span name="ExchangeRate"></span>&nbsp;<span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency"></span> <a id="IsIntroductoryRate" href="avoide:javascript;" data-container="body" data-toggle="popover" data-placement="top" data-title="Rate Details" data-trigger="focus" data-content="The introductory rate is for your first transfer with MoneyFex">  <i class="fa fa-question"></i>  </a>
+                            </h2>
+
+                            <p id="IsIntroductoryFee2">
+                                Fee:
+                                <del>
+                                    <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                </del> (No fee for the first transaction)
+                            </p>
+                            <p id="IsNotIntroductoryFee2" style="display:none">
+                                Fee: <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                            </p>
+                        </div>
+
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="exchange-rate-wraper-new" style="background-color:white;display:none" id="ValidationResultdiv">
+                            <p class="text-danger" id="ValidationResult">
+                            </p>
+                        </div>
+                        <div class="mf-form-calculator">
+                            <span class="mf-calculator-label">You send  </span>
+                            <input type="number" id="SendingAmount" class="primary-placeholder" required placeholder="0.00" name="SendingAmount" onkeyup="GetPaymentSummary(false)" step=".03">
+                            <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                <span class="mf-currency-select" data-currency="GBP" id="sendingCountry">GBP&nbsp;&nbsp; from United Kingdom</span>
+                                @*<span class="mf-currency-select" data-currency="EUR" id="sendingCountry">EUR&nbsp;&nbsp; from Belgium</span>*@
+                                <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                            </div>
+
+
+
+                            <div class="currency-dropdown dropdown-menu" aria-labelledby=" dropdown-toggle">
+                                <div class="currency-search">
+                                    <div class="search-input">
+                                        <input type="search" name="" class=" input-currency-search" id="searchcurency" placeholder="Type a currency / country">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <ul id="currencylist">
+
+                                    @foreach (var item in SendingCountries)
+                                    {
+
+                                        <li class="currency-dropdown_option" onclick="OnSendingCountryChange('@item.CountryCode', '@item.Currency')">
+                                            <div class="currency-dropdown_option_flag flag-icon   flag-icon-@item.CountryCode.ToLower()"></div>
+                                            <span class="currency-dropdown_option_text">@item.Currency&nbsp;&nbsp; from @item.CountryName</span>
+                                        </li>
+                                    }
+
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="mf-form-calculator">
+                            <span class="mf-calculator-label">They receive</span>
+                            <input type="number" class=" primary-placeholder" id="ReceivingAmount" placeholder="0.00" name="ReceivingAmount" onkeyup="GetPaymentSummary(true)" step=".01">
+
+
+                            <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                @*<span class="mf-currency-select" data-currency="GBP" id="receivingCountry"> NGN &nbsp;&nbsp;Nigeria</span>*@
+                                <span class="mf-currency-select" data-currency="@ViewBag.DefaultReceivingCurrency" id="receivingCountry"> @CountryNameWithCur</span>
+                                <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                            </div>
+
+
+                            <div class="currency-dropdown dropdown-menu" aria-labelledby=" dropdown-toggle">
+                                <div class="currency-search">
+                                    <div class="search-input">
+                                        <input type="search" name="" class=" input-currency-search" id="searchcurency1" placeholder="Type a currency / country">
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <ul id="currencylist1">
+                                    @foreach (var item in ReceivingCountries)
+                                    {
+                                        <li class="currency-dropdown_option" onclick="OnReceivingCountryChange('@item.CountryCode', '@item.Currency')">
+                                            <div class="currency-dropdown_option_flag flag-icon   flag-icon-@item.CountryCode.ToLower()"></div>
+                                            <span class="currency-dropdown_option_text">@item.Currency&nbsp;&nbsp;@item.CountryName</span>
+                                        </li>
+                                    }
+
+                                </ul>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+
+
+                    <div class=" col-lg-12">
+
+                        <div class="form-home">
+                            <div class="transfer-type">
+                                <h4 class="text-left">Transfer to a </h4>
+                                <div class="display-inline mb10 mt10" id="transferMethod">
+
+                                    <label class="radio-box disabled" id="bac">
+
+                                        <img src="~/Content/images/icon/svg/bank-disabled.svg" width="50">
+                                        <h4 class="mb15 text-center"> Bank Account</h4>
+                                        <input type="radio" name="radio" id="BankAccount" value="4" checked onchange="GetPaymentSummary(false)" disabled>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-box disabled" id="wal">
+
+                                        <img src="~/Content/Images/icon/svg/mobile-money-disabled.svg" width="50" />
+
+                                        <h4 class="mb15 text-center"> Mobile Wallet</h4>
+                                        <input type="radio" name="radio" id="MobileWallet" value="3" onchange="GetPaymentSummary(false)" disabled>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <label class="radio-box disabled" id="casp">
+                                        <img src="~/Content/Images/icon/svg/cash-pickup-disabled.svg" width="50" />
+
+                                        <h4 class="mb15 text-center"> Cash Pickup</h4>
+                                        <input type="radio" name="radio" id="CashPickup" value="1" onchange="GetPaymentSummary(false)" disabled>
+                                        <span class="checkmark"></span>
+                                    </label>
+
+
+
+                                </div>
+
+                                <div class="error-alert hidden-lg">
+                                    <span class="text-danger text-center" id="transferMethodvalidationMsg"> </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-home col-lg-12">
+
+                        <a onclick="TransferNow()" class="btn-transfer ">Transfer</a>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+
+                <hr />
+
+            </div>
+        </div>
+
+
+
+
+        @*<div class="dynamic-bank-list text-center">
+            <div class="container">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <h3 class="mb30" id="logoHeaderText"></h3>
+                    <ul class="owl-carousel owl-theme bank-list" id="logo"></ul>
+                </div>
+            </div>
+        </div>*@
+    </div>
+
+</section>
+
+<!-- banner -->
+<!-- about -->
+
+
+<section class="section-space60 ">
+    <div class="container">
+        <div class="row">
+            <div class="welcome-text-home text-center">
+                <h1 class="text-primary hidden-lg hidden-md mb40">
+                    Fast, Easy
+                    and Cheap<br>
+                    Money
+                    Transfer
+                    Service
+
+                    <!--
+                        <span id="swappable-title"><span>Pay for Goods</span></span><br> -->
+
+                </h1>
+                <div class="main-header text-center">
+                    <h1>Multiple Services</h1>
+                    <span></span>
+                </div>
+
+                <div class="clearfix mb20"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="mobile_design home-service-design text-center clearfix">
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!--  -->
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <div class="dashboard_thumb">
+                            <a href="">
+                                <div class="das-icon">
+                                    <img src="~/Content/images/icon/svg/bank.svg">
+                                </div>
+                                <h3>Bank Account Deposit</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <div class="dashboard_thumb">
+                            <a href="">
+                                <div class="das-icon">
+                                    <img src="~/Content/images/icon/svg/mobile-money.svg">
+                                </div>
+                                <h3>Mobile Money Transfer</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <div class="dashboard_thumb">
+                            <a href="">
+                                <div class="das-icon">
+                                    <img src="~/Content/images/icon/svg/cash-pickup.svg">
+                                </div>
+                                <h3>Cash Pickup</h3>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                        <div class="dashboard_thumb">
+                            <a href="">
+                                <div class="das-icon">
+                                    <img src="~/Content/images/icon/svg/kiipay.svg">
+                                </div>
+                                <h3>KiiPay Wallet </h3>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+
+
+                <!--  -->
+
+                <div class="clearfix"></div>
+            </div>
+            <div class="text-center mt20  ">
+                <h1 class="text-primary text-large mb10" style="font-size: 50px;">19,000+</h1>
+                <h3 class="mb0">Customers in 8 Months</h3>
+            </div>
+        </div>
+    </div>
+</section>
+
+@*<section class="section-space40 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-header text-center">
+                        <h1>From our Customer</h1>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <!--  -->
+                    <div class="testimonialhome owl-carousel owl-theme ">
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Website, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Facebook, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Twitter, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Website, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Facebook, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="item">
+                            <div class="testimonial text-left mb10">
+                                <!--    <div class="rate">
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star active"></span>
+                                   <span class="fa fa-star"></span>
+                                   <span class="fa fa-star"></span>
+                                   </div> -->
+                                <div class="testimonial-content">
+                                    <h3>Finally!</h3>
+                                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="testimonials-author text-right">
+                                            <h4 class="text-secondary">
+                                                Gilbert, MoneyFex Sender <span>(Twitter, UK)</span>
+                                            </h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+@if (Model.Feedbacks.Count > 0)
+{
+    @*<section class="section-space40 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-header text-center">
+                            <h1>From our Customer</h1>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+
+                        <div class="testimonialhome owl-carousel owl-theme ">
+
+
+                            @foreach (var item in Model.Feedbacks)
+                            {
+
+                                <div class="item">
+                                    <div class="testimonial text-left mb10">
+                                        <div class="testimonial-content">
+
+                                            <p>@item.FeedBack</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="testimonials-author text-right">
+                                                    <h4 class="text-secondary">
+                                                        @item.CustomerFirstName, @item.CustomerTypeName <span>(@item.PlatformName, @item.Country)</span>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>*@
+
+    @*<section class="section-space40 ">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="main-header text-center">
+                            <h1>From our Customer</h1>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+
+                        <div class="testimonialhome owl-carousel owl-theme ">
+
+                            @foreach (var item in Model.Feedbacks)
+                            {
+                                <div class="item">
+                                    <div class="testimonial text-left mb10">
+                                        <div class="testimonial-content">
+                                            <p>@item.FeedBack</p>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="testimonials-author text-right">
+                                                    <h4 class="text-secondary">
+                                                        @item.CustomerFirstName, @item.CustomerTypeName <span>(@item.PlatformName, @item.Country)</span>
+                                                    </h4>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+
+
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>*@
+
+
+
+    <section class="section-space40 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="main-header text-center">
+                        <h1>From our Customers</h1>
+                        <span></span>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <!--  -->
+                    <div class="testimonialhome owl-carousel owl-theme ">
+                        <!--  -->
+                        @foreach (var item in Model.Feedbacks)
+                        {
+                            <div class="item">
+                                <div class="testimonial text-left mb10">
+
+                                    <div class="testimonial-content">
+                                        <p>@item.FeedBack</p>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="testimonials-author text-right">
+                                                <h4 class="text-secondary">
+                                                    @item.CustomerFirstName, @item.CustomerTypeName <span>(@item.PlatformName, @item.Country)</span>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+}
+
+
+
+<!-- testimonial -->
+<!--Partners  -->
+@*<iframe src="https://www.w3schools.com" id="CustomerEnrollment" width="100%" height="800px"></iframe>*@
+@section Scripts
+    {
+    @*<script type="text/javascript" src="https://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>*@
+<script type="text/javascript">
+
+        var src = "https://www.google.com/maps";
+
+        $("#i").attr('src', src);
+        var selectedSendingCountry = "GB";
+        //var selectedSendingCountry = "BE";
+
+        var selectedReceivingCountry = '@ViewBag.DefaultReceivingCountry';
+
+        var selectedReceivingCurrency = '@ViewBag.DefaultReceivingCurrency';
+        var SendingCountry = "";
+        var ReceivingCountry = "";
+        var selectedTransferMethod = "";
+        var transferMethodvalue = $("#transferMethod input[type='radio']:checked")[0].value;
+
+        EnableDisableServices(selectedSendingCountry, selectedReceivingCountry, function () { }, selectedReceivingCurrency);
+        //$("#logo").hide();
+
+        $("#SendingAmount").val(3);
+
+        function OnReceivingCountryChange(val , cur) {
+            $("#receivingCountry").text($($(event.currentTarget).find('span')[0]).text());
+            $("#receivingCountry").attr('data-currency', cur);
+            selectedReceivingCountry = val;
+            $("#SendingAmount").val(3);
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+            EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(false) }, ReceivingCurrency);
+            //Logos(transferMethodvalue);
+            //$("#BankAccount")[0].checked = true;
+        }
+        function OnSendingCountryChange(val , cur) {
+            $("#sendingCountry").text($($(event.currentTarget).find('span')[0]).text());
+            $("#sendingCountry").attr('data-currency', cur);
+            selectedSendingCountry = val;
+            $("#SendingAmount").val(3);
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+            EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(false) }, ReceivingCurrency);
+            //CheckEnabledRadio();
+            //$("#BankAccount")[0].checked = true;
+            //Logos(transferMethodvalue);
+
+
+        }
+        function CalculateSummary(IsReceivingAmount) {
+
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+            EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(IsReceivingAmount) }, ReceivingCurrency);
+            //CheckEnabledRadio();
+        }
+
+
+        function Logos(transferMethodvalue) {
+          var  transferMethodvalue = $("#transferMethod input[type='radio']:checked")[0].value;
+
+            $.getJSON("/Home/GetUploadedServicesLogoInJson?sendingCountry=" + SendingCountry +
+                "&receivingCountry=" + ReceivingCountry + "&transferMethod=" + transferMethodvalue,
+                function (result) {
+
+                    //$("#logo div").remove();
+                  //  $("#logoHeaderText").text(result.HeaderText);
+
+                    for (var item in result.LogoList) {
+                       // $("#logo").append('<div class="owl-item" style="width: 153px;"> <li class="item"><a href = "" ><img src="' + result.LogoList[item] + '" alt="image name "></a></li> </div>')
+
+                    }
+
+
+
+                })
+
+        }
+
+        var validationResult = null;
+
+
+        function EstimateSummary(data) {
+
+
+            Riddha.ajax.post("/EstimationSummary/GetTransferSummary", data)
+                .done(function (result) {
+
+                    result = result.response;
+                    debugger;
+                    for (var item in result) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                        $(selector).text(result[item]);
+
+                    }
+
+                    if (result.Fee == 0) {
+                        $('[name="Fee"]').text(result.ActualFee);
+                    }
+                    if (result.IsIntroductoryRate) {
+
+                        $("#IsIntroductoryRate").show();
+                    } else {
+                        $("#IsIntroductoryRate").hide();
+                    }
+                    if (result.IsIntroductoryFee) {
+
+                        if (result.Fee == 0) {
+                            $("#IsIntroductoryFee").show();
+                            $("#IsNotIntroductoryFee").hide();
+                            $("#IsIntroductoryFee2").show();
+                            $("#IsNotIntroductoryFee2").hide();
+                        }
+
+                        else {
+
+                            $("#IsIntroductoryFee").hide();
+                            $("#IsNotIntroductoryFee").show();
+                            $("#IsIntroductoryFee2").hide();
+                            $("#IsNotIntroductoryFee2").show();
+
+                        }
+                    } else {
+
+                        $("#IsIntroductoryFee").hide();
+                        $("#IsNotIntroductoryFee").show();
+                        $("#IsIntroductoryFee2").hide();
+                        $("#IsNotIntroductoryFee2").show();
+                    }
+
+                    //CheckEnabledRadio();
+                    Logos(transferMethodvalue);
+
+                    var IsValid = result.IsValid;
+                    if (IsValid.Data == false) {
+
+                        validationResult = IsValid;
+                        $("#ValidationResult").text(validationResult.Message);
+                        $("#ValidationResultdiv").show();
+
+                    } else {
+                        validationResult = IsValid;
+                        $("#ValidationResult").text("");
+                        $("#ValidationResultdiv").hide();
+                    }
+
+                });
+        }
+        function GetPaymentSummary(IsReceivingAmount) {
+
+            var SendingAmount = $("#SendingAmount").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+
+            var SendingCurrency = $("#sendingCountry").attr('data-currency');
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var IsReceivingAmount = IsReceivingAmount;
+
+
+            try {
+
+                   transferMethodvalue = $("#transferMethod input[type='radio']:checked")[0].value;
+            } catch (e) {
+
+            }
+            debugger;
+            if ($("#transferMethod input[type='radio']:checked")[0] == undefined) {
+
+                EnableDisableServices(SendingCountry, ReceivingCountry, function () {
+
+                    try {
+
+                        transferMethodvalue = $("#transferMethod input[type='radio']:checked")[0].value;
+
+                    } catch (e) {
+
+                    }
+
+
+
+                }, ReceivingCurrency);
+
+            }
+            debugger;
+
+            var data = {
+
+                SendingAmount: SendingAmount,
+                ReceivingAmount: ReceivingAmount,
+                SendingCurrency: SendingCurrency,
+                ReceivingCurrency: ReceivingCurrency,
+                SendingCountry: SendingCountry,
+                ReceivingCountry: ReceivingCountry,
+                IsReceivingAmount: IsReceivingAmount,
+                TransferMethod: transferMethodvalue,
+                TransferType : 1 // Online Type
+            };
+
+
+
+            Riddha.ajax.post("/EstimationSummary/GetTransferSummary", data)
+                .done(function (result) {
+
+                    result = result.response;
+                    debugger;
+                    for (var item in result) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                        $(selector).text(result[item]);
+
+                    }
+
+                    if (result.Fee == 0) {
+                        $('[name="Fee"]').text(result.ActualFee);
+                    }
+                    if (result.IsIntroductoryRate) {
+
+                        $("#IsIntroductoryRate").show();
+                    } else {
+                        $("#IsIntroductoryRate").hide();
+                    }
+                    if (result.IsIntroductoryFee) {
+
+                        if (result.Fee == 0) {
+                            $("#IsIntroductoryFee").show();
+                            $("#IsNotIntroductoryFee").hide();
+                            $("#IsIntroductoryFee2").show();
+                            $("#IsNotIntroductoryFee2").hide();
+                        }
+
+                        else {
+
+                            $("#IsIntroductoryFee").hide();
+                            $("#IsNotIntroductoryFee").show();
+                            $("#IsIntroductoryFee2").hide();
+                            $("#IsNotIntroductoryFee2").show();
+
+                        }
+                    } else {
+
+                        $("#IsIntroductoryFee").hide();
+                        $("#IsNotIntroductoryFee").show();
+                        $("#IsIntroductoryFee2").hide();
+                        $("#IsNotIntroductoryFee2").show();
+                    }
+
+                    //CheckEnabledRadio();
+                    Logos(transferMethodvalue);
+
+                    var IsValid = result.IsValid;
+                    if (IsValid.Data == false) {
+
+                        validationResult = IsValid;
+                        $("#ValidationResult").text(validationResult.Message);
+                        $("#ValidationResultdiv").show();
+
+                    } else {
+                        validationResult = IsValid;
+                        $("#ValidationResult").text("");
+                        $("#ValidationResultdiv").hide();
+                    }
+
+                });
+
+            //$.getJSON("/Home/GetPaymentSummary?SendingAmount="
+            //    + SendingAmount +
+            //    "&ReceivingAmount=" + ReceivingAmount +
+            //    "&SendingCountry=" + SendingCountry +
+            //    "&ReceivingCountry=" + ReceivingCountry +
+            //    "&IsReceivingAmount=" + IsReceivingAmount +
+            //    "&transferMethod=" + transferMethodvalue,
+            //    function (result) {
+
+            //        for (var item in result) {
+            //            var selector = '[name="' + item + '"]';
+            //            $(selector).val(result[item]);
+            //            $(selector).text(result[item]);
+
+            //        }
+
+            //        if (result.Fee == 0) {
+            //            $('[name="Fee"]').text(result.ActualFee);
+            //        }
+            //        if (result.IsIntroductoryRate) {
+
+            //            $("#IsIntroductoryRate").show();
+            //        } else {
+            //            $("#IsIntroductoryRate").hide();
+            //        }
+            //        if (result.IsIntroductoryFee) {
+
+            //            if (result.Fee == 0) {
+            //                $("#IsIntroductoryFee").show();
+            //                $("#IsNotIntroductoryFee").hide();
+            //                $("#IsIntroductoryFee2").show();
+            //                $("#IsNotIntroductoryFee2").hide();
+            //            }
+
+            //            else {
+
+            //                $("#IsIntroductoryFee").hide();
+            //                $("#IsNotIntroductoryFee").show();
+            //                $("#IsIntroductoryFee2").hide();
+            //                $("#IsNotIntroductoryFee2").show();
+
+            //            }
+            //        } else {
+
+            //            $("#IsIntroductoryFee").hide();
+            //            $("#IsNotIntroductoryFee").show();
+            //            $("#IsIntroductoryFee2").hide();
+            //            $("#IsNotIntroductoryFee2").show();
+            //        }
+
+            //        //CheckEnabledRadio();
+            //        Logos(transferMethodvalue);
+
+            //        var IsValid = result.IsValid;
+            //        if (IsValid.Data == false) {
+
+            //            validationResult = IsValid;
+            //            $("#ValidationResult").text(validationResult.Message);
+            //            $("#ValidationResultdiv").show();
+
+            //        } else {
+            //            validationResult = IsValid;
+            //            $("#ValidationResult").text("");
+            //            $("#ValidationResultdiv").hide();
+            //        }
+
+            //    })
+
+
+
+
+        }
+
+
+
+        //function EnableDisabledTransferMethod() {
+
+        //    transferMethod = $("#transferMethod input[type='radio']:checked")[0].id;
+        //    transferMethodvalue = 0;
+        //    switch (transferMethod) {
+
+        //        case "BankAccount":
+        //            transferMethodvalue = 4;
+        //            $("#wal").addClass('disabled')
+        //            $("#bac").removeClass('disabled')
+        //            $("#casp").addClass('disabled')
+
+        //            break;
+        //        case "MobileWallet":
+        //            transferMethodvalue = 3;
+        //            $("#bac").addClass('disabled')
+        //            $("#casp").addClass('disabled')
+        //            $("#wal").removeClass('disabled')
+
+        //            break;
+        //        case "CashPickup":
+        //            transferMethodvalue = 1;
+        //            $("#wal").addClass('disabled')
+        //            $("#bac").addClass('disabled')
+        //            $("#casp").removeClass('disabled')
+        //            //window.location.href = "/SenderMobileMoneyTransfer/Index";
+        //            break;
+        //        default:
+        //    }
+
+
+        //}
+
+
+        //$("#ReceivingCountrydiv").change(function () {
+
+        //    GetPaymentSummary(true);
+        //})
+        //$("#SendingCountrydiv").change(function () {
+
+        //    GetPaymentSummary(false);
+        //})
+
+        CalculateSummary();
+        $("#SendingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() == 3 || $("#SendingAmount").val() == 0) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+
+        })
+
+        $("#ReceivingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() == 3 || $("#SendingAmount").val() == 0) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+        })
+
+
+
+        function GetCountryFlag(sendingCountry, receivingCountry) {
+
+            if (sendingCountry != "") {
+
+                $("#SendingCountryFlagSpan").show();
+            }
+            if (receivingCountry != "") {
+
+                $("#ReceivingCountryFlagSpan").show();
+            }
+            $.getJSON("/Home/getFlagCode/", {
+                SendingCountry: sendingCountry,
+                ReceivingCountry: receivingCountry,
+
+            }, function (data) {
+
+                $("#SendingCountryFlag").removeClass();
+                $("#ReceivingCountryFlag").removeClass();
+                $("#SendingCountryFlag").addClass("flag fbj " + data.SendingCountryFlagCode + " ");
+                $("#ReceivingCountryFlag").addClass("flag fbj " + data.ReceivingCountryFlagCode + " ");
+            });
+        }
+        $(document).on('data-selectedcountry', function () {
+
+            alert('Data changed to: ' + "");
+        });
+
+
+        function TransferNow() {
+
+            if (validationResult.Data == false) {
+                $("#ValidationResult").text(validationResult.Message)
+                $("#ValidationResult").show();
+                return;
+            }
+            $("#ValidationResult").hide();
+            //debugger;
+            var sendingAmount = $("#SendingAmount").val();
+            if (sendingAmount <= 0) {
+
+                $("#validationMsg").text("Enter an amount");
+                $("#validationMsg").show();
+                return;
+            }
+            else if (sendingAmount > 50000) {
+
+                $("#validationMsg").text("Please enter send amount less than or equal to GBP 50,000");
+                $("#validationMsg").show();
+                return;
+            } else {
+                $("#validationMsg").hide();
+            }
+            transferMethod = $("#transferMethod input[type='radio']:checked")[0].id;
+            window.location.href = "/Home/SendMoneyNow?transferMethod=" + transferMethod;
+
+        }
+
+
+
+
+
+
+</script>
+
+
+}
+
+
+
+
+
+

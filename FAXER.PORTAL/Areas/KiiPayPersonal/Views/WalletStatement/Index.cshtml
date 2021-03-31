@@ -1,0 +1,173 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.WalletStatementViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Wallet Statement</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+
+            <div class="col-lg-3 col-xs-6 col-xs-offset-3 col-lg-offset-5 ">
+
+                <div class="form-group">
+                    @*    @Html.DropDownListFor(model => model.Filter, (IEnumerable<SelectListItem>)ViewBag.Filter, new { @class = "form-control" })*@
+                    @Html.DropDownListFor(model => model.Filter, new SelectList(new List<Object> { new { value = 0, text = "All" }, new { value = 1, text = "In" }, new { value = 2, text = "Out" } }, "value", "text", Model.Filter),"Filter Transactions", new { @class = "form-control", @id="filterKey", @onchange="filter()" })
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <br>
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th>Date & Name</th>
+                                    <th>Type & Acc</th>
+                                    <th>Reference</th>
+                                    <th>Gross & Fee</th>
+                                    <th>Net & Balance.</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.WalletStatementList)
+                                {
+
+
+                                    <tr>
+                                        <td>
+                                            @if (item.InOut == FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.InOut.In)
+                                            {
+                                                <img src="~/Areas/KiiPayPersonal/images/icon/svg/right-arrow.svg" width="30">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Areas/KiiPayPersonal/images/icon/svg/left-arrow.svg" width="30">
+                                            }
+                                        </td>
+                                        <td><span class="text-primary">@item.Date</span><br>@item.Name</td>
+                                        <td>@item.Type<br>@item.AccountNumber</td>
+                                        <td>@item.Reference</td>
+                                        <td>@item.Gross<br>@item.Fee</td>
+                                        <td>@item.Balance<br>@item.Net</td>
+                                        <td>
+                                            @if (item.InOut == FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.InOut.In)
+                                            {
+                                                if (item.IsRefunded == true)
+                                                {
+                                                    <a class="btn btn-primary radius-20 disabled">Refund</a>
+                                                }
+                                                else
+                                                {
+                                                    <a onclick="refundModal('@item.InOut', '@item.Id', '@item.PaymentType');" @*onclick="refundModal(@item.InOut, @item.Id, @item.PaymentType)"*@ class="btn btn-primary radius-20">Refund</a>
+                                                }
+
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-primary radius-20 disabled">Refund</a>
+                                            }
+
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- back btn -->
+                    <div class="clearfix">
+                        <hr>
+                        <center>
+                            <a href="@Url.Action("Index","Dashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!-- Refund Confirmation -->
+<div id="Refund" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40"> Do you want to refund  this payment?</h4>
+                <hr>
+                <button type="button" onclick="refund()" class="btn btn-primary   radius-20" >Yes</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Refund Confirmation end -->
+@section Scripts{
+    <script type="text/javascript">
+        var refundId = "";
+        var paymentType = "";
+        function filter() {
+            var key = $("#filterKey").val();
+            window.location.href = "/KiiPayPersonal/WalletStatement/Index?filterKey=" + key;
+        };
+
+        function refundModal(inOut, id, type) {
+            debugger;
+            refundId = id;
+            if (inOut != "In") {
+                return;
+            }
+            paymentType = type;
+            $("#Refund").modal('show');
+        };
+
+        function refund() {
+            window.location.href = "/KiiPayPersonal/WalletStatement/Refund?id=" + refundId + "&paymentType=" + paymentType;
+        };
+
+    </script>
+    
+    }

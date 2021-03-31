@@ -1,0 +1,169 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessInternationalPayBillsReferenceOneVM
+@{
+    ViewBag.Title = "InternationalPayBillsReferenceOne";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <!--  -->
+
+    <!--  -->
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-left">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Areas/Businesses/images/icon/svg/buldings.svg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> Eneo</span>
+                            </div>
+                        </div>
+
+                        <div class="pinside20">
+                            <label>Payment Reference</label>
+                            <div class="referencecode mb20">
+                                <div class="col-lg-5">
+                                    <img src="~/Areas/Businesses/images/kiipay.png" width="80"> <b>Ref:</b>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    HV8 @Model.ReferanceNo0@Model.ReferanceNo1@Model.ReferanceNo2
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+
+
+                            <div class="estimate-calculator" style="">
+                                <div class="wrapper">
+
+                                    <dl>
+                                        <dt>Bill No.:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.BillNo</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Amount:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.Amount FCFA</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Fee:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.Fee FCFA</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Total:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.TotalAmount FCFA</dd>
+                                    </dl>
+                                    <div class="clearfix">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg">Confirm and Pay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+@if (ViewBag.kiiPayBusinessResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">KiiPay Business Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.kiiPayBusinessResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.kiiPayBusinessResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">KiiPay Business</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.kiiPayBusinessResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}

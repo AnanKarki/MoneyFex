@@ -1,0 +1,89 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+
+    <h4 style="text-align:center">Business Account Money Transfer Confirmation of Payment Receipt </h4>
+
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b> Receipt Number</b></td>
+                <td><b>@ViewBag.ReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.TransactionDate</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.TransactionTime</b></td>
+            </tr>
+            <tr>
+                <td><b>Sender's Full Name</b></td>
+                <td><b>@ViewBag.SenderFullName</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Receiver's Full Name</b></td>
+                <td><b>@ViewBag.ReceiverFullName</b></td>
+            </tr>
+            <tr>
+                <td><b>Telphone</b></td>
+                <td><b>@ViewBag.Telephone</b></td>
+            </tr>
+            <tr>
+                <td><b>Agent Name</b></td>
+                <td><b>@ViewBag.AgentName</b></td>
+            </tr>
+            <tr>
+                <td><b>Agent Code</b></td>
+                <td><b>@ViewBag.AgentCode</b></td>
+            </tr>
+            @*<tr>
+                    <td><b>MFCN Number</b></td>
+                    <td><b>@ViewBag.MFCN</b></td>
+                </tr>*@
+            <tr>
+                <td><b>Amount Sent</b></td>
+                <td>
+                    <b>
+                        @ViewBag.TotalAmountSentAndFee @ViewBag.SendingCurrency
+                    </b>
+                </td>
+
+            </tr>
+            <tr>
+                <td><b>Total Transferred</b></td>
+                <td>
+                    <b>
+
+                        @ViewBag.AmountSent @ViewBag.SendingCurrency
+                    </b>
+                </td>
+
+            </tr>
+            <tr>
+                <td><b>Fees</b></td>
+                <td><b>@ViewBag.Fee @ViewBag.SendingCurrency</b></td>
+            </tr>
+            <tr>
+                <td><b>Exchange Rates</b></td>
+                <td><b>@ViewBag.ExchangeRate</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Amount Received</b></td>
+                <td><b>@ViewBag.AmountReceived @ViewBag.ReceivingCurrency</b></td>
+
+            </tr>
+
+
+        </tbody>
+    </table>
+
+</div>

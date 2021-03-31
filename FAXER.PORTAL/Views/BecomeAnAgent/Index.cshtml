@@ -1,0 +1,285 @@
+﻿@model FAXER.PORTAL.DB.BecomeAnAgent
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Become an Agent</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    @if (TempData["Message"] != null)
+                    {
+                        <label style="color:red">@TempData["Message"]</label>
+                        <br />
+                    }
+                    <h3>Do you want to attract new customers and also increase your revenue through commissions ?</h3>
+                    <hr>
+                    <p>
+                        If the answer to this question is <b>YES</b>, then become a MoneyFex  paying agent !
+                    </p>
+                    <p>To do so, simply fill the form below and we will contact you directly to complete the process.</p>
+
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> First Name <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Last Name <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Company/Business Name <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.CompanyBusinessName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.CompanyBusinessName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-5">
+                        <label>Business Type <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(x => x.BusinessType, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BusinessType, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Business License/Registration Number <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.BusinessLicenseRegistrationNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BusinessLicenseRegistrationNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Address Line 1 <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.Address1, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.Address1, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Address line 2 <span class=""></span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.Address2, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    @*<div class="col-lg-5">
+            <label>Street Name <span class="required"></span></label>
+        </div>
+        <div class="col-lg-6 ">
+            <div class="form-group">
+                @Html.TextBoxFor(x => x.Street, new { @class = "form-control" })
+                @Html.ValidationMessageFor(x => x.Street, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="clearfix"></div>*@
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>City <span class="required">*</span></label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>State/Province<span class="required">*</span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.StateProvince, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.StateProvince, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>PostCode/ZipCode<span class="required"></span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.PostZipCode, new { @class = "form-control", @placeholder = "Optional" })
+                            @Html.ValidationMessageFor(x => x.PostZipCode, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Country<span class="required">*</span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Your Country", new { @class = "form-control", id = "CountryCode", @onChange = "getCountryPhoneCode()" })
+                        </div>
+                        @Html.ValidationMessageFor(x => x.CountryCode, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Contact Person Name<span class="required">*</span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.ContactName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ContactName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Contact Phone No<span class="required">*</span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+
+                        <div class="input-group">
+                            <span class="input-group-addon" id="CountryPhoneCode"></span>
+                            @Html.TextBoxFor(x => x.ContactPhone, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.ContactPhone, "", new { @class = "text-danger" })
+                        </div>
+                        <br />
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Business Email Address <span class="required">*</span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(x => x.BusinessEmailAddress, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(x => x.BusinessEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Fax No<span class=""></span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.FaxNo, new { @class = "form-control"  ,@placeholder="Optional"})
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Business/Company Website <span class=""></span></label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.Website, new { @class = "form-control" , @placeholder="Optional" })
+                            @Html.ValidationMessageFor(x => x.Website, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    @*<a href="become-an-agent-confirm.php" class="fbtn btn-next">Submit <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Submit <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+</form>
+    
+@section Scripts{
+    
+
+<script type="text/javascript">
+    function getCountryPhoneCode() {
+
+        var countryCode = $("#CountryCode").val();
+        $.getJSON("/BecomeAnAgent/GetCountryPhoneCode?CountryCode=" + countryCode, function (result) {
+            debugger;
+            $("#CountryPhoneCode").text(result.PhoneCode);
+        })
+    }
+
+    </script>    
+}

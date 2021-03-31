@@ -1,0 +1,259 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentStaffInformationViewModel
+@{
+    ViewBag.Title = "UpdaeAgentStaffDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UpdaeAgentStaffDetails", "AuxAgentComplianceForm", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Details <label class="text-primary">ABC Bank/James Indiguor</label> <span>Staff ID: 15484814<br>Staff Login Code: 1245</span></h4>
+                                        <a href="@Url.Action("AgentStaffDetails","AuxAgentComplianceForm")" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(Model => Model.Name, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+
+                                                    <div class="form-group">
+                                                        <label>Date of Birth</label>
+                                                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        @Html.TextAreaFor(x => x.Address1, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(Model => Model.Address1, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Phone No.</label>
+
+                                                        @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(Model => Model.PhoneNumber, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Email Address</label>
+                                                        @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(Model => Model.EmailAddress, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Identification Information</h5>
+                                                        <hr>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID Card Type</label>
+
+                                                        @Html.DropDownListFor(model => model.IdCardType, (IEnumerable<SelectListItem>)ViewBag.IdCardType, "Select ID Type", new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(Model => Model.IdCardType, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID Card Number</label>
+                                                        @Html.TextBoxFor(x => x.IdCardNumber, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "" })
+                                                        @Html.ValidationMessageFor(Model => Model.IdCardNumber, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+                                                    <div class="row">
+                                                        <!--  -->
+                                                        <div class="col-lg-3">
+                                                            <div class="form-group">
+                                                                <label>Day</label>
+
+                                                                @Html.TextBoxFor(x => x.ExpiryDay, new { @class = "form-control form-control-lg form-control-round form-control-bold", @type = "number", placeholder = "DD", id = "Day" })
+                                                                @Html.ValidationMessageFor(Model => Model.ExpiryDay, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                        <!--  -->
+                                                        <!--  -->
+                                                        <div class="col-lg-5">
+                                                            <div class="form-group">
+                                                                <label>Month</label>
+
+                                                                @Html.EnumDropDownListFor(x => x.ExpiryMonth, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                                @Html.ValidationMessageFor(Model => Model.ExpiryMonth, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                        <!--  -->
+                                                        <!--  -->
+                                                        <div class="col-lg-4">
+                                                            <div class="form-group">
+                                                                <label>Year</label>
+                                                                @Html.TextBoxFor(x => x.ExpiryYear, new { @class = "form-control form-control-lg form-control-round form-control-bold", placeholder = "YYYY", id = "Year" })
+                                                                @Html.ValidationMessageFor(Model => Model.ExpiryYear, "", new { @class = "text-danger" })
+
+                                                            </div>
+                                                        </div>
+                                                        <!--  -->
+
+                                                    </div>
+
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID Issuing Country</label>
+                                                        @Html.DropDownListFor(model => model.IssuingCountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "" })
+
+                                                        @Html.ValidationMessageFor(Model => Model.IssuingCountryCode, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Compliance</h5>
+                                                        <hr>
+                                                    </div>
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID 1</label>
+                                                        @Html.TextBoxFor(x => x.Id1, new { @class = "form-control form-control-lg form-control-round", type = "file", @name = "Id1" ,@id = "Id1" })
+                                                        @Html.ValidationMessageFor(Model => Model.Id1, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID 2</label>
+                                                        @Html.TextBoxFor(x => x.Id2, new { @class = "form-control form-control-lg form-control-round", type = "file", name = "Id2", id = "Id2" })
+                                                        @Html.ValidationMessageFor(Model => Model.Id2, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>ID 3</label>
+                                                        @Html.TextBoxFor(x => x.Id3, new { @class = "form-control form-control-lg form-control-round", type = "file" ,name = "Id3", id = "Id3" })
+                                                        @Html.ValidationMessageFor(Model => Model.Id3, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+
+
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <button type="submit" class="btn btn-primary btn-round btn-block"><i class="fa fa-refresh"></i> Update</button>
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+}

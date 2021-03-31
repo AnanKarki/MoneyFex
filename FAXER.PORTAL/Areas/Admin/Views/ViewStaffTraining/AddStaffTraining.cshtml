@@ -1,0 +1,412 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddStaffTrainingViewModel
+@{
+    ViewBag.Title = "AddStaffTraining";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@*@using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Add Training</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                        <a href="@Url.Action("Index","ViewStaffTraining")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View - Training</a>
+
+                        <ol class="breadcrumb">
+                            <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                            <li class="active">Add Training</li>
+                        </ol>
+
+                    </div>
+                     /.col-lg-12
+                </div>
+                 /.row
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="col-lg-8">
+
+
+                                <div class="form-body">
+
+                                    <div class="form-group">
+                                        <label>Select Country </label>
+                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All country", new { @class = "form-control", id = "Country" })
+                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Select City </label>
+                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "All city", new { @class = "form-control", id = "City" })
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Select Staff </label>
+                                        @Html.DropDownListFor(model => model.staffId, (IEnumerable<SelectListItem>)ViewBag.Staffs, "All Staff", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.staffId, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Training Title </label>
+                                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Training Link </label>
+                                        @Html.TextBoxFor(model => model.Link, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Training Deadline </label>
+                                        @Html.TextBoxFor(model => model.Deadline, new { @class = "date", id = "deadlineDate", @data_date_change = "deadlineDateChange" })
+                                        @Html.EditorFor(model => model.Deadline, new { htmlAttributes = new { @id = "deadlineDate", @class = "form-control", type = "date", @data_date_change = "deadlineDateChange" } })
+                                        @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Complete Training</label>
+                                        @Html.TextBoxFor(model => model.completeTraining, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.completeTraining, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label>Outstanding Training</label>
+                                        @Html.TextBoxFor(model => model.outstandingTraining, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.outstandingTraining, "", new { @class = "text-danger" })
+                                    </div>
+
+
+                                    <hr>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-lg  btn-rounded pull-right">Publish Training</button>
+                                    </div>
+
+
+                                </div>
+
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Add Training  </h4>
+                                        <a href="@Url.Action("Index","ViewStaffTraining")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Training
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label> Country</label>
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select country", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "Country", @onchange = "GetStaffAccToCountryAndCity();" })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select city", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "City", @onchange = "GetStaffAccToCountryAndCity()" })
+                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Staff</label>
+                                                        @Html.DropDownListFor(model => model.staffId, (IEnumerable<SelectListItem>)ViewBag.Staffs, "Select Staff", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "StaffId" })
+                                                        @Html.ValidationMessageFor(model => model.staffId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Training Title</label>
+                                                        @Html.TextBoxFor(model => model.Title, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "Title" })
+                                                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Training Link</label>
+                                                        @Html.TextBoxFor(model => model.Link, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "Link" })
+                                                        @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Start Date</label>
+                                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @id = "deadlineDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date", @data_date_change = "DateOfStartChange" } })
+                                                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Finish Date</label>
+                                                        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @id = "deadlineDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date", @data_date_change = "DateOfFinishChange" } })
+                                                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Full Notice</label>
+                                                        @Html.TextAreaFor(model => model.FullNotice, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "FullNotice" })
+                                                        @Html.ValidationMessageFor(model => model.FullNotice, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","ViewStaffTraining")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <a onclick="Preview()" class="btn btn-primary btn-round pull-right"><i class="fa fa-eye"></i> Preview</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Popup preview -->
+    <div class="modal fade" id="viewpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body text-justify">
+                    <!--    <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " style="float: left; margin-right: 15px; width: 300px;">  -->
+                    <h5 id="Notice"></h5>
+                    <hr>
+                    <a id="Linkurl"></a>
+                    <p id="NoticePreview"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                    <button onclick="Submit()" class="btn btn-primary btn-round"><i class="fa fa-send"></i> Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Popup preview -->
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+        //$(document).ready(function () {
+        //    $("#Country").change(function () {
+        //        var country = $("#Country").val();
+        //        window.location.href = "/Admin/ViewStaffTraining/AddStaffTraining?countryCode=" + country;
+        //    });
+
+        //    $("#City").change(function () {
+        //        var country = $("#Country").val();
+        //        var city = $("#City").val();
+        //        window.location.href = "/Admin/ViewStaffTraining/AddStaffTraining?countryCode=" + country + "&city=" + city;
+        //    });
+        //});
+
+        function GetStaffAccToCountryAndCity() {
+            var country = $("#Country").val();
+            var city = $("#City").val();
+            $.getJSON("/Admin/ViewStaffTraining/GetStaffAccToCountryAndCity?countryCode=" + country + "&city=" + city, function (result) {
+                var staffselector = $("#StaffId");
+                $("#StaffId option").remove();
+                staffselector.append('<option value="0">All </option>');
+                for (var i = 0; i <= result.Data.length; i++) {
+                    staffselector.append('<option value=" ' + result.Data[i].staffId + ' "> ' + result.Data[i].staffName + '</option>');
+                }
+            })
+        }
+        function Submit() {
+
+            $("form")[0].submit();
+        }
+        function Preview() {
+
+            var Title = $("#Title").val();
+            var link = $("#Link").val();
+            var fullNotice = $("#FullNotice").val();
+            $("#Notice").text(Title);
+            $("#NoticePreview").text(fullNotice);
+            $("#Linkurl").text(link);
+
+            $("#viewpopup").modal("show");
+        }
+        function DateOfStartChange(date) {
+
+            Date.prototype.addDays = function (days) {
+                var date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+
+            var startDate = $("#startDate").val();
+            var finishDate = $("#finishDate").val();
+
+            var parts = startDate.split('/');
+            var partsFinish = finishDate.split('/');
+
+            var HolidaysStartDate = new Date(parts[2], parts[1] - 1, parts[0]);
+            var HolidaysFinishDate = new Date(partsFinish[2], partsFinish[1] - 1, partsFinish[0]);
+
+            var currentdate = new Date();
+            var dateAfterdays = currentdate.addDays(5);
+            if (HolidaysStartDate.getFullYear().toString().length != 4) {
+                alert("Please enter a Valid date");
+            }
+            else if (!(HolidaysStartDate > dateAfterdays)) {
+
+                alert("You Are Only Allowed to Request 5 days After Date to current date ");
+                $("#startDate").val("");
+            }
+            else if (HolidaysFinishDate < HolidaysStartDate) {
+                alert("Finish Date can't be smaller than Start Date !");
+                $("#startDate").val("");
+            }
+
+        }
+
+        function DateOfFinishChange(date) {
+
+            var startDate = $("#startDate").val();
+            var finishDate = $("#finishDate").val();
+            var staffId = $("#StaffId").val();
+
+            var partsStart = startDate.split('/');
+            var partsFinish = finishDate.split('/');
+
+            var HolidaysStartDate = new Date(partsStart[2], partsStart[1] - 1, partsStart[0]);
+            var HolidaysFinishDate = new Date(partsFinish[2], partsFinish[1] - 1, partsFinish[0]);
+
+            if (HolidaysFinishDate.getFullYear().toString().length != 4) {
+                alert("Please enter a Valid date");
+            }
+            else if (HolidaysFinishDate < HolidaysStartDate) {
+                alert("Finish Date can't be smaller than Start Date !");
+                $("#finishDate").val("");
+            }
+
+            else {
+                //var oneDay = 24 * 60 * 60 * 1000;
+                //var diffDays = Math.round(Math.abs((HolidaysStartDate.getTime() - HolidaysFinishDate.getTime()) / (oneDay)));
+                //$("#noOfDays").val(diffDays);
+                $.getJSON("/Admin/StaffHolidays/NoOfDaysCalculation?StaffId=" + staffId + "&StartDate=" + startDate.toString("dd/MM/yyyy") + "&FinishDate=" + finishDate.toString("dd/MM/yyyy"), function (data) {
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                    }
+                    //if ($("#AlreadyTaken").val() == "false") {
+                    //    alert("Sorry, The holiday on this date is already taken !");
+                    //    $("#NoLeft").val("");
+                    //    $("#noOfDays").val("");
+                    //    $("#NoTaken").val("");
+                    //    $("#finishDate").val("");
+                    //}
+                    if ($("#NoLeft").val() < 0) {
+                        alert("The number of requested days is greater than the no. of holidays left !");
+                        $("#NoLeft").val("");
+                        $("#noOfDays").val("");
+                        $("#NoTaken").val("");
+                        $("#finishDate").val("");
+
+                    }
+                    if ($("#AlreadyTaken").val() == "false") {
+                        alert("The selected date is already taken");
+                    }
+
+                });
+            }
+        }
+
+    </script>
+}
+

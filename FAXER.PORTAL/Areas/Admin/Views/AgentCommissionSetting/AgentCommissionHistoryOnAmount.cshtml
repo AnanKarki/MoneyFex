@@ -1,0 +1,70 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.AgentCommissionHisotryViewModel>
+
+@{
+    ViewBag.Title = "AgentCommissionHistoryOnAmount";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+       <div class="row bg-title">
+
+       </div>
+        <div class="row">
+
+           
+            <div class="col-md-12">
+                
+                <div class="white-box">
+
+                    <div class="row bg-title">
+
+                        <h4 class="page-title">Commission On Amount History</h4>
+                    </div>
+                    <hr />
+                    <div class="table-responsive">
+                        <table class="csvprint display nowrap" cellspacing="0" width="100%">
+                            <thead>
+
+
+                                <tr>
+                                    @*<th>SN</th>*@
+                                    <th>Agent name</th>
+                                    <th>Service</th>
+                                    <th>Sending </th>
+                                    <th>Receiving </th>
+                                    <th>Date</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                    <tr>
+                                        @*<td>@index</td>*@
+                                        <td>@item.AgentName</td>
+
+                                        <td>@item.TransferSevice</td>
+                                        <td>@item.SendingRate</td>
+                                        <td>@item.ReceivingRate</td>
+                                        <td>@item.CreatedDate</td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

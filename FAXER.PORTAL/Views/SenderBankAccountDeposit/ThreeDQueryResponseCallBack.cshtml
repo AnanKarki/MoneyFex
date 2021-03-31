@@ -1,0 +1,77 @@
+﻿@model FAXER.PORTAL.SecureTradingPaymentGateway.CustomerResponseVm
+@{
+    ViewBag.Title = "DebitCreditCardDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+
+}
+@using (Html.BeginForm("DebitCreditCardDetails", "SenderBankAccountDeposit", FormMethod.Post, new { @Id = "payform" }))
+{
+    <!--  -->
+
+
+    @Html.HiddenFor(model => model.MD)
+    @Html.HiddenFor(model => model.parenttransactionreference)
+    @Html.HiddenFor(model => model.PaRes)
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        @*<div class="col-lg-6">
+                            <img src="~/Content/Images/icon/svg/bank.svg" width="150">
+                        </div>
+
+                        <div class="col-lg-6">
+                            <img src="~/Content/images/icon/card/visa.png" width="80">
+                        </div>*@
+                        @*<div class="clearfix "> </div>
+                        <hr>*@
+                        <h3>Processing your payment.</h3>
+                        <h3 class="text-primary"> Processing <img src="~/Content/Images/partners/processing.gif" alt="" width="150"></h3>
+
+
+                        <h4>
+                            Do we have your mobile phone number?<br>
+                            We use these details to provide an extra layer of security when<br> you shop online.
+                        </h4>
+                        <h4>It's really important that you update your mobile phone number<br> (and any additional cardholders), as you may not be able to<br> make some purchases online without it.</h4>
+
+
+
+                    </div>
+
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+        //function Nextfocus(e) {
+
+        //    debugger;
+        //    if ($(this).val() == 2) {
+
+        //        $(this).next().focus();
+        //    }
+        //}
+
+        window.onload = function () {
+            $("#payform").submit();
+
+        }
+
+    </script>
+}

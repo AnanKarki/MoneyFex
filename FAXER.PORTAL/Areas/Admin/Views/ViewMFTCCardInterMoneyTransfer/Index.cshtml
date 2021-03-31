@@ -1,0 +1,135 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewMFTCCardInterMoneyTransferViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Virtual Account Inter Money Transfer</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Virtual Account Inter Money Transfer</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="csv display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2"> SN. </th>
+                                    <th colspan="5" align="center"> Sender's Details</th>
+                                    <th colspan="4" align="center"> Sending Virtual Account </th>
+                                    <th rowspan="2"> Transferred amount </th>
+                                    <th colspan="4" align="center">  Receiving Virtual Account </th>
+                                    <th colspan="2" align="center"> Date/Time </th>
+
+                                </tr>
+                                <tr>
+                                    <th>Sender's Name.</th>
+                                    <th> Address</th>
+                                    <th>Country</th>
+                                    <th> Tel</th>
+                                    <th>Email</th>
+                                    <th> Virtual Account Number </th>
+                                    <th> Name on Virtual Account </th>
+                                    <th> Virtual Account Registered Country </th>
+                                    <th> Amount on Virtual Account </th>
+
+                                    <th> Virtual Account Number </th>
+                                    <th> Name on Virtual Account </th>
+                                    <th> Virtual Account Registered Country </th>
+                                    <th> Amount on Virtual Account </th>
+                                    <th> Date </th>
+                                    <th> Time </th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+
+                                    i++;
+                                <tr>
+                                    <td>@i</td>
+                                    <td>@item.FaxerName</td>
+                                    <td>@item.FaxerAddress</td>
+                                    <td>@item.FaxerCountry</td>
+                                    <td>@item.FaxerTelephone</td>
+                                    <td>@item.FaxerEmail</td>
+                                    <td>@item.FaxingMFTCNumber</td>
+                                    <td>@item.FaxingMFTCName</td>
+                                    <td>@item.FaxingMFTCCountry</td>
+                                    <td>@item.FaxingMFTCAmount</td>
+                                    <td>@item.AmountTransferred</td>
+                                    <td>@item.ReceivingMFTCNumber</td>
+                                    <td>@item.ReceivingMFTCName</td>
+                                    <td>@item.ReceivingMFTCCountry</td>
+                                    <td>@item.ReceivingMFTCAmount</td>
+                                    <td>@item.Date</td>
+                                    <td>@item.Time</td>
+
+                                </tr>
+                                }
+
+
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMFTCCardInterMoneyTransfer/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

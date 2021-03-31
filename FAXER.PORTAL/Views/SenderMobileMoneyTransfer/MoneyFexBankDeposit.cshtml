@@ -1,0 +1,196 @@
+﻿@model FAXER.PORTAL.Models.SenderMoneyFexBankDepositVM
+@{
+    ViewBag.Title = "MoneyFexBankDeposit";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] splittedAmount = Model.AvailableBalance.ToString("0.00").Split('.');
+}
+
+
+@using (Html.BeginForm())
+{
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <!--  -->
+
+                <div class="col-lg-4">
+                    <div class="login_signup mb20">
+
+                        <ul class="wiz">
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="flag-icon flag-icon-@ViewBag.ReceivingCountry "></i> @ViewBag.ReceivingCountryCurrency @ViewBag.TransferMethod </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="fa fa-money"></i> Amount @ViewBag.SendingCountryCurrency @ViewBag.SendingAmount </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="fa fa-user"></i> @ViewBag.ReceiverName </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderMobileMoneyTransfer")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon last">
+                                            <i class="fa fa-credit-card"></i>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!--  -->
+                <!--  -->
+                <!-- <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 "> -->
+                <div class="col-lg-6">
+                    <div class="login_signup   clearfix text-center">
+                        <h3 class="text-left">Bank Details</h3>
+                        <hr>
+                        <div class="text-left">
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label> Amount due</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.Amount @Model.SendingCurrencyCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Account number</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.AccountNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>@Model.LabelName</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.ShortCode
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Payment Reference</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.PaymentReference
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                        </div> <hr>
+                        <p class="mb0">Have you made payment to our bank account?</p>
+                        @*<label class="inline-label">
+                                <input type="radio" name="radio"> Yes
+                            </label>
+                            &nbsp;&nbsp;&nbsp;
+
+                            <label class="inline-label">
+                                <input type="radio" name="radio" checked> No
+                            </label>*@
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Send Confirmation</button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("InternationalPayment")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+<!--  -->

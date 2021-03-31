@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.NameOfContactPerson,
+    </p>
+    <br />
+    <p>
+        Thank you for accepting to join the growing network of  Service Providers partnering with MoneyFex to accept payment from their customers around the world.
+    </p>
+    <p>
+        Please use the following login details to complete your registration to become a MoneyFex approved service provider.
+    </p>
+
+    <p style="background-color:#e0ffff;">
+        <br />
+        <strong>Email address:</strong>@ViewBag.EmailAddress<br />
+        <br />
+        <strong>Merchant Login Code:</strong>@ViewBag.MerchantLoginCode
+        <br />
+    </p>
+    <br />
+    <br />
+    <p>
+        Before we can activate your account, one last step must be taken to complete your registration.
+    </p>
+    <p>
+        To complete your registration, Please click on this URL to continue:<br />
+        <a href="@ViewBag.Link">@ViewBag.Link</a>
+    </p>
+    <br />
+    <p>
+        **** Does The Above URL Not Work? ****<br />
+
+        Please copy and paste on your browser! <br />
+
+        If you are still having problems with the process, please contact a member of our support staff at support@moneyfex.com
+    </p>
+    
+
+
+
+</div>

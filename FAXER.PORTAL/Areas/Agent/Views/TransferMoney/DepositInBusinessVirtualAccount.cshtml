@@ -1,0 +1,644 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentBusinessTransferMoneyViewModel
+@{
+    ViewBag.Title = "DepositInBusinessVirtualAccount";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    var senderPhoneCountryCode = "";
+    
+    var senderDate = "...";
+    var senderTime = "...";
+    var businessAccountStatus = "...";
+    var bgcolorStatus = "";
+}
+@if (Model != null)
+{
+    senderPhoneCountryCode = Model.SenderCountryPhoneCode == null ? "" : Model.SenderCountryPhoneCode;
+    
+    senderDate = Model.SenderDate == null ? "..." : Model.SenderDate;
+    senderTime = Model.SenderTime == null ? "..." : Model.SenderTime;
+    businessAccountStatus = Model.BusinessAccountStatus == null ? "..." : Model.BusinessAccountStatus;
+    bgcolorStatus = Model.BusinessAccountStatus == "Active" ? "#3CB371" : "#F08080";
+
+
+
+    <script type="text/javascript">
+        window.onload = function () {
+
+            $(".senderCurr").text("@Model.SenderCurrency");
+            $(".receiverCurr").text("@Model.ReceiverCurrency");
+            $("#businessAccountStatus").text("@Model.BusinessAccountStatus");
+            $(".recTelCode").text("@Model.BusinessCountryPhoneCode");
+            };
+    </script>
+}
+
+
+<!--  -->
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(x => x.SenderFaxerId, new { @id = "SenderFaxerId" })
+    @Html.HiddenFor(x => x.ReceiverKiiPayBusinessInformationId, new { @id = "ReceiverKiiPayBusinessInformationId" })
+    @Html.HiddenFor(x => x.SenderCurrency)
+    @Html.HiddenFor(x => x.ReceiverCurrency)
+    @Html.HiddenFor(x => x.ReceiverCurrenySymbol)
+    @Html.HiddenFor(x => x.SenderCurrencySymbol)
+    @Html.HiddenFor(x => x.BusinessCountryPhoneCode)
+    @Html.HiddenFor(x => x.SenderCountryPhoneCode)
+    @Html.HiddenFor(x => x.SenderDate)
+    @Html.HiddenFor(x => x.SenderTime)
+
+
+
+
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h1>Deposit Money into Business Virtual Account </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+
+
+                    <div class=" border_tbls">
+                        <div class="col-lg-5 pull-right">
+                            <div class="input-group stylish-input-group">
+                                @Html.TextBoxFor(model => model.SendersAccountNo, new { @class = "form-control", @placeholder = "Search Sender's Account No./ Telephone No.", @id = "SendersAccountNo" })
+
+                                <span class="input-group-addon">
+                                    <button type="button" class="" onclick="searchAccountNo();">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.SendersAccountNo, "", new { @class = "text-danger pull-right" })
+                    <div class="clearfix"></div>
+                    <!-- start -->
+                    <div class=" border_tbls">
+                        <div class="col-lg-8">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Sender's Details</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(model => model.SenderFirstName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(model => model.SenderMiddleName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Family/Last Name</label>
+                                        @Html.TextBoxFor(model => model.SenderLastName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Date of Birth</label>
+                                        @Html.TextBoxFor(model => model.SenderDOB, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        @*<select class="form-control">
+                                                <option>M</option>
+                                                <option>F</option>
+                                            </select>*@
+                                        @Html.TextBoxFor(model => model.SenderGender, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(model => model.SenderAddress, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        @Html.TextBoxFor(model => model.SenderCity, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        @Html.TextBoxFor(model => model.SenderCountry, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Telephone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@senderPhoneCountryCode</span>
+                                            @Html.TextBoxFor(model => model.SenderTelephone, new { @class = "form-control", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(model => model.SenderEmail, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            @*<table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Business Account  Status</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>...</td>
+                                        </tr>
+                                    </tbody>
+                                </table>*@
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>Time</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@senderDate</td>
+                                        <td>@senderTime</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Sender's Identification</h3>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Select ID Type</label>
+                                        @Html.DropDownListFor(model => model.SenderIDType, (IEnumerable<SelectListItem>)ViewBag.IDCardDropdown, "Select ID Type", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.SenderIDType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>ID Number</label>
+                                        @Html.TextBoxFor(model => model.SenderIDNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.SenderIDNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>ID Expiring Date</label>
+                                        @Html.TextBoxFor(model => model.SenderIDExpiringDate, new { @class = "form-control", @type = "date" })
+                                        @Html.ValidationMessageFor(model => model.SenderIDExpiringDate, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Issuing Country</label>
+                                        @Html.DropDownListFor(model => model.SenderIDIssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.SenderIDIssuingCountry, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+
+                    <div class=" border_tbls">
+                        <div class="form-row ">
+                            <div class="col-lg-12">
+                                <h3>Business Account Details</h3>
+                            </div>
+
+                            <div class="col-lg-5 pull-right ">
+                                <div class="form-group">
+                                    <div class="input-group stylish-input-group">
+                                        @Html.TextBoxFor(model => model.BusinessAccountNo, new { @class = "form-control", @placeholder = "Search Business Account Name/No.", @id = "busineessAccountNo" })
+
+                                        <span class="input-group-addon">
+                                            <button type="button" class="" onclick="searchBusinessAccountNo();">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BusinessAccountNo, "", new { @class = "text-danger", @id = "validationBusiness" })
+                                    <label class="text-danger" id="Invalid" style="display:none"></label>
+                                </div>
+
+                            </div>
+
+                            <div class="clearfix">
+
+                            </div>
+                            <div class="form-row">
+                                <div class="col-lg-8"></div>
+                                <div class=" col-lg-3">
+                                    <table class="  table table-bordered pull-right">
+                                        <thead>
+                                            <tr>
+                                                <td>Business Account Status</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="background-color:@bgcolorStatus;" id="bgcolorstatus">
+
+
+                                                    <label id="businessAccountStatus" name="BusinessAccountStatus"></label>
+                                                    @Html.HiddenFor(model => model.BusinessAccountStatus)
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Business Name</label>
+                                    @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Business License/Registration Number</label>
+                                    @Html.TextBoxFor(model => model.BusinessLicenseNumber, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Address</label>
+                                    @Html.TextBoxFor(model => model.BusinessAddress, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(model => model.BusinessCity, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Country</label>
+                                    @Html.TextBoxFor(model => model.BusinessCountry, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>Telephone</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon recTelCode"></span>
+                                        @Html.TextBoxFor(model => model.BusinessTelephoneNumber, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+
+
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="clearfix">
+
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Deposit Details</h3>
+                                </div>
+
+                                <!--  -->
+                                <div class="col-lg-3">
+                                    <label> Deposit  Amount</label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon senderCurr"></span>
+                                            @Html.TextBoxFor(model => model.DepositAmount, new { @class = "form-control", @placeholder = "Sender's currency", @autocomplete = "off", @id = "depositAmount", @onchange = "getFaxingCalcDepositAmount();" })
+                                            @Html.ValidationMessageFor(model => model.DepositAmount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3">
+                                    <label> Fees</label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon senderCurr"></span>
+                                            @Html.TextBoxFor(model => model.DepositFees, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3">
+                                    <label>Total Amount including Fee</label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon senderCurr"></span>
+                                            @Html.TextBoxFor(model => model.TotalAmountIncludingFee, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3">
+                                    <label>Current Exchange Rate</label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CurrentExchangeRate, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3">
+                                    <label>Amount to be available in <br>Receiver Account </label>
+                                </div>
+
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon receiverCurr"></span>
+                                            @Html.TextBoxFor(model => model.ReceivingAmount, new { @class = "form-control", @placeholder = "Receiver's currency", @id = "recAmount", @onchange = "getFaxingCalcReceivingAmount();" })
+                                            @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"><br></div>
+                                <!--  -->
+
+                                <div class="col-lg-3 ">
+                                    <label>Payment Reference</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.PaymentReference, new { @class = "form-control", @placeholder = "E.g. First Name-Fee Payment" })
+                                        @Html.ValidationMessageFor(model => model.PaymentReference, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Official Use Only</h3>
+                                    <p><b> Agent Details</b></p>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Agency</label>
+                                        @Html.TextBoxFor(model => model.NameOfAgency, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Account No.</label>
+
+                                        @Html.TextBoxFor(model => model.AgentAccountNo, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Paying Staff</label>
+                                        @Html.TextBoxFor(model => model.NameOfPayingStaff, new { @class = "form-control" , @readonly = "readonly"})
+                                        @Html.ValidationMessageFor(model => model.NameOfPayingStaff, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Information Verification</h3>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="checkbox">
+                                        <label>@Html.CheckBoxFor(model => model.VerificationConfirm)  I confirm that the information required to  deposit money into this virtual account has been fully verified by myself</label>
+                                        @Html.ValidationMessageFor(model => model.VerificationConfirm, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@Url.Action("Index")" class="fbtn btn-back hidden-xs hidden-sm pull-left "><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+
+                    <button type="submit" class="fbtn btn-next pull-right" id=" ">Deposit Money  <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function searchAccountNo() {
+            var senderAccountNo = $("#SendersAccountNo").val();
+            window.location.href = "/Agent/TransferMoney/DepositInBusinessVirtualAccount?senderAccountNo=" + senderAccountNo;
+        };
+
+        function searchBusinessAccountNo() {
+
+            var businessAccountNo = $("#busineessAccountNo").val();
+            $.getJSON("/Agent/TransferMoney/getBusinessAccountDetails?businessAccountNumber=" + businessAccountNo, function (data) {
+                if (data != null) {
+                    debugger;
+                    if (data.InvalidNo == true) {
+
+                        $("#Invalid").text("Invalid Business Account Number !");
+                        $("#Invalid").show();
+                        $("#validationBusiness").hide();
+                    }
+                    else {
+                        $("#Invalid").hide();
+                        for (var item in data) {
+                            var selector = '[name="' + item + '"]';
+                            $(selector).val(data[item]);
+                        }
+                        if (data.BusinessAccountStatus != "Active") {
+                            $("#Invalid").show();
+                            $("#validationBusiness").hide();
+                            $("#Invalid").text("The Business Account must be active to complete the transaction !");
+                            $("#bgcolorstatus").css('background-color', '#F08080');
+                        }
+                        if (data.BusinessAccountStatus == "Active") {
+                            $("#bgcolorstatus").css('background-color', '#3CB371');
+                            $("#validationBusiness").hide();
+                        }
+                        $(".recTelCode").text(data.BusinessCountryPhoneCode);
+                        $(".receiverCurr").text(data.ReceiverCurrency);
+                        $("#businessAccountStatus").text(data.BusinessAccountStatus);
+                    }
+                }
+            })
+        };
+
+        function getFaxingCalc() {
+            var topUpAmount = $("#depositAmount").val();
+            var receivingAmount = $("#recAmount").val();
+            var senderFaxerId = $("#SenderFaxerId").val();
+            var receiverKiiPayBusinessInformationId = $("#ReceiverKiiPayBusinessInformationId").val();
+            $.getJSON("/Agent/TransferMoney/getFaxingCalculationsBusiness?topUpAmount=" + topUpAmount + "&senderFaxerId=" + senderFaxerId + "&receiverKiiPayBusinessInformationId=" + receiverKiiPayBusinessInformationId + "&RecevingAmount=" + receivingAmount, function (data) {
+                if (data != null) {
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                    }
+                }
+            });
+        };
+
+        function getFaxingCalcDepositAmount() {
+            $("#recAmount").val(0);
+            getFaxingCalc();
+        };
+
+        function getFaxingCalcReceivingAmount() {
+            $("#depositAmount").val(0);
+            getFaxingCalc();
+        };
+
+    </script>
+
+
+
+}

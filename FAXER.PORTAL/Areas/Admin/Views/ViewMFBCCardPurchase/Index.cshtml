@@ -1,0 +1,136 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewMFBCCardPurchaseViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View-MFBC Card Purchase Usage</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View-MFBC Card Purchase Usage</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="csv  display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">SN<strong></strong></td>
+                                    <td rowspan="2"><strong>Business Name</strong></td>
+                                    <td rowspan="2"><strong>Card User's Full Name</strong></td>
+
+
+                                    <td colspan="3"><strong>Purchase Amount </strong></td>
+                                    <td colspan="2"><strong>Merchant Info  </strong></td>
+
+
+                                    <td rowspan="2"><strong>Purchase  Receipt  </strong></td>
+
+                                </tr>
+
+                                <tr>
+
+
+                                    <td><strong>Amt</strong></td>
+                                    <td><strong>Time</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Payment Type(ntl/intl)</strong></td>
+
+
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>BMF Code</strong></td>
+                                </tr>
+
+
+                            </thead>
+
+
+                            <tbody>
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.BusinessName</td>
+                                        <td>@item.CardUserFullName</td>
+
+                                        <td>@item.PurchaseAmt @item.Currency</td>
+                                        <td>@item.PurchaseTime</td>
+                                        <td>@item.PurchaseDate</td>
+                                        <td>@item.PaymentType</td>
+                                        <td>@item.MerchantName</td>
+                                        <td>@item.MerchantBMFSCode</td>
+                                        <td><button class="btn btn-sm btn-warning btn-rounded">PDF Receipt</button></td>
+
+
+                                    </tr>
+                                }
+
+
+
+
+
+
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMFBCCardPurchase/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

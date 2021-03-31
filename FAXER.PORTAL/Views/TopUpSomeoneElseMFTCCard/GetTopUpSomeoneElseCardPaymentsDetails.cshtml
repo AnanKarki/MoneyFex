@@ -1,0 +1,164 @@
+﻿@model List<FAXER.PORTAL.Models.TopUpSomeoneElsePaymentDetialsViewModel>
+@{
+    ViewBag.Title = "GetTopUpSomeoneElseCardPaymentsDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Other MFTC Card Payments</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <form>
+                    <div class="col-lg-7">
+                        <label id="Validate" class="col-lg-4" style="color:red;display:none">Please Enter Valid Date</label>
+                    </div>
+
+
+                    <div class="col-lg-7">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>From</label>
+                                    <input type="Date" name="" id="From" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label>to</label>
+                                    <input type="Date" name="" id ="To" class="form-control">
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <br />
+
+
+                                <button type="button" class="btn btn-success btn-sm" onclick="Filter()">Search</button>
+                                <button type="button" class="btn btn-warning btn-sm" onclick="GetDetails()">Refresh</button>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 pull-right">
+                        <a href="@Url.Action("Index")" class="btn btn-sm btn-success pull-right ">TopUp someone else's card</a>
+                        <div class="clearfix"><br></div>
+                        <a href="have-you-made-payment-before.php" class="btn btn-sm btn-danger pull-right ">Download PDF</a>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="clearfix">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Name of other Card User</th>
+                                        <th>Other MFTC Card Number</th>
+                                        <th>Card User Country</th>
+                                        <th>Card User City</th>
+                                        <th>Card Top-up Amount</th>
+                                        <th>Top-up Reference</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Receipt</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+
+
+                                <tbody>
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.CardUserName</td>
+                                            <td>@item.MFTCCardNumber</td>
+                                            <td>@item.CardUserCountry</td>
+                                            <td>@item.CardUserCity</td>
+                                            <td>@item.TopUpAmount</td>
+                                            <td>@item.TopUpReference</td>
+                                            <td>@item.Date.ToString("dd/MM/yyyy")</td>
+                                            <td>@item.Time</td>
+                                            <td><a href="@Url.Action("PrintReceipt" , new { TransactionId = item.Id})" target="_blank" class="btn btn-warning btn-xs"> Receipt </a></td>
+                                            <td><a href="@Url.Action("MFTCCardAccountNo", new { @MFTCCardNO = item.MFTCCardNumber})" class="btn btn-success btn-xs">Top-Up Card Again</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <a href="@Url.Action("Index", "DashBoard")" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard</a>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+        function Filter() {
+
+
+            var from = $("#From").val();
+            var To = $("#To").val();
+            if (from == null || from == "") {
+                $("#Validate").show();
+            }
+            else if (To == null || To == "") {
+
+                $("#Validate").show();
+            }
+            else {
+                var fromParts = from.split('-');
+                var newDateFrom = new Date(fromParts[0], fromParts[1] - 1, fromParts[2]);
+                var ToParts = To.split('-');
+                var newDateTo = new Date(ToParts[0], ToParts[1] - 1, ToParts[2]);
+                if (newDateFrom.getFullYear().toString().length != "4" || newDateTo.getFullYear().toString().length != "4") {
+                    $("#Validate").show();
+
+                }
+                else if (newDateFrom > newDateTo) {
+
+                    $("#Validate").show();
+
+                }
+                else {
+                    $("#Validate").hide();
+
+
+
+                    window.location.href = "/TopUpSomeoneElseMFTCCard/GetTopUpSomeoneElseCardPaymentsDetails?FromDate=" + from + "&ToDate=" + To;
+                }
+            }
+
+        }
+        function GetDetails() {
+
+            window.location.href = "/TopUpSomeoneElseMFTCCard/GetTopUpSomeoneElseCardPaymentsDetails?FromDate=" + "" + "&ToDate=" + "";
+        }
+
+
+
+    </script>
+}

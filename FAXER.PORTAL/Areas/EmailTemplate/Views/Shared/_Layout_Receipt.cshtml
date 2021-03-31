@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MoneyFex</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        p {
+            margin: 0 0 6px;
+            line-height: 23px;
+        }
+
+        table img {
+            max-width: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif; font-weight: 300;">
+
+    <div style="margin: 0 auto;
+      max-width: 650px;
+       width: 100%;
+      border: solid 1px #eee;">
+
+        <div style="   border-bottom: solid 1px #eee;
+        border-top: solid 1px #eee;
+        padding: 10px 15px;
+        margin-bottom: 0px;">
+            <div style="float: left;">
+                @*<img src="~/Areas/EmailTemplate/Images/ReceiptImg/logo.png" width="200">*@
+          
+                <img src="~/Areas/EmailTemplate//images/logo.png" width="200">
+
+            </div>
+            <div style="float: right;">
+
+
+            </div>
+            <div style="clear:both ;">
+
+            </div>
+        </div>
+        <br>
+        
+           @RenderBody()
+        
+        <div style="    background: #f5f5f5;
+            padding:   15px;
+            margin-bottom: 0px;">
+
+            <p>
+                Receiver may receive less due to fees charged or offsets applied by the receiver's financial institution or any foreign taxes that may be assessed. Additionally, restrictions imposed by government in your intended destination state or territory may affect your transfer/payment. In addition to applicable transaction fee, foreign exchange gains may apply. Currency is converted at an exchange rate set by MoneyFex. Please see the terms and conditions or call MoneyFex at <b>+44 2081445215</b> for more information regarding currency exchange.
+            </p>
+            <hr>
+            <p>If you are using our services to deposit money into a virtual account, pay for goods and services abroad, please verify that the receiver information, including receiver’s email address, telephone number and or other necessary account information are accurate and correct before sending. MoneyFex is not responsible for losses resulting from your failure to provide correct information for your transfer. </p>
+            <p>
+                You can cancel for a full refund within 180 days of payment, unless the funds have been received by the beneficiary.
+            </p>
+            <hr>
+            <p>
+                <i>
+                    &copy; 2019 MoneyFex. MoneyFex Limited, 1st Floor, North Westgate House Harlow, Essex London CM20 1YS, United Kingdom. MoneyFex Limited is authorised and regulated in the United Kingdom by the Financial Conduct Authority (no. 745989). Registered with UK Companies House. Reg no.10105082
+                </i>
+            </p>
+
+
+        </div>
+    </div>
+
+</body>
+</html>

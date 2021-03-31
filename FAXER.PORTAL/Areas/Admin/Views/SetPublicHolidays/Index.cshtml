@@ -1,0 +1,276 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.ViewPublicHolidaysViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@if (ViewBag.Message == "Holiday Calendar Added Successfully !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message", 4);
+
+        };
+    </script>
+}
+
+@if (ViewBag.Message == "Holiday Calendar Update Successfully !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message",4);
+        }
+    </script>
+}
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">View Public Holidays</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <a href="@Url.Action("AddPublicHoliday", "SetPublicHolidays")" class="btn btn-info pull-right m-l-20   waves-effect waves-light btn-rounded">Add New Public Holiday</a>
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">View Public Holidays</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+                                <thead>
+                                    @{
+                                        int i = 0;
+                                    }
+
+                                    <tr>
+                                        <td>SN</td>
+                                        <td>Country</td>
+                                        <td>City</td>
+                                        <td>Holiday Name</td>
+                                        <td>From Date</td>
+                                        <td>Till Date</td>
+                                        <td>Action</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.Country</td>
+                                            <td>@item.City</td>
+                                            <td>@item.HolidayName</td>
+                                            <td> <b>@item.FromDate </b></td>
+                                            <td><b>@item.ToDate</b></td>
+                                            <td>
+                                                <a href="@Url.Action("EditPublicHoliday","SetPublicHolidays", new { Id=item.Id})" class="btn btn-success btn-sm">Edit</a>
+                                                <a href="@Url.Action("DeletePublicHoliday","SetPublicHolidays", new { Id=item.Id})" class="btn btn-danger btn-sm" id="sa-params">Delete</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Public Holidays Calendar</h4>
+                                    <a href="@Url.Action("AddPublicHoliday", "SetPublicHolidays")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Add Public Holidays
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control   form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control   form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Years, "Select Year", new { @class = "form-control form-control-round form-control-bold", id = "Year", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control   form-control-round form-control-bold" id="Month" onchange="Fliter();">
+                                                    <option value="0">Select Month</option>
+                                                    <option value="1">January</option>
+                                                    <option value="2">February</option>
+                                                    <option value="3">March</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">May</option>
+                                                    <option value="6">June</option>
+                                                    <option value="7">July</option>
+                                                    <option value="8">August</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Name" class="form-control form-control-round form-control-bold" name="Name" id="Name" value="@ViewBag.Name" onchange="Fliter();">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Name</th>
+                                                    <th>Start</th>
+                                                    <th>Finish</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                                @{int i = 1;}
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td><i class="flag flag-icon flag-icon-@item.CountryFlag"></i> @item.Country </td>
+                                                        <td>@item.City</td>
+                                                        <td><a href="">@item.HolidayName</a></td>
+
+                                                        <td>@item.FromDate   </td>
+                                                        <td>@item.ToDate  </td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("AddPublicHoliday","SetPublicHolidays", new { Id=item.Id})" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                        @{ i++;}
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var year = document.getElementById("Year").value;
+            var month = document.getElementById("Month").value;
+            var Name = $("#Name").val();
+
+            window.location.href = "/Admin/SetPublicHolidays/Index?CountryCode=" + country + "&City=" + city + "&Year=" + year + "&Month=" + month + "&Name=" + Name;
+        }
+
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/SetPublicHolidays/DeletePublicHoliday?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+
+    </script>
+}

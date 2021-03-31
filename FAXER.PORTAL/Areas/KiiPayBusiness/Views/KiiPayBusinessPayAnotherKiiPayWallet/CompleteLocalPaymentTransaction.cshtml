@@ -1,0 +1,68 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessPaymentCompletedVM
+@{
+    ViewBag.Title = "CompleteLocalPaymentTransaction";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+
+    //string[] CurrentBalSplited = Model.CurrentBalance.ToString().Split('.');
+    string[] CurrentBalSplited = "20.00".Split('.');
+
+
+
+
+}
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">@Model.SendingCurrencySymbol @CurrentBalSplited[0].<small class="text-primary">@CurrentBalSplited[1]</small></h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                <div class="login_signup mb50 clearfix text-center">
+
+                    <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                    <h2 class=" ">You've sent <span class="text-primary">@Model.ReceivingCurrencySymbol@Model.ReceivingAmount </span> to @Model.ReceiverName</h2>
+
+
+
+
+                    @*<h4 class="text-center mb30">Sending Money to another Country?   <a href="@Url.Action("SearchKiiPayPersonalWalletForInternatinalPayment" , "KiiPayBusinessPayAnotherKiiPayWallet")">Change</a></h4>*@
+
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <a href="@Url.Action("SearchKiiPayPersonalWalletForLocalPayment")" class="btn btn-primary btn-lg mb30">Send More Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="@Url.Action("DashBoard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i>  Go to Dashboard </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+

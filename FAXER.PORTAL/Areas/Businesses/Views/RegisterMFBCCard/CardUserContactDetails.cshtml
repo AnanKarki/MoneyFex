@@ -1,0 +1,182 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFBCCardUserContactDetailsViewModel
+    @{
+        ViewBag.Title = "CardUserContactDetails";
+        Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+    }
+
+
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h1>Business Contact Details</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <form method="post">
+        <div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="login_signup">
+
+
+
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Address 1 <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Address1 , new { @class ="form-control" , @placeholder ="Address1"})
+                                    @Html.ValidationMessageFor(model => model.Address1 , "" , new { @classs="text-danger"})
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Address 2</label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", @placeholder = "Address2" })
+                                    @Html.ValidationMessageFor(model => model.Address2, "", new { @classs = "text-danger" })
+
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>City <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "City" })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @classs = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>State/Province/Region <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.State, new { @class = "form-control", @placeholder = "State/Province/Region" })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @classs = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Zip/Postal Code <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control", @placeholder = "Zip/Postal Code" })
+                                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @classs = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Country <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.HiddenFor(model => model.CountryName)
+                                    @Html.DropDownListFor(model => model.CountryName , (IEnumerable<SelectListItem>)ViewBag.Countries , "Select Country" , new { @class ="form-control" , @disabled= "disabled"})
+                                    @Html.ValidationMessageFor(model => model.CountryName ,"" , new { @class ="text-danger"})
+                                    @Html.HiddenFor(model => model.Country)
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "Phone Number" })
+                                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @classs = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Email Address <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "Card User Email Address" })
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @classs = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!--  -->
+        <!--  -->
+        <div class="dynamic_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <a href="@Url.Action("RegisterBusinessCard", "RegisterMFBCCard")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                        <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <br>
+                        <a href="@Url.Action("RegisterBusinessCard", "RegisterMFBCCard")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+    </form>
+    <!--  -->

@@ -1,0 +1,347 @@
+﻿@model FAXER.PORTAL.DB.SARForm
+@{
+    ViewBag.Title = "ComplianceSARForm";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b, strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+
+                                        <a href="@Url.Action("Index", "AuxAgentComplianceForm")" class=" btn btn-primary f-left btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+
+                                    <div class="card-body">
+
+                                        <!--  -->
+                                        <div class="forms-wrapper">
+
+
+
+                                            <div class="forms">
+                                                <div class="forms-header">
+                                                    Suspicious Activity Report (SAR) Form
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <h4>Agent Information</h4>
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><label>Agent Account: <a href="">@Model.AgentAccountNo</a></label></td>
+                                                                    <td><label>Date Submitted: <date> @Model.SubmittedDate</date></label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>Staff Name: @Model.AgentStaffName</label></td>
+                                                                    <td><label>Agent Staff ID: <a href="">@Model.StaffAccountNo</a></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <h4>Transaction Details</h4>
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><label>Transaction Type   </label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="3"><label> <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;</span> Cash Pickup  </label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>MFCN: @Model.MFCN</label></td>
+                                                                    <td><label> KiiPay Account No.: <a href="">@Model.BusinessVirtualAccountNo</a></label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>Bank Deposit: <a href="">@Model.VirtualAccountNo</a></label></td>
+
+                                                                    <td><label>Transaction Date: <date>@Model.TransactionDate</date></label></td>
+                                                                <tr>
+                                                                    <td><label>Time: <time>@Model.TransactionTime</time></label></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <h4>Customer Details </h4>
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td><label> First Name: @Model.FirstName</label></td>
+                                                                    <td><label> Last Name:   @Model.LastName</label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>Date of Birth:   <date>@Model.DateOfBirth</date></label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>ID Type: @Model.IdType</label></td>
+                                                                    <td><label> ID Number:   @Model.IdNumber</label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>Expiring Date: <date>@Model.IdentificationExpiryDate</date></label></td>
+                                                                    <td><label> Address:   @Model.Address</label></td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <h4>Reason for Suspicion</h4>
+
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td><label><span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;</span>  Several customers using the same address</label></td>
+                                                                </tr>
+
+
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <h4>Head Office Use Only </h4>
+
+                                                        <table>
+
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td colspan="2"><label>Compliance Decision</label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label> SAR <input type="checkbox" name="SAR" value="@Model.IsSAR"></label></td>
+                                                                    <td><label> NON SAR <input type="checkbox" name="SAR" value="@Model.IsSAR"></label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>
+                                                                            Investigation Date:<input type="date" name="" value="@Model.InvestigationDate">
+
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>
+                                                                            Staff Name:     <input type="text" name="" value="@Model.StaffName">
+
+
+                                                                        </label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>Staff ID:  <input type="text" name="" value="@Model.StaffAccountNo"></label>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-footer  ">
+                                                    <table width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td> <button type="button" onclick="Cancel()" href="@Url.Action("Index", "AuxAgentComplianceForm") " class="button button-cancel">Cancel </button></td>
+                                                                <td align="center" style="text-align: center;"><button type="submit" class="button button-Submit  " style="float: none;">Submit</button> </td>
+                                                                <td> <button type="" class="button button-Submit  ">Print</button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Cancel() {
+
+            window.location.href = "/Admin/AuxAgentComplianceForm/Index";
+
+        }
+
+    </script>
+}

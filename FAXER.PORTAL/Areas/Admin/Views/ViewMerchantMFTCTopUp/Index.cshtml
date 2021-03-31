@@ -1,0 +1,160 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewMerchantMFTCTopUpViewModel>
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View-MFBC Card Withdrawal Usage</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View-MFBC Card Withdrawal Usage</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="csv  display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">SN<strong></strong></td>
+                                    <td colspan="4"><strong>Service Provider</strong></td>
+                                    <td colspan="5"><strong>Receiving Virtual Account</strong></td>
+                                    <td rowspan="2"><strong>Deposit Amount</strong></td>
+                                    <td rowspan="2"><strong>Deposit Fee</strong></td>
+                                    <td rowspan="2"><strong>Deposit Type(ntl/intl)</strong></td>
+                                    <td rowspan="2"><strong>Date</strong></td>
+                                    <td rowspan="2"><strong>Time</strong></td>
+                                    <td rowspan="2"><strong>Receipt</strong></td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td><strong>Provider Name</strong></td>
+                                    <td><strong>Merchant Account No</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+
+
+                                    <td><strong>Account User Name</strong></td>
+                                    <td><strong>Account Number</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+                                    <td><strong>Email</strong></td>
+
+
+                                </tr>
+
+
+                            </thead>
+
+
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.MerchantName</td>
+                                        <td>@item.MerchantAccountNo</td>
+                                        <td>@item.MerchantCountry</td>
+                                        <td>@item.MerchantCity</td>
+
+                                        <td>@item.CardUserName</td>
+                                        <td>@item.CardUserMFTCCardNumber</td>
+                                        <td>@item.CardUserCountry</td>
+
+                                        <td>@item.CardUserCity</td>
+                                        <td>@item.CardUserEmail</td>
+
+                                        <td>@item.TopUpAmount</td>
+                                        <td>@item.TopUpFee</td>
+                                        <td>@item.TopUpType</td>
+
+
+
+                                        <td>@item.TransactionDate </td>
+                                        <td>@item.TransactionTime</td>
+                                        @if (item.TopUpTypeEnum == FAXER.PORTAL.DB.TopUpType.International)
+                                        {
+                                            <td><a href="@Url.Action("PrintReceipt", "ViewMerchantMFTCTopUp", new { @TransactionId = item.TransactionId })" target="_blank" class="btn btn-sm btn-warning btn-rounded">PDF Receipt</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a href="@Url.Action("", "")" target="_blank" class="btn btn-sm btn-danger btn-rounded">NO Receipt</a></td>
+                                        }
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMerchantMFTCTopUp/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

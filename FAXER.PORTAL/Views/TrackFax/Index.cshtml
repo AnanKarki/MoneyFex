@@ -1,0 +1,74 @@
+﻿@model FAXER.PORTAL.Models.TrackFax
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Track a Transfer</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("FaxDetails", "TrackFax", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row ">
+                        <div class="col-lg-5">
+                            <h4>Look up a Transfer:</h4>
+                            <p>
+                                Find the status of your Transfer by entering the MoneyFex
+                                Control Number (MFCN) and your Surname
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.FaxerSurNam, new { htmlAttributes = new { @class = "form-control", placeholder = "Sender's Surname" } })
+                                @Html.ValidationMessageFor(model => model.FaxerSurNam, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.MoneyFaxControlNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "MoneyFex Control No. (MFCN)" } })
+                                @Html.ValidationMessageFor(model => model.MoneyFaxControlNumber, "", new { @class = "text-danger" })
+                                @if (TempData["ValidData"] != null)
+                                {
+
+                                    <label style="color:red;">@TempData["ValidData"]</label>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                    <br />
+                    <a href="@Url.Action("Index","dashboard")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+

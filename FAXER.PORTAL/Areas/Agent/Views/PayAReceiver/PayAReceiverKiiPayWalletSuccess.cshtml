@@ -1,0 +1,58 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.PayAReceiverKiipayWalletSuccessViewModel
+@{
+    ViewBag.Title = "PayAReceiverKiiPayWalletSuccess";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                        <h2 class=" ">Payment Completed </h2>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        @{
+                            if (Model.KiiPayWalletType == FAXER.PORTAL.Areas.Agent.Models.KiiPayWalletType.Personal)
+                            {
+                                <a href="@Url.Action("PrintMFTCCardWithdrawlReceipt","PayAReceiver", new { @Area ="Agent", @TransactionId = Model.TransactionId})" class="btn btn-primary btn-lg mb30" target="_blank">Print Receipt  <i class="fa fa-print" aria-hidden="true"></i></a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("PrintBusinessCardWithdrawlReceipt","PayAReceiver", new { @Area ="Agent", @TransactionId = Model.TransactionId})" class="btn btn-primary btn-lg mb30" target="_blank">Print Receipt  <i class="fa fa-print" aria-hidden="true"></i></a>
+                            }
+                        }
+
+
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("GoToDashboard","AgentDashboard", new { @Area = "Agent"})" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i>  Go to Dashboard </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

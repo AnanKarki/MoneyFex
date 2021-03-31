@@ -1,0 +1,158 @@
+﻿@model List<FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessStandingOrderPaymentListVM>
+@{
+    ViewBag.Title = "BusinessStandingOrder";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2 ">
+
+
+
+                <div class="login_signup mb50 clearfix text-center">
+                    <h3>Business Standing Orders</h3>
+                    <hr>
+                    <div class="col-lg-6  col-lg-offset-3 ">
+                        <div class="form-group">
+
+
+                            @Html.DropDownList("RecentltyPaidBusinesses", (IEnumerable<SelectListItem>)ViewBag.RecentltyPaidBusinesses, "Select recent mobile no."  ,new { @class = "form-control", @id= "BusinessMobileNo", @onChange ="GetBusinessInfo()"})
+                            @*<select class="form-control">
+                                <option>Select recent mobile no.</option>
+
+                            </select>*@
+                        </div>
+
+                    </div>
+                    <div class="clearfix mb20"> </div>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name & Wallet No.</th>
+                                    <th>Country & City</th>
+                                    <th>Amount</th>
+                                    <th>Frequency</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+
+
+                                    <tr>
+                                        <td><span class="text-primary">@item.Name</span><br> @item.MobileNo</td>
+                                        <td>@item.Country <br>@item.City</td>
+                                        <td>@item.CurrencySymbol @item.Amount</td>
+                                        <td>@item.FrequencyDetail</td>
+
+                                        <td>
+                                            @if (item.IsEnabled == false)
+                                            {
+                                            <a class="btn btn-preview radius-20 btn-block"  onclick="AddBusinessStandingOrder(@item.ReceiverId)"> Add  </a>
+                                            }
+                                            else
+                                            {
+                                            <a class="btn btn-primary radius-20 btn-block" onclick="UpdateBusinessStandingOrder(@item.TransactionId)">Update</a>
+                                            <button class="btn btn-danger radius-20 btn-block" onclick="DeleteBusinessStandingOrder(@item.TransactionId)">Remove</button>
+                                            }
+                                        </td>
+                                    </tr>
+
+
+                                }
+                             
+
+
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="dashboard.php" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i>  Back to Dashboard </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+
+@using (Html.BeginForm("DeleteBusinessStandingOrder", "KiiPayBusinessStandingOrderPayment"))
+{
+    <!-- Delete Confirmation -->
+    <div id="delete" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md text-center">
+            <div class="modal-content">
+                @Html.Hidden("Id", new { @id = "Id" })
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">  Confirmation</h4>
+                </div>
+                <div class="modal-body uk-text-center ">
+
+                    <h4 class="mt40"> Do you want to remove this standing order?</h4>
+                    <hr>
+                    <button type="submit" class="btn btn-primary   radius-20">Yes</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+<!-- Delete Confirmation end -->
+@section Scripts{
+
+    <script type="text/javascript">
+        function DeleteBusinessStandingOrder(id) {
+
+            $("#Id").val(id);
+            $("#delete").modal('show');
+        }
+        function UpdateBusinessStandingOrder(id) {
+
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessStandingOrderPayment/UpdateExistingBusinessStandingOrder?Id=" + id
+        }
+        function AddBusinessStandingOrder(id) {
+
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessStandingOrderPayment/AddNewBusinessStandingOrder?Id=" + id
+        }
+        function GetBusinessInfo() {
+
+            var ReceiverId = $("#BusinessMobileNo").val();
+
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessStandingOrderPayment/BusinessStandingOrder?ReceiverBusinessId=" + ReceiverId;
+
+        }
+    </script>
+}
+

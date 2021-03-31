@@ -1,0 +1,81 @@
+﻿
+
+@{
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+<div style="padding:20px">
+
+
+    <h4 style="text-align:center">
+        Non-Virtual Account Transfer Refund Confirmation Receipt
+    </h4>
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>MF Receipt Number</b></td>
+                <td><b>@ViewBag.ReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Original Transaction Receipt No</b></td>
+                <td><b>@ViewBag.TransactionReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.Date</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.Time</b></td>
+            </tr>
+            <tr>
+                <td><b>Name of Sending Customer</b></td>
+                <td><b>@ViewBag.SenderFullName</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Receiver's Full Name </b></td>
+                <td><b>@ViewBag.ReceiverFullName</b></td>
+            </tr>
+            <tr>
+                <td><b>Receiver's Country </b></td>
+                <td><b>@ViewBag.ReceiverCountry</b></td>
+            </tr>
+            <tr>
+                <td><b>Receiver's City</b></td>
+                <td><b>@ViewBag.ReceiverCity</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Refunding Type</b></td>
+                <td><b>@ViewBag.RefundingType</b></td>
+
+            </tr>
+            <tr>
+                <td><b>MFCN Number</b></td>
+                <td><b>@ViewBag.MFCN</b></td>
+            </tr>
+            @*<tr>
+                <td><b>Refunding Staff Name</b></td>
+                <td><b>@ViewBag.RefundingAdminName</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Refunding Staff Code </b></td>
+                <td><b>@ViewBag.RefundingAdminCode</b></td>
+            </tr>*@
+            <tr>
+                <td><b>Original transfer amount without fee</b></td>
+                <td><b>@ViewBag.OriginalSentAmount</b></td>
+            </tr>
+            <tr>
+                <td><b>Refunded Amount</b></td>
+                <td><b>@ViewBag.RefundedAmount</b></td>
+            </tr>
+        </tbody>
+    </table>
+    <p><b>Thank You For Using MoneyFex </b></p>
+</div>
+
+

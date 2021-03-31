@@ -1,0 +1,203 @@
+﻿@model FAXER.PORTAL.Models.PaymentMethodViewModel
+
+@{
+    ViewBag.Title = "SenderPaymentMethod";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    string[] amountSplited = Model.TotalAmount.ToString("0.00").Split('.');
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Sender <label class="text-primary">@ViewBag.SenderName</label> <span>Account Number: @ViewBag.SenderAccountNo<br>Country: @ViewBag.SenderCountry</span></h4>
+                                        <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </button>
+                                    </div>
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                                <div class="card">
+                                                    <!-- Available balance -->
+                                                    <div class="wallet-balance background-primary p-20  text-center mb30 mt20">
+                                                        <h6 class="text-white">Amount including fee</h6>
+                                                        <h1 class="text-white">@Model.SendingCurrencySymbol @amountSplited[0].<small class="text-white">@amountSplited[1]</small></h1>
+                                                    </div>
+                                                    <hr>
+                                                    <!-- Available balance -->
+                                                    <div class="card-block">
+                                                        @*<ul class="paymentmethod-list mt20 mb20">
+                                                                <h5 class="text-left m-b-10">How do you want to pay ?</h5>
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="radio"> <span class="cardsaved hidden-xs"><img src="assets/images/icon/visa.png"></span> <span class="title">Saved Credit/Debit Card</span> <span class="subtitle">Card No. **** 4547</span>
+                                                                    </label>
+                                                                </li>
+
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="radio">
+                                                                        <span class="cardsaved hidden-xs">
+                                                                            <img src="assets/images/icon/credit-debit.jpg" alt="">
+                                                                        </span> <span class="title"> Credit/Debit  </span> <span class="subtitle"><a href="add-money-card.php">Card details required</a></span>
+                                                                    </label>
+                                                                </li>
+
+                                                                <li>
+                                                                    <label>
+                                                                        <input type="radio" name="radio"> <span class="cardsaved hidden-xs"><img src="assets/images/icon/kiipay.svg"></span> <span class="title"> KiiPay Wallet Balance   </span> <span class="subtitle">Balance $500.00 GBP</span>
+                                                                    </label>
+                                                                </li>
+
+                                                                <li>
+                                                                    <label class="text-left">
+                                                                        <a href="add-new-card.php"><i class="fa fa-plus"></i> Add New Card</a>
+                                                                    </label>
+                                                                </li>
+
+                                                            </ul>*@
+
+                                                        @Html.HiddenFor(model => model.TotalAmount)
+                                                        @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                                                        @Html.HiddenFor(model => model.HasKiiPayWallet)
+
+                                                        <ul class="paymentmethod-list mt20 mb20">
+                                                            <h4 class="text-left">
+                                                                @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                                                            </h4>
+                                                            <h5 class="text-left m-b-10">How do you want to pay ?</h5>
+
+                                                            @{
+                                                                int index = 0;
+                                                            }
+                                                            @foreach (var item in Model.CardDetails)
+                                                            {
+                                                                <li>
+                                                                    <label>
+
+                                                                        @Html.RadioButtonFor(model => Model.CardDetails[index].IsChecked, true, new { @type = "radio", @id = item.CardId, @onchange = "RadioChange();" })
+                                                                        <span class="cardsaved">
+                                                                            @if (item.CreditDebitCardType == FAXER.PORTAL.Models.CreditDebitCardType.VisaCard)
+                                                                            {
+                                                                                <img src="~/Content/images/icon/card/visa.png">
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <img src="~/Content/images/icon/card/master-card.png">
+                                                                            }
+
+                                                                        </span>
+
+
+                                                                        <div class="details_method">
+                                                                            <span class="title">Saved Credit/Debit Card</span> <span class="subtitle"> @item.CardNumber</span>
+                                                                            <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.CreditDebitFee </a> </span>
+
+                                                                        </div>
+
+
+                                                                    </label>
+
+                                                                    @Html.HiddenFor(model => Model.CardDetails[index].CardId)
+                                                                    @Html.HiddenFor(model => Model.CardDetails[index].CreditDebitCardType)
+
+                                                                    @Html.HiddenFor(model => Model.CardDetails[index].CardNumber)
+                                                                    @{
+                                                                        index++;
+                                                                    }
+                                                                </li>
+                                                            }
+                                                            <li>
+                                                                <label>
+                                                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard, new { @onchange = "RadioChange();", id = "CreditDebitCard" })
+                                                                    <span class="cardsaved ">
+                                                                        <img src="~/Content/images/credit-debit.jpg">
+                                                                    </span>
+                                                                    <div class="details_method">
+                                                                        <span class="title"> Credit/Debit</span> <span class="subtitle"><a href="add-money-card.php">Card details required</a>  </span>
+                                                                        <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.CreditDebitFee </a> </span>
+
+                                                                    </div>
+
+                                                                </label>
+                                                            </li>
+                                                            @if (Model.HasEnableMoneyFexBankAccount == true)
+                                                            {
+                                                                <li>
+                                                                    <label class="clearfix">
+                                                                        @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount, new { @onchange = "RadioChange();", id = "MoneyFexBankAccount" })
+                                                                        <span class="cardsaved "><img src="~/Content/images/icon/svg/bank.svg"></span>
+                                                                        <div class="details_method">
+                                                                            <span class="title"> MoneyFex Bank Account  </span> <span class="subtitle"><a href="#"> Manually transfer from your bank account to ours</a></span>
+                                                                            <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency  @ViewBag.ManualBankDepositFee </a> </span>
+
+                                                                        </div>
+                                                                    </label>
+                                                                </li>
+                                                            }
+
+                                                            @if (Model.HasKiiPayWallet)
+                                                            {
+                                                                <li>
+                                                                    <label>
+                                                                        @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.KiiPayWallet, new { @onchange = "RadioChange();" })
+
+                                                                        <span class="cardsaved"><img src="~/Content/images/icon/svg/kiipay.svg"></span> <span class="title"> KiiPay Wallet Balance   </span> <span class="subtitle">Balance @Model.SendingCurrencySymbol@Model.KiipayWalletBalance </span>
+                                                                        <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.Fee</a> </span>
+
+                                                                        @Html.HiddenFor(model => model.KiipayWalletBalance)
+                                                                    </label>
+                                                                </li>
+                                                            }
+
+                                                        </ul>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light p-40">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <button type="submit" class="btn btn-lg btn-block btn-primary btn-round "> Confirm & Transfer <i class="fa fa-angle-right"></i></button>
+
+                                                <button onclick="window.history.go(-1);" class="btn btn-lg  btn-block btn-link btn-round pull-left">
+                                                    <i class="fa fa-angle-left m-r-5"></i> Back
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}

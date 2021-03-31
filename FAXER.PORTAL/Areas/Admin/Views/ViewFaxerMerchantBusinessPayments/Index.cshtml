@@ -1,0 +1,130 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewFaxerMerchantBusinessPaymentsViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Sender Merchant/Business Payments</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Sender Merchant/Business Payments</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="print  display nowrap" cellspacing="0" width="100%">
+
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Sender's Name</th>
+                                    <th>Sender's Address</th>
+                                    <th>Sender's Country</th>
+                                    <th>Sender's City</th>
+                                    <th>Merchant's Name</th>
+                                    <th>Merchant's Account Number</th>
+                                    <th>Merchant's Country</th>
+                                    <th>Merchant's City</th>
+                                    <th>Payment Amount</th>
+                                    <th>Payment Reference</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Payment by Admin?</th>
+                                    <th>Admin Payer</th>
+                                    <th>Auto Payment Enable</th>
+                                    <th>Auto Payment Amount</th>
+                                    <th>Frequency of Auto Pay</th>
+                                    <th>Receipt</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.FaxerName</td>
+                                        <td>@item.FaxerAddress</td>
+                                        <td>@item.FaxerCountry</td>
+                                        <td>@item.FaxerCity</td>
+                                        <td>@item.MerchantName</td>
+                                        <td>@item.MerchantAccountNo</td>
+                                        <td>@item.MerchantCountry</td>
+                                        <td>@item.MerchantCity</td>
+                                        <td>@item.PaymentAmount @item.PaymentCurrency</td>
+                                        <td>@item.PaymentReference</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Time</td>
+                                        <td>@item.PaymentByAdmin</td>
+                                        <td>@item.AdminPayer</td>
+                                        <td>@item.AutoPaymentEnable</td>
+                                        <td>@item.AutoPaymentAmount @item.PaymentCurrency</td>
+                                        <td>@item.FrequencyOfAutoPay</td>
+                                        <td>
+                                            <a href="@Url.Action("PrintReceipt","ViewFaxerMerchantBusinessPayments", new { @id = item.Id})" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewFaxerMerchantBusinessPayments/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

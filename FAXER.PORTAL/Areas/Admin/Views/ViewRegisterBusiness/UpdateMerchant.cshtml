@@ -1,0 +1,266 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisterBusinessViewModel
+@{
+    ViewBag.Title = "UpdateMerchant";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>UpdateMerchant</h2>
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    //@Html.HiddenFor(m => m.Confirm)
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Update Merchant</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="/Admin/ViewRegisterBusiness" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Merchants</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Update Merchant</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="form-body">
+                            <h3 class="box-title">Business Details</h3>
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> Business Name </label>
+                            </div>
+                            @Html.ValidationMessage("ViewBag.SuccessMessage", "", new { @class = "text-success" })
+                            @Html.HiddenFor(model => model.Id)
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @placeholder = "What is the Official Name of your Business?", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>
+                                    Business License/Registration Number
+                                </label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.BusinessRegNumber, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.BusinessRegNumber, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Email Address</label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-3 control-label">
+                                <label>Name of Contact Person</label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.ContactName, new { @class = "form-control", @placeholder = "Name of Person at the agent that can be contacted by MFS" })
+                                    @Html.ValidationMessageFor(model => model.ContactName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Business Type</label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.EnumDropDownListFor(model => model.BusinessTypeEnum, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BusinessTypeEnum, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <h3 class="box-title">Business Contact Details</h3>
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Address 1 <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address Line 1" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Address 2</label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", @placeholder = "Address Line 2" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>State/Province/Region  <span class="required">*</span></label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.State, new { @class = "form-control", @placeholder = "State/Province/Region" })
+                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Zip/Postal Code  <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control", @placeholder = "Zip/Postal Code" })
+                                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>City <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "City" })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Country <span class="required">*</span></label>
+
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Telepone, new { @class = "form-control", @placeholder = "Including Country Code" })
+                                    @Html.ValidationMessageFor(model => model.Telepone, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Fax Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Fax, new { @class = "form-control", @placeholder = "Fax Number Including Country Code" })
+                                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Website <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Website, new { @class = "form-control", @placeholder = "Website" })
+                                    @Html.ValidationMessageFor(model => model.Fax, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    <div class="">
+
+                                        <label>
+                                            @Html.CheckBoxFor(model => model.Confirm, new { @class = "checkbox-success" }) Please check the box to accept to our terms and conditions.
+                                            @Html.ValidationMessageFor(model => model.Confirm, "", new { @class = "text-danger" })
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>
+                        <div class="form-actions text-center">
+                            <i class="fa fa-check"></i>
+                            <input type="submit" class="btn btn-success btn-rounded" value="Finish Setup">
+
+                            <a href="@Url.Action("Index","ViewRegisterBusiness")" type="button" class="btn btn-danger btn-rounded">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+            <!--/.row -->
+            <!--row -->
+        </div>
+    </div>
+}
+

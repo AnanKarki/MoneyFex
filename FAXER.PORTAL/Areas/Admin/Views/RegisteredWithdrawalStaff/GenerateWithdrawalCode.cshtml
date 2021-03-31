@@ -1,0 +1,120 @@
+﻿
+@{
+    ViewBag.Title = "GenerateWithdrawalCode";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Generate Withdrawal Code</h4>
+                                    <a href="generate-a-code.php" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i>  Generate Code
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select Country</option>
+                                                    <option>United Kingdom (GBP)</option>
+                                                    <option>Nigeria (NGN)</option>
+                                                    <option>Cameroon (XAF)</option>
+                                                    <option>Ghana (GHS)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select City</option>
+                                                    <option>London</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Year / Month" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Agent Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Withdrawal Code</th>
+                                                    <th>Withdrawal Staff</th>
+                                                    <th>Staff ID</th>
+                                                    <th>Generated Staff</th>
+                                                    <th>Date Generated</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>Nigeria</td>
+                                                    <td>Lagos</td>
+
+                                                    <td><a href="agent-dashboard.php">ABC Aldos Ltd</a> </td>
+
+                                                    <td><a href="">98587457</a></td>
+                                                    <td>4684684</td>
+                                                    <td> James Tina </td>
+                                                    <td><a href="">98587457</a></td>
+                                                    <td><a href="">James Shrestha</a></td>
+                                                    <td>jan-08-2020</td>
+                                                    <td><span class="text-success">Not Use</span></td>
+
+
+                                                </tr>
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

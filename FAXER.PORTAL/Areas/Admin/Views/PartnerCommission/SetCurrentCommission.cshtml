@@ -1,0 +1,215 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PartnerCurrentCommisionViewModel
+@{
+    ViewBag.Title = "SetCurrentCommission";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.Id)
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Commission  </h4>
+                                        <a href="partners-commission-setting.php" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Commission
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "country" })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                           
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "All Cities", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "city" })
+                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Partner</label>
+                                                        @Html.DropDownListFor(model => model.PartnerId, (IEnumerable<SelectListItem>)ViewBag.Agents, "All Agents", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "agent", @onchange = "GetAgentAccountNo()" })
+                                                        @Html.ValidationMessageFor(model => model.PartnerId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Account No.</label>
+                                                        @Html.TextBoxFor(model => model.PartnerAccountNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "AccountNumber", disabled = "disabled" })
+                                                        @Html.ValidationMessageFor(model => model.PartnerAccountNo, "", new { @class = "text-danger" })
+
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Partner Agent</label>
+                                                        @Html.DropDownListFor(model => model.PartnerAgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "All Agents", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "agent", @onchange = "GetAgentAccountNo()" })
+                                                        @Html.ValidationMessageFor(model => model.PartnerAgentId, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Agent Account No.</label>
+                                                        @Html.TextBoxFor(model => model.AgentAccountNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "AgentAccountNumber", disabled = "disabled" })
+                                                        @Html.ValidationMessageFor(model => model.AgentAccountNo, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Transfer Services</label>
+                                                        @Html.EnumDropDownListFor(model => model.TransferSevice, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "TransferSevice" })
+                                                        @Html.ValidationMessageFor(Model => Model.TransferSevice, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Commission Type</label>
+                                                        @Html.EnumDropDownListFor(model => model.CommissionType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "CommissionType", @onchange = "Fliter();" })
+                                                        @Html.ValidationMessageFor(Model => Model.CommissionType, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Sending Commission</label>
+                                                        @Html.TextBoxFor(model => model.SendingCommission, new { @class = "form-control  form-control-lg form-control-round autonumber", id = "SendingRate" })
+                                                        @Html.ValidationMessageFor(Model => Model.SendingCommission, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Receiving Commission</label>
+                                                        @Html.TextBoxFor(model => model.ReceivingCommission, new { @class = "form-control  form-control-lg form-control-round autonumber", id = "ReceivingRate" })
+                                                        @Html.ValidationMessageFor(Model => Model.ReceivingCommission, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Commission Due Day</label>
+                                                        @Html.EnumDropDownListFor(model => model.CommissionDueDate, new { @class = "form-control  form-control-lg form-control-round form-control-bold", id = "CommissionDueDate" })
+                                                        @Html.ValidationMessageFor(Model => Model.CommissionDueDate, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <button type="button" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</button>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function () {
+
+                var country = $("#country").val();
+                window.location.href = "/Admin/PartnerCommission/SetCurrentCommission?CountryCode=" + country;
+            });
+
+            $("#city").change(function () {
+
+                var country = $("#country").val();
+                var city = $("#city").val();
+                window.location.href = "/Admin/PartnerCommission/SetCurrentCommission?CountryCode=" + country + "&City=" + city;
+            });
+
+
+
+        });
+
+        function GetAgentAccountNo() {
+
+            var AgentId = $("#agent").val();
+            $.getJSON("/Admin/PartnerCommission/GetAgentsAccountNo?AgentId=" + AgentId, function (result) {
+
+                var AccountNumber = result.Data;
+                $("#AccountNumber").val(AccountNumber);
+            });
+        }
+
+
+    </script>
+}
+

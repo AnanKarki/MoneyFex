@@ -1,0 +1,181 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUser_MFTCCardPaymentPayingAmountViewModel
+@{
+    ViewBag.Title = "PayingAmount";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+
+    string FaxingCurrency = FAXER.PORTAL.Common.CardUserSession.FaxingCurrency ?? "";
+    string FaxingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.FaxingCurrencySymbol ?? "";
+    string ReceivingCurrrency = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrency ?? "";
+    string ReceivingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrencySymbol ?? "";
+
+    string CurrentBalance = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol + " " + FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard ;
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+
+                <h1>Someone else's Virtual Account Payment <span class="pull-right account-balance">Account Balance :<strong class="  text-primary italic"> @CurrentBalance</strong></span></h1>
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+
+
+
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Payment Amount</label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.TopUpAmount, new { @class = "form-control", id = "FaxingAmount", type = "number" })
+                                <span class="input-group-addon">@FaxingCurrency</span>
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <div class="col-lg-7 text-center">
+                        <center>OR</center><br>
+                    </div>  <div class="clearfix"></div>
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Amount in account user currency</label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@ReceivingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.ReceivingAmount, new { @class = "form-control", id = "ReceivingAmount", type = "number" })
+                                <span class="input-group-addon">@ReceivingCurrrency</span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TopUpAmount, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Does the payment amount include fee?</label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label> @Html.RadioButtonFor(model => model.IncludingFee, true, new { @checked = true }) Yes</label> &nbsp;&nbsp;
+                            <label> @Html.RadioButtonFor(model => model.IncludingFee, false, new { @checked = true }) No</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Payment Reference</label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.PaymentReference, new { @class = "form-control", @placeholder = "E.g. First Name-Fee Payment" })
+                            @Html.ValidationMessageFor(model => model.PaymentReference, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    @if (ViewBag.ExchangeRate != null)
+                    {
+
+                        <label class="text-danger">@ViewBag.ExchangeRate</label>
+                    }
+                    @if (TempData["InSufficientBalance"] != null)
+                    {
+
+                        <label class="text-danger">@TempData["InSufficientBalance"]</label>
+                    }
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("MFTCCardHoderDetials")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next"> Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("MFTCCardHoderDetials")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+<!--  -->
+@section Scripts{
+<script type="text/javascript">
+
+    var FaxingAmount = document.getElementById('FaxingAmount'),
+        ReceivingAmount = document.getElementById('ReceivingAmount');
+
+    function enableToggle(current, other) {
+
+        other.disabled = current.value.replace(/\s+/, '').length > 0;
+    }
+
+
+    FaxingAmount.onkeyup = function () {
+        enableToggle(this, ReceivingAmount);
+        document.getElementById("ReceivingAmount").value = "0";
+    }
+    ReceivingAmount.onkeyup = function () {
+        enableToggle(this, FaxingAmount);
+        document.getElementById("FaxingAmount").value = "0";
+    }
+
+
+    //function Disabled() {
+    //    var FaxAmount = $("#FaxingAmount").val();
+    //    var ReceivingAmount = $("#ReceivingAmount").val();
+    //    if (FaxAmount > 0) {
+    //        $("#ReceivingAmount").prop("readonly", true);
+    //    }
+    //    if (ReceivingAmount > 0) {
+    //        $("#FaxingAmount").prop("readonly", true);
+    //    }
+    //}
+    </script>
+}

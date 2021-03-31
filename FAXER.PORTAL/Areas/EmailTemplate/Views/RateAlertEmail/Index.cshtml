@@ -1,0 +1,384 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+
+    //Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+    var imageUrl = baseUrl + "/Content/flag-icons/fonts/" + ViewBag.ReceivingCountryCode + ".Jpeg";
+
+
+
+}
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyFex</title>
+    <style>
+        @@font-face {
+            font-family: "AndreasBecker";
+            src: url("font/AndreasBecker.ttf");
+            src: url("font/AndreasBecker.ttf.eot?#iefix") format("embedded-opentype"), url("font/AndreasBecker.ttf") format("truetype");
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* A simple css reset */
+        body, table, thead, tbody, tr, td, img {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-spacing: 0px;
+            border-collapse: collapse;
+            vertical-align: top;
+            font-family: AndreasBecker;
+        }
+        /* Add some padding for small screens */
+        .wrapper {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+            padding-bottom: 20px;
+            line-height: 1.6;
+            font-family: AndreasBecker;
+        }
+
+        p, a, li {
+            font-family: AndreasBecker;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        @@media only screen and (max-width: 620px) {
+            .wrapper .section {
+                width: 100%;
+            }
+
+            .wrapper .column {
+                width: 100%;
+                display: block;
+            }
+
+            .ngeku-img table {
+                width: 100%;
+            }
+
+            .ngeku-img img {
+                width: 110px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+    
+    <link href="@baseUrl/Content/flag-icons/css/flag-icon.css" rel="stylesheet" />
+    <link href="https://moneyfex.com/Content/flag-icons/css/flag-icon-email.css" rel="stylesheet" />
+</head>
+<body>
+    <table width="100%">
+        <tbody>
+            <tr>
+                <td class="wrapper" width="600" align="center">
+                    <!-- Header image -->
+                    <table class="section header" cellpadding="0" cellspacing="0" width="600">
+                        <tr>
+                            <td class="column">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="33%">&nbsp;</td>
+                                            <td align="center">
+                                                <center>
+                                                    <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/logo.png" width="100">
+                                                </center>
+                                            </td>
+                                            <td width="33%">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    @*<table class="section header" cellpadding="0" cellspacing="0" width="600">
+                        <tr>
+                            <td class="column">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="33%">&nbsp;</td>
+                                            <td align="center">
+                                                <center>
+                                                    <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/logo.png" width="100">
+                                                </center>
+                                            </td>
+                                            <td width="33%">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>*@
+                    <br>
+                    <!-- Two columns -->
+                    <table class="section" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="column ngeku-img" width="100" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td align="left">
+                                                <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/naira-offer.png">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="20" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td> &nbsp; </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="480" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 35px; height: 35px; line-height: 35px; background: #02b6ff; border-radius: 50%; 
+text-align: center; color: #fff; float: left; margin-right: 10px;">
+                                                @ViewBag.SendingCurrencySymbol
+                                            </td>
+                                            <!--<td style="width: 35px; height: 35px; line-height: 35px; background: #02b6ff; border-radius: 50%; text-align: center; color: #fff; float: left;">
+                                                <img src="@baseUrl/Content/flag-icons/fonts/flag.Jpeg" width="100%; " />-->
+                                                @*<i class="flag flag-icon flag-icon-@ViewBag.ReceivingCountry"></i>*@
+                                            <!--</td>-->
+                                            <td style="width: 35px; height: 35px; line-height: 0px; background: #02b6ff; border-radius: 50%; text-align: center; color: #fff; float: left;">
+                                                @*<img src="@baseUrl/Content/flag-icons/fonts/flag.Jpeg" style="border-radius: 50%;width:35px;height:35px" />*@
+                                                <img src="@imageUrl" style="border-radius: 50%;width:35px;height:35px" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 24px; color: #004468;  line-height:14px; margin-top: 15px;">Rate Alert</b></h1>
+                                            </td>
+                                        </tr>
+
+                                        @if (ViewBag.DifferenceUp == true)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-size: 37px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 50px;">
+                                                        Hurry @ViewBag.FirstName <br /> @ViewBag.ReceivingCurrency has lost value!
+                                                    </h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 style="color: #02b6ff;  line-height: 30px; font-size: 20px;">
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @ViewBag.ReceivingCurrency has dropped in value! Weaker
+
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @ViewBag.ReceivingCurrency means you will get more of it for
+
+                                                        your @ViewBag.SendingCurrency. Transfer now before it gains
+
+                                                        value again!*
+
+                                                    </h2>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                        @if (ViewBag.DifferenceDown == true)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-size: 37px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 50px;">
+                                                        Hurry @ViewBag.FirstName <br /> before @ViewBag.ReceivingCurrency becomes <br />even more expensive!
+                                                    </h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 style="color: #02b6ff;  line-height: 30px; font-size: 20px;">
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @ViewBag.ReceivingCurrency has started gaining value! Stronger
+
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @ViewBag.ReceivingCurrency means you will get less of it for
+
+                                                        your @ViewBag.SendingCurrency. Transfer now before it gets
+
+                                                        even more expensive!*
+
+
+                                                    </h2>
+                                                </td>
+                                            </tr>
+
+                                        }
+                                        @if (ViewBag.DifferenceZero == true)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <h1 style="font-size: 37px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 50px;">
+                                                        Hurry @ViewBag.FirstName  <br />Before @ViewBag.ReceivingCurrency gains value!
+                                                    </h1>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <h2 style="color: #02b6ff;  line-height: 30px; font-size: 20px;">
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @*@ViewBag.ReceivingCurrency*@
+                                                        @ViewBag.ReceivingCurrency has kept its value! This could
+                                                        change any day. If @*@ViewBag.ReceivingCurrency*@ @ViewBag.ReceivingCurrency gains value it
+                                                        means you will get less of it for your @ViewBag.SendingCurrency.
+
+                                                        Transfer now before it gains value again!*
+
+
+
+                                                    </h2>
+                                                </td>
+                                            </tr>
+
+                                        }
+
+                                        <tr>
+                                            <td>
+                                                <table>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="border:solid 1px #2f6496; width:30%; margin-right: 10px; float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                                                <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 23px; font-size: 15px;">
+                                                                    Yesterday Rate
+                                                                    <br>
+                                                                    @ViewBag.YesterdayDate
+                                                                </div>
+                                                                <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold;">
+                                                                    @ViewBag.YesterdayRate
+                                                                </div>
+                                                            </td>
+                                                            <td style="border:solid 1px #2f6496; width:30%; margin-right: 10px; float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                                                <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 23px; font-size: 15px;">
+                                                                    Today Rate<br>@ViewBag.TodayDate
+                                                                </div>
+                                                                <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold;">
+                                                                    @ViewBag.TodayRate
+                                                                </div>
+                                                            </td>
+                                                            @if (ViewBag.DifferenceUp == true)
+                                                            {
+
+                                                                <td style="border:solid 1px #2f6496; width:30%;   float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                                                    <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 42px; font-size: 15px;">
+                                                                        Difference
+                                                                    </div>
+                                                                    <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold; color: green; text-align: left;">
+                                                                        <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/up.png" style="    float: left;
+                                                         margin-right: 2px;
+                                                         width: 35px;">  @ViewBag.Difference
+                                                    </div>
+                                                </td>
+                                                <!--  -->
+                                            }
+                                                            <!--  -->
+                                                            @if (ViewBag.DifferenceDown == true)
+                                                            {
+                                                                <td style="border:solid 1px #2f6496; width:30%;   float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                                                    <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 42px; font-size: 15px;">
+                                                                        Difference
+                                                                    </div>
+                                                                    <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold; color: red; text-align: left;">
+                                                                        <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/down.png" style="    float: left;
+                                                         margin-right: 2px;
+                                                         width: 35px;">  @ViewBag.Difference
+                                                    </div>
+                                                </td>
+                                                <!--  -->
+                                            }
+                                                            @if (ViewBag.DifferenceZero == true)
+                                                            {
+
+
+                                                                <td style="border:solid 1px #2f6496; width:30%;   float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                                                    <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 42px; font-size: 15px;">
+                                                                        Difference
+                                                                    </div>
+                                                                    <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold; text-align: center;">
+                                                                        @ViewBag.Difference
+                                                                    </div>
+                                                                </td>
+                                                                <!--  -->
+                                                            }
+                                                            @*<td style="border:solid 1px #2f6496; width:30%;   float: left; text-align: center; border-radius:10px; overflow: hidden;">
+                                               <div style="height:42px; background: #2f6496; color: #fff; padding: 7px; border-radius: 0 0  10px 10px; font-weight: 300;  line-height: 42px; font-size: 15px;">
+                                                   Difference
+                                               </div>
+                                               <div style="padding: 10px; height: 25px; font-size: 15px; font-weight: bold; color: red; text-align: left;">
+                                                   <img src="https://www.moneyfex.com/Areas/EmailTemplate/images/down.png" style="    float: left;
+                                        margin-right: 2px;
+                                        width: 35px;">  19.70
+                                               </div>
+                                           </td>*@
+                                                        </tr>
+                                                        <tr>
+                                                            <td>
+                                                                <a style="
+                       background: #02b6ff;
+                       margin-top: 20px;
+
+    color: #fff;
+    border: 0;
+    outline: 0;
+    padding: 5px 0px;
+    text-align: center;
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+    font-size: 25px;
+    cursor: pointer;
+     margin-bottom: 15px;text-decoration:none" href="@baseUrl/faxeraccount/login">
+                                                                    Transfer Now
+                                                                </a>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td style="color: #02b6ff; font-size: 12px;">
+                                                                * We can not guarantee that tomorrows exchange rate will be better or worst than today. This advise is only based on the past two day trend and in no way our forecast of how the market will move
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+<body>
+</body>
+
+</html>

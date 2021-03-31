@@ -1,0 +1,116 @@
+﻿@model  FAXER.PORTAL.Models.ReceivingMoneyBetweenMoneyFaxTopUpCardViewModel
+@{
+    ViewBag.Title = "ReceivingMoneyFaxTopUp";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var countryCurrency = "";
+    var CountryCurrencySymbol = "";
+    if(Model != null)
+    {
+
+        countryCurrency = Model.CountryCurrency ?? "";
+        CountryCurrencySymbol = Model.CountryCurrencySymbol ?? "";
+
+
+    }
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Transfer Money Between Virtual Accounts</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form  ">
+        <div class="container">
+            <div class="row">
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-4">
+                        <label> Virtual Accounts</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.TopUpCard, null, "Select Receiver Virtual Account", htmlAttributes: new { @class = "form-control", id = "TopUpCard", @onchange = "getMFTCCard(this.value);" })
+                            @Html.ValidationMessage("TopUpError", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4">
+                        <label>Receiving Account Registered Country</label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.ReceivingTopUpCardRegisteredCountry, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.ReceivingTopUpCardRegisteredCountry, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4 ">
+                        <label> Balance on Receiving Account</label>
+                    </div>
+                    @*<div class="form-group">
+                        <div class="col-lg-1 nopr">
+                            @Html.EditorFor(model => model.CountryCurrencySymbol, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                        <div class="col-lg-3 nopadding">
+                            @Html.EditorFor(model => model.ReceivingTopUpCardAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.ReceivingTopUpCardAmount, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="col-lg-2 nopl">
+                            @Html.EditorFor(model => model.CountryCurrency, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                        </div>
+                    </div>*@
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@CountryCurrencySymbol</span>
+                            @Html.EditorFor(model => model.ReceivingTopUpCardAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            <span class="input-group-addon">@countryCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ReceivingTopUpCardAmount, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4 ">
+                        <label> </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label>@Html.CheckBoxFor(m => m.Confirm) Check this box to confirm money transfer</label>
+                            @Html.ValidationMessage("Confirm", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <a href="@Url.Action("Index" ,"TransferMoneyBetweenMoneyFaxTopUpCard" , new { mFTCCardInformationId = FAXER.PORTAL.Common.FaxerSession.TransferCardId })" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Confirm Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@Url.Action("Index" ,"TransferMoneyBetweenMoneyFaxTopUpCard" , new { mFTCCardInformationId = FAXER.PORTAL.Common.FaxerSession.TransferCardId })" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function getMFTCCard(val) {
+        window.location.href = "/TransferMoneyBetweenMoneyFaxTopUpCard/ReceivingMoneyFaxTopUp?MFTCCardId=" + val;
+    }
+</script>

@@ -1,0 +1,174 @@
+﻿
+@model FAXER.PORTAL.Models.SenderBankAccountDepositVm
+
+
+@{
+    ViewBag.Title = "LocalBankAccountDeposit";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Bank Account Deposit</h3>
+                        <hr>
+                        <div class="form-group mb30">
+
+                            @Html.DropDownListFor(model => model.RecentAccountNumber, (IEnumerable<SelectListItem>)ViewBag.RecentAccountNumbers, "Select Recent Account No.", new { @class = "form-blue", @id = "recentAccountNumber", onchange = "GetAccountInformation()" })
+                            @Html.ValidationMessageFor(model => model.RecentAccountNumber, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-blue", @placeholder = "Account owner Name" })
+                            @Html.ValidationMessageFor(model => model.AccountOwnerName, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group contact-no-group mb20">
+                            @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-blue", @placeholder = "Enter Mobile Number" })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(x => x.AccountNumber, new { @class = "form-blue", @placeholder = "Enter Account Number" })
+                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.BankNames, "Select Bank Name", new { @class = "form-blue selectpicker ", @id = "BankId", @data_show_subtext = "true", @data_live_search = "true" , @onchange= "GetBankCode()" })
+                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(x => x.BranchCode, new { @class = "form-blue", @placeholder = "Branch Code" })
+                            @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("Index","senderBankAccountDeposit") " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+<!--  -->
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+
+        function GetAccountInformation() {
+            var accountNo = $("#recentAccountNumber").val();
+
+            $.getJSON("/SenderBankAccountDeposit/GetAccountInformation?accountNo=" + accountNo, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+
+                $("#BankId").val(result["Bank"]);
+                $("#CountryPhoneCode").val(result["CountryPhoneCode"]);
+            })
+        }
+
+
+
+        function GetPaymentSummary() {
+            debugger;
+            var SendingAmount = $("#SendingAmount").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+
+            //GetPaymentSummary
+            $.getJSON("/SenderBankAccountDeposit/GetPaymentSummary?SendingAmount=" + SendingAmount + "&ReceivingAmount=" + ReceivingAmount, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+
+
+            })
+        }
+
+
+        function GetAccountInformation() {
+            var accountNo = $("#recentAccountNumber").val();
+
+            $.getJSON("/SenderBankAccountDeposit/GetAccountInformation?accountNo=" + accountNo, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+
+                $("#BankId").val(result["Bank"]);
+                $("#CountryPhoneCode").val(result["CountryPhoneCode"]);
+                $("#CountryPhoneCode").text(result["CountryPhoneCode"]);
+            })
+        }
+
+        function GetBankCode() {
+
+            var bankId = $("#BankId").val();
+            $.getJSON("/SenderBankAccountDeposit/GetBankCode?bankId=" + bankId, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+
+            })
+
+        }
+
+    </script>
+}

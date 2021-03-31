@@ -1,0 +1,170 @@
+﻿@model FAXER.PORTAL.Models.TopUpCardUserDetailsModelView
+@{
+    ViewBag.Title = "UserContactDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<!--  -->
+@using (Html.BeginForm(FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Virtual Account Registration</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        <h3>Account User Details</h3>
+                        <hr>
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="col-lg-5">
+                            <label> First Name <span class="required">*</span></label>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.TopUpUserFirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "First Name", onkeypress = "return AvoidSpace(event)" } })
+                                @Html.ValidationMessageFor(model => model.TopUpUserFirstName, "", new { @class = "text-danger" })
+                                @Html.ValidationMessage("duplicateError", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Middle Name </label>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.TopUpUserMiddleName, new { htmlAttributes = new { @class = "form-control", placeholder = "Middle Name(if available)" } })
+                                @Html.ValidationMessageFor(model => model.TopUpUserMiddleName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Last Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.TopUpUserLastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Last/Family Name", onkeypress = "return AvoidSpace(event)" } })
+                                @Html.ValidationMessageFor(model => model.TopUpUserLastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5 clearfix">
+                            <label>Date of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+
+                                <input type="number" class="form-control day" placeholder="Day">
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                <select class="form-control month" style="font-size: 11px;">
+                                    <option selected>Month</option>
+                                    <option value='1'>Janaury</option>
+                                    <option value='2'>February</option>
+                                    <option value='3'>March</option>
+                                    <option value='4'>April</option>
+                                    <option value='5'>May</option>
+                                    <option value='6'>June</option>
+                                    <option value='7'>July</option>
+                                    <option value='8'>August</option>
+                                    <option value='9'>September</option>
+                                    <option value='10'>October</option>
+                                    <option value='11'>November</option>
+                                    <option value='12'>December</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input type="number" class="form-control year" placeholder="Year">
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group ">
+                            @Html.TextBoxFor(model => model.TopUpUserDateOfBirth, new { @class = "form-control dateInput" , style="display:none" })
+                            @Html.ValidationMessageFor(model => model.TopUpUserDateOfBirth, "", new { @class = "col-lg-6 col-lg-offset-5 text-danger" })
+                            @Html.ValidationMessage("InvalidAge", new { @class = "col-lg-6 col-lg-offset-5 text-danger" })
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-5">
+            <label>Date of Birth <span class="required">*</span></label>
+        </div>
+        <div class="col-lg-6 ">
+            <div class="form-group">
+
+                @Html.EditorFor(model => model.TopUpUserDateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                @Html.ValidationMessageFor(model => model.TopUpUserDateOfBirth, "", new { @class = "text-danger" })
+                @Html.ValidationMessage("InvalidAge", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                        <div class="clearfix"></div>
+                        <div class="col-lg-5">
+                            <label></label>
+                        </div>
+                        @*<div class="col-lg-6 ">
+            <div class="form-group">
+                @Html.CheckBoxFor(model => model.AgeVerification) Check only if you are at least 18 years of age.
+                @Html.ValidationMessage("AgeVerification", new { @class = "text-danger" })
+            </div>
+        </div>*@
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" , class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    @*<button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                    <button type="submit" class="fbtn btn-next"> Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function AvoidSpace(event) {
+        var k = event ? event.which : window.event.keyCode;
+        if (k == 32) return false;
+    }
+</script>
+
+

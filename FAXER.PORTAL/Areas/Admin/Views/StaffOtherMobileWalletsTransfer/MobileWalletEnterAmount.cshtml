@@ -1,0 +1,290 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.MobileMoneyTransferEnterAmountViewModel
+@{
+    ViewBag.Title = "MobileWalletEnterAmount";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    var ReceivingCountries = new List<FAXER.PORTAL.Models.CountryViewModel>(ViewBag.ReceivingCountries);
+}
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(x => x.Fee)
+    @Html.HiddenFor(x => x.ExchangeRate)
+    @Html.HiddenFor(x => x.TotalAmount)
+    @Html.HiddenFor(model => model.SendingCountry)
+    @Html.HiddenFor(model => model.SendingCurrencyCode)
+    @Html.HiddenFor(model => model.ReceivingCurrencyCode)
+    @Html.HiddenFor(model => model.SendingCurrencySymbol)
+    @Html.HiddenFor(model => model.ReceivingCurrencySymbol)
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Sender <label class="text-primary">@ViewBag.SenderName</label> <span>Account Number: @ViewBag.SenderAccountNo<br>Country:@ViewBag.SenderCountry</span></h4>
+                                        <a href="@Url.Action("Index","StaffOtherMobileWalletsTransfer")" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                                <div class="pinside20">
+
+                                                    <div class="exchange-rate-wraper-new">
+                                                        <h2>
+                                                            1&nbsp;
+                                                            <span data-outbound-currency="GBP" name="SendingCurrency">
+
+                                                            </span>&nbsp;=&nbsp;
+                                                            <span name="ExchangeRate">
+
+                                                            </span>&nbsp;
+                                                            <span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency">
+                                                            </span>
+                                                        </h2>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="pinside20">
+                                                    @Html.ValidationMessage("SendingAmount", "", new { @class = "text-danger" })
+                                                    <!--  -->
+                                                    <div class="mf-form-calculator">
+                                                        <span class="mf-calculator-label">You send  </span>
+                                                        <input type="number" id="SendingAmount" class="primary-placeholder" required placeholder="0.00" name="SendingAmount" onkeyup="GetPaymentSummary(false)" step="any">
+                                                        <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                            <span class="mf-currency-select" data-currency="GBP" id="SendingCountry">GBP&nbsp;&nbsp; from United Kingdom</span>
+                                                            <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                                                        </div>
+                                                        <!--  -->
+                                                        <!--  -->
+
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="mf-form-calculator">
+                                                        <span class="mf-calculator-label">They receive</span>
+                                                        <input type="number" class=" primary-placeholder" id="ReceivingAmount" placeholder="0.00" name="ReceivingAmount" onkeyup="GetPaymentSummary(true)" step="any">
+
+
+                                                        <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                                            <span class="mf-currency-select" data-currency="GBP" id="ReceivingCountry">NGN &nbsp;&nbsp;Nigeria</span>
+                                                            <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                                                        </div>
+                                                        <!--  -->
+
+
+                                                        <div class="currency-dropdown dropdown-menu" aria-labelledby=" dropdown-toggle" id="receivingCountryList">
+                                                            <div class="currency-search">
+                                                                <div class="search-input">
+                                                                    <input type="search" name="" class=" input-currency-search" id="searchcurency1" placeholder="Type a currency / country">
+                                                                </div>
+                                                                <div class="clearfix"></div>
+                                                            </div>
+                                                            <ul id="currencylist1">
+                                                                @foreach (var item in ReceivingCountries)
+                                                                {
+
+                                                                    <li class="currency-dropdown_option" onclick="OnReceivingCountryChange('@item.CountryCode', '@item.Currency')">
+                                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-@item.CountryCode.ToLower()"></div>
+                                                                        <span class="currency-dropdown_option_text">@item.Currency&nbsp;&nbsp;@item.CountryName</span>
+                                                                    </li>
+                                                                }
+
+                                                            </ul>
+                                                        </div>
+                                                        <!--  -->
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+
+                                                <div class="m-t-20">
+
+                                                    <div class="estimate-calculator" style="">
+                                                        <div class="wrapper">
+
+                                                            <dl>
+                                                                <dt>Fee</dt>
+                                                                <dd class="fee" id="Fee" data-outbound-currency="USD"><span name="SendingCurrencySymbol"> @Model.SendingCurrencySymbol</span><span name="Fee">@Model.Fee</span></dd>
+                                                            </dl>
+                                                            <dl>
+                                                                <dt>You pay</dt>
+                                                                <dd class="fee" data-outbound-currency="USD" id="TotalAmount"> <span name="SendingCurrencySymbol">@Model.SendingCurrencySymbol </span><span name="TotalAmount">@Model.TotalAmount</span></dd>
+                                                            </dl>
+                                                            <dl>
+                                                                <dt>They receive</dt>
+                                                                <dd class="fee" data-outbound-currency="USD"> <span name="ReceivingAmount">@Model.ReceivingAmount</span> <span name="ReceivingCurrency">@Model.ReceivingCurrencyCode</span></dd>
+                                                            </dl>
+                                                            <div class="clearfix">
+
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="exchange-rate-holder">
+                                                        Exchange rate
+                                                        1&nbsp;<span data-outbound-currency="GBP" name="SendingCurrencyCode">@Model.SendingCurrencyCode</span>&nbsp;=&nbsp;<span name="ExchangeRate">@Model.ExchangeRate</span>&nbsp;<span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency">@Model.ReceivingCurrencyCode</span>
+
+                                                    </div>
+
+                                                    <!--  -->
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light p-40">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <button type="submit" class="btn btn-lg btn-block btn-primary btn-round "> Continue <i class="fa fa-angle-right"></i></button>
+
+                                                <a href="@Url.Action("Index","StaffOtherMobileWalletsTransfer")" class="btn btn-lg  btn-block btn-link btn-round pull-left">
+                                                    <i class="fa fa-angle-left m-r-5"></i> Back
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        debugger;
+          $("#SendingAmount").val('@Model.SendingAmount');
+
+        var selectedSendingCountry = "@Model.SendingCountry";
+        var selectedReceivingCountry = "@Model.ReceivingCountry";
+        var SendingCountry = "@Model.SendingCountry";
+        var ReceivingCountry = "@Model.ReceivingCountry";
+        var selectedSendingCurrency = "@Model.SendingCurrencyCode";
+        var selectedReceivingCurrency = "@Model.ReceivingCurrencyCode";
+        if (ReceivingCountry == "") {
+            ReceivingCountry = "NG";
+            selectedReceivingCountry = ReceivingCountry;
+            selectedReceivingCurrency = "NGN";
+        }
+        SetSendingCountryText(selectedSendingCountry);
+        function SetSendingCountryText(countrycode) {
+            $("#SendingCountry").html(selectedSendingCurrency + " &nbsp;&nbsp; " + countrycode);
+            $("#ReceivingCountry").html(selectedReceivingCurrency + " &nbsp;&nbsp; " + selectedReceivingCountry);
+            $("#SendingCountry").attr('data-currency', selectedSendingCurrency);
+            $("#ReceivingCountry").attr('data-currency', selectedReceivingCurrency);
+        }
+        function OnReceivingCountryChange(val, cur) {
+            debugger;
+            $("#ReceivingCountry").text($($(event.currentTarget).find('span')[0]).text());
+            $("#ReceivingCountry").attr('data-currency', cur);
+            selectedReceivingCountry = val;
+            $("#SendingAmount").val(1);
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            GetPaymentSummary(false);
+        }
+
+        function OnSendingCountryChange(val) {
+            $("#SendingCountry").text($($(event.currentTarget).find('span')[0]).text());
+            selectedSendingCountry = val;
+            $("#SendingAmount").val(1);
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            GetPaymentSummary(false);
+        }
+        GetPaymentSummary(false);
+
+
+        function GetPaymentSummary(IsReceivingAmount) {
+
+             var SendingAmount = $("#SendingAmount").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var SendingCurrency = '@Model.SendingCurrencyCode';
+            var ReceivingCurrency = $("#ReceivingCountry").attr('data-currency');
+
+            if (SendingAmount == "") {
+
+                SendingAmount = 0;
+            }
+            if (ReceivingAmount == "") {
+
+                ReceivingAmount = 0;
+            }
+            transferMethodvalue = @ViewBag.TransferMethod;
+            var data = {
+
+                SendingAmount: SendingAmount,
+                ReceivingAmount: ReceivingAmount,
+                SendingCurrency: SendingCurrency,
+                ReceivingCurrency: ReceivingCurrency,
+                SendingCountry: SendingCountry,
+                ReceivingCountry: ReceivingCountry,
+                IsReceivingAmount: IsReceivingAmount,
+                TransferMethod: transferMethodvalue
+            };
+            Riddha.ajax.post("/EstimationSummary/GetTransferSummary", data)
+                .done(function (result) {
+
+                    result = result.response;
+                    for (var item in result) {
+
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                        $(selector).text(result[item]);
+                    }
+
+                    '[name="' + SendingCurrencyCode + '"]'.val(result.response.SendingCurrency);
+                    '[name="' + ReceivingCurrencyCode + '"]'.val(result.response.ReceivingCurrency);
+
+
+                });
+        }
+
+        $("#SendingAmount").focus(function () {
+            if ($("#SendingAmount").val() <= 1) {
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+        })
+
+        $("#ReceivingAmount").focus(function () {
+            if ($("#SendingAmount").val() <= 1) {
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+        })
+
+    </script>
+}

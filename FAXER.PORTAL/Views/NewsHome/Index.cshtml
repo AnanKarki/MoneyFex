@@ -1,0 +1,164 @@
+﻿@model List<FAXER.PORTAL.Models.NewsHomeViewModel>
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string url = "";
+}
+<style>
+    .customm {
+        height: 255px;
+    }
+</style>
+<div class="page-header" style="background:  url(images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+                <ol class="breadcrumb ">
+                    <li> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="active">News</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="  mb80 mt20">
+                    <h1 class="page-new">News</h1>
+                    <div class="row">
+                        <!--  -->
+                        @{ int i = 0;}
+                        @foreach (var item in Model)
+                        {
+
+                            i++;
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="post-block mb30">
+
+                                    <div class="bg-white pinside30 outline  ">
+                                        <h4><a href="@Url.Action("NewsDetails", new { @id=item.Id})" class="title">@item.Headline  </a></h4>
+                                        <div class="post-img">
+                                            
+                                            @if (item.ImageUrl != null && item.ImageUrl != "")
+                                            {
+                                                url = item.ImageUrl;
+
+                                                <a href="@Url.Action("NewsDetails", new { @id=item.Id})" class=" "><img src="@url" alt=" "></a>
+                                            }
+                                            
+                                        </div>
+
+                                        <p>@Html.Raw(@item.FullBody) </p>
+                                        <a href="@Url.Action("NewsDetails", new { @id=item.Id})" class="btn-link">Read More</a>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            if (i == 3)
+                            {
+                                <div class="clearfix"></div>
+                                i = 0;
+                            }
+
+                        }
+
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="post-block mb30">
+                                    <div class="post-img">
+                                        <a href="@Url.Action("NewsDetails")" class=" "><img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive"></a>
+                                    </div>
+                                    <div class="bg-white pinside30 outline">
+                                        <h2><a href="@Url.Action("NewsDetails")" class="title">Lorem ipsum dolor   consectetuer  </a></h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                                        <a href="@Url.Action("NewsDetails")" class="btn-link">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-md-4 col-sm-6 col-xs-12">
+                                <div class="post-block mb30">
+                                    <div class="post-img">
+                                        <a href="@Url.Action("NewsDetails")" class=" "><img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive"></a>
+                                    </div>
+                                    <div class="bg-white pinside30 outline">
+                                        <h2><a href="@Url.Action("NewsDetails")" class="title">Lorem ipsum dolor   consectetuer  </a></h2>
+                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.</p>
+                                        <a href="@Url.Action("NewsDetails")" class="btn-link">Read More</a>
+                                    </div>
+                                </div>
+                            </div>*@
+                        <!--  -->
+                        <div class="col-md-12 text-center col-sm-12 col-xs-12">
+                            <div class="st-pagination">
+                                <!--st-pagination-->
+                                <ul class="pagination">
+
+
+
+                                    <li>
+                                        @if (ViewBag.Page == 0)
+                                        {
+
+                                            <a aria-label="previous"><span aria-hidden="true">previous</span></a>
+                                        }
+                                        else
+                                        {
+
+                                            <a href="@Url.Action("Index", new { page = ViewBag.Page - 1 })" aria-label="previous"><span aria-hidden="true">previous</span></a>
+                                        }
+                                    </li>
+                                    @if (ViewBag.Page == 0)
+                                    {
+                                        <li class="active"><a href="@Url.Action("Index", new { page = 0 })">1</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Index", new { page = 0 })">1</a></li>
+                                    }
+                                    @if (ViewBag.Page == 1)
+                                    {
+                                        <li class="active"><a href="@Url.Action("Index", new { page = 1 })">2</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Index", new { page = 1 })">2</a></li>
+                                    }
+                                    @if (ViewBag.Page == 2)
+                                    {
+                                        <li><a href="@Url.Action("Index", new { page = 2 })">3</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@Url.Action("Index", new { page = 2 })">3</a></li>
+                                    }
+                                    <li>
+                                        @if (ViewBag.startCount == ViewBag.TotalCount || ViewBag.EndCount == ViewBag.TotalCount)
+                                        {
+
+                                            <a aria-label="Next"><span aria-hidden="true">next</span></a>
+                                        }
+                                        else
+                                        {
+                                            <a href="@Url.Action("Index", new { page = ViewBag.Page + 1 })" aria-label="Next"><span aria-hidden="true">next</span></a>
+                                        }
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--/.st-pagination-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,604 @@
+﻿@model FAXER.PORTAL.Models.PaymentMethodViewModel
+
+@{
+    ViewBag.Title = "LocalPayNow";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string[] amountSplited = Model.TotalAmount.ToString().Split('.');
+    string Amount = amountSplited[0].ToString();
+    string Cent = "0";
+    if (amountSplited.Length > 1)
+    {
+        Cent = amountSplited[1].ToString();
+    }
+
+}
+
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary">@Model.SendingCurrencySymbol @Amount.<small class="text-primary">@Cent</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+
+                        </div>
+         
+
+
+                        @Html.HiddenFor(model => model.TotalAmount)
+                        @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                        @Html.HiddenFor(model => model.HasKiiPayWallet)
+                        <ul class="paymentmethod-list mt20 mb20">
+                            <h4 class="text-left">@Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })</h4>
+                            <h4 class="text-left">@Html.ValidationMessage("StripeError", "", new { @class = "text-danger" })</h4>
+                            <h4 class="text-left">How do you want to pay ?</h4>
+                            @*<li>
+            <label>
+                @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.SavedDebitCreditCard)
+                <span class="cardsaved hidden-xs">
+                    <img src="images/icon/card/visa.png">
+                </span>
+                <span class="title">Saved Credit/Debit Card</span>
+                <span class="subtitle">Card No. **** 4547</span>
+            </label>
+        </li>*@
+
+                            @{
+                                int index = 0;
+                            }
+                            @foreach (var item in Model.CardDetails)
+                            {
+                                <li>
+                                    <label>
+
+                                        @Html.RadioButtonFor(model => Model.CardDetails[index].IsChecked, true, new { @type = "radio", @id = item.CardId, @onchange = "RadioChange();" })
+                                        <span class="cardsaved hidden-xs"><img src="~/Content/images/icon/card/visa.png">   </span><span class="title">Saved Credit/Debit Card</span> <span class="subtitle"> @item.CardNumber</span>
+                                    </label>
+                                </li>
+                                @Html.HiddenFor(model => Model.CardDetails[index].CardId)
+
+                                @Html.HiddenFor(model => Model.CardDetails[index].CardNumber)
+
+                                index++;
+
+
+
+                            }
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard, new { @onchange = "RadioChange();" ,@checked="true" })
+                                    <span class="cardsaved hidden-xs"> <img src="~/Content/images/icon/card/visa.png">  </span> <span class="title"> Credit/Debit  </span> <span class="subtitle"><a href="@Url.Action("")">Card details required</a></span>
+                                </label>
+                            </li>
+
+                            @if (Model.HasKiiPayWallet)
+                            {
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.KiiPayWallet, new { @onchange = "RadioChange();" })
+                                    <span class="cardsaved hidden-xs"><img src="~/Content/images/icon/svg/kiipay.svg"></span> <span class="title"> KiiPay Wallet Balance   </span> <span class="subtitle">Balance @Model.SendingCurrencySymbol @Model.KiipayWalletBalance </span>
+                                    @Html.HiddenFor(model => model.KiipayWalletBalance)
+                                </label>
+                            </li>
+                            }
+
+
+                            @*<li>
+            <label>
+                @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount, new { @onchange = "RadioChange();" })
+                <span class="cardsaved hidden-xs"><img src="~/Content/images/mf-fav-logo.png"></span> <span class="title"> MoneyFex Bank Account  </span> <span class="subtitle"><a href="deposit-bank-account.php">Deposit Money into our Account</a></span>
+            </label>
+        </li>*@
+
+                            <li>
+                                <label class="text-left">
+                                    <a href="@Url.Action("SenderAddMoneyCard" , new { @IsAddDebitCreditCard = true})"><i class="fa fa-plus"></i> Add New Card</a>
+                                </label>
+                            </li>
+
+                        </ul>
+
+
+                        <div class="form-group mb30">
+                            <label class="label-checkbox ">Do you want to set a standing <br>order payment to this wallet?  </label>
+                            <br>
+                            <label class="label-checkbox ">&nbsp;&nbsp;Yes&nbsp;&nbsp;@Html.CheckBoxFor(model => model.EnableAutoPayment, new { @id = "setStandingOrderPayment" })</label>
+                        </div>
+                        <label id="AutoTopUpAmountValidation" style="color:red;display:none;">Please enter amount greater than 0</label>
+                        <label id="Frequency_validation" style="color:red;display:none;">Please select the payment frequency to enable auto payment</label>
+                        <input type="hidden" id="PaymentDay" name="PaymentDay" />
+                        <div class="form-group standingorder" style="display:none">
+                            @Html.TextBoxFor(model => model.AutoPaymentAmount, new { @type = "number", @placeholder = "Enter Amount", @class = "form-blue", id = "AutoPaymentAmount", @autocomplete = "off" })
+                            @Html.ValidationMessageFor(model => model.AutoPaymentAmount, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb30 standingorder" style="display:none">
+                            <select class="form-blue" name="AutopaymentFrequency" id="AutopaymentFrequency">
+                                <option>Select Payment Frequency</option>
+
+                                <option>Weekly</option>
+                                <option>Monthly</option>
+                                <option>Yearly</option>
+                            </select>
+                        </div>
+                        <div class="clearfix">  </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg mb30">Confirm Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal" id="credit_debit_card_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+                                Please save credit/debit Card to Enable Auto pay
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <input type="hidden" value="@ViewBag.CardCount" id="CardCount">
+    <div class="modal" id="PaymentWeekly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                            <div class="icon_al">
+                                <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8" id="PaymentDate">
+
+                            <p>
+                                Please Choose Your Payment Day .
+                                <br />
+
+                                <label id="InvalidWeekDay" style="color:red;display:none;"> Please choose a day</label>
+                                <div class="col-lg-6">
+                                    <label><input type="radio" id="Sunday" name="Payment" value="0">Sunday</label><br />
+                                    <label><input type="radio" id="Monday" name="Payment" value="1"> Monday</label><br />
+                                    <label><input type="radio" id="Tuesday" name="Payment" value="2"> Tuesday</label><br />
+                                    <label><input type="radio" id="Wednesday" name="Payment" value="3"> Wednesday</label><br />
+                                </div>
+                                <div class="col-lg-6">
+                                    <label><input type="radio" id="Thursday" name="Payment" value="4"> Thursday</label><br />
+                                    <label><input type="radio" id="Friday" name="Payment" value="5"> Friday</label><br />
+                                    <label><input type="radio" id="Saturday" name="Payment" value="6"> Saturday</label><br />
+                                </div>
+                            </p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="WeelyAutoPayments()">Ok</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="ResetFrequency()" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="PaymentMonthly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+                                Please Choose Your Payment Day .
+                            </p>
+                            <select aria-label="Day" name="PaymentDateMonthly" id="PaymentDateMonthly" title="Day" required>
+                                <option value="0">Select Day of the Month</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                @for (int i = 10; i <= 31; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <br />
+                            <label id="invalidMonthlyDay" style="color:red;display:none">Please Choose Day</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="MonthlyAutoPayments()">Ok</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="ResetFrequency()" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal" id="PaymentYearly" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;" data-backdrop="static">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+
+                                Please Choose Your Payment Month and Day .
+
+                            </p>
+                            <select aria-label="Month" name="Month" id="Month" title="Month" required>
+                                <option value="0">Select Month</option>
+                                <option value="01">Jan</option>
+                                <option value="02">Feb</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Apr</option>
+                                <option value="05">May</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Aug</option>
+                                <option value="09">Sep</option>
+                                <option value="10">Oct</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dec</option>
+                            </select>
+                            <select aria-label="Month" name="Day" id="Day" title="Month" required>
+                                <option value="0">Select Day</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                @for (int i = 10; i <= 31; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                            <br />
+                            <label id="invalidMonth" style="color:red;display:none">Please Choose Month</label>
+                            <label id="invalidDay" style="color:red;display:none">Please Choose Day</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary btn-sm" onclick="YearlyAutoPayment()">Ok</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="ResetFrequency()" data-dismiss="modal">close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="freqency_alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                            <div class="icon_al">
+                                <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+                                Are you sure you want to pay this virtual account  <b>@Model.SendingCurrencySymbol  <span id="AutoPaymentAmounttext"></span></b> , every <b><span id="FrequencyDay"></span></b> of the <b><span id="Frequency"></span></b> ?
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Yes Proceed</button>
+                    <button type="button" class="btn btn-danger btn-sm" onclick="ResetAutoPayment()" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script type="text/javascript">
+        function RadioChange() {
+            debugger;
+            $("input[type=radio]").prop('checked', false)
+            event.target.checked = true;
+            //event.target.value = true;
+            if (event.target.id > 0) {
+
+                $("02").show();
+                $("01").hide();
+                //$("form").submit();
+
+            } else {
+
+
+                $("01").show();
+                $("02").hide();
+                //window.location.href = "AddMoneyToWalletEnterCardInformation";
+            }
+        }
+
+        $(document).ready(function () {
+            $('#Auto').click(function (event) {
+                if (this.checked) {
+
+                    $('#submit_prog').show();
+                }
+                else {
+                    $('#submit_prog').hide()
+                }
+            });
+
+            $('#confirm').click(function (event) {
+                if ($("#Auto").prop("checked") == true) {
+                    if ($("#AutoPaymentAmount").val() == 0 || $("#AutoPaymentAmount").val() == "") {
+                        $("#AutoTopUpAmountValidation").show();
+                        $("#confirm").prop("checked", false);
+                    }
+                    else if ($("#AutopaymentFrequency").val() == "Auto payment frequency") {
+                        $("#AutoTopUpAmountValidation").hide();
+                        $("#Frequency_validation").show();
+                        $("#confirm").prop("checked", false);
+
+                    } else {
+
+                        $("#AutoTopUpAmountValidation").hide();
+                        $("#Frequency_validation").hide();
+
+
+                    }
+                }
+            });
+            $('#AutopaymentFrequency').change(function (event) {
+                if ($("#AutopaymentFrequency").val() != 0) {
+                    var Amount = $("#AutoPaymentAmount").val();
+                    var Frequency = $("#AutopaymentFrequency").val();
+                    $("#AutoPaymentAmounttext").text(Amount);
+
+                    if (Frequency == "Weekly") {
+                        $("#PaymentWeekly").modal("show");
+                        $("#Frequency").text("Week");
+                    }
+                    else if (Frequency == "Monthly") {
+                        $("#PaymentMonthly").modal("show");
+                        $("#Frequency").text("Month");
+                    }
+                    else if (Frequency == "Yearly") {
+                        $("#PaymentYearly").modal("show");
+                        $("#Frequency").text("Year");
+
+
+                    }
+
+
+
+                    //$("#freqency_alert").modal("show");
+                }
+            });
+
+            $("#PaymentDate").change(function (event) {
+
+                var radios = document.getElementsByName('Payment');
+                var days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+                for (var i = 0, length = radios.length; i < length; i++) {
+                    if (radios[i].checked) {
+                        // do whatever you want with the checked radio
+
+                        $("#PaymentDay").val(radios[i].value);
+                        $("#FrequencyDay").text(days[radios[i].value]);
+
+                        // only one radio can be logically checked, don't check the rest
+                        break;
+                    }
+                }
+
+
+            });
+
+
+
+
+
+        });
+
+
+
+        function WeelyAutoPayments() {
+            var values = $("#PaymentDay").val();
+            if (values == "") {
+                $("#InvalidWeekDay").show();
+            }
+            else {
+                $("#InvalidWeekDay").hide();
+
+                $("#freqency_alert").modal("show");
+
+                $("#PaymentWeekly").modal("hide");
+            }
+
+        }
+
+        function MonthlyAutoPayments() {
+
+
+            var values = $("#PaymentDateMonthly").val();
+
+            if (values == "0") {
+                $("#invalidMonthlyDay").show();
+
+            } else {
+
+                $("#PaymentDay").val(values);
+                if (values == "01" || values == "21" || values == "31") {
+                    $("#FrequencyDay").text(values + "st");
+                }
+                else if (values == "02" || values == "22") {
+                    $("#FrequencyDay").text(values + "nd");
+                }
+                else if (values == "03" || values == "22") {
+                    $("#FrequencyDay").text(values + "rd");
+                }
+
+                else {
+                    $("#FrequencyDay").text(values + "th");
+                }
+
+                $("#invalidMonthlyDay").hide();
+                $("#freqency_alert").modal("show");
+
+                $("#PaymentMonthly").modal("hide");
+
+
+            }
+        }
+
+        function YearlyAutoPayment() {
+            var Month = $("#Month").val();
+            var Day = $("#Day").val();
+
+            if (Month == "0") {
+                $("#invalidMonth").show();
+                $("#invalidDay").hide();
+            }
+            else if (Day == "0") {
+                $("#invalidMonth").hide();
+                $("#invalidDay").show();
+            }
+            else {
+
+                $("#invalidMonth").hide();
+                $("#invalidDay").hide();
+
+                $("#PaymentDay").val(Month + Day);
+                $("#FrequencyDay").text($("#Month option:selected").text() + " " + Day);
+                $("#freqency_alert").modal("show");
+
+                $("#PaymentYearly").modal("hide");
+            }
+        }
+
+        function ResetAutoPayment() {
+            $("#AutoPaymentAmount").val(0);
+            $("#AutopaymentFrequency").val("Auto payment frequency");
+            $("#freqency_alert").modal("hide");
+
+        }
+
+        function ResetFrequency() {
+            $("#AutoPaymentAmount").val(0);
+            $("#AutopaymentFrequency").val("Auto payment frequency");
+            $("#PaymentDay").val("");
+            $("#FrequencyDay").text("");
+            $("#PaymentWeekly").modal("hide");
+
+        }
+
+
+        $("#setStandingOrderPayment").on("change", function () {
+
+            if (this.checked == true) {
+
+                $(".standingorder").show();
+            } else {
+
+
+                $(".standingorder").hide();
+            }
+
+        })
+    </script>
+}

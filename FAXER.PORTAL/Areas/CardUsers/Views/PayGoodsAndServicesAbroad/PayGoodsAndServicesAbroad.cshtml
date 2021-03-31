@@ -1,0 +1,219 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.PayGoodsAndServicesAbroadViewModel
+@{
+    ViewBag.Title = "PayGoodsAndServicesAbroad";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+    var CurrencySymbol = "";
+    var Currency = "";
+    if (Model != null) {
+
+        CurrencySymbol = Model.CurrencySymbol ?? "";
+        Currency = Model.Currency ?? "";
+    }
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>Pay for goods &  services</h1>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+
+<form method="post">
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <h4 class="pull-right">Amount available on this MFBC (@Model.AmountOnCard @Model.Currency)</h4>
+
+                    @if (ViewBag.Vaildation != null)
+                    {
+                        <label style="color:red;">@ViewBag.Vaildation</label>
+                    }
+                    @Html.HiddenFor(model => model.AmountOnCard, new { id = "AmountOnCard" })
+                    @Html.HiddenFor(model => model.InvalidCard, new { id = "Invalid" })
+                    @Html.HiddenFor(model => model.CardId, new { id = "CardId" })
+                    @Html.HiddenFor(model => model.ReceiverMFBCCardId, new { id = "ReceiverMFBCCardId" })
+                    @Html.HiddenFor(model => model.InvalidCountry, new { id = "InvalidCountry" })
+                    @Html.HiddenFor(model => model.GoodsPurchaseLimit)
+                    @Html.HiddenFor(model => model.GoodsPurchaseLimitAmount)
+                    <label id="Validation" style="color:red;display:none;">Please enter Valid Card Number</label>
+                    <label id="NotValidCountry" style="color:red;display:none;">You can only pay a merchant registered in your country of residence</label>
+
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverMFBCCardNumber, new { @class = "form-control", @placeholder = "Search MFBC Number Only/Full Details", id = "CardNumber", onchange = "getCardDetails()" })
+                            @Html.ValidationMessageFor(model => model.ReceiverMFBCCardNumber, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverBusinessCardUserName, new { @class = "form-control", @placeholder = "Display Name", id = "Name", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.ReceiverBusinessCardUserName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.ReceiverCardUserAccountNo, new { @class = "form-control", @placeholder = "Display Merchant Account Number", id = "AccountNo", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(model => model.ReceiverCardUserAccountNo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <hr>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <label>Enter Payment Reference</label>
+                            <br />
+                            @Html.TextBoxFor(model => model.PaymentReference, new { @class = "form-control", @placeholder = "Payment Reference" })
+                            @Html.ValidationMessageFor(model => model.PaymentReference, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <div class="row">
+                        <label style="margin-left:30px;">Enter Paying Amount</label>
+
+                    </div>
+              
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@CurrencySymbol</span>
+                            @Html.TextBoxFor(model => model.PayingAmount, new { @class = "form-control", @placeholder = "Enter The Paying Amount", id = "PayingAmount", onkeyup = "VaildateAmount()" })
+                            <span class="input-group-addon">@Currency</span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.PayingAmount, "", new { @class = "text-danger" })
+                        <label id="ValidateAmount" style="color:red;display:none">Your balance is Insufficient , The payment cannot be proceeded</label>
+                        <label id="Zero" style="color:red;display:none"> Amount cannot less than or equal to 0 </label>
+                    </div>
+
+                    <div class="clearfix"><br /></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-12">
+                        <div class="checkbox">
+
+                            <label>@Html.CheckBoxFor(model => model.IsConfirmed)Check this box to confirm payment to above MoneyFex Account</label>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        @Html.ValidationMessageFor(model => model.IsConfirmed, "", new { @class = "text-danger" })
+                    </div>
+                    <!--  -->
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("Index" , "CardUserHome")" class="fbtn btn-back hidden-xs hidden-sm "> < Back to Dashboard</a>
+                    <button type="submit" class="fbtn btn-next" id="submit">Confirm Payment ></button>
+                    <br />
+                    <a href="@Url.Action("Index" , "CardUserHome")" class="fbtn btn-back hidden-lg hidden-md "> < Back to Dashboard</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@section scripts{
+    <script type="text/javascript">
+        function getCardDetails() {
+            var CardNumber = document.getElementById("CardNumber").value;
+            if (CardNumber != "") {
+                $.getJSON("/CardUsers/PayGoodsAndServicesAbroad/GetCardDetails?CardNumber=" + CardNumber, function (data) {
+
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                        $(selector).prop('readonly', 'readonly');
+                        $("#Validation").hide();
+                        if ($("#Invalid").val() == "true") {
+                            $("#Validation").show();
+                            $("#Name").val("");
+                            $("#AccountNo").val("");
+
+                        }
+                        if ($("#InvalidCountry").val() == "true") {
+                            $("#Validation").hide();
+                            $("#NotValidCountry").show();
+                            $("#Name").val("");
+                            $("#AccountNo").val("");
+
+                        }
+                        if ($("#InvalidCountry").val() == "false") {
+
+                            $("#NotValidCountry").hide();
+                        }
+                    }
+
+
+                }
+                );
+
+            }
+
+        }
+
+        function VaildateAmount() {
+            var AmountOnCard = $("#AmountOnCard").val();
+            var PayingAmount = $("#PayingAmount").val();
+
+            if (Number(AmountOnCard) < Number(PayingAmount)) {
+
+                $("#ValidateAmount").show();
+                $("#Zero").hide();
+
+                $("#submit").prop("disabled", true);
+            }
+            else if (Number(PayingAmount) <= 0) {
+
+                $("#Zero").show();
+                $("#ValidateAmount").hide();
+                $("#submit").prop("disabled", true);
+            }
+            else {
+
+                $("#ValidateAmount").hide();
+                $("#Zero").hide();
+
+                $("#submit").prop("disabled", false);
+            }
+        }
+
+
+    </script>
+
+}
+

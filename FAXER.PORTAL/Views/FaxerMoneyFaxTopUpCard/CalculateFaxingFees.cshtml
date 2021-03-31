@@ -1,0 +1,132 @@
+﻿
+@{
+    ViewBag.Title = "CalculateFaxingFees";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:14%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Calculate Sending fees</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <form>
+
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> Enter Top-up Amount</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            <input type="text" name="" class="form-control" placeholder="Sender's currency">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Top-up Fees</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            <input type="text" name="" class="form-control" placeholder="" disabled="disabled">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Total Amount including Fee</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            <input type="text" name="" class="form-control" placeholder="" disabled="disabled">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Current Exchange Rate</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            <input type="text" name="" class="form-control" placeholder="" disabled="disabled">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Amount to be available on <br>MoneyFex Top-up Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            <input type="text" name="" class="form-control" placeholder="Receiver's currency" disabled="disabled">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@Url.Action("FaxCardToTopUp")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                <a href="@Url.Action("TopUpPaymentMethod")" class="fbtn btn-next">Proceed to payment  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

@@ -1,0 +1,277 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.CareerIndexViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+@if (ViewBag.Message != "")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message", 4);
+        };
+    </script>
+}
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Master View-Career</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <a href="@Url.Action("AddNewCareer", "Career")" class="btn btn-info pull-right m-l-20   waves-effect waves-light btn-rounded">Add New Job</a>
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Master View-Career</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                </div>
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td>SN</td>
+                                        <td>Job Title</td>
+                                        <td>Description</td>
+                                        <td>Country</td>
+                                        <td>City</td>
+                                        <td>Contract Type</td>
+                                        <td>Salary Range</td>
+                                        <td>Closing Date</td>
+                                        <td>Action</td>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+
+                                        <tr>
+                                            <td>@i</td>
+
+                                            <td>@item.JobTitle </td>
+                                            <td>@item.Description </td>
+                                            <td>@item.Country</td>
+                                            <td>@item.City</td>
+
+                                            <td>@item.ContractType </td>
+
+                                            <td>@item.SalaryRange </td>
+                                            <td>@item.ClosingDate</td>
+                                            <td>
+                                                <a class="btn btn-success btn-sm" href="@Url.Action("EditJob","Career",new {id=item.Id })">Edit</a>
+                                                <a class="btn btn-danger btn-sm" href="@Url.Action("deleteJob","Career", new { id=item.Id})">Delete</a>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom  ">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Career</h4>
+
+
+                                    <a href="@Url.Action("AddNewCareer", "Career")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Add Career
+                                    </a>
+
+
+
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <div class="form-group  ">
+                                                <input type="text" class=" form-control form-control-round form-control-bold" value="" placeholder="Date From to" autocomplete="off" name="dates" id="dates" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Job Title</th>
+                                                    <th>Contract Type</th>
+                                                    <th>Salary</th>
+                                                    <th>Closing Date</th>
+                                                    <th>Publish Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td><a href="#" onclick="showCarrers(@item.Id, this);">@item.JobTitle </a></td>
+                                                        <td>@item.ContractType</td>
+                                                        <td>@item.CountrySymbol @item.SalaryRange</td>
+                                                        <td>@item.ClosingDate</td>
+                                                        <td>@item.PublishDate</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("AddNewCareer","Career",new {id=item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="@Url.Action("deleteJob","Career",new {id=item.Id })" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+
+                                                    </tr>
+
+
+
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="modal fade" id="show_message" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body text-justify">
+                                <div id="spa">
+                                    <img src="" id="ImageUrl" name="ImageUrl" alt=" " style="float: left; margin-right: 15px; width: 300px;">
+                                </div>
+
+                                <h5><span id="Title" name="Title"></span></h5>
+
+
+
+                                <p><span id="FullBody" name="FullBody"></span></p>
+                                <text style="display:none" id="IdForEdit"></text>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                                <a href="#" onclick="Edit()" class="btn btn-primary btn-round"><i class="icofont icofont-ui-edit"></i> Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                @section scripts{
+                    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var date = $("#dates").val();
+            debugger;
+            window.location.href = "/Admin/Career/Index?CountryCode=" + country + "&City=" + city +"&Date="+date;
+        }
+
+
+        $('input[name="dates"]').val('@ViewBag.DateRange');
+            function showCarrers(Id, control) {
+                $.getJSON("/Admin/Career/showCareer?id=" + Id, function (data) {
+                    document.getElementById("IdForEdit").innerHTML = data.Id;
+                    document.getElementById("Title").innerHTML = data.Title;
+                    document.getElementById("FullBody").innerHTML = data.FullBody;
+                    document.getElementById("spa").getElementsByTagName("img")[0].src = data.ImageUrl;
+                    if (data.ImageUrl == "" || data.ImageUrl == undefined) {
+                        $("#ImageUrl").hide();
+                    }
+                    else {
+
+                        $("#ImageUrl").show();
+                    }
+
+                });
+                $("#show_message").modal("show");
+            }
+
+            function Edit() {
+               var id= $("#IdForEdit").text();
+                window.location.href = "/Admin/Career/AddNewCareer?Id=" + id;
+
+        }
+
+        $(".applyBtn").click(function () {
+
+            var date = $('input[name="dates"]').val();
+            Fliter();
+        });
+                    </script>
+
+
+                }

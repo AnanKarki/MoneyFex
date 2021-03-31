@@ -1,0 +1,110 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.BankAccountDepositAbroadViewModel
+@{
+    ViewBag.Title = "BankDepositAbroad";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard </h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            @using (Html.BeginForm())
+            {
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Bank Account Deposit</h3>
+                        <hr>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue" })
+
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.RecentAccountNumber, (IEnumerable<SelectListItem>)ViewBag.RecentAccountNumbers, "Select Recent Account No.", new { @class = "form-blue", @id="recentAccountNo", @onchange="changeAccountNo()" })
+
+                        </div>
+
+
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(model => model.AccountOwner, new { @placeholder = "Account owner", @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.AccountOwner, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(model => model.TelephoneNumber, new { @placeholder = "Telephone No.", @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.TelephoneNumber, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.BankName, (IEnumerable<SelectListItem>)ViewBag.BankNames, "Select Bank Name", new { @class = "form-blue" })
+
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.Branch, (IEnumerable<SelectListItem>)ViewBag.Branches, "Select Branch", new { @class = "form-blue" })
+
+                        </div>
+
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(model => model.BranchCode, new { @placeholder = "Branch Code", @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group   mb20">
+                            @Html.TextBoxFor(model => model.AccountNumber, new { @placeholder = "Account Number", @class = "form-blue", @id="acc" })
+                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                        </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+            }
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function changeAccountNo() {
+            var accountNo = $("#recentAccountNo").val();
+            $("#acc").val(accountNo);
+
+        }
+
+    </script>
+    }

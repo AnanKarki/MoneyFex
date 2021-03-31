@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "ActivateAgent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ActivateAgent</h2>
+<form action="/becomeanagent/activate" method="post">
+    <input type="hidden" name="ActivationCode" value="@ViewBag.ActivationCode"/>
+    <button type="submit" class="btn btn-lg btn-success">Activate</button>
+</form>
+

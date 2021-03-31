@@ -1,0 +1,114 @@
+﻿@model FAXER.PORTAL.Models.SearchKiiPayWalletVM
+@{
+    ViewBag.Title = "SearchInternationalKiiPayWallet";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Send Money to a KiiPay Wallet</h3>
+                        <hr>
+
+                        @Html.HiddenFor(model => model.CountryPhoneCode, new { id = "CountryPhoneCode" })
+                        @Html.HiddenFor(model => model.CountryCode, new { id = "CountryPhoneCode" })
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue", id = "Country", onchange = "getPhoneCode()" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.RecentMobileNo, (IEnumerable<SelectListItem>)ViewBag.MobileNumbers, "Select a Recent Mobile Number", new { @class = "form-blue", @id = "phoneNumber", @onchange = "selectPhoneNumber();" })
+                            @Html.ValidationMessageFor(model => model.RecentMobileNo, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+                        <!--  -->
+                        <div class="form-group contact-no-group">
+                            <div class="countr-code-lg">
+                                <span name="CountryPhoneCode"></span>
+                                @Model.CountryPhoneCode
+                            </div>
+                            @Html.TextBoxFor(model => model.MobileNo, new { @type = "number", @class = "form-blue contact-no-lg", @maxlength = "10", @minlength = "10", @placeholder = "Enter Mobile Number ", @id = "phoneTextBox" })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                        </div>
+                        <!--  -->
+
+
+                        <div class="form-group  ">
+                            @Html.TextBoxFor(model => model.ReceiverName, new { @class = "form-blue", @placeholder = "Receiver Name", @id = "ReceiverFullName" })
+
+                        </div>
+
+
+                        <h4 class="text-center mb30">Sending Money to a local KiiPay Wallet?   <a href="@Url.Action("SearchLocalKiiPayWallet")">Change</a></h4>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function getPhoneCode() {
+            debugger;
+            var country = $("#Country").val();
+
+            window.location.href = "/SenderKiiPayWalletTransfer/SearchInternationalKiiPayWallet?Country=" + country;
+        }
+        $(".countr-code-lg").text($("#CountryPhoneCode").val());
+
+        function selectPhoneNumber() {
+
+            var phoneNumber = $("#phoneNumber").val();
+            var country = $("#Country").val();
+            if (phoneNumber != null) {
+                $.getJSON("/SenderKiiPayWalletTransfer/GetNumberName?PhoneNumber=" + phoneNumber + "&CountryCode=" + country, function (result) {
+
+                    $("#phoneTextBox").val(result.phoneTextBox);
+                    $("#ReceiverName").val(result.ReceiverName);
+                    return;
+                })
+            }
+            else {
+                return;
+            }
+        }
+
+    </script>
+}

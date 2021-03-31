@@ -1,0 +1,141 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddStaffTrainingViewModel
+@{
+    ViewBag.Title = "EditStaffTraining";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit Staff Training</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Add Training</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index","ViewStaffTraining")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View - Training</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Add Training</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+
+                            <div class="form-body">
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Country </label>
+                                    @Html.HiddenFor(model => model.Id)
+                                    @Html.HiddenFor(model => model.staffId)
+                                    @Html.TextBoxFor(model => model.countryName, new { @class = "form-control", @readonly="readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>City </label>
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Staff </label>
+                                    @Html.TextBoxFor(model => model.staffName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Training Title </label>
+                                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Training Link </label>
+                                    @Html.TextBoxFor(model => model.Link, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Training Deadline </label><br />
+                                    @*@Html.TextBoxFor(model => model.Deadline, new { @value = Model.Deadline, @class = "date", id = "deadlineDate", @data_date_change = "deadlineDateChange" })*@
+                                    @Html.TextBoxFor(model => model.Deadline, new { @class="form-control", type = "date", id = "deadlineDate" })
+                                    @Html.ValidationMessageFor(model => model.Deadline, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Complete Training</label>
+                                    @Html.TextBoxFor(model => model.completeTraining, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.completeTraining, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Outstanding Training</label>
+                                    @Html.TextBoxFor(model => model.outstandingTraining, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.outstandingTraining, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+
+                                <hr>
+                                <!--  -->
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-lg  btn-rounded pull-right">Update Training</button>
+                                </div>
+                                <!--  -->
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts {
+    
+    <script type="text/javascript">
+
+        function deadlineDateChange(date) {
+            //Date.prototype.addDays = function (days) {
+            //    var date = new Date(this.valueOf());
+            //    date.setDate(date.getDate() + days);
+            //    return date;
+            //}
+
+            var deadline = $("#deadlineDate").val();
+            var partsDeadline = deadline.split('/');
+            var deadlineDate = new Date(partsDeadline[2], partsDeadline[1] - 1, partsDeadline[0]);
+            var currentDate = new Date();
+            if (deadlineDate < currentDate) {
+                alert("Deadline can't be smaller than the current date !");
+                $("#deadlineDate").val("");
+            }
+
+            
+        }
+
+    </script>
+    }

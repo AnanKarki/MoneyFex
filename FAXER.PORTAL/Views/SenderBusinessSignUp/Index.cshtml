@@ -1,0 +1,98 @@
+﻿@model FAXER.PORTAL.Models.LoginViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-left">
+                    <div class="text-center">
+                        <h3>Business </h3>
+
+                    </div>
+                    <hr>
+                   
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        <div class="mt40">
+
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email or mobile number" } })
+
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+
+
+                                    <div class="input-group">
+
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", id = "show_password", @placeholder = "Password" })
+
+                                        <div class="input-group-addon" id="passwoed_show" onclick="togglePassword();"><i class="fa fa-eye"></i></div>
+
+
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("Attempt", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+                        <div class="text-center">
+
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Log in <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-12 mb20 ">
+                                @Html.ActionLink("Forgot Password", "ForgotPassword")
+                                @*<a href="forgotpassword.php">Forgot Password</a>*@
+                            </div>
+
+                            <div class="or-border mb20">
+                                OR
+                            </div>
+                            <div class="col-lg-12 ">
+                                <a href="/SenderBusinessSignUp/BusinessLoginInfo">Sign Up</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+
+                    }
+                </div>
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+

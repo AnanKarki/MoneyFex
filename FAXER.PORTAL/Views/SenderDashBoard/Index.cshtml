@@ -1,0 +1,323 @@
+﻿@model FAXER.PORTAL.Models.SenderMonthlyTransactionMeterViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] MeterBalance = Model.SenderMonthyTransactionMeterBalance.ToString("0.00").Split('.');
+
+}
+
+@*<div class="dashboard_sidebar">
+        <ul>
+            <li><a href="@Url.Action("index", "FaxerAccountProfile")">My Account Profile</a></li>
+            <li><a href="@Url.Action("index","FaxerMoneyFaxMerchantPayments")">My MoneyFex Merchant Payments</a></li>
+
+            <li><a href="@Url.Action("GetTopUpSomeoneElseCardPaymentsDetails","TopUpSomeoneElseMFTCCard")"> Other MFTC Card Payments</a></li>
+            <li><a href="@Url.Action("index","FaxerAutoPayments")">My Auto Payments</a></li>
+            <li><a href="@Url.Action("index","EstimateFee")">Estimate Sending Fees</a></li>
+            <li><a href="@Url.Action("index","FaxerMoneyFaxTopUpCard")">My MoneyFex Top-up Card</a></li>
+            <li><a href="@Url.Action("index","StartFaxingMoney")"> Top-up MoneyFex Card</a></li>
+            <li><a href="@Url.Action("index","TransferMoneyBetweenMoneyFaxTopUpCard")">Transfer Money Between MoneyFex Top-Up Cards</a></li>
+            <li><a href="@Url.Action("index","FaxingHistory")">Sending History</a></li>
+            <li><a href="@Url.Action("index","FaxInProgress")">Send  in Progress..</a></li>
+            <li><a href="@Url.Action("index","TrackAFax")">Track a Transfer</a></li>
+
+            <div class="dropdown-divider">Learn More</div>
+            <li><a href="@Url.Action("index","HowToFaxMoney")">How to Send Money</a></li>
+            <li><a href="@Url.Action("index","HowToReceiveMoney")">How to Receive Money</a></li>
+            <li><a href="">How to Pay for goods & services</a></li>
+
+            <div class="dropdown-divider">Contact Support</div>
+            <li><a href="@Url.Action("index","Contact")">Contact Us</a></li>
+            <li><a href="@Url.Action("index","Faq")">Faq</a></li>
+            <li><a href="@Url.Action("index","ReportAFund")">Report a Fraud</a></li>
+        </ul>
+    </div>*@
+
+
+
+
+
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="kiipay-main-header">
+
+                <!--  -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  ">
+                        <h5>Monthly Transaction Meter</h5>
+                        <h1 class="text-primary">@Model.SenderCurrencySymbol<span class="amountheader">@MeterBalance[0]</span>.<small class="text-primary">@MeterBalance[1]</small></h1>
+                    </div>
+                </div>
+                <!-- <div class="text-center   mt10">
+                   <button type="button" class="btn btn-primary  radius-20" data-toggle="modal" data-target="#ecard">KiiPay E-Card</button>
+
+                 </div>
+                -->
+
+            </div>
+            <!--  -->
+            <div class="clearfix">
+
+            </div>
+        </div>
+
+        <div class="col-lg-8 col-lg-offset-2">
+
+            <!--  -->
+            <div class=" ">
+
+                <div class=" dashboard_body ">
+
+                    <div class="mobile_design text-center  ">
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("Index" , "SenderTransferMoneyNow")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/transfermoney.svg">
+                                    </div>
+                                    <h4>Transfer  Money  </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("Index" , "SenderPayBills")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/paybills.svg">
+                                    </div>
+                                    <h4>Pay Bills  </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("index" , "SenderPayForServices")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/payforservices.svg">
+                                    </div>
+                                    <h4>Pay for Services   </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("SenderKiiPayWalletUserRegistration" , "SenderRegisterWalletsForFamilyandFriends")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/registered-KiiPay-wallets.svg">
+                                    </div>
+                                    <h4>Register Wallets <br>for Family and Friends</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("Index" ,"SenderMyRegisteredKiiPayWallets")">
+                                    <div class="das-icon">
+
+                                        <img src="~/Content/images/icon/svg/kiipay.svg">
+                                    </div>
+                                    <h4>My Registered <br>KiiPay Wallets</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb    ">
+                                <a href="@Url.Action("Index" , "SenderRequestAPayment")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/request-payment.svg">
+                                    </div>
+                                    <h4>Request a Payment <br>Using KiiPay Wallet  </h4>
+                                </a>
+                            </div>
+                        </div>*@
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("Index" , "SenderCashPickUpDetail")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/transfers-progress.svg">
+                                    </div>
+                                    <h4>Transaction in Progress</h4>
+                                    <span class="numbervisible"><b>@ViewBag.CashPickUpinProgessCount</b></span>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("Index" , "SenderTransactionHistory")">
+                                    <div class="das-icon">
+                                        <img src="~/Content/images/icon/svg/transaction-history.svg">
+                                    </div>
+                                    <h4>Transaction History </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="">
+                                    <div class="das-icon">
+                                        <img src="images/icon/sud.png">
+                                    </div>
+                                    <h4>Under Development</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+
+                    @RenderPage("~/Views/Shared/_mobile-menu-dashboard.cshtml")
+                </div>
+            </div>
+        </div>
+        <!--  -->
+    </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>
+
+
+
+<!-- Modal -->
+<div class="modal" id="NoMFTCCardFound" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex </h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            You do not have a MoneyFex Virtual Account registered, do you want to register a Account now?
+                        </p>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("UserContactDetails","TopUpRegestration")" class="btn btn-primary btn-sm">Register a Account</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="credit_debit_card_validation" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex </h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <h4>
+                            You do not have a Credit/Debit Card Saved on your Account, do you want to save one now?
+                        </h4>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("AddADebitCreditCard","FaxerAccountProfile")" class="btn btn-primary btn-sm">Save a Credit/Debit Card</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var Count = $("#CardCount").val();
+            if (Count != "") {
+                var TONum = parseInt(Count);
+                if (TONum <= 0) {
+                    $("#NoMFTCCardFound").modal("show");
+                }
+                else {
+                    $("#NoMFTCCardFound").modal("hide");
+                }
+            }
+            var CreditCardCount = '@TempData["CreditDebitCardCount"]';
+            if (CreditCardCount != "" || CreditCardCount != null) {
+
+                var CreditCardCountToNum = parseInt(CreditCardCount);
+                if (CreditCardCountToNum == 0) {
+                    $("#credit_debit_card_validation").modal("show");
+
+                } else {
+                    $("#credit_debit_card_validation").modal("hide");
+                }
+            }
+        });
+
+
+        // get Access Code for card user
+
+        function getAccessCode(){
+
+            var CardId = $("#MFTCCardId").val();
+
+            $.getJSON("/DashBoard/GetWithdrawalCode?CardId=" + CardId, function (result) {
+
+
+                $("#AccessCode").text("The Access Code is " + result.AccessCode);
+            })
+
+
+        }
+
+    </script>
+}

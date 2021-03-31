@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "RegistrationVerification";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-center">
+                    <h3>Enter the verification Code </h3>
+                    <hr>
+                    <p>Confirm your account with the code sent to your mobile number or email address</p>
+                    <form method="get" accept-charset="utf-8">
+                        <div class="pincode-input-container">
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text first input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <!-- <div>-</div> -->
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text last input-lg">
+                        </div>
+
+                        <div class="clearfix"><hr></div>
+                        <p>Didn't receive code?   <button class="btn  btn-link" type="send"> Resend code</button> </p>
+
+                        <a href="verified-your-account.php" class="btn btn-primary radius-20">Verify your account <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+
+
+<!--  -->

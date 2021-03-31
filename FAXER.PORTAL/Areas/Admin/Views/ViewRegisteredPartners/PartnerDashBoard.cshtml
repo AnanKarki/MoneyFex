@@ -1,0 +1,889 @@
+﻿
+@{
+    ViewBag.Title = "PartnerDashBoard";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="page-body">
+
+                        <div class="  d-flex align-items-center flex-row card m-b-30">
+
+                            <div class="card-block">
+                                <h3 class="">Ram Shrestha</h3>
+                                <h5 class="text-primary">Account No. 6558545454 <br>Country: United Kingdome</h5>
+                            </div>
+
+                            <div class="card-block">
+                                <button class="btn btn-inverse  btn-round m-r-20" data-toggle="modal" data-target="#RegisteredAgentsnotepopup">Note</button>
+                                <button class="btn btn-primary btn-round m-r-20" data-toggle="modal" data-target="#email">Send Email</button>
+                                <button class="btn btn-secondary btn-round m-r-20" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+                            </div>
+
+                        </div>
+                        <div class="row">
+
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-c-yellow text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>30-Day Commission</b></p>
+                                                <h4 class="m-b-0">$ 852</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="fa fa-dollar f-40 text-c-yellow"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-c-green text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>30-Day Trans. via Partner</b></p>
+                                                <h4 class="m-b-0">$ 5,852</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-c-pink text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>Partner Commission Rate </b></p>
+                                                <h4 class="m-b-0">$ 2442</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="fa fa-dollar f-40 text-c-pink"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-md-6">
+                                <div class="card bg-c-blue text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>Partner Status</b></p>
+                                                <h4 class="m-b-0">$ 5,242</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="feather icon-shopping-cart f-40 text-c-blue"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-8 col-md-12">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <div class="card-header-left ">
+                                            <h5>Monthly Volume via Partner</h5>
+                                            <!--     <span class="text-muted">For more details about usage, please refer <a href="https://www.amcharts.com/online-store/" target="_blank">amCharts</a> licences.</span> -->
+                                        </div>
+                                        <div class="card-header-right ">
+                                            <input type="text" name="datefilter" class="form-control" value="" placeholder="Filter" />
+                                        </div>
+                                    </div>
+                                    <div class="card-block-big">
+                                        <div id="monthly-graph" style="height:350px"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-12">
+                                <div class="card feed-card">
+                                    <div class="card-header">
+                                        <h5>Partner Agent List</h5>
+                                    </div>
+                                    <div class="card-block">
+
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Agent Name</th>
+                                                        <th>Account No.</th>
+                                                        <th>Country</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            ABC Ltd.
+                                                        </td>
+                                                        <td><a href="">5454546</a></td>
+                                                        <td>Nigeria</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            WallyPay
+                                                        </td>
+                                                        <td><a href="">5454546</a></td>
+                                                        <td>Ghana</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            GHS PLC
+                                                        </td>
+                                                        <td><a href="">5454546</a></td>
+                                                        <td>Kenya</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            ABC Ltd.
+                                                        </td>
+                                                        <td><a href="">5454546</a></td>
+                                                        <td>Nigeria</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            WallyPay
+                                                        </td>
+                                                        <td><a href="">5454546</a></td>
+                                                        <td>Ghana</td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center m-r-20">
+                                                <hr>
+                                                <a href="partner-agent-list.php" class=" b-b-primary text-primary">View all  </a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Recent Transactions via Partner </h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Type</th>
+                                                        <th>Identifier</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Received</label>
+                                                        </td>
+                                                        <td>Cash Pickup</td>
+                                                        <td><a href="sender-statement-cash-pickup-received.php">00145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Received</label>
+                                                        </td>
+                                                        <td>Bill Payment TU</td>
+                                                        <td><a href="sender-statement-bill-payment-tu.php">BTTU5894</a></td>
+                                                        <td>Yesterday</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-danger">On Hold</label>
+                                                        </td>
+                                                        <td>Cash Pickup</td>
+                                                        <td><a href="sender-statement-cash-pickup-hold.php">00145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-danger">On Hold</label>
+                                                        </td>
+                                                        <td>Service Payment</td>
+                                                        <td><a href="sender-statement-bill-payment.php">SP165458</a></td>
+                                                        <td>Yesterday</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-primary">Progress</label>
+                                                        </td>
+                                                        <td>Cash Pickup</td>
+                                                        <td><a href="sender-statement-cash-pickup-hold.php">00145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-primary">Progress</label>
+                                                        </td>
+                                                        <td>Bank Deposit</td>
+                                                        <td><a href="sender-statement-bank-account-deposit.php">BD145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Received</label>
+                                                        </td>
+                                                        <td>Other Mobile Wallet</td>
+                                                        <td><a href="sender-statement-other-mobile-wallet.php">OW-65458</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Received</label>
+                                                        </td>
+                                                        <td>KiiPay Wallet</td>
+                                                        <td><a href="">KP145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-warning">Refunded</label>
+                                                        </td>
+                                                        <td>Cash Pickup</td>
+                                                        <td><a href="sender-statement-kiipay-wallet.php">00145414</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Received</label>
+                                                        </td>
+                                                        <td>Bill payment</td>
+                                                        <td><a href="sender-statement-bill-payment.php">BP65458</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center m-r-20">
+                                                <hr>
+                                                <a href="partner-agent-transaction-list.php" class=" b-b-primary text-primary">View all  </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Account Statement </h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sender</th>
+                                                        <th>Amount</th>
+                                                        <th>Date</th>
+                                                        <th>Action</th>
+
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td><a href="">James Edange</a></td>
+                                                        <td>NGN 500,000</td>
+                                                        <td>Jan-05-2019</td>
+                                                        <td><a href="">Details</a></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">James Edange</a></td>
+                                                        <td>NGN 500,000</td>
+                                                        <td>Jan-05-2019</td>
+                                                        <td><a href="">Details</a></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">James Edange</a></td>
+                                                        <td>NGN 500,000</td>
+                                                        <td>Jan-05-2019</td>
+                                                        <td><a href="">Details</a></td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">James Edange</a></td>
+                                                        <td>NGN 500,000</td>
+                                                        <td>Jan-05-2019</td>
+                                                        <td><a href="">Details</a></td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">James Edange</a></td>
+                                                        <td>NGN 500,000</td>
+                                                        <td>Jan-05-2019</td>
+                                                        <td><a href="">Details</a></td>
+                                                    </tr>
+
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+
+                                            <a href="receiver-transaction-statement.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card latest-update-card">
+                                    <div class="card-header">
+                                        <h5>General Updates</h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="latest-update-box">
+                                            <div class="row p-t-20 p-b-30">
+                                                <div class="col-auto text-right update-meta">
+                                                    <p class="text-muted m-b-0 d-inline">2 hrs ago</p>
+                                                    <i class="fa  bg-info update-icon">L</i>
+
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="m-t-10"><a href="">Latest News About Partner</a></h6>
+                                                </div>
+                                            </div>
+                                            <div class="row p-b-30">
+                                                <div class="col-auto text-right update-meta">
+                                                    <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                    <i class="fa   bg-simple-c-pink update-icon">S</i>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="m-t-10"><span class="text-red">Sanction List Alert</span>  <a href="">Not available </a></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="row p-b-30">
+                                                <div class="col-auto text-right update-meta">
+                                                    <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                    <i class="fa   bg-simple-c-yellow update-icon">I</i>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="m-t-10">   <a href="">Invoice Due</a></h6>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="row p-b-30">
+                                                <div class="col-auto text-right update-meta">
+                                                    <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                    <i class="fa bg-simple-c-blue  update-icon">C</i>
+                                                </div>
+                                                <div class="col">
+                                                    <h6 class="m-t-10"><a href="">Latest Commission</a></h6>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class="b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Invoice </h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Status</th>
+                                                        <th>Type</th>
+                                                        <th>ID</th>
+                                                        <th>Date</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success">Paid</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-warning">Outstanding</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-inverse ">Coming up</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-success ">Paid</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-warning">Outstanding</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <label class="label label-inverse ">Coming up</label>
+                                                        </td>
+                                                        <td>Commission</td>
+                                                        <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                        <td>Today 2:00</td>
+                                                    </tr>
+
+
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center m-r-20">
+                                                <hr>
+                                                <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card latest-update-card">
+                                    <div class="card-header">
+                                        <h5>Partner Details</h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-block p-t-15">
+                                        <div class=" ">
+
+                                            <table class="table  table-responsive m-b-0">
+
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">
+                                                        Name
+                                                    </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">ABC Bank Ltd</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Business Type</th>
+                                                    <td class="social-user-name b-none text-muted">Finance</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">
+                                                        Agent Registration No.
+                                                    </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">356541</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">
+                                                        Business Registration No.
+                                                    </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">356541</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">Login No.</th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">356541</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Agent Type</th>
+                                                    <td class="social-user-name b-none text-muted">Principal</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Currency</th>
+                                                    <td class="social-user-name b-none text-muted">BGP</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">System Adminstrator</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">Peter Edah</td>
+                                                </tr>
+
+
+
+                                                <tr>
+                                                    <th class="social-label b-none">Main Contact Person</th>
+                                                    <td class="social-user-name b-none text-muted">James Elliot</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">City</th>
+                                                    <td class="social-user-name b-none text-muted">London</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        <a href="tel:+445458745475">+445458745475</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Office</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        <a href="tel:+445458745475">+445458745475</a>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted"><a href="mailto:info@abcbank.com">info@abcbank.com</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Address</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        10 Mearson Street<br> Hallow Road<br> TW1 1DQ<br> United Kingdom
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Due Diligence Reporting Officer</th>
+                                                    <td class="social-user-name b-none text-muted"><a href="">Louis Anegekhu</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Due Diligence Report</th>
+                                                    <td class="social-user-name b-none text-muted"><a href="">Report</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Due Diligence Document</th>
+                                                    <td class="social-user-name b-none text-muted"><a href="">Documents</a></td>
+                                                </tr>
+
+
+
+                                            </table>
+
+                                        </div>
+                                        <hr>
+                                        <div class="text-center">
+                                            <a href="partner-update-details.php" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update Details</a>
+
+                                            <button type="button" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</button>
+
+
+                                            <button type="button" class="btn btn-danger btn-round  s"><i class="fa fa-remove"></i> Delete</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="col-xl-6 col-md-12">
+                                <div class="card table-card">
+                                    <div class="card-header">
+                                        <h5>Documentation</h5>
+                                        <div class="card-header-right">
+                                            <ul class="list-unstyled card-option">
+
+                                                <li><i class="fa fa-window-maximize full-card"></i></li>
+                                                <li><i class="fa fa-refresh reload-card"></i></li>
+                                            </ul>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-block">
+                                        <div class="table-responsive">
+                                            <table class="table table-hover table-borderless">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Document</th>
+                                                        <th>Expiry Date</th>
+                                                        <th>Date + Time</th>
+
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td><a href="">Financial</a></td>
+                                                        <td>Jan-05-2020</td>
+                                                        <td>Jan-01-2019 12:45pm</td>
+
+                                                        <td class="action-icon">
+                                                            <a href=" " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center m-r-20">
+                                                <hr>
+                                                <a href="partner-documentation.php" class=" b-b-primary text-primary">View all  </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!--  <div id="styleSelector">
+            </div> -->
+            </div>
+        </div>
+    </div>

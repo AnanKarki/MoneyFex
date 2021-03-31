@@ -1,0 +1,197 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.DailyTransactionStatementViewModel
+@{
+    ViewBag.Title = "DailyTransactionStatement";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+    string Commision1 = Model.Commission.ToString("0.00").Split('.')[0];
+    string Commision2 = Model.Commission.ToString("0.00").Split('.')[1];
+
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Agent Daily Transaction Statement     </h1>
+            </div>
+            <div class="col-lg-6">
+                <div class="text-right wallet-balance pull-right ">
+                    <h5>30-Day Commission</h5>
+                    <h1 class="text-primary">@Model.AgentCurrencySymbol@Commision1.<small class="text-primary">@Commision2</small></h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8  ">
+                <br><br><br><br>
+                <h3>Reference Number :   <span id="refNo">@Model.ReferenceNumber</span></h3>
+                @Html.HiddenFor(x => x.ReferenceNumber)
+            </div>
+            <div class="col-lg-4 pull-right mb40   ">
+                <div class="cardbody">
+
+                    <h3 class="text-primary  ">@FAXER.PORTAL.Common.AgentSession.AgentInformation.Name</h3>
+                    <i class="fa fa-map-mark"></i> @FAXER.PORTAL.Common.AgentSession.AgentInformation.Address1 , @FAXER.PORTAL.Common.AgentSession.AgentInformation.Address2
+                    <br>
+                    <i class="fa fa-phone"></i>  @FAXER.PORTAL.Common.AgentSession.AgentInformation.PhoneNumber<br>
+                    <i class="fa fa-envelope"></i>  <a href="mailto:@FAXER.PORTAL.Common.AgentSession.AgentInformation.Email">@FAXER.PORTAL.Common.AgentSession.AgentInformation.Email</a><br>
+                    @*<i class="fa fa-globe"></i> <a href="http://@FAXER.PORTAL.Common.AgentSession.AgentInformation.Website" target="_blank"> @FAXER.PORTAL.Common.AgentSession.AgentInformation.Website</a><br>*@
+                    MoneyFex Account No.   @FAXER.PORTAL.Common.AgentSession.AgentInformation.AccountNo
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+                <div class="clearfix">
+                    <hr>
+                </div>
+
+
+                <div class="row mb40">
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Day, (IEnumerable<SelectListItem>)ViewBag.Days, "select Day", new { @class = "form-control", id = "day", onchange = "filter();" })
+
+                        </div>
+                    </div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(m => m.Month, new { @class = "form-control", id = "month", onchange = "filter();" })
+
+                        </div>
+                    </div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.Year, (IEnumerable<SelectListItem>)ViewBag.Years, "select Year", new { @class = "form-control", id = "year", onchange = "filter();" })
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(m => m.TransactionType, "Transaction Type", new { @class = "form-control", id = "transactionType", onchange = "filter();" })
+
+                        </div>
+                    </div>
+                </div>
+
+                <a id="downloadButton" title="" class="btn btn-primary mb20 pull-left" onclick="downloadStatement();">Download Statement</a>
+
+                <h1>  <span class="pull-right account-balance">Account Balance :<strong class="  text-primary italic"> @Model.AgentCurrencySymbol @Model.AccountBalance</strong></span></h1>
+
+                <div class="mb30 ">
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table table-bordered" id="DataTable">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Method </th>
+                                <th>Type </th>
+                                <th>Amount</th>
+                                <th>Fee</th>
+                                <th>Commission</th>
+                                <th>Identifier</th>
+                                <th>Date & Time</th>
+                                <th>Staff Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ int i = 0;}
+                            @foreach (var item in Model.TransactionList)
+                            {
+                                i++;
+
+                                <tr>
+
+                                    <td>@i</td>
+                                    <td>@item.TransactionTypeName</td>
+                                    <td>@item.Type </td>
+                                    <td>@item.CurrencySymbol@item.Amount</td>
+                                    <td>@item.CurrencySymbol@item.Fee</td>
+                                    <td>@item.CurrencySymbol@item.AgentCommission</td>
+                                    <td>
+                                        <a href="@Url.Action("AgentTransactionDetail","AgentDashboard", new { @id = item.Id , @transactionService = item.TransactionType,@Type=item.Type})">@item.TransactionIdentifier</a>
+                                    </td>
+                                    <td>@item.FormatedDate</td>
+                                    <td>@item.StaffName</td>
+
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>  
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="@Url.Action("Index")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function filter() {
+     
+            var referenceNo = $("#refNo")[0].innerText;
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            var transactionType = $("#transactionType").val();
+            window.location.href = "/Agent/AgentDashboard/DailyTransactionStatement?referenceNumber=" + referenceNo + "&day=" + day + "&month=" + month + "&year=" + year + "&transactionType=" + transactionType;
+
+
+        }
+
+        function downloadStatement() {
+
+            var referenceNo = $("#refNo")[0].innerText;
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            var transactionType = $("#transactionType").val();
+            $("#refNo").text("");
+            $("#downloadButton").hide();
+            window.location.href = "/Agent/AgentDashboard/DownloadStatement?referenceNumber=" + referenceNo + "&day=" + day + "&month=" + month + "&year=" + year + "&transactionType=" + transactionType;
+        }
+
+
+
+
+
+    </script>
+
+}

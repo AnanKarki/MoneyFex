@@ -1,0 +1,423 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PayoutFlowControlViewModel
+@{
+    ViewBag.Title = "SetPayoutFlowControl";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div id="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Payount Flow Control Setup </h4>
+                                        <a href="@Url.Action("Index", "PayoutFlowControl")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+
+
+                                        <div class="row" data-bind="with:$root.Master">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Currency</label>
+
+                                                    <select data-bind="options: $root.Currencies,
+                       optionsText: 'Name',
+                       optionsValue: 'Code',
+                       value: SendingCurrency,
+                       optionsCaption: 'Select Sending Currency'" class="form-control form-control-lg form-control-round form-control-bold"></select>
+
+                                                    @Html.ValidationMessageFor(x => x.Master.SendingCurrency, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Currency</label>
+
+                                                    <select data-bind="options: $root.Currencies,
+                       optionsText: 'Name',
+                       optionsValue: 'Code',
+                       value: ReceivingCurrency,
+                       optionsCaption: 'Select Receiving Currency'" class="form-control form-control-lg form-control-round form-control-bold"></select>
+
+
+                                                    @Html.ValidationMessageFor(x => x.Master.ReceivingCurrency, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    <select data-bind="options: $root.TransferMethods,
+                       optionsText: 'Name',
+                       optionsValue: 'Id',
+                       value: TransferMethod , event:{'change' : $root.GetBankOrWallets} " class="form-control form-control-lg form-control-round form-control-bold" id="TransferMethod"></select>
+                                                    @*@Html.EnumDropDownListFor(x => x.Master.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })*@
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Payout API</label>
+                                                    <select data-bind="options: $root.ApiSerives,
+                       optionsText: 'Name',
+                       optionsValue: 'Id',
+                       value: PayoutApi" class="form-control form-control-lg form-control-round form-control-bold"></select>
+
+                                                    @Html.ValidationMessageFor(x => x.Master.PayoutApi, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div id="PayoutFlowDetails">
+                                                    <table class="table table-bordered table-striped  " cellspacing="0" width="100%">
+                                                        <thead>
+                                                            <tr>
+
+                                                                <td><strong>Payout Provider </strong></td>
+                                                                <td><strong>Action</strong></td>
+                                                            </tr>
+                                                        </thead>
+
+
+                                                        <tbody data-bind="foreach:$root.Details">
+                                                            <tr>
+                                                                <td class="WrodWrapper" data-bind="text:$root.GetBankOrWalletsName(PayoutProviderId)">
+                                                                </td>
+                                                                <td class="text-center">
+                                                                    <button type="button" class="btn btn-primary" data-bind="click:$root.RemoveDetail"><i class="fa fa-remove"></i></button>
+                                                                </td>
+
+                                                                <td></td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                        <tfoot data-bind="with:$root.Detail">
+                                                            <tr>
+
+                                                                <td>
+                                                                    <select data-bind="options: $root.BankOrWallets,
+                       optionsText: 'Name',
+                       optionsValue: 'Id',
+                       value: PayoutProviderId" class="form-control form-control-lg form-control-round form-control-bold"></select>
+
+                                                                </td>
+                                                                <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddDetails">Add </button> </td>
+                                                            </tr>
+                                                        </tfoot>
+
+
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","PayoutFlowControl")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                @*<button type="button" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>*@
+                                                <button type="button" class="btn btn-primary btn-round pull-right" data-bind="click:$root.CreateORUpdate"><i class="fa fa-save"></i> Save</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    <script src="~/Areas/Admin/css/toastr.js"></script>
+
+    <script type="text/javascript">
+
+
+        function MasterModel(item) {
+
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.SendingCurrency = ko.observable(item.SendingCurrency || '');
+            self.ReceivingCurrency = ko.observable(item.ReceivingCurrency || '');
+            self.TransferMethod = ko.observable(item.TransferMethod || '');
+            self.PayoutApi = ko.observable(item.PayoutApi || '');
+            self.CreatedBy = ko.observable(item.CreatedBy || '');
+            self.CreatedDate = ko.observable(item.CreatedDate || '');
+            self.IsPayoutEnabled = ko.observable(item.IsPayoutEnabled || '');
+        }
+
+        function DetailsModel(item) {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.PayoutProviderId = ko.observable(item.PayoutProviderId || 0);
+            self.PayoutFlowControlId = ko.observable(item.PayoutFlowControlId || 0);
+        }
+
+        function CurrencyDropDownModel(item)
+        {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.Code = ko.observable(item.Code || 0);
+            self.Name = ko.observable(item.Name || 0);
+        }
+
+        function BankOrWalletDropDownModel(item)
+        {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.Name = ko.observable(item.Name || 0);
+        }
+
+
+        function PayoutFlowControl(Id) {
+            var self = this;
+            var url = "/Admin/PayoutFlowControl";
+            self.Master = ko.observable(new MasterModel());
+            self.Detail = ko.observable(new DetailsModel());
+            self.Details = ko.observableArray([]);
+            self.Currencies = ko.observableArray([]);
+
+            $(document).ready(function () {
+                var transferMethod = $('#TransferMethod').val();
+
+                if (transferMethod != null) {
+                  //  self.GetBankOrWallets();
+                }
+
+            });
+
+
+            self.BankOrWallets= ko.observableArray([]);
+            self.TransferMethods = ko.observableArray([
+                { Name: 'Select Transfer Method', Id: 0 },
+                { Name: 'Cash PickUp', Id: 1 },
+                { Name: 'KiiPay Wallet', Id: 2 },
+                { Name: 'Other Wallet', Id: 3 },
+                { Name: 'Bank Deposit', Id: 4 },
+                { Name: 'Bill Payment', Id: 5 },
+                { Name: 'Service Payment', Id: 6 },
+            ]);
+
+            self.ApiSerives = ko.observableArray([
+                { Name: 'VGG', Id: 0 },
+                { Name: 'TransferZero', Id: 1 },
+                { Name: 'EmergentApi', Id: 2 },
+                { Name: 'MTN', Id: 3},
+                { Name: 'Zenith', Id: 4},
+            ]);
+
+
+            GetCurrency();
+            function GetCurrency() {
+                Riddha.ajax.get(url + "/GetCurrency").done(function (result) {
+                    if (result.Status == 1) {
+                        var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), CurrencyDropDownModel);
+                        self.Currencies(data);
+                    }
+                })
+            }
+
+            self.GetBankOrWallets = function() {
+
+                var transferMethod = $('#TransferMethod').val();
+                if (transferMethod != null || transferMethod != undefined) {
+                    if (transferMethod == 1) {
+
+                        $('#PayoutFlowDetails').hide();
+
+                    }
+                    else {
+                        Riddha.ajax.get(url + "/GetBankOrWallet?transferMethod=" + transferMethod).done(function (result) {
+                            if (result.Status == 1) {
+                                var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), BankOrWalletDropDownModel);
+                                self.BankOrWallets(data);
+                            }
+                        });
+
+
+                    }
+
+                }
+
+            }
+
+            GetBankOrWalletData();
+            function GetBankOrWalletData() {
+
+                var transferMethod = '@ViewBag.TransferMethod';
+
+                if (transferMethod == 1) {
+                    $('#PayoutFlowDetails').hide();
+
+                }
+                else {
+                    $('#PayoutFlowDetails').show();
+
+                    Riddha.ajax.get(url + "/GetBankOrWallet?transferMethod=" + transferMethod).done(function (result) {
+                        if (result.Status == 1) {
+                            var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), BankOrWalletDropDownModel);
+                            self.BankOrWallets(data);
+                        }
+                    });
+                }
+            }
+
+            self.GetBankOrWalletsName = function (id) {
+                debugger;
+                var mapped = ko.utils.arrayFirst(self.BankOrWallets(), function (item) {
+                    return item.Id() == id();
+                });
+
+                if (mapped != null || mapped != undefined) {
+                    return mapped.Name();
+                }
+                else {
+                    return "";
+                }
+            };
+
+            self.RemoveDetail = function (model) {
+                self.Details.remove(model);
+            }
+
+
+            self.GetPayoutFlowControlDetails = function (payoutFlowControlId) {
+                if (payoutFlowControlId > 0) {
+                    Riddha.ajax.get(url + "/GetDetails?payoutFlowControlId=" + payoutFlowControlId)
+                        .done(function (result) {
+                            if (result.Status == 1) {
+                                self.Master(new MasterModel(result.Data.Master));
+                                if (result.Data.Master.TransferMethod == 1) {
+
+                                    $('#PayoutFlowDetails').hide();
+                                }
+                                else {
+                                    $('#PayoutFlowDetails').show();
+                                    var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data.Details), DetailsModel);
+
+                                    self.Details(data);
+                                }
+                                
+                            }
+                        });
+                }
+            }
+
+
+
+            self.GetPayoutFlowControlDetails(Id);
+
+            self.AddDetails = function (model) {
+                self.Detail(model);
+                self.Details.push(self.Detail());
+
+                self.Detail(new DetailsModel());
+
+            }
+
+            self.CreateORUpdate = function (result) {
+                if (self.Master().SendingCurrency() == "" || self.Master().SendingCurrency() == undefined) {
+
+                    Riddha.UI.Toast('Select sending currency', 0);
+                    return;
+                }
+                if (self.Master().ReceivingCurrency() == "" || self.Master().ReceivingCurrency() == undefined) {
+                    Riddha.UI.Toast('Select receiving currency', 0);
+                    return;
+                }
+                if (self.Master().TransferMethod() == 0) {
+                    Riddha.UI.Toast('Select transfer method', 0);
+                    return;
+                }
+
+                if (self.Master().TransferMethod() != 1) {
+                    if (self.Details().length == 0) {
+                    Riddha.UI.Toast('Enter Details', 0);
+
+                    return;
+                    }
+                }
+
+                var data = {
+
+                    Master: self.Master(),
+                    Details: self.Details()
+                };
+
+                debugger;
+                Riddha.ajax.post(url + "/SavePayoutFlow", data)
+                    .done(function (result) {
+                        if (result.Status == 1) {
+                            Riddha.UI.Toast(result.Message, 4);
+                            self.ResetModel();
+                        }
+
+                    });
+                window.location.href = "/Admin/PayoutFlowControl/Index";
+
+
+
+            }
+            self.ResetModel = function () {
+
+                self.Master(new MasterModel());
+                self.Details([]);
+
+            }
+
+        }
+
+
+        ko.cleanNode(document.getElementById("page-wrapper"));
+        var obj1 = new PayoutFlowControl('@ViewBag.Id');
+        ko.applyBindings(obj1, document.getElementById("page-wrapper"));
+
+
+    </script>
+}

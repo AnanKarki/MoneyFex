@@ -1,0 +1,244 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessOwnerInformationVm
+@{
+    ViewBag.Title = "BusinessContactDetails";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Business Owner Information</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    <form>
+        <div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="login_signup">
+
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label> First Name <span class="required">*</span></label>
+                            </div>
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Middle Name </label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.MiddleName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-5">
+                                <label>Last Name <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.IsAddressSame, new { id = "IsSameAddress" }) Check box if address is the same  with business
+                                      
+                                        @*<input type="checkbox" name=" " value=" ">*@
+                                    </label>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="clearfix"></div>
+                            <hr>
+
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+
+                                    <label> Address Line 1 <span class="required">*</span></label>
+                                </div>
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.AddressLine1, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.AddressLine1, "", new { @class = "text-danger" })
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label> Address Line 2</label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.AddressLine2, new { @class = "form-control", @placeholder = "" })
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>City <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.City, "", new { @class = "text-danger" })
+                                </div>	<div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>Province / Region / State <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.State, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.State, "", new { @class = "text-danger" })
+                                </div>	<div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>Post Code / Zipcode <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.ZipCode, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.ZipCode, "", new { @class = "text-danger" })
+                                </div>	<div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>Country <span class="required">*</span></label>  
+                                </div>
+                                <div class="col-lg-6 ">
+                                    @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>Contact No. <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control", @placeholder = "" })
+                                    @Html.ValidationMessageFor(Model => Model.ContactNo, "", new { @class = "text-danger" })
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-5">
+                                    <label>Email Address<span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-6 ">
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "", @type = "Email" })
+                                    @Html.ValidationMessageFor(Model => Model.EmailAddress, "", new { @class = "text-danger" })
+                                </div><div class="clearfix"></div>
+                            </div>
+                            <!--  -->
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+        <!--  -->
+        <!--  -->
+        <div class="dynamic_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <a href="/Businesses/BusinessRegistration/SignUp" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                        <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <br>
+                        @*<a href="" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Next</a>*@
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+<!--  -->
+@section Scripts{
+    <script type="text/javascript">
+
+        $('#IsSameAddress').on('change', function () {
+
+            if ($(this)[0].checked == true) {
+
+                FillData();
+            }
+
+            else {
+                document.getElementsByName("AddressLine1")[0].value = "";
+                document.getElementsByName("AddressLine2")[0].value = "";
+                document.getElementsByName("City")[0].value = "";
+                document.getElementsByName("ContactNo")[0].value = "";
+                document.getElementsByName("CountryId")[0].value = "";
+                document.getElementsByName("State")[0].value = "";
+                document.getElementsByName("ZipCode")[0].value = "";
+            }
+
+        });
+        function FillData() {
+            $.getJSON("/BusinessRegistration/GetAddressDetails", function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+
+                }
+            });
+        }
+    </script>
+}

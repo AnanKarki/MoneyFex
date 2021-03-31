@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="kiipay-main-header">
+
+                <!--  -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  ">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard  </h1>
+                    </div>
+                    <div class="text-center   mt10">
+                        <button type="button" class="btn btn-primary  radius-20" data-toggle="modal" data-target="#ecard">KiiPay</button>
+
+                    </div>
+
+                </div>
+                <!--  -->
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class=" ">
+
+                    <div class=" dashboard_body ">
+
+                        <div class="mobile_design text-center  ">
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("Index","TransferMoneyNow")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/transfermoney.svg">
+                                            
+                                        </div>
+                                        <h4>Transfer  Money  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("PayBills")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/paybills.svg">
+                                        </div>
+                                        <h4>Pay Bills  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("Index","PayForGoodsAndServices")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/payforservices.svg">
+                                        </div>
+                                        <h4>Pay for Services   </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("Index","RequestAPayment")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/request-payment.svg">
+                                        </div>
+                                        <h4>Request a Payment  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a  onclick="getWithdrawalCode()">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/get-withdrawal-code.svg">
+                                        </div>
+                                        <h4>Get Withdrawal Code</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","WalletStatement")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/statement.svg">
+                                        </div>
+                                        <h4>Wallet Statement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <!-- <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                              <div class="dashboard_thumb">
+                                <a href="add-money-to-wallet.php">
+                                  <div class="das-icon">
+                                    <img src="images/icon/svg/add-money-to-wallet.svg">
+                                  </div>
+                                  <h4> Add Money to Wallet</h4>
+                                </a>
+                              </div>
+                            </div> -->
+
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("AddAndWithdrawFromWallet")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/kiipay.svg">
+                                        </div>
+                                        <h4>Add & Withdraw<br> Money from Wallet</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("WalletUsageControl")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/wallet-usage-control.svg">
+                                        </div>
+                                        <h4>  Wallet Usage Control</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+    </div>
+    <!--  -->
+</section>
+<!-- withdrawal-code -->
+<div class="modal fade" tabindex="-1" id="withdrawal-code" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-card" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h1>Your code is  <br> <span class="text-primary" name="withdrawalCode"> </span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- withdrawal-code -->
+@section Scripts{
+    <script type="text/javascript">
+        function getWithdrawalCode() {
+            $.getJSON('/KiiPayPersonal/Dashboard/GetWithdrawalCode', function (data) {
+                if (data.Code == "" || data.Code == undefined) {
+                    return;
+                }
+                else {
+                    $('[name=withdrawalCode]').text(data.Code);
+                    $("#withdrawal-code").modal('show');
+                }
+            });
+            return;
+        }
+
+
+    </script>
+    
+    }

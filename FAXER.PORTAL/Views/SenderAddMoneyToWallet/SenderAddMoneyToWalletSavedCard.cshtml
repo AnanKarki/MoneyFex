@@ -1,0 +1,175 @@
+﻿@model FAXER.PORTAL.Models.SenderAddMoneyToWalletSavedCardViewModel
+@{
+    ViewBag.Title = "SenderAddMoneyToWalletSavedCard";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] AvailableBalance = Model.AvailableBalance.ToString("0.00").Split('.');
+    string[] SendingBalance = Model.Amount.ToString("0.00").Split('.');
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@Model.SendingCurrencySymbol @AvailableBalance[0].<small class="text-primary">@AvailableBalance[1]</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount</h5>
+                                <h1 class="text-primary">@Model.SendingCurrencySymbol @SendingBalance[0].<small class="text-primary">@SendingBalance[1]</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+
+                        </div>
+                        @Html.HiddenFor(model => model.AvailableBalance)
+                        @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                        @Html.HiddenFor(model => model.Amount)
+
+
+                        <ul class="paymentmethod-list mt20 mb20">
+                            <h4 class="text-left">@Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })</h4>
+                            <h4 class="text-left">How do you want to add ?</h4>
+                            <li>
+
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var item in Model.CardDetails)
+                                {
+                                    <label>
+                                        @Html.RadioButtonFor(model => Model.CardDetails[index].IsChecked, true, new { @type = "radio", @id = item.CardId, @onchange = "RadioChange();" })
+                                        <span class="cardsaved hidden-xs">
+
+                                            @if (item.CreditDebitCardType == FAXER.PORTAL.Models.CreditDebitCardType.MasterCard)
+                                            {
+                                                <img src="~/Content/images/icon/card/visa.png">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/icon/card/master-card.png">
+                                            }
+
+                                        </span><span class="title">Saved Credit/Debit Card</span> <span class="subtitle"> @item.CardNumber</span>
+                                    </label>
+
+                                    @Html.HiddenFor(model => Model.CardDetails[index].CardId)
+
+                                    @Html.HiddenFor(model => Model.CardDetails[index].CardNumber)
+                                    index++;
+
+                                }
+                            </li>
+                            @*<li>
+                                    <label><input type="radio" name="radio" id="0" checked="checked" onchange="RadioChange()"> <span class="cardsaved hidden-xs"> </span> <span class="title"> Credit/Debit  </span> <span class="subtitle"><a href="@Url.Action("AddMoneyToWalletEnterCardInformation")">Card details required</a></span></label>
+                                </li>*@
+                            <li>
+                                <label>
+                                    <input type="radio" name="radio" id="0" checked="checked" onchange="RadioChange()"> <span class="cardsaved hidden-xs">
+                                        <img src="~/Content/images/icon/card/visa.png">
+                                    </span> <span class="title"> Credit/Debit  </span> <span class="subtitle">Card details required</span>
+                                </label>
+                            </li>
+
+                            @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("StripeError", "", new { @class = "text-danger" })
+
+                            <p class="text-left"><small>Card processing fees may apply</small></p>
+
+
+                            <div class="text-left">
+                                <a href="@Url.Action("SenderAddMoneyCard","SenderAddMoneyToWallet")"><i class="fa fa-plus"></i> Add New Card</a>
+                            </div>
+
+                        </ul>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+                        <a class="btn btn-primary btn-lg mb30" onclick="submit()">Add Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function RadioChange() {
+            debugger;
+            $("input[type=radio]").prop('checked', false)
+            event.target.checked = true;
+            event.target.value = true;
+            if (event.target.id > 0) {
+
+                $("02").show();
+                $("01").hide();
+                //$("form").submit();
+
+            } else {
+
+
+                $("01").show();
+                $("02").hide();
+                //window.location.href = "AddMoneyToWalletEnterCardInformation";
+            }
+        }
+
+
+        function submit() {
+
+            var id = "";
+            $("input[type=radio]").each(function () {
+                debugger;
+                if ($(this)[0].checked == true) {
+                    id = $(this)[0].id;
+                    return;
+                };
+
+            });
+            if (id > 0) {
+
+                //$("02").show();
+                //$("01").hide();
+                $("form").submit();
+
+            } else {
+
+
+                //$("01").show();
+                //$("02").hide();
+                window.location.href = "SenderAddMoneyCard";
+            }
+        }
+
+
+    </script>
+}

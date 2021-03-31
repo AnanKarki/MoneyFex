@@ -1,0 +1,68 @@
+﻿@model FAXER.PORTAL.Models.SenderPayingSupplierAbroadReferenceOneVM
+@{
+    ViewBag.Title = "PayBillsReferenceSuccess";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                @Html.HiddenFor(model=>model.ReceiverName)
+                @Html.HiddenFor(model=>model.ReferenceNo)
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="@Model.PhotoUrl" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.ReceiverName</span>
+                            </div>
+                        </div>
+                        <div class="pinside20">
+                            <div class="referencecode ">
+                                <div class="col-lg-5">
+                                    <img src="~/Content/images/kiipay.png" width="80"> <b>Ref:</b>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    @Model.ReferenceNo
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                        </div>
+
+                        <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                        <h2 class=" ">Done !<br><small>Thank you</small></h2>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <a href="@Url.Action("SenderBillingServices")" class="btn btn-primary btn-lg   ">Pay another Bill <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+                        <div class="clearfix mb30">
+                        </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard   </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+    }
+}

@@ -1,0 +1,709 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentTransactionHistoryViewModel
+@{
+    ViewBag.Title = "TransactionDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@if (Model.FilterKey == FAXER.PORTAL.Areas.Agent.Models.TransactionType.KiiPayWallet && Model.FilterType == FAXER.PORTAL.Areas.Agent.Models.Type.Transfer)
+{
+    <!-- CashPickUp -->
+    foreach (var item in Model.TransactionHistoryList)
+    {
+
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+
+                        <div class="page-body">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="card">
+
+                                        <div class="card-header border-bottom">
+                                            <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@item.ReceiverName</label>  <span>Account No: @item.AccountNumber<br>Agent Login Code: </span></h4>
+                                            <a href="@Url.Action("Index","AUXAgentRecentTransaction")" class=" btn btn-primary f-right btn-round">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </a>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                                <div class="dt-responsive table-responsive">
+
+                                                    <table width="100%">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  @item.Type </h5>
+                                                                        <span class="text-primary">@item.ReceiptNumber</span>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td align="right">
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  KiiPay Wallet  </h5>
+                                                                        <span class="text-success">@item.Status</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-striped table-bordered nowrap">
+
+                                                        <tbody>
+
+
+                                                            <tr>
+                                                                <td class="text-left">Sender Name</td>
+                                                                <td class="text-left"> @item.SenderName</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left"> @item.SenderEmail</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Telephone</td>
+                                                                <td class="text-left">@item.SenderNumber</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Receiver's Dath of Birth</td>
+                                                                <td class="text-left"> @item.ReceiverDOB</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver's Name</td>
+                                                                <td class="text-left"> @item.ReceiverName</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left"> @item.ReceiverEmail</td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td class="text-left">KiiPay Wallet Number</td>
+                                                                <td class="text-left"> <a href="">@item.ReceiverNumber</a></td>
+                                                            </tr>
+
+
+                                                            <tr>
+
+                                                                <td class="text-left">Agent Name</td>
+                                                                <td class="text-left"><a href="">@item.AgentName</a></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Agent Number</td>
+                                                                <td class="text-left"><a href="">@item.AgentNumber</a></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Transaction Staff</td>
+                                                                <td class="text-left"><a href="">@item.TransactionStaff</a></td>
+                                                            </tr>
+
+                                                            <tr>
+
+                                                                <td class="text-left">Receiving Country</td>
+                                                                <td class="text-left"> @item.ReceiverCountry</td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td class="text-left">Sending Amount</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountSent</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Fee</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.Fee</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Paid</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountPaid</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Exchange Rate</td>
+                                                                <td class="text-left"> 1 @item.SendingCurrency = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">@item.ReceiverName will Receive</td>
+                                                                <td class="text-left"> @item.ReceivingCurrencySymbol @item.ReceivingAmount @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Payment Method</td>
+                                                                <td class="text-left">@item.PaymentMethod</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Date</td>
+                                                                <td class="text-left">@item.TransactionDate</td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-footer bg-light">
+                                            <div class="row">
+                                                <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+                                                    <button type="button" class="btn btn-success btn-round m-r-20" onclick="repeatKiiPayTransfer('@item.ReceiptNumber','@item.SenderNumber')"><i class="fa fa-repeat"></i> Repeat</button>
+
+                                                    <button type="button" style="color:grey" class="btn btn-warning btn-round m-r-20" disabled><i class="fa fa-money"></i> Refund</button>
+
+                                                    <button type="button" class="btn btn-danger btn-round m-r-20"><i class="fa fa-remove"></i> Cancel</button>
+
+                                                    <a href="@Url.Action(" PrintReceiptOfKiiPayWallet","AgentDashboard" , new { @Area="Agent" , @TransactionId=item.Id , transactionService=FAXER.PORTAL.Areas.Agent.Models.TransactionType.KiiPayWallet , @AgentId=ViewBag.AgentId })" class="btn btn-primary btn-round"><i class="fa fa-print"></i> Print</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    }
+}
+
+@if (Model.FilterKey == FAXER.PORTAL.Areas.Agent.Models.TransactionType.CashPickUp && Model.FilterType == FAXER.PORTAL.Areas.Agent.Models.Type.Transfer)
+{
+    <!-- CashPickUp -->
+    foreach (var item in Model.TransactionHistoryList)
+    {
+
+
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+
+                        <div class="page-body">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="card">
+
+                                        <div class="card-header border-bottom">
+                                            <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@item.ReceiverName</label>  <span>Account No: @item.AccountNumber<br>Agent Login Code: </span></h4>
+                                            <a href="@Url.Action("Index","AUXAgentRecentTransaction")" class=" btn btn-primary f-right btn-round">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </a>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                                <div class="dt-responsive table-responsive">
+
+                                                    <table width="100%">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  @item.Type </h5>
+                                                                        <span class="text-primary">@item.ReceiptNumber</span>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td align="right">
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  Cash Pickup </h5>
+                                                                        <span class="text-success">@item.Status</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-striped table-bordered nowrap">
+
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td class="text-left">MFCN</td>
+                                                                <td class="text-left">@item.MFCN</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Sender Name</td>
+                                                                <td class="text-left"> @item.SenderName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left"> @item.SenderEmail</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Sender Telephone</td>
+                                                                <td class="text-left"> @item.SenderNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver's Name</td>
+                                                                <td class="text-left"> @item.ReceiverName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left">@item.ReceiverEmail</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver Telephone</td>
+                                                                <td class="text-left">@item.ReceiverNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Name</td>
+                                                                <td class="text-left"><a href="">@item.AgentName</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Number</td>
+                                                                <td class="text-left"><a href="">@item.AgentNumber</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Transaction Staff</td>
+                                                                <td class="text-left"><a href="">@item.TransactionStaff</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">City</td>
+                                                                <td class="text-left"> @item.ReceiverCity</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Country</td>
+                                                                <td class="text-left"> @item.ReceiverCountry</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Sending Amount</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountSent</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Fee</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.Fee</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Paid</td>
+                                                                <td class="text-left">@item.SendingCurrencySymbol @item.AmountPaid</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Exchange Rate</td>
+                                                                <td class="text-left"> 1 @item.SendingCurrency = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">@ViewBag.ReceiverFirstName will receive</td>
+                                                                <td class="text-left"> @item.ReceivingCurrencySymbol @item.ReceivingAmount @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Payment Method</td>
+                                                                <td class="text-left">@item.PaymentMethod</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Date</td>
+                                                                <td class="text-left">@item.TransactionDate</td>
+                                                            </tr>
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-footer bg-light">
+                                            <div class="row">
+                                                <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+                                                    <button type="button" class="btn btn-success btn-round m-r-20" onclick="repeatCashPickUpTransfer('@item.ReceiptNumber','@item.SenderNumber')"><i class="fa fa-repeat"></i> Repeat</button>
+
+                                                    <button type="button" style="color:grey" class="btn btn-warning btn-round m-r-20" disabled><i class="fa fa-money"></i> Refund</button>
+
+                                                    <button type="button" class="btn btn-danger btn-round m-r-20"><i class="fa fa-remove"></i> Cancel</button>
+                                                    <a href="@Url.Action(" PrintReceiptOfCashPickUp","AgentDashboard" , new { @Area="Agent" , @TransactionId=item.Id , transactionService=FAXER.PORTAL.Areas.Agent.Models.TransactionType.CashPickUp , AgentId=ViewBag.AgentId })"  class="btn btn-primary btn-round"><i class="fa fa-print"></i> Print</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+     
+
+    }
+}
+
+@if (Model.FilterKey == FAXER.PORTAL.Areas.Agent.Models.TransactionType.OtherWalletTransfer)
+{
+    <!-- CashPickUp -->
+    foreach (var item in Model.TransactionHistoryList)
+    {
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+
+                        <div class="page-body">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="card">
+
+                                        <div class="card-header border-bottom">
+                                            <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@item.ReceiverName</label>  <span>Account No: @item.AccountNumber<br>Agent Login Code: </span></h4>
+                                            <a href="@Url.Action("Index","AUXAgentRecentTransaction")" class=" btn btn-primary f-right btn-round">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </a>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                                <div class="dt-responsive table-responsive">
+
+                                                    <table width="100%">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  @item.Type </h5>
+                                                                        <span class="text-primary">@item.ReceiptNumber</span>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td align="right">
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5> Other Wallet </h5>
+                                                                        <span class="text-success">@item.Status</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-striped table-bordered nowrap">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-left">Sender</td>
+                                                                <td class="text-left"> @item.SenderName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left"> @item.SenderEmail</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Sender Telephone</td>
+                                                                <td class="text-left"> @item.SenderNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver Name</td>
+                                                                <td class="text-left">@item.ReceiverName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver Telephone</td>
+                                                                <td class="text-left"> @item.ReceiverNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Name</td>
+                                                                <td class="text-left"><a href="">@item.AgentName</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Number</td>
+                                                                <td class="text-left"><a href="">@item.AgentNumber</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Transaction Staff</td>
+                                                                <td class="text-left"><a href="">@item.TransactionStaff</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">City</td>
+                                                                <td class="text-left"> @item.ReceiverCity</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left"> Country</td>
+                                                                <td class="text-left"> @item.ReceiverCountry</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Sent</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountSent</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Fee</td>
+                                                                <td class="text-left">@item.SendingCurrencySymbol @item.Fee</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Paid</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountPaid</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Exchange Rate</td>
+                                                                <td class="text-left"> @item.SendingCurrency 1 = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">@ViewBag.ReceiverFirstName will receive</td>
+                                                                <td class="text-left"> @item.ReceivingCurrencySymbol @item.ReceivingAmount @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Payment Method</td>
+                                                                <td class="text-left">@item.PaymentMethod</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Date</td>
+                                                                <td class="text-left">@item.TransactionDate</td>
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-footer bg-light">
+                                            <div class="row">
+                                                <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+                                                    <button type="button" class="btn btn-success btn-round m-r-20" onclick="repeatMobileWalleTransfer('@item.ReceiptNumber','@item.SenderNumber')"><i class="fa fa-repeat"></i> Repeat</button>
+
+                                                    <button type="button" style="color:grey" class="btn btn-warning btn-round m-r-20" disabled><i class="fa fa-money"></i> Refund</button>
+
+                                                    <button type="button" class="btn btn-danger btn-round m-r-20"><i class="fa fa-remove"></i> Cancel</button>
+
+                                                    <a href="@Url.Action(" PrintReceiptOfOtherWallet","AgentDashboard" , new { @Area="Agent" , @TransactionId=item.Id , transactionService=FAXER.PORTAL.Areas.Agent.Models.TransactionType.OtherWalletTransfer , @AgentId=ViewBag.AgentId })" class="btn btn-primary btn-round"><i class="fa fa-print"></i> Print</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+@if (Model.FilterKey == FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit)
+{
+    <!-- CashPickUp -->
+    foreach (var item in Model.TransactionHistoryList)
+    {
+        <div class="pcoded-content">
+            <div class="pcoded-inner-content">
+
+                <div class="main-body">
+                    <div class="page-wrapper">
+
+                        <div class="page-body">
+                            <div class="row">
+
+                                <div class="col-sm-12">
+
+                                    <div class="card">
+
+                                        <div class="card-header border-bottom">
+                                            <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@item.BankName/@item.ReceiverName</label>  <span>Account No: @item.AccountNumber<br>Agent Login Code: </span></h4>
+                                            <a href="@Url.Action("Index","AUXAgentRecentTransaction")" class=" btn btn-primary f-right btn-round">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </a>
+                                        </div>
+
+                                        <div class="card-body">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                                <div class="dt-responsive table-responsive">
+
+                                                    <table width="100%">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  @item.Type </h5>
+                                                                        <span class="text-primary">@item.ReceiptNumber</span>
+                                                                    </div>
+                                                                </td>
+
+                                                                <td align="right">
+                                                                    <div class="p-t-10 p-b-10">
+
+                                                                        <h5>  Bank Deposit </h5>
+                                                                        <span class="text-success">@item.Status</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <table class="table table-striped table-bordered nowrap">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-left">Sender</td>
+                                                                <td class="text-left"> @item.SenderName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Email Address</td>
+                                                                <td class="text-left"> @item.SenderEmail</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Telephone</td>
+                                                                <td class="text-left"> @item.SenderNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver Name</td>
+                                                                <td class="text-left"> @item.ReceiverName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Bank Name</td>
+                                                                <td class="text-left"> @item.BankName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Bank Branch</td>
+                                                                <td class="text-left"> @item.BankBranch</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Account Number</td>
+                                                                <td class="text-left">@item.AccountNumber</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Name</td>
+                                                                <td class="text-left"><a href="">@item.AgentName</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Agent Number</td>
+                                                                <td class="text-left"><a href="">@item.AgentNumber</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Transaction Staff</td>
+                                                                <td class="text-left"><a href="">@item.TransactionStaff</a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Receiver Country</td>
+                                                                <td class="text-left"> @item.ReceiverCountry</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Sent</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountSent</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Fee</td>
+                                                                <td class="text-left">@item.SendingCurrencySymbol @item.Fee</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Amount Paid</td>
+                                                                <td class="text-left"> @item.SendingCurrencySymbol @item.AmountPaid</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Exchange Rate</td>
+                                                                <td class="text-left"> 1 @item.SendingCurrency  = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">@ViewBag.ReceiverFirstName will receive</td>
+                                                                <td class="text-left"> @item.ReceivingCurrencySymbol @item.ReceivingAmount @item.ReceivingCurrrency</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Payment Method</td>
+                                                                <td class="text-left">@item.PaymentMethod</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Date</td>
+                                                                <td class="text-left">@item.TransactionDate</td>
+                                                            </tr>
+
+                                                        </tbody>
+
+                                                    </table>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="card-footer bg-light">
+                                            <div class="row">
+                                                <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+                                                    <button type="button" class="btn btn-success btn-round m-r-20" onclick="repeatBankAccountDeposit('@item.ReceiptNumber','@item.SenderNumber')"><i class="fa fa-repeat"></i> Repeat</button>
+
+                                                    <button type="button" style="color:grey" class="btn btn-warning btn-round m-r-20" disabled><i class="fa fa-money"></i> Refund</button>
+
+                                                    <button type="button" class="btn btn-danger btn-round m-r-20"><i class="fa fa-remove"></i> Cancel</button>
+                                                    <a href="@Url.Action(" PrintReceiptOfBankDeposit","AgentDashboard" , new { @Area="Agent" , @TransactionId=item.Id , transactionService=FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit , @AgentId=ViewBag.AgentId })" class="btn btn-primary btn-round"><i class="fa fa-print"></i> Print</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    }
+}
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function repeatKiiPayTransfer(receiptNumber, SenderNumber) {
+
+            window.location.href = "/Agent/AgentDashboard/RepeatCashPickUpTransfer?ReceiptNumber=" + receiptNumber + "&MobileNo=" + SenderNumber;
+
+        };
+        function repeatMobileWalleTransfer(receiptNumber, SenderNumber) {
+
+            window.location.href = "/Agent/AgentDashboard/RepeatOtherMobileWallets?ReceiptNumber=" + receiptNumber + "&MobileNo=" + SenderNumber;
+
+        };
+        function repeatBankAccountDeposit(receiptNumber, SenderNumber) {
+
+            window.location.href = "/Agent/AgentDashboard/BankAccountDeposit?ReceiptNumber=" + receiptNumber + "&MobileNo=" + SenderNumber;
+
+        };
+        function repeatCashPickUpTransfer(receiptNumber, SenderNumber) {
+
+            window.location.href = "/Agent/AgentDashboard/CashPickUpTransfer?ReceiptNumber=" + receiptNumber + "&MobileNo=" + SenderNumber;
+        };
+
+    </script>
+}

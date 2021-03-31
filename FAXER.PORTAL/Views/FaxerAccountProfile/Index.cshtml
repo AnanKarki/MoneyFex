@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3  hidden-xs hidden-sm col-md-4">
+                <a href="dashboard.php" class="btn btn-primary btn-sm btn-block">My Dashboard</a>
+                <br>
+                <div class="clearfix"></div>
+                @{Html.RenderPartial("_Dashboard_Sidebar");}
+
+            </div>
+            <div class="col-lg-9 col-md-8">
+                <!-- <div class="dashboard_header">
+
+
+
+                    <h1>Estimate Faxing Fees</h1>
+
+
+        </div> -->
+                <!--  -->
+                <div class="dashboard_body">
+
+
+                    <div class="  ">
+                        <h3>My Account Profile</h3>
+                        <hr>
+                        <div class="mobile_design text-center">
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("FaxerInformation")">
+                                        <i class="fa fa-info" aria-hidden="true"></i>
+                                        <h4>Sender's<br />Information</h4>
+                                    </a>
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("RegisteredTopUpCards")">
+                                        <div class="cybicon icn7" aria-hidden="true"></div>
+                                        <h4>Registered Money<br />Fex Top-up Cards</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("SavedCreditDebitCard")">
+                                        <i class="fa fa-credit-card-alt"></i>
+                                        <h4>Saved <br /> Credit/Debit Card </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+
+
+                </div>
+                <!--  -->
+
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <!--  -->
+    </div>
+
+
+    </div>
+    <!--  -->
+    </div>
+    <!--  -->
+</section>
+
+
+
+

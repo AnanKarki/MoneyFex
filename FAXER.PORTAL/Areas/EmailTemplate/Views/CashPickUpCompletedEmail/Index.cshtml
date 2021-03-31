@@ -1,0 +1,238 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+@{ 
+    Layout = null;
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyFex</title>
+    <style>
+            @@font-face {
+        font-family: "AndreasBecker";
+        src: url("font/AndreasBecker.ttf");
+        src: url("font/AndreasBecker.ttf.eot?#iefix") format("embedded-opentype"), url("font/AndreasBecker.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+        }
+
+         /* A simple css reset */
+         body,table,thead,tbody,tr,td,img {
+         padding: 0;
+         margin: 0;
+         border: none;
+         border-spacing: 0px;
+         border-collapse: collapse;
+         vertical-align: top;
+         font-family: AndreasBecker;
+
+         }
+         /* Add some padding for small screens */
+         .wrapper {
+         padding-left: 10px;
+         padding-right: 10px;
+         }
+         h1,h2,h3,h4,h5,h6,p {
+         margin: 0;
+         padding: 0;
+         padding-bottom: 20px;
+         line-height: 1.6;
+         font-family: AndreasBecker;
+         }
+         p,a,li {
+         font-family: AndreasBecker;
+         }
+         img {
+         width: 100%;
+         display: block;
+         }
+         @@media only screen and (max-width: 620px) {
+         .wrapper .section {
+         width: 100%;
+
+         }
+         .wrapper .column {
+         width: 100%;
+         display: block;
+
+         }
+        .ngeku-img table {
+            width: 100%;
+        }
+
+            .ngeku-img img {
+                width: 110px;
+                margin: 0 auto;
+            }
+         }
+    </style>
+</head>
+<body>
+    <table width="100%">
+        <tbody>
+            <tr>
+                <td class="wrapper" width="600" align="center">
+                    <!-- Header image -->
+                    <table class="section header" cellpadding="0" cellspacing="0" width="600" style="margin-top: 10px;">
+                        <tr>
+                            <td class="column">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td width="33%">&nbsp;</td>
+                                            <td align="center">
+                                                <center>
+                                                    <img src="@baseUrl/Areas/EmailTemplate/Images/logo.png" width="100">
+                                                </center>
+                                            </td>
+                                            <td width="33%">&nbsp;</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <br> <br>
+                    <!-- Two columns -->
+                    <table class="section" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="column ngeku-img" width="100" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td align="left">
+                                                <img src="@baseUrl/Areas/EmailTemplate/Images/ngeku.png">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="20" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td> &nbsp; </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="480" valign="top">
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderName, </h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+
+                                                @if (@ViewBag.IsInProgress == true)
+                                                {
+                                                    <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                                        Your money transferred to<br>@ViewBag.ReceiverName is in progress.
+                                                    </h1>
+                                                }
+                                                else
+                                                {
+                                                    <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                                        Your money transferred to <br>@ViewBag.ReceiverName is now ready <br>for pickup
+                                                    </h1>
+                                                }
+
+                                                <h1 style="font-size: 18px; color:#333; line-height: 10px; margin-top: 20px;">Below are the full details of your transaction:</h1>
+                                                <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+
+                                                    MFCN: @ViewBag.MFCN<br>
+                                                    You sent: @ViewBag.SendingCur @ViewBag.SentAmount to @ViewBag.ReceivingCountry<br>
+                                                    Fee: @ViewBag.SendingCur @ViewBag.Fee<br>
+                                                    @ViewBag.receiverFirstName received: @ViewBag.ReceivingCur @ViewBag.receivingAmount
+                                                </h1>
+
+                                                <h1 style="font-size: 20px; color:#333;  line-height: 20px; margin-top: 20px;">
+                                                    We look forward to facilitate your next money transfer
+                                                </h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 22px; color: #004468;  line-height:14px; margin: 40px 0;">Thank You</h1>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td class=" " width="600" align="center" colspan="3" style="background-color:#02b6ff; color: #fff; padding: 5px; border-radius: 4px;">
+
+                                <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                    <img src="@baseUrl/Areas/EmailTemplate/Images/phone.png" style="width:24px; float: left; margin-right: 8px;">
+                                    <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="tel:02081445215">02081445215</a>
+                                </div>
+
+
+
+                                <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                    <img src="@baseUrl/Areas/EmailTemplate/Images/email.png" style=" width:24px; float: left; margin-right: 8px;">
+
+                                    <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="mailto:info@moneyfex.com">info@moneyfex.com</a>
+                                </div>
+
+                                <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                    <img src="@baseUrl/Areas/EmailTemplate/Images/website.png" style="width:24px; float: left; margin-right: 8px;">
+
+                                    <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="http://moneyfex.com">www.moneyfex.com</a>
+                                </div>
+
+
+
+
+
+
+
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="600" align="left" colspan="3">
+                                <br>
+                                <p style="font-size: 13px; color:#a5a2a2;">MoneyFex Ltd is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment services. Registration number: 745989</p>
+                                <p style="font-size: 13px; color:#a5a2a2;">
+                                    MoneyFex Ltd is registered in England and Wales, Company Registration Number: 10105032
+                                    The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.
+                                </p>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

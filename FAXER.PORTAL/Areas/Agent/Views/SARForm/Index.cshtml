@@ -1,0 +1,457 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SARFormVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 25px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+
+<!--  -->
+<div class="real_form">
+    <div class="container">
+
+        <div class="row">
+            <div class="forms-wrapper">
+
+
+                <div class="form-main-title">
+                    Suspicious Activity Report (SAR) Form
+                </div>
+                <form method="post">
+                    <div class="forms">
+                        <div class="forms-header">
+                            Please return form to Email: sardesk@moneyfex.com
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h4>AGENT INFORMATION - Please Complete</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><label>Agent Account: @Html.TextBoxFor(model => model.AgentAccountNo, new { @readonly = "readonly" })</label></td>
+                                            <td><label>Date Submitted:@Html.EditorFor(model => model.SubmittedDate, new { htmlAttributes = new { type = "date", @readonly = "readonly" } })</label></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>Staff Name: @Html.TextBoxFor(model => model.AgentStaffName, new { @readonly = "readonly" })</label></td>
+                                            <td><label>Agent Staff ID: @Html.TextBoxFor(model => model.AgentStaffLoginCode, new { @readonly = "readonly" })</label></td>
+                                            @Html.HiddenFor(model => model.AgentId)
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h4>TRANSACTION DETAILS - Please Complete</h4>
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><label>Transaction Type (Select one)  </label></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <label> Cash to Cash <input type="checkbox" id="SetSARTransactionTypeBox0" onclick="SetSARTransactionType('0')"></label>
+                                                <label> Virtual Account   <input type="checkbox" id="SetSARTransactionTypeBox1" onclick="SetSARTransactionType('1')"></label>
+                                                <label> Business Virtual Account   <input type="checkbox" id="SetSARTransactionTypeBox2" onclick="SetSARTransactionType('2')"></label>
+                                            </td>
+                                            @Html.HiddenFor(model => model.SARTransactionType, new { @id = "SARTransactionType" })
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    MFCN: @Html.TextBoxFor(model => model.MFCN)
+                                                    @Html.ValidationMessageFor(model => model.MFCN, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Virtual Account No.: @Html.TextBoxFor(model => model.VirtualAccountNo)
+                                                    @Html.ValidationMessageFor(model => model.VirtualAccountNo, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Business Virtual Account No.: @Html.TextBoxFor(model => model.BusinessVirtualAccountNo)
+                                                    @Html.ValidationMessageFor(model => model.BusinessVirtualAccountNo, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                            <td>
+                                                <label>
+                                                    Transaction Date: @Html.EditorFor(model => model.TransactionDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.TransactionDate, "", new { @class = "text-danger" })
+
+                                                </label>
+                                            </td>
+
+
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Time: @Html.TextBoxFor(model => model.TransactionTime, new { @type = "time" })
+                                                    @Html.ValidationMessageFor(model => model.TransactionTime, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h4>CUSTOMER DETAILS - Please Complete</h4>
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    First Name: @Html.TextBoxFor(model => model.FirstName)
+                                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Last Name:   @Html.TextBoxFor(model => model.LastName)
+                                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Date of Birth:
+
+                                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    ID Type: @Html.TextBoxFor(model => model.IdType)
+                                                    @Html.ValidationMessageFor(model => model.IdType, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    ID Number:   @Html.TextBoxFor(model => model.IdNumber)
+                                                    @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Expiring Date: @Html.EditorFor(model => model.IdentificationExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.IdentificationExpiryDate, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Address:  @Html.TextBoxFor(model => model.Address)
+                                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h4>REASON FOR SUSPICION - Please Complete</h4>
+                                <p>Choose the indicator that best describes the situation - you can choose more than one; please give further information in the Notes section. If none of these apply, please use the Notes. Section and write on the reverse of the form if you need more space.</p>
+                                <table>
+                                    <tbody>
+                                        @{ var Index = 0;}
+                                        @foreach (var item in Model.ReasonsForSuspicion)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <label>
+                                                        @Html.HiddenFor(x => Model.ReasonsForSuspicion[Index].Id)
+                                                        @Html.HiddenFor(x => Model.ReasonsForSuspicion[Index].Name)
+                                                        @Html.CheckBoxFor(model => Model.ReasonsForSuspicion[Index].IsChecked)
+                                                        @item.Name
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            Index++;
+                                        }
+                                        <tr>
+                                            <td>
+                                                <h5>Notes: Please provide more information about the reason for your suspicion.</h5>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                @Html.TextAreaFor(model => model.OtherSuspiciousReason, new { @rows = "5", @style = "width: 100%;" })
+
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h4>HEAD OFFICE USE ONLY</h4>
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td><label>COMPLIANCE DECISION</label></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><label> SAR  @Html.CheckBoxFor(model => model.IsSAR)</label></td>
+                                            <td><label> NON SAR    @Html.CheckBoxFor(model => model.IsNonSAR)</label></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><label> INVESTIGATION DATE:   @Html.TextBoxFor(model => model.InvestigationDate, new { type = "date", @readonly = "readonly" }) </label></td>
+                                        </tr>
+                                        <tr>
+                                            <td><label>STAFF NAME: @Html.TextBoxFor(model => model.StaffName, new { @readonly = "readonly" })</label></td>
+                                            <td><label>STAFF ID: @Html.TextBoxFor(model => model.StaffLoginCode, new { @readonly = "readonly" })</label></td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="forms-footer  ">
+                            <a href="@Url.Action("SARForms" , "AgentForms")" class="btn btn-danger ">Cancel </a>
+
+                            <button type="submit" class="button button-Submit  ">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="Refresh()">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="Refresh()">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $("[name='IsSAR']").prop("disabled", true);
+
+        $("[name='IsNonSAR']").prop("disabled", true);
+        function SetSARTransactionType(val) {
+            debugger;
+            if (val == "0") {
+
+                $("#SetSARTransactionTypeBox1")[0].checked = false;
+                $("#SetSARTransactionTypeBox2")[0].checked = false;
+                $("[name='MFCN']").prop("disabled", false);
+                $("[name='BusinessVirtualAccountNo']").prop("disabled", true);
+                $("[name='VirtualAccountNo']").prop("disabled", true);
+            } else if (val == "1") {
+
+
+                $("#SetSARTransactionTypeBox0")[0].checked = false;
+
+                $("#SetSARTransactionTypeBox2")[0].checked = false;
+                $("[name='MFCN']").prop("disabled", true);
+                $("[name='BusinessVirtualAccountNo']").prop("disabled", true);
+                $("[name='VirtualAccountNo']").prop("disabled", false);
+
+            } else if (val == "2") {
+
+
+                $("[name='VirtualAccountNo']").prop("disabled", true);
+
+                $("[name='MFCN']").prop("disabled", true);
+                $("[name='BusinessVirtualAccountNo']").prop("disabled", false);
+                $("#SetSARTransactionTypeBox0")[0].checked = false;
+                $("#SetSARTransactionTypeBox1")[0].checked = false;
+
+            } else {
+
+            }
+            $("#SARTransactionType").val(val);
+
+        }
+
+
+        $("#onload").modal('show');
+        function Refresh() {
+
+            window.location.href = "/Agent/SARForm/Index";
+
+        }
+    </script>
+}

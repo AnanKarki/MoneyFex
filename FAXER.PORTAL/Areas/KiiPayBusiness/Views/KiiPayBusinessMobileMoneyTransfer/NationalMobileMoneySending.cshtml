@@ -1,0 +1,79 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessNationalMobileMoneySendingVM
+@{
+    ViewBag.Title = "  National Mobile Money Sending";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+
+
+<!--  -->
+
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@Model.AvailableBalanceDollar.<small class="text-primary">@Model.AvailableBalanceCent</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="@Model.SenderImageUrl" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary">@Model.Sender </span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="amount-group  ">
+
+                            <div>
+                                <label>Enter Amount</label>
+                                @Html.TextBoxFor(x => x.SendingAmount, new { @Class = "amount", @placeholder = "£0.00", @type = "number" })
+                                @Html.ValidationMessageFor(x => x.SendingAmount, "", new { @class = "text-danger validationRed" })
+                            </div>
+                        </div>
+
+                        <div class="gbp">
+                            @Model.Currency
+                        </div>
+                        <div class="clearfix"></div>
+                        <label class="label-checkbox  ">Send SMS Notification?  &nbsp;&nbsp; Yes  &nbsp;&nbsp; @Html.CheckBoxFor(x => x.SendSms) </label>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button class="btn btn-primary btn-lg mb30">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

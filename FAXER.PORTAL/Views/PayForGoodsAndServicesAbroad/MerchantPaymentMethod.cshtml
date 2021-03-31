@@ -1,0 +1,174 @@
+﻿@model FAXER.PORTAL.Models.PaymendMethodViewModel
+@{
+    ViewBag.Title = "MerchantPaymentMethod";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:35%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay for goods & services abroad</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm("MerchantPaymentMethod", "PayForGoodsAndServicesAbroad", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @*<div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="col-lg-8">
+                            <div class="form-group">
+                                <h4>Use the calculated amount to instantly Pay the Merchant</h4>
+                                <br>
+                                @Html.DropDownListFor(model => model.PaymentMethod, null, "-Select money Sending payment method--", htmlAttributes: new { @class = "form-control", id = "Country" })
+                                @Html.ValidationMessageFor(model => model.PaymentMethod, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <br />
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h5>Select Payment Method</h5>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="mobile_design text-center">
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("MerchantCardPayment", "CardPayment")">
+                                    <img src="~/images/pay-icon.png" style="padding: 10px 0;">
+                                    <h4>Pay Using Credit/Debit Card</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+
+                                <input type="hidden" value="@TempData["CardCount"]" id="CardCount">
+                                <a href="@Url.Action("MerchantPaymentUsingSavedCreditDebitCard" , "CardPayment")">
+                                    <img src="~/images/pay-icon.png" style="padding: 10px 0;">
+
+                                    <h4>Pay Using Saved Credit/Debit Card</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("MerchantPaymentUsingBankToBankPaymentMethod" , "PayForGoodsAndServicesAbroad")">
+                                    <img src="~/images/banktobank.png" style="padding: 10px 0;">
+                                    <h4>Pay Using Bank-to-Bank Transfer </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="#">
+                                    <img src="~/images/bitcoin.png" style="padding: 10px 0;">
+                                    <h4>Pay Using Bitcoin</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackUrl" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    @*<button value="Next" class="fbtn btn-next" type="submit">Make payment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                    <br>
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackUrl" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+    <div class="modal" id="credit_debit_card_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+                                Please add credit/debit Card to use this Payment Method<br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("AddADebitCreditCard", "FaxerAccountProfile")" class="btn btn-primary btn-sm">Add Credit/debit Card</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var Count = $("#CardCount").val();
+            if (Count != "") {
+                var TONum = parseInt(Count);
+                if (TONum <= 0) {
+                    $("#credit_debit_card_validation").modal("show");
+                }
+                else {
+                    $("#credit_debit_card_validation").modal("hide");
+                }
+            }
+        });
+
+    </script>
+}

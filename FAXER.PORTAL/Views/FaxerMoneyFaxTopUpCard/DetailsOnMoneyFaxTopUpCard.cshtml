@@ -1,0 +1,290 @@
+﻿@model FAXER.PORTAL.Models.DetailsOnMoneyFaxTopUpCardViewModel
+@{
+    ViewBag.Title = "DetailsOnMoneyFaxTopUpCard";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Details on Receiver Virtual Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <form>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @if (string.IsNullOrEmpty(Model.CardPhoto))
+                            {
+                                @*<img src="@Model.CardPhoto" style="width:150px;" alt="Photo of MoneyFax Top-up Card User">*@
+                                <img src="@Model.CardPhoto" class=" img-thumbnail" style="max-width: 150px; min-height: 100px; height: 100%; width: 100%;">
+                            }
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.DropDownList("MFTCCardNumber", null, "Select Receiver Virtual Account", new { @class = "form-control", @onchange = "getCardDetails(this.value);" })
+                        </div>
+                        @if (TempData["NoCardSelected"] != null)
+                        {
+
+                            <label style="color:red">@TempData["NoCardSelected"]</label>
+                        }
+                        @Html.HiddenFor(model => model.Id, new { @id = "MFTCCardID" })
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <br><br>
+                    <div class="col-lg-5">
+                        <label>Account No.</label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.CardNumber, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> Name </label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.NameOnMoneyFaxTopUpCard, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> Country </label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.CountryOnMoneyFaxTopUpCard, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> City</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.CityOnMoneyFaxTopUpCard, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Telephone Number</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.TelephoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Email Address</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Status of MoneyFex Top-up Card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.StatusOfMoneyFaxTopUpCard, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Amount on Virtual Account</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.AmountOnMoneyFaxTopUpCard, new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@*<div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2  ">
+                    @Html.HiddenFor(x => x.Id)
+
+                    <a href="@Url.Action("Index")" class="btn btn-danger pull-left   hidden-xs hidden-sm"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    &nbsp;&nbsp;
+
+                    <div class="hidden-lg hidden-md"><br></div>
+                    <a href="@Url.Action("UpdateRegisteredTopUpCards","FaxerAccountProfile", new { MFTCId=Model.Id})" id="proceed_payment" class="btn btn-primary pull-right">Update this Account  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+                    <div class="hidden-lg hidden-md clearfix"><br></div>
+                    <a href="@Url.Action("Index","StartFaxingMoney" , new { mFTCCardInformationId = Model.Id})" id="proceed_payment" class="btn btn-primary pull-right" style="margin-right: 30px;">Deposit Money<i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <a href="@Url.Action("Index")" class="btn btn-danger pull-left hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!--  start-->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2  ">
+                @Html.HiddenFor(x => x.Id)
+
+
+                <a href="@Url.Action("Index")" class="btn btn-danger mb10 pull-left   hidden-xs hidden-sm">
+                    <i class="fa fa-chevron-left" aria-hidden="true"></i> Back
+                </a>
+                &nbsp;&nbsp;
+
+                <div class="hidden-lg hidden-md"><br></div>
+
+
+                <a href="@Url.Action("UpdateRegisteredTopUpCards","FaxerAccountProfile", new { MFTCId=Model.Id})" id="proceed_payment" class="btn btn-primary mb10 ">Update this Account <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="hidden-lg hidden-md clearfix"><br></div>
+
+                <a href="@Url.Action("Index","StartFaxingMoney" , new { mFTCCardInformationId = Model.Id})" id="proceed_payment" class="btn btn-primary mb10 " style="margin-right: 30px;">Deposit Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <div class="clearfix"></div>
+                <br>
+
+                <a href="@Url.Action("Index")" class="btn btn-success mb10  hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end -->
+
+
+@using (Html.BeginForm("UpdoadCardUserPhoto", "FaxerMoneyFaxTopUpCard", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "CardUserForm" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="modal" id="CardUserPhotoModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4>MoneyFex Alert</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                                <div class="icon_al">
+                                    <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+
+                                <h3>Account User Identification</h3>
+
+
+
+                                <div class="form-group">
+                                    <p>
+                                        To increase the security of your virtual account user, we strongly suggest that you upload his/her passport size photograph that will be printed on his/her electronic card that comes with the account.
+                                    </p>
+                                </div>
+                                <div class="form-group col-lg-6 ">
+
+                                    <label id="dataFileValidation" class="text-danger" style="display:none;">Please choose photo to upload!</label>
+                                    <input type="file" id="dataFile" name="file" class="form-control" />
+
+                                    <input type="hidden" id="moneyFaxTopUpCardId" name="moneyFaxTopUpCardId">
+                                    @Html.ValidationMessage("File", "", new { @class = "text-danger" })
+                                </div>
+
+
+                                <div class="clearfix"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-sm" onclick="Upload()">Upload</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+<!--  -->
+@section scripts{
+    <script type="text/javascript">
+
+
+
+        function getCardDetails(val) {
+            window.location.href = "/FaxerMoneyFaxTopUpCard/DetailsOnMoneyFaxTopUpCard?moneyFaxTopUpCardId=" + val;
+        }
+
+
+        function Upload() {
+
+            if ($("#dataFile").val() != "") {
+
+
+                $("#moneyFaxTopUpCardId").val($("#MFTCCardID").val());
+                $("#CardUserForm").submit();
+            } else {
+                $("#dataFileValidation").show();
+            }
+
+        }
+
+        if (@Model.Id > 0) {
+            var cardPhoto = '@Model.CardPhoto';
+            if (cardPhoto == undefined || cardPhoto == "") {
+
+                $("#CardUserPhotoModal").modal('show');
+            }
+        }
+    </script>
+}

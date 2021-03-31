@@ -1,0 +1,240 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.StaffContaactDetailsViewModel
+@{
+    ViewBag.Title = "StaffContactDetails";
+    //Layout = "~/Areas/Agent/Views/Shared/_Layout_Agent.cshtml";
+
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Agent Admin User Registration  </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+@using (Html.BeginForm())
+{
+
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        <h3>User Contact Details</h3>
+                        <hr>
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> Address 1 <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Address1, new { @class = "form-control", @placeholder = "Address Line 1" })
+                                @Html.ValidationMessageFor(Model => Model.Address1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> Address 2  </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Address2, new { @class = "form-control", @placeholder = "Address Line 2" })
+                                @Html.ValidationMessageFor(Model => Model.Address2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>City <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.City, new { @class = "form-control", @placeholder = "City" })
+                                @Html.ValidationMessageFor(Model => Model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>State/Province/Region <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.State, new { @class = "form-control", @placeholder = "State/Province/Region" })
+                                @Html.ValidationMessageFor(Model => Model.State, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Zip/Postal Code <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control", @placeholder = "Zip/Postal Code" })
+                                @Html.ValidationMessageFor(Model => Model.ZipCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country   <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.HiddenFor(x => x.Country)
+
+
+                                    @Html.DropDownListFor(Model => Model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", id = "CountryCode", @disabled="disabled" })
+
+                                    @Html.ValidationMessageFor(Model => Model.Country, "", new { @class = "text-danger" })
+
+                                
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Mobile Number <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group contact-no-group">
+                                <div class="countr-code" id="PhoneCode">
+
+                                </div>
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control contact-no", @placeholder = "" })
+
+                                @Html.HiddenFor(model => model.PhoneCode)
+                                @*<span class="input-group-addon" id="PhoneCode">@FAXER.PORTAL.Common.AgentSession.AgentInformation.PhoneNumber</span>*@
+                                @Html.ValidationMessageFor(Model => Model.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <br />
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                        <h3>Admin  Login Information</h3>
+
+                        <hr>
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Email Address <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @placeholder = "", @type = "email" })
+                                @Html.ValidationMessageFor(Model => Model.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Password  <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Password, new { @class = "form-control", @placeholder = "password", @type = "password" })
+                                @Html.ValidationMessageFor(Model => Model.Password, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Confirm Password  <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password", @type = "password" })
+                                @Html.ValidationMessageFor(Model => Model.ConfirmPassword, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                        <div class="col-lg-12">
+                            Password Policy : Password should contain atleast one upper case, one number, one special character and one lower case
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    @*<a href="staff-compliance-documentation.php" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+}
+
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var countryCode = $("#CountryCode").val();
+            $.getJSON("/Agent/AgentRegistration/GetCountryPhoneCode?CountryCode=" + countryCode, function (result) {
+                debugger;
+                $("#PhoneCode").text(result.PhoneCode);
+            })
+        }
+
+        //function getCountryPhoneCode() {
+
+        //    var countryCode = $("#CountryCode").val();
+        //    $.getJSON("/Agent/AgentRegistration/GetCountryPhoneCode?CountryCode=" + countryCode, function (result) {
+        //        debugger;
+        //        $("#PhoneCode").text(result.PhoneCode);
+        //    })
+        //}
+
+    </script>
+}

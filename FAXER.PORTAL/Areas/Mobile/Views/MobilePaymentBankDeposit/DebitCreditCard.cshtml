@@ -1,0 +1,301 @@
+﻿@model FAXER.PORTAL.Models.CreditDebitCardViewModel
+@{
+    ViewBag.Title = "DebitCreditCardDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string[] SendingAmount = Model.FaxingAmount.ToString().Split('.');
+    string Amount1 = SendingAmount[0];
+    string Amount2 = "00";
+    if (SendingAmount.Length > 1)
+    {
+
+        Amount2 = SendingAmount[1];
+    }
+}
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.FaxingCurrencySymbol)
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Content/images/user.svg" alt="">
+                                </div>
+                                @Html.HiddenFor(model => model.ReceiverName)
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary">@Model.ReceiverName</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary">@Model.FaxingCurrencySymbol<span class="amountheader">@Amount1</span>.<small class="text-primary">@Amount2</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+
+
+                                <img src="~/Content/images/icon/card/visa.png" alt="" width="35" id="VisaCard">
+
+                                <img src="~/Content/images/icon/card/master-card.png" alt="" width="35" id="MasterCard">
+
+
+                            </div>
+                            <div class="panel-body text-left mt20">
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <label class="text-danger" id="StripeError"></label>
+                                            @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                                            @Html.ValidationMessage("StripeError", "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    @Html.HiddenFor(model => model.FaxingAmount)
+                                    @Html.HiddenFor(model => model.FaxingCurrency)
+                                    <!--  -->
+                                    @*<div class="col-lg-12">
+                                            <div class="form-group">
+                                                @Html.EnumDropDownListFor(model => model.CreditDebitCardType, new { @class = "form-control " })
+                                                @Html.ValidationMessageFor(model => model.CreditDebitCardType, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>*@
+                                    <!--  -->
+                                    <!--  -->
+
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control creditcardNumber", @placeholder = "Card number" })
+                                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <label>Expiry date</label>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.EndMM, new { @class = "form-control", @placeholder = "MM", @type = "number" })
+                                            @Html.ValidationMessageFor(model => model.EndMM, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.EndYY, new { @class = "form-control", @placeholder = "YY", @type = "number" })
+                                            @Html.ValidationMessageFor(model => model.EndYY, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.SecurityCode, new { @class = "form-control", @placeholder = "Security code", type = "password", @maxlength = "3" })
+                                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.TextBoxFor(model => model.NameOnCard, new { @class = "form-control", @placeholder = "Name on card" })
+                                            @Html.ValidationMessageFor(model => model.NameOnCard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->  <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.TextBoxFor(model => model.AddressLineOne, new { @class = "form-control", @placeholder = "Address", @readonly = "readonly" })
+                                            @Html.ValidationMessageFor(model => model.AddressLineOne, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    @if (ViewBag.HasOneSavedCard == false)
+                                    {
+
+                                        <div class="col-lg-8"><label>Save this card for future use?</label></div>
+                                        <div class="col-lg-2">
+                                            <label> @Html.RadioButtonFor(model => model.SaveCard, true) Yes </label>
+                                        </div>
+                                        <div class="col-lg-2"><label> @Html.RadioButtonFor(model => model.SaveCard, false) No </label></div>
+                                        <!--  -->
+                                    }
+
+                                    <div class="col-lg-10">
+                                        <label id="CreditCardlabelText" style="display:none;" class="text-danger">
+                                            You're using a credit card: An additional fee of <span id="extrafee"> </span> will be added to the amount
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <hr>
+                            @*<button type="submit" class="btn btn-primary btn-lg mb30">Confirm & Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                            <a id="confirm" class="btn btn-primary btn-lg mb30">Confirm & Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@*<form name="form" id="acsurl" method="POST">
+        <div>
+            <input type="hidden" name="PaReq" id="pareq" />
+            <input type="hidden" name="TermUrl" id="termurl" />
+            <input type="hidden" name="MD" id="md" />
+        </div>
+    </form>*@
+
+<form name="form" id="acsurl" method="get">
+    <div>
+        <input type="hidden" name="PaReq" id="pareq" />
+        <input type="hidden" name="TermUrl" id="termurl" />
+        <input type="hidden" name="MD" id="md" />
+    </div>
+</form>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        //function Nextfocus(e) {
+
+        //    debugger;
+        //    if ($(this).val() == 2) {
+
+        //        $(this).next().focus();
+        //    }
+        //}
+
+        $("#VisaCard").hide();
+        $("#MasterCard").hide();
+
+        $("#CardNumber").on('keyup', function (e) {
+            if ($(this).val().length >= 19) {
+
+                $("#EndMM").focus();
+            }
+            if ($(this).val().startsWith(4)) {
+                $("#VisaCard").show();
+                $("#MasterCard").hide();
+            }
+            if ($(this).val().startsWith(5)) {
+                $("#MasterCard").show();
+                $("#VisaCard").hide();
+            }
+
+
+        });
+
+
+
+        $("#confirm").click(function () {
+
+            $("#loader").show();
+            var data = $($('form')[0]).serialize();
+            $.post("ThreeDQuery",
+                data,
+                function (result) {
+                    //for (var item in result.Data) {
+                    //    var selector = "";
+                    //}
+                    //for (var item in result.Data) {
+                    //    var selector = '[name="' + item + '"]';
+                    //    $(selector).val(result.Data[item]);
+                    //}
+                    console.log(result.Data);
+                    $("#loader").hide();
+                    debugger;
+                    if (result.Status == 1) {
+
+                        $("#pareq").val(result.Data.PaReq);
+                        $("#termurl").val(result.Data.termurl);
+                        $("#md").val(result.Data.MD);
+                        $("#acsurl").attr("action", result.Data.acsurl);
+                        $("#acsurl").submit();
+
+                    }
+                    else {
+                        $("#StripeError").text(result.Message);
+                    }
+
+                });
+        });
+
+
+
+        $("#EndMM").on('keyup', function (e) {
+            if ($(this).val().length >= 2) {
+
+                $("#EndYY").focus();
+            }
+        });
+        $("#EndYY").on('keyup', function (e) {
+            if ($(this).val().length >= 2) {
+
+                $("#SecurityCode").focus();
+            }
+        });
+
+        $("#SecurityCode").on('keyup', function (e) {
+            var cardNumber = $("#CardNumber").val();
+            var month = $("#EndMM").val();
+            var year = $("#EndYY").val();
+            var securityCode = $("#SecurityCode").val();
+
+            if (securityCode.length > 2) {
+
+                $("#NameOnCard").focus();
+                //$.getJSON("/SenderBankAccountDeposit/IsCrebitCard?cardNumber=" + cardNumber +
+                //    "&month=" + month + "&year=" + year + "&securityCode=" + securityCode, function (result) {
+                //        if (result.IsCrebitCard == true) {
+
+                //            $("#extrafee").text(result.ExtraAmount);
+                //            $("#CreditCardlabelText").show();
+                //        } else {
+
+                //            $("#CreditCardlabelText").hide();
+                //        }
+                //    });
+            }
+        });
+
+
+    </script>
+}

@@ -1,0 +1,160 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentTransferLimtViewModel
+@{
+    ViewBag.Title = "SetReceiverLimit";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set  Limit   </h4>
+                                        <a href="@Url.Action("Index","ReceiverLimit")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Limit
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+
+                                                        @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select  Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "GetReceiverByCountry()" })
+                                                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "City", })
+                                                        @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Receiver</label>
+                                                        @Html.DropDownListFor(x => x.ReceiverId, (IEnumerable<SelectListItem>)ViewBag.Receivers, "Select Receiver", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "ReceiverId", @name = "ReceiverName" })
+                                                        @Html.ValidationMessageFor(x => x.ReceiverId, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Services</label>
+
+
+                                                        @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                        @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+                                                        @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Frequency</label>
+                                                        @Html.EnumDropDownListFor(x => x.Frequency, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Frequency" })
+                                                        @Html.ValidationMessageFor(x => x.Frequency, "", new { @class = "text-danger" })
+                                                        @Html.ValidationMessage("", "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+
+                                                        <label>Amount</label>
+                                                        @Html.TextBoxFor(x => x.Amount, new { @class = "form-control  form-control-lg form-control-round", @placeholder = "Enter Amount", @id = "Amount" })
+                                                        @Html.ValidationMessageFor(x => x.Amount, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "ReceiverLimit")" class="btn btn-danger btn-round pull-left">
+                                                    <i class="fa fa-remove"></i> Cancel
+                                                </a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function GetReceiverByCountry() {
+
+            var Country = $("#Country").val();
+
+            $.getJSON("/Admin/ReceiverLimit/GetReceiverByCountry?Country=" + Country, function (result) {
+
+                var agentselector = $("#ReceiverId");
+                $("#ReceiverId option").remove();
+                agentselector.append('<option value="0">All </option>');
+
+                for (var i = 0; i <= result.Data.length; i++) {
+
+                    agentselector.append('<option value=" ' + result.Data[i].Id + ' "> ' + result.Data[i].Name + '</option>');
+                }
+
+
+            })
+        }
+
+
+
+
+    </script>
+}

@@ -1,0 +1,240 @@
+﻿@model FAXER.PORTAL.Models.PaymendMethodViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:35%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Instant Money Transfer</h1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("ReciverPaymentMethod", "PaymentMethod", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    @*<div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <h4>Use the calculated amount to instantly fax money</h4>
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(model => model.PaymentMethod, null, "-Select money faxing payment method--", htmlAttributes: new { @class = "form-control", id = "Country" })
+                                @Html.ValidationMessageFor(model => model.PaymentMethod, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h5>Select Payment Method</h5>
+                </div>
+                <div class="clearfix"></div>
+                <br>
+
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="mobile_design text-center">
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("Receiver", "CardPayment")" id="btn1">
+                                    <img src="~/images/pay-icon.png" style="padding: 10px 0;">
+                                    <h4>Pay Using Credit/Debit Card</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+
+                                <input type="hidden" value="@TempData["CardCount"]" id="CardCount">
+                                <a href="@Url.Action("ReceiverTransferUsingSavedCreditDebitCard" , "CardPayment")" id="btn2">
+
+                                    <img src="~/images/pay-icon.png" style="padding: 10px 0;">
+
+                                    <h4>Pay Using Saved Credit/Debit Card</h4>
+                                </a>
+
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("ReceiverPaymentUsingBankToBank" , "PaymentMethod")" id="btn3">
+                                    <img src="~/images/banktobank.png" style="padding: 10px 0;">
+                                    <h4>Pay Using Bank-to-Bank Transfer </h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                            <div class="dashboard_thumb">
+                                <a href="#">
+                                    <img src="~/images/bitcoin.png" style="padding: 10px 0;" id="btn4">
+                                    <h4>Pay Using Bitcoin</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackUrl" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    @*<button value="Next" class="fbtn btn-next" type="submit">Make payment<i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+
+                    <br />
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackUrl" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="credit_debit_card_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <p>
+                                Please add credit/debit Card to use this PaymentMethod<br />
+                                (Send Money Using Saved Card)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("AddADebitCreditCard", "FaxerAccountProfile")" class="btn btn-primary btn-sm">Add Credit/debit Card</a>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal" id="UploadPhotoAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none" data-backdrop="static" data-keyboard="static">
+        <div class="modal-dialog" style="width:600px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <p>
+                                You are about to make a transfer of over  1000 .<br />
+                                To comply with anti-money laundering regulations, MoneyFex is required by law to ask for a copy of
+                                "your Photo Identification Document (ID).<br />
+                                Please upload a copy of your ID to proceed with this Transaction
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Index","UploadIdentificationDocument" , new { ToURL = ViewBag.ToUrl})" class="btn btn-primary btn-sm">Upload Identification Document</a>
+                    @*<button type="button" class="btn btn-danger btn-sm" onclick="CloseModal()">Close</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            var Count = $("#CardCount").val();
+            if (Count != "") {
+                var TONum = parseInt(Count);
+                if (TONum < 0) {
+                    $("#credit_debit_card_validation").modal("show");
+                }
+                else {
+                    $("#credit_debit_card_validation").modal("show");
+                }
+            }
+
+            var CardURL = '@ViewBag.cardUrl';
+            if (CardURL == undefined || CardURL == "") {
+
+
+                $("#UploadPhotoAlert").modal("show");
+                $("#btn1").prop('disabled', true);
+                $("#btn2").prop('disabled', true);
+                $("#btn3").prop('disabled', true);
+                $("#btn4").prop('disabled', true);
+            } else {
+
+                $("#UploadPhotoAlert").modal("hide");
+                $("#btn1").prop('disabled', false);
+                $("#btn2").prop('disabled', false);
+                $("#btn3").prop('disabled', false);
+                $("#btn4").prop('disabled', false);
+            }
+
+
+        });
+
+    </script>
+}
+
+
+
+

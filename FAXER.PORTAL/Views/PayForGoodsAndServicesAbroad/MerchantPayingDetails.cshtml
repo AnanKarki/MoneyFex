@@ -1,0 +1,188 @@
+﻿@model FAXER.PORTAL.Models.MerchantPayingDetailsViewModel
+@{
+    ViewBag.Title = "MerchantPayingDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var FaxingCurrencySymbol = "";
+    var FaxingCurrency = "";
+    var ReceivingCurrency = "";
+    var ReceivingCurrencySymbol = "";
+
+    if (Model != null)
+    {
+        FaxingCurrencySymbol = Model.FaxingCurrencySymbol ?? "";
+        FaxingCurrency = Model.FaxingCurrency ?? "";
+        ReceivingCurrency = Model.ReceivingCurrency ?? "";
+        ReceivingCurrencySymbol = Model.ReceivingCurrencySymbol ?? "";
+    }
+}
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay for goods & services abroad</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h3>Paying Details</h3>
+                    <hr>
+                    <!--  -->
+                    @Html.HiddenFor(model => model.FaxingCurrency)
+                    @Html.HiddenFor(model => model.FaxingCurrencySymbol)
+                    @Html.HiddenFor(model => model.ReceivingCurrency)
+                    @Html.HiddenFor(model => model.ReceivingCurrencySymbol)
+                    @Html.HiddenFor(model => model.PayingAmount)
+                    @Html.HiddenFor(model => model.PaymentFee)
+                    @Html.HiddenFor(model => model.TotalAmountIncludingFee)
+                    @Html.HiddenFor(model => model.AmountToBeReceivedByMerchant)
+                    @Html.HiddenFor(model => model.CurrentExchangeRate)
+                    @Html.HiddenFor(model => model.PaymentReference)
+
+                    <div class="col-lg-5">
+                        <label>Paying Amount </label>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.PayingAmount @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.TextBoxFor(x => x.PayingAmount, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+
+                        </div>*@
+                    </div>
+
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Payment Fee </label>
+                    </div>
+                    <div class="col-lg-6">
+
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.PaymentFee @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.TextBoxFor(x => x.PaymentFee, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+
+                        </div>*@
+                    </div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Total Amount Including Fee </label>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.TotalAmountIncludingFee @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.TextBoxFor(x => x.TotalAmountIncludingFee, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+
+                        </div>*@
+                    </div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Current Exchange Rate</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <div class="form-control form-text">
+
+                                @Model.CurrentExchangeRate
+                            </div>
+                            @*@Html.TextBoxFor(x => x.CurrentExchangeRate, new { @class = "form-control", @readonly = "readonly" })*@
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Amount to be Received by Merchant</label>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @ReceivingCurrencySymbol  @Model.AmountToBeReceivedByMerchant @ReceivingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@ReceivingCurrencySymbol</span>
+                            @Html.TextBoxFor(x => x.AmountToBeReceivedByMerchant, new { @class = "form-control", @readonly = "readonly" })
+                            <span class="input-group-addon">@ReceivingCurrency</span>
+
+                        </div>*@
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Payment Reference</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @*<input type="text" name="" class="form-control" placeholder="">*@
+                            <div class="form-control form-text">
+
+                                
+                                @Model.PaymentReference
+                            </div>
+                            @*@Html.TextBoxFor(x => x.PaymentReference, new { @class = "form-control", @readonly = "readonly" })*@
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@Url.Action("MerchantAmount")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@Url.Action("MerchantAmount")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  -->

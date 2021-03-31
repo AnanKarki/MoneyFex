@@ -1,0 +1,289 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisterBusinessViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Registered Business</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <button type="button"  id="registration_KiiPayBusinessInformationId" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Register a Merchant</button>
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Registered Business</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+                    <div class="hideoption id=" pop"">
+                        <div class="btn-  pull-left">
+                            <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                            </button>
+                            <button data-toggle="modal" data-target="#emailpopup" href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td align="center">
+                                        <div class="checkbox checkbox-success ">
+                                            <input id="checkAll" type="checkbox" class="check_boxa">
+                                            <label for="checkAll" name="name" class="check_boxa"> </label>
+                                        </div>
+                                        Select All
+                                    </td>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Business Name</strong></td>
+                                    @*  <td><strong>Business License/Reg No.</strong></td>*@
+                                    <td><strong>Business MFS Code</strong></td>
+                                    <td><strong>Business Type</strong></td>
+                                    <td><strong>Address</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+                                    <td><strong>Telephone</strong></td>
+                                    <td><strong>Fax</strong></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><strong>Status</strong></td>
+                                    <td><strong>Action</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td align="center">
+                                            <div class="checkbox checkbox-success">
+                                                <input type="checkbox" name="" class="check_boxa" onclick="return pushId('@item.Email',this);">
+                                                <label name="name" class="check_boxa"> </label>
+                                            </div>
+                                        </td>
+                                        <td>@i</td>
+                                        <td><a href="@Url.Action("ViewRegisteredBusinessMore","ViewRegisterBusiness",new {id=item.Id})">@item.BusinessName </a></td>
+                                        @*<td>@item.BusinessRegNumber</td>*@
+                                        <td>@item.BusinessMobileNo</td>
+                                        <td>@item.BusinessType</td>
+                                        <td>
+                                            @item.Address,<br /> @item.City, @item.Country
+
+                                        </td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.Telepone</td>
+                                        <td>@item.Fax</td>
+                                        <td>@item.Email</td>
+                                        <td>
+                                            @item.IsActive
+                                        </td>
+                                        <td>
+                                            <div class="btn-group m-r-10">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu action_drop">
+                                                    <li>
+                                                        <a href="@Url.Action("ViewRegisteredBusinessMore","ViewRegisterBusiness",new {id=item.Id})" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a>
+                                                    </li>
+                                                    <li><a href="@Url.Action("UpdateMerchant","ViewRegisterBusiness",new { id=item.Id})" class="btn btn-xs btn-success waves-effect waves-light "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a></li>
+
+
+                                                    @if (item.IsActive == "Active")
+                                                    {
+                                                        <li><a href="@Url.Action("UpdateAccountStatus","ViewRegisterBusiness",new { id=item.Id})" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+                                                        <li><a href="" class="btn btn-xs btn-primary waves-effect waves-light disabled"><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                    }
+                                                    else if (@item.IsActive == "Inactive")
+                                                    {
+                                                        <li><a class="btn btn-xs btn-warning waves-effect waves-light disabled"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+                                                        <li><a href="@Url.Action("UpdateAccountStatus","ViewRegisterBusiness", new { id = item.Id })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                    }
+
+                                                    <li><a href="@Url.Action("DeleteMerchant","ViewRegisterBusiness",new { id=item.Id})" class="btn btn-xs btn-danger waves-effect waves-light " id="sa-params"><span class="btn-label"><i class=" ti-trash"></i></span> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        Page @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) of @Model.PageCount
+                        @Html.PagedListPager(Model, page => Url.Action("Index", new { @page = page }))
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="emailpopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                <div class="modal-body">
+                    <div class="col-lg-9 col-md-8">
+
+                        <div class="dashboard_header">
+                            <h1>Compose</h1>
+                        </div>
+                        <!--  -->
+                        <div class="dashboard_body">
+                            <div class=" ">
+                                <div class=" ">
+
+                                    <!--  -->
+                                    <div class="col-lg-3">
+                                        <label>From</label>
+                                    </div>
+
+                                    <div class="col-lg-8 ">
+                                        <div class="form-group">
+                                            customerservice@gmail.com
+                                            @*@Html.TextBox("customerservice@gmail.com", new { @value = "customerservice@gmail.com", @readonly = "readonly" })*@
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3">
+                                        <label>Subject</label>
+                                    </div>
+
+                                    <div class="col-lg-8 ">
+                                        <div class="form-group">
+                                            @*                                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "Message Subject" })*@
+                                            <input type="text" name="subject" />
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="clearfix"></div>
+                                    <!--  -->
+                                    <!--  -->
+
+
+                                    <div class="col-lg-12 ">
+                                        <div class="form-group">
+                                            <label>Body</label>
+                                            <textarea rows="5" class="form-control" name="body"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <!--  -->
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-12 ">
+
+
+                            <button class="fbtn btn-next" type="submit" name="Draft" onclick="sendEmail();">&nbsp &nbsp &nbsp &nbsp Send > &nbsp &nbsp &nbsp &nbsp &nbsp <i class="" aria-hidden="true"></i></button>
+
+                            <br>
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewRegisterBusiness/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+        var idArray = [];
+        function pushId(Id, control) {
+           
+            $("#pop").show();
+            $(".hideoption").show();
+            var checkbox = $(control);
+            setTimeout(function () { checkbox.prop('checked', !checkbox.prop('checked')); }, 10);
+            if (idArray.includes(Id)) {
+                var a = idArray.indexOf(Id);
+                idArray.splice(a, 1);
+            }
+            else {
+                idArray.push(Id);
+            }
+            return false;
+        }
+
+        function sendEmail() {
+           
+            var subject = document.getElementsByName("subject")[0].value;
+            var body = document.getElementsByName("body")[0].value;
+            window.location.href = "/Admin/ViewRegisterBusiness/sendEmails?emails=" + idArray + "&subject=" + subject + "&body=" + body;
+        }
+
+
+
+        $("#registration_KiiPayBusinessInformationId").on('click', function () {
+
+            $("#registration_business").modal('show');
+        });
+    </script>
+}

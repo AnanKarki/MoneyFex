@@ -1,0 +1,240 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.EditAccountProfileViewModel
+@{
+    ViewBag.Title = "EditAccountProfile";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 pdb40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2  ">
+
+                    <div class="login_signup mb50 clearfix">
+                        <h3> KiiPay E-Card User Details </h3>
+                        <hr>
+
+
+
+
+
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>City</label>
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Address 1</label>
+                                @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Address 2</label>
+                                @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Mobile Number</label>
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Email</label>
+                                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <hr>
+                                <h3>Identification Information</h3>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> ID Card Type </label>
+                                @Html.DropDownListFor(model => model.IDCardType, (IEnumerable<SelectListItem>)ViewBag.IDCardTypes, "Choose ID Type", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> ID Card Number </label>
+                                @Html.TextBoxFor(model => model.IDCardNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardNumber, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Day </label>
+                                @Html.TextBoxFor(model => model.IDCardExpiringDay, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardExpiringDay, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Month </label>
+                                @Html.EnumDropDownListFor(model => model.IDCardExpiringMonth, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardExpiringMonth, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> Year </label>
+                                @Html.TextBoxFor(model => model.IDCardExpiringYear, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardExpiringYear, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> ID Issuing Country </label>
+                                @Html.DropDownListFor(model => model.IDCardIssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.IDCardIssuingCountry, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <hr>
+
+                        <!--  -->
+                        <div class="col-lg-12 mt30">
+                            <div class="form-group text-center">
+                                <button type="button" class="btn btn-primary btn-lg  radius-20" onclick="updateDetails();">Update Details</button>
+                            </div>
+                            <!--  -->
+
+
+
+                            <div class="clearfix"></div>
+                            <div class="text-center  clearfix">
+                                <hr>
+                                <!-- back btn -->
+                                <div class="clearfix ">
+
+                                    <center>
+                                        <a href="@Url.Action("AccountProfile","Dashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                    </center>
+                                </div>
+                                <!-- back btn end-->
+                            </div>
+                        </div>
+                        
+                        <!--  -->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- KiiPay Confirmation -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">KiiPay Confirmation</h4>
+                </div>
+                <div class="modal-body uk-text-center ">
+                    <div class="form-group">
+                        <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+                        @Html.TextBoxFor(model=>model.TempSecurityCode, new { @class="form-control", @placeholder = "Enter code", @id="userPhoneCode" })
+                        <span id="error"></span>
+                        @Html.HiddenFor(model=>model.TempSecurityCode)
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="submitForm();" class="btn btn-primary btn-sm radius-20" >Confirm</button>
+                    <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!-- KiiPay Confirmation end -->
+}
+
+@section scripts{
+    <script type="text/javascript">
+        var phoneCode = "";
+        function updateDetails() {
+            $.getJSON('/KiiPayPersonal/Dashboard/SendEditProfilePhoneCode', function (data) {
+                if (data != null || data != undefined || data != "") {                    
+                    phoneCode = data.result;
+                    $("#myModal").modal('show');
+                }
+
+            });
+            return;
+
+            
+        }
+
+        function submitForm() {
+            if ($("#userPhoneCode").val().trim() != phoneCode) {
+                $("#error").text("Invalid Code");
+                return;
+            }
+            else {
+                $('form').submit();
+            }
+        }
+
+
+
+    </script>
+
+}

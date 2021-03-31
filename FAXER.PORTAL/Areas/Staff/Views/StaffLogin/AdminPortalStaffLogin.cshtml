@@ -1,0 +1,110 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.AdminPortalStaffLoginViewModel
+@{
+    ViewBag.Title = "AdminPortalStaffLogin";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <h1>Staff Login</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup">
+                    <div class="text-center">
+                        <h4><i>Unauthorised access to this portal is prohibited and violators will be prosecuted !!!</i></h4>
+
+                    </div>
+                    <hr>
+                    <form action="/Staff/StaffLogin/AdminPortalStaffLogin" method="post">
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                <input type="email" name="StaffNameAndSurname" class="form-control" placeholder="First and Surname">
+                                <div class="clearfix"></div>
+                                @Html.ValidationMessageFor(model => model.StaffNameAndSurname, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+
+
+                                <div class="input-group">
+
+                                    <input type="text" class="form-control" id="show_password" name="StaffMFSCode" placeholder="MFS Code">
+                                    <div class="input-group-addon" id="passwoed_show"><i class="fa fa-eye"></i></div>
+                                    <div class="clearfix"></div>
+                                    <br />
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.StaffMFSCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <input type="hidden" class="form-control" id="TimeZone" name="TimeZone" >
+                        <!--  -->
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                <label><input type="checkbox" name="IsAuthorizedChecked" id="IsAuthorizedChecked">  I am authorised to login to MoneyFax Service Admin Portal</label>
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <center>
+                            <a id="submitLink" class="fbtn btn-next">Login <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        </center>
+                        <!--  -->
+
+                        <div class="clearfix"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->
+@section Scripts{
+
+    <script>
+        $(document).ready(function () {
+
+            $('#submitLink').click(function () {
+                if ($("#IsAuthorizedChecked").is(":checked")) {
+                    $('form').submit();
+                }
+                return;
+
+
+            });
+        });
+
+        var d = new Date();
+        var n = d.getTimezoneOffset();
+        $("#TimeZone").val(n);
+
+    </script>
+}

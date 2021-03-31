@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Start Sending</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="login_signup">
+
+                    <h3>Does the  Receiver  have a MoneyFex Virtual Account ? </h3><br>
+                    <a href="@Url.Action("Index" ,"MFTCCardPaymentByMerchant")" class="btn btn-success btn-sm">Yes</a>&nbsp;&nbsp;
+                    <a href="@Url.Action("Index"  ,"NoCardPaymentByMerchant")" class="btn btn-primary btn-sm">No</a>
+                </div>
+
+                <div style="height:300px;"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->

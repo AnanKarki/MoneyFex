@@ -1,0 +1,107 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentFundAccountViewModel
+@{
+    ViewBag.Title = "BankDetails";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                @Html.HiddenFor(x => x.City)
+                @Html.HiddenFor(x => x.AgentCountry)
+                <!--  -->
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup   clearfix text-center">
+                        <h3 class="text-left">Bank Details</h3>
+                        <hr>
+                        <div class="text-left">
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label> Amount</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.AgentCountryCurrencySymbol @Model.Amount @Model.AgentCountryCurrency
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Account no.</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.BankAccountNo
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Sort Code</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+                                        @Model.BankSortCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <label>Payment Reference</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                <div class="form-group text-left">
+                                    <div class="form-control form-text">
+
+                                        @Model.PaymentReference
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+
+                        </div>
+
+                        <hr>
+
+                        <h4 class="text-center mt30 text-bold ">Have you made payment to our bank account?</h4>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  ">Confirm </button>
+                        <div class="clearfix mb30"> </div>
+
+                        <a href="@Url.Action("FundAccount","FundAccount")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                    <!-- </div> -->
+
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </section>
+}

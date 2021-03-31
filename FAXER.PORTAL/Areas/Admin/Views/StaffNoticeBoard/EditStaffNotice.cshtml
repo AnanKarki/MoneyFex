@@ -1,0 +1,120 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddStaffNoticeViewModel
+@{
+    ViewBag.Title = "EditStaffNotice";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditStaffNotice</h2>
+
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Edit Notice</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index", "StaffNoticeBoard")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View - Notice</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Edit Notice</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+
+                            <div class="form-body">
+
+
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select Country </label>
+                                    @Html.TextBoxFor(model => model.CountryName, new { @class="form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select City </label>
+                                   @Html.TextBoxFor(model=>model.City, new { @class="form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select Staff </label>
+                                    @Html.TextBoxFor(model=>model.StaffName, new { @class = "form-control", @readonly="readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Notice Headline</label>
+                                    @Html.TextBoxFor(model => model.Headline, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Full Notice  </label>
+                                    @Html.TextAreaFor(model => model.FullNotice, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.FullNotice, "", new { @class = "text-danger" })
+                                </div>
+
+                                <hr>
+                                <!--  -->
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-lg  btn-rounded pull-right">Modify Notice</button>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function (e) {
+                var country = $(this).val();
+                window.location.href = "/Admin/StaffNoticeBoard/AddStaffNotice?country=" + country;
+
+            });
+
+
+            $("#city").change(function (e) {
+                var country = $("#country").val();
+                var city = $(this).val();
+                window.location.href = "/Admin/StaffNoticeBoard/AddStaffNotice?country=" + country + "&city=" + city;
+            });
+
+
+        });
+    </script>
+
+
+
+
+
+}

@@ -1,0 +1,1564 @@
+﻿
+@{
+    ViewBag.Title = "SenderDashboard";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+
+                    <div class="  d-flex align-items-center flex-row card m-b-30">
+
+                        <div class="card-block">
+                            <h3 class="">Ram Shrestha</h3>
+                            <h5 class="text-primary">Account No. 6558545454 <br>Country: United Kingdome</h5>
+                        </div>
+
+                        <div class="card-block">
+                            <button class="btn btn-inverse  btn-round m-r-20" data-toggle="modal" data-target="#RegisteredAgentsnotepopup">Note</button>
+                            <button class="btn btn-primary btn-round m-r-20" data-toggle="modal" data-target="#email">Send Email</button>
+                            <button class="btn btn-secondary btn-round m-r-20" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Monthly<br> Transfer</b></p>
+                                            <h4 class="m-b-0">$ 852</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Monthly Service Payment</b></p>
+                                            <h4 class="m-b-0">$ 5,852</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Monthly Bill <br>Payment  </b></p>
+                                            <h4 class="m-b-0">$ 2442</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-blue text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Monthly KiiPay Wallet Payment</b></p>
+                                            <h4 class="m-b-0">$ 5,242</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-shopping-cart f-40 text-c-blue"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-header-left ">
+                                        <h5>Monthly View</h5>
+                                        <!--     <span class="text-muted">For more details about usage, please refer <a href="https://www.amcharts.com/online-store/" target="_blank">amCharts</a> licences.</span> -->
+                                    </div>
+                                    <div class="card-header-right ">
+                                        <input type="text" name="datefilter" class="form-control" value="" placeholder="Filter" />
+                                    </div>
+                                </div>
+                                <div class="card-block-big">
+                                    <div id="monthly-graph" style="height:350px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card feed-card">
+                                <div class="card-header">
+                                    <h5>Feeds</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class=" fa fa-check bg-simple-c-green feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">New KiiPay Wallet User Registered <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa fa-plus bg-primary feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Fund Added to KiiPay Wallet<span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-primary feed-icon">W</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Withdrawal from KiiPay Wallet <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa fa-question bg-simple-c-pink feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Compliance Alert <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa fa-close  bg-red feed-icon"> </i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Transction Cancellation <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa bg-simple-c-yellow feed-icon">E</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">App Error <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Recent Transactions </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Identifier</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Received</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="sender-statement-cash-pickup-received.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Received</label>
+                                                    </td>
+                                                    <td>Bill Payment TU</td>
+                                                    <td><a href="sender-statement-bill-payment-tu.php">BTTU5894</a></td>
+                                                    <td>Yesterday</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">On Hold</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="sender-statement-cash-pickup-hold.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">On Hold</label>
+                                                    </td>
+                                                    <td>Service Payment</td>
+                                                    <td><a href="sender-statement-bill-payment.php">SP165458</a></td>
+                                                    <td>Yesterday</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-primary">Progress</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="sender-statement-cash-pickup-hold.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-primary">Progress</label>
+                                                    </td>
+                                                    <td>Bank Deposit</td>
+                                                    <td><a href="sender-statement-bank-account-deposit.php">BD145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Received</label>
+                                                    </td>
+                                                    <td>Other Mobile Wallet</td>
+                                                    <td><a href="sender-statement-other-mobile-wallet.php">OW-65458</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Received</label>
+                                                    </td>
+                                                    <td>KiiPay Wallet</td>
+                                                    <td><a href="">KP145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-warning">Refunded</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="sender-statement-kiipay-wallet.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Received</label>
+                                                    </td>
+                                                    <td>Bill payment</td>
+                                                    <td><a href="sender-statement-bill-payment.php">BP65458</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="sender-transaction-statement.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>KYC Update</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class=" ">
+                                        <p>Sanction list Status: <span class="text-success">Absence</span></p>
+                                        <div class="row">
+
+                                            <div class="col-lg-8">
+                                                <table class="table  table-responsive m-b-0">
+                                                    <tr>
+                                                        <th colspan="2">
+                                                            <h5>Personal Details</h5>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="social-label b-none p-t-0">First Name</th>
+                                                        <td class="social-user-name b-none p-t-0 text-muted">Raymond</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="social-label b-none p-t-0">Middle Name </th>
+                                                        <td class="social-user-name b-none p-t-0 text-muted">Smith</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="social-label b-none">Surname</th>
+                                                        <td class="social-user-name b-none text-muted">John</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th class="social-label b-none">Date of Birth</th>
+                                                        <td class="social-user-name b-none text-muted">Jan-09-1998</td>
+                                                    </tr>
+                                                </table>
+                                            </div>
+
+                                            <div class="col-lg-4">
+                                                <img src="assets/images/avatar-4.jpg">
+                                            </div>
+                                        </div>
+                                        <table class="table  table-responsive m-b-0">
+
+                                            <tr>
+                                                <th colspan="2">
+                                                    <h5>Current Address</h5>
+                                                </th>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Address Line 1</th>
+                                                <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Address Line 2</th>
+                                                <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none p-b-0">City</th>
+                                                <td class="social-user-name b-none p-b-0 text-muted">London</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Postcode</th>
+                                                <td class="social-user-name b-none text-muted">
+                                                    TW14 8JX
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Country</th>
+                                                <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th colspan="2">
+                                                    <h5>Bank Card Information</h5>
+                                                </th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Card Registered to Name ?</th>
+                                                <td class="social-user-name b-none text-success">Yes</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Card Registered to Address ?</th>
+                                                <td class="social-user-name b-none text-success">Yes</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th colspan="2">
+                                                    <h5>UK Edited Electoral Roll</h5>
+                                                </th>
+
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Address and Name on Electoral Register ?</th>
+                                                <td class="social-user-name b-none ">Yes <span class="text-success">10121</span></td>
+                                            </tr>
+
+                                        </table>
+
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="agent-compliance-list.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Regular Beneficiaries </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Latest Amount</th>
+                                                    <th>Identifier</th>
+                                                    <th>Country</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">5454548</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">KP85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Oge..</a>
+                                                    </td>
+                                                    <td>20,000 XAF</td>
+                                                    <td><a href="">BD85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Unag..</a>
+                                                    </td>
+                                                    <td>20,000 XAF</td>
+                                                    <td><a href="">OW85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="sender-beneficiaries.php" class=" b-b-primary text-primary">View all  </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Regular Service Payment </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Latest Amount</th>
+                                                    <th>Identifier</th>
+                                                    <th>Country</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">LLC Man.</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">SP45461</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">LLC Man.</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">SP45461</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Anam Hotel</a>
+                                                    </td>
+                                                    <td>20,000 XAF</td>
+                                                    <td><a href="">SP45461</a></td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Jupitar Hos..</a>
+                                                    </td>
+                                                    <td>GHS 20,000</td>
+                                                    <td><a href="">OW85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-gh"></span> Ghana</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="regular-service-payment-list.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Regular Bill Payment </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Latest Amount</th>
+                                                    <th>Identifier</th>
+                                                    <th>Country</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Lyca Mobile</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">5454548</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Lyca Mobile</a>
+                                                    </td>
+                                                    <td>NGN 500,000</td>
+                                                    <td><a href="">5454548</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">MTN-Cmr..</a>
+                                                    </td>
+                                                    <td>20,000 XAF</td>
+                                                    <td><a href="">BPTU85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Airtel</a>
+                                                    </td>
+                                                    <td>200 GHS</td>
+                                                    <td><a href="">BP85658</a></td>
+                                                    <td><span class="flag-icon flag-icon-gh"></span> Ghana</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="regular-bill-payment-list.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Transaction Limit </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><a href="sender-transfer-set-new-limit.php" class="btn btn-primary btn-round">Set Limit</a></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Service</th>
+                                                    <th>Amount</th>
+                                                    <th>Frequency</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>KiiPay Wallet</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Bank Deposit</td>
+                                                    <td>$1000</td>
+                                                    <td>Weekly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Cash Pickup</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Other Wallet</td>
+                                                    <td>$1000</td>
+                                                    <td>Yearly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Service Payment </td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Bill Payment TU</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td class="action-icon">
+                                                        <a href="sender-transfer-set-new-limit.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="sender-set-limit.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Limit History</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row  ">
+
+                                        <!--  -->
+                                        <div class="col-xl-6 col-md-6">
+                                            <div class="form-group m-b-0">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option value="">Select Month </option>
+                                                    <option value="January">January</option>
+                                                    <option value="February">February</option>
+                                                    <option value="March">March</option>
+                                                    <option value="April">April</option>
+                                                    <option value="May">May</option>
+                                                    <option value="June">June</option>
+                                                    <option value="July">July</option>
+                                                    <option value="August">August</option>
+                                                    <option value="September">September</option>
+                                                    <option value="October">October</option>
+                                                    <option value="November">November</option>
+                                                    <option value="December">December</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-6 col-md-6">
+                                            <div class="form-group m-b-0">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option value="">Select Year </option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2013">2013</option>
+                                                    <option value="2012">2012</option>
+                                                    <option value="2011">2011</option>
+                                                    <option value="2010">2010</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                    </div>
+                                </div>
+                                <div class="card-block">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Service</th>
+                                                    <th>Amount</th>
+                                                    <th>Frequency</th>
+
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>KiiPay Wallet</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+                                                    <td>Jan-05-2018</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Bank Deposit</td>
+                                                    <td>$1000</td>
+                                                    <td>Weekly</td>
+
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Cash Pickup</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Other Wallet</td>
+                                                    <td>$1000</td>
+                                                    <td>Yearly</td>
+
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Service Payment </td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Bill Payment TU</td>
+                                                    <td>$1000</td>
+                                                    <td>Monthly</td>
+
+                                                    <td>Jan-05-2018</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="sender-limit-history.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Registered KiiPay Wallet </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><a href="" class="btn btn-primary btn-round">Number of Wallet (5)</a></li>
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Name</th>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+
+                                                    <th>Wallet Number</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Active</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">Inactive</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">Deleted</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Active</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">Inactive</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">Deleted</label>
+                                                    </td>
+                                                    <td><a href="">Ram Chhetri</a></td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>Lagos</td>
+                                                    <td><a href="">54587454</a></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="sender-registered-kiiPay-wallet.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Registered KiiPay Wallet Statement </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>Ukesh Raj Shre...</td>
+                                                    <td>-$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>ABC Ltd</td>
+                                                    <td>+$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Ukesh Raj Shre...</td>
+                                                    <td>-$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>LLC Mankon</td>
+                                                    <td>-$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>Ukesh Raj Shre...</td>
+                                                    <td>+$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>Ukesh Raj Shre...</td>
+                                                    <td>-$50,000</td>
+                                                    <td>Jan-05-2018</td>
+                                                    <td><a href="">Details</a></td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="registered-KiiPay-wallet-statement.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card ">
+                                <div class="card-header">
+                                    <h5>System Activity</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class="latest-update-box">
+                                        <div class="row  p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hrs ago</p>
+                                                <i class="fa bg-success update-icon">200</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"> <a href="">Login</a></h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                <i class="fa bg-red update-icon">10</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"> Failed Login</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                <i class="fa   bg-info update-icon">2</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">  Password Reset </h6>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="#!" class="b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <div class="card latest-update-card ">
+                                <!--  -->
+                                <div class="card-header">
+                                    <h5>Promotions </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Amount/Rate</th>
+                                                    <th>Code</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Mother</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        New Year
+                                                    </td>
+                                                    <td>$5</td>
+                                                    <td><a href="">2020</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Mother</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        New Year
+                                                    </td>
+                                                    <td>$5</td>
+                                                    <td><a href="">2020</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        New Year
+                                                    </td>
+                                                    <td>$5</td>
+                                                    <td><a href="">2020</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="sender-promotions-list.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>Sender's Details</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class="table-responsive">
+
+                                        <table class="table  table-responsive m-b-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">First Name</th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">Raymond</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">Middle Name </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">Smith</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Surname</th>
+                                                    <td class="social-user-name b-none text-muted">John</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Date of Birth</th>
+                                                    <td class="social-user-name b-none text-muted">Jan-09-1998</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Current Address</h5>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 1</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 2</th>
+                                                    <td class="social-user-name b-none text-muted">60 Manfort Road</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">City</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">London</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Postcode</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        TW14 8JX
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        +4545747587
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        info@abcdbank.com
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Identification Details</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Type</th>
+                                                    <td class="social-user-name b-none text-muted">Passport</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Number</th>
+                                                    <td class="social-user-name b-none text-muted">58745457</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Expiry Date</th>
+                                                    <td class="social-user-name b-none text-muted">Jan-08-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Issuing Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Bank Card Information</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Saved Debit/Credit Card</th>
+                                                    <td class="social-user-name b-none "> XXXX-2352</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Expiry Date</th>
+                                                    <td class="social-user-name b-none "> 02/2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none" colspan="2">Documentation</th>
+
+                                                </tr>
+                                                <tr>
+                                                    <td class="social-user-name b-none ">
+                                                        <button href="https://picsum.photos/1200/768.jpg?random=1" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                            ID 1
+                                                        </button>
+
+                                                        <button href="https://picsum.photos/1200/768.jpg?random=2" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                            ID 2
+                                                        </button>
+
+                                                        <button href="https://picsum.photos/1200/768.jpg?random=3" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                            Address
+                                                        </button>
+
+                                                        <button href="https://picsum.photos/1200/768.jpg?random=3" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                            Photo
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="sender-update-details.php" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update Details</a>
+
+                                        <button type="button" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</button>
+
+                                        <button type="button" class="btn btn-danger btn-round  s"><i class="fa fa-remove"></i> Delete</button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Referrals </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Country</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Oge..</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Unag..</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="sender-referrals-list.php" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Reserved </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Country</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Peter</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">Edum Oge..</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-ng"></span> Nigeria</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Unag..</a>
+                                                    </td>
+                                                    <td><span class="flag-icon flag-icon-cm"></span> Cameroon</td>
+                                                    <td>$5</td>
+                                                    <td>Jan-05-2009</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="#!" class=" b-b-primary text-primary">View all  </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  <div id="styleSelector">
+            </div> -->
+        </div>
+    </div>
+</div>

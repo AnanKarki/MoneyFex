@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName ,
+    </p>
+    <p>
+        Your payment to @ViewBag.MerchantBusinessName has been successful, the Merchant's MoneyFex  account has been credited.
+    </p>
+    <p>
+        Please find attached, a receipt to confirm this transaction.
+    </p>
+    <br />
+    
+    <table style="width:50%;margin-left:150px ">
+        <tbody>
+            <tr>
+               
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.PayForGoodsAbroad"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/23.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

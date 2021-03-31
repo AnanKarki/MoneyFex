@@ -1,0 +1,252 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentContactDetailsViewModel
+@{
+    ViewBag.Title = "ContactDetails";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Agent's Contact Details</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> Address 1 <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(x => x.Address1, new { @class = "form-control", placeholder = "Address Line 1", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.Address1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> Address 2  </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(x => x.Address2, new { @class = "form-control", placeholder = "Address Line 2", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.Address2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>City <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.City, new { @class = "form-control", placeholder = "City", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>State/Province/Region <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(x => x.StateProvinceRegion, new { @class = "form-control", placeholder = "State/Province/Region", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.StateProvinceRegion, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Zip/Postal Code <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ZipPostalCode, new { @class = "form-control", placeholder = "Zip/Postal Code", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.ZipPostalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country   <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.CountryList, "Select Country", new { @class = "form-control", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Phone Number <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control", placeholder = "Phone number including country code", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Fax Number  </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.FaxNo, new { @class = "form-control", placeholder = "Fax number including country code", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.FaxNo, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Website </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Website, new { @class = "form-control", placeholder = "Website", @readonly = "true" })
+                                @Html.ValidationMessageFor(x => x.Website, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>@Html.CheckBoxFor(x => x.Accept) Please check this box to accept to our terms and conditions</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <button class="fbtn btn-next" type="submit">Finish Account Setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Success</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle-success" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success btn-sm" data-dismiss="modal" id="GO">Close window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Warning</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="GO">Close window</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--  -->
+@section Scripts {
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#GO").click(function () {
+
+                window.location.href = "/Agent/AgentLogin/Login";
+            });
+        });
+
+
+    </script>
+
+
+
+}

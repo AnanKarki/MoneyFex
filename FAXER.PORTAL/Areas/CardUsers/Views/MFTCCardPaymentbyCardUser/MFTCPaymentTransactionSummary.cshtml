@@ -1,0 +1,146 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUser_MFTCPaymentTransactionSummaryViewModel
+@{
+    ViewBag.Title = "MFTCPaymentTransactionSummary";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+    string FaxingCurrency = FAXER.PORTAL.Common.CardUserSession.FaxingCurrency ?? "";
+    string FaxingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.FaxingCurrencySymbol ?? "";
+    string ReceivingCurrrency = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrency ?? "";
+    string ReceivingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrencySymbol ?? "";
+
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Virtual Account Payment Summary</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Card User Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>You are Topping-Up to:</b></p>
+                                <p>
+                                    @Model.ReceiverName<br>
+                                    @Model.ReceiverMFTCCardNumber
+                                </p>
+                                <p>
+                                    <a href="@Url.Action("MFTCCardHoderDetials")" class="theme-color">Change Receiver</a>
+                                    <br><b>Receive Option</b> <br>E-Card Withdrawal
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Your Personal Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Contact Information</b></p>
+                                <p>
+                                    @Model.CardUserName<br>@Model.CardUserPhoneNumber<br>
+                                    @Model.CardUserEmail
+                                </p>
+                                <p> <b>Country of Operation</b><br>@Model.CardUserCountry</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="clearfix"></div>
+
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Your Payment Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Card Information</b></p>
+
+                                <p>@Model.SenderMFTCCardNumber</p>
+                                @*<p><b>Exp: 12/20</b> </p>*@
+                                <p>
+                                    <b>Your home Billing Address</b><br>@Model.streetAddress
+                                    @Model.City
+                                    @Model.State
+                                    @Model.PostalCode
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center"> Your Transaction Details</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p>
+                                    <b>Transaction Total</b><br>Amount : @Model.SentAmount @FaxingCurrency<br>
+                                    Fees : @Model.Fees @FaxingCurrency<br>
+                                    Total Cost : @Model.TotalAmount @FaxingCurrency<br>
+
+                                    Total Receive Amount : @Model.TotalReceiveAmount @ReceivingCurrrency
+                                </p>
+
+
+                                <a href="@Url.Action("PayingAmount")" title="">Change Transaction Amount</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("PaymentDetails")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next">Deposit Now <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("PaymentDetails")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+</form>

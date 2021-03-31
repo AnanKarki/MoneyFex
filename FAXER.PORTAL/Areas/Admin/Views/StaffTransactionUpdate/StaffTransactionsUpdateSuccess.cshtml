@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "StaffTransactionsUpdateSuccess";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Sender <label class="text-primary">@ViewBag.SenderName</label> <span>Account Number: @ViewBag.SenderAccountNo<br>Country:@ViewBag.SenderCountry</span></h4>
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+                                <div class="card-body p-t-50 b-b-50">
+
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                            <div class="card">
+
+                                                <div class="card-block text-center p-50">
+
+                                                    <!-- success -->
+                                                    <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                                        <span class="swal2-success-line-tip"></span>
+                                                        <span class="swal2-success-line-long"></span>
+                                                        <div class="swal2-success-ring"></div>
+                                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                                    </div>
+                                                    <!-- success -->
+                                                    <!-- error -->
+                                                    <!--
+                                                    <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: flex;"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div> -->
+                                                    <!-- error -->
+
+                                                    <h2 class=" ">Update <span class="text-primary">Confirmed </span>  </h2>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <!--   <div class="card-footer bg-light p-40">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <a href="sender-payment-method-success.php" class="btn btn-lg btn-block btn-primary btn-round "> Confirm Transfer <i class="fa fa-angle-right"></i></a>
+
+                                                <button onclick="window.history.go(-1);" class="btn btn-lg btn-block btn-primary btn-round"> <i class="fa fa-angle-left m-r-5"></i> Back
+                                                </button>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

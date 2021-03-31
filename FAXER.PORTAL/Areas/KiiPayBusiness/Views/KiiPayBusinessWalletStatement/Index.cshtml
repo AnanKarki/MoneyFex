@@ -1,0 +1,232 @@
+﻿@model List<FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.WalletStatementVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Wallet Statement</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+
+            <div class="col-lg-3 col-xs-6 col-xs-offset-3 col-lg-offset-5 ">
+
+                <div class="form-group">
+
+                    <select class="form-control" id="filter" onchange="FilterData()">
+                        <option>Filter Transactions</option>
+                        <option value="0">All</option>
+                        <option value="1">In</option>
+                        <option value="2">Out</option>
+                    </select>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+                <br>
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> </th>
+                                    <th>Date & Name</th>
+                                    <th>Type & Acc</th>
+                                    <th>Reference</th>
+                                    <th>Gross & Fee</th>
+                                    <th>Net & Balance.</th>
+
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                <tr>
+                                    <td>
+                                        @if (item.TrasactionStatus == FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.TrasactionStatus.IN)
+                                        {
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/right-arrow.svg" width="30">
+
+                                        }
+                                        else
+                                        {
+
+
+
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/left-arrow.svg" width="30">
+
+
+                                        }
+                                    </td>
+                                    <td><span class="text-primary">@item.TransactionDate</span><br>@item.ReceiverORSenderName</td>
+                                    <td>Payment Made<br>@item.MobileNo</td>
+                                    <td>@item.PaymentReference</td>
+                                    @if (item.TrasactionStatus == FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.TrasactionStatus.IN)
+                                    {
+
+
+                                        <td> @item.ReceivingCurrency @item.Amount<br>@item.SendingCurrency @item.Fee</td>
+                                        <td>@item.SendingCurrency @item.Balance <br>  + @item.ReceivingCurrency @item.Amount</td>
+                                    }
+                                    else
+                                    {
+
+
+                                        <td> @item.SendingCurrency @item.Amount<br>@item.SendingCurrency @item.Fee</td>
+                                        <td>@item.SendingCurrency @item.Balance <br> - @item.SendingCurrency @item.TotalAmount</td>
+                                    }
+                                    @*<td>@item.TotalAmount<br>+$255.00</td>*@
+                                    <td>
+
+                                        @*<a data-toggle="modal" data-target="#Refund" class="btn btn-primary radius-20">Refund</a>*@
+
+                                        @if (item.TrasactionStatus == FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.TrasactionStatus.IN)
+                                        {
+                                            <a onclick="RefundTransactionModal('@item.TransactionId' , '@item.WalletStatementType')" class="btn btn-primary radius-20">Refund</a>
+                                        }
+                                    </td>
+
+                                </tr>
+                                }
+                                @*<tr>
+                                        <td><img src="images/icon/svg/right-arrow.svg" width="30"></td>
+                                        <td><span class="text-primary">09-Jul-2019</span><br>Ukesh Raj</td>
+                                        <td>Payment Made<br>12454124</td>
+                                        <td>Payment from James</td>
+                                        <td>$299.00<br>$255.00</td>
+                                        <td>$299.00<br>+$255.00</td>
+                                        <td>
+                                            <a data-toggle="modal" data-target="#Refund" class="btn btn-primary radius-20">Refund</a>
+                                        </td>
+
+                                    </tr>
+
+
+                                    <tr>
+                                        <td><img src="images/icon/svg/left-arrow.svg" width="30"></td>
+                                        <td><span class="text-primary">09-Jul-2019</span><br>Ukesh Raj</td>
+                                        <td>Payment Made<br>12454124</td>
+                                        <td>Payment from James</td>
+                                        <td>$299.00<br>$255.00</td>
+                                        <td>$299.00<br>-$255.00</td>
+                                        <td></td>
+
+                                    </tr>*@
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- back btn -->
+                    <div class="clearfix">
+                        <hr>
+                        <center>
+                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!--  -->
+<!-- Refund Confirmation -->
+<div id="Refund" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40"> Do you want to refund  this payment?</h4>
+                <hr>
+                <button type="button" class="btn btn-primary   radius-20" onclick="RefundTransaction()">Yes</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Refund Confirmation end -->
+<!-- Completed -->
+<div id="payment-completed" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm text-center">
+        <div class="modal-content trans-success">
+
+            <div class="modal-body uk-text-center ">
+                <i class="fa fa-check text-primary  "></i>
+                <p class="text-white"> Completed</p>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Completed end -->
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        var TransactionId = 0;
+        var WalletStatementType = "";
+        function RefundTransactionModal(Id, WalletStatementType) {
+
+            TransactionId = Id;
+            WalletStatementType = WalletStatementType;
+
+            $("#Refund").modal('show');
+
+        }
+        function RefundTransaction() {
+
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessWalletStatement/RefundTransaction?Id=" + TransactionId + "&walletStatementType=" + WalletStatementType;
+
+        }
+
+        var refundSuccessful = "@TempData["Successful"]";
+        if (refundSuccessful == 1) {
+            $("#payment-completed").modal('show');
+        }
+
+        function FilterData() {
+
+            var FilterType = $("#filter").val();
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessWalletStatement/Index?WalletStatementFilterType=" + FilterType;
+
+        }
+    </script>
+}

@@ -1,0 +1,394 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentCommissionSettingViewModel
+@{
+    ViewBag.Title = "AddAgentCommission";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Add Agent Continent Commission</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                        <a href="@Url.Action("Index","AgentCommissionSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">View Add Agent Country Commission</a>
+
+                        <ol class="breadcrumb">
+                            <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                            <li class="active">Add Agent Commission</li>
+                        </ol>
+
+                    </div>
+
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="row bg-title">
+                            <h4 class="page-title" style="float:left;"><b>Add Agent Continent Commission </b></h4>
+                            <a href="@Url.Action("Index","AgentCommissionSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light" style="float:right;">View Add Agent Country Commission</a>
+                            <ol class="breadcrumb">
+                                <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                                <li class="active">Add Agent Commission</li>
+                            </ol>
+
+                        </div>
+                        <div class="col-md-12">
+                            <hr />
+
+                        </div>
+
+                        <form method="post">
+                            <div class="form-body">
+                                /row
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Select Country</label>
+                                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @onchange = "Fliter();", @class = "form-control", @id = "Country", @data_country = ViewBag.Countries })
+                                            @Html.ValidationMessageFor(Model => Model.Country, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Select City</label>
+                                            @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @onchange = "Fliter();", @class = "form-control", @id = "City" })
+                                            @Html.ValidationMessageFor(Model => Model.City, "", new { @class = "text-danger" })
+                                        </div>
+                                        @Html.HiddenFor(model => model.Id)
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Select Agent</label>
+                                            @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @onchange = "SetAccountNo();", @class = "form-control", @id = "Agent" })
+                                            @Html.ValidationMessageFor(Model => Model.AgentId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Account No</label>
+                                            @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control", @readonly = "readonly", id = "AccountNo" })
+                                            @Html.ValidationMessageFor(Model => Model.AgentId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Transfer Service </label>
+                                            @Html.EnumDropDownListFor(model => model.TransferSevice, new { @class = "form-control", @id = "TransferSevice" })
+                                            @Html.ValidationMessageFor(Model => Model.TransferSevice, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Commission Type</label>
+                                            @Html.EnumDropDownListFor(model => model.CommissionType, new { @class = "form-control", @id = "CommissionType", @onchange = "Fliter();" })
+                                            @Html.ValidationMessageFor(Model => Model.CommissionType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                /row
+                                /row
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Enter Sending Rate</label>
+                                            @Html.TextBoxFor(model => model.SendingCommission, new { @class = "form-control", id = "SendingRate" })
+                                            @Html.ValidationMessageFor(Model => Model.SendingCommission, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                /row
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Enter Receiving Rate</label>
+                                            @Html.TextBoxFor(model => model.ReceivingCommission, new { @class = "form-control", id = "ReceivingRate" })
+                                            @Html.ValidationMessageFor(Model => Model.ReceivingCommission, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+                                /row
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Commission Due Date</label>
+                                            @Html.EnumDropDownListFor(model => model.CommissionDueDate, new { @class = "form-control", id = "CommissionDueDate" })
+                                            @Html.ValidationMessageFor(Model => Model.CommissionDueDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                                <a href="@Url.Action("Index","AgentCommissionSetting")" class="btn btn-danger">Cancel</a>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+             .row
+            /.row
+            row
+        </div>
+    </div>*@
+
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Commission  </h4>
+                                        <a href="@Url.Action("Index", "AgentCommissionSetting")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Commission
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @onchange = "GetCitesByCountry();", @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @data_country = ViewBag.Countries })
+                                                    @Html.ValidationMessageFor(Model => Model.Country, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @onchange = "GetAgentByCity();", @class = "form-control form-control-lg form-control-round form-control-bold", @id = "City" })
+                                                    @Html.ValidationMessageFor(Model => Model.City, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                @Html.HiddenFor(model => model.Id)
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @onchange = "SetAccountNo();", @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Agent" })
+                                                    @Html.ValidationMessageFor(Model => Model.AgentId, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Account No.</label>
+                                                    @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @readonly = "readonly", id = "AccountNo" })
+                                                    @Html.ValidationMessageFor(Model => Model.AgentId, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Transfer Services</label>
+                                                    @Html.EnumDropDownListFor(model => model.TransferSevice, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "TransferSevice" })
+                                                    @Html.ValidationMessageFor(Model => Model.TransferSevice, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Commission Type</label>
+                                                    @Html.EnumDropDownListFor(model => model.CommissionType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "CommissionType", @onchange = "Fliter();" })
+                                                    @Html.ValidationMessageFor(Model => Model.CommissionType, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Commission</label>
+                                                    @Html.TextBoxFor(model => model.SendingCommission, new { @class = "form-control  form-control-lg form-control-round autonumber", id = "SendingRate" })
+                                                    @Html.ValidationMessageFor(Model => Model.SendingCommission, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Commission</label>
+                                                    @*<input type="text" class="form-control form-control-lg form-control-round autonumber" placeholder="Enter Commission" data-a-sign="$">*@
+                                                    @Html.TextBoxFor(model => model.ReceivingCommission, new { @class = "form-control  form-control-lg form-control-round autonumber", id = "ReceivingRate" })
+                                                    @Html.ValidationMessageFor(Model => Model.ReceivingCommission, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Commission Due Day</label>
+                                                    @Html.EnumDropDownListFor(model => model.CommissionDueDate, new { @class = "form-control  form-control-lg form-control-round form-control-bold", id = "CommissionDueDate" })
+                                                    @Html.ValidationMessageFor(Model => Model.CommissionDueDate, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","AgentCommissionSetting")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("City").value;
+            var transferSevice = $("#TransferSevice").val();
+            var commissionType = $("#CommissionType").val();
+
+            var agentId = $("#Agent option:selected").val();
+            window.location.href = "/Admin/AgentCommissionSetting/AddAgentCommission?Country=" + country + "&City=" + city + "&AgentId=" + agentId + "&TransferSevice=" + transferSevice + "&CommissionType=" + commissionType;
+        }
+
+        function GetCitesByCountry() {
+            debugger;
+            var country = $("#Country").val();
+            $.getJSON("/Admin/AdminCommon/GetCityByCountry?countryCode=" + country, function (result) {
+
+                var citySelector = $("#City");
+                $("#City option").remove();
+                citySelector.append('<option value="">Select</option>');
+                if (result.Data.length != 0) {
+                    for (var i = 0; i <= result.Data.length; i++) {
+                        citySelector.append('<option value="' + result.Data[i].City + '">' + result.Data[i].City + '</option>');
+                    }
+                }
+
+            })
+            search();
+        }
+
+        function GetAgentByCity() {
+
+            search();
+            $("#AccountNo").val("");
+            $("#Agent").val(0);
+        }
+
+        function SetAccountNo() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("City").value;
+            debugger;
+            var agentId = $("#Agent").val();
+            $.getJSON("/AgentCommissionSetting/GetAccountNo?AgentId=" + agentId, function (data) {
+                if (data != null) {
+                    $("#AccountNo").val(data.accountNo);
+                    $("#SendingRate").val(data.SendingCommissionRate);
+                    $("#ReceivingRate").val(data.ReceivingCommissionRate);
+                }
+            });
+        }
+
+        function GetCommission(data) {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("City").value;
+            ///Admin/FaxingCommissionSetting/AddFaxingContinentCommission
+            var agentId = $("#Agent option:selected").val();
+            window.location.href = "/Admin/AgentCommissionSetting/AddAgentCommission?AgentId=" + agentId;
+
+        }
+        //$(document).ready(function () {
+        //    $("#SendingRate").numeric();
+        //});
+        //$(document).ready(function () {
+        //    $("#ReceivingRate").numeric();
+        //});
+        //$("#SendingRate").inputFilter(function (value) {0
+        //    return /^-?\d*[.,]?\d*$/.test(value);
+        //});
+        //$("#ReceivingRate").on('keydown', function (value) {
+        //    var regex = RegExp('[-+]?([0-9]*.[0-9]+|[0-9]+)');
+
+        //    $(this).value;
+        //    if (regex.test((this).value) == false) {
+
+        //        $(this).value == "";
+        //    }
+        //});
+        search();
+        function search() {
+            var data = {
+                id: $("#Agent"),
+                country: $("#Country").val(),
+                Currecny: "",
+                isBusiness: false,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "Agent",
+                placeholder: "Select",
+                City: $("#City").val()
+            }
+            SelectSearch(data);
+        }
+    </script>
+
+}

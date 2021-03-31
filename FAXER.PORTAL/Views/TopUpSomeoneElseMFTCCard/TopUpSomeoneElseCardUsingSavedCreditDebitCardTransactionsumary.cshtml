@@ -1,0 +1,166 @@
+﻿@model FAXER.PORTAL.Models.MFTCCardTransactionSummaryViewModel
+@{
+    ViewBag.Title = "TopUpSomeoneElseCardUsingSavedCreditDebitCardTransactionsumary";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay someone else's Virtual Account using saved Credit/Debit Card</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <div class="mobile_design text-center">
+
+                        <div class="col-lg-6">
+
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center">Virtual Account Information </h2>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <p><b>You are Depositing To:</b></p>
+                                    <p>
+                                        @Model.CardUsername <br />
+                                        @Model.MFTCCardNumber
+                                    </p>
+                                    <p>
+
+                                        <a href="@Url.Action("Index")">Change Virtual Account </a>
+                                    </p>
+                                    <p><b>Receive Option</b></p>
+                                    <p>@Model.ReceiveOption</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center">Your Personal Information</h2>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <p><b>Your Contact Information</b></p>
+                                    <p>
+                                        @Model.FaxerName<br />
+                                        @Model.FaxerPhoneNumber<br />
+                                        @Model.FaxerEmail<br />
+                                    </p>
+                                    <p><b>Your Country of Birth</b></p>
+                                    <p>@Model.CountryOfBirth</p>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center">Your Payment Information</h2>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <p><b>Your Card Information</b></p>
+                                    <p>@Model.CardNumber  &nbsp;  Exp :@Model.CardExpriyDate</p>
+                                    <p><b>Your Home Billing Address</b></p>
+                                    <p>
+                                        @Model.streetAddress <br />
+                                        @Model.City <br />
+                                        @Model.PostalCode
+                                    </p>
+                                    <a href="@Url.Action("TopUpSomeoneElseCardUsingSavedCreditDebitCard", "TopUpSomeoneElseMFTCCard" , new { savedCardId = Model.SavedCardId})" >  Change Payment Information</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-6">
+
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h2 class="panel-title text-center"> Your Transaction Details</h2>
+                                </div>
+                                <div class="panel-body text-center">
+                                    <p><b>Transaction Total</b></p>
+                                    <p>
+                                        Top-Up Amount :&nbsp; @Model.SentAmount
+                                        <hr>
+                                        Fees : &nbsp; @Model.Fees
+                                        <hr>
+                                        Total Cost : &nbsp; @Model.TotalAmount
+                                        <hr>
+                                        Total Receive Amount : &nbsp; @Model.TotalReceiveAmount
+                                    </p>
+                                    <br />
+                                    <a href="@Url.Action("TopUpAmount")" >Change Transaction Amount</a>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+                        <!--  -->
+
+
+
+                    </div>
+
+
+                </div>
+
+
+                \
+
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@Url.Action("TopUpSomeoneElseCardUsingSavedCreditDebitCard", "TopUpSomeoneElseMFTCCard" , new { savedCardId = Model.SavedCardId})" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    @*<a href="hurraymessage.php" class="fbtn btn-next">Finish Faxing this Amount <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Pay Now<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@Url.Action("TopUpSomeoneElseCardUsingSavedCreditDebitCard", "TopUpSomeoneElseMFTCCard" , new { savedCardId = Model.SavedCardId})" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

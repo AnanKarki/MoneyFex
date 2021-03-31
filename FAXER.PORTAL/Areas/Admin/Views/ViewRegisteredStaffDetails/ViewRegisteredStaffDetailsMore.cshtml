@@ -1,0 +1,396 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredStaffMoreViewModel
+@{
+    ViewBag.Title = "ViewRegisteredStaffDetailsMore";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewRegisteredStaffDetailsMore</h2>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <a href="/Admin/ViewRegisteredStaffDetails" class="btn btn-info btn-rounded waves-effect waves-light"><span class="btn-label"><i class="fa fa-angle-left"></i></span> Back to View-Registered Staff Details </a>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li><a href="/Admin/ViewRegisteredStaffDetails">View- Registered Staff Details</a></li>
+                    <li class="active">@ViewBag.staffName</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+                    <div class="hideoption">
+                        <div class="btn-  pull-left">
+                            <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                            </button>
+                            <button href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                            </button>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+
+                                    <td rowspan="2"><strong>System Login Level   </strong></td>
+                                    <td colspan="4"><strong>Next of Kin</strong></td>
+                                    <td colspan="5"><strong>Employment</strong></td>
+                                    <td colspan="4"><strong>Login Time and Day</strong></td>
+                                    <td colspan="2"> Holidays</td>
+                                    <td rowspan="2"><strong>Staff Document</strong></td>
+                                    <td rowspan="2"><strong>No. Of Days</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Full Name</strong></td>
+                                    <td><strong>Relation</strong></td>
+                                    <td><strong>Address </strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>Telephone</strong></td>
+                                    <td><strong>Position </strong></td>
+                                    <td><strong>Salary</strong></td>
+                                    <td><strong>Mode (F/PT)</strong></td>
+                                    <td><strong>Date of Employment</strong></td>
+                                    <td><strong>Date of Leaving</strong></td>
+                                    <td><strong>Start Time</strong></td>
+                                    <td><strong>End Time</strong></td>
+                                    <td><strong>Start Day</strong></td>
+                                    <td><strong>End Day</strong></td>
+                                    <td><strong>Entitlement ?</strong></td>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td>
+                                        @Html.EnumDropDownListFor(model => model.SystemLoginLevel, new { @class = "", @id = "sysLevel" })
+                                    </td>
+                                    <td>@Model.NOKFirstName @Model.NOKMiddleName @Model.NOKLastName</td>
+                                    @Html.HiddenFor(model => model.StaffId, new { id = "staffId" })
+                                    <td>@Model.NOKRelation</td>
+                                    <td>@Model.NOKAddress1 @Model.NOKCity @Model.NOKCountry</td>
+                                    <td>@Model.NOKCountry</td>
+                                    <td> @Model.NOKTelephone</td>
+                                    <td>@Model.EmpPosition</td>
+                                    <td>@Model.EmpSalary</td>
+                                    <td>@Html.EnumDropDownListFor(model => model.EmpMode, new { @id = "empMode" })</td>
+                                    <td>@Html.TextBoxFor(model => model.DateOfEmployment, new { @value = Model.DateOfEmployment, id = "employmentDate", @class = "date", @data_date_change = "DateOfEmploymentChange" })</td>
+                                    <td>@Html.TextBoxFor(model => model.DateOfLeaving, new { @value = Model.DateOfLeaving, id = "leavingDate", @class = "date", @data_date_change = "DateOfLeavingChange" })</td>
+
+
+                                    <td>@Html.EditorFor(model => model.LogInStartTime, new { htmlAttributes = new { @class = "", id = "startTime", type = "time" } })</td>
+                                    <td>@Html.EditorFor(model => model.LogInEndTime, new { htmlAttributes = new { @class = "", id = "endTime", type = "time" } })</td>
+
+
+
+                                    <td>
+                                        @Html.EnumDropDownListFor(model => model.LogInStartDay, new { @class = "", id = "startDay" })
+                                    </td>
+                                    <td>
+                                        @Html.EnumDropDownListFor(model => model.LogInEndDay, new { @class = "", id = "endDay" })
+                                    </td>
+
+
+
+
+                                    <td> @Html.EnumDropDownListFor(model => model.HolidaysEntitlement, new { @class = "", id = "entitlement" }) </td>
+                                    <td><a class="btn btn-sm btn-primary" href="avoide:javascript;" data-toggle="modal" data-target="#StaffDoc">  View Document</a></td>
+                                    <td>@Html.TextBoxFor(model => model.HolidaysNoOfDays, new { @class = "", id = "noOfDays", @placeholder = "Enter" })</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+        <!-- Staff documents -->
+
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="StaffDoc">
+
+            <div class="modal-dialog modal-lg">
+
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">MoneyFax Service-Register a Staff</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <td rowspan="2"><strong>SN.</strong></td>
+                                                <td rowspan="2"><strong>Staff Name</strong></td>
+                                                <td colspan="9"><strong>Compliance Documents</strong></td>
+                                                <td rowspan="2"><strong>Action</strong></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Residence Permit</td>
+                                                <td><strong>Type</strong></td>
+                                                <td>Exp. Date</td>
+                                                <td>Passport Side 1</td>
+                                                <td>Passport Side 2</td>
+                                                <td>Utility Bill</td>
+                                                <td>CV</td>
+                                                <td>Highest Qualification </td>
+                                                <td>Ref Doc</td>
+                                            </tr>
+
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                @*<td><a href="images/logo.png"><img src="plugins/images/logo.png" class="document_attached"></a></td>*@
+                                                <td>1</td>
+                                                <td>@Model.StaffFirstName @Model.StaffMiddleName @Model.StaffLastName</td>
+                                                <td><a href=""><img src="@Model.ResidencePermitUrl" class="document_attached" width="50" height="50"></a></td>
+                                                <td>@Html.TextBoxFor(model => model.Type, new { @class = "", @placeholder = "Enter", @id = "type" })</td>
+
+
+                                                <td>@Html.TextBoxFor(model => model.ExpiryDate, new { @value = Model.ExpiryDate, id = "ExpiryDate", @class = "date", @data_date_change = "ExpiryDateChange" })</td>
+
+
+                                                <td><img src="@Model.PassportSide1Url" class="document_attached" width="50" height="50"></td>
+                                                <td><a href="@Model.PassportSide2Url"><img src="@Model.PassportSide2Url" class="document_attached" width="50" height="50"></a></td>
+                                                <td><a href="images/logo.png"><img src="@Model.UtilityBillUrl" class="document_attached" width="50" height="50"></a></td>
+                                                <td><a href="images/logo.png"><img src="@Model.CVUrl" class="document_attached" width="50" height="50"></a></td>
+                                                <td><a href="images/logo.png"><img src="@Model.HighestQualUrl" class="document_attached" width="50" height="50"></a></td>
+                                                <td>
+                                                    <span id="fileselector">
+                                                        <label class="btn btn-xs btn-primary" for="upload-file-selector">
+                                                            <input id="upload-file-selector" type="file" class="hidden">
+                                                            <i class="fa_icon icon-upload-alt margin-correction"></i>upload file
+                                                        </label>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="staff-compliance-documentation.php" class="btn btn-xs btn-primary btn-block">Update Documents</a>
+
+                                                    <button class="btn btn-xs btn-danger btn-block">Delete</button>
+
+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger brn-sm" data-dismiss="modal">Close</button>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#sysLevel").change(function (e) {
+                var staffId = $("#staffId").val();
+                var sysLevel = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeSysLoginLevel?staffId=" + staffId + "&sysValue=" + sysLevel;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+
+                        e.preventDefault();
+                    });
+
+            });
+
+            $("#empMode").change(function (e) {
+
+                var staffId = $("#staffId").val();
+                var mode = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeMode?staffId=" + staffId + "&mode=" + mode;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+
+                        e.preventDefault();
+                    });
+            });
+
+            $("#type").change(function (e) {
+
+                var staffId = $("#staffId").val();
+                var type = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/changePermitType?staffId=" + staffId + "&type=" + type;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+
+                        e.preventDefault();
+                    });
+            });
+
+            
+
+
+            
+
+            $("#startTime").change(function (e) {
+                var staffId = $("#staffId").val();
+                var time = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeStartTime?staffId=" + staffId + "&time=" + time;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+            $("#endTime").change(function (e) {
+                var staffId = $("#staffId").val();
+                var time = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeEndTime?staffId=" + staffId + "&time=" + time;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+            $("#startDay").change(function (e) {
+                var staffId = $("#staffId").val();
+                var day = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeStartDay?staffId=" + staffId + "&day=" + day;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+            $("#endDay").change(function (e) {
+                var staffId = $("#staffId").val();
+                var day = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeEndDay?staffId=" + staffId + "&day=" + day;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+            $("#entitlement").change(function (e) {
+                var staffId = $("#staffId").val();
+                var value = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeHolidaysEntitlement?staffId=" + staffId + "&value=" + value;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+            $("#noOfDays").change(function (e) {
+                var staffId = $("#staffId").val();
+                var days = $(this).val();
+                var url = "/Admin/ViewRegisteredStaffDetails/ChangeNoOfHolidays?staffId=" + staffId + "&noOfDays=" + days;
+                $.getJSON(url)
+                    .done(function (data) {
+
+                    })
+                    .error(function (err) {
+                        e.preventDefault();
+                    });
+            });
+
+
+        });
+
+        function DateOfEmploymentChange(date) {
+            var staffId = $("#staffId").val();
+
+            var url = "/Admin/ViewRegisteredStaffDetails/ChangeEmpDate?staffId=" + staffId + "&date=" + date;
+            $.getJSON(url)
+                .done(function (data) {
+
+                })
+                .error(function (err) {
+                    e.preventDefault();
+                });
+
+        }
+
+        function DateOfLeavingChange(date) {
+            var staffId = $("#staffId").val();
+            var url = "/Admin/ViewRegisteredStaffDetails/ChangeLeavingDate?staffId=" + staffId + "&date=" + date;
+
+            $.getJSON(url)
+                .done(function (data) {
+
+                })
+                .error(function (err) {
+                    e.preventDefault();
+                });
+        }
+
+        function ExpiryDateChange(date) {
+            var staffId = $("#staffId").val();
+            var url = "/Admin/ViewRegisteredStaffDetails/ChangeExpiryDate?staffId=" + staffId + "&date=" + date;
+
+            $.getJSON(url)
+                .done(function (data) {
+
+                })
+                .error(function (err) {
+                    e.preventDefault();
+                });
+        }
+
+
+
+    </script>
+}

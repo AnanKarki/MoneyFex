@@ -1,0 +1,85 @@
+﻿@model FAXER.PORTAL.Models.MFCareerViewModel
+@{
+    /**/
+    ViewBag.Title = "SenderCareer";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<div class="page-header" style="background:  url(/Content/images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+                <ol class="breadcrumb ">
+                    <li> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="active">Current Vacancies</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class=" ">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="  mb80 mt20">
+
+                    <h1 class="page-new">Current Vacancies</h1>
+                    <div class="contact-form mb60">
+                        <div class=" ">
+                            <div class="row">
+                                <div class="col-lg-12 pdl20">
+                                         <!-- section title start-->
+                                        <h4>Opportunities are broad and varied at MoneyFex, if you want to be challenged, developed and fascinated in a career to be proud of, then the opportunity is now!</h4>
+ 
+                                    @if (Model.CareerList.Count == 0)
+                                    {
+                                        <p> There is no vacancy available at the moment, please check again later.</p>
+                                    }
+                                    else
+                                    {
+                                        <table class="table table-bordered">
+                                            <thead class="thead-default">
+                                                <tr>
+                                                    <th>Job Title & Description</th>
+                                                    <th>Location</th>
+                                                    <th>Contract Type</th>
+                                                    <th>Salary Range </th>
+                                                    <th>Closing Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.CareerList)
+                                                {
+                                                    <tr>
+                                                        <td>@item.JobTitle <br /> @item.JobDescription</td>
+                                                        <td>@item.Location</td>
+                                                        <td>@item.ContractType</td>
+                                                        <td>@item.SalaryRange</td>
+                                                        <td>@item.ClosingDate</td>
+
+                                                        @Html.HiddenFor(model => model.JobId)
+                                                        @*  <input type="hidden" id="@item.Id" value="@item.JobTitle">*@
+                                                        <td><a href="@Url.Action("SenderJobApplication","QuickLink", new { @jobId = item.Id})" class="btn btn-sm btn-success">Apply</a></td>
+
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.section title start-->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,200 @@
+﻿@model List<FAXER.PORTAL.Areas.Staff.ViewModels.StaffEmailInboxViewModel>
+@{
+    ViewBag.Title = "Inbox";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+<style>
+    a {
+        cursor: pointer;
+    }
+</style>
+@{Html.RenderPartial("_mail_sidebar");}
+@if (ViewBag.Message != null)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            @*<div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size:50px;"></i>
+                            </div>*@
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="col-lg-9 col-md-8">
+
+    <div class="dashboard_header">
+        <h1>Inbox</h1>
+    </div>
+    <!--  -->
+    <div class="dashboard_body">
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm">
+                <div class="checkbox" style="margin: 0;">
+                    <label>
+                        <input type="checkbox">
+                    </label>
+                </div>
+            </button>
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span><span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="@Url.Action("Sent","StaffMessage")">Sent</a></li>
+                <li><a href="@Url.Action("Inbox","StaffMessage", new { @status="read"})">Read</a></li>
+                <li><a href="@Url.Action("Inbox","StaffMessage", new { @status="unread"})">Unread</a></li>
+                <li><a href="@Url.Action("Archive","StaffMessage")">Archived</a></li>
+                <li><a href="@Url.Action("Junk","StaffMessage")">Junk</a></li>
+            </ul>
+        </div>
+        <a href="@Url.Action("Inbox","StaffMessage")" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" title="Refresh">
+            <span class="fa fa-refresh"></span>
+        </a>
+        <!-- Single button -->
+        <div class="btn-group">
+            <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown">
+                More <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="#" onclick="markAsRead();">Mark all as read</a></li>
+                <li><a href="#" onclick="markAsArchive();">Archive</a></li>
+                <li><a href="#" onclick="markAsDeleted();">Delete</a></li>
+            </ul>
+        </div>
+        <div class="pull-right">
+            <span class="text-muted"><b>@ViewBag.startCount</b>–<b>@ViewBag.EndCount</b> of <b>@ViewBag.TotalCount</b></span>
+            <div class="btn-group btn-group-sm">
+                @if (ViewBag.startCount == 1 || ViewBag.EndCount == ViewBag.TotalCount)
+                {
+                    <a class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Inbox", new { page = ViewBag.Page - 1 })" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                }
+                @if (ViewBag.startCount == ViewBag.TotalCount || ViewBag.EndCount == ViewBag.TotalCount)
+                {
+                    <a class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Inbox", new { page = ViewBag.Page + 1 })" class="btn btn-sm btn-default">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                }
+            </div>
+        </div>
+        <hr />
+
+        <!-- Tab panes -->
+        @foreach (var item in Model)
+        {
+            <div class="mail_list inbox ">
+                <div class="tab-pane fade in active" id="home">
+                    <div class="list-group">
+                        @if (item != null)
+                        {
+                            if (item.EmailStatus == FAXER.PORTAL.DB.EmailStatus.Delivered)
+                            {
+                                <a href="@Url.Action("ViewMessage","StaffMessage", new { @id=item.Id})" class="list-group-item">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" onclick="return pushId(@item.Id,this);">
+                                        </label>
+                                    </div>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">@item.SenderName</span> <span class="">@item.Subject</span>
+                                    <span class="text-muted" style="font-size: 11px;">- @item.ShortBody</span> <span class="badge">@item.EmailDate</span> <span class="pull-right">
+                                        @if (item.HasAttachment == true)
+                                        {
+                                            <span class="glyphicon glyphicon-paperclip">
+                                            </span>
+                                        }
+                                    </span>
+                                </a>
+                            }
+                            else if (item.EmailStatus == FAXER.PORTAL.DB.EmailStatus.Sent)
+                            {
+
+                                <a href="@Url.Action("ViewMessage","StaffMessage", new { @id=item.Id})" class="list-group-item read">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" onclick="return pushId(@item.Id,this);">
+                                        </label>
+                                    </div>
+                                    <span class="name" style="min-width: 120px; display: inline-block;">@item.SenderName</span> <span class="">@item.Subject</span>
+                                    <span class="text-muted" style="font-size: 11px;">- @item.ShortBody</span> <span class="badge">@item.EmailDate</span> <span class="pull-right">
+                                        @if (item.HasAttachment == true)
+                                        {
+                                            <span class="glyphicon glyphicon-paperclip">
+                                            </span>
+                                        }
+                                    </span>
+                                </a>
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <!-- Ad -->
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+@section scripts{
+    <script type="text/javascript">
+        var idArray = [];
+        function pushId(Id, control) {
+            var checkbox = $(control);
+            setTimeout(function () { checkbox.prop('checked', !checkbox.prop('checked')); }, 10);
+            if (idArray.includes(Id)) {
+                var a = idArray.indexOf(Id);
+                idArray.splice(a, 1);
+            }
+            else {
+                idArray.push(Id);
+            }
+            return false;
+        }
+
+        function markAsRead() {
+            window.location.href = "/Staff/StaffMessage/MarkAsRead?id=" + idArray;
+        }
+
+        function markAsArchive() {
+            window.location.href = "/Staff/StaffMessage/MarkAsArchived?id=" + idArray;
+        }
+        function markAsDeleted() {
+            window.location.href = "/Staff/StaffMessage/MarkAsDeleted?id=" + idArray;
+
+        }
+
+
+    </script>
+}

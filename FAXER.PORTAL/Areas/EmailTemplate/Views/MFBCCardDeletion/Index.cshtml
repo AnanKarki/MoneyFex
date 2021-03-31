@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+
+
+
+    Dear Admin,
+    <br />
+
+    <p>
+
+        A MoneyFex Business Card (MFBC) registered with the following information has been deleted by : @ViewBag.NameOfDeleter
+    </p>
+
+    <br />
+    MFBC Card Number: @ViewBag.MFBCNo
+    <br />
+
+    Name on MFBC Card: @ViewBag.NameOnMFBCard
+    <br />
+    Merchant Name: @ViewBag.MerchantName
+    <br />
+    Merchant Account Number: @ViewBag.MerchantAccNo
+    <br />
+    Date of Birth of Registered Card User: @ViewBag.DOBOfCardUser
+    <br />
+    Card User History: @ViewBag.CardUserHistory
+    <br />
+    Card User City: @ViewBag.CardUserCity
+    <br />
+    Amount on Card: @ViewBag.AmountOnCard
+    <br />
+    <br />
+    Please make a refund to this user accordingly.
+
+    <br />
+
+  
+
+
+</div>

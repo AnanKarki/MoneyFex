@@ -1,0 +1,241 @@
+﻿
+@model FAXER.PORTAL.Areas.Admin.ViewModels.AddNewAlertViewModel
+@{
+    ViewBag.Title = "AddNewAlert";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("AddNewAlert", "StaffAlerts", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Alert Message</h4>
+                                        <a href="@Url.Action("Index", "StaffAlerts")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Alert
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "country" })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "All Cities", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "city" })
+                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Staff</label>
+                                                        @Html.DropDownListFor(model => model.Agent, (IEnumerable<SelectListItem>)ViewBag.Staffs, "All Staff", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "StaffId", @onchange = "GetStaffAccountNo()" })
+                                                        @Html.ValidationMessageFor(model => model.Agent, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label> Account Number</label>
+                                                        @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "AccountNumber" })
+                                                        @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label> Alert Heading</label>
+                                                        @Html.TextBoxFor(model => model.Heading, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "Heading" })
+                                                        @Html.ValidationMessageFor(model => model.Heading, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Full Alert Message</label>
+                                                        @Html.TextAreaFor(model => model.FullMessage, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "FullMessage" })
+                                                        @Html.ValidationMessageFor(model => model.FullMessage, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Start Date</label>
+
+                                                        @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @id = "startDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date", @data_date_change = "DateOfStartChange" } })
+                                                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>End Date</label>
+                                                        @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @id = "endDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date", @data_date_change = "DateOfFinishChange" } })
+                                                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Alert Photo</h5>
+                                                        <div class="col-lg-4">
+                                                            <a href="@Model.Photo" target="_blank"><img src="@Model.Photo" id="Image" name="Image" alt=" " style="float: left; margin-right: 15px; width: 100px;"></a>
+                                                        </div>
+                                                        <hr>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Upload Photo</label>
+                                                        <input type="file" name="AlertPhoto" class="form-control form-control-lg form-control-round" placeholder="Title" id="AlertPhoto">
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","StaffAlerts")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <a onclick="Preview()" class="btn btn-primary btn-round pull-right"><i class="fa fa-eye"></i> Preview</a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- popup -->
+    <div class="modal fade" id="viewpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+
+                <div class="modal-body text-justify">
+                    <img src="@Model.Photo" alt=" " id="PopImage" style="float: left; margin-right: 15px; width: 300px;">
+                    <h5 id="PopHeading"></h5>
+                    <p id="PopMessage"></p>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                    <button onclick="Submit()" class="btn btn-primary btn-round"><i class="fa fa-send"></i> Publish</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- popup -->
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function () {
+
+                var country = $("#country").val();
+                window.location.href = "/Admin/StaffAlerts/AddNewAlert?countryCode=" + country;
+            });
+
+            $("#city").change(function () {
+
+                var country = $("#country").val();
+                var city = $("#city").val();
+                window.location.href = "/Admin/StaffAlerts/AddNewAlert?countryCode=" + country + "&city=" + city;
+            });
+
+
+
+        });
+
+        function GetStaffAccountNo() {
+
+            var Staff = $("#StaffId").val();
+            $.getJSON("/Admin/StaffAlerts/GetStaffAccountNo?AgentId=" + Staff, function (result) {
+
+                var AccountNumber = result.Data;
+                $("#AccountNumber").val(AccountNumber);
+            });
+        }
+
+        function Submit() {
+
+            $("form")[0].submit();
+        }
+
+        function Preview() {
+
+            var heading = $("#Heading").val();
+            var fullMessage = $("#FullMessage").val();
+            var photo = $('#AlertPhoto').attr('src');
+
+            $("#PopHeading").text(heading);
+            $("#PopMessage").text(fullMessage);
+            $('#PopImage').attr('src', photo);
+
+            $("#viewpopup").modal("show");
+        }
+    </script>
+}

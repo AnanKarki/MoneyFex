@@ -1,0 +1,36 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        <b>
+            Merchant Payment
+        </b>
+    </p>
+    <br />
+    <p>
+        Name of Payer: <b> @ViewBag.PayerName</b>
+    </p>
+
+    <p>
+        Payer Account No : <b>@ViewBag.PayerAccountNo</b>
+    </p>
+    <p>
+        Name of Merchant: <b>@ViewBag.MerchantName</b>
+    </p>
+    <p>
+        Merchant Account Number: <b>@ViewBag.MerchantAccountNo</b>
+    </p>
+    <p>
+        Amount: <b>@ViewBag.Amount</b>
+    </p>
+    <p>
+        Payment Reference: <b>@ViewBag.PaymentReference</b>
+    </p>
+    <p>
+        Bank Reference: <b>@ViewBag.BankReference</b>
+    </p>
+
+</div>

@@ -1,0 +1,55 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+        ,
+    </p>
+    <p>
+        This is to confirm that you have successfully remove auto deposit of @ViewBag.AutoTopUpAmount
+        @ViewBag.CountryCurrencySymbol
+        from Virtual Account  - @ViewBag.MFTCCardNumber
+        , @ViewBag.CardUserName.
+    </p>
+
+    <p>
+
+        The user of this account will no longer be able to withdraw money or pay for Goods and Services using the virtual account.
+    </p>
+    <br />
+    <p>
+        You can add auto deposit to this account by going to the <strong>Standing Orders Payment</strong> section of your dashboard.
+    </p>
+    
+
+
+    <table style="width:100%; ">
+        <tbody>
+            <tr>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoTopUp"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/21.png" alt=""></a>
+                </td>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.PayForGoodsAbroad"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/23.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

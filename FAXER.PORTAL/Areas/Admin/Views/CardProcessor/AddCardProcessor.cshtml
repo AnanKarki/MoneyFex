@@ -1,0 +1,136 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.CardProcessorViewModel
+@{
+    ViewBag.Title = "AddCardProcessor";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Add Card Processor Provider Name</h4>
+                                        <a href="@Url.Action("Index","CardProcessor")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Card Processor Provider
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(model => model.Id)
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "" })
+                                                    @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Transfer Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferType" })
+                                                    @Html.ValidationMessage("TransferType", "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Transfer Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  --> 
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Card Processor</label>
+                                                    @Html.EnumDropDownListFor(x => x.CardProcessorApi, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "CardProcessorApi" })
+                                                    @Html.ValidationMessage("CardProcessorApi", "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Card Processor Name</label>
+                                                    @Html.TextBoxFor(x => x.CardProcessorName, new { @class = "form-control form-control-lg form-control-round", @name = "CardProcessorName", @placeholder = "Enter Card Processor Name" })
+                                                    @Html.ValidationMessageFor(x => x.CardProcessorName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Contact person</label>
+                                                    @Html.TextBoxFor(x => x.ContactName, new { @class = "form-control form-control-lg form-control-round", @name = "ContactName", @placeholder = "Enter Contact Name" })
+                                                    @Html.ValidationMessageFor(x => x.ContactName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Telephone</label>
+                                                    @Html.TextBoxFor(x => x.TelephoneNo, new { @class = "form-control form-control-lg form-control-round", @name = "TelephoneNo", @placeholder = "Enter Telephone No" })
+                                                    @Html.ValidationMessageFor(x => x.TelephoneNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Email Address</label>
+                                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control form-control-lg form-control-round", @name = "Email", @placeholder = "Enter Email" })
+                                                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","CardProcessor")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

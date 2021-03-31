@@ -1,0 +1,97 @@
+﻿@model FAXER.PORTAL.Models.SenderMobileEnrterAmountVm
+@{
+    ViewBag.Title = "KiiPayEnterAmount";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.ReceiverId)
+    @Html.HiddenFor(x => x.SendingCurrencyCode)
+    @Html.HiddenFor(x => x.SendingCurrencySymbol)
+    @Html.HiddenFor(x => x.ReceivingCurrencyCode)
+    @Html.HiddenFor(x => x.ReceivingCurrencySymbol)
+
+    @Html.HiddenFor(x => x.ReceiverName)
+
+
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Content/Images/user.svg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.ReceiverName</span>
+                            </div>
+                        </div>
+
+
+
+                        <div class="amount-group  ">
+
+                            <div>
+                                <label>Enter Amount</label>
+
+                                @Html.TextBoxFor(x => x.SendingAmount, new { @class = "amount", placeholder = Model.ReceivingCurrencySymbol + "0.00", @type = "number", @step = ".01" , id= "SendingAmount" })
+                            </div>
+                        </div>
+
+                        <div class="gbp">
+                            @Model.SendingCurrencyCode
+                        </div>
+                        <div></div>
+                        @Html.ValidationMessageFor(model => model.SendingAmount, "", new { @class = "text-danger" })
+
+                        <div>
+                            <label class="label-checkbox ">Send SMS Notification ?  &nbsp;&nbsp;Yes&nbsp;&nbsp;@Html.CheckBoxFor(x => x.SendSms)</label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+@section Scripts{
+    
+    <script type="text/javascript">
+
+        $("#SendingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() <= 1) {
+                $("#SendingAmount").val("");
+            }
+        });
+    </script>
+    }

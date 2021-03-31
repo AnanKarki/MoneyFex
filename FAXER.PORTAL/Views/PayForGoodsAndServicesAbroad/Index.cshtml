@@ -1,0 +1,62 @@
+﻿@model  FAXER.PORTAL.Models.EstimateFaxingFee
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="progress">
+        <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+             aria-valuemin="0" aria-valuemax="100" style="width:7%">
+        </div>
+        <div class="arrow"></div>
+    </div>
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Pay for goods & services abroad</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Faxing, ViewBag.Country as IEnumerable<SelectListItem>, "Select Sending Country", htmlAttributes: new { @class = "form-control", id = "Country" })
+                            @Html.ValidationMessageFor(model => model.Faxing, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <br />
+                    <div class="clearfix"></div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Receiving, ViewBag.Country as IEnumerable<SelectListItem>, "Select Reciving Country", htmlAttributes: new { @class = "form-control", id = "Country" })
+                            @Html.ValidationMessageFor(model => model.Receiving, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <input value="Next" class="fbtn btn-next" type="submit" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--  -->

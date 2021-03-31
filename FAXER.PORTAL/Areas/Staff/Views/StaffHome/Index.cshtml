@@ -1,0 +1,70 @@
+﻿@model List<FAXER.PORTAL.Areas.Staff.ViewModels.StaffNoticeBoardViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+@{Html.RenderPartial("_mail_sidebar");}
+
+<div class="col-lg-9 col-md-8">
+
+    <div class="dashboard_header">
+
+
+
+        <h1>Notice Board</h1>
+       
+    </div>
+ 
+    <!--  -->
+    <div class="dashboard_body">
+
+        <div class="row">
+            @foreach (var item in Model)
+            {
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="post-block mb30">
+                    <div class="bg-title">
+                        <h4><a href="" class="">@item.NoticeTitle</a></h4>
+                    </div>
+                    <div class="bg-white pinside20 outline">
+                        <h5><a href="" class="title">@item.NoticeDescription</a></h5>
+                        <p class="meta"><span class="meta-date">@item.NoticeDate</span> </p>
+
+                    </div>
+                </div>
+            </div>
+            }
+            @*<div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="post-block mb30">
+                    <div class="post-img">
+                        <a href="" class=""><img src="https://dummyimage.com/vga" alt="" class="img-responsive"></a>
+                    </div>
+                    <div class="bg-white pinside20 outline">
+                        <h4><a href="" class="title">Lorem ipsum dolor  consectetuer</a></h4>
+                        <p class="meta"><span class="meta-date">Aug 25, 2017</span> </p>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-sm-6 col-xs-12">
+                <div class="post-block mb30">
+                    <div class="post-img">
+                        <a href="" class=""><img src="https://dummyimage.com/vga" alt="" class="img-responsive"></a>
+                    </div>
+                    <div class="bg-white pinside20 outline">
+                        <h4><a href="" class="title">Lorem ipsum dolor  consectetuer</a></h4>
+                        <p class="meta"><span class="meta-date">Aug 25, 2017</span> </p>
+
+                    </div>
+                </div>
+            </div>*@
+
+        </div>
+    </div>
+    <!--  -->
+
+
+</div>
+
+

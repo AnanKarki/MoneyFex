@@ -1,0 +1,154 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessPaymentSummaryVM
+@{
+    ViewBag.Title = "PaymentsummaryForLocalPayment";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm("CompleteLocalPaymentTransaction" , "KiiPayBusinessPayAnotherKiiPayWallet"))
+{
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3 class="text-left">Wallet Payment Summary</h3>
+                        <hr>
+                        <div class="text-left">
+
+
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> Amount </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.SendingCountryCurrencySymbol @Model.TotalAmount @Model.SendingCountryCurrency
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> Fee </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.ReceivingCountryCurrencySymbol  @Model.Fee @Model.ReceivingCountryCurrency
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> Local SMS Message </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.SendingCountryCurrencySymbol @Model.SmsFee @Model.SendingCountryCurrency
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> You'll Pay </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+
+                                        @Model.SendingCountryCurrencySymbol @Model.TotalAmount @Model.SendingCountryCurrency
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> @Model.ReceiverName will Receive </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.ReceivingCountryCurrencySymbol @Model.ReceivingAmount @Model.ReceivingCountryCurrency
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Payment Reference </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.PaymentReference
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                        </div>
+
+                        <hr>
+
+
+                        <h4 class="text-center mt30  ">For more information, please read our    <a href="agreement.php"> Agreement</a></h4>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg  mb30">Send Money Now <i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

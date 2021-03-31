@@ -1,0 +1,165 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewAgentCashWithdrawalViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@if (ViewBag.Message == "Withdrawal Confirmed !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message",4);
+        }
+    </script>
+}
+@if (ViewBag.Message == "Something went wrong. Please contact Admin !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message",4);
+        }
+    </script>
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Cash Withdrawal History</h4>
+                                    <a href="@Url.Action("Index","AgentCashWithdrawalHistory")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold" id="type" onchange="Filter();">
+                                                    <option value="">Select Type</option>
+                                                    <option value="Agent">Agent</option>
+                                                    <option value="MoneyFex Staff">MoneyFex Staff</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Year / Month" id="Date" onchange="Filter();" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Agent Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Withdrawal Type</th>
+                                                    <th>Staff Name</th>
+                                                    <th>Staff ID</th>
+                                                    <th>Amount</th>
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.AgentCashWithdrawalIPagedList)
+                                                {
+                                                    <tr>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+
+                                                        <td><a href="agent-dashboard.php">@item.Name</a> </td>
+
+                                                        <td><a href="">@item.AccountNo</a></td>
+                                                        <td>@item.WithdrawalType</td>
+                                                        <td> @item.NameOfStaffAgent </td>
+                                                        <td><a href="">@item.StaffCode</a></td>
+                                                        <td>@item.CurrencySymbol @item.AccountBalance</td>
+                                                        <td><span class="text-success">@item.Status</span></td>
+                                                        <td><a href="@Url.Action("CashWithDrawalDetails","AgentCashWithdrawalHistory",new { AgentId=item.AgentId,Id=item.Id,iscashWithdrawal=item.IsWithdrawalByAgent})">Details</a></td>
+
+
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.AgentCashWithdrawalIPagedList.PageCount < Model.AgentCashWithdrawalIPagedList.PageNumber ? 0 :
+                                                        Model.AgentCashWithdrawalIPagedList.PageNumber) of @Model.AgentCashWithdrawalIPagedList.PageCount
+
+                                                        @Html.PagedListPager(Model.AgentCashWithdrawalIPagedList, page => Url.Action("Index",
+                                                            new { @page = page }))
+
+                                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var type = document.getElementById("type").value;
+            var date = document.getElementById("Date").value;
+            window.location.href = "/Admin/AgentCashWithdrawalHistory/Index?type=" + type + "&Country=" + country + "&City=" + city + "&Date=" + date;
+        }
+
+
+    </script>
+}

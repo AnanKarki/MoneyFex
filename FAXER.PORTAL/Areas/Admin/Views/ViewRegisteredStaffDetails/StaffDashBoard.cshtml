@@ -1,0 +1,930 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.StaffDashboardViewModel
+@{
+    ViewBag.Title = "StaffDashBoard";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+
+    string[] StaffName = Model.Staff.FullName.Split(' ');
+    int StaffId = Model.Staff.StaffId;
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+
+                    <div class="  d-flex align-items-center flex-row card m-b-30">
+
+                        <div class="card-block">
+                            <h3 class="">@Model.Staff.FullName</h3>
+                            <h5 class="text-primary">Login Code: @ViewBag.LoginCode <br>Access Code: @ViewBag.AccessCode</h5>
+                        </div>
+
+                        <div class="card-block">
+                            <button class="btn btn-inverse  btn-round m-r-20" data-toggle="modal" data-target="#RegisteredAgentsnotepopup">Note</button>
+                            <button class="btn btn-primary btn-round m-r-20" data-toggle="modal" data-target="#email">Send Email</button>
+                            <button class="btn btn-secondary btn-round m-r-20" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Number of Holidays</b></p>
+                                            <h4 class="m-b-0">  @ViewBag.TotalNumberOfHolidays </h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Days Taken</b></p>
+                                            <h4 class="m-b-0">@ViewBag.DayTaken</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Day Left </b></p>
+                                            <h4 class="m-b-0">@ViewBag.DayLeft</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-blue text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Monthly Salary</b></p>
+                                            <h4 class="m-b-0">  @ViewBag.Currency @Model.Employment.EmpSalary</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-shopping-cart f-40 text-c-blue"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-header-left ">
+                                        <h5>Employment</h5>
+
+                                    </div>
+
+                                </div>
+                                <div class="card-block-big">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Employer ID
+                                                    </td>
+                                                    <td>@Model.Employment.Id</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-title">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Title
+                                                    </td>
+                                                    <td>@Model.Employment.EmpPosition</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Employment
+                                                    </td>
+                                                    <td>@Model.Employment.DateOfEmployment</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-date">Set</a></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        Type
+                                                    </td>
+                                                    <td>@Model.Employment.Type</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-select">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Salary
+                                                    </td>
+                                                    <td>@Model.Employment.EmpSalary</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-select">Set</a></td>
+                                                </tr>
+
+
+
+
+                                                <tr>
+                                                    <td>
+                                                        Salary Scale
+                                                    </td>
+                                                    <td>@Model.Employment.EmpMode</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-select">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Salary Mode
+                                                    </td>
+                                                    <td>@Model.Employment.EmpMode</td>
+                                                    <td><a href="" data-toggle="modal" data-target="#set-select">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Highest Qualification
+                                                    </td>
+                                                    <td><a href="@Model.Employment.HighestQualUrl"></a>@Model.Employment.HighestQualUrl</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Previous Position
+                                                    </td>
+                                                    <td>Null</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Leaving Date
+                                                    </td>
+                                                    <td>@Model.Employment.DateOfLeaving</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Company Share
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Days of Holidays
+                                                    </td>
+                                                    <td>@Model.Employment.HolidaysNoOfDays</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Years of Employment
+                                                    </td>
+                                                    <td>5</td>
+                                                    <td><a href="">Set</a></td>
+                                                </tr>
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card feed-card">
+                                <div class="card-header">
+                                    <h5>Feed</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class=" fa fa-check bg-simple-c-green feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Login <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa  bg-simple-c-pink feed-icon">P</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Perform Transaction<span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa  bg-simple-c-pink feed-icon">B</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Birth Day <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-simple-c-green feed-icon">A</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Compliance Alert <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-simple-c-green feed-icon">T</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Complete Training <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa bg-simple-c-yellow feed-icon">H</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">On Holidays <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Documentation </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    <th>Document Name</th>
+                                                    <th>Update Date</th>
+                                                    <th>Expiry Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model.Documentation)
+
+                                                {
+                                                    i++;
+
+
+                                                    <tr>
+                                                        <td>
+                                                            @i
+                                                        </td>
+                                                        <td><a href="">@item.DocumentName</a></td>
+                                                        <td>@item.CreationDate</td>
+                                                        <td>@item.ExpiryDateString</td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="@Url.Action("Index","StaffDocumentation",new { StaffId = @StaffId })" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Payslip </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Month</th>
+                                                    <th>Reference</th>
+                                                    <th>Due Date</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model.Payslip)
+
+                                                {
+
+
+
+                                                    <tr>
+                                                        <td><label class="label label-inverse">@item.StaffStatus</label></td>
+                                                        <td>@item.PayslipMonth</td>
+                                                        <td><a href="">@item.StaffMFSCode</a></td>
+                                                        <td>@item.DueDate</td>
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="@Url.Action("Index","ViewStaffPayslip",new { StaffId = @StaffId })" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Holidays </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    <th>Start Day</th>
+                                                    <th>End Day</th>
+                                                    <th>Number of Days</th>
+                                                    <th>Approved By</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int k = 0;}
+                                                @foreach (var item in Model.HoliDay)
+
+                                                {
+                                                    k++;
+                                                    <tr>
+                                                        <td>@k</td>
+                                                        <td>@item.StartDate</td>
+                                                        <td>@item.FinishDate</td>
+                                                        <td>@item.NoOfDays</td>
+                                                        <td><a href="">@item.ApprovedByName</a></td>
+                                                    </tr>
+                                                }
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="@Url.Action("Index","StaffHolidays",new { StaffId = @StaffId })" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Training </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN</th>
+                                                    <th>Title</th>
+                                                    <th>Posted Date</th>
+                                                    <th>Completion Date</th>
+                                                    <th>Status</th>
+
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int l = 0;}
+                                                @foreach (var item in Model.Traning)
+
+                                                {
+                                                    l++;
+                                                    <tr>
+                                                        <td>@l</td>
+                                                        <td><a href="">@item.Title</a></td>
+                                                        <td>@item.CreationDate</td>
+                                                        <td>@item.EndDate</td>
+                                                        <td><span class="text-danger">@item.Status</span></td>
+                                                    </tr>
+                                                }
+
+
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+
+                                        <a href="@Url.Action("Index","ViewStaffTraining",new { StaffId = @StaffId })" class=" b-b-primary text-primary">View all  </a>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>System Activity</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="latest-update-box">
+                                        <div class="row p-t-20 p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">Day</p>
+                                                <i class="fa fa-sun-o bg-info update-icon"></i>
+
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">Monday - Friday <a href="" class="text-bold">Set</a></h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row p-t-20 p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">Time</p>
+                                                <i class="fa fa-clock-o  bg-warning update-icon"> </i>
+
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">9:00 - 17:00 <a href="" class="text-bold">Set</a></h6>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row p-t-20 p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">Time Zone</p>
+                                                <i class="fa fa-globe  bg-primary update-icon"> </i>
+
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">GMT + 1 <a href="" class="text-bold">Set</a></h6>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row p-t-20 p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">Login Level</p>
+                                                <i class="fa fa-sign-in  bg-info update-icon"> </i>
+
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">Level 3 <a href="" class="text-bold">Set</a></h6>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hours ago</p>
+                                                <i class="fa fa-sign-in bg-success  update-icon"> </i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">Last Login</h6>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hours ago</p>
+                                                <i class="fa fa-sign-in bg-red  update-icon"></i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">10 Failed Login</h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hours ago</p>
+                                                <i class="fa fa-key bg-success  update-icon">L</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">2 Password Reset</h6>
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="#!" class="b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>Staff Details</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class="table-responsive">
+                                        <table class="table  table-responsive m-b-0">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">First Name</th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">@StaffName[0]</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-t-0">Middle Name </th>
+                                                    <td class="social-user-name b-none p-t-0 text-muted">@StaffName[1]</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Surname</th>
+                                                    <td class="social-user-name b-none text-muted">@StaffName[2]</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Date of Birth</th>
+                                                    <td class="social-user-name b-none text-muted">@Model.Staff.DOB</td>
+                                                </tr>
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Current Address</h5>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 1</th>
+                                                    <td class="social-user-name b-none text-muted">@Model.Staff.Address1</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 2</th>
+                                                    <td class="social-user-name b-none text-muted">@Model.Staff.Address2</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">City</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">@Model.Staff.City</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Postcode</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.Staff.PostCode
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-@Model.Staff.CountryFlag"></span> @Model.Staff.Country</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Time at address</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.Staff.TimeAtAddress
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Previous Address</h5>
+                                                    </th>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 1</th>
+                                                    <td class="social-user-name b-none text-muted">@Model.PreviousAddress.Address1</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address Line 2</th>
+                                                    <td class="social-user-name b-none text-muted">@Model.PreviousAddress.Address2</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none p-b-0">City</th>
+                                                    <td class="social-user-name b-none p-b-0 text-muted">@Model.PreviousAddress.City</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Postcode</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.PreviousAddress.PostalCode
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-@Model.PreviousAddress.CountryFlag"></span> @Model.PreviousAddress.Country</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Time at address</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.PreviousAddress.LivedFor
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.PreviousAddress.PhoneNumber
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        user@email.com
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Private Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        user@email.com
+                                                    </td>
+                                                </tr>
+
+
+
+
+
+
+
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Identification Details</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Type</th>
+                                                    <td class="social-user-name b-none text-muted">Passport</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Number</th>
+                                                    <td class="social-user-name b-none text-muted">58745457</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Expiry Date</th>
+                                                    <td class="social-user-name b-none text-muted">Jan-08-2022</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Issuing Country</th>
+                                                    <td class="social-user-name b-none text-muted"><span class="flag-icon flag-icon-gb"></span> United Kingdom</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th colspan="2">
+                                                        <h5>Next of Kin</h5>
+                                                    </th>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Name</th>
+                                                    <td class="social-user-name b-none "> @Model.Staff.KinFullName</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Relationship</th>
+                                                    <td class="social-user-name b-none ">@Model.Staff.KinRelation</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <th class="social-label b-none">Address</th>
+                                                    <td class="social-user-name b-none ">@Model.Staff.KinAddress</td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="social-label b-none">Telephone</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.Staff.KinTelephone
+
+                                                    </td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <th class="social-label b-none">Email</th>
+                                                    <td class="social-user-name b-none text-muted">
+                                                        @Model.Staff.KinAddress
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="partner-update-details.php" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update Details</a>
+
+                                        <button type="button" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</button>
+
+
+                                        <button type="button" class="btn btn-danger btn-round  s"><i class="fa fa-remove"></i> Delete</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+            <!--  <div id="styleSelector">
+            </div> -->
+        </div>
+    </div>
+</div>
+
+
+<!-- popup set-title -->
+<div class="modal fade" id="set-title" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-body text-justify">
+
+                <div class="form-group m-b-0">
+                    <label>Employer ID  </label>
+                    <input type="text" class="form-control form-control-lg form-control-round form-control-bold">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <a href=" " class="btn  btn-primary btn-round"><i class="fa fa-save"></i> Set</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popup set-title -->
+<!-- popup set-select -->
+<div class="modal fade" id="set-select" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-body text-justify">
+
+                <div class="form-group m-b-0">
+                    <label>Salary Scale  </label>
+                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                        <option>Select  </option>
+                        <option>18,000 - 22,000 </option>
+
+
+                    </select>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <a href=" " class="btn  btn-primary btn-round"><i class="fa fa-save"></i> Set</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popup set-select -->
+<!-- popup set-date -->
+<div class="modal fade" id="set-date" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+
+            <div class="modal-body text-justify">
+
+                <div class="form-group m-b-0">
+                    <label>Date  </label>
+                    <input type="date" class="form-control form-control-lg form-control-round form-control-bold">
+                </div>
+
+            </div>
+            <div class="modal-footer">
+
+                <a href=" " class="btn  btn-primary btn-round"><i class="fa fa-save"></i> Set</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popup set-date -->

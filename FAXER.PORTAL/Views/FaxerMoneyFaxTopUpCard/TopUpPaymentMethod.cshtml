@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "TopUpPaymentMethod";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:21%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Top-up payment method</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <form>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <h4>Using the calculated amount to top-up MoneyFex Card</h4>
+                            <div class="clearfix"></div>
+                            <br>
+                            <select class="form-control" onchange="getval(this);">
+                                <option>-Select MoneyFex Top-up Card Payment method--</option>
+                                <option value="top-up-using-credit-debit.php">Top-up payment using Credit/Debit Card</option>
+                                <option value="top-up-using-saved-credit-debit.php">Top-up payment using saved Credit/Debit Card</option>
+                                <option value="top-up-bank-to-bank.php">Top-up payment using Bank-to-Bank payment</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <a href="@Url.Action("CalculateFaxingFees")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                <a href="" id="proceed_payment" class="fbtn btn-next">Make payment <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

@@ -1,0 +1,298 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUserInformationViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>MoneyFex Virtual Account User's information</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6">
+                <!--  -->
+                <div class="profileinfo">
+
+                    <div class="gear">
+                        <label>Full Name:</label>
+                        <span id="fullname" class="datainfo">@Model.FullName</span>
+
+
+                    </div>
+
+
+
+
+                    <div class="gear">
+                        <label>Address:</label>
+
+                        <span id="Address" class="datainfo">@Model.Address1  @Model.City @Model.State @Model.ZipCode, @Model.Country</span>
+
+                        <a class="pull-right btn btn-primary btn-sm" onclick="UpdateAdress()">Update</a>
+                        @*<a class="pull-right btn btn-primary btn-sm" onclick="UpdateAdress()">Update</a>
+                            <span id="Address" class="datainfo">@Model.Address</span>
+
+                            <a href="#" class="editlink">Update</a>
+                            <a class="savebtn" onclick="UpdateAddress(@Model.Id)">Save</a>
+                            @if (TempData["AddressInvalid"] != null)
+                            {
+                                <label style="color:red">@TempData["AddressInvalid"]</label>
+                            }*@
+
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Telephone:</label>
+                        <span id="Telephone" class="datainfo">@Model.PhoneNumber</span>
+
+
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateTelephone(@Model.Id)">Save</a>
+                        @if (TempData["PhoneNumberInvalid"] != null)
+                        {
+                            <label style="color:red"> @TempData["PhoneNumberInvalid"]</label>
+                        }
+
+                    </div>
+
+
+
+
+
+                    <div class="gear">
+                        <label>Email Address:</label>
+                        <span id="pemail" class="datainfo">@Model.EmailAddress</span>
+
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateEmail(@Model.Id)">Save</a>
+                        @if (TempData["EmailAddressInvalid"] != null)
+                        {
+                            <label style="color:red"> @TempData["EmailAddressInvalid"]</label>
+                        }
+
+                    </div>
+
+
+
+
+                    @*<div class="gear">
+                            <label>Password:</label>
+                            <span id="Password" class="datainfo">@Model.Password</span><br>
+                            <a href="@Url.Action("ForgotPassword" , "CardUserLogin")" class=" ">Reset Password</a>
+
+                        </div>*@
+
+
+
+
+
+
+                </div>
+                <!--  -->
+                <div class="clearfix"></div>
+                <a href="@Url.Action("Index" , "CardUserHome")" class="btn btn-sm btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+
+        </div>
+
+
+
+
+    </div>
+
+</div>
+@using (Html.BeginForm("Index", "CardUserInformation", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <!-- fax-cancellation popup -->
+    <div class="modal fade" id="UpdateAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Update Address</h4>
+                </div>
+                <div class="modal-body">
+                    @*@Html.Hidden("ID", null, new { @id = "id" })*@
+                    <div class="row">
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 1 <span class="required">*</span></label>
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 2</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>City <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>State/Province/Region <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Zip/Postal Code <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(model => model.ZipCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-5">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control" placeholder="">
+
+                                </div>
+                            </div>*@
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok"> Update </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+
+            function UpdateAddress(id) {
+
+                var Address = $("#Address-form").val();
+
+                window.location.href = "/CardUsers/CardUserInformation/UpdateAddress?Address=" + Address + "&id=" + id;
+
+            }
+            function UpdateTelephone(id) {
+
+                var PhoneNumber = $("#Telephone-form").val();
+
+                window.location.href = "/CardUsers/CardUserInformation/UpdateTelephone?PhoneNumber=" + PhoneNumber + "&id=" + id;
+
+            }
+            function UpdateEmail(id) {
+
+                var Email = $("#pemail-form").val();
+
+                window.location.href = "/CardUsers/CardUserInformation/UpdateEmail?Email=" + Email + "&id=" + id;
+
+            }
+            function UpdateAdress() {
+
+                $("#UpdateAddress").modal("show");
+
+            };
+
+             window.onload = function() {
+            var InvalidAddress = '@TempData["InvalidInformation"]';
+            if (InvalidAddress == "True") {
+
+                $("#UpdateAddress").modal("show");
+
+            }
+
+
+        }
+    </script>
+}

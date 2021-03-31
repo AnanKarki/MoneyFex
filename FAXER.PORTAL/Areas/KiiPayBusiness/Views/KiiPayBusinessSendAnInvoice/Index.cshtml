@@ -1,0 +1,182 @@
+﻿@model List<FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.InvoiceMasterListvm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Send an Invoice</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-4">
+
+            </div>
+            <div class="col-lg-2  ">
+
+                <div class="form-group">
+
+                    <select id="FilterInvoice" class="form-control" onchange="ChooseFilter()">
+                        <option>Filter Invoice</option>
+                        <option>All</option>
+                        <option value="0">Paid</option>
+                        <option value="1">Unpaid</option>
+                    </select>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 pull-right">
+                <a href="@Url.Action("Create","KiiPayBusinessSendAnInvoice")" class="btn btn-primary radius-20 btn-sm pull-right mb20"><i class="fa fa-plus"></i> Create Invoice</a>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="DataTable">
+                            <thead>
+                                <tr>
+                                    <th>Date & Invoice No.</th>
+                                    <th>Reciver & Wallet No.</th>
+                                    <th>Amount & Status</th>
+                                    <th>View</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><span class="text-primary">@item.InvoiceDate</span><br>@item.InvoiceNo</td>
+                                        <td>@item.ReciverName<br>@item.ReciverWalletNo</td>
+                                        <td>@item.CurrencySymbol @item.TotalAmount<br><span class="text-danger">@item.InvoiceStatus</span></td>
+
+                                        <td><a href="@Url.Action("SeeInvoice" , new { Id = item.Id})" class="btn btn-preview btn-small radius-20">See Invoice</a></td>
+                                        <td>
+                                            <select id="@item.Id" onchange="ChooseAction(@item.Id)">
+                                                <option>Select</option>
+                                                <option value="1">Remind</option>
+                                                <option value="2">Edit</option>
+                                                <option value="3">Cancel</option>
+                                                <option value="4">Delete</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+
+
+<div id="Alert" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40" id="alertmessage"> </h4>
+                <hr>
+                <a href="" class="btn btn-primary   radius-20" id="link">Yes</a>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+@section scripts
+    {
+
+    <script type="text/javascript">
+
+        function ChooseAction(id) {
+            debugger;
+            var selectedValue = $("#" + id + " option:selected").val();
+            var url = "";
+            switch (selectedValue) {
+
+
+                case "1":
+                    $("#alertmessage").text("Are you sure you want to remind?");
+                    url = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Remind?Id=" + id;
+                    break;
+
+                case "2":
+
+                    $("#alertmessage").text("Are you sure you want to edit?");
+                    url = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Create?Id=" + id;
+                    break;
+
+                case "3":
+                    $("#alertmessage").text("Are you sure you want to cancel?");
+
+                    url = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Cancel?Id=" + id;
+                    // window.location.href = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Cancel?Id=" + id;
+                    break;
+
+                case "4":
+                    $("#alertmessage").text("Are you sure you want to cancel?");
+                    url = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Delete?Id=" + id;
+                    break;
+                default:
+            }
+            $("#link").attr("href", url);
+            $("#Alert").modal('show');
+        }
+
+        function ChooseFilter() {
+
+            debugger;
+            var selectedValue = $("#FilterInvoice option:selected").val();
+            window.location.href = "/KiiPayBusiness/KiiPayBusinessSendAnInvoice/Index?invoiceStatus=" + selectedValue;
+
+        }
+    </script>
+}
+

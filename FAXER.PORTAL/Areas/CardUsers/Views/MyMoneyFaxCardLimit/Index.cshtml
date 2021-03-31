@@ -1,0 +1,101 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.MyMoneyFaxCardLimitViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>My Account Usage Limits</h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <form>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-5 pull-right">
+                        <br>
+                        <h4>Amount available on this card (@Model.AmountOnCard)</h4>
+                        <br>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th colspan="2">Card Withdrawal Limit</th>
+                                    <th colspan="2">Purchases Limit</th>
+                                </tr>
+                            </thead>
+
+
+
+                            <tbody>
+                                <!--  -->
+                                <tr>
+                                    <td><b>Amount</b></td>
+
+                                    <td><b>Limit Type</b></td>
+
+
+                                    <!--  -->
+                                    <td><b>Amount</b></td>
+
+                                    <td><b>Limit Type</b></td>
+
+                                </tr>
+
+
+
+                                <tr>
+                                    <td>@Model.CardWithdDrawlLimitAmount</td>
+                                    <td>
+                                       @Model.CardWithDrawlLimitType
+                                    </td>
+
+                                    <td>@Model.CardPurchaseLimitAmount</td>
+                                    <td>
+                                        @Model.CardPurchaseLimitType
+                                    </td>
+                                </tr>
+                            </tbody>    
+                        </table>
+                    </div>
+
+
+
+                    <div class="clearfix"></div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <a href="@Url.Action("Index" , "CardUserHome")" class="fbtn btn-back "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Dashboard</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->

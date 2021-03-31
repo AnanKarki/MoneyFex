@@ -1,0 +1,70 @@
+﻿
+@{
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+    <h4 style="text-align:center">
+        Virtual Account Deposit confirmation of Payment Receipt
+    </h4>
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>MF Receipt Number</b></td>
+                <td><b>@ViewBag.MFReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.TransactionDate</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.TransactionTime</b></td>
+            </tr>
+            <tr>
+                <td><b>Name of Sending Customer</b></td>
+                <td><b>@ViewBag.SenderName</b></td>
+            </tr>
+            <tr>
+                <td><b>Virtual Account Number</b></td>
+                <td><b>@ViewBag.MFTCCardNumber</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Virtual Account User Name</b></td>
+                <td><b>@ViewBag.MFTCCardName</b></td>
+            </tr>
+            <tr>
+                <td><b>Deposit  Amount</b></td>
+                <td><b>@ViewBag.TopUpAmount @ViewBag.SendingCurrency</b></td>
+            </tr>
+            <tr>
+                <td><b>Deposit Fees</b></td>
+                <td><b>@ViewBag.Fees @ViewBag.SendingCurrency</b></td>
+            </tr>
+            <tr>
+                <td><b>Exchange Rates</b></td>
+                <td><b>@ViewBag.ExchangeRate</b></td>
+            </tr>
+            <tr>
+                <td><b>  Total Deposit Amount + Fees</b></td>
+                <td><b>@ViewBag.TotalAmount @ViewBag.SendingCurrency</b></td>
+            </tr>
+            <tr>
+                <td><b>  Deposit Amount  in Account User’s  Local Currency</b></td>
+                <td><b>@ViewBag.AmountInLocalCurrency @ViewBag.ReceivingCurrency</b></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+
+</div>
+
+

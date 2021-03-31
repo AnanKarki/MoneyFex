@@ -1,0 +1,84 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+<div style="padding:20px">
+
+
+    
+
+    <h4 style="text-align:center">Deleted Virtual Account Refund Confirmation Receipt</h4>
+
+    <table>
+        <tbody width="100%">
+            <tr>
+                <td><b>Receipt Number</b></td>
+                <td><b>@ViewBag.ReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Original Debit/Credit Card Last Four Digits</b></td>
+                <td><b>@ViewBag.CardLastFourDigits</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.Date</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.Time</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Virtual Account Registrar  Name</b></td>
+                <td><b>@ViewBag.MFTCardRegistrar</b></td>
+            </tr>
+            <tr>
+                <td><b>Virtual Account User Full Name</b></td>
+                <td><b>@ViewBag.MFTCardUserName</b></td>
+            </tr>
+            <tr>
+                <td><b>Virtual Account No</b></td>
+                <td><b>@ViewBag.MFTCardNumber</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Virtual Account User Registered Country</b></td>
+                <td><b>@ViewBag.MFTCardUserCountry</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Virtual Account User City</b></td>
+                <td><b>@ViewBag.MFTCardUserCity</b></td>
+            </tr>
+            @*<tr>
+                    <td><b>Refunding Staff Name</b></td>
+                    <td><b>@ViewBag.RefundingStaffName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Refunding Staff Code</b></td>
+                    <td><b>@ViewBag.RefundingStaffCode</b></td>
+                </tr>*@
+            <tr>
+                <td><b>Refunding Type</b></td>
+                <td><b></b></td>
+            </tr>
+
+
+            <tr>
+                <td><b>Virtual Account Balance before deletion</b></td>
+                <td><b>@ViewBag.BalanceOnCard</b></td>
+
+            </tr>
+
+            <tr>
+                <td><b>Refunded Amount</b></td>
+                <td><b>@ViewBag.RefundedAmount</b></td>
+
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+</div>

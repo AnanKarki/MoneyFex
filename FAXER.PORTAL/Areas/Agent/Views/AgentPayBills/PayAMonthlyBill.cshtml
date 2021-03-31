@@ -1,0 +1,99 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.PayMonthlyBillViewModel
+@{
+    ViewBag.Title = "PayAMonthlyBill";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix ">
+                        <h3>Pay Monthly Bill</h3>
+                        <hr>
+                        <!--  -->
+
+                        <div class="form-group mb30">
+                            <label>Country</label>
+                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue", id = "Country", @onchange = "FilterSuppliers()" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            @*<select class="form-blue">
+                <option>Select Country</option>
+                <option>United Kingdom</option>
+                <option>Ghana</option>
+                <option>Nigeria</option>
+                <option>Cameroon</option>
+            </select>*@
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group mb30">
+                            <label>Supplier</label>
+                            @Html.DropDownListFor(model => model.SupplierId, (IEnumerable<SelectListItem>)ViewBag.Suppliers, "Select Supplier", new { @class = "form-blue", @id = "SupplierId" })
+                            @Html.ValidationMessageFor(model => model.SupplierId, "", new { @class = "text-danger" })
+                            @*<select class="form-blue">
+                <option>Select Supplier</option>
+                <option>Supplier 1</option>
+                <option>Supplier 2</option>
+
+            </select>*@
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group mb30">
+                            <label>KiiPay Receipt Reference</label>
+                            <div class="input-group">
+                                <span class="input-group-addon uk-reference">HV8</span>
+                                @Html.TextBoxFor(model => model.ReferenceNo, new { @class = "form-blue uk-refe-input", @placeholder = "Enter reference" })
+
+                            </div>
+                        </div>
+                        @Html.ValidationMessage("ReferenceNo", "", new { @class = "text-danger" })
+                        <!--  -->
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Enter <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("Index","AgentPayBills")"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+}
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function FilterSuppliers() {
+
+            var countryCode = $("#Country").val();
+            window.location.href = "/Agent/AgentPayBills/PayAMonthlyBill?country=" + countryCode;
+        }
+    </script>
+}

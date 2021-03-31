@@ -1,0 +1,418 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.BankAccountPaymentConfirmationViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                </div>
+                 /.row
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="login_signup">
+                                <a onclick="window.history.go(-1);" class="  btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:left;">
+                                    <i class="fa fa-angle-left m-r-5"></i> Back
+                                </a>
+                                <hr />
+
+                                <div class="dt-responsive table-responsive">
+
+                                    <table class="table table-striped table-bordered nowrap">
+
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    <div class="p-t-10 p-b-10">
+
+                                                        <h5>Payment Reference</h5>
+                                                        <span class="text-primary"> @Model.PaymentReference </span>
+                                                    </div>
+                                                </td>
+
+                                                <td align="right">
+                                                    <div class="p-t-10 p-b-10">
+
+                                                        <h5>@Model.Method </h5>
+                                                        <span class="text-warning">In Progress</span>
+                                                    </div>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td class="text-left">Reference</td>
+                                                <td class="text-left"> <span class="text-primary">@Model.RecipetNo</span></td>
+
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Sender Name</td>
+                                                <td class="text-left"> @Model.SenderName</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Email</td>
+                                                <td class="text-left"> @Model.SenderEmail</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Telephone</td>
+                                                <td class="text-left">@Model.senderPhoneNo</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Sender's Dath of Birth</td>
+                                                <td class="text-left"> @Model.senderDOB</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Receiver's Name</td>
+                                                <td class="text-left"> @Model.ReceiverName</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Email Address</td>
+                                                <td class="text-left"> @Model.ReceiverEmail</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Mobile Number</td>
+                                                <td class="text-left">@Model.ReceiverPhoneNo</td>
+                                            </tr>
+                                            @if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.OtherWallet)
+                                            {
+                                                <tr>
+                                                        <td class="text-left">Wallet Mobile Number</td>
+                                                        <td class="text-left">@Model.MFCN</td>
+                                                    </tr>
+                                                <tr>
+                                                    <td class="text-left">Wallet Provider</td>
+                                                    <td class="text-left">@Model.WalletProvider</td>
+                                                </tr>
+                                            }@if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.BankDeposit)
+                                            {
+                                                <tr>
+                                                    <td class="text-left">Bank Name</td>
+                                                    <td class="text-left">@Model.BankName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Bank Code</td>
+                                                    <td class="text-left">@Model.BankCode</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Account Number</td>
+                                                    <td class="text-left">@Model.AccountNumber</td>
+                                                </tr>
+                                            }
+
+                                            <tr>
+                                                <td class="text-left">City</td>
+                                                <td class="text-left">@Model.ReciverCity</td>
+                                            </tr>
+
+                                            <tr>
+
+                                                <td class="text-left"> Country</td>
+                                                <td class="text-left">@Model.ReciverCountry</td>
+
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left">Sending Amount</td>
+                                                <td class="text-left"> @Model.SendingCurrencySymbol @Model.sendingAmount</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Fee</td>
+                                                <td class="text-left">@Model.SendingCurrencySymbol @Model.Fee </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Amount Paid</td>
+                                                <td class="text-left"> @Model.SendingCurrencySymbol @Model.TotalAmount</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">@Model.ReciverFirstname will Receive</td>
+                                                <td class="text-left"> @Model.ReceivingAmount @Model.ReceivingCurrency</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Exchange Rate</td>
+                                                <td class="text-left"> 1 @Model.SendingCurrency = @Model.ExchangeRate @Model.ReceivingCurrency</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Payment Method</td>
+                                                <td class="text-left">Direct Bank Payment</td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left">@Model.TranactionDate</td>
+                                            </tr>
+                                            @if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.CashPickUp)
+                                            {
+                                                <tr>
+                                                    <td class="text-left">MFCN</td>
+                                                    <td class="text-left">@Model.MFCN</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+
+                                    </table>
+
+                                </div>
+
+                                <h6>Has a payment of  <span class="text-primary">GBP @Model.TotalAmount been made to MoneyFex's bank account ?</span></h6>
+
+                                <div class="border-checkbox-section col-lg-12">
+
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" type="checkbox" id="Yes">
+                                        @Html.CheckBoxFor(model => model.IsPaid, true)
+                                        <label class="border-checkbox-label" for="Yes">Yes</label>
+                                    </div>
+                                </div>
+                                <div class="border-checkbox-section col-lg-12">
+
+                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                        <input class="border-checkbox" type="checkbox" id="No">
+                                        @Html.CheckBoxFor(model => model.IsPaid, false)
+
+                                        <label class="border-checkbox-label" for="No">No</label>
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+
+                                            <button type="submit" class="  btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" id="Continue">Continue <i class="fa  fa-angle-right"></i></button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    }*@
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-body">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                            <button onclick="window.history.go(-1);" class=" btn btn-primary   btn-round">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </button>
+                                            <hr>
+                                            <div class="dt-responsive table-responsive">
+
+                                                <table class="table table-striped table-bordered nowrap">
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="p-t-10 p-b-10">
+
+                                                                    <h5>Payment Reference</h5>
+                                                                    <span class="text-primary"> @Model.PaymentReference </span>
+                                                                </div>
+                                                            </td>
+
+                                                            <td align="right">
+                                                                <div class="p-t-10 p-b-10">
+
+                                                                    <h5>@Model.Method </h5>
+                                                                    <span class="text-warning">In Progress</span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td class="text-left">Reference</td>
+                                                            <td class="text-left"> <span class="text-primary">@Model.RecipetNo</span></td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Sender Name</td>
+                                                            <td class="text-left"> @Model.SenderName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Email</td>
+                                                            <td class="text-left"> @Model.SenderEmail</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="text-left">Telephone</td>
+                                                            <td class="text-left">@Model.senderPhoneNo</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="text-left">Sender's Dath of Birth</td>
+                                                            <td class="text-left"> @Model.senderDOB</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Receiver's Name</td>
+                                                            <td class="text-left"> @Model.ReceiverName</td>
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="text-left">Email Address</td>
+                                                            <td class="text-left"> @Model.ReceiverEmail</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Mobile Number</td>
+                                                            <td class="text-left">@Model.ReceiverPhoneNo</td>
+                                                        </tr>
+                                                        @if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.OtherWallet)
+                                                        {
+                                                            @*<tr>
+                                                                    <td class="text-left">Wallet Mobile Number</td>
+                                                                    <td class="text-left">@Model.MFCN</td>
+                                                                </tr>*@
+                                                            <tr>
+                                                                <td class="text-left">Wallet Provider</td>
+                                                                <td class="text-left">@Model.WalletProvider</td>
+                                                            </tr>
+                                                        }@if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.BankDeposit)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-left">Bank Name</td>
+                                                                <td class="text-left">@Model.BankName</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Bank Code</td>
+                                                                <td class="text-left">@Model.BankCode</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-left">Account Number</td>
+                                                                <td class="text-left">@Model.AccountNumber</td>
+                                                            </tr>
+                                                        }
+
+                                                        <tr>
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">@Model.ReciverCity</td>
+                                                        </tr>
+
+                                                        <tr>
+
+                                                            <td class="text-left"> Country</td>
+                                                            <td class="text-left">@Model.ReciverCountry</td>
+
+                                                        </tr>
+
+                                                        <tr>
+                                                            <td class="text-left">Sending Amount</td>
+                                                            <td class="text-left"> @Model.SendingCurrencySymbol @Model.sendingAmount</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Fee</td>
+                                                            <td class="text-left">@Model.SendingCurrencySymbol @Model.Fee </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Amount Paid</td>
+                                                            <td class="text-left"> @Model.SendingCurrencySymbol @Model.TotalAmount</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">@Model.ReciverFirstname will Receive</td>
+                                                            <td class="text-left"> @Model.ReceivingAmount @Model.ReceivingCurrency</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Exchange Rate</td>
+                                                            <td class="text-left"> 1 @Model.SendingCurrency = @Model.ExchangeRate @Model.ReceivingCurrency</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Payment Method</td>
+                                                            <td class="text-left">Direct Bank Payment</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Date</td>
+                                                            <td class="text-left">@Model.TranactionDate</td>
+                                                        </tr>
+                                                        @if (Model.Method == FAXER.PORTAL.DB.TransactionTransferMethod.CashPickUp)
+                                                        {
+                                                            <tr>
+                                                                <td class="text-left">MFCN</td>
+                                                                <td class="text-left">@Model.MFCN</td>
+                                                            </tr>
+                                                        }
+                                                    </tbody>
+                                                </table>
+
+                                            </div>
+                                            <h6>Has a payment of  <span class="text-primary">GBP @Model.TotalAmount been made to MoneyFex's bank account ?</span></h6>
+
+                                            <div class="border-checkbox-section col-lg-12">
+
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    @*<input class="border-checkbox" type="checkbox" id="Yes">*@
+                                                    @Html.CheckBoxFor(model => model.IsPaid, true)
+                                                    <label class="border-checkbox-label" for="Yes">Yes</label>
+                                                </div>
+                                            </div>
+                                            <div class="border-checkbox-section col-lg-12">
+
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    @*<input class="border-checkbox" type="checkbox" id="No">*@
+                                                    @Html.CheckBoxFor(model => model.IsPaid, false)
+
+                                                    <label class="border-checkbox-label" for="No">No</label>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+
+                                                <button type="submit" class="btn btn-primary btn-round">Continue <i class="fa  fa-angle-right"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        if (vm.Status == "paid" || vm.Status == "completed" || vm.Status == "confirm") {
+            $('#Continue').attr('disabled', 'disabled');
+        }
+
+    </script>
+}

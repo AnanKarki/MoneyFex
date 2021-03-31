@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.CardUserName,
+    </p>
+
+    <p>
+        Great News!
+    </p>
+    <p>
+        A MoneyFex virtual account  with the following details has been registered in your name by @ViewBag.SenderName who lives in @ViewBag.SenderCountry.
+    </p>
+    <p>
+        Account No: @ViewBag.MFTCCardNumber
+    </p>
+    <p>
+        Name on Account: @ViewBag.CardUserName
+    </p>
+    <p>
+        With this account, you can withdraw money from MoneyFex agent and pay for goods and services in @ViewBag.CardUserCountry.
+    </p>
+    To pay for goods and services, see the balance on your account, history of account usage, please register an online account with MoneyFex by downloading the MoneyFex virtual account App from Google play Store or from Apple App store.
+
+
+
+
+    <p>
+        Please contact us if you are having difficulties to register your account online.
+    </p>
+
+
+    
+</div>

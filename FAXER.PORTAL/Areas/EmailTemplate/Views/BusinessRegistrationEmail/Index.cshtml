@@ -1,0 +1,30 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+
+    <p>
+        Dear @ViewBag.BusinessName,
+    </p>
+    <p>
+        Thank you for registering with MoneyFex, please click on the following registration link to start the process of completing your registration to become a Business Merchant of MoneyFex.
+        
+    </p>
+    <p>
+        <a href="@ViewBag.Link">@ViewBag.Link</a>
+    </p>
+
+    <p>
+        Please note that,  after clicking on this link, a new registration code which will allow you to complete the process will be sent separately to your registered email address.
+    </p>
+    <p>
+        Please contact Customer Service should you have any problem in completing the registration process.
+    </p>
+
+
+
+
+</div>
+

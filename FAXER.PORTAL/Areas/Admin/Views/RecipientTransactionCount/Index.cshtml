@@ -1,0 +1,102 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.RecipientTransactionCountViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Daily Recipient Transactions</h4>
+                                    <a href="@Url.Action("SetRecipientTransactionCount","RecipientTransactionCount")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set-up
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN.</th>
+
+                                                    <th>Sending Country</th>
+                                                    <th>Receiving Country</th>
+                                                    <th>Recipient</th>
+                                                    <th>Sender</th>
+                                                    <th>MF Account</th>
+                                                    <th>Transaction Number</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+
+                                                        <td>@item.SendingCountryName</td>
+                                                        <td>@item.ReceivingCountryName</td>
+                                                        <td>@item.RecipientName</td>
+                                                        <td>@item.SenderName</td>
+                                                        <td>@item.SenderAccountNo</td>
+                                                        <td>@item.TransactionCount</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetRecipientTransactionCount","RecipientTransactionCount" , new { id = item.Id})" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/RecipientTransactionCount/Delete?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "warning", 0);
+                        }
+                    });
+            });
+        }
+
+    </script>
+}

@@ -1,0 +1,299 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MyBusinessProfileViewModel
+@{
+    ViewBag.Title = "BusinessProfile";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Busines Profile</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+                <!--  -->
+                <div class="profileinfo">
+
+                    <div class="gear">
+                        <label>Name of Business:</label>
+                        <span id="fullname" class="datainfo">@Model.BusinessName</span>
+
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Business License:</label>
+                        <span id="License" class="datainfo">@Model.BusinessLicenseNumber</span>
+                        @*<a href="#" class="editlink">Update</a>
+                            <a class="savebtn">Save</a>*@
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Address:</label>
+                        <span id="Address" class="datainfo">@Model.Address1 @Model.City @Model.State @Model.PostalCode @Model.Country</span>
+                        <a class="pull-right btn btn-primary btn-sm" onclick="UpdateAdress()">Update</a>
+                    </div>
+
+                    <div class="gear">
+                        <label>Phone Number:</label>
+                        <span id="Phone" class="datainfo">@Model.PhoneNumber</span>
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdatePhone(@Model.Id)">Save</a>
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Fax Number:</label>
+                        <span id="FaxNo" class="datainfo">@Model.FaxNo</span>
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateFaxNo(@Model.Id)">Save</a>
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Email Address:</label>
+                        <span id="Email" class="datainfo">@Model.EmailAddress</span>
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateEmailAddress(@Model.Id)">Save</a>
+                        @if (TempData["InValid"] != null)
+                        {
+
+                            <label style="color:red">@TempData["InValid"]</label>
+                        }
+                    </div>
+
+
+                    <div class="gear">
+                        <label>Website:</label>
+                        <span id="website" class="datainfo">@Model.Website</span>
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateWebsite(@Model.Id)">Save</a>
+                    </div>
+
+
+                    <h3>Business Contact Person </h3>
+                    <hr>
+                    <div class="gear">
+                        <label>Full Name:</label>
+                        <span id="ContactPerson" class="datainfo">@Model.NameOfContactPerson</span>
+                        <a href="#" class="editlink">Update</a>
+                        <a class="savebtn" onclick="UpdateContactPerson(@Model.Id)">Save</a>
+                    </div>
+
+                </div>
+                <!--  -->
+                <div class="clearfix"></div>
+                <a href="@Url.Action("Index" , "BusinessHome")" class="btn btn-sm btn-danger">  Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@using (Html.BeginForm("BusinessProfile", "BusinessProfile", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <!-- fax-cancellation popup -->
+    <div class="modal fade" id="UpdateAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Update Address</h4>
+                </div>
+                <div class="modal-body">
+                    @*@Html.Hidden("ID", null, new { @id = "id" })*@
+                    <div class="row">
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 1 <span class="required">*</span></label>
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 2</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>City <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>State/Province/Region <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Zip/Postal Code <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-5">
+                            <label>Country <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-5">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control" placeholder="">
+
+                                </div>
+                            </div>*@
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok"> Update </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function UpdateAddress(id) {
+
+            var Address = $("#Address-form").val();
+            window.location.href = "/BusinessProfile/UpdateBusinessAddress?Address=" + Address + "&id=" + id;
+
+        }
+        function UpdatePhone(id) {
+
+            var Phone = $("#Phone-form").val();
+            window.location.href = "/BusinessProfile/UpdatePhone?Phone=" + Phone + "&id=" + id;
+
+        }
+        function UpdateFaxNo(id) {
+
+            var FaxNo = $("#FaxNo-form").val();
+            window.location.href = "/BusinessProfile/UpdateFaxNo?FaxNo=" + FaxNo + "&id=" + id;
+
+        }
+        function UpdateEmailAddress(id) {
+
+            var Email = $("#Email-form").val();
+            window.location.href = "/BusinessProfile/UpdateEmailAddress?Email=" + Email + "&id=" + id;
+
+        }
+        function UpdateWebsite(id) {
+
+            var website = $("#website-form").val();
+            window.location.href = "/BusinessProfile/UpdateWebsite?website=" + website + "&id=" + id;
+
+        }
+        function UpdateContactPerson(id) {
+
+            var ContactPerson = $("#ContactPerson-form").val();
+            window.location.href = "/BusinessProfile/UpdateContactPerson?ContactPerson=" + ContactPerson + "&id=" + id;
+
+        }
+          function UpdateAdress() {
+
+        $("#UpdateAddress").modal("show");
+
+        };
+
+        window.onload = function() {
+            var InvalidAddress = '@TempData["InvalidInformation"]';
+            if (InvalidAddress == "True") {
+
+                $("#UpdateAddress").modal("show");
+
+            }
+
+
+        }
+
+    </script>
+}

@@ -1,0 +1,108 @@
+﻿
+@{
+    ViewBag.Title = "TopUpCardRegistration";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>MoneyFex Top-card Registration</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="login_signup">
+                    <h3>Card User's Details</h3>
+                    <hr>
+                    <form>
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> First Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="text" name="" class="form-control" placeholder=" First Name">
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Middle Name </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="text" name="" class="form-control" placeholder="Middle Name  (if available)">
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Last Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="text" name="" class="form-control" placeholder="Last/Family Name">
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Date of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="date" name="" class="form-control" placeholder="">
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@Url.Action("FaxingNoMFCT")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <a href="@Url.Action("CardUsersContactDetails")" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

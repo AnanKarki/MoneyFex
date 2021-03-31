@@ -1,0 +1,253 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@if (ViewBag.Message == "success")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+
+            $("#success").modal('show');
+        };
+    </script>
+}
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="success" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-check-circle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>Transaction Completed Successfully !</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-sm" onclick="PrintReceipt('@ViewBag.fileUrl');"> Print Payment Receipt</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+@*<div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h1>Transfer Money</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>*@
+@*<!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <div class="mobile_design text-center row">
+
+
+                        <!--  -->
+                        <div class="col-lg-4 col-md-4  col-xs-5 ">
+                            <div class="newone  bgcolor2 ">
+                                <a href="@Url.Action("Index","AgentFaxMoney")">
+                                    <div class="das-icon">
+
+                                        <img src="~/Areas/Agent/images/icon/2.png" />
+                                    </div>
+                                    <h4>Cash to Cash Transfer</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4 col-md-4  col-xs-5">
+                            <div class="newone  bgcolor4 ">
+                                <a href="@Url.Action("DepositInVirtualAccount","TransferMoney")">
+                                    <div class="das-icon">
+                                        <img src="~/Areas/Agent/images/icon/12.png">
+                                    </div>
+                                    <h4>Deposit Money into a Virtual Account</h4>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+                        <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                            <div class="newone  bgcolor3 ">
+                                <a href="@Url.Action("DepositInBusinessVirtualAccount","TransferMoney")">
+                                    <div class="das-icon">
+                                        <img src="~/Areas/Agent/images/icon/3.png">
+                                    </div>
+                                    <h4>Deposit Money into <br>Business Virtual Account </h4>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--  -->
+
+                        <div class="clearfix"></div>
+
+
+
+
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                </div>
+            </div>
+
+
+        </div>
+        <!--  -->
+
+
+
+    </div>
+    <!--  -->*@
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class="dashboard_body">
+
+                    <div class=" clearfix">
+                        <h3>Select a Transfer Method</h3>
+                        <hr>
+                        <div class="text-center   clearfix">
+                            <center>
+                                @Html.ValidationMessage("Insufficientfund", "", new { @class = "text-danger" })
+
+                            </center>
+                        </div>
+
+                        <div class="mobile_design text-center" id="CheckBalance">
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6" id="CheckBalance">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("BankAccountDeposit","AgentBankAccountDeposit")" class="my-link">
+                                        <div class="das-icon">
+                                            <img src="/Content/images/icon/svg/bank.svg">
+                                        </div>
+                                        <h4>Bank Account Deposit</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6" id="CheckBalance">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("WalletInformation","AgentMobileMoneyTransfer")" class="my-link">
+                                        <div class="das-icon">
+                                            <img src="/Content/images/icon/svg/mobile-money.svg">
+                                        </div>
+                                        <h4>Other Mobile Wallet Transfer</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6" id="CheckBalance">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("CashPickupInformation","AgentCashPickUpTransfer")" class="my-link">
+                                        <div class="das-icon">
+                                            <img src="/Content/images/icon/svg/cash-pickup.svg">
+                                        </div>
+                                        <h4>Cash Pickup </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            @*<div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("SendMoneToKiiPayWallet","AgentKiiPayWalletTransfer")" class="my-link">
+
+                                            <div class="das-icon">
+                                                <img src="/Content/images/icon/svg/kiipay.svg">
+                                            </div>
+                                            <h4>Send Money<br> to a KiiPay Wallet</h4>
+                                        </a>
+                                    </div>
+                                </div>*@
+                            <!--  -->
+                            <!-- back btn -->
+                            <div class="clearfix">
+                                <hr>
+                                <center>
+                                    <a href="@Url.Action("GoToDashboard","AgentDashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    </div>
+    </div>
+    <!--  -->
+    </div>
+    <!--  -->
+</section>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function PrintReceipt(data) {
+            debugger;
+            $("#success").modal('hide');
+            var href = window.location.href;
+
+            var hrefSplit = href.split("?");
+
+            window.location.href = hrefSplit[0];
+            //window.open(data);
+            window.open("/Agent/TransferMoney/printReceipt?url=" + data);
+        }
+        CheckBalance();
+        function CheckBalance() {
+            debugger;
+            if ('@ViewBag.OutOfBalance' == 'True') {
+                $('.my-link').bind('click', false);
+            }
+
+        }
+    </script>
+}
+

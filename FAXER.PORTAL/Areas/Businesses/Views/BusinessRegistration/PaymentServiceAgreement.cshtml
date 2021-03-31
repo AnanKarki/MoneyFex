@@ -1,0 +1,120 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.PaymentServiceAgreementVm
+@{
+    ViewBag.Title = "PaymentServiceAgreement";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Payment Services Agreement</h1>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm())
+{
+    <form>
+        <!--  -->
+        <!--  -->
+        <div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="login_signup">
+                            <div class="agreement">
+
+                                <p>MoneyFex Ltd  provides global payment services for businesses who are registered on the company’s proprietary money transfer platform. Before using this platform, you must read and agree to the following Payment Services Agreement.</p>
+                                <p>This Agreement is entered into by and between MoneyFex Ltd., a limited company registered in England and Wales (Registered number 10105082) with the registered address 1st Floor, North Westgate House Harlow, Essex London CM20 1YS United Kingdom (“MoneyFex”), and the Service Provider or Business (“Supplier”) defined below.</p>
+                                <p>In consideration of the mutual covenants and conditions contained herein, the receipt and sufficiency of which are hereby acknowledged, MoneyFex and Supplier hereby agree as follows:</p>
+                                <ol type="1">
+                                    <li><b>Merchant Services. </b>The supplier has authorised MoneyFex to serve as the Merchant of Record for its customers. As Merchant of Record, MoneyFex shall be responsible for (a) processing bank-to-bank, credit/debit card payments, (b) settling and remitting Net Funds to Suppliers, where such settlements are required, (c) processing refunds, in accordance with MoneyFex’s refund policies. All payments to Suppliers (Net Funds Release) will be net of any commissions charged by MoneyFex, and shall be accompanied by a detailed settlement report (Release Statement on the Supplier Dashboard). Net Fund Releases to Supplier shall occur once payment has been confirmed by MoneyFex, regardless of whether or not the service or product paid for by the customer has been used or not. Net Fund Releases shall only be made in the default currency utilised by the Supplier and shall be available for withdrawal by the Supplier.</li>
+                                    <li>
+                                        <b>Term of Agreement.</b>
+                                        The Term of this Agreement shall commence on the date of full execution and shall continue in full force and effect until terminated by either Party upon ninety (90) days prior written notice to the other Party. In the event of Termination, MoneyFex shall remit any and all Net Funds to the Supplier for all Services or Products paid for by the customer through the Termination Date. Such remittance shall be made pursuant to the terms and conditions of this Agreement and shall be made on the Net Funds Release Date immediately following the Termination Date.
+                                    </li>
+                                    <li>
+                                        <b>Chargebacks,</b> Credit Backs and Refunds. Supplier shall not be responsible for fees relating to any Chargebacks or the value of the goods and services unless:
+                                    </li>
+                                    <ol type="a">
+                                        <li>Subsequent to the customer requesting additional information and documentation from the Supplier, relative to the dispute, and such information is not provided within seven (7) days of the date of the request.</li>
+                                        <li>
+                                            Where a Chargeback results from the failure on the part of Supplier to Fulfill the service or product promised to the customer.
+                                        </li>
+                                        <li>
+                                            In the event Supplier fails to take action to refund the customer after being notified of a suspect or fraudulent transaction.
+                                        </li>
+                                        <li>
+                                            In the event a Chargeback is issued as a result of a customer service issue that was not dealt with by Supplier in a timely and professional manner.
+                                        </li>
+                                    </ol>
+                                    <li>Funds paid by customers to the supplier shall be instantly made available for withdrawal or onward spending (using MoneyFex’s network of Suppliers) by the Supplier. </li>
+                                    <li>Any dispute or claim arising out of or in connection with this Agreement shall be governed and construed in accordance with English law. The Parties agree to submit such dispute for binding arbitration to the International Arbitration Association. The parties further waive their right to file an action in court or request a jury. In the event of a conflict of law or one of the provisions of this Agreement is determined to be unenforceable, the arbitrator is granted the power and authority in chancery to construe this Agreement to the broadest extent possible to effectuate the intent of the parties. The prevailing Party shall be entitled to recover reasonable costs and fees incurred in prosecuting or defending an action. </li>
+                                    <li>No interest will be payable for sum held by MoneyFex pending withdrawal or onward spending by the Supply. </li>
+                                    <li>The Parties agree to employ commercially good faith efforts to ensure the information provided from one to another is accurate and current in all respects. </li>
+                                    <li>
+                                        This Agreement is binding upon the Parties as well as their representatives, affiliated entities, successors and assigns.
+                                        This Agreement may be executed in multiple counterparts, which taken together will constitute a single instrument. Execution and delivery of this Agreement may be evidenced by facsimile, email or other electronic transmission.
+                                    </li>
+                                </ol>
+                                <p>I give my consent that Trust My Travel will process personal data relating to the entity(s) and individual(s) included in this agreement for limited and proportionate use in compliance with:</p>
+                                <p>REGULATION (EU) 2016/679 OF THE EUROPEAN PARLIAMENT AND OF THE COUNCIL of 27 April 2016 on the protection of natural persons with regard to the processing of personal data and on the free movement of such </p>
+                                <p>data, and repealing Directive 95/46/EC (General Data Protection Regulation)</p>
+                                <p>and that I understand that I have the right to withdraw my consent by emailing MoneyFex Ltd</p>
+                                <p>
+                                    <b>
+                                        You must read, agree with, and accept all of the terms and conditions contained in these Payment Services Agreement before you can become a MoneyFex Supplier or continue to use the supplier payment platform.
+                                    </b>
+                                </p>
+                            </div>
+                            <hr>
+
+                            <div class="col-lg-12">
+                                <div class="checkbox">
+
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.IhaveRead) I have read and accepted the Payment Service Agreement
+                                        @Html.ValidationMessageFor(Model => Model.IhaveRead, "", new { @class = "text-danger" })
+                                        @*<input type="checkbox" name=" " value=" ">*@
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="checkbox">
+                                    <label>
+                                        @Html.CheckBoxFor(model => model.IAccept) I accept the business terms and conditions of MoneyFex
+                                        @Html.ValidationMessageFor(Model => Model.IAccept, "", new { @class = "text-danger" })
+                                        @*<input type="checkbox" name=" " value=" ">*@
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+        <div class="dynamic_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <a href="/Businesses/BusinessRegistration/BusinessContactDetails" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                        <button type="submit" class="fbtn btn-next">Finish account setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <br>
+                        @*<a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+}
+<!--  -->

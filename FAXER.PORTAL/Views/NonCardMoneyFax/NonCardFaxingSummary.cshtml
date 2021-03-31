@@ -1,0 +1,187 @@
+﻿@model FAXER.PORTAL.Models.EstimateFaxingFeeSummary
+
+@{
+    ViewBag.Title = "NonCardFaxingSummary";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var FaxingCurrencySymbol = "";
+    var FaxingCurrency = "";
+    var ReceivingCurrency = "";
+    var ReceivingCurrencySymbol = "";
+
+    if (Model != null)
+    {
+        FaxingCurrencySymbol = Model.FaxingCurrencySymbol ?? "";
+        FaxingCurrency = Model.FaxingCurrency ?? "";
+        ReceivingCurrency = Model.ReceivingCurrency ?? "";
+        ReceivingCurrencySymbol = Model.ReceivingCurrencySymbol ?? "";
+    }
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Cash to Cash Transfer</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<form method="post">
+
+
+    <div class="real_form">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!--<h4>EstimateFaxingFeeSummary</h4>
+    <hr />-->
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                    @Html.HiddenFor(model => model.FaxingCurrency)
+                    @Html.HiddenFor(model => model.FaxingCurrencySymbol)
+                    @Html.HiddenFor(model => model.ReceivingCurrency)
+                    @Html.HiddenFor(model => model.ReceivingCurrencySymbol)
+                    @Html.HiddenFor(model => model.FaxingAmount)
+                    @Html.HiddenFor(model => model.FaxingFee)
+                    @Html.HiddenFor(model => model.TotalAmount)
+                    @Html.HiddenFor(model => model.ExchangeRate)
+                    @Html.HiddenFor(model => model.ReceivingAmount)
+                    <div class="col-lg-5">
+                        <label> Sending Amount  </label>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.FaxingAmount @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+
+
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.FaxingAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true  } })
+                            @Html.ValidationMessageFor(model => model.FaxingAmount, "", new { @class = "text-danger" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+                        </div>*@
+                    </div>
+
+
+                    <div class="col-lg-5">
+                        <label> Sending Fee  </label>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.FaxingFee @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.FaxingFee, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.FaxingFee, "", new { @class = "text-danger" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+                        </div>*@
+                    </div>
+
+                    <div class="col-lg-5">
+                        <label>Total Amount Including Fee</label>
+                    </div>
+
+
+                    <div class="col-lg-6">
+
+                        <div class="form-control form-text">
+
+                            @FaxingCurrencySymbol  @Model.TotalAmount @FaxingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.TotalAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+                            <span class="input-group-addon">@FaxingCurrency</span>
+                        </div>*@
+                    </div>
+
+                    
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExchangeRate, htmlAttributes: new { @class = "col-md-5" })
+                        <div class="col-md-6">
+                            <div class="form-control form-text">
+
+                                @Model.ExchangeRate
+                            </div>
+
+                            @*@Html.TextBoxFor(model => model.ExchangeRate, new { @class = "form-control", @readonly = true })
+                            @Html.ValidationMessageFor(model => model.ExchangeRate, "", new { @class = "text-danger" })*@
+                        </div>
+                    </div>
+
+                    <div class="col-lg-5">
+                        <label>Amount To Be Received</label>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="form-control form-text">
+
+                            @ReceivingCurrencySymbol @Model.ReceivingAmount @Model.ReceivingCurrency
+                        </div>
+                        @*<div class="input-group">
+                            <span class="input-group-addon">@ReceivingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.ReceivingAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+                            <span class="input-group-addon">@ReceivingCurrency</span>
+
+                        </div>*@
+                    </div>
+
+                    <div class="clearfix"><br></div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-lg-7">
+                        @if (ViewBag.ExchangeRate != null)
+                        {
+                            <label style="color:red">@ViewBag.ExchangeRate</label>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <a href="@Url.Action("Index","NonCardMoneyFax")" , class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("Index","NonCardMoneyFax")" , class="fbtn btn-back hidden-lg hidden-md "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+
+
+

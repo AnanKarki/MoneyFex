@@ -1,0 +1,192 @@
+﻿@model List<FAXER.PORTAL.Models.MerchantAutoPaymentsViewModel>
+@{
+    ViewBag.Title = "MerchantAutoPayments";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    int index = 0;
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Service Provider Standing Order Payments</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <form>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("PreviousPayee", null, "Select Previous Payee (Service Provider)", new { @class = "form-control", @onchange = "getMerchantDetails(this.value);" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN</th>
+                                    <th>Service Provider Name</th>
+                                    <th> Account No.</th>
+                                    <th>Country</th>
+                                    <th>City</th>
+                                    @*<th>Payment Frequency</th>*@
+                                    <th>Frequency Details</th>
+                                    <th>Auto Amount</th>
+                                    <th>Payment Reference</th>
+                                    <th>Auto Payment</th>
+                                    <th width="20%">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                    <tr>
+                                        <td>@index</td>
+                                        <td>@item.MerchantName</td>
+                                        <td>@item.AccountNo</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.FrequencyDetails</td>
+                                        <td>@item.AutoAmount</td>
+                                        <td>@item.PaymentReference</td>
+                                        <td>@item.EnableAutoPayment</td>
+                                        <td>
+                                            @if (item.EnableAutoPayment == "Yes")
+                                            {
+                                                <a class="btn btn-sm btn-success" href="@Url.Action("MerchantAutoPaymentAdd")"> Update</a>
+
+                                                <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#remove_auto_payments_merchant" onclick="GetId(@item.Id);">Remove</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-sm btn-success" href="@Url.Action("MerchantAutoPaymentAdd")"> Add </a>
+
+                                            }
+
+                                            @*<a class="btn btn-sm btn-success" href="@Url.Action("MerchantAutoPaymentAdd")">Add</a>
+                                                <a class="btn btn-sm btn-danger" data-toggle="modal" data-target="#remove_auto_payments_merchant" onclick="GetId(@item.Id);">Remove</a>*@
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <input type="hidden" value="@TempData["CardCount"]" id="CardCount">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="@Url.Action("Index","FaxerAutoPayments")" class="fbtn btn-back"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <!-- <a href="" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                 -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="credit_debit_card_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>MoneyFex</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            Please add credit/debit Card to enable Auto Payment
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("AddADebitCreditCard", "FaxerAccountProfile")" class="btn btn-primary btn-sm">Add Credit/debit Card</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!-- merchant-auto-payments.php -->
+@using (Html.BeginForm("DeleteMerchantAutoPayments", "FaxerAutoPayments", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="remove_auto_payments_merchant" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex Service-Standing Order Payments</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Hidden("merchantPaymentInformationId", null, new { @id = "merchantPaymentInformationId" })
+                    <div class="row">
+
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <h4>Are you sure you want to remove auto-payment from this merchant ?</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok">Yes Remove</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- merchant-auto-payments.php -->
+@section Scripts{
+    <script>
+        function getMerchantDetails(val) {
+            window.location.href = "/FaxerAutoPayments/MerchantAutoPayments?faxMerchantPayInfoId=" + val;
+        }
+        function GetId(val) {
+            document.getElementById("merchantPaymentInformationId").value = val;
+        };
+        $(document).ready(function () {
+            var Count = $("#CardCount").val();
+            if (Count != "") {
+                var TONum = parseInt(Count);
+                if (TONum < 0) {
+                    $("#credit_debit_card_validation").modal("show");
+                }
+                else {
+                    $("#credit_debit_card_validation").modal("show");
+                }
+            }
+        });
+    </script>
+}

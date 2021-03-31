@@ -1,0 +1,58 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.NameOfBusinessContactPerson
+    </p>
+    <p>
+        A MoneyFex Business Card (MFBC) registered with the following information has been deleted:
+    </p>
+    <p>
+        <strong>MFBC Number:</strong> @ViewBag.MFBCCardNumber
+    </p>
+    <p>
+        <strong>Name on MFBC Card:</strong> @ViewBag.CardUserName
+    </p>
+    <p>
+        <strong>Date of Birth of Registered Card User:</strong>@ViewBag.CardUserDOB
+    </p>
+    <p>
+        <strong>Telephone number of Business:</strong> @ViewBag.BusinessPhoneNumber
+    </p>
+    <p>
+        <strong>Email address of Registered Card User:</strong> @ViewBag.CardUserEmail
+    </p>
+    <p>
+        <strong>Country of Registered Card User:</strong> @ViewBag.CardUserCountry
+    </p>
+    <p>
+        <strong>City of Registered Card User:</strong> @ViewBag.CardUserCity
+    </p>
+    <br />
+    <p>
+        The customer service team will now process a refund of the balance amount on this card.
+    </p>
+    <p>
+        Please allow 5 working days for this amount to be processed, you will be contacted by us with the information that you will need to withdraw the money from our main paying agent.
+    </p>
+    <br />
+    
+    
+    <table style="width:50%;margin-left:150px; ">
+        <tbody>
+            <tr>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.RegisterBusinessCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/25.png" alt=""></a>
+                </td>
+           
+            </tr>
+        </tbody>
+    </table>
+
+</div>

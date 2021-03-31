@@ -1,0 +1,117 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.AddNewCardViewModel
+@{
+    ViewBag.Title = "EditCard";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+
+
+                        <div class="clearfix">
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <img src="~/Areas/KiiPayPersonal/images/icon/card/visa.png" alt="" width="35"> &nbsp;&nbsp; <img src="~/Areas/KiiPayPersonal/images/icon/card/master-card.png" alt="" width="35">
+                                &nbsp;&nbsp; <img src="~/Areas/KiiPayPersonal/images/icon/card/ae.png" alt="" width="35">
+                                &nbsp;&nbsp;<img src="~/Areas/KiiPayPersonal/images/icon/card/maestro.png" alt="" width="35">
+                            </div>
+                            <div class="panel-body text-left mt20">
+                                <div class="row">
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.EnumDropDownListFor(model => model.CardType, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CardType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.NameOnCard, new { @class = "form-control", @placeholder = "Name On Card" })
+                                            @Html.ValidationMessageFor(model => model.NameOnCard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.CardNumber, new { @type = "text", @class = "form-control", @placeholder = "Card Number", @maxlength = "19", @minlength = "12" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.ExpMonth, new { @type = "text", @class = "form-control", @placeholder = "Expiring Month", @maxlength = "2", @minlength = "2" })
+                                            @Html.ValidationMessageFor(model => model.ExpMonth, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.ExpYear, new { @type = "text", @class = "form-control", @placeholder = "Expiring Year", @maxlength = "2", @minlength = "2" })
+                                            @Html.ValidationMessageFor(model => model.ExpYear, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.SecurityCode, new { @type = "text", @class = "form-control", @placeholder = "Security Code", @maxlength = "4", @minlength = "3" })
+                                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            <select class="form-control">
+                                                <option>Select your Address</option>
+                                            </select>
+                                        </div>
+                                        @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <!--  -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <hr>
+                            <button type="submit" class="btn btn-primary btn-lg mb30">Confirm & Add <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+                                <center>
+                                    <a href="@Url.Action("Index","SavedCreditDebitCard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+}

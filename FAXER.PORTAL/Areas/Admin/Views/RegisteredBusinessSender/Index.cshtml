@@ -1,0 +1,452 @@
+﻿@model List<FAXER.PORTAL.Models.SenderBusinessprofileViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    //string[] Alpha = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z" };
+
+}
+
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="card-header border-bottom">
+                            <h2 class="f-left m-t-5 m-b-0" style="float:left;">Registered Business</h2>
+
+                            <a href="@Url.Action("BanAReceiver", "BanReceiver")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                <i class="icofont icofont-plus m-r-5"></i>  Ban a receiver
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr />
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "filter();" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td><strong>SN.</strong></td>
+                                        <td><strong>Business Name</strong></td>
+                                        <td><strong>Contact Person Name</strong></td>
+                                        <td><strong>Business Type</strong></td>
+                                        <td><strong>Address</strong></td>
+                                        <td><strong>Country</strong></td>
+                                        <td><strong>Telephone</strong></td>
+                                        <td><strong>Email</strong></td>
+                                        <td><strong>Registeration No</strong></td>
+                                        <td><strong>Status</strong></td>
+                                        <td><strong>Transaction</strong></td>
+                                        <td><strong>Action</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody style="margin-bottom: 30px !important;">
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        ++i;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.BusinessName</td>
+                                            <td>@item.ContactName</td>
+                                            <td>@item.BusinessType</td>
+                                            <td>@item.Address1</td>
+                                            <td>@item.Country</td>
+                                            <td>@item.PhoneNumber</td>
+                                            <td>@item.Email</td>
+                                            <td>@item.RegistrationNumber</td>
+                                            <td>@item.Status</td>
+                                            <td>
+                                                <a href="@Url.Action("Index","SenderTransactionActivity",new { SenderId = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light ">
+                                                    <span class="btn-label"><i class=" ti-pencil-alt"></i></span>
+                                                    View
+                                                </a>
+
+                                            </td>
+                                            <td>
+                                                <div class="btn-group m-r-10">
+                                                    <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                    <ul role="menu" class="dropdown-menu action_drop">
+                                                        <li><a href="@Url.Action("ViewRegisteredFaxersMore","ViewRegisteredFaxers",new{id = @item.Id , isBusiness = true})" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a></li>
+                                                        <li><a href="@Url.Action("UpdateFaxerInformation","ViewRegisteredFaxers",new { id = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a>    </li>
+                                                        @if (item.Status == "Active")
+                                                        {
+                                                            <li><button class="btn btn-xs btn-primary waves-effect waves-light disabled "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</button></li>
+                                                            <li>  <a href="@Url.Action("ActivateStatus", "ViewRegisteredFaxers", new { id = item.Id , AccountStatus = false , isBusiness = true })" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a href="@Url.Action("ActivateStatus", "ViewRegisteredFaxers", new { id = item.Id , AccountStatus = true , isBusiness = true })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                            <li>  <button class="btn btn-xs btn-warning waves-effect waves-light disabled"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</button></li>
+                                                        }
+
+
+
+                                                        <li><btn class="btn btn-xs btn-danger waves-effect waves-light" onclick="deleteSender('@item.Id');"><span class="btn-label"><i class=" ti-trash"></i></span> Delete</btn></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="clearfix mt100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-header">
+                        <div class="row align-items-end">
+                            <div class="col-lg-8">
+                                <div class="page-header-title">
+                                    <div class="d-inline">
+                                        <h4>Registered Business</h4>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="page-header-breadcrumb">
+                                    <ul class="breadcrumb-title">
+                                        <li class="breadcrumb-item">
+                                            <a href="index.php"> <i class="feather icon-home"></i> </a>
+                                        </li>
+
+                                        <li class="breadcrumb-item">
+                                            <a href="#!">Registered Business</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-c-yellow text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>30-Day Payment Received</b></p>
+                                                <h4 class="m-b-0">$852.00</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="fa fa-users f-40 text-c-yellow"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-c-green text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>30-Day Nno. of Payment  </b></p>
+                                                <h4 class="m-b-0">5,852</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-6">
+                                <div class="card bg-c-pink text-white">
+                                    <div class="card-block">
+                                        <div class="row align-items-center">
+                                            <div class="col">
+                                                <p class="m-b-5"><b>Business Status</b></p>
+                                                <h4 class="m-b-0">Active</h4>
+                                            </div>
+                                            <div class="col col-auto text-right">
+                                                <i class="feather icon-book f-40 text-c-pink"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-block">
+                                        <div class="row ">
+
+                                            <div class="col-xl-4 col-md-6">
+                                                <div class="form-group">
+                                                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xl-4 col-md-6">
+                                                <div class="form-group">
+                                                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control  form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-xl-4 col-md-6">
+                                                <div class="form-group">
+
+                                                    <input name="" class="form-control form-control-round form-control-bold" id="search" placeholder="Search Receiver" onkeyup="filter();">
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="m-b-15">
+
+
+                                            <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#email">Send Email</button>
+
+
+                                            <button class="btn btn-secondary btn-round" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+
+
+
+                                        </div>
+                                        <div class="  row row-eq-height>.alpha-box" id="search-result">
+
+
+                                            @foreach (var item in Alpha)
+                                            {
+
+                                                <div class=" col-lg-4">
+                                                    <div class="list-tag alpha-box p-20 m-b-30">
+
+                                                        <h2 class="text-bold"> @item  </h2>
+                                                        <ul class="scroll-list">
+                                                            @foreach (var data in Model)
+                                                            {
+                                                                if (data.BusinessName.StartsWith(item))
+                                                                {
+                                                                    <li><a href="@Url.Action("BusinessDashboard","RegisteredBusinessSender" , new { SenderId =data.Id})">@data.BusinessName</a></li>
+                                                                }
+
+                                                            }
+
+
+                                                        </ul>
+                                                    </div>
+                                                </div>
+
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">
+                                        Registered Business
+
+                                    </h4>
+                                    @*<a class=" btn btn-primary f-right btn-round" href="@Url.Action("RegisterAFaxer", "ViewRegisteredFaxers")">
+                                            Register a Business
+                                        </a>*@
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control  form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Business Name" class="form-control form-control-round form-control-bold" name="BusinessName" id="BusinessName" value="@ViewBag.BusinessName" onchange="filter();">
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="custom-btn" class="table table-striped table-bordered ">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>SN.</strong></td>
+                                                    <td><strong>Business Name</strong></td>
+                                                    <td><strong>Contact Person Name</strong></td>
+                                                    <td><strong>Business Type</strong></td>
+                                                    <td><strong>Address</strong></td>
+                                                    <td><strong>Country</strong></td>
+                                                    <td><strong>Telephone</strong></td>
+                                                    <td><strong>Email</strong></td>
+                                                    <td><strong>Registeration No</strong></td>
+                                                    <td><strong>Status</strong></td>
+                                                    <td><strong>Transaction</strong></td>
+                                                    <td><strong>Action</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="margin-bottom: 30px !important;">
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    ++i;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>
+                                                            <a href="@Url.Action("ViewRegisteredFaxersMore","ViewRegisteredFaxers",new{id = @item.Id , isBusiness = true})">
+                                                                @item.BusinessName
+                                                            </a>
+                                                        </td>
+                                                        <td>@item.ContactName</td>
+                                                        <td>
+                                                            @item.BusinessType
+                                                        </td>
+                                                        <td>@item.Address1</td>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.PhoneNumber</td>
+                                                        <td>@item.Email</td>
+                                                        <td>@item.RegistrationNumber</td>
+                                                        <td>@item.Status</td>
+                                                        <td>
+                                                            <a href="@Url.Action("Index","SenderTransactionActivity",new { SenderId = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light ">
+                                                                <span class="btn-label"><i class=" ti-pencil-alt"></i></span>
+                                                                View
+                                                            </a>
+
+                                                        </td>
+                                                        <td>
+                                                            <div class="btn-group m-r-10">
+                                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                                <ul role="menu" class="dropdown-menu action_drop">
+                                                                    <li><a href="@Url.Action("ViewRegisteredFaxersMore","ViewRegisteredFaxers",new{id = @item.Id , isBusiness = true})" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a></li>
+                                                                    <li><a href="@Url.Action("UpdateFaxerInformation","ViewRegisteredFaxers",new { id = @item.Id , isFromBusiness = true})" class="btn btn-xs btn-success waves-effect waves-light "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a>    </li>
+                                                                    @if (item.Status == "Active")
+                                                                    {
+                                                                        <li><button class="btn btn-xs btn-primary waves-effect waves-light disabled "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</button></li>
+                                                                        <li>  <a href="@Url.Action("ActivateStatus", "ViewRegisteredFaxers", new { id = item.Id , AccountStatus = false , isBusiness = true })" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <li><a href="@Url.Action("ActivateStatus", "ViewRegisteredFaxers", new { id = item.Id , AccountStatus = true , isBusiness = true })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                                        <li>  <button class="btn btn-xs btn-warning waves-effect waves-light disabled"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</button></li>
+                                                                    }
+                                                                    <li>
+                                                                        <btn class="btn btn-xs btn-danger waves-effect waves-light" onclick="DeletePopUp(@item.Id);"><span class="btn-label"><i class=" ti-trash"></i></span> Delete</btn>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </td>
+
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                        <div class="clearfix mt100"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var Country = $("#Country").val();
+            var City = $("#City").val();
+            var businessName = $("#BusinessName").val();
+
+            window.location.href = "/Admin/RegisteredBusinessSender/Index?Country=" + Country + "&City=" + City + "&businessName=" + businessName;
+
+        }
+        $("#search").val('@ViewBag.Search');
+
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/RegisteredBusinessSender/DeleteFaxerInformation?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+    </script>
+}
+
+

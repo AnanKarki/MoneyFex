@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "FaxCardToTopUp";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+			<?php include("include/header-login.php");?>
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Start Sending Money</h1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <form>
+                    <div class="col-lg-6 col-lg-offset-4">
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option>Select MoneyFex Top-up Card</option>
+                                <option>card 1</option>
+                                <option>card 2</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="col-lg-4">
+                        <label>Amount of money on this card</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <input type="text" name="" placeholder="$500" disabled="disabled" class="form-control">
+                        </div>
+                    </div>
+                    </ >
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@Url.Action("FaxMoneyLogin")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                <a href="@Url.Action("CalculateFaxingFees")" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

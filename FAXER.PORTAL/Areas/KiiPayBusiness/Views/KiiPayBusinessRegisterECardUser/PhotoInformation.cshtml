@@ -1,0 +1,59 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessRegisterECardUserPhotoInformationVM
+@{
+    ViewBag.Title = "PhotoInformation";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm("PhotoInformation", "KiiPayBusinessRegisterECardUser",  FormMethod.Post  , new { enctype = "multipart/form-data" }))
+{
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>KiiPay Registration</h3>
+                        <hr>
+
+                        <div class="pinside40">
+                            <p class="text-left"><b>Photo (Optional)</b></p>
+                            <!--  -->
+                            <div class="form-group mb20">
+                                <label class="text-left">To increase the security of your business KiiPay E-card user, please upload his/her passport size photograph below. This photo will be printed on the E-Card that will be added on your business account profile.</label>
+                                <hr>
+                                <input type="file" class="form-control" name="File">
+
+                            </div>
+                            <!--  -->
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

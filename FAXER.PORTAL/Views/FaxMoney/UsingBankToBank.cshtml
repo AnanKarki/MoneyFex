@@ -1,0 +1,164 @@
+﻿@model FAXER.PORTAL.Models.BankToBankTransferViewModel
+@{
+    ViewBag.Title = "UsingBankToBank";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style type="text/css">
+    .real_form ul {
+        list-style: none;
+    }
+</style>
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:42%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Direct Bank Deposite Payment</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4>Please make a payment of @Model.SendingCurrencySymbol @Model.SendingAmount to MoneyFex using the following Bank Account Details</h4>
+                    <hr>
+
+
+                    <div class="form-group">
+                        @*Account Number : <b>2564525</b><br>*@
+                        Account Number : <b>@Model.AccountNumber</b><br>
+                        @Model.LabelName  <b>@Model.LabelValue</b>
+                    </div>
+                    <div class="form-group">
+                        Reference your bank payment as follows:<br>
+                        @Model.SenderSurname- @Model.SendingAmount
+                    </div>
+                    @Html.HiddenFor(model => model.AccountNumber)
+                    @Html.HiddenFor(model => model.SendingCurrency)
+                    @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                    @Html.HiddenFor(model => model.SenderSurname)
+                    @Html.HiddenFor(model => model.SendingAmount)
+                    @Html.HiddenFor(model => model.LabelName)
+                    @Html.HiddenFor(model => model.LabelValue)
+                    @Html.HiddenFor(model => model.PaymentReference)
+                    <div class="form-group">
+                        <label>@Html.CheckBoxFor(model => model.Confirm) I confirm that a payment of @Model.SendingCurrencySymbol @Model.SendingAmount has been made to MoneyFex using the account provided</label>
+                        @Html.ValidationMessageFor(model => model.Confirm, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        <label>@Html.CheckBoxFor(model => model.Accept) Accept our Terms and Condition</label>
+                        @Html.ValidationMessageFor(model => model.Accept, "", new { @class = "text-danger" })
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <a href="/FaxMoney/ChoosePaymentOption" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="/FaxMoney/ChoosePaymentOption" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal" id="AlertPopUp" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>MoneyFex Bank to Bank Payment</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-info-circle" aria-hidden="true" style="color:blue"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+
+                        <div class="form-group">
+                            Have you made a direct bank deposite payment to MoneyFex for your transfer ?
+                            if not, please do so before sending a payment reference
+                        </div>
+                        <br>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <a class="btn btn-sm btn-danger pull-left" onclick="CloseModal()"> Not Yet</a>
+                
+                <span class="hidden-lg hidden-md  clearfix"><br /></span>
+
+
+
+                <a href="@Url.Action("BankToBankDepositConfirmation_Yes" , "FaxMoney")" class="btn btn-sm btn-primary hidden-xs "> Yes Payment made, Send Reference</a>
+                <a href="@Url.Action("BankToBankDepositConfirmation_Yes" , "FaxMoney")" class="btn btn-sm pull-left btn-primary hidden-lg hidden-md hidden-sm"> Yes Payment made, Send Reference</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+
+        if ('@ViewBag.ModelIsValid' == '1') {
+
+            $("#AlertPopUp").show("modal");
+        } else {
+
+            $("#AlertPopUp").hide("modal");
+    }
+
+    function CloseModal() {
+
+        $("#AlertPopUp").hide("modal");
+    }
+       if ('@TempData["BankHasbeenSetuped"]' == '0') {
+
+            $("#BankAccountAlert").show();
+        }
+    </script>
+
+}

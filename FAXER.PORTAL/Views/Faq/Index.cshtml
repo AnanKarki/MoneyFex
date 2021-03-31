@@ -1,0 +1,1037 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<div class="page-header" style="background:  url(/images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+                <ol class="breadcrumb ">
+                    <li> <a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="active">Faqs</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<div class=" ">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pinside0 mb80 mt20">
+                    <div class=" ">
+                        <h1 class="page-new">Faq</h1>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="section-title mb30">
+                                    <h2>Getting Started</h2>
+                                </div>
+                                <p>
+                                    MoneyFex is an innovative money transfer company that specialises in post money transfer management and payment services. Post transfer management is achieved through a virtualing account system that allows a money sender to register an account in the name of a potential beneficiary who lives abroad. This virtual account can be credited online from abroad and control usage by the money sender (registrar). A virtual account registered by a money sender comes with a user-friendly dashboard that is instantly accessible to beneficiary (i.e. account user) who in most cases will be living in the money sender’s home country.
+                                </p>
+                                <p>
+                                    This dashboard comes with unique features that allow the account user to see virtual account balance, payments made to the account, controls set by the account registrar, transaction history, transfer money and pay for goods and services worldwide. The dashboard is also incorporated with an Electronic Card (E-Card) specifically designed with the name, account number and photo of the account user. Using this E-Card as an identifier, the account user can withdraw money from a MoneyFex paying agent in their country of residence.
+                                </p>
+                                <p>
+                                    The payment service of MoneyFex on the other hand, runs on the company's proprietary transfer platform. This service allows both the money sender and the beneficiary to make direct payments to businesses that are registered with MoneyFex’s network of service providers.
+                                </p>
+                                <p>
+                                    MoneyFex offers a simple and convenient way to transfer and control money sent abroad, and to pay for goods and services.
+                                </p>
+                                <br>
+                            </div>
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="section-title mb30">
+                                    <h2>General Questions</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 st-accordion col-xs-12">
+
+
+                                <!--  -->
+                                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingOne">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">What services do MoneyFex offer? </a> </h4>
+                                        </div>
+                                        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                                            <div class="panel-body">
+                                                <ul class="list-theme">
+                                                    <li>MoneyFex virtual account service</li>
+                                                    <li>Cash to Cash  money transfer service</li>
+                                                    <li>MoneyFex payments service</li>
+                                                </ul>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">How do I pay for my transfer? </a> </h4>
+                                        </div>
+                                        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                            <div class="panel-body">
+                                                <p>
+                                                    You can pay for your transfer using a debit or credit card, or a deposit to MoneyFex’s bank transfer.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">Where can I transfer money to? </a> </h4>
+                                        </div>
+                                        <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                            <div class="panel-body">
+                                                <p>MoneyFex allows you to transfer money to West Africa and some countries in Asia. We are currently preparing to launch our services in other part of Africa, Asia, South America and Australia too.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFour">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Where can I transfer money from?</a> </h4>
+                                        </div>
+                                        <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                            <div class="panel-body">
+                                                <p> MoneyFex accepts money transfer services from Europe, Asia and North America. The fees for transfer money may vary depending on the registered country of the sender.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="false" aria-controls="collapseFive">How much can I transfer at once?</a> </h4>
+                                        </div>
+                                        <div id="collapseFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFive">
+                                            <div class="panel-body">
+                                                <p>The maximum amount of money you can transfer will depend on where you live. This is because different countries have different rules relating to money transfers.</p>
+                                                <p>
+                                                    The maximum amount will also depend on how you pay as some card company may have expenditure limits on online payment.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSix" aria-expanded="false" aria-controls="collapseSix">How long will it take for the money to arrive?</a> </h4>
+                                        </div>
+                                        <div id="collapseSix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSix">
+                                            <div class="panel-body">
+                                                <p>In most cases, transfers sent using MoneyFex’s platform arrive instantly. There are some transfers that can take longer depending on the payment method used.</p>
+                                                <p>
+                                                    Note that your transfer will not be sent until MoneyFex has received your payment.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">Why do you need a mobile phone number and email address for my receiver?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeven">
+                                            <div class="panel-body">
+                                                <p>You must provide a mobile phone number and email address of your receiver to allow MoneyFex to send notifications to both you and the receiver about the progress of your transfer.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingEight">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEight" aria-expanded="false" aria-controls="collapseEight">Why do I need to supply identification?</a> </h4>
+                                        </div>
+                                        <div id="collapseEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEight">
+                                            <div class="panel-body">
+                                                <p>To comply with anti-money laundering regulations, MoneyFex will require a copy of your photo ID (driving license and passport are the only acceptable forms of ID) and a utility bill to proof your identity and address respectively. Additionally, for transactions of £5,000 and over, MoneyFex will require evidence of the source of funds in the form of payslip or bank statement.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>My Account </h2>
+                                </div>
+                                <div class="panel-group" id="accordion-1" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingNine">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion-1" href="#collapseNine" aria-expanded="true" aria-controls="collapseNine">How do I change the name on my MoneyFex account?</a> </h4>
+                                        </div>
+                                        <div id="collapseNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNine">
+                                            <div class="panel-body">
+                                                <p>
+                                                    The name on your account must be your full legal name that appears on your government issued ID.
+                                                </p>
+                                                <p>If you have made a mistake when registering (for example, you misspelled your name), please contact the customer care team who will be able to help.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="false" aria-controls="collapseTen">How do I change the date of birth on my account?</a> </h4>
+                                        </div>
+                                        <div id="collapseTen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTen">
+                                            <div class="panel-body">
+                                                <p>The date of birth on your MoneyFex account must be your real date of birth that appears on your government issued ID.</p>
+                                                <p>
+                                                    If you have made a mistake when registering with MoneyFex (for example, you entered your date of birth incorrectly), please contact the customer care team who will be able to help.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingEleven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven" aria-expanded="false" aria-controls="collapseEleven">How do I change the address on my account?</a> </h4>
+                                        </div>
+                                        <div id="collapseEleven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEleven">
+                                            <div class="panel-body">
+                                                <p>The address on your MoneyFex account must be your full residential address.</p>
+                                                <p>
+                                                    If you have made a mistake when registering (for example you mistyped your address), please go to your My Account Profile on your MoneyFex Dashboard to amend your address.
+                                                </p>
+                                                <p>
+                                                    If you have moved to a new house, your address will need to be updated. In this instance, please go to My Account Profile and follow the instructions on how to update your address.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwelve">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwelve" aria-expanded="false" aria-controls="collapseTwelve">How do I change the e-mail address on my account?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwelve" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwelve">
+                                            <div class="panel-body">
+                                                <p>If you wish to change the e-mail address on your account, please go to My Account Profile and follow the instructions on how to change your email address.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirteen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirteen" aria-expanded="false" aria-controls="collapseThirteen">How do I change the password on my account?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirteen">
+                                            <div class="panel-body">
+                                                <p>If you have forgotten your MoneyFex account password for the website, please follow the below steps.</p>
+                                                <p>Step 1. Go to www.MoneyFex.com</p>
+                                                <p>Step 2. Click ‘Login’</p>
+                                                <p>Step 3. Click ‘Forgotten Password?’</p>
+                                                <p>Step 4. Enter your e-mail address and click ‘Request Security Code’</p>
+                                                <p>Step 5. Check your e-mail address for the e-mail from us. This email will include a one time security code.</p>
+                                                <p>Step 6. Enter the one time security code</p>
+                                                <p>Step 7. After confirmation of the code, proceed to password reset</p>
+                                                <p>Step 8. Enter your new password and confirm</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourteen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourteen" aria-expanded="false" aria-controls="collapseFourteen">Can I have multiple accounts with MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourteen">
+                                            <div class="panel-body">
+                                                <p>No. We permit only one account per customer.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFifteen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="false" aria-controls="collapseFifteen">Can I have a joint account with MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseFifteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifteen">
+                                            <div class="panel-body">
+                                                <p>
+                                                    We do not permit joint accounts or multiple account holders. Each customer must create their own individual account.
+                                                    This is because we need to ensure that we are completing necessary identity checks on every individual who uses the MoneyFex platform.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixteen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixteen" aria-expanded="false" aria-controls="collapseSixteen">How do I close my account with MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixteen">
+                                            <div class="panel-body">
+                                                <p>If you would like your MoneyFex account to be disabled or closed, please contact our customer service team who will be able to help.</p>
+                                                <p>Should you change your mind, you can always reactivate your account by contacting us again.</p>
+                                                <p>The balance on all your MoneyFex virtual accounts will be refunded to you, and the account disabled. This will mean that your account users will no longer be able to withdraw money or make payments using their MoneyFex electronic card.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventeen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventeen" aria-expanded="false" aria-controls="collapseSeventeen">How do I reset my password?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventeen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventeen">
+                                            <div class="panel-body">
+                                                <p>To reset your password, login to your MoneyFex Account Dashboard, My Account Profile, Reset Password</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingEighteen">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseEighteen" aria-expanded="false" aria-controls="collapseEighteen">How do I delete my Money transfer history with MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseEighteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingEighteen">
+                                            <div class="panel-body">
+                                                <p>MoneyFex is required by law to keep full records of customers’ transfer history. This means that we cannot remove or delete entries from our database.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Sending Money Online</h2>
+                                </div>
+                                <div class="panel-group" id="accordion-2" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingNineteen">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseNineteen" aria-expanded="true" aria-controls="collapseNineteen">How can I estimate the fees before I start sending money?</a> </h4>
+                                        </div>
+                                        <div id="collapseNineteen" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingNineteen">
+                                            <div class="panel-body">Go to Estimate transfer Fees to estimate the cost of sending money, and also the current exchange rate. You can also get an estimate of the transfer fee and exchange rate, by going to our agents in your home country</div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwenty">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwenty" aria-expanded="false" aria-controls="collapseTwenty">How do I track the status of my transfer?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwenty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwenty">
+                                            <div class="panel-body">
+                                                <p>Tracking your transfer is easy, you can do this directly on your dashboard or from the homepage by clicking on Track a Transfer. You will need your surname and the MoneyFex Control Number (MFCN). </p>
+                                                <p>Note: For MoneyFex virtual account, you can see the account balance and withdrawals by the user from Account Usage History in the DASHBOARD after logging in.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyOne">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyOne" aria-expanded="false" aria-controls="collapseTwentyOne">Which countries can I send money to?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyOne">
+                                            <div class="panel-body">
+                                                <p>To see which countries you can send money to, simply go to Find Locations.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyTwo" aria-expanded="false" aria-controls="collapseTwentyTwo">How much money can I send at a given time?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyTwo">
+                                            <div class="panel-body">You can send up to £5000.00 within 30 calendar days.  </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyThree" aria-expanded="false" aria-controls="collapseTwentyThree">What is the fee to send money?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyThree">
+                                            <div class="panel-body">
+                                                <p>Fees vary depending on where you are sending money to. To see what they will be, go to Estimate Fees. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyFour">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFour" aria-expanded="false" aria-controls="collapseTwentyFour">Can I send money to someone’s physical bank account?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyFour">
+                                            <div class="panel-body">
+                                                <p>No. MoneyFex allows you to send money online by paying into any virtual account which is registered to a name and address abroad. The electronic card that comes with this account can be used by the account user to withdraw money from one of our agents in their country of residence. Also, you can pay for goods and services abroad, if the service provider has been vetted and registered on our database. Please go to LEARN MORE from the the homepage, Pay for Goods & Services to learn more.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyFive" aria-expanded="false" aria-controls="collapseTwentyFive">When making a cash to cash transfer, how long does it take for the money to become available for the receiver to collect?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyFive">
+                                            <div class="panel-body">
+                                                <p>
+                                                    Money is typically available within minutes after confirmation of the online payment.
+                                                    Note that payment by our agents will be subject to their operating hours and compliance with regulatory requirements within their country.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentySix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentySix" aria-expanded="false" aria-controls="collapseTwentySix">Can I send money using another person’s bank account or a bank card that is not registered to my address?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentySix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentySix">
+                                            <div class="panel-body">
+                                                <p>
+                                                    No. We will only accept payment from a credit/debit card or bank account that is registered to the money sender’s name and address.
+                                                </p>
+                                                <p>
+                                                    To update your address, log in to your MoneyFex account and go to My account Profile.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentySeven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentySeven" aria-expanded="false" aria-controls="collapseTwentySeven">Does the name of the receiver have to match their government issued Identification Document?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentySeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentySeven">
+                                            <div class="panel-body">
+                                                <p>
+                                                    Yes, for security reasons, our agents will not make a payment to the beneficiary if the name on the receiver’s Identification Document does not match the name stated by the sender.
+                                                </p>
+                                                <p>
+                                                    For MoneyFex virtual account users, the name on both the electronic card registered to the account and the Identification Document must match for withdrawals and payments to be made.
+                                                </p>
+                                                <p>Please check the name of your MoneyFex virtual account user as it appears on their ID, before registering a an account or sending money to them.</p>
+                                                <p>Do not hesitate to contact MoneyFex Customer Care team if your virtual account user or receiver is still having problems withdrawing or receiving money.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyEight">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyEight" aria-expanded="false" aria-controls="collapseTwentyEight">Can the beneficiary/ virtual account user withdraw or receive a transfer in a different country other than the one I initially sent to?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyEight">
+                                            <div class="panel-body">
+                                                <p>No. For security reasons, your MoneyFex account user or beneficiary can only collect money from the country that the money was sent to. If the beneficiary is out of the country and unable to collect the money, please go to the “Transfer in Progress” section on your account Dashboard and cancel the transfer. You can choose to send this transfer to your receiver’s new location.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyEightOne">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyEightOne" aria-expanded="false" aria-controls="collapseTwentyEightOne">Can I send money by calling MoneyFex Customer Service?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyEightOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyEightOne">
+                                            <div class="panel-body">
+                                                <p>Yes. Our customer care centre can help you transfer money and also make payment to your MoneyFex virtual account. However, we encourage you to use the online platform as the volume of calls may be very high in the day.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyEightTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyEightTwo" aria-expanded="false" aria-controls="collapseTwentyEightTwo">How can I find a location to transfer money?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyEightTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyEightTwo">
+                                            <div class="panel-body">
+                                                <p>For those who have sporadic internet connection in their country of residence please go to Find a Location to search for MoneyFex Agents who will be able to help transfer money for you.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingTwentyNine">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwentyNine" aria-expanded="false" aria-controls="collapseTwentyNine">How can I view my Transfer history?</a> </h4>
+                                        </div>
+                                        <div id="collapseTwentyNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwentyNine">
+                                            <div class="panel-body">
+                                                <p>Log in to your Moneyfex online account Dashboard and click on Money Transfer History.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Cancellations and Refunds</h2>
+                                </div>
+                                <div class="panel-group" id="accordion-3" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirty">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirty" aria-expanded="true" aria-controls="collapseThirty">How do I cancel a transfer that I've made?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirty">
+                                            <div class="panel-body">
+                                                <p>Login to your account and go to Money transfer in Progress… and cancel the transfer. However, you won’t be able to cancel a transfer that has already been held by MoneyFex Customer Service or processed i.e. the receiver has been paid. </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyOne">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyOne" aria-expanded="false" aria-controls="collapseThirtyOne">How long does it take to cancel a transfer?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyOne">
+                                            <div class="panel-body">
+                                                <p>Transfer cancellation is instant. Refund will be made approximately 48 hours after the cancellation has been requested.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyTwo" aria-expanded="false" aria-controls="collapseThirtyTwo">How long does a refund take?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyTwo">
+                                            <div class="panel-body">
+                                                <p>A refund of the money that was due to be transfered, will be made approximately 48 hours after the cancellation has been requested.</p>
+                                                <p>This may vary depending on the payment method and provider you chose. Please note that if you cancel a transfer, the transfer fee will not be refunded, only the money that was due to be transferred will be refunded, and only if the transfer has not yet been processed (i.e the receiver has not yet been paid).</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyThree" aria-expanded="false" aria-controls="collapseThirtyThree">Can I recall a transfer that has been processed?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyThree">
+                                            <div class="panel-body">
+                                                <p>No. Under no circumstances will we be able to recall a paid transfer.</p>
+                                                <p>If you have transferred money to a wrong receiver, you must contact us immediately so that we can try to stop the transfer from being processed by our agents.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Receiving Money </h2>
+                                </div>
+                                <div class="panel-group" id="accordion-4" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyFour">
+                                            <h4 class="panel-title">
+                                                <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyFour" aria-expanded="true" aria-controls="collapseThirtyFour">
+                                                    What information do I need to receive money that was sent to me?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="collapseThirtyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyFour">
+                                            <div class="panel-body">
+                                                <p>When receiving money, you will need the MoneyFex Control Number (MFCN) for the transaction along with a valid photo ID. The person who sent money should have the MFCN. Some countries also require a valid proof of address when an I.D. does not contain an address.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyFive" aria-expanded="false" aria-controls="collapseThirtyFive">When will funds be ready for me to receive?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyFive">
+                                            <div class="panel-body">
+                                                <p>Funds are usually available to be received instantly after confirmation of payment. In some cases, MoneyFex may require additional information from you before completing the process.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtySix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtySix" aria-expanded="false" aria-controls="collapseThirtySix">What does the receiver need to receive funds?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtySix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtySix">
+                                            <div class="panel-body">
+                                                <ul class="list-theme">
+                                                    <li>A valid photo ID that shows their full name (this must match the details supplied by the money sender), and</li>
+                                                    <li>The MoneyFex Control Number (MFCN), which is the number sent to your registered email address after completing the transfer process.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtySeven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtySeven" aria-expanded="false" aria-controls="collapseThirtySeven">Will my receiver be charged when receiving cash?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtySeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtySeven">
+                                            <div class="panel-body">
+                                                <p>No. Your receiver will not be charged by MoneyFex or by any paying agent in our network when receiving funds.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyEight">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyEight" aria-expanded="false" aria-controls="collapseThirtyEight">My receiver is having problems receiving funds from a paying agent?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyEight">
+                                            <div class="panel-body">
+
+                                                <p>If your receiver is having difficulty in receiving the money you sent to them, please check:</p>
+
+                                                <ul class="list-theme">
+                                                    <li>If they have a valid form of ID</li>
+                                                    <li>If they are using the correct MoneyFex Control Number that was sent to you by email</li>
+                                                    <li>If your transfer has been processed. Use Track a Transfer to find out the status of the transfer.</li>
+                                                    <li>If the problem persists, please contact the MoneyFex customer service team using customerservice@MoneyFex.com.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingThirtyNine">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThirtyNine" aria-expanded="false" aria-controls="collapseThirtyNine">How can I find an agent location to receive money that was sent to me?</a> </h4>
+                                        </div>
+                                        <div id="collapseThirtyNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThirtyNine">
+                                            <div class="panel-body">
+                                                <p>Go to Find a Location to search for the nearest MoneyFex agent in your country of residence.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourty">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourty" aria-expanded="false" aria-controls="collapseFourty">What are the currency options when receiving money?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourty">
+                                            <div class="panel-body">
+                                                <p>MoneyFex is only able to pay in the currency of your country of residence.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>ID Card Verification</h2>
+                                </div>
+                                <div class="panel-group" id="accordion-5" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyOne">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyOne" aria-expanded="true" aria-controls="collapseFourtyOne">What type of documents do you accept in order to verify my identity?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyOne">
+                                            <div class="panel-body">
+                                                <ul class="list-theme">
+
+                                                    <li>If we need to verify your identity we can accept the following: </li>
+                                                    <li>Current signed passport</li>
+                                                    <li>Current driver’s licence</li>
+                                                    <li>Current Residence permit</li>
+                                                    <li>To upload your identification documents for verification, please login to your MoneyFex Account Dashboard  My Account Profile, Update Photo ID.</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyTwo" aria-expanded="false" aria-controls="collapseFourtyTwo">Why do I need to provide ID?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyTwo">
+                                            <div class="panel-body">
+                                                <p>Every customer needs to have their identity verified at some stage when using MoneyFex. Part of this process involves photo ID verification.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyThree" aria-expanded="false" aria-controls="collapseFourtyThree">Is there anything else I need to know?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyThree">
+                                            <div class="panel-body">
+                                                <p>a) If you are providing photo ID, it needs to include the following:</p>
+                                                <p>
+                                                    <td>1. Your photograph</td>
+                                                </p>
+                                                <p>2. Your full name</p>
+                                                <p>3. Your date of birth</p>
+                                                <p>4. The expiry date (the document must not have expired)</p>
+                                                <p>A.   We may at some stage need further documentation from you after initial verification. If this is the case we will contact you by e-mail to advise you.</p>
+                                                <p>B.   Please send a high quality image. If the image is unclear we may ask for another copy.</p>
+                                                <p>C.   We need to see the full document including all four corners. If we cannot see the full document we may ask for another copy.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Security and Privacy with MoneyFex</h2>
+                                    <p>The security and privacy of our customers is of the utmost importance to us.</p>
+                                </div>
+                                <div class="panel-group" id="accordion-6" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyFour">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyFour" aria-expanded="true" aria-controls="collapseFourtyFour">How safe is MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyFour">
+                                            <div class="panel-body">
+                                                <p>MoneyFex is a financial institution regulated (in the UK) by the Financial Conduct Authority (FCA). </p>
+                                                <p>As we transfer money internationally, we also have to satisfy the requirements of a number of other global regulatory bodies.</p>
+                                                <p>Our website and apps are specifically designed to ensure that we are protecting your account from unauthorised login attempts.</p>
+                                                <p>We implement strict verification processes to ensure that we fully identify all of our customers. </p>
+                                                <p>We have teams dedicated to the monitoring of customer accounts and transactions for signs of unusual activity.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyFive" aria-expanded="false" aria-controls="collapseFourtyFive">What is the FCA?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyFive">
+                                            <div class="panel-body">
+                                                <p>The Financial Conduct Authority (FCA) is a regulatory body based within the UK. MoneyFex must ensure it operates in accordance with the rules of the FCA. They ensure that MoneyFex operates in accordance with all appropriate rules, obligations and regulations they set. All financial institutions and services registered in the UK must adhere to these guidelines.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtySix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtySix" aria-expanded="false" aria-controls="collapseFourtySix">How do MoneyFex protect my privacy?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtySix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtySix">
+                                            <div class="panel-body">
+                                                <p>The security and privacy of our customers is of the utmost importance to us.</p>
+                                                <p>Visit our privacy policy to read more.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Preventing Fraud</h2>
+                                </div>
+                                <div class="panel-group" id="accordion-7" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtySeven">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtySeven" aria-expanded="true" aria-controls="collapseFourtySeven">I received an email from MoneyFex asking for my financial information. Should I provide it?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtySeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtySeven">
+                                            <div class="panel-body">
+                                                <p>
+                                                    No. MoneyFex will never send you unsolicited emails asking for your personal or financial information. You should only submit this information if you are logged into your MoneyFex online account at  www.MoneyFex.com.
+                                                </p>
+                                                <p>If you receive a suspicious email purporting to be from MoneyFex, please email us immediately so that we can investigate. Also, if your financial information has been compromised, we recommend that you contact your financial institution immediately.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Sending Money using MoneyFex virtual account</h2>
+                                </div>
+                                <div class="panel-group" id="accordion-8" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyEight">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyEight" aria-expanded="true" aria-controls="collapseFourtyEight">What is a MoneyFex virtual account number?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyEight">
+                                            <div class="panel-body">
+                                                <p>This is a Receiver Virtual Account that a money sender can register in the name of a money receiver so that money can be deposited into the account for a withdrawal by the registered account user who lives abroad.</p>
+                                                <p>As we transfer money internationally, we also have to satisfy the requirements of a number of other global regulatory bodies.</p>
+                                                <p>After registration, the account information is accessible to the beneficiary through a mobile application and MoneyFex paying agents. </p>
+                                                <p>The registered virtual account comes with an electronic card (e-card) that the account user can use to withdraw money from a paying agent. Money can be paid into this account anytime by a money sender using either credit/debit or a direct online bank deposit to MoneyFex. After crediting the account, the account user  can use the E-Card to withdraw money from a MoneyFex agent and also to pay for goods and services in their country of residence.</p>
+                                                <p>With this virtual account, the money sender can do the following:</p>
+                                                <p>A. Control how much the account user can withdraw from the account at a given time </p>
+                                                <p>B. Set standing order payments to the virtual account </p>
+                                                <p>C. Transfer money between multiple accounts registered in the same country</p>
+                                                <p>D. Get instant alerts on account  usage</p>
+                                                <p>E. See account crediting history</p>
+                                                <p>F. See the balance on each account registered.</p>
+                                                <p>Also, the account user can see account payment history, controls set on the account and transfer money from an account to abroad.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFourtyNine">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFourtyNine" aria-expanded="false" aria-controls="collapseFourtyNine">When will funds be available for the virtual account user to use?</a> </h4>
+                                        </div>
+                                        <div id="collapseFourtyNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFourtyNine">
+                                            <div class="panel-body">
+                                                <p>Funds are usually available instantly. In some cases, however, we may require additional information from the money sender for the money to be available for the account user.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFifty">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFifty" aria-expanded="false" aria-controls="collapseFifty">What information do I need to pay money into a virtual account ?</a> </h4>
+                                        </div>
+                                        <div id="collapseFifty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFifty">
+                                            <div class="panel-body">
+                                                <p>The information required to pay money into a virtual account is already saved on your dashboard during registration.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyOne">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyOne" aria-expanded="false" aria-controls="collapseFiftyOne">How can I pay money into a virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyOne">
+                                            <div class="panel-body">
+                                                <p>Login to your  MoneyFex Account Dashboard  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  Deposit Money into a Virtual Account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select a virtual account number <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter payment amount <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Proceed to Payment <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Select Payment method <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Confirm your billing address and accept the Terms and Conditions <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  pay account now <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Review information and Confirm payment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyTwo" aria-expanded="false" aria-controls="collapseFiftyTwo">Can I set up auto payment to my MoneyFex virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyTwo">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Auto Transfers  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select MoneyFex account auto payment  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Add <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter amount  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> proceed to setup
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyThree" aria-expanded="false" aria-controls="collapseFiftyThree">Can I update the amount of the auto pay account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyThree">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Standing Order Payments  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select Receiver Virtual Account Auto Pay Deposit  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  Select Account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> update <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> update amount <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  proceed to setup
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyFour">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyFour" aria-expanded="false" aria-controls="collapseFiftyFour">Can I remove auto payment from my MoneyFex Account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyFour">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login and go to your Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> select Others Receiver Virtual Account   <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  Select Account Number <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> remove
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyFive" aria-expanded="false" aria-controls="collapseFiftyFive">Can I pay someone else’s MoneyFex virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyFive">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  Deposit Money into virtual account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> select Pay someone else’s virtual account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter the account number  and search <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Confirm account user information <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter payment amount and payment  Reference <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Proceed to Payment <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Select Payment method <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Confirm your billing address and accept the Terms and Conditions <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Confirm Payment <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Review information and Confirm Payment
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftySix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftySix" aria-expanded="false" aria-controls="collapseFiftySix">Can I set up auto payment to pay someone else’s MoneyFex virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftySix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftySix">
+                                            <div class="panel-body">
+                                                <p>Yes, to add auto payment to someone else’s MoneyFex bank account that you have recently paid;</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> select Others Receiver Virtual Account   <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  search virtual Account Number <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter payment  reference and set frequency of auto payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> proceed to setup
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftySeven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftySeven" aria-expanded="false" aria-controls="collapseFiftySeven">Can I update the amount of the auto payment on someone else’s MoneyFex virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftySeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftySeven">
+                                            <div class="panel-body">
+                                                <p>Yes, to update the auto payment on someone else’s account that you have recently made payment to and added auto payment.</p>
+                                                <p>Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  My Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> select Others Receiver Virtual Account  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  update <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> update amount <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  proceed to setup </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyEight">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyEight" aria-expanded="false" aria-controls="collapseFiftyEight">Can I remove auto payment from someone else’s MoneyFex virtual account?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyEight">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> select Others Receiver Virtual Account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Remove
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingFiftyNine">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseFiftyNine" aria-expanded="false" aria-controls="collapseFiftyNine">Will a MoneyFex virtual account user be charged an additional fee after payment?</a> </h4>
+                                        </div>
+                                        <div id="collapseFiftyNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFiftyNine">
+                                            <div class="panel-body">
+                                                <p>No, the registrant (sender) pays the account payment fees.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixty">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixty" aria-expanded="false" aria-controls="collapseSixty">In which countries can a MoneyFex virtual account be used?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixty" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixty">
+                                            <div class="panel-body">
+                                                <p>A MoneyFex virtual account is registered to a name, address and a country. The account can only be used by the person and in the country that the accont has been registered to. </p>
+                                                <p>
+                                                    MoneyFex virtual account can be registered for usage in any country where MoneyFex is available.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="section-title mb30">
+                                    <h2>Paying for goods and services abroad</h2>
+                                    <p>MoneyFex offers a user friendly online platform for people to pay for goods and services around the world. The payment service of our platform is suitable for individuals or businesses that regularly pay bills or contributions to charity organisations abroad. Examples of regular payments for goods and services abroad include; tuition fee payments, hospital bills, donations, large purchases of goods etc.</p>
+                                    <p>Go to How to pay for good and services to learn more about this service.</p>
+                                </div>
+                                <div class="panel-group" id="accordion-9" role="tablist" aria-multiselectable="true">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyOne">
+                                            <h4 class="panel-title"> <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyOne" aria-expanded="true" aria-controls="collapseSixtyOne">Who is a service provider when paying for goods and services abroad?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyOne">
+                                            <div class="panel-body">
+                                                <p>A service provider is a business organisation that is selling goods or services. The service provider will only be able to accept payments from customers abroad using the MoneyFex platform, after vetting (i.e. of the legality of the operation) has been conducted by us. If the service provider passes our vetting process, the service provider will be added to our database of service providers that can receive payments via the MoneyFex platform.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyTwo" aria-expanded="false" aria-controls="collapseSixtyTwo">How secure is paying for goods and services abroad?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyTwo">
+                                            <div class="panel-body">
+                                                <p>Very secure. MoneyFex will not add a service provider who has not been properly vetted by our security team</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyThree" aria-expanded="false" aria-controls="collapseSixtyThree">Can I recall a payment made to a service provider?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyThree">
+                                            <div class="panel-body">
+                                                <p>No. MoneyFex cannot recall payments that have been processed. It is your responsibility to contact the service provider and agree on the terms and payment before making the payment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyFour">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyFour" aria-expanded="false" aria-controls="collapseSixtyFour">Is there a limit on how much I can pay for goods and services at a given time?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyFour">
+                                            <div class="panel-body">
+                                                <p>Yes.  A maximum of £500 can be paid to a service provider at a given time. Where large amounts of money are involved, please contact our customer service team who will be happy to help you.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyFive">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyFive" aria-expanded="false" aria-controls="collapseSixtyFive">Can I contact a service provider before paying for goods and/or services?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyFive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyFive">
+                                            <div class="panel-body">
+                                                <p>Yes. You must contact the service provider prior to making a payment, as you will need to know their MoneyFex account number and the payable amount before making the payment.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtySix">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtySix" aria-expanded="false" aria-controls="collapseSixtySix">When will the service provider receive money paid into their account?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtySix" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtySix">
+                                            <div class="panel-body">
+                                                <p>Once your payment is confirmed by MoneyFex, the service provider’s MoneyFex account will be instantly credited. The service provider can then withdraw the money from our paying agent at a time that is convenient for them. An email and notification message is sent to both you and the service provider  to confirm the transaction.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtySeven">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtySeven" aria-expanded="false" aria-controls="collapseSixtySeven">Can I set up an automatic payment for recurring payments of goods and/or services?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtySeven" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtySeven">
+                                            <div class="panel-body">
+                                                <p>Yes. We understand that some customers may have recurring monthly payments to make. Therefore we have designed our platform to have an auto payment feature. Your credit/debit card will be debited as instructed by you.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyEight">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyEight" aria-expanded="false" aria-controls="collapseSixtyEight">How can I set-up an automatic payment for goods and services?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyEight" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyEight">
+                                            <div class="panel-body">
+                                                <p>To set up an automatic payment to a service provider that you have recently paid,</p>
+                                                <p>Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  My Standing Order Payments   <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select Service Provider Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Select Previous Payee from dropdown <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Add <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter amount <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  Set frequency of auto payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> proceed to setup</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSixtyNine">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSixtyNine" aria-expanded="false" aria-controls="collapseSixtyNine">Can I update an automatic payment for goods and services?</a> </h4>
+                                        </div>
+                                        <div id="collapseSixtyNine" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSixtyNine">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  My Standing Order Payments  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select Service Provider Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>Select Previous Payee from dropdown <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> update <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> update amount  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  proceed to setup
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventy">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventy" aria-expanded="false" aria-controls="collapseSeventy">Can I remove auto payment from someone else’s MoneyFex virtual account number?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventy" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventy">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>To stop an auto payment to a service provider,</p>
+                                                <p>Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> My Standing Order Payments  <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>  select Service Provider Standing Order Payments <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Select Service Provider <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Remove</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventyOne">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventyOne" aria-expanded="false" aria-controls="collapseSeventyOne">Will the service provider be charged a fee for receiving my payment via MoneyFex?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventyOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventyOne">
+                                            <div class="panel-body">
+                                                <p>No. The registrant (sender) pays all the fees related to the transaction.</p>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventyTwo">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventyTwo" aria-expanded="false" aria-controls="collapseSeventyTwo">Can I save my credit/debit card information on my profile so that I can easily access it when making a transaction?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventyTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventyTwo">
+                                            <div class="panel-body">
+                                                <p>Yes!</p>
+                                                <p>
+                                                    How safe are my saved credit/debit card details on MoneyFex’s money transfer platform?
+                                                </p>
+                                                <p>
+                                                    Very safe. Your card information is scrambled and part masked to avoid it being compromised.
+                                                </p>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventyThree">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventyThree" aria-expanded="false" aria-controls="collapseSeventyThree">Can I set up an auto payment without saving my credit/debit card details to my MoneyFex account?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventyThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventyThree">
+                                            <div class="panel-body">
+                                                <h3>No</h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="headingSeventyFour">
+                                            <h4 class="panel-title"> <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseSeventyFour" aria-expanded="false" aria-controls="collapseSeventyFour">How do I save my credit/debit card details to my MoneyFex account?</a> </h4>
+                                        </div>
+                                        <div id="collapseSeventyFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingSeventyFour">
+                                            <div class="panel-body">
+                                                <p>
+                                                    Login to your  MoneyFex Account Dashboard <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Saved Credit/Debit Card <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Save a Credit/Debit Card from popup <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i>
+                                                    Enter card information  (As written on your card) <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Enter billing address as registered in your MoneyFex account <i class="fa fa-long-arrow-right text-primary" aria-hidden="true"></i> Accept Terms and Conditions and Save Card
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>

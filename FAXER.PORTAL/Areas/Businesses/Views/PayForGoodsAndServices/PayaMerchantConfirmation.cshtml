@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "PayaMerchantConfirmation";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Pay a Merchant</h1>
+
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h4 class="pull-right">Credit on MFBC (@ViewBag.AmountCredited)</h4>
+
+                <form>
+                    <br><br>
+                    <p>The payment has been successful, your MoneyFex Business Card has been debited</p>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <a href="@Url.Action("Index" , "BusinessHome")" class="fbtn btn-back hidden-xs hidden-sm ">  Back to Dashboard</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!--  -->

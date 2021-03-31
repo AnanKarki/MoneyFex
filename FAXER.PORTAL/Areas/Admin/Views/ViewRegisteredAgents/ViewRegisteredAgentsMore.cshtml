@@ -1,0 +1,281 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredAgentsViewModel
+@{
+    ViewBag.Title = "ViewRegisteredAgentsMore";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    var date = DateTime.Now.ToString("dd/MM/yyyy");
+    var time = DateTime.Now.ToString("HH:mm");
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+
+<style>
+    /*.modal {
+        display: block !important; /* I added this to see the modal, you don't need this */
+    }
+
+    */
+    /* Important part */
+    .modal-dialog {
+        overflow-y: initial !important
+    }
+
+    .modal-body {
+        height: 500px;
+        overflow-y: auto;
+    }
+</style>
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+
+
+
+
+                <a href="@Url.Action("Index","ViewRegisteredAgents")" class="btn btn-info btn-rounded waves-effect waves-light"><span class="btn-label"><i class="fa fa-angle-left"></i></span> Back to Registered Agents </a>
+
+
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li><a href="@Url.Action("Index","ViewRegisteredAgents")">Registered Agents</a></li>
+                    <li class="active">@FAXER.PORTAL.Common.StaffSession.LoggedStaff.FirstName @FAXER.PORTAL.Common.StaffSession.LoggedStaff.MiddleName @FAXER.PORTAL.Common.StaffSession.LoggedStaff.LastName</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered  csvprint table-striped" cellspacing="0" width="100%">
+
+
+
+                            <thead>
+                                <tr>
+
+
+                                    <td><strong>Busines/License Number</strong></td>
+                                    <td><strong>Name of Contact Person</strong></td>
+
+
+
+                                    <td><strong>Customer Deposit</strong></td>
+                                    <td><strong>Customer Deposit Fees</strong></td>
+                                    <td><strong>Bank Deposit</strong></td>
+                                    <td><strong>Total Deposit</strong></td>
+                                    <td><strong>Name of Latest Depositer</strong></td>
+                                    <td><strong>Latest Deposit Date</strong></td>
+                                    <td><strong>Update Receipt</strong> </td>
+                                    <td><strong>Website</strong></td>
+                                    <td><strong>Note</strong></td>
+
+                                    <td><strong>Failed Login </strong></td>
+                                    @*<td><strong>Email Agent </strong></td>*@
+
+                                </tr>
+
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+
+                                    <td>@Model.AgentBusinessLicenseNumber</td>
+                                    <td>@Model.ContactPerson</td>
+                                    <td>@Model.CurrentCustomerDeposit</td>
+                                    <td>@Model.CurrentCustomerDepositFees</td>
+                                    <td>@Model.CurrentBankDeposit</td>
+                                    <td>@Model.TotalDeposit</td>
+                                    <td>@Model.NameOfLatestDepositer</td>
+                                    <td>@Model.LatestDepositedDateTime</td>
+                                    <td><a href="" data-toggle="modal" data-target="#ReceiptPopUp" class="btn btn-danger">Open Receipts</a></td>
+                                    <td><a href="http://@Model.Website" target="_blank">@Model.Website</a></td>
+                                    <td><a href="" data-toggle="modal" data-target="#notepopup"><i class="fa fa-plus"></i></a></td>
+
+                                    <td>@Model.LoginFailedCount</td>
+                                    @*<td>
+                                            <a href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                                <span class="btn-label"><i class="fa fa-envelope"></i></span> SMS
+                                            </a>
+
+                                            <a href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                                            </a>
+                                        </td>*@
+
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+
+<div id="ReceiptPopUp" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Account Credit Update Receipt</h3>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="clearfix"> <br></div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Receipt Date</th>
+                                        <th>PDF Receipt</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AgentBankAccountReceipts)
+                                    {
+                                        <tr>
+                                            <td>@item.Date</td>
+                                            <td><a href="@Url.Action("MoneyFexBankDeposit", "BankAccountCreditUpdate" , new { area = "Agent"  , transactionId = item.TransactionId})" target="_blank" class="btn btn-danger">Receipt</a></td>
+                                            @*<td>@item.TransactionId</td>*@
+
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="notepopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="" data-toggle="modal" data-target="#addnote" class="btn btn-sm btn-primary">Add New Note</a>
+                            <div class="clearfix"> <br></div>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Notes</th>
+                                        <th>Date</th>
+                                        <th>Time</th>
+                                        <th>Staff</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.AgentNoteList)
+                                    {
+                                        <tr>
+                                            <td>
+                                                <p>@item.Note</p>
+                                            </td>
+                                            <td>@item.Date</td>
+                                            <td>@item.Time</td>
+                                            <td>@item.StaffName</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="addnote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Date: @date</th>
+                                        <th>Time: @time</th>
+                                        <th>Staff: @FAXER.PORTAL.Common.StaffSession.LoggedStaff.FirstName  @FAXER.PORTAL.Common.StaffSession.LoggedStaff.MiddleName @FAXER.PORTAL.Common.StaffSession.LoggedStaff.LastName</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td colspan="3">
+                                            <textarea rows="8" class="form-control" maxlength="2000" id="note" required></textarea>
+                                            <label id="InvalidNote" style="display:none;color:red">Please write a note</label>
+                                        </td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <input type="hidden" id="agent_id" name="agent_id" value="@Model.Id">
+                        <input type="hidden" id="registrationNo" name="registrationNo" value="@Model.RegistrationNumber">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" onclick="AddNewNote()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- add note ad -->
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function AddNewNote() {
+            debugger;
+            var Agent_id = $("#agent_id").val();
+            var note = $("#note").val();
+            var registrationNo = $("#registrationNo").val();
+
+            if (note == "" || note == undefined) {
+                $("#InvalidNote").show();
+
+
+            } else {
+
+                $("#InvalidNote").hide();
+
+                window.location.href = "/Admin/ViewRegisteredAgents/AddNewAgentMote?note=" + note + "&AgentId=" + Agent_id + "&RegistrationNo=" + registrationNo;
+            }
+        }
+    </script>
+}

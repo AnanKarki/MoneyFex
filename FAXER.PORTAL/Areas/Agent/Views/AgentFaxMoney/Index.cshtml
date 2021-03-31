@@ -1,0 +1,884 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentFaxMoneyViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+    bool Validate = false;
+    string FaxerPhoneCode = Model.FaxerCountryPhoneCode ?? "";
+    if (Model != null)
+    {
+        if (Model.FaxingDetails == true)
+        {
+            Validate = true;
+        }
+    }
+    var NoExchangeRate = Session["NoExchangeRateSetup"] == null ? "" : Session["NoExchangeRateSetup"];
+
+}
+<style>
+    .no-padding {
+        padding: 0px !important;
+    }
+
+    .no-left-padding {
+        padding-left: 0px !important;
+    }
+
+    .no-right-padding {
+        padding-right: 0px !important;
+    }
+</style>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Cash to Cash Transfer</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!--  -->
+<!--  -->
+
+<form method="post">
+    @Html.HiddenFor(Model => Model.AgentId)
+    @Html.HiddenFor(Model => Model.FaxerCountryPhoneCode)
+    @Html.HiddenFor(Model => Model.ReceiverCountryPhoneCode)
+    @Html.HiddenFor(Model => Model.FaxerSearched)
+    @Html.HiddenFor(model => model.ReceiverSelected)
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class=" border_tbls">
+                        <div class="col-lg-5 pull-right">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" id="AccountNo/PhoneNo" class="form-control" placeholder="Search Sender's Account No./ Telephone No.">
+                                <span class="input-group-addon">
+                                    <button type="button" class="" onclick="getFaxerDetails();">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!-- start -->
+                    <div class=" border_tbls">
+                        <div class="col-lg-12">
+
+                            <div class="form-row Faxer">
+                                <div class="col-lg-12">
+                                    <h3>Sender's Details</h3>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(x => x.FaxerFirstName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FaxerFirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(x => x.FaxerMiddleName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Family/Last Name</label>
+                                        @Html.TextBoxFor(x => x.FaxerLastName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FaxerLastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Date of Birth</label>
+                                        @Html.EditorFor(model => model.FaxerDOB, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @*@Html.TextBoxFor(x => x.FaxerDOB, new { @class = "form-control", type = "date", @readonly = "readonly" })*@
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Gender</label>
+                                        @Html.TextBoxFor(x => x.FaxerGender, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"><br></div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Photo ID  Number</label>
+                                        @Html.TextBoxFor(x => x.IdNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Photo ID Type</label>
+                                        @Html.DropDownListFor(x => x.IdentificationTypeId, (IEnumerable<SelectListItem>)ViewBag.IDTypes, "Select  Identity Type", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.IdentificationTypeId, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(x => x.IdentificationTypeId)
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Expiring Date</label>
+                                        @Html.EditorFor(model => model.IdCardExpiringDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.IdCardExpiringDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Select Issuing Country</label>
+                                        @Html.DropDownListFor(x => x.IssuingCountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Issuing Country", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(x => x.IssuingCountryCode, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(x => x.IssuingCountryCode)
+                                    </div>
+                                </div>
+
+
+
+
+                                <div class="clearfix"></div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(x => x.FaxerAddress, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FaxerAddress, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        @Html.TextBoxFor(x => x.FaxerCity, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FaxerCity, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Country</label>
+
+                                        @Html.DropDownListFor(model => model.FaxerCountry, (IEnumerable<SelectListItem>)ViewBag.countries, "Select Sender Country", new { @class = "form-control faxerCountry", id = "FaxerCountry", @onchange = "GetFaxerCountryCode();" })
+                                        @Html.ValidationMessageFor(model => model.FaxerCountry, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(x => x.FaxerCountry)
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Telephone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@FaxerPhoneCode</span>
+                                            @Html.TextBoxFor(x => x.FaxerTelephone, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(x => x.FaxerEmail, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FaxerEmail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Sending Amount</h3>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Sending Country</label>
+
+                                        @Html.HiddenFor(x => x.FaxerCountry, new { @id = "FaxingCountry" })
+                                        @Html.DropDownListFor(x => x.FaxingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Sender Country", new { @class = "form-control", id = "FaxingCountry", onchange = "getCalulateDetails(true)", @disabled = "disabled" })
+                                        @Html.ValidationMessageFor(x => x.FaxingCountry, "", new { @class = "text-danger" })
+                                        <label id="SendingCountry" style="color:red;display:none">Please select Sending Country</label>
+                                        @Html.HiddenFor(x => x.FaxingCountry)
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label> Receiving Country</label>
+                                        @Html.DropDownListFor(x => x.RecevingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Receiver Country", new { @class = "form-control", id = "RecevingCountry", onchange = "getCalulateDetails(false);" })
+                                        @Html.ValidationMessageFor(x => x.RecevingCountry, "", new { @class = "text-danger" })
+                                        <label id="ReceivingCountry" style="color:red;display:none">Please select Receiving Country</label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Enter Amount</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="FaxingCurrency"></span>
+
+                                            @Html.TextBoxFor(x => x.FaxedAmount, new { @class = "form-control", id = "FaxAmount", onchange = "getCalulateDetails(true)" })
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.FaxedAmount, "", new { @class = "text-danger" })
+                                        @Html.HiddenFor(model => model.NoExchangeRateSetup, new { @id = "NoExchangeRateSetup" })
+                                        <label id="SendingAmt" style="color:red;display:none">Sending Amount Cannot be null</label>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Fee</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="FaxingCurrency1"></span>
+
+                                            @Html.EditorFor(x => x.FaxingFee, new { htmlattributes = new { @class = "form-control", id = "FaxingFee", @readonly = "readonly" } })
+                                        </div>
+                                        @Html.ValidationMessageFor(x => x.FaxingFee, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Total Amount including Fee</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="FaxingCurrency2"></span>
+
+                                            @Html.TextBoxFor(x => x.TotalAmountIncludingFee, new { @class = "form-control", id = "TotalAmount", @readonly = "readonly" })
+
+                                        </div>
+                                        @Html.HiddenFor(model => model.FaxingDetails)
+
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Current Exchange Rate</label>
+                                        @Html.TextBoxFor(x => x.CurrentExchangeRate, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Amount to be Received</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="ReceivingCurrency"></span>
+                                            @Html.TextBoxFor(x => x.RecevingAmount, new { @class = "form-control", id = "ReceivingAmount", onchange = "getCalulateDetails(false);" })
+
+                                        </div>
+
+                                        @Html.ValidationMessageFor(model => model.RecevingAmount, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+                        <div class=" col-lg-12">
+
+                            <div class="form-row Receiver">
+                                <div class="col-lg-12">
+                                    <h3>Receiver's Details</h3>
+                                </div>
+                                @if (Model != null)
+                                {
+                                    if (Model.FaxerSearched == true)
+                                    {
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Select Previous Receiver</label>
+                                                @Html.HiddenFor(model => model.FaxerId)
+
+                                                @Html.DropDownListFor(x => x.ExistingReceiver, (IEnumerable<SelectListItem>)ViewBag.existingReceiver, "Select Existing Receiver ", new { @class = "form-control existingReceiver", id = "ReceiverId", onchange = "getReceiverDetails();" })
+                                                @Html.ValidationMessageFor(x => x.ExistingReceiver, "", new { @class = "text-danger" })
+                                                @Html.HiddenFor(model => model.FaxerSearched)
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                                <div class="clearfix">
+
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            @Html.EditorFor(model => model.ReceiverFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(x => x.ReceiverFirstName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            @Html.TextBoxFor(model => model.ReceiverMiddleName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Family/Last Name</label>
+                                            @Html.TextBoxFor(model => model.ReceiverLastName, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.ReceiverLastName, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            @Html.TextBoxFor(model => model.ReceiverAddress, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.ReceiverAddress, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            @Html.TextBoxFor(model => model.ReceiverEmailAddress, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.ReceiverEmailAddress, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            @Html.TextBoxFor(model => model.ReceiverCity, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(x => x.ReceiverCity, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    @Html.HiddenFor(x => x.ReceiverCountry, new { id = "ReceiverCountry" })
+
+                                    @*<div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+
+                                                        @@Html.HiddenFor(model => model.ReceiverCountry, (IEnumerable<SelectListItem>
+                                                    )ViewBag.Countries, "Select Receiver Country", new { @class = "form-control", id = "ReceiverCountry", onchange = "getPhoneCode();" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverCountry, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>*@
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Telephone</label>
+                                            <div class="input-group">
+                                                <span class="input-group-addon" id="ReceivingTelePhoneCode"></span>
+                                                @Html.TextBoxFor(model => model.ReceiverTelephone, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Reason for Transfer</label>
+                                            <select class="form-control" name="type_val[]" id="type_val" onchange="openPopup()">
+                                                <option>--Select Reason--</option>
+                                                <option value="to pay the education provider">For Education</option>
+                                                <option value="to pay this service provider">To Pay for Services </option>
+                                                <option value="to pay this charity">For Charity Donation</option>
+                                                <option value="3">For an Investment </option>
+                                                <option value="4">For Family Support</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                    @*<div class="col-lg-1 no-right-padding">
+
+                                            @Html.TextBoxFor(x => x.ReceiverCountryPhoneCode, new { @class = "form-control", @readonly = "readonly" })
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Official Use Only</h3>
+                                    <p><b> Agent Details</b></p>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Agency</label>
+                                        @Html.TextBoxFor(x => x.NameOfAgency, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Account No.</label>
+                                        @Html.TextBoxFor(x => x.AgencyMFSCode, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Paying Staff</label>
+                                        @Html.TextBoxFor(x => x.PayingAgentName, new { @class = "form-control", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.PayingAgentName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                @*<div class="clearfix"></div>
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("DateTime")
+                                        @Html.EditorFor(model => model.DateTime, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                                        @Html.ValidationMessageFor(model => model.DateTime, "", new { @class = "text-danger" })
+
+                                    </div>*@
+                            </div>
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Information Verification</h3>
+
+                                </div>
+
+                                <div class="col-lg-12">
+                                    <div class="checkbox">
+                                        <label>@Html.CheckBoxFor(model => model.IsConfirmed) I confirm that the information required to transfer this money has been fully verified by myself</label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <a href="@Url.Action("Index","TransferMoney")" class="fbtn btn-back hidden-xs hidden-sm pull-left "><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+                    <button type="submit" class="fbtn btn-next pull-right" id=" ">Transfer Money Now<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="NoExchangeRate" style="display:none">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>No exchange has been setup for this country</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    @*<a class="btn btn-success btn-sm" target="_blank"  href="@Url.Action("PrintAgentMoneySenderReceiverReceipt","PayAReceiver",new { MFCN=ViewBag.AgentResult.Data})">Print Payment Receipt</a>*@
+                    <a class="btn btn-success btn-sm" onclick="PrintReceipt(@ViewBag.AgentResult.Data)"> Print Payment Receipt</a>
+                    @*@if (ViewBag.AgentResult.Data != null)
+                        {
+                            <a class="btn btn-success btn-sm" target="_blank" href="@Url.Action("PrintPDFNonCardReceive","PayAReceiver",new { MFCN=ViewBag.AgentResult.Data.MFCN})">Print Payment Receipt</a>
+                        }*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="InvalidReceivingCountryPopUp" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>PLease select the valid Receiver as respective to the receiving country</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade in" id="reasonForTransferModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title"><i class="fa fa-book"></i> Do you want <span id="reason"></span>  directly ?</h4>
+            </div>
+            <div class="modal-body">
+
+                <a href="pay-for-goods-and-services.php" class="btn btn-success ">Yes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button class="btn btn-primary " data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function openPopup() {
+            debugger;
+            var label = $("#type_val option:selected")[0].value;
+
+            if (label == 3 && label == 4) {
+                $("#reason").text(label.toLowerCase());
+                $("#reasonForTransferModal").modal('show');
+            }
+
+
+        }
+
+        function getFaxerDetails() {
+        var AccountNoORPhoneNo = document.getElementById("AccountNo/PhoneNo").value;
+        window.location.href = "/agent/AgentFaxMoney/index?AccountNoORPhoneNo=" + AccountNoORPhoneNo;
+        }
+
+
+        var PreviousFaxingAmount = 0;
+        function getCalulateDetails(IsFromFaxingAmount) {
+            debugger;
+            var FaxingCountry = document.getElementById("FaxingCountry").value;
+            var ReceivingCountry = document.getElementById("RecevingCountry").value;
+            var FaxingAmount = document.getElementById("FaxAmount").value;
+            var ReceivingAmount = document.getElementById("ReceivingAmount").value;
+
+            if (PreviousFaxingAmount != FaxingAmount) {
+
+                ReceivingAmount = 0;
+
+            }
+            if (FaxingAmount == "") {
+
+                FaxingAmount = 0;
+            }
+            if (IsFromFaxingAmount == false) {
+
+                if (ReceivingAmount == "") {
+
+                    ReceivingAmount = 0;
+                }
+
+                FaxingAmount = 0;
+            }
+
+            //+ "?FaxerCountry=" + FaxerCountry + "?ReceiverCountry=" + ReceiverCountry
+                $.getJSON("/agent/AgentFaxMoney/getCalculatedDetails/", {
+                    FaxerCountry: FaxingCountry,
+                    ReceiverCountry: ReceivingCountry,
+                    FaxAmount: FaxingAmount,
+                    ReceivingAmount: ReceivingAmount
+                }, function (data) {
+
+                    for (var item in data) {
+                        if (data == null) {
+
+                        }
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+
+                    }
+
+                    $("#FaxingCurrency").text(data.FaxingCurrencySymbol);
+                    $("#FaxingCurrency1").text(data.FaxingCurrencySymbol);
+                    $("#FaxingCurrency2").text(data.FaxingCurrencySymbol);
+                    $("#ReceivingCurrency").text(data.ReceiverCurrencySymbol)
+                    $("#ReceiverCountry").val(data.ReceivingCountry)
+                    $("#ReceivingTelePhoneCode").text(data.ReceiverPhoneCode)
+                    PreviousFaxingAmount = $("#FaxAmount").val();
+
+                    var NoExchangeRateSetup = $("#NoExchangeRateSetup").val();
+
+                    if (NoExchangeRateSetup == "true") {
+
+                        $("#NoExchangeRate").modal("show");
+                    }
+                });
+
+
+
+
+        }
+
+
+        function getPhoneCode() {
+
+
+
+            ValidateReceiverCountry();
+            var recCountry = $("#ReceiverCountry").val();
+
+            $.getJSON("/agent/agentfaxmoney/GetPhoneCode?countryCode=" + recCountry, function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+                    $(selector).prop('readonly', 'readonly');
+
+                }
+                });
+            }
+
+
+
+
+        function getReceiverDetails() {
+            var ReceiverId = document.getElementById("ReceiverId").value;
+            var ReceivingCountry = document.getElementById("RecevingCountry").value;
+            if (ReceiverId != 0) {
+                $.getJSON("/agent/AgentFaxMoney/GetReceiverDetails/", {
+                    id :  ReceiverId,
+                    RecevingCountry: ReceivingCountry
+                } , function (data) {
+
+                    if (data.InvalidReceivingCountry == true) {
+
+                        $("#InvalidReceivingCountryPopUp").modal("show");
+
+                    } else {
+                        $("#InvalidReceivingCountryPopUp").modal("hide");
+
+                        for (var item in data) {
+                            var selector = '[name="' + item + '"]';
+                            $(selector).val(data[item]);
+                            $(selector).prop('readonly', 'readonly');
+                            $('#ReceiverCountry').prop("disabled", "disabled");
+                        }
+                    }
+                });
+            }
+            else {
+                $('.Receiver input').prop('readonly', false);
+                $('#ReceiverCountry').prop("disabled", false);
+                $('.Receiver input').val("");
+                $('.Receiver select').val("");
+
+            }
+        }
+
+        function ValidateReceiverCountry() {
+
+            var recCountry = $("#ReceiverCountry").val();
+            var ReceivingCountry = document.getElementById("RecevingCountry").value;
+            if (ReceivingCountry != recCountry) {
+
+                $('.Receiver select').val("");
+                $("#InvalidReceivingCountryPopUp").modal("show");
+                return;
+            }
+            else {
+
+                $("#InvalidReceivingCountryPopUp").modal("hide");
+            }
+
+        }
+
+
+
+
+        var receiverDetails = "@Model.ReceiverSelected" == "True";
+        $('.Receiver input').prop('readonly', receiverDetails);
+        $('#ReceiverCountry').prop('readonly', receiverDetails);
+
+        var FaxerSearched = "@Model.FaxerSearched" =="True" ;
+        $('.Faxer input').prop('readonly', FaxerSearched);
+        $('.Faxer select').prop("readonly", FaxerSearched);
+
+        //if (receiverSelected != 0) {
+        //    $('.Receiver input').prop('readonly', true);
+        //    $('#ReceiverCountry').prop("disabled", true);
+        //}
+
+
+    //function getCalulateDetails() {
+    //    var x = document.getElementsByTagName("form");
+    //    x[0].submit();
+        //}
+        function PrintReceipt(data) {
+        @*href="@Url.Action("PrintAgentMoneySenderReceiverReceipt","PayAReceiver",new { MFCN=ViewBag.AgentResult.Data})"*@
+            $("#onload").modal("hide");
+            debugger;
+            var href = window.location.href;
+
+            var hrefSplit = href.split("?");
+
+            window.location.href = hrefSplit[0];
+            window.open("/PayAReceiver/PrintAgentMoneySenderReceiverReceipt?MFCN=" + data);
+        }
+
+
+    </script>
+}

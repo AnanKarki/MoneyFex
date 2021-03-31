@@ -1,0 +1,117 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentProfileViewModel
+
+@{
+    ViewBag.Title = "UpdateAgentProfile";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 pdb40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2  ">
+
+                    <div class="login_signup mb50 clearfix">
+                        <h3> Agent Profile  </h3>
+                        <hr>
+
+                        @Html.HiddenFor(x=> x.Id)
+                        @Html.HiddenFor(x=> x.AgentStaffId)
+                        <div class="text-center">
+                            <a href="@Url.Action("Index", "AgentProfile")" class="btn btn-sm btn-primary    radius-20">View Profile</a>
+                            <hr>
+                        </div>
+                        <form action="edit-business-profile_submit" method="get" accept-charset="utf-8">
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Address Line 1</label>
+                                    @Html.TextBoxFor(model => model.Address1, new { @class = "form-control", @type = "text" })
+                                    @Html.ValidationMessageFor(x => x.Address1,"" , new { @class = "text-danger"})
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Address Line 2</label>
+                                    @Html.TextBoxFor(model => model.Address2, new { @class = "form-control", @type = "text" })
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @type = "text" })
+                                    @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>PostCode</label>
+                                    @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control ", @type = "text" })
+                                    @Html.ValidationMessageFor(x => x.PostalCode, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Telephone Number</label>
+
+                                    @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control ", @type = "text" })
+                                    @Html.ValidationMessage("MobileNo", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Email</label>
+                                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "text" })
+                                    @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-12 mt30">
+                                <div class="form-group text-center">
+                                    <button type="submit" class="btn btn-primary btn-lg  radius-20" data-toggle="modal" data-target="#myModal">Update</button>
+                                </div>
+                                <!--  -->
+
+                                <div class="clearfix"></div>
+                                <div class="text-center  clearfix">
+                                    <hr>
+                                    <!-- back btn -->
+                                    <div class="clearfix ">
+
+                                        <center>
+                                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                        </center>
+                                    </div>
+                                    <!-- back btn end-->
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--  -->
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    /**/
+
+
+}

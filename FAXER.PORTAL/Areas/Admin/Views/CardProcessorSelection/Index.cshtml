@@ -1,0 +1,207 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.CardProcessorSelectionViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Card Processor Provider Selection</h4>
+                                    <a href="@Url.Action("SetCardProcessorSelection", "CardProcessorSelection")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Add Card Processor Provider Selection
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-round form-control-bold " id="TransferType" name="TransferType" onchange="filter();">
+                                                    <option value="0">Select Transfer Type</option>
+                                                    <option value="1">Online</option>
+                                                    <option value="2">Agent</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-round form-control-bold" id="TransferMethod" name="TransferMethod" onchange="filter();">
+                                                    <option value="0">Select Transfer Method</option>
+                                                    <option value="7">All</option>
+                                                    <option value="1">CashPickUp</option>
+                                                    <option value="2">KiiPayWallet</option>
+                                                    <option value="3">OtherWallet</option>
+                                                    <option value="4">BankDeposit</option>
+                                                    <option value="5">BillPayment</option>
+                                                    <option value="6">ServicePayment</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("SendingCountry", (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control   form-control-round form-control-bold", @id = "SendingCountry", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("ReceivingCountry", (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control   form-control-round form-control-bold", @id = "ReceivingCountry", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sending Country</th>
+                                                    <th>Sending Currency</th>
+                                                    <th>Receving Country</th>
+                                                    <th>Receving Currency</th>
+                                                    <th>Type</th>
+                                                    <th>Method</th>
+                                                    <th>Range</th>
+                                                    <th>Card Provider</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+
+                                                        <td>@item.SendingCountryName</td>
+                                                        <td>@item.SendingCurrency</td>
+                                                        <td>@item.ReceivingCountryName</td>
+                                                        <td>@item.ReceivingCurrency</td>
+                                                        <td>@item.TransferTypeName</td>
+                                                        <td>@item.TransferMethodName</td>
+                                                        <td>@item.RangeName</td>
+                                                        <td>@item.CardProcessorName</td>
+
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetCardProcessorSelection", "CardProcessorSelection", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page, @PageSize = ViewBag.PageSize }))
+
+                                        <div class="form-group">
+                                            Display <select onchange="GetDataForPageSizeFilter()" id="PageSize">
+                                                <option value="10">
+                                                    10
+                                                </option>
+                                                <option value="20">
+                                                    20
+                                                </option>
+                                                <option value="40">
+                                                    40
+                                                </option>
+                                                <option value="50">
+                                                    50
+                                                </option>
+                                                <option value="100">
+                                                    100
+                                                </option>
+                                                <option value="500">
+                                                    500
+                                                </option>
+                                                <option value="1000">
+                                                    1000
+                                                </option>
+
+                                            </select> Transactions
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var page = 1;
+        var pageSize = $("#PageSize").val();
+
+        function filter() {
+            var transferType = $("#TransferType").val();
+            var TransferMethod = $("#TransferMethod").val();
+            var SendingCountry = $("#SendingCountry").val();
+            var ReceivingCountry = $("#ReceivingCountry").val();
+            window.location.href = "/Admin/CardProcessorSelection/Index?transfertype=" + transferType +
+                "&transferMethod=" + TransferMethod + "&sendingCountry=" + SendingCountry + "&receivingCountry=" + ReceivingCountry +
+                "&page=" + page + "&PageSize=" + pageSize;
+        }
+
+        function GetDataForPageSizeFilter() {
+             pageSize = $("#PageSize :selected").val();
+             page = 1;
+            filter();
+        }
+
+        $("#TransferType").val('@ViewBag.TransferType');
+        $("#TransferMethod").val('@ViewBag.TransferMethod');
+        $("#PageSize").val('@ViewBag.PageSize');
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/CardProcessorSelection/DeleteCardProcessorSelection?Id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+    </script>
+}

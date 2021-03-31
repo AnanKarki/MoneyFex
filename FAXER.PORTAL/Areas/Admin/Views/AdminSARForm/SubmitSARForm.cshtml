@@ -1,0 +1,466 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SARFormVM
+@{
+    ViewBag.Title = "SubmitSARForm";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b, strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-left btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+
+                                <div class="card-body">
+
+                                    <!--  -->
+                                    <div class="forms-wrapper">
+
+
+
+                                        <div class="forms">
+                                            <div class="forms-header">
+                                                Suspicious Activity Report (SAR) Form
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h4>Agent Information</h4>
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><label>Agent Account: <input type="text" name=""></label></td>
+                                                                <td><label>Date Submitted: <input type="date" name=""></label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>Staff Name: <input type="text" name=""></label></td>
+                                                                <td><label>Agent Staff ID: <input type="text" name=""></label></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h4>Transaction Details</h4>
+
+
+
+                                                    <label>Transaction Type (Select one)  </label>
+                                                    <br>
+                                                    <!--  -->
+
+                                                    <label data-toggle='collapse' data-target='.kiipaywallet'> KiiPay Wallet <input type="checkbox" name="checkbox"></label>
+
+
+                                                    <div class="kiipaywallet collapse">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Mobile Number: </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="number" name="" placeholder="Enter Mobile Number">
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <br>
+                                                    <!--  -->
+
+                                                    <label data-toggle='collapse' data-target='.cashpickup'> Cash Pickup <input type="checkbox" name="checkbox" id="active"> </label>
+
+
+                                                    <div class="cashpickup collapse">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">MFCN: </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" name="" placeholder="Enter MFCN Number">
+                                                            </div>
+                                                        </div>
+
+
+
+
+
+
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <br>
+                                                    <!--  -->
+
+                                                    <label data-toggle='collapse' data-target='.bankdeposit'> Bank Deposit <input type="checkbox" name="checkbox"></label>
+
+
+                                                    <div class="bankdeposit collapse">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Bank Account No. </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="number" name="" placeholder="Enter Account Number">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Bank Name  </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="text" name="" placeholder="Enter Bank Name">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Bank Code. </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="number" name="" placeholder="Enter Bank Code">
+                                                            </div>
+                                                        </div>
+
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Country </div>
+                                                            <div class="col-lg-8">
+                                                                <select>
+                                                                    <option>Select Country</option>
+                                                                    <option value="GB">United kingdom (GBP)</option>
+                                                                    <option value="NG">Nigeria (NGN)</option>
+                                                                    <option value="CM">Cameroon (XAF)</option>
+                                                                    <option value="GH">Ghana (GHS)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <br>
+                                                    <!--  -->
+                                                    <label data-toggle='collapse' data-target='.othermobilewallet'> Other Mobile wallet   <input type="checkbox" name="checkbox"></label>
+
+                                                    <div class="othermobilewallet collapse">
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Country </div>
+                                                            <div class="col-lg-8">
+                                                                <select>
+                                                                    <option>Select Country</option>
+                                                                    <option value="GB">United kingdom (GBP)</option>
+                                                                    <option value="NG">Nigeria (NGN)</option>
+                                                                    <option value="CM">Cameroon (XAF)</option>
+                                                                    <option value="GH">Ghana (GHS)</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Operator </div>
+                                                            <div class="col-lg-8">
+                                                                <select>
+                                                                    <option>Select Operator</option>
+                                                                    <option>MTL</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3">Mobile No. </div>
+                                                            <div class="col-lg-8">
+                                                                <input type="number" name="" placeholder="Enter Mobile Number">
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <!--  -->
+
+                                                    <br>
+
+                                                    <!-- date time -->
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">Transaction Date: </div>
+                                                        <div class="col-lg-8">
+                                                            <input type="date" name="">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row">
+                                                        <div class="col-lg-3">Time </div>
+                                                        <div class="col-lg-8">
+                                                            <input type="time" name="">
+                                                        </div>
+                                                    </div>
+                                                    <!-- date time -->
+
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h4>Customer Details</h4>
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td><label> First Name: <input type="text" name=""></label></td>
+                                                                <td><label> Last Name:   <input type="text" name=""></label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>Date of Birth:   <input type="date" name=""></label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>ID Type: <input type="text" name=""></label></td>
+                                                                <td><label> ID Number:   <input type="text" name=""></label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>Expiry Date: <input type="date" name=""></label></td>
+                                                                <td><label> Address:   <input type="text" name=""></label></td>
+
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h4>Reason for Suspicion</h4>
+                                                    <p>Choose the indicator that best describes the situation - you can choose more than one; please give further information in the Notes section. If none of these apply, please use the Notes. Section and write on the reverse of the form if you need more space.</p>
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Several customers using the same address</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer sends or receives large sums</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer receives money and immediately sends it on</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer produces seemingly false identification or identification that appears to be counterfeited, altered or inaccurate (please remember that you should REFUSE a transaction if you are unhappy with the ID presented)</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer’s reason for transaction is doubtful, vague or inconsistent</label></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer sends or receives money on behalf, or in association with, a third party (including a business or charity)</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer uses different names</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> <input type="checkbox" name=""> Customer seems to be sending money under the influence of third party(ies)</label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <h5>Notes: Please provide more information about the reason for your suspicion.</h5>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <textarea name="" rows="5" style="width: 100%;"></textarea>
+                                                                </td>
+                                                            </tr>
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h4>HEAD OFFICE USE ONLY</h4>
+
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td><label>COMPLIANCE DECISION</label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> SAR  <input type="checkbox" name=""></label></td>
+                                                                <td><label> NON SAR    <input type="checkbox" name=""></label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label> INVESTIGATION DATE:   <input type="date" name=""></label></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>STAFF NAME: <input type="text" name=""></label></td>
+                                                                <td><label>STAFF ID: <input type="text" name=""></label></td>
+
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-footer  ">
+                                                <button type="" class="button button-cancel  ">Cancel </button>
+
+                                                <button type="" class="button button-Submit  ">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>                                         <!--  -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+   

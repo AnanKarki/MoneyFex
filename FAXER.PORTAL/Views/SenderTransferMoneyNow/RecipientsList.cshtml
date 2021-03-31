@@ -1,0 +1,167 @@
+﻿@model List<FAXER.PORTAL.Models.RecipientsViewModel>
+@{
+    ViewBag.Title = "RecipientsList";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class="asidebox mt10">
+                    <div class="title">
+                        <h3>My Recipients  <a href="@Url.Action("Index", "AddRecipients")" class="add"><i class="fa fa-plus"></i> Add</a></h3>
+                        <hr>
+                    </div>
+
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <div class="form-group ">
+                            <input type="text" name="Search" class="form-control text-center" placeholder="Search" id="Search" onkeyup="filter();" value="@ViewBag.ReceiverName" autofocus>
+                        </div>
+                    </div>
+                    <div class="clearfix">  </div>
+                    <ul class="recent-t no-scroll">
+
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <div class="card-r-t-body">
+                                    <div class="first-character">@item.ReciverFirstLetter</div>
+                                    <div class="right-details">
+                                        <h4 class="text-secondary">@item.ReceiverName</h4>
+                                        <span class="ac-details">
+                                            @if (item.Service == FAXER.PORTAL.DB.Service.BankAccount)
+                                            {
+                                                <span>
+
+                                                    <i class="flag-icon flag-icon-@item.ReceiverCountryLower"></i> @item.Country Account No. @item.AccountNo
+                                                </span>
+                                            }
+                                            else
+                                            {
+                                                <span>
+
+                                                    <i class="flag-icon flag-icon-@item.ReceiverCountryLower"></i> @item.Country   Mobile No. @item.MobileNo
+                                                </span>
+                                            }
+                                        </span>
+                                        @if (item.Service == FAXER.PORTAL.DB.Service.BankAccount)
+                                        {
+
+                                            <span class="text-primary">@item.BankName</span>
+                                        }
+                                        else if (item.Service == FAXER.PORTAL.DB.Service.MobileWallet)
+                                        {
+                                            <span class="text-primary">@item.MobileWalletProviderName</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-primary">@item.ServiceName</span>
+                                        }
+
+
+                                    </div>
+                                </div>
+                                <div class="card-r-t-footer">
+
+
+                                    @if (item.Service == FAXER.PORTAL.DB.Service.BankAccount)
+                                    {
+                                        <a href="@Url.Action("RecentTransfersSendAgain","SenderTransferMoneyNow" , new { @recipientId = item.Id , @transactionServiceType = FAXER.PORTAL.Models.TransactionServiceType.BankDeposit})">Send </a>
+
+                                        <a href="@Url.Action("RecipientsBankAccount", "AddRecipients" , new { Id =item.Id})">Edit</a>
+                                    }
+                                    else if (item.Service == FAXER.PORTAL.DB.Service.MobileWallet)
+                                    {
+                                        <a href="@Url.Action("RecentTransfersSendAgain","SenderTransferMoneyNow" , new { @recipientId = item.Id , @transactionServiceType = FAXER.PORTAL.Models.TransactionServiceType.MobileWallet})">Send </a>
+
+                                        <a href="@Url.Action("RecipientsMobileAccount", "AddRecipients" , new { Id =item.Id})">Edit</a>
+                                    }
+                                    else if (item.Service == FAXER.PORTAL.DB.Service.CashPickUP)
+                                    {
+                                        <a href="@Url.Action("RecentTransfersSendAgain","SenderTransferMoneyNow" , new { @recipientId = item.Id , @transactionServiceType = FAXER.PORTAL.Models.TransactionServiceType.CashPickUp})">Send </a>
+
+                                        <a href="@Url.Action("RecipientsCashPickup", "AddRecipients", new { Id =item.Id})">Edit</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("RecentTransfersSendAgain","SenderTransferMoneyNow" , new { @recipientId = item.Id , @transactionServiceType = FAXER.PORTAL.Models.TransactionServiceType.KiiPayWallet})">Send </a>
+
+                                        <a href="@Url.Action("RecipientsKiipayWallet", "AddRecipients", new { Id =item.Id})">Edit</a>
+
+                                    }
+
+                                    <a onclick="ConfirmationDeleteShow(@item.Id)">Delete</a>
+                                </div>
+                            </li>
+
+                        }
+
+
+                    </ul>
+                </div>
+                <!--  -->
+            </div>
+
+
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>
+
+<!-- Delete  -->
+<div id="confirmationdelete" class="modal fade in" role="dialog" style="display: block; padding-right: 17px;">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" onclick="CloseButton()">×</button>
+                <h4 class="modal-title"> Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+                <div class="form-group">
+                    <p class="mb0">Do you want to delete this recipient?</p>
+
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-primary radius-20" data-dismiss="modal" onclick="DeleteRecipients()">Yes</button>
+
+                <button type="button" class="btn btn-default radius-20" data-dismiss="modal" onclick="CloseButton()">No</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- Delete  -->
+@section Scripts
+{
+    <script type="text/javascript">
+        $("#confirmationdelete").hide();
+
+        function filter() {
+
+            var ReceiverName = $("#Search").val();
+            window.location.href = "/SenderTransferMoneyNow/RecipientsList?ReceiverName=" + ReceiverName;
+        }
+
+        function ConfirmationDeleteShow(id) {
+            sessionStorage.setItem("delete_item_id", id);
+            $("#confirmationdelete").show();
+        }
+        function DeleteRecipients() {
+            var id = sessionStorage.getItem("delete_item_id")
+            window.location.href = "/AddRecipients/Delete?Id=" + id;
+        }
+        function CloseButton() {
+
+            $("#confirmationdelete").hide();
+
+        }
+
+    </script>
+}

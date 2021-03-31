@@ -1,0 +1,510 @@
+﻿@model FAXER.PORTAL.DB.ThirdPartyMoneyTransfer
+@{
+    ViewBag.Title = "ComplianceThirdPartyTransfer";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5);
+        /* IE */
+        -moz-transform: scale(1.5);
+        /* FF */
+        -webkit-transform: scale(1.5);
+        /* Safari and Chrome */
+        -o-transform: scale(1.5);
+        /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b,
+    strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table,
+        .forms .forms-body table tr,
+        td,
+        th {
+            border: 0;
+            text-align: left;
+            white-space: normal;
+        }
+
+        .forms .forms-body input,
+        select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="forms-wrapper">
+
+                    <div class="form-main-title">
+                        Third Party Money Transfer
+                    </div>
+                    <p>FOR USE WITH MONEY TRANSFERS BY A THIRD PARTY</p>
+                    <div class="forms">
+                        <div class="forms-header">
+                            Third Party Details
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label>Is the transaction is being conducted on behalf of a third party?</label>
+
+                                            </td>
+                                            <td>
+                                                @if (Model.IsThirdPartyTransfer)
+                                                {
+                                                    <label><b><span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  Yes</span></b></label>
+                                                }
+                                                else
+                                                {
+                                                    <label>  <span style="color:red; font-weight: bold; font-size: 20px;">&times; No</span></label>
+                                                }
+
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>Sender Full Name or Business Name:</label>
+                                            </td>
+
+                                            <td>
+                                                <label><b>@Model.SenderORBusinessName </b></label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Date of Birth:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.DateOfBirth</b></label>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Country of Birth:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.Country</b></label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <label>Gender :</label>
+                                            </td>
+
+                                            <td><label><b>@Model.Gender</b></label></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>Address:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.Address</b></label>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>Telephone Number:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.PhoneNo</b></label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <label>Email Address:</label>
+                                            </td>
+                                            <td><label><b>@Model.EmailAddress</b></label></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>ID Type:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.IdCardType</b></label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <label> ID Number:</label>
+                                            </td>
+                                            <td><label><b>@Model.IdNumber</b></label></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>Expiring Date:</label>
+                                            </td>
+                                            <td><label><b>@Model.IdExpiryDate</b></label></td>
+
+
+                                        </tr>
+                                        <tr>
+
+                                            <td>
+                                                <label> Issuing Country:</label>
+                                            </td>
+
+                                            <td><label><b>@Model.IdIssuingCountry</b></label></td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>Occupation:</label>
+                                            </td>
+
+                                            <td><label><b>@Model.Occupation</b></label></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="forms-header">
+                            Sending Agent Information
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Country:
+                                                </label>
+                                            </td>
+
+                                            <td><label><b>@Model.AgentStaffCountry</b></label></td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Agent Name:
+                                                </label>
+                                            </td>
+                                            <td><label><b>@Model.AgentStaffName</b></label></td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Agent Account No.:
+                                                </label>
+                                            </td>
+
+                                            <td>
+                                                <label><b>@Model.AgentStaffAccountNo</b>                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <label>Agent Staff ID:</label>
+                                            </td>
+
+                                            <td>
+                                                <label><b>@Model.AgentStaffLoginCode</b></label>
+                                            </td>
+
+
+
+                                        </tr>
+
+                                        <tr>
+
+                                            <td>
+                                                <label>Agent Email:</label>
+                                            </td>
+                                            <td><label><b>@Model.AgentStaffEmail</b></label></td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>Agent Telephone:</label>
+                                            </td>
+                                            <td>
+                                                <label><b>@Model.AgentStaffPhoneNo</b></label>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="forms-header">
+                            <span style="float:left;"> MoneyFex Control Number</span> <span style="float:right;">For MF Head Office Use only</span>
+                            <div style="clear: both;">
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Main Amount:
+                                                    <input type="text" name="" value="@Model.MainAmount">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Fee:
+                                                    <input type="text" name="" value="@Model.Fee">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    MFCN:
+                                                    <input type="text" name="" value="@Model.MFCN">
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="forms-header">
+                            MoneyFex Compliance Specialist
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Approved by:
+                                                    <input type="text" name="" value="@Model.ApprovedByName">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Title:
+                                                    <input type="text" name="" value="@Model.AppovedTitle">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Date:
+                                                    <input type="date" name="" value="@Model.ApprovedDate">
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Declined by:
+                                                    <input type="text" name=""value="@Model.DeclinedByName">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Title:
+                                                    <input type="text" name="" value="@Model.DeclinedTitle">
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Date:
+                                                    <input type="date" name="" value="@Model.DeclinedDate">
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="forms-footer  ">
+                            <button type="" onclick="" class="button button-cancel  ">Cancel </button>
+
+                            <button type="submit" class="button button-Submit  ">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Cancel() {
+
+            window.location.href = "/Admin/AuxAgentComplianceForm/Index";
+
+        }
+
+    </script>
+}

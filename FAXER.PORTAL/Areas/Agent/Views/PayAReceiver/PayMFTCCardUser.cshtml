@@ -1,0 +1,764 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.PayMFTCCardUserViewModel
+@{
+    ViewBag.Title = "PayMFTCCardUser";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    string date = "---";
+    string time = "---";
+    var CardUrl = "";
+    var CardExpDate = "";
+    string MFTCCardCurrency = Model.MFTCCardCurrencySymbol ?? "";
+    string FaxerPhoneCode = Model.FaxerPhoneCode ?? "";
+    string MFTCCardPhoneCode = Model.MFTCCardPhoneCode ?? "";
+    if (Model != null)
+    {
+        CardUrl = Model.MFTCCardURL;
+        CardExpDate = Model.IdCardExpiringDate.ToString();
+        if (Model.DateTime != null)
+        {
+            DateTime DateTime = Model.DateTime ?? new DateTime();
+            date = DateTime.ToString("dd/MM/yyyy");
+            time = DateTime.ToString("HH:mm");
+        }
+    }
+}
+<!--  -->
+
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Pay E-Card User</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    @Html.HiddenFor(model => model.MFTCCardId)
+    @Html.HiddenFor(model => model.AgentId)
+    @Html.HiddenFor(model => model.StatusOfFax)
+    @Html.HiddenFor(model => model.StatusOfFaxName)
+    @Html.HiddenFor(model => model.DateTime)
+    @Html.HiddenFor(model => model.MFTCCardURL)
+    @Html.HiddenFor(model => model.CardStatus)
+    @Html.HiddenFor(model => model.LimitTypeEnum)
+    @Html.HiddenFor(model => model.MFTCCardCurrencySymbol)
+    @Html.HiddenFor(model => model.FaxerPhoneCode)
+    @Html.HiddenFor(model => model.MFTCCardPhoneCode)
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <div class="border_tbls  ">
+                        <div class="col-lg-4 pull-right ">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" id="MFTC" class="form-control" placeholder="Search Name / E-Card Number" value="@ViewBag.MFTCCardNo">
+                                <span class="input-group-addon">
+                                    <button type="button" class="" onclick="populateDetails();">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        @*sdf*@
+                        <div class="col-lg-8">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Sender's Details</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(model => model.FaxerFirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(model => model.FaxerMiddleName, new { @class = "form-control", @placeholder = "Middle Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Family/Last Name</label>
+                                        @Html.TextBoxFor(model => model.FaxerLastName, new { @class = "form-control", @placeholder = "Family/Last Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(model => model.FaxerAddress, new { @class = "form-control", @placeholder = "Address", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        @Html.TextBoxFor(model => model.FaxerCity, new { @class = "form-control", @placeholder = "City", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        @Html.TextBoxFor(model => model.FaxerCountry, new { @class = "form-control", @placeholder = "Country", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Telephone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@FaxerPhoneCode</span>
+                                            @Html.TextBoxFor(model => model.FaxerTelephone, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(model => model.FaxerEmail, new { @class = "form-control", @placeholder = "Email", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Virtual Account Status</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.CardStatus == "Active")
+                                            {
+                                                <td style="background-color:#9fff80;">Active</td>
+                                            }
+                                            else if (Model.CardStatus == "InActive")
+                                            {
+                                                <td style="background-color:#ffb3b3;">InActive</td>
+                                            }
+                                            else if (Model.CardStatus == "IsDeleted")
+                                            {
+                                                <td style="background-color:#ffb3b3;">IsDeleted</td>
+                                            }
+                                            else if (Model.CardStatus == "IsRefunded")
+                                            {
+                                                <td style="background-color:#ffb3b3;">IsRefunded</td>
+                                            }
+
+                                            else
+                                            {
+                                                <td>---</td>
+                                            }
+                                        }
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <td>Date</td>
+                                        <td>Time</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>@date</td>
+                                        <td>@time</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                    </div>
+
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>E-Card Details</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name on E-Card</label>
+                                        @Html.TextBoxFor(model => model.MFTCFirstName, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>E-Card Number</label>
+                                        @Html.TextBoxFor(model => model.MFTCCardNumber, new { @class = "form-control", @placeholder = "Virtual Account No.", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Balance on E-Card</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@MFTCCardCurrency</span>
+                                            @Html.TextBoxFor(model => model.AmountOnCard, new { @class = "form-control", @placeholder = "Amount on Card", id = "AmountOnCard", @readonly = "readonly" })
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Withdrawal Limit</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@MFTCCardCurrency</span>
+                                            @Html.TextBoxFor(model => model.WithDrawlLimit, new { @class = "form-control", @id = "WithdrawalLimitAmount", @placeholder = "Withdrawal Limit on Card", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Limit Type</label>
+                                        @Html.TextBoxFor(model => model.LimitType, new { @class = "form-control", @placeholder = "Limit Type", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Amount Requested</label>
+
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@MFTCCardCurrency</span>
+                                            @Html.TextBoxFor(model => model.AmountRequested, new { @class = "form-control", id = "AmountRequested", onkeyup = "validateAmount();" })
+                                        </div>
+                                        <label id="InvalidAmount" class="text-danger"></label>
+                                        <label id="amountErrorMessage" style="color:red;display:none;">Amount should be less or equal to amount on card..</label>
+                                        <label id="amountErrorMessageLimit" style="color:red;display:none;">Amount should be less or equal to withdrawal Limit..</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class=" border_tbls">
+                        <div class="col-lg-8">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>E-Card User Details</h3>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(model => model.MFTCFirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(model => model.MFTCMiddleName, new { @class = "form-control", @placeholder = "Middle Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Family/Last Name</label>
+                                        @Html.TextBoxFor(model => model.MFTCLastName, new { @class = "form-control", @placeholder = "Family/Last Name", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(model => model.MFTCAddress, new { @class = "form-control", @placeholder = "Address", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        @Html.TextBoxFor(model => model.MFTCCity, new { @class = "form-control", @placeholder = "City", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Country</label>
+                                        @Html.TextBoxFor(model => model.MFTCCountry, new { @class = "form-control", @placeholder = "Country", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Telephone</label>
+                                        <div class="input-group">
+                                            <span class="input-group-addon">@Model.MFTCCardPhoneCode</span>
+                                            @Html.TextBoxFor(model => model.MFTCTelephone, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        @Html.TextBoxFor(model => model.MFTCCardUserEmail, new { @class = "form-control", @placeholder = "Email", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <br><br>
+                            @if (CardUrl == null)
+                            {
+
+                                <img src="~/Areas/Agent/images/logo.png" class="img-thumbnail">
+                            }
+                            else
+                            {
+                                <img src="@CardUrl" class="img-thumbnail">
+                            }
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>E-Card User's Identification</h3>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Select ID Type</label>
+                                        @Html.DropDownListFor(model => model.IdentificationTypeId, (IEnumerable<SelectListItem>)ViewBag.IDTypes, "Select ID Type", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IdentificationTypeId, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>ID  Number</label>
+                                        @Html.TextBoxFor(model => model.IdNumber, new { @class = "form-control", @placeholder = "ID  Number", id = "CardNumber" })
+                                        @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>ID Card Expiring Date</label>
+                                        @Html.EditorFor(model => model.IdCardExpiringDate, new { htmlAttributes = new { @class = "form-control", id = "Expiry", onblur = "ValidateDate();" } })
+                                        @Html.ValidationMessageFor(model => model.IdCardExpiringDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <label>Select Issuing Country</label>
+                                        @Html.DropDownListFor(model => model.IssuingCountryCode, (IEnumerable<SelectListItem>)ViewBag.IdIssuingCountry, "Select Issuing Country", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IssuingCountryCode, "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+
+
+
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Official Use Only</h3>
+                                    <p><b> Agent Details</b></p>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Agency</label>
+                                        @Html.TextBoxFor(model => model.NameOfAgency, new { @class = "form-control", @placeholder = "Name of Agency", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Account No.</label>
+                                        @Html.TextBoxFor(model => model.AgencyMFSCode, new { @class = "form-control", @placeholder = "Agency MF Code", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Name of Paying Staff</label>
+                                        @Html.TextBoxFor(model => model.PayingAgentName, new { @class = "form-control", @placeholder = "Paying Agent Name", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(model => model.PayingAgentName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    @*sdf*@
+                    @*<div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row" id="Agent">
+                                    <div class="col-lg-12">
+                                        <h3>Official Use Only</h3>
+                                        <p><b>Paying Agent</b></p>
+                                        <div class="clearfix"></div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("Name of Agency")
+                                        @Html.TextBoxFor(model => model.NameOfAgency, new { @class = "form-control", @placeholder = "Name of Agency", @readonly = "readonly" })
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        @Html.Label("Agency MF Code")
+                                        @Html.TextBoxFor(model => model.AgencyMFSCode, new { @class = "form-control", @placeholder = "Agency MF Code", @readonly = "readonly" })
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        @Html.Label("Paying Agent Name")
+                                        @Html.TextBoxFor(model => model.PayingAgentName, new { @class = "form-control", @placeholder = "Name of Paying Agent", id = "PayingAgent" })
+                                        @Html.ValidationMessageFor(model => model.PayingAgentName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>*@
+                    <!-- end -->
+                    <!-- start -->
+                    @*sdf*@
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-12">
+                            <div class="form-row ">
+                                <div class="col-lg-12">
+                                    <h3>Information Verification</h3>
+
+                                </div>
+                                <div class="col-lg-12">
+                                    <div class="checkbox">
+                                        <label>@Html.CheckBoxFor(model => model.IsConfirmed)I confirm that the information required to pay this E-card user  has been fully verified by myself</label>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    @*sdf*@
+
+                    @*<div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Information Verification</h3>
+
+                                    </div>
+
+                                    <div class="col-lg-12">
+                                        <div class="checkbox">
+                                            <label>@Html.CheckBoxFor(model => model.IsConfirmed) I confirm that the information required to either pay or rejection this transaction has been fully verified by myself</label>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>*@
+                    <!-- end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <!--  -->
+    @*sdf*@
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    @if (Model != null)
+                    {
+                        if (Model.CardStatus == "Active")
+                        {
+                            <a href="index" class="fbtn btn-back hidden-xs hidden-sm pull-left"><i class="fa fa-ban" aria-hidden="true"></i>Cancel</a>
+                            <button type="submit" class="fbtn btn-next pull-right" id="Submit">Pay E-Card User  <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+                        else
+                        {
+                            <a href="index" class="fbtn btn-back hidden-xs hidden-sm pull-left" disabled="disabled"><i class="fa fa-ban" aria-hidden="true"></i> Cancel</a>
+                            <button type="submit" class="fbtn btn-next pull-right" disabled>Pay E-Card User  <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+
+                    }
+                    else
+                    {
+                        <a href="index" class="fbtn btn-back hidden-xs hidden-sm " disabled="disabled"><i class="fa fa-ban" aria-hidden="true"></i> Reject payment</a>
+                        <button type="submit" class="fbtn btn-next" disabled>Pay the Receiver  <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- entercard -->
+    <div class="modal " id="entercard" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body  ">
+                    <div class="form-group  pinside20 ">
+                        <h4>Enter Virtual Account Withdrawal Code</h4>
+                        <input type="text" name="" class="form-control" id="AccessCode" placeholder="Enter Code Here ">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <a  class="btn btn-primary pull-left" onclick="populateDetails()">Submit</a>
+                        <a  class="btn btn-default pull-right" data-dismiss="modal">Cancel</a>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- entercard -->
+</form>
+<!--  -->
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+                    @*@if (ViewBag.AgentResult.Data != null)
+                        {
+                            <a class="btn btn-success btn-sm" target="_blank" href="@Url.Action("PrintPDFNonCardReceive","PayAReceiver",new { MFCN=ViewBag.AgentResult.Data.MFCN})">Print Payment Receipt</a>
+                        }*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4 id="Message">@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @*<button type="button" class="btn btn-success btn-sm" data-dismiss="modal">Print Payment Receipt</button>*@
+                    <a class="btn btn-success btn-sm" onclick="PrintReceipt(@ViewBag.AgentResult.Data)">Print Payment Receipt</a>
+                    @*<a class="btn btn-success btn-sm" target="_blank" href="@Url.Action("PrintMFTCCardWithdrawlReceipt","PayAReceiver",new { TransactionId=ViewBag.AgentResult.Data})">Print Payment Receipt</a>*@
+                    @*<button class="btn btn-success btn-sm" target="_blank" onclick="populateDetails();">Finish Payment</button>*@
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        function populateDetails() {
+            var MFTCCode = document.getElementById("MFTC").value;
+
+            var AccessCode = document.getElementById("AccessCode").value;
+            window.location.href = "/agent/PayAReceiver/PayMFTCCardUser?MFTCCode=" + MFTCCode + "&AccessCode=" + AccessCode ;
+        }
+
+        function validateAmount() {
+            var cardAmount = $('#AmountOnCard').val();
+            var requestAmount = document.getElementById("AmountRequested").value;
+            var WithdrawalLimit = $("#WithdrawalLimitAmount").val();
+            var regex = /[0-9]|\./;
+
+            if (!regex.test(requestAmount)) {
+
+                $("#InvalidAmount").text("Please enter a valid Amount");
+
+
+            }
+            else if (Number(requestAmount) > Number(cardAmount)) {
+                //alert("You Dont Have Enough Balance");
+                $("#InvalidAmount").text("");
+                $("#amountErrorMessage").show();
+                $('#Receiver input').prop('readonly', true);
+                $('#Receiver select').prop("disabled", true);
+                $('#PayingAgent').prop('readonly', true);
+            } else if (Number(requestAmount) > Number(WithdrawalLimit)) {
+
+                if (@Model.LimitTypeEnum != @FAXER.PORTAL.DB.CardLimitType.NoLimitSet) {
+                    $("#InvalidAmount").text("");
+                    $("#amountErrorMessageLimit").show();
+                    $('#Receiver input').prop('readonly', true);
+                    $('#Receiver select').prop("disabled", true);
+                    $('#PayingAgent').prop('readonly', true);
+                }
+            }
+            else {
+                $("#InvalidAmount").text("");
+                $("#amountErrorMessage").hide();
+                $("#amountErrorMessageLimit").hide();
+                $('#Receiver input').prop('readonly', false);
+                $('#Receiver select').prop("disabled", false);
+                $('#PayingAgent').prop('readonly', false);
+            }
+
+        }
+        function ValidateDate() {
+
+            var currentdate = new Date();
+            var card = $("#Expiry").val();
+            var cardparts = card.split('-');
+            var cardDate = new Date(cardparts[0], cardparts[1] - 1, cardparts[2])
+
+            if (cardDate <= currentdate) {
+                $("#Validation").show();
+                $('#Receiver select').prop("disabled", true);
+                $('#PayingAgent').prop('readonly', true);
+                $('#Submit').prop('readonly', true);
+                $('#CardNumber').prop('readonly', true);
+                $('#Submit').prop("disabled", true);
+
+
+            } else if (cardDate.getFullYear().toString().length != "4") {
+
+                $("#Validation").show();
+                $('#Receiver select').prop("disabled", true);
+                $('#PayingAgent').prop('readonly', true);
+                $('#Submit').prop('readonly', true);
+                $('#CardNumber').prop('readonly', true);
+                $('#Submit').prop("disabled", true);
+
+
+            }
+            else {
+
+                $("#Validation").hide();
+                $('#Receiver select').prop("disabled", false);
+                $('#PayingAgent').prop('readonly', false);
+                $('#CardNumber').prop('readonly', false);
+                $('#Submit').prop("disabled", false);
+
+            }
+
+        }
+
+
+        function PrintReceipt(data) {
+            $("#onload").modal("hide");
+
+            var href = window.location.href;
+
+            var hrefSplit = href.split("?");
+
+            window.location.href = hrefSplit[0];
+            window.open("/PayAReceiver/PrintMFTCCardWithdrawlReceipt?TransactionId=" + data);
+
+        }
+    var CardStatus = "@Model.CardStatus" == "Active";
+        $('#Receiver input').prop('readonly', !CardStatus);
+        $('#PayingAgent').prop('readonly', !CardStatus);
+        $('.real_form select').prop("disabled", !CardStatus);
+        $('#AmountRequested').prop('readonly', !CardStatus);
+        $("#Submit").prop('readonly', !CardStatus);
+
+
+        if ('@ViewBag.AccessCodeIsEntered' == '0' || '@ViewBag.AccessCodeIsEntered' == '1') {
+
+            $("#entercard").modal('show');
+
+        }
+
+    </script>
+    `}

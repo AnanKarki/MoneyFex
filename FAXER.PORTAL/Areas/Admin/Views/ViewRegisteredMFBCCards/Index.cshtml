@@ -1,0 +1,210 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredMFBCCardsViewModel>
+@{
+    ViewBag.Title = "ViewRegisteredMFBCCards";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Registered MFBC Cards</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a data-toggle="modal" data-target="#registration_business" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Register a Merchant</a>
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Registered MFBC Cards</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="hideoption">
+                        <div class="btn-  pull-left">
+                            <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                            </button>
+                            <button href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <a data-toggle="modal" data-target="#mfbcPhoto" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Upload MFBC Card Photo</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td align="center">
+                                        <div class="checkbox checkbox-success ">
+                                            <input id="checkAll" type="checkbox" class="check_boxa">
+                                            <label for="checkAll" name="name" class="check_boxa"> </label>
+                                        </div>
+                                        Select All
+                                    </td>
+                                    <td><strong>SN.</strong></td>
+
+                                    <td><strong>Business Name</strong></td>
+                                    <td><strong>Business License/Reg</strong></td>
+                                    <td><strong>Address</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>Tel</strong></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><strong>MFBC Card Number</strong></td>
+                                    <td><strong>Temp SMS MFBC No. Send?</strong></td>
+                                    <td><strong>Credit on Mfbc Card</strong></td>
+                                    <td><strong>Status</strong></td>
+                                    <td><strong>Action</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{
+
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td align="center">
+                                            <div class="checkbox checkbox-success">
+                                                <input type="checkbox" name="" class="check_boxa">
+                                                <label name="name" class="check_boxa"> </label>
+                                            </div>
+                                        </td>
+                                        <td>@i</td>
+                                        <td><a href="@Url.Action("ViewRegisteredMFBCCardsMore","ViewRegisteredMFBCCards",new {id=item.Id })">@item.BusinessName</a></td>
+                                        <td>@item.BusinessRegNumber</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.MFBCCardNumber</td>
+
+
+                                        <td>@item.TempSMSMFBC</td>
+                                        <td>@item.CreditOnCard @item.Currency</td>
+
+                                        <td>
+                                            @item.CardUsageStatus
+                                        </td>
+                                        <td>
+                                            <div class="btn-group m-r-10">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu action_drop">
+                                                    <li>
+                                                        <a href="@Url.Action("ViewRegisteredMFBCCardsMore","ViewRegisteredMFBCCards",new {id=item.Id })" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a>
+                                                    </li>
+                                                    <li><a href="#" class="btn btn-xs btn-success waves-effect waves-light "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a></li>
+                                                    @if (item.CardUsageStatus == "Active")
+                                                    {
+                                                        <li><a href="" class="btn btn-xs btn-primary waves-effect waves-light disabled "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                        <li><a href="@Url.Action("UpdateCardStatus","ViewRegisteredMFBCCards",new { id=item.Id})" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+
+                                                    }
+                                                    else if (item.CardUsageStatus == "Inactive")
+                                                    {
+                                                        <li><a href="@Url.Action("UpdateCardStatus","ViewRegisteredMFBCCards",new { id=item.Id})" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                        <li><a href="" class="btn btn-xs btn-warning waves-effect waves-light disabled "><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+
+                                                    }
+                                                    <li><a href="@Url.Action("DeleteCard","ViewRegisteredMFBCCards",new { id = item.Id})" class="btn btn-xs btn-danger waves-effect waves-light " id="sa-params"><span class="btn-label"><i class=" ti-trash"></i></span> Delete</a></li>
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mfbcPhoto" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title">MFBC Card Photo Upload</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="ti-user icon_x3 text-warning" aria-hidden="true"></i>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>Please enter the MFBC card below to upload a new virtual Card for this Merchant</h4>
+                        <div class="col-lg-12">
+                            <label>Enter MFBC Card Number</label><br />
+                            <input type="text" name="CardNum" id="CardNum">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-warning waves-effect waves-light btn-rounded" onclick="mfbcCardNum();">Submit </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewRegisteredMFBCCards/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+        function mfbcCardNum() {
+
+            var num = $("#CardNum").val();
+            window.location.href = "/Admin/ViewRegisteredMFBCCards/UploadMFBCCardPhoto?cardNum=" + num;
+        }
+
+
+    </script>
+}

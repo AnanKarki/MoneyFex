@@ -1,0 +1,117 @@
+﻿@model FAXER.PORTAL.Models.SenderKiiPayWalletUserRegistrationViewModel
+@{
+    ViewBag.Title = "SenderKiiPayWalletUserRegistration";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                <div class="login_signup mb50 clearfix text-center">
+                    <h3> KiiPay Wallet User Registration</h3>
+                    <hr>
+
+                    <div class="pinside40">
+
+                        <!--  -->
+                        <div class="form-group mb20">
+
+                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" , id="Country" , @onchange= "GetCountryPhoneCode()" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="form-group mb20">
+
+                            @Html.TextBoxFor(model => model.FullName, new { @class = "form-control", placeholder = "Full  Name" })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                        @Html.HiddenFor(model => model.CountryPhoneCode , new { @id= "CountryPhoneCode" })
+                        <div class="form-group contact-no-group">
+                            <div class="countr-code" name="CountryPhoneCode" id="CountryPhoneCodetext">
+                                
+                            </div>
+                            @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control contact-no", placeholder = "Enter Mobile Number", maxlength = "10" ,minlength = "10", type = "number" })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                           
+
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+
+
+                        <div class="form-group mb20">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control", placeholder = "Email Address (optional) "})
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                          
+                        </div>
+                        <!--  -->
+
+
+
+
+
+
+
+
+                    </div>
+
+
+
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <button type="submit" class="btn btn-primary btn-lg   ">Finish Account Setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <div class="clearfix mb30"> </div>
+                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+
+
+}
+
+@section Scripts{
+    
+    <script type="text/javascript">
+
+        function GetCountryPhoneCode() {
+
+            var countryCode = $("#Country").val();
+            $.getJSON("/SenderRegisterWalletsForFamilyandFriends/GetCountryPhoneCode?CountryCode=" + countryCode, function (result) {
+                debugger;
+                $("#CountryPhoneCode").val(result.CountryPhoneCode);
+                $("#CountryPhoneCodetext").text(result.CountryPhoneCode);
+            });
+        }
+
+    </script>
+    }

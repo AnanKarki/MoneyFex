@@ -1,0 +1,169 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessSendAnInvoicevm
+@{
+    ViewBag.Title = "SeeInvoice";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>Preview Invoice</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance mb20 ">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+
+
+
+                </div>
+                <div class="clearfix">
+
+                </div>
+                <div class="invoice ">
+                    <!-- start -->
+                    <div class="row">
+                        <h1 class="text-right">Invoice</h1>
+                        <div class="col-lg-5">
+                            <div class="invoice-box">
+                                <h5>Invoice From</h5>
+                                <h3 class="text-primary">@Model.InvoiceMaster.FromBusinessName</h3>
+                                <p>Wallet No. @Model.InvoiceMaster.FromInvoiceMobileNumber</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 pull-right">
+                            <!--  -->
+                            <div class="col-lg-5 text-right">
+                                <label>Invoice Number</label>
+                            </div>
+                            <div class="col-lg-7">
+                                <div class="form-control form-text">
+                                    @Model.InvoiceMaster.InvoiceNo
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="clearfix ">
+                                <div class="mt20">
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-5 text-right">
+                                <label>Date</label>
+                            </div>
+                            <div class="col-lg-7">
+
+                                <div class="form-control form-text">
+                                   @Model.InvoiceMaster.InvoiceDate
+                                </div>
+                            </div>
+                            <!--  -->
+
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <hr>
+                    <!-- start -->
+                    <div class="row mt20">
+                        <div class="col-lg-6">
+
+
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="col-lg-3 text-right">
+                                    <label><b>Invoice to: </b></label>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="form-control form-text">
+                                        Gloab Emarket<br>@Model.InvoiceMaster.ToCCInvoiceMobileNumber
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="pull-right wallet-balance mb20 ">
+                                <h5>Amount Due:</h5>
+                                <h1 class="text-primary">@Model.InvoiceMaster.CountryCode<small class="text-primary"></small></h1>
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="table-responsive mt10">
+                        <table class="table table-striped">
+
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.InvoiceDetails)
+                                {
+                                    <tr>
+                                        <td>@item.ItemName </td>
+                                        <td>@item.Quantity</td>
+                                        <td>@item.Price</td>
+                                        <td>@item.CurrencySymbol @item.Amount</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td rowspan="5" class="text-left   " width="30%">
+                                        <p style="width:100%">@Model.InvoiceMaster.NoteToReceipient    </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Subtotal</td>
+                                    <td class="text-right">@Model.InvoiceMaster.Subtotal</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Discount</td>
+                                    <td class="text-right">@Model.InvoiceMaster.Discount</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right">Shipping</td>
+                                    <td class="text-right">@Model.InvoiceMaster.Shipping</td>
+                                </tr>
+                                <tr>
+                                    <td class="text-right"><b>Total</b></td>
+                                    <td class="text-right">@Model.InvoiceMaster.TotalAmount</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

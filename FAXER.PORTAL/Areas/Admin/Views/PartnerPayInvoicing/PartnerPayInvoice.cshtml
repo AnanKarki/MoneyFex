@@ -1,0 +1,95 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentPayInvoiceViewModel
+
+
+@{
+    ViewBag.Title = "PartnerPayInvoice";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                            <div class="card">
+
+
+
+                                <div class="card-body p-40">
+
+
+                                    <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                        <div class="d-flex align-items-center amount-group  m-b-25">
+                                            <div>
+                                                <div class="userimage  ">
+                                                    <img src="assets/images/buldings.svg " alt="">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2 class="text-primary"> @Model.Name</h2>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="m-t-20">
+
+                                            <div class="estimate-calculator" style="">
+                                                <div class="wrapper">
+                                                    <h5 class="text-primary">Invoice No: @Model.InvoiceNo</h5>
+                                                    <hr>
+                                                    <dl>
+                                                        <dt>Fee</dt>
+                                                        <dd class="fee" data-outbound-currency="USD"> @Model.CountryCurrencySymbol @Model.Fee</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>You pay</dt>
+                                                        <dd class="fee" data-outbound-currency="USD"> @Model.CountryCurrencySymbol @Model.YouPay</dd>
+                                                    </dl>
+                                                    <dl>
+                                                        <dt>They receive</dt>
+                                                        <dd class="fee" data-outbound-currency="USD">  @Model.CountryCurrencySymbol @Model.TheyReceive</dd>
+                                                    </dl>
+                                                    <div class="clearfix">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="row">
+                                    <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                        <a href="@Url.Action("Pay","PartnerPayInvoicing")" class="btn btn-primary btn-lg btn-round  btn-block"> Confirm and Pay <i class="fa fa-angle-right m-l-5"></i></a>
+                                        <a href="@Url.Action("Index","PartnerPayInvoicing")" class=" btn btn-link  btn-lg btn-round btn-block">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

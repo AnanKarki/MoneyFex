@@ -1,0 +1,107 @@
+﻿@model List<FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessMoneyTransferHistoryViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Money Transfer history</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form>
+                    <div class="col-lg-4 col-lg-offset-8">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" id="SearchText" class="form-control" placeholder="Search Receiver's Name/MFCN">
+                            <span class="input-group-addon">
+                                <button type="button" class="" onclick="SearchTran()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+
+                    <div class=" ">
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Receiver's Name</th>
+                                        <th>Country </th>
+                                        <th>Receiver's City</th>
+
+                                        <th>Transfer Amount</th>
+                                        <th>Transfer Date</th>
+                                        <th>Transfer Time</th>
+                                        <th>MFCN</th>
+                                        <th>Status of Transfer</th>
+
+                                        <th>Transfer Receipt</th>
+                                        <th>Repeat Transfer</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @{int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.ReceiverName</td>
+                                            <td>@item.ReceiverCountry</td>
+                                            <td>@item.ReceiverCity</td>
+
+                                            <td>@item.TransferAmount</td>
+                                            <td>@item.Date</td>
+                                            <td><time>@item.Time</time></td>
+                                            <td>@item.MFCN</td>
+                                            <td>@item.StatusOfTransfer</td>
+                                            <td><a href="@Url.Action("NonCardTransferReceipt" ,"BusinessMoneyTransferInProgress" , new { Id = item.TransactionId})" target="_blank" class="btn btn-warning btn-xs">Transfer Receipt </a></td>
+                                            <td><a href="@Url.Action("SenderThisReceiverAgain" , new { ReceiverId = item.ReceiverId})" class="btn btn-success btn-xs">Send money again to this receiver </a></td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+
+
+
+
+
+                            </table>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <a href="@Url.Action("Index", "BusinessHome")" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function SearchTran() {
+
+            var SearchText = $("#SearchText").val();
+            window.location.href = "/Businesses/BusinessMoneyTransferHistory/Index?searchText=" + SearchText;
+        }
+    </script>
+}

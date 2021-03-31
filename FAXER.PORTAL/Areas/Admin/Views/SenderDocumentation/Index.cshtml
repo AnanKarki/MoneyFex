@@ -1,0 +1,514 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model FAXER.PORTAL.Areas.Admin.ViewModels.SenderDocumentationAndSenderNote
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    var baseurl = Request.Url.GetLeftPart(UriPartial.Authority);
+    int TotalPageCount = ViewBag.NumberOfPage;
+    int CurrentpageCount = ViewBag.CurrentpageCount;
+
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Sender Documentation</h4>
+                                    <a href="@Url.Action("UploadSenderDocumentation","SenderDocumentation")" class=" btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-eye m-r-5"></i> Upload Document
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Cities", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select Cities", new { @class = "form-control", @id = "Cities", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Sender Name" class="form-control form-control-round form-control-bold" name="SenderName" id="SenderName" value="@ViewBag.SenderName" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Customer No" class="form-control form-control-round form-control-bold" name="AccountNo" id="AccountNo" value="@ViewBag.AccountNo" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Telephone No" class="form-control form-control-round form-control-bold" name="Telephone" id="Telephone" value="@ViewBag.Telephone" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <select name="Status" id="Status" class="form-control form-control-round form-control-bold" onchange="filter();">
+                                                    <option value="3">Search By Status</option>
+                                                    <option value="0">Approved</option>
+                                                    <option value="1">Disapproved</option>
+                                                    <option value="2">InProgress</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered">
+
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>SN.</strong></td>
+                                                    <td><strong>Country</strong></td>
+                                                    <td><strong>Sender Name </strong></td>
+                                                    <td><strong>Customer No.</strong></td>
+                                                    <td><strong>Document Name</strong></td>
+                                                    <td><strong>Expiry date</strong></td>
+                                                    <td><strong>Staff(Upload)</strong></td>
+                                                    <td><strong>Note</strong></td>
+                                                    <td><strong>Date Time</strong></td>
+                                                    <td><strong>Status</strong></td>
+                                                    <td><strong>Action</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody style="margin-bottom: 30px !important;">
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model.SenderDocumentationViewModel)
+                                                {
+                                                    ++i;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.Country</td>
+
+                                                        <td><a href="">@item.SenderFullName </a></td>
+                                                        <td><a href="">@item.AccountNo </a></td>
+
+                                                        <td>
+                                                            @*<img src="@item.DocumentPhotoUrl" width="50" height="50" />*@
+                                                            <a onclick="OpenDoc('@item.Id')" class="btn btn-primary btn-sm">
+                                                                Document
+                                                            </a>
+
+                                                        </td>
+
+                                                        <td>@item.ExpiryDate</td>
+
+                                                        <td><a href="">@item.CreatedByStaffName</a></td>
+                                                        <td>
+                                                            @if (item.NoteCount > 0)
+                                                            {
+                                                                <a onclick="ShowPopUp('@item.SenderId')" class="text-danger">
+                                                                    <i class="fa fa-plus"> </i> Note
+                                                                </a>
+                                                            }
+                                                            else
+                                                            {
+                                                                <a onclick="ShowPopUp('@item.SenderId')" style="color:#007bff">
+                                                                    <i class="fa fa-plus"> </i> Note
+                                                                </a>
+                                                            }
+
+                                                        </td>
+                                                        <td>@item.CreatedDate</td>
+                                                        <td>@item.StatusName</td>
+
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("UploadSenderDocumentation", "SenderDocumentation", new { @id = item.Id })"
+                                                               target="_blank" data-toggle="tooltip" data-placement="top"
+                                                               data-original-title="Edit" class="m-r-15 text-success"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+                                        </table>
+
+
+
+                                        <div>
+                                            <div class="form-group">
+                                                @*Page @(Model.SenderDocumentationViewModel.PageCount < Model.SenderDocumentationViewModel.PageNumber ? 0 :
+                                                    Model.SenderDocumentationViewModel.PageNumber) of @Model.SenderDocumentationViewModel.PageCount*@
+
+                                                Page @ViewBag.PageNumber of @TotalPageCount
+                                            </div>
+
+
+                                            @if (TotalPageCount != 0)
+                                            {
+                                                <div class="form-group">
+
+                                                    @{int pagecount = CurrentpageCount;}
+                                                    <button style="color:white; background-color:#428bca; border-color:#428bca;" id="backButton" onclick="ChangeButton(false);">
+                                                        <<
+                                                    </button>
+                                                    <div id="pageCountbtn">
+
+                                                        @for (int buttonCount = 1; buttonCount <= 10; buttonCount++)
+                                                        {
+                                                            pagecount++;
+                                                            <button style="color:white; background-color:#428bca; border-color:#428bca;">
+                                                                @pagecount
+                                                            </button>
+                                                        }
+                                                    </div>
+                                                    <span style="display:none" id="pagecount">@pagecount</span>
+                                                    @if (TotalPageCount > 10 && TotalPageCount != pagecount)
+                                                    {
+                                                        <button style="color:white; background-color:#428bca; border-color:#428bca;" id="nextButton" onclick="ChangeButton(true);">
+                                                            >>
+                                                        </button>
+                                                    }
+
+
+
+
+                                                </div>
+                                            }
+
+                                            <div class="form-group">
+                                                Show
+                                                <select onchange="GetDataForPageSizeFilter()" id="PageSize">
+                                                    <option value="10">
+                                                        10
+                                                    </option>
+                                                    <option value="20">
+                                                        20
+                                                    </option>
+                                                    <option value="40">
+                                                        40
+                                                    </option>
+                                                    <option value="50">
+                                                        50
+                                                    </option>
+                                                    <option value="100">
+                                                        100
+                                                    </option>
+                                                    <option value="500">
+                                                        500
+                                                    </option>
+                                                    <option value="1000">
+                                                        1000
+                                                    </option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+
+
+
+
+                                        <div class="clearfix mt100"></div>
+                                        <div class="clearfix mt100"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="complianceAddNote" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+
+
+            <div class="modal-body">
+
+                <a onclick="AddNewNotePopup();" @*data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#addnewnote"*@ class="btn btn-primary  btn-round m-b-10">Add New Note</a>
+                <div class="table-responsive">
+
+
+                    <table class="table table-bordered" id="Note">
+                        <thead>
+                            <tr>
+                                <th>Notes</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Staff Name</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="addnewnote" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Date:</th>
+                                <th>Time:</th>
+                                <th>Staff:</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                @Html.HiddenFor(x => x.TransactionStatementNote.SenderId, new { @id = "SenderId" })
+                                <td colspan="3">
+                                    @*@Html.TextAreaFor(x => x.TransactionStatementNote.Note, new { @class = "form-control", @rows = "8" })*@
+
+                                    <textarea class="form-control" rows="8" id="NoteTextArea"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="saveNote()" class="btn btn-primary  btn-round">Save</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- add note ad -->
+
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        var pageSize = "";
+
+        var CurrentpageCount = '@ViewBag.CurrentpageCount';
+
+        function filter(pageNumber) {
+            var Country = $("#Country").val();
+            var Cities = $("#Cities").val();
+            var senderName = $("#SenderName").val();
+            var AccountNo = $("#AccountNo").val();
+            var Status = $("#Status").val();
+            var telephone = $("#Telephone").val();
+            var email = $("#Email").val();
+            var pageSize = $("#PageSize").val();
+            window.location.href = "/Admin/SenderDocumentation/Index?Country=" + Country + "&City=" + Cities
+                + "&SenderName=" + senderName + "&AccountNo=" + AccountNo
+                + "&Status=" + Status + "&Telephone=" + telephone + "&page=" + pageNumber + "&PageSize=" + pageSize + "&CurrentpageCount=" + CurrentpageCount ;
+
+        }
+        function GoToFilter() {
+            debugger;
+            console.log($(this).text());
+            console.log($(this).val());
+            var pageNumber = $(this).text();
+            filter(pageNumber);
+        }
+        //$("#pageCountbtn").each(function () {
+
+        //})
+        //$('#pageNumber').on('click', function () {
+        //    debugger;
+        //    console.log($(this).text());
+        //    filter($(this).text());
+        //});
+        function OpenDoc(Id) {
+            var src = "";
+            $.getJSON("/Admin/SenderDocumentation/GetDoumentImageUrl?Id=" + Id, function (result)
+            {
+                src = result.URL;
+                @*if (src == "" || src == undefined || src == null) {
+
+
+                }
+                window.open('@baseurl' + src, "_blank");*@
+
+                if (src.length > 200) {
+            //$("#docSrc").attr('src', src);
+              //window.open(src, "_blank");
+
+              var image = new Image();
+              image.src = src;
+
+              var w = window.open("");
+              w.document.write(image.outerHTML);
+
+            }
+            else {
+                $("#docSrc").attr('src', src);
+                window.open('@baseurl'  + src, "_blank");
+            }
+            });
+
+            debugger;
+            //window.open(src, "_blank");
+          @*if (src.length > 200) {
+            //$("#docSrc").attr('src', src);
+              //window.open(src, "_blank");
+
+              var image = new Image();
+              image.src = src;
+
+              var w = window.open("");
+              w.document.write(image.outerHTML);
+
+            }
+            else {
+                $("#docSrc").attr('src', src);
+                window.open('@baseurl' + '/' + src, "_blank");
+            }*@
+
+        }
+        $("#Cities").val('@ViewBag.City');
+        $("#Status").val('@ViewBag.Status');
+        function GetDataForPageSizeFilter() {
+
+            var size = $("#PageSize :selected").val();
+            pageSize = size;
+            filter(1);
+            //window.location.href = "/Admin/SenderDocumentation/Index?PageSize=" + size;
+        }
+
+
+
+        var senderId = 0;
+        var transactionId = 0;
+
+        function ShowPopUp(SenderId ) {
+        debugger;
+        senderId = SenderId;
+        $.getJSON("/Admin/SenderDocumentation/GetSenderNote?SenderId=" + senderId,
+            function (result) {
+                var tr;
+                //Append each row to html table
+                for (var i = 0; i < result.result.length; i++) {
+                    tr = $('<tr/>');
+                    tr.append("<td>" + result.result[i].Note + "</td>");
+                    tr.append("<td>" + result.result[i].CreatedDate + "</td>");
+                    tr.append("<td>" + result.result[i].CreatedTime + "</td>");
+                    tr.append("<td>" + result.result[i].CreatedByName + "</td>");
+                    $('#Note').append(tr);
+                }
+            });
+
+        $('#complianceAddNote').modal('show');
+        }
+
+        function AddNewNotePopup()
+    {
+         $("#SenderId").val(senderId);
+         $('#addnewnote').modal('show');
+     }
+
+        function saveNote()
+    {
+
+        var model = {
+            TransactionId: transactionId,
+            Note: $("#NoteTextArea").val(),
+            SenderId: senderId
+        };
+
+        $.post("/Admin/SenderDocumentation/SaveNote", model,function (data) {
+
+            $("#complianceAddNote").modal('hide');
+
+            $("#addnewnote").modal('hide');
+            Riddha.UI.Toast("Note Added Successfully");
+
+        });
+
+        }
+
+        $("#PageSize").val('@ViewBag.PageSize')
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/SenderDocumentation/Delete?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+
+
+        function ChangeButton(isGoToNextPage) {
+            var TotalNumberOfpage = '@ViewBag.NumberOfPage';
+            var pageCount = $("#pagecount").text();
+            GetPagignationButton(TotalNumberOfpage, pageCount, isGoToNextPage);
+        }
+       
+
+        $("#pageCountbtn button").each(function () {
+            $($(this)[0]).on('click', function () {
+                var pageno = $(this).text().trim();
+                filter(pageno);
+            });
+        })
+
+        ShowBackButton();
+        function ShowBackButton() {
+            if (@CurrentpageCount != 0) {
+                $("#backButton").show();
+            } else {
+                $("#backButton").hide();
+            }
+
+            if ('@ViewBag.ButtonCount' < 10) {
+                 $("#nextButton").hide();
+                for (var x ='@ViewBag.ButtonCount' ; x <= 10; x++) {
+                try {
+                    $("#pageCountbtn button")[x].value = 0;
+                    $("#pageCountbtn button")[x].innerText = 0;
+                    $("#pageCountbtn button")[x].style.visibility = 'hidden';
+                } catch (e) {
+
+                }
+            }
+           }
+
+        }
+
+
+
+    </script>
+}

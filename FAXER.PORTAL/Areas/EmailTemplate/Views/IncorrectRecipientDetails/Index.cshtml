@@ -1,0 +1,119 @@
+﻿    
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+@*<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;">
+                <img src="@baseUrl/Areas/EmailTemplate/Images/ngeku.png" width="100%">
+
+            </td>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.SenderFristName,</b></h1>
+                <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    Money transferred to @ViewBag.ReceiverFullName has not been completed because of incorrect recipient details.
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <h3>
+                    Recipient details provided:
+                </h3>
+                <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                    Recipient Name:  @ViewBag.ReceiverFullName<br>
+                    Bank Name: @ViewBag.BankName <br>
+                    Account Number: @ViewBag.BankAccount<br>
+                    Country: @ViewBag.County <br>
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    Please reply to this email with the correct recipient details for us to complete this transaction.
+                </p>
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    Thank you
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>*@
+
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFristName, </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                Money transferred to @ViewBag.ReceiverFullName has not been completed because of incorrect recipient details.
+                            </h1>
+                            <h1 style="font-size: 18px; color:#333; line-height: 10px; margin-top: 20px;">
+                                Recipient details provided
+                            </h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                Recipient Name:  @ViewBag.ReceiverFullName<br>
+                                Bank Name: @ViewBag.BankName <br>
+                                Account Number: @ViewBag.BankAccount<br>
+                                Country: @ViewBag.County <br>
+                            </h1>
+
+                            <h1 style="font-size: 20px; color:#333;  line-height: 30px; margin-top: 20px;">
+                                Please reply to this email with the correct recipient details for us to complete this transaction.
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:14px; margin: 40px 0;">Thank You</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

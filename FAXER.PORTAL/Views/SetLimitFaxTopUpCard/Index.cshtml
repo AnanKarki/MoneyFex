@@ -1,0 +1,344 @@
+﻿@model  FAXER.PORTAL.Models.SetLimitFaxTopUpCardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>Set Limit on Receiver Virtual Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <div class="row">
+
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                @Html.DropDownList("MFTCCardNumber", null, "Select Receiver Virtual Account No", new { @class = "form-control", @onchange = "getDetails(this.value);" })
+                                @Html.ValidationMessage("CardError", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <select class="form-control" onchange="setLimit()" id="LimitType">
+                                    <option>Select Limit Type</option>
+                                    <option value="1">Limit withdrawal Amount</option>
+                                    <option value="2">Limit purchasing Amount</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="login_signup" id="purchaseLimit" style="display:none">
+
+                        <h3>Purchase Limit </h3>
+                        <hr>
+
+                        <h3><span class="  account-balance">Account Balance :<strong class="  text-primary italic"> @Model.CurrentBalance @Model.CardUserCurrency</strong></span> </h3>
+                        <div class="clearfix mb30">
+
+                        </div>
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> Amount  </label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.PurchasingAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Amount", id = "PurchasingAmount" } })
+                                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> Previous Limit</label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+
+                                <div class="form-control" disabled>@Model.PreviousPurchasingLimit @Model.CardUserCurrency</div>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> New Limit</label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+
+                                <div class="form-control" disabled id="purchasingNewAmount"> @Model.CardUserCurrency</div>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <label>Limit Frequency</label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                @Html.EnumDropDownListFor(m => m.PurchasingAutoPaymentFrequency, "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <hr>
+
+                        <div class="col-lg-4 col-lg-offset-3">
+                            <button type="submit" name="UpdatePurchaseLimit" value=true class="btn btn-primary   pull-right radius-20">Set Limit</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <div class="login_signup" id="WithdrawalLimit" style="display:none">
+                       
+
+                        <h3>Withdrawal Limit </h3>
+                        <hr>
+
+                        <h3><span class="  account-balance">Account Balance :<strong class="  text-primary italic"> @Model.CurrentBalance @Model.CardUserCurrency</strong></span> </h3>
+                        <div class="clearfix mb30">
+
+                        </div>
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> Amount  </label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.WithDrawAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Amount", id = "WithDrawAmount" } })
+                                @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> Previous Limit</label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+
+                                <div class="form-control" disabled>@Model.PreviousCashWithDrawLimit @Model.CardUserCurrency</div>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-3">
+                            <label> New Limit</label>
+                        </div>
+
+                        <div class="col-lg-4 ">
+                            <div class="form-group">
+
+                                <div class="form-control" disabled id="withDrawNewAmount"> @Model.CardUserCurrency</div>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-3">
+                                <label>Limit Frequency</label>
+                            </div>
+
+                            <div class="col-lg-4 ">
+                                @Html.EnumDropDownListFor(m => m.WithDrawAutoPaymentFrequency, "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <hr>
+
+                        <div class="col-lg-4 col-lg-offset-3">
+                            <button type="submit" name="UpdateWithdrawlLimit" value=true class="btn btn-primary   pull-right radius-20">Set Limit</button>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+               
+            </div>
+        </div>
+        </div>
+
+
+        @*<div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <form>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    @Html.DropDownList("MFTCCardNumber", null, "Select Receiver Virtual Account No", new { @class = "form-control", @onchange = "getDetails(this.value);" })
+                                    @Html.ValidationMessage("CardError", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-6 pull-left">
+                                <br>
+                                <h4>Balance on this Account  (@Model.CurrentBalance @Model.CardUserCurrency)</h4>
+                                <br>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                <br>
+                                <button type="submit" href="" name="UpdateBothLimitType" value=true class="btn btn-success btn-sm">Update Limit</button>
+                                <br>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th colspan="4">Limit withdrawal Amount</th>
+                                            <th colspan="4">Limit purchasing Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><b>Amount</b></td>
+                                            <td><b>Previous Limit</b></td>
+                                            <td><b>New Limit</b></td>
+                                            <td><b>Limit Type</b></td>
+                                            <td><b>Amount</b></td>
+                                            <td><b>Previous Limit</b></td>
+                                            <td><b>New Limit</b></td>
+                                            <td><b>Limit Type</b></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.WithDrawAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Amount", id = "WithDrawAmount" } })
+                                                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                            <td>@Model.PreviousCashWithDrawLimit</td>
+                                            <td>
+                                                <span id="withDrawNewAmount"> </span>
+                                            </td>
+                                            <td>
+                                                @Html.EnumDropDownListFor(m => m.WithDrawAutoPaymentFrequency, "", new { @class = "" })
+                                            </td>
+
+
+                                            <td>
+                                                <div class="form-group">
+                                                    @Html.EditorFor(model => model.PurchasingAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Amount", id = "PurchasingAmount" } })
+                                                    @Html.ValidationMessage("Error", new { @class = "text-danger" })
+                                                </div>
+                                            </td>
+                                            <td>@Model.PreviousPurchasingLimit</td>
+                                            <td>
+                                                <span id="purchasingNewAmount"> </span>
+                                            </td>
+                                            <td>
+                                                @Html.EnumDropDownListFor(m => m.PurchasingAutoPaymentFrequency, "", new { @class = "" })
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="4" class="text-center"><button type="submit" name="UpdateWithdrawlLimit" value=true class="btn btn-primary btn-sm">Set New Withdrawal Limit</button></th>
+                                            <th colspan="4" class="text-center"><button type="submit" name="UpdatePurchaseLimit" value=true class="btn btn-primary btn-sm">Set New purchasing Limit</button></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+        <div class="dynamic_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-10 col-lg-offset-1">
+                        <a href="@Url.Action("Index", "FaxerMoneyFaxTopUpCard")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    }
+<!--  -->
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+<script type='text/javascript'>
+    function getDetails(val) {
+        window.location.href = "/SetLimitFaxTopUpCard/Index?mftcCardId=" + val;
+    }
+
+    $('#WithDrawAmount').on("change", function () {
+        var value = $(this).val()
+        $("#withDrawNewAmount").html(value +  ' @Model.CardUserCurrency');
+    });
+
+    $('#PurchasingAmount').on("change", function () {
+        var value = $(this).val()
+        $("#purchasingNewAmount").html(value  + ' @Model.CardUserCurrency');
+    });
+
+    function setLimit() {
+
+        var val = $("#LimitType").val();
+        if (val == '2') {
+            $("#purchaseLimit").show();
+            $("#WithdrawalLimit").hide();
+        } else {
+
+            $("#purchaseLimit").hide();
+            $("#WithdrawalLimit").show();
+        }
+        
+    }
+</script>

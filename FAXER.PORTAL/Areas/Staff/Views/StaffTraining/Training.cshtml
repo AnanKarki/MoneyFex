@@ -1,0 +1,74 @@
+﻿@model List<FAXER.PORTAL.Areas.Staff.ViewModels.StaffTrainingViewModel>
+@{
+    ViewBag.Title = "Training";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+
+@{Html.RenderPartial("_mail_sidebar");}
+<div class="col-lg-9 col-md-8">
+
+    <div class="dashboard_header">
+        <h1>My Trainings</h1>
+    </div>
+    <!--  -->
+    <div class="dashboard_body">
+
+        <div class="row">
+            <div class="col-lg-3 pull-right clearfix">
+                <div class="input-group stylish-input-group">
+                    <input type="text" class="form-control" value="Search Training">
+                    <span class="input-group-addon">
+                        <button type="submit" class="">
+                            <span class="glyphicon glyphicon-search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Training Title</th>
+                    <th>Training Link</th>
+                    <th>Training Deadline</th>
+                    <th>Completed Trainings</th>
+                    <th>Outstanding Trainings</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    i++;
+                    if (!item.TrainingLink.Contains("http"))
+                    {
+                        item.TrainingLink = "http://" + item.TrainingLink;
+                    }
+
+
+                <tr>
+                    <td>@i</td>
+                    <td>@item.TrainingTitle</td>
+
+                    <td><a href="@item.TrainingLink" target="_blank"> @item.TrainingLink.Substring(7)</a></td>
+                    <td>@item.TrainingDeadline</td>
+                    <td>@item.CompletedTraining</td>
+                    <td>@item.OutstandingTraining</td>
+                </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!--  -->
+
+
+</div>
+

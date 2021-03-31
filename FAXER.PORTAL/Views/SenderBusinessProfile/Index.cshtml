@@ -1,0 +1,187 @@
+﻿@model FAXER.PORTAL.Models.SenderBusinessprofileViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2  ">
+
+                    <div class="login_signup mb50 clearfix">
+                        <h3> Business   Profile </h3>
+                        <hr>
+
+                        <div class=" ">
+                            <!--  -->
+                            <div class="profileinfo">
+
+                                <div class="gear">
+                                    <label>Account Number:</label>
+                                    <span id="fullname" class="datainfo">@Model.AccountNo</span>
+
+
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Name of Business:</label>
+                                    <span id="fullname" class="datainfo">@Model.BusinessName</span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Business License:</label>
+                                    <span id="Address" class="datainfo">@Model.RegistrationNumber</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="website" class="datainfo">@Model.BusinessAddress1 , @Model.BusinessAddress2 , @Model.BusinessCity , @Model.BusinessCountry</span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Country:</label>
+                                    <span id="website" class="datainfo">@Model.BusinessCountry</span>
+
+                                </div>
+
+
+
+                                <div class="gear">
+                                    <label>Telephone / Wallet Number:</label>
+                                    <span id="Phone" class="datainfo"> @Model.PhoneCode @Model.PhoneNumber </span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Email:</label>
+                                    <span id="fax" class="datainfo">@Model.Email</span>
+
+                                </div>
+
+
+
+                                <h3>  Contact Person </h3>
+                                <hr>
+                                <div class="gear">
+                                    <label>Name:</label>
+                                    <span id="website" class="datainfo">@Model.ContactName</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="website" class="datainfo">@Model.Address1 , @Model.Address2 , @Model.City , @Model.Country</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Country:</label>
+                                    <span id="Address" class="datainfo">@Model.Country</span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <div class="text-center">
+                                @*<a href="@Url.Action("UpdateProfile", "SenderBusinessProfile")" class="btn btn-sm btn-primary radius-20 mb30">Edit Profile</a>*@
+                                <button type="submit" class="btn btn-sm btn-primary radius-20 mb30">Edit Profile</button>
+
+                            </div>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    if (ViewBag.IsPinCodeSend == 1)
+    {
+        <!-- KiiPay Confirmation -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Moneyfex Confirmation</h4>
+                    </div>
+                    <div class="modal-body uk-text-center ">
+                        <div class="form-group">
+                            <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+
+                            <input type="number" class="form-control" placeholder="Enter code" name="UserEnterPinCode" id="UserEnterPinCode">
+
+                            @*@Html.TextBox("UserEnterPinCode", new { @class = "form-control", @placeholder = "Enter Code" })*@
+                            @Html.Hidden("PinCode", new { id = "PinCode" })
+                            <div class="text-center">
+                                @Html.ValidationMessage("InvalidPinCode", "", new { @class = "text-danger", id = "InvalidPinCode" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <a class="btn btn-primary btn-sm radius-20" onclick="Update()">Confirm</a>
+                        <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- KiiPay Confirmation end -->
+    }
+
+}
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function Update() {
+
+            debugger;
+            var userpincode = $("#UserEnterPinCode").val();
+            var pincode = $("#PinCode").val();
+
+            if (userpincode == "" || userpincode == null || userpincode == undefined) {
+
+                $("#InvalidPinCode").text("Enter a code");
+
+            }
+            else if (userpincode != pincode) {
+
+                $("#InvalidPinCode").text("Enter a valid code");
+
+            } else {
+
+                window.location.href = "/SenderBusinessProfile/UpdateProfile?PinCode=" + userpincode;
+            }
+        }
+        $("#myModal").modal('show');
+        $("#PinCode").val(@ViewBag.PinCode);
+    </script>
+}

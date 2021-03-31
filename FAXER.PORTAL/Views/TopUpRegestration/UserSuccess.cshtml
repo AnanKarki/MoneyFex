@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "UserSuccess";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Virtual Account Registration</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>
+                    Confirmation of Virtual Account Registration
+                </h3>
+                <hr>
+
+
+
+                @*<p>You have successfully registered a  Virtual Account, a confirmation SMS text and email messages have been sent to your card user. Also, a receipt to confirm this payment has been sent to your registered email address and added to your MoneyFex Service account.</p>
+
+                <p>While waiting for the MoneyFax Card to be sent, your virtual account user can now use the confirmation SMS text message or email sent to him/her together with his/her ID Card to withdraw money from one of our agents in their country of residence. </p>*@
+
+
+                <p>You have successfully registered a MoneyFex Receiver Virtual Account, a confirmation email message has been sent to your account user.</p>
+
+                <p>Your account user can use the confirmation email sent to him/her by us to withdraw money money or spend from the account.</p>
+
+
+
+                <h3>What do you want to do next?</h3>
+                <hr>
+            </div>
+
+            <div class="mobile_design text-center">
+
+                <!--  -->
+                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                    <div class="newone  bgcolor1  ">
+                        <a href="@Url.Action("Index","StartFaxingMoney" , new { mFTCCardInformationId = ViewBag.TopUPCardId })">
+                            <div class="das-icon">
+                                <img src="/images/icon/1.png">
+                            </div>
+                            <h4>Deposit Money into Virtual Account</h4>
+                        </a>
+                    </div>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                    <div class="newone  bgcolor2 ">
+                        <a href="@Url.Action("Index","NonCardMoneyFax")">
+                            <div class="das-icon">
+                                <img src="/images/icon/2.png">
+                            </div>
+                            <h4>Cash to Cash Transfer</h4>
+                        </a>
+                    </div>
+                </div>
+                <!--  -->
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->

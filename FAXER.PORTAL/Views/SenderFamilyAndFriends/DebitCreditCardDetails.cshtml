@@ -1,0 +1,121 @@
+﻿@model FAXER.PORTAL.Models.CreditDebitCardViewModel
+
+@{
+
+    ViewBag.Title = "DebitCreditCardDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] amountSplited = Model.FaxingAmount.ToString("0.00").Split('.');
+}
+
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.NameOnCard</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary" @Model.FaxingCurrencySymbol @amountSplited[0]><small class="text-primary">@amountSplited[1]</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <img src="/images/icon/card/visa.png" alt="" width="35"> &nbsp;&nbsp; <img src="/images/icon/card/master-card.png" alt="" width="35">
+                                &nbsp;&nbsp; <img src="/images/icon/card/ae.png" alt="" width="35">
+                                &nbsp;&nbsp;<img src="/images/icon/card/maestro.png" alt="" width="35">
+                            </div>
+                            <div class="panel-body text-left mt20">
+                                <div class="row">
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.EnumDropDownListFor(model => model.CreditDebitCardType, "", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CreditDebitCardType, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control", @placeholder = "Card Number", @type = "number" })
+                                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.ExpiryDate, new { @class = "form-control", @placeholder = "Expiring date", @type = "date" })
+                                            @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.SecurityCode, new { @class = "form-control", @placeholder = "Security Code", @type = "number" })
+                                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(model => model.AddressLineOne, (IEnumerable<SelectListItem>)ViewBag.Address, "Select Address", new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.AddressLineOne, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-8"><label>Save this card for future use ?</label></div>
+                                    <div class="col-lg-2">
+                                        @Html.RadioButtonFor(model => model.SaveCard, true) Yes
+
+
+                                    </div>
+                                    <div class="col-lg-2">
+                                        @Html.RadioButtonFor(model => model.SaveCard, false) No
+                                    </div>
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <hr>
+                            <button type="submit" class="btn btn-primary btn-lg mb30">Confirm & Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!--  -->

@@ -1,0 +1,165 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.AgentTransferLimtViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Hold Cash Limit </h4>
+                                    <a href="@Url.Action("SetHoldCashLimit","AgentHoldCashLimit")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set New Limit
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                            <div class="row">
+
+                                                <!--  -->
+                                                <div class="col-xl-4 ">
+                                                    <div class="form-group">
+                                                        @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "js-example-data-array form-control form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-xl-4 ">
+                                                    <div class="form-group">
+                                                        @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-xl-4 ">
+                                                    <div class="form-group">
+
+                                                        @Html.DropDownList("Agent", (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @class = "js-example-data-array form-control form-control-round form-control-bold", @id = "Agent", @onchange = "filter();" })
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                            <div class="col-lg-4  ">
+                                                <div class="form-group">
+                                                    <input type="text" placeholder="Search By Account No " class="form-control form-control-round form-control-bold" name="AccountNo" id="AccountNo" value="@ViewBag.AccountNo" onchange="filter();">
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Agent</th>
+                                                    <th>Account No.</th>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Amount</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int i = 1;}
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.AgentName</td>
+                                                        <td><a href="">@item.AccountNo</a></td>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td>@item.CountryCurrencySymbol @item.Amount</td>
+
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetHoldCashLimit", "AgentHoldCashLimit", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+
+                                                        </td>
+                                                        @{i++;}
+                                                    </tr>
+                                                }
+
+
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) of @Model.PageCount
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { @page = page }))
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var country = $("#Country").val();
+          
+            var city = $("#City").val();
+            var agent = $("#Agent").val();
+            var AccountNo = $("#AccountNo").val();
+
+
+            window.location.href = "/Admin/AgentHoldCashLimit/Index?Country=" + country + " &city=" + city + " &AgentId=" + agent + " &AccountNo=" + AccountNo;
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/AgentHoldCashLimit/DeleteHoldCashLimit?Id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success!", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning!", 0);
+                        }
+                    });
+            });
+        }
+
+
+    </script>
+}
+

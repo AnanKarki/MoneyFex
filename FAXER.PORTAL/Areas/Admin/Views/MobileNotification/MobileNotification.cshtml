@@ -1,0 +1,259 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.MobileNotifiactionViewModel
+@{
+    ViewBag.Title = "MobileNotification";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Mobile Notification</h4>
+                                        <a href="@Url.Action("Index", "MobileNotification" )" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Mobile Notification
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.NotificationType, new
+                                                    {
+                                                        @class = "form-control form-control-lg form-control-round form-control-bold",
+                                                        @id = "NotificationType",
+                                                @onChange = "CheckNotificationType()"
+                                                    })
+                                                    @Html.ValidationMessageFor(x => x.NotificationType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Sending Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.SendingNotificationMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SendingNotificationMethod" })
+                                                    @Html.ValidationMessageFor(x => x.SendingNotificationMethod, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Sending Currency</label>
+                                                    @Html.DropDownListFor(x => x.SendingCurrency, (IEnumerable<SelectListItem>
+                                                        )ViewBag.SendingCurrency, "Select Sending Currency", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCurrency", @onchange = "GetSendingCountryByCurrency()" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCurrency, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>
+                                                        )ViewBag.SendingCountry, "Select Sending Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry", @onchange = "GetsenderByCountry();" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group" id="ReceivingCurrencydiv">
+                                                    <label>Receiving Currency</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCurrency, (IEnumerable<SelectListItem>
+                                                        )ViewBag.ReceivingCurrency, "Select Receiving Currency", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCurrency", @onchange = "GetReceivingCountryByCurrency();" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCurrency, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group" id="ReceivingCountrydiv">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>
+                                                        )ViewBag.ReceivingCountry, "Select Receiving Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Senders</label>
+                                                    @Html.DropDownListFor(x => x.SenderId, (IEnumerable<SelectListItem>)ViewBag.Senders,
+                                                   "All", new
+                                                        {
+                                                       @class = "",
+                                                       @id = "SenderId",
+                                                            @onchange = "GetSenderAccountNo()"
+                                                   })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Sender Account no.</label>
+                                                    @Html.TextBoxFor(x => x.SenderAccount, new { @class = "form-control  form-control-lg form-control-round", @placeholder = "", @id = "SenderAccount", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.SenderAccount, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Notification Heading</label>
+                                                    @Html.TextBoxFor(x => x.NotificationHeading, new { @class = "form-control  form-control-lg form-control-round", @placeholder = "Enter Heading Text", @id = "NotificationHeading" })
+                                                    @Html.ValidationMessageFor(x => x.NotificationHeading, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Full Notification</label>
+                                                    @Html.TextAreaFor(x => x.FullNotification, new { @class = "form-control  form-control-lg form-control-round ", @placeholder = "Enter Text", @rows = "4" })
+                                                    @Html.ValidationMessageFor(x => x.FullNotification, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","MobileNotification")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+
+            $("#SendingCurrency").val('@Model.SendingCurrency');
+            $("#ReceivingCurrency").val('@Model.ReceivingCurrency');
+
+
+        GetSenderAccountNo();
+        function GetSenderAccountNo() {
+            var senderId = $("#SenderId").val();
+            $.getJSON("/Admin/MobileNotification/GetAccountNumber?senderId=" + senderId, function (result) {
+                $("#SenderAccount").val(result.Data);
+            })
+
+        }
+
+        function GetSendingCountryByCurrency() {
+            var sendingCurrency = $("#SendingCurrency").val();
+            var NotificationType = $("#NotificationType").val();
+            $.getJSON("/Admin/MobileNotification/GetCountyByCurrency?currency=" + sendingCurrency, function (result) {
+                debugger;
+                var sendingCountrySelector = $("#SendingCountry");
+                $("#SendingCountry option").remove();
+                if (NotificationType != 2) {
+                    sendingCountrySelector.append('<option value="All">All</option>');
+                }
+                for (var i = 0; i < result.Data.length; i++) {
+                    sendingCountrySelector.append('<option value="' + result.Data[i].Code + ' "> ' + result.Data[i].Name + '</option>');
+                }
+                if ('@Model.SendingCountry' != '') {
+                         $("#SendingCountry").val('@Model.SendingCountry');
+                }
+            });
+            $("#SenderAccount").val('');
+            search();
+        }
+        function GetReceivingCountryByCurrency() {
+            var receivingCurrency = $("#ReceivingCurrency").val();
+            var NotificationType = $("#NotificationType").val();
+            $.getJSON("/Admin/MobileNotification/GetCountyByCurrency?currency=" + receivingCurrency, function (result) {
+                debugger;
+                var receivingCountrySelector = $("#ReceivingCountry");
+                $("#ReceivingCountry option").remove();
+                if (NotificationType != 2) {
+                    receivingCountrySelector.append('<option value="All">All</option>');
+                }
+                for (var i = 0; i < result.Data.length; i++) {
+                    receivingCountrySelector.append('<option value="' + result.Data[i].Code + ' "> ' + result.Data[i].Name + '</option>');
+                }
+                if ('@Model.ReceivingCountry' != '') {
+                    $("#ReceivingCountry").val('@Model.ReceivingCountry');
+                    $("#select2-SenderId-container").text("");
+                    $("#select2-SenderId-container").text('@Model.SenderFullName');
+                    $("#SenderAccount").val('@Model.SenderAccount');
+                    $("#SenderId").val('@Model.SenderId');
+
+                }
+            });
+            //search();
+
+
+        }
+        function GetsenderByCountry() {
+
+            var sendingCountry = $("#SendingCountry").val();
+            var sendingCurrency = $("#SendingCurrency").val();
+            var senderName = $("#SenderName").val();
+            if (sendingCountry == undefined || sendingCountry == "" || sendingCountry == null) {
+
+                return;
+            }
+            $.getJSON("/Admin/MobileNotification/GetsenderByCountry?country=" + sendingCountry
+                + "&currency=" + sendingCurrency + "&SenderName=" + senderName, function (result)
+            {
+
+                var senderSelector = $("#SenderId");
+                $("#SenderId option").remove();
+                senderSelector.append('<option value="0">All </option>');
+                senderSelector.append(result.Data);
+                //for (var i = 0; i <= result.Data.length; i++) {
+                //    senderSelector.append('<option value="' + result.Data[i].senderId + ' "> ' + result.Data[i].senderName + '</option>');
+                //}
+            })
+            $("#SenderAccount").val('');
+            search();
+        }
+        search();
+        function search() {
+            var data = {
+                id: $("#SenderId"),
+                country: $("#SendingCountry").val(),
+                Currecny: $("#SendingCurrency").val(),
+                isBusiness: false,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetSenders',
+                identifier: "SenderId",
+                placeholder: "All"
+            }
+            SelectSearch(data);
+        }
+
+        function CheckNotificationType() {
+
+            var NotificationType = $("#NotificationType").val();
+
+            if (NotificationType == 1) {
+                $("#ReceivingCurrencydiv").hide();
+                $("#ReceivingCountrydiv").hide();
+
+            }
+        }
+        var sendingCountry = '@Model.SendingCountry';
+        var receivingCountry = '@Model.ReceivingCountry';
+        var senderName = '@Model.SenderFullName';
+
+        if ('@Model.Id' != '0') {
+
+            GetSendingCountryByCurrency();
+            GetReceivingCountryByCurrency();
+
+            $("#SenderId").val('@Model.SenderId');
+
+
+        }
+
+
+    </script>
+}
+

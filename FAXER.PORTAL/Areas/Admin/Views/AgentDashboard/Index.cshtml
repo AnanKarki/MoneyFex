@@ -1,0 +1,1063 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentViewModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+
+                    <div class="  d-flex align-items-center flex-row card m-b-30">
+                        @foreach (var item in Model.LoginInformation)
+                        {
+                        <div class="card-block">
+                            <h3 class="">@item.Name</h3>
+                            <h5 class="text-primary">Account No. @item.AccountNo</h5>
+                            <h5 class="text-primary">Login Code: @item.Logincode</h5>
+                        </div>
+                        }
+                        <div class="card-block">
+                            <button class="btn btn-inverse  btn-round m-r-20" data-toggle="modal" data-target="#RegisteredAgentsnotepopup">Note</button>
+                            <button class="btn btn-primary btn-round m-r-20" data-toggle="modal" data-target="#email">Send Email</button>
+                            <button class="btn btn-secondary btn-round m-r-20" data-toggle="modal" data-target="#SMS">Send SMS</button>
+                            <a href="system-control-agent.php" class="btn btn-info btn-round">System Control</a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Account Balance</b></p>
+                                            <h4 class="m-b-0">$ 852</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Weekly Transfers</b></p>
+                                            <h4 class="m-b-0">$ 5,852</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Weekly Receive  </b></p>
+                                            <h4 class="m-b-0">$ 2442</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-dollar f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3 col-md-6">
+                            <div class="card bg-c-blue text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Weekly Bill Payment</b></p>
+                                            <h4 class="m-b-0">$ 5,242</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-shopping-cart f-40 text-c-blue"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-8 col-md-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-header-left ">
+                                        <h5>Monthly View</h5>
+                                        <!--     <span class="text-muted">For more details about usage, please refer <a href="https://www.amcharts.com/online-store/" target="_blank">amCharts</a> licences.</span> -->
+                                    </div>
+                                    <div class="card-header-right ">
+                                        <input type="text" name="datefilter" class="form-control" value="" placeholder="Filter" />
+                                    </div>
+                                </div>
+                                <div class="card-block-big">
+                                    <div id="monthly-graph" style="height:350px"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card feed-card">
+                                <div class="card-header">
+                                    <h5>Feeds</h5>
+                                </div>
+                                <div class="card-block">
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class=" fa fa-check bg-simple-c-green feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">New Staff Registration <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa fa-question bg-red feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">Compliance Alert <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa fa-question bg-simple-c-yellow feed-icon"></i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">New Fund Issued <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa  bg-simple-c-pink feed-icon">R</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">New Customer <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa   bg-simple-c-green feed-icon">L</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">New Limit Reached <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row m-b-30">
+                                        <div class="col-auto p-r-0">
+                                            <i class="fa bg-simple-c-yellow feed-icon">E</i>
+                                        </div>
+                                        <div class="col">
+                                            <h6 class="m-b-5">App Error <span class="text-muted f-right f-13">Just Now</span></h6>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Recent Transactions </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Identifier</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="activity-transfer.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Bill Payment</td>
+                                                    <td><a href="activity-bill-payment.php">HAV-65458</a></td>
+                                                    <td>Yesterday</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">On Hold</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="activity-kiipay-received.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-danger">On Hold</label>
+                                                    </td>
+                                                    <td>Bill Payment</td>
+                                                    <td><a href="activity-bill-payment.php">HAV-65458</a></td>
+                                                    <td>Yesterday</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-primary">progress</label>
+                                                    </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td><a href="activity-kiipay-received.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Bank Deposit</td>
+                                                    <td><a href="activity-transfer-bank-deposit.php">HAV-65458</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Mobile Wallet</td>
+                                                    <td><a href="activity-kiipay-received.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>KiiPay Wallet</td>
+                                                    <td><a href="activity-kiipay-received.php">00145414</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="activity.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>General Updates</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="latest-update-box">
+                                        <div class="row p-t-20 p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hrs ago</p>
+                                                <i class="fa  bg-info update-icon">L</i>
+
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><a href="">Latest News About Agent</a></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                <i class="fa bg-simple-c-yellow  update-icon">A</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><a href="">Agent Message Sent to Agent</a></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                <i class="fa   bg-simple-c-pink update-icon">A</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><span class="text-red">Sanction List Alert</span>  <a href="">Agent is available </a></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                <i class="fa bg-simple-c-yellow  update-icon">C</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><a href="">Latest Commission</a></h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                <i class="fa   bg-simple-c-pink update-icon">G</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><a href="">Good Agent</a> </h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                <i class="fa bg-simple-c-yellow  update-icon">E</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"><a href="">Excellent</a></h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="#!" class="b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Compliance </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <div class="circle-in-table bg-simple-c-yellow">
+                                                            LF
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle"><a href="compliance-large-funds.php">Large Fund Submited</a></td>
+
+                                                    <td class="align-middle">Today 2:00</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <div class="circle-in-table bg-simple-c-pink">
+                                                            <i class="fa fa-question "></i>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle"><a href="compliance-sar.php">SAR  Submited</a></td>
+
+                                                    <td class="align-middle">Yesterday 2:00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <div class="circle-in-table bg-simple-c-green">
+                                                            TS
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle"><a href="compliance-AML-training.php">Training Submited</a></td>
+
+                                                    <td class="align-middle">Jan-02-2019 </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="align-middle">
+                                                        <div class="circle-in-table bg-simple-c-yellow">
+                                                            PF
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle"><a href="compliance-funding-source.php">Proof of Funds Submited</a></td>
+
+                                                    <td class="align-middle">Yesterday 2:00</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="agent-compliance-list.php" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Agent Staff </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Name</th>
+                                                    <th>Title</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Active</label>
+                                                    </td>
+                                                    <td>Ukesh Raj..</td>
+                                                    <td>Admin</td>
+                                                    <td><a href="agent-staff-details.php">Details</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Active</label>
+                                                    </td>
+                                                    <td>Ukesh Raj..</td>
+                                                    <td>Compliance</td>
+                                                    <td><a href="agent-staff-details.php">Details</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Active</label>
+                                                    </td>
+                                                    <td>Ukesh Raj..</td>
+                                                    <td>Manager</td>
+                                                    <td><a href="agent-staff-details.php">Details</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-warning">Inactive</label>
+                                                    </td>
+                                                    <td>Ukesh Raj..</td>
+                                                    <td>User</td>
+                                                    <td><a href="agent-staff-details.php">Details</a></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-4 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Withdrawals </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Staff</td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="withdrawals-details.php">Details</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Confirmed</label>
+                                                    </td>
+                                                    <td>Staff</td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="withdrawals-bank-details.php">Details</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-primary">progress</label>
+                                                    </td>
+                                                    <td>Agent</td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="withdrawals-details.php">Details</a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card ">
+                                <div class="card-header">
+                                    <h5>System Activity</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block p-t-15">
+                                    <div class="latest-update-box">
+                                        <div class="row  p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">2 hrs ago</p>
+                                                <i class="fa bg-success update-icon">200</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"> <a href="">Login</a></h6>
+                                            </div>
+                                        </div>
+
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">1 day ago</p>
+                                                <i class="fa bg-red update-icon">10</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10"> Failed Login</h6>
+                                            </div>
+                                        </div>
+                                        <div class="row p-b-30">
+                                            <div class="col-auto text-right update-meta">
+                                                <p class="text-muted m-b-0 d-inline">4 hrs ago</p>
+                                                <i class="fa   bg-info update-icon">2</i>
+                                            </div>
+                                            <div class="col">
+                                                <h6 class="m-t-10">  Password Reset </h6>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="text-center m-r-20">
+                                        <hr>
+                                        <a href="#!" class="b-b-primary text-primary">View all  </a>
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                            <div class="card latest-update-card ">
+                                <!--  -->
+                                <div class="card-header">
+                                    <h5>Promotions </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
+                                <div class="card-block ">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name</th>
+                                                    <th>Amount/Rate</th>
+                                                    <th>Code</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Mother</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        New Year
+                                                    </td>
+                                                    <td>$5</td>
+                                                    <td><a href="">2020</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>0</td>
+                                                    <td><a href="">Mother</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        New Year
+                                                    </td>
+                                                    <td>$5</td>
+                                                    <td><a href="">2020</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Christmas
+                                                    </td>
+                                                    <td>0%</td>
+                                                    <td><a href="">Free12</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        Easter
+                                                    </td>
+                                                    <td>1%</td>
+                                                    <td><a href="">Test235</a></td>
+                                                    <td>Jan-05-2019</td>
+
+                                                </tr>
+
+
+
+
+
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+
+                            </div>
+
+
+
+                        </div>
+
+
+
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card latest-update-card">
+                                <div class="card-header">
+                                    <h5>Agent Details</h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                @foreach (var item in Model.LoginInformation)
+                                {
+                                <div class="card-block p-t-15">
+                                    <div class=" ">
+
+                                        <table class="table  table-responsive m-b-0">
+
+                                            <tr>
+                                                <th class="social-label b-none p-t-0">
+                                                    Agent Name
+                                                </th>
+                                                <td class="social-user-name b-none p-t-0 text-muted">@item.Name</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none p-t-0">
+                                                    Registration Date
+                                                </th>
+                                                <td class="social-user-name b-none p-t-0 text-muted">Jan-05-2019</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Business Type</th>
+                                                <td class="social-user-name b-none text-muted">Finance</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Business Registration</th>
+                                                <td class="social-user-name b-none text-muted">85454745</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Login No.</th>
+                                                <td class="social-user-name b-none text-muted">58585</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none p-b-0">Agent Type</th>
+                                                <td class="social-user-name b-none p-b-0 text-muted">Principal</td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="social-label b-none">Currency</th>
+                                                <td class="social-user-name b-none text-muted">
+                                                    <span class="flag-icon flag-icon-gb"></span> GBP
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">System Adminstrator</th>
+                                                <td class="social-user-name b-none text-muted">Peter Edah</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Main Contact Person</th>
+                                                <td class="social-user-name b-none text-muted">James Elliot</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">City</th>
+                                                <td class="social-user-name b-none text-muted">London</td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Telephone</th>
+                                                <td class="social-user-name b-none text-muted">
+                                                    <a href="tel:+445458745475">+445458745475</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Office</th>
+                                                <td class="social-user-name b-none text-muted">
+                                                    <a href="tel:+445458745475">+445458745475</a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Email</th>
+                                                <td class="social-user-name b-none text-muted"><a href="mailto:info@abcbank.com">info@abcbank.com</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Address</th>
+                                                <td class="social-user-name b-none text-muted">
+                                                    10 Mearson Street<br> Hallow Road<br> TW1 1DQ<br> United Kingdom
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Due Diligence Reporting Officer</th>
+                                                <td class="social-user-name b-none text-muted"><a href="agent-staff-details.php">Louis Anegekhu</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Due Diligence Report</th>
+                                                <td class="social-user-name b-none text-muted"><a href="">Report</a></td>
+                                            </tr>
+                                            <tr>
+                                                <th class="social-label b-none">Due Diligence Document</th>
+                                                <td class="social-user-name b-none text-muted"><a href="">Documents</a></td>
+                                            </tr>
+
+
+                                            <tr>
+                                                <th class="social-label b-none">Agent Affiliated to Referrer?</th>
+                                                <td class="social-user-name b-none text-muted">Yes</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th class="social-label b-none">Referrer</th>
+                                                <td class="social-user-name b-none text-muted"><a href="partner-dashboard.php">LTD Limited</a></td>
+                                            </tr>
+
+                                        </table>
+
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <a href="agent-update-details.php" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update Details</a>
+
+                                        <button type="button" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</button>
+
+
+                                        <button type="button" class="btn btn-danger btn-round  s"><i class="fa fa-remove"></i> Delete</button>
+
+
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Invoice </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Status</th>
+                                                    <th>Type</th>
+                                                    <th>Reference</th>
+                                                    <th>Date</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success">Paid</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-warning">Outstanding</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-inverse ">Coming up</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-success ">Paid</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-warning">Outstanding</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <label class="label label-inverse ">Coming up</label>
+                                                    </td>
+                                                    <td>Commission</td>
+                                                    <td><a href="details-transfer-paid.php">1254554</a></td>
+                                                    <td>Today 2:00</td>
+                                                </tr>
+
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12">
+                            <div class="card table-card">
+                                <div class="card-header">
+                                    <h5>Agent Account Credit<small> (for pre-financing)</small> </h5>
+                                    <div class="card-header-right">
+                                        <ul class="list-unstyled card-option">
+                                            <li><i class="fa fa-window-maximize full-card"></i></li>
+                                            <li><i class="fa fa-refresh reload-card"></i></li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix m-t-15"> </div>
+                                    <a href="credit-account.php" class="btn btn-round btn-primary pull-right">Credit Account</a>
+                                </div>
+                                <div class="card-block">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover table-borderless">
+                                            <thead>
+                                                <tr>
+                                                    <th>Staff Name</th>
+                                                    <th>Amount</th>
+                                                    <th>Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Marcus</a>
+                                                    </td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="agent-account-credit-details.php">Details</a></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Marcus</a>
+                                                    </td>
+                                                    <td>$2000</td>
+                                                    <td>Jan-01-2019</td>
+                                                    <td><a href="agent-account-credit-details.php">Details</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Marcus</a>
+                                                    </td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="agent-account-credit-details.php">Details</a></td>
+                                                </tr>
+
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Marcus</a>
+                                                    </td>
+                                                    <td>$2000</td>
+                                                    <td>Jan-01-2019</td>
+                                                    <td><a href="agent-account-credit-details.php">Details</a></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td>
+                                                        <a href="">James Marcus</a>
+                                                    </td>
+                                                    <td>$2000</td>
+                                                    <td>Today 2:00</td>
+                                                    <td><a href="agent-account-credit-details.php">Details</a></td>
+                                                </tr>
+
+
+
+                                            </tbody>
+                                        </table>
+                                        <div class="text-center m-r-20">
+                                            <hr>
+                                            <a href="#!" class=" b-b-primary text-primary">View all  </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!--  <div id="styleSelector">
+             </div> -->
+        </div>
+    </div>
+</div>

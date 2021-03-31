@@ -1,0 +1,166 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.WithdrawMoneyFromWalletSummaryVM
+@{
+    ViewBag.Title = "WithdrawMoneyFromWalletSummary";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+
+
+                        <h3 class="text-center">Review</h3>
+                        <hr>
+
+
+
+
+                        <div class="text-left">
+
+
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> From </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.FromWallet
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> To </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.ToBankAccount
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> Amount </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                        @Model.Amount @Model.CurrencyCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> Fee </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                       @Model.Fee @Model.CurrencyCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label> You will Receive </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <div class="form-control form-text">
+                                       @Model.TotalReceiveAmount @Model.CurrencyCode
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+
+
+
+
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <a data-toggle="modal" data-target="#ConfirmationWithdraw" class="btn btn-primary btn-lg  mb30 ">Confirm Withdrawal <i class="fa fa-angle-right" aria-hidden="true"></i></a>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <!--   Confirmation -->
+    <div id="ConfirmationWithdraw" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Confirm Withdrawal</h4>
+                </div>
+                <div class="modal-body uk-text-center ">
+                    <div class="form-group">
+                        <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+                        @Html.TextBoxFor(model => model.MobileCode, new { @type = "number", @placeholder = "Enter code", @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.MobileCode, "", new { @class = "text-danger" })
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default btn-sm radius-20">Confirm</button>
+                    <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <!--   Confirmation end -->
+
+}

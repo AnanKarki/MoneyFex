@@ -1,0 +1,283 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.UpdateProperyViewModel
+
+@{
+    ViewBag.Title = "UpdatePropertyOfTransaction";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{<div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0"> Update Transaction Property</h4>
+
+                                        <a href="@Url.Action("Index","TransactionHistoryOfAllSender")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                            <i class="icofont icofont-eye m-r-5"></i> Update Transaction Property
+                                        </a>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(x => x.ReceiptNo)
+                                        @Html.HiddenFor(x => x.TransactionId)
+                                        @Html.HiddenFor(x => x.TransactionServiceType)
+                                        @Html.HiddenFor(x => x.Country)
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiver Name</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverName, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Receiver Name" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                @if (Model.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.BankDeposit)
+                                                {
+                                                    @*<div class="form-group">
+                                                            <label>Bank </label>
+                                                            @Html.DropDownListFor(x => x.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank", new { @class = "form-control form-control-round form-control-bold", @onchange = "GetBankCode()" })
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Bank Code</label>
+                                                            @Html.TextBoxFor(x => x.BankCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Bank Code" })
+                                                            @Html.ValidationMessageFor(x => x.BankCode, "", new { @class = "text-danger" })
+
+                                                        </div>*@
+
+                                                    <div class="form-group">
+                                                        <div class="form-group m-b-35">
+                                                            <div class="input-group input-group-round input-group-lg">
+                                                                <span class="input-group-addon" id="CountryPhoneCodeSpan"> @ViewBag.CountryPhoneCode </span>
+
+                                                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Mobile Number ", @autocomplete = "off" })
+
+                                                            </div>
+
+                                                            @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+
+
+                                                        </div>
+                                                    </div>
+                                                    if (Model.IsEuropeTransfer == true)
+                                                    {
+
+                                                        <div class="form-group   mb20">
+                                                            @Html.TextBoxFor(x => x.BankName, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Bank Name" })
+                                                            @Html.ValidationMessageFor(model => model.BankName, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group   mb20">
+                                                            @Html.TextBoxFor(x => x.BankCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter BIC/SWIFT" })
+                                                            @Html.ValidationMessageFor(model => model.BankCode, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb20">
+                                                            @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter IBAN" })
+                                                            @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    }
+                                                    else if (Model.IsWestAfricaTransfer == true)
+                                                    {
+
+                                                        <div class="form-group mb30" id="dropdown">
+                                                            @Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank Name", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "BankId", @data_show_subtext = "true", @data_live_search = "true", onchange = "GetBankCode()" })
+                                                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb20">
+                                                            @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter IBAN" })
+                                                            @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    }
+
+                                                    else if (Model.IsSouthAfricaTransfer == true)
+                                                    {
+
+                                                        <div class="form-group mb30">
+
+                                                            @Html.TextBoxFor(x => x.ReceiverStreet, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Address" })
+                                                            @Html.ValidationMessageFor(model => model.ReceiverStreet, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb30">
+
+                                                            @Html.TextBoxFor(x => x.ReceiverPostalCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Postcode" })
+                                                            @Html.ValidationMessageFor(model => model.ReceiverPostalCode, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb30">
+
+                                                            @Html.TextBoxFor(x => x.ReceiverCity, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter City" })
+                                                            @Html.ValidationMessageFor(model => model.ReceiverCity, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb30">
+                                                            @Html.TextBoxFor(x => x.ReceiverEmail, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Email Address" })
+                                                            @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb20">
+                                                            @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Account Number" })
+                                                            @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb30" id="dropdown">
+                                                            @Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank Name", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "BankId", @data_show_subtext = "true", @data_live_search = "true", onchange = "GetBankCode()" })
+                                                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+                                                        </div>
+                                                        <div class="form-group mb30">
+                                                            @Html.HiddenFor(x => x.BankCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter code", @readonly = true, @style = "display:none" })
+                                                            @Html.ValidationMessageFor(model => model.BankCode, "", new { @class = "text-danger" })
+                                                            @*<p style="font-size:15px"><i> Bank code / branch code / sort code / routing number etc</i> </p>*@
+                                                        </div>
+                                                    }
+                                                    else
+                                                    {
+
+                                                        <div class="form-group mb30" id="dropdown">
+                                                            @Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank Name", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "BankId", @data_show_subtext = "true", @data_live_search = "true", onchange = "GetBankCode()" })
+                                                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                        if (Model.Country == "GH")
+                                                        {
+                                                            <div class="form-group mb30">
+
+                                                                @Html.DropDownListFor(model => model.BankCode, (IEnumerable<SelectListItem>)ViewBag.Branches, "Select Branch", new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                                @Html.ValidationMessageFor(model => model.BankCode, "", new { @class = "text-danger" })
+                                                            </div>
+                                                        }
+
+
+                                                        <div class="form-group mb20">
+                                                            @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Account Number", @type = "number" })
+                                                            @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+                                                            @*@Html.ValidationMessage("AccountNumber", new { @class = "text-danger" })*@
+
+                                                        </div>
+
+
+                                                        if (Model.Country != "GH")
+                                                        {
+                                                            <div class="form-group   mb20" style="display:none">
+
+
+                                                                @Html.HiddenFor(x => x.BankCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter code", @readonly = true, @style = "display:none" })
+                                                                @Html.ValidationMessageFor(model => model.BankCode, "", new { @class = "text-danger" })
+                                                                <p style="font-size:15px"><i> Bank code / branch code / sort code / routing number etc</i> </p>
+                                                            </div>
+
+
+                                                        }
+                                                    }
+
+                                                }
+                                                @if (Model.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.MobileWallet)
+                                                {
+                                                    <div class="form-group">
+                                                        <label>Wallet Provider</label>
+                                                        @Html.DropDownListFor(x => x.WalletId, (IEnumerable<SelectListItem>)ViewBag.Wallets, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Wallet" })
+                                                        @Html.ValidationMessageFor(x => x.BankCode, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label id="labelText"></label>
+                                                        @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Account no" })
+                                                        @Html.ValidationMessageFor(x => x.AccountNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                }
+                                                @if (Model.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.CashPickUp)
+                                                {
+                                                    <div class="form-group">
+                                                        <div class="form-group m-b-35">
+                                                            <div class="input-group input-group-round input-group-lg">
+                                                                <span class="input-group-addon" id="CountryPhoneCodeSpan"> @ViewBag.CountryPhoneCode </span>
+                                                                @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Mobile Number ", @autocomplete = "off" })
+                                                            </div>
+                                                            @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group   mb20">
+                                                        @Html.TextBoxFor(x => x.ReceiverEmail, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Email Address (Optional)" })
+                                                        @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    if (Model.Country == "MA")
+                                                    {
+                                                        <div class="form-group mb20">
+                                                            @Html.DropDownListFor(model => model.IdenityCardId, (IEnumerable<SelectListItem>)ViewBag.IdCardTypes, "Select Id Card", new { @class = "form-blue", @id = "IdenityCardId" })
+                                                            @Html.ValidationMessageFor(model => model.IdenityCardId, "", new { @class = "text-danger" })
+                                                        </div>
+
+                                                        <div class="form-group   mb20">
+                                                            @Html.TextBoxFor(x => x.IdentityCardNumber, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter IdCard number" })
+                                                            @Html.ValidationMessageFor(model => model.IdentityCardNumber, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    }
+                                                }
+
+                                                <!--  -->
+                                                <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","TransactionHistoryOfAllSender")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        ShowlabelText();
+        function ShowlabelText() {
+            debugger;
+            if ('@Model.TransactionServiceType' == '@FAXER.PORTAL.Models.TransactionServiceType.BankDeposit') {
+            $("#labelText").text("Account No");
+        }
+        else {
+            $("#labelText").text("Mobile No");
+            }
+        }
+
+        function GetBankCode() {
+
+            var bankId = $("#BankId").val();
+            $.getJSON("/SenderBankAccountDeposit/GetBankCode?bankId=" + bankId, function (result) {
+
+                $("#BankCode").val(result.BranchCode);
+
+
+
+            })
+
+        }
+    </script>
+}
+
+
+

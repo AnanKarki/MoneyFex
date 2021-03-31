@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px;">
+
+    <p>
+        Dear @ViewBag.FaxerName,
+    </p>
+    <p>
+        The balance on your registered Virtual Account @ViewBag.MFTCCardNumber  is Zero (0), @ViewBag.CardUserName will not be able to withdraw money or pay for goods and services in @ViewBag.CardUserCountryCode.
+    </p>
+    <p>
+        The Exchange Rates today is:  1 @ViewBag.SenderCurrency @ViewBag.SenderCountryCode = @ViewBag.ExchangeRate @ViewBag.CardUserCurrency @ViewBag.CardUserCountryCode
+    </p>
+    <p>
+        You can take advantage of our competitive exchange rates and fees to deposit money into this account now.
+    </p>
+    <p>
+        In addition to making a deposit, you can also set up Standing Order Payment to this virtual account to always make money available to {Account User Name} while having full control on how much he/she can withdraw and spend from the account at a given time.
+    </p>
+
+    <br />
+
+    <table style="width:80%;margin-left:80px ">
+        <tbody>
+            <tr>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoTopUp"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/21.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+
+</div>

@@ -1,0 +1,197 @@
+﻿@model List<FAXER.PORTAL.Models.TrackAFaxViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Transaction History</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <form>
+                        @*<div class="col-lg-8 pull-right ">
+                            <label id="Validate" class="col-lg-4" style="color:red;display:none">Please Enter Valid Date</label>
+                        </div>
+                        <div class="col-lg-8 pull-right ">
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" ">
+                                        From:
+                                    </label>
+                                    <input type="date" id="From" class="form-control">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" ">
+                                        To:
+                                    </label>
+                                    <input type="date" id="To" class="form-control">
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <br />
+
+
+                                <button type="button" class="btn btn-success btn-sm" onclick="Filter()">Search</button>
+                                <button type="button" class="btn btn-warning btn-sm" onclick="Filter()">Reload</button>
+
+
+
+                            </div>
+
+
+                        </div>*@
+                        <div class="clearfix"></div>
+
+                        <div class="col-lg-4 col-lg-offset-8">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" placeholder="Search Receiver's Name/MFCN" name="searchText">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <br>
+                        <div class=" ">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Receiver's Name</th>
+                                            <th>Receiver's City</th>
+                                            <th>Country </th>
+                                            <th>Sent Amount</th>
+                                            <th>Sent Date</th>
+                                            <th>Sent Time</th>
+                                            <th>MFCN</th>
+                                            <th>Status of Send Money</th>
+                                            <th>Sent Receipt</th>
+                                            <th>Repeat Send </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            int index = 0;
+                                        }
+                                        @foreach (var item in Model)
+                                        {
+                                            index++;
+                                            <tr>
+                                                <td>@index</td>
+                                                <td hidden>@item.Id</td>
+                                                <td>@item.ReceiverName</td>
+                                                <td>@item.ReceiverCity</td>
+                                                <td>@item.ReceiverCountry</td>
+                                                <td>@item.FaxedAmount</td>
+                                                <td>@item.FaxedDate</td>
+                                                <td>@item.FaxedTime</td>
+                                                <td>@item.MoneyFaxControlNumber</td>
+                                                <td>@item.Faxingstatus</td>
+                                                <td><a href="@Url.Action("printReceipt" ,"RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", MFCN = item.MoneyFaxControlNumber })" target="_blank" class="btn btn-warning btn-xs"> Sent Receipt</a></td>
+                                                <td><a href="@Url.Action("SendMoneyAgainToReceiver" , "FaxingHistory", new {ReceivingCountry = item.ReceiverCountryCode , ReceiverId = item.Id})" class="btn btn-success btn-xs">Send money again to this receiver </a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <a href="@Url.Action("index","DashBoard")" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard</a>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<!-- <div class="dynamic_footer">
+  <div class="container">
+    <div class="row">
+  <div class="col-lg-8 col-lg-offset-2">
+<a href="index.php" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+<a href="faxmoney1.php" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+<br/>
+<a href="index.php" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+  </div>
+</div>
+</div>
+</div> -->
+<!--  -->
+
+@section Scripts{
+
+    <script type="text/javascript">
+        function Filter() {
+
+            var from = $("#From").val();
+            var To = $("#To").val();
+            if ((To == null || To == "") && (from == null || from == "")) {
+
+                window.location.href = "/FaxingHistory/Index?FromDate=" + from + "&ToDate=" + To;
+            }
+            else if (from == null || from == "") {
+                $("#Validate").show();
+            }
+            else if (To == null || To == "") {
+
+                $("#Validate").show();
+            }
+
+            else {
+                var fromParts = from.split('-');
+                var newDateFrom = new Date(fromParts[0], fromParts[1] - 1, fromParts[2]);
+                var ToParts = To.split('-');
+                var newDateTo = new Date(ToParts[0], ToParts[1] - 1, ToParts[2]);
+                if (newDateFrom.getFullYear().toString().length != "4" || newDateTo.getFullYear().toString().length != "4") {
+                    $("#Validate").show();
+
+                }
+                else if (newDateFrom > newDateTo) {
+
+                    $("#Validate").show();
+
+                }
+                else {
+                    $("#Validate").hide();
+                    window.location.href = "/FaxingHistory/Index?FromDate=" + from + "&ToDate=" + To;
+                }
+            }
+
+        }
+    </script>
+}

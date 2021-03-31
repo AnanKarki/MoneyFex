@@ -1,0 +1,143 @@
+﻿@model List<FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessMoneyTransferInProgressViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Money Transfers in Progress</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row ">
+                    <div class="col-lg-4 pull-right">
+                        <div class="input-group stylish-input-group">
+                            <input type="text" id="SearchText" class="form-control" placeholder="Search Receiver's Name/MFCN ">
+                            <span class="input-group-addon">
+                                <button type="button" class="" onclick="SearchTran()">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Receiver's Name</th>
+                                    <th>Country</th>
+                                    <th>Receiver's City</th>
+                                    <th>Transfer Amount</th>
+                                    <th> Date</th>
+                                    <th> Time</th>
+                                    <th>MFCN</th>
+                                    <th>Status of Transfer</th>
+                                    <th>Action on Transfer</th>
+                                    <th> Receipt</th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @{int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.ReceiverName</td>
+                                        <td>@item.ReceiverCountry</td>
+                                        <td>@item.ReceiverCity</td>
+
+                                        <td>@item.TransferAmount</td>
+                                        <td>@item.Date</td>
+                                        <td><time>@item.Time</time></td>
+                                        <td>@item.MFCN</td>
+                                        <td>@item.StatusOfTransfer</td>
+                                        @*<td><a href="" class="btn btn-danger btn-xs" data-toggle="modal" data-target="#fax-cancellation">Cancel Transfer</a></td>*@
+
+                                        <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#fax-cancellation" onclick="GetValue(@item.TransactionId);">Cancel Transfer</a></td>
+                                        <td><a href="@Url.Action("NonCardTransferReceipt", "BusinessMoneyTransferInProgress" , new { Id = item.TransactionId})" target="_blank" class="btn btn-warning btn-xs"> Transfer Receipt</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="@Url.Action("Index" , "BusinessHome")" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("CancelFax", "BusinessMoneyTransferInProgress", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <!-- fax-cancellation popup -->
+    <div class="modal fade" id="fax-cancellation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex - Transaction Cancellation</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Hidden("ID", null, new { @id = "id" })
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9  col-md-9 col-sm-9 col-xs-9" >
+                            <h4>Are you sure you want to cancel this Transaction?</h4>
+
+                            <p>
+                                Please note that after cancellation, you will only be refunded the transferred amount <b>NOT</b> the  fee!
+                            </p>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok">Yes Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        function GetValue(val) {
+            document.getElementById("id").value = val;
+        };
+
+        function SearchTran() {
+
+            var SearchText = $("#SearchText").val();
+            window.location.href = "/Businesses/BusinessMoneyTransferInProgress/Index?searchText=" + SearchText;
+        }
+    </script>
+}
+<!-- fax-cancellation popup -->

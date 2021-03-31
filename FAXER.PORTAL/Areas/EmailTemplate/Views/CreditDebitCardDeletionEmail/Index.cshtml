@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+@*<div style="padding:20px">
+        <p>
+            Dear @ViewBag.FaxerName
+        </p>
+        <p>
+            This is to confirm that you have deleted the Credit/Debit card ending @ViewBag.CreditDebitCardLast4Digits from your MoneyFex Service Account.
+        </p>
+        <p>
+            You will not be able to continue with your <i> <b> Standing Orders Payments</b></i>and Deposit.
+        </p>
+        <p>
+            To add a new Credit/Debit card, please use the following link:
+        </p>
+        <br />
+
+        <table style="width:50%;margin-left:150px">
+            <tbody>
+                <tr>
+                    <td style="border-color: #fff;
+                            padding: 5px; text-align: center;">
+                        <a href="@ViewBag.AddNewCreditOrDebitCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/26.png" alt=""></a>
+                    </td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>*@
+
+<table>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.FaxerName</b>,</h1>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p style="line-height: 30px; color: #02b6ff;  font-weight: 500; font-size: 18px;">
+                    This is to confirm that the Credit/Debit card  ending with @ViewBag.CreditDebitCardLast4Digits  has been deleted from your MoneyFex account.
+                </p>
+                <p style="line-height: 30px; color: #02b6ff;  font-weight: 500; font-size: 18px;">
+                    If this deletion was not done by yourself, please contact us immediately.
+                </p>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    Thank you
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+

@@ -1,0 +1,174 @@
+﻿@model FAXER.PORTAL.Models.SignUp.SenderPersonalDetailVM
+@{
+    ViewBag.Title = "PersonalDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-center">
+                    <div class="text-center">
+                        <h3>Enter Personal Details</h3>
+                    </div>
+                    <hr>
+                    <form>
+                        <div class="pinside20">
+
+                            @*<div class="form-group">
+                                <div class="user-image-reg">
+
+                                </div>
+                                <p><a href="" class="block">Choose photo</a></p>
+                            </div>*@
+                            @Html.ValidationMessage("InvalidName", "", new { @class = "text-danger" })
+                            <!--  -->
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @placeholder = "First Name" })
+                                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                                @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", placeholder = "Last Name" })
+                                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="row">
+
+                                <div class="col-lg-12 text-left">
+                                    <label>Birth Date</label>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.Day, new { @type = "number", @placeholder = "DD", @class = "form-control" })
+                                        @*<input type="number" placeholder="Day" class="form-control">*@
+                                        @Html.ValidationMessageFor(model => model.Day, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.EnumDropDownListFor(model => model.Month, new { @class = "form-control" })
+                                        @*<select name="month" class="form-control">
+                        <option>Month</option>
+                        <option value="January">January</option>
+                        <option value="February">February</option>
+                        <option value="March">March</option>
+                        <option value="April">April</option>
+                        <option value="May">May</option>
+                        <option value="June">June</option>
+                        <option value="July">July</option>
+                        <option value="August">August</option>
+                        <option value="September">September</option>
+                        <option value="October">October</option>
+                        <option value="November">November</option>
+                        <option value="December">December</option>
+                    </select>*@
+
+                                        @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.Year, new { @type = "number", @placeholder = "Year", @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.ValidationMessage("DOB", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="row">
+
+                                <div class="col-lg-12 text-left">
+                                    <label>Gender</label>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-3 text-left">
+                                    <div class="form-group mb20">
+
+                                        <label>
+                                            @Html.RadioButtonFor(model => model.Gender, FAXER.PORTAL.Models.Gender.Male)
+                                            Male
+                                        </label>
+                                        @*<label><input type="radio" name="mf"> Male</label>*@
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 text-left">
+                                    <div class="form-group mb20">
+
+                                        <label>
+                                            @Html.RadioButtonFor(model => model.Gender, FAXER.PORTAL.Models.Gender.Female)
+                                            Female
+                                        </label>
+                                        @*<label><input type="radio" name="mf"> Female</label>*@
+
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                            </div>
+                            <!--  -->
+
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+
+                        <div class="col-lg-12 mb20 ">
+                            <button type="submit" class="btn btn-primary radius-20">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                        <!--  -->
+
+                        <div class="clearfix">
+
+                        </div>
+                    </form>
+
+                </div>
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+}
+
+@section Scripts{
+    
+    <script type="text/javascript">
+
+        $('input[name="Day"]').val("");
+        $('input[name="Year"]').val("");
+
+    </script>
+    }

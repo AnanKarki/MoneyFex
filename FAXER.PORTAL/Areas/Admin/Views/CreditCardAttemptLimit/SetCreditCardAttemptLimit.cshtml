@@ -1,0 +1,156 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.CreditCardAttemptLimitViewModel
+@{
+    ViewBag.Title = "SetCreditCardAttemptLimit";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Daily Card Payment Attempts</h4>
+                                        <a href="@Url.Action("Index", "CreditCardAttemptLimit")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View
+                                        </a>
+                                    </div>
+
+                                    @Html.HiddenFor(x => x.Id)
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(model => model.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold ", @id = "SendingCountry", @onchange = "GetSenderByCountry()" })
+                                                    @Html.ValidationMessageFor(model => model.SendingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(model => model.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <div class="form-group">
+                                                        <label>Sender</label>
+                                                        @Html.DropDownListFor(model => model.SenderId, (IEnumerable<SelectListItem>)ViewBag.Senders, "Select Sender", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SenderId", @onchange = "GetAccountNumber()" })
+                                                        @Html.ValidationMessageFor(model => model.SenderId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Money Fex Account No</label>
+                                                    @Html.TextBoxFor(model => model.SenderAccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeHolder = "Enter sender Account", @id = "AccountNumber", @readonly = "readonly" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Card Attempts</label>
+                                                    @Html.TextBoxFor(model => model.AttemptLimit, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeHolder = "Enter Amount" })
+
+                                                </div>
+
+                                                <!--  -->
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "CreditCardAttemptLimit")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function GetSenderByCountry() {
+            var SendingCountry = $("#SendingCountry").val();
+            $.getJSON("/Admin/TransactionAmountLimit/GetsenderByCountry?Country=" + SendingCountry, function (result) {
+                var senderSelector = $("#SenderId");
+                $("#SenderId option").remove();
+                senderSelector.append('<option value="">Select</option>');
+                senderSelector.append('<option value="0">All</option>');
+                for (var i = 0; i <= result.Data.length; i++) {
+                    senderSelector.append('<option value="' + result.Data[i].senderId + '">' + result.Data[i].senderName + '</option>');
+                }
+            })
+        }
+
+        function GetAccountNumber() {
+            var SenderId = $("#SenderId").val();
+            $.getJSON("/Admin/TransactionAmountLimit/GetAccountNumber?SenderId=" + SenderId, function (result) {
+                var AccountNumber = result.Data;
+                $("#AccountNumber").val(AccountNumber);
+            })
+            GetAttemptLimit();
+        }
+
+        function GetAttemptLimit() {
+            var SendingCountry = $("#SendingCountry").val();
+            var ReceivingCountry = $("#ReceivingCountry").val();
+            var SenderId = $("#SenderId").val();
+            window.location.href = "/Admin/CreditCardAttemptLimit/SetCreditCardAttemptLimit?sendingCountry=" + SendingCountry
+                + "&receivingCountry=" + ReceivingCountry + "&senderId=" + SenderId;
+
+        }
+    </script>
+}
+
+

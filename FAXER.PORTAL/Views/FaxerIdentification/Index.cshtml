@@ -1,0 +1,113 @@
+﻿@model FAXER.PORTAL.Models.FaxerIdentification
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:28%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Sender Regestration</h1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Index", "FaxerIdentification", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+               
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="login_signup">
+
+                            <h3>Sender's Identification Document</h3>
+                            <hr />
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdCardType, htmlAttributes: new { @class = "control-label col-md-5 required" })
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(x => x.IdCardType, null, "Select Card Type", htmlAttributes: new { @class = "form-control", id = "CardType" })
+                                    @Html.ValidationMessageFor(model => model.IdCardType, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdCardNumber, htmlAttributes: new { @class = "control-label col-md-5 required" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.IdCardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.IdCardNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IdCardExpiringDate, htmlAttributes: new { @class = "control-label col-md-5 required" })
+                                <div class="col-md-6">
+                                    @Html.EditorFor(model => model.IdCardExpiringDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                    @Html.ValidationMessageFor(model => model.IdCardExpiringDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.IssuingCountry, htmlAttributes: new { @class = "control-label col-md-5 required" })
+
+                                <div class="col-md-6">
+                                    @Html.DropDownListFor(model => model.IssuingCountry, null, "Select Issuing Country", htmlAttributes: new { @class = "form-control", id = "RecCountry" })
+                                    @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <span> Will you at any time be transferring or paying over a $1000 or an equivalent amount at given time using our platform?</span>
+                                <div class="checkbox" style="margin-left:20px;">
+                                    @Html.CheckBoxFor(model => model.CheckAmount)Yes
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                To comply with anti-money laundering regulations, MoneyFex Service requires a copy of your photo ID (driving Licence and passport are the only acceptable forms of ID)
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6 form-group">
+                                    <input type="file" id="dataFile" name="upload" class="form-control"/>
+                                    @Html.ValidationMessage("File", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                    <br />
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

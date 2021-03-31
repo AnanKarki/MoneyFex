@@ -1,0 +1,40 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName,
+    </p>
+    <br />
+    <p>
+        This is to confirm that a balance refund of @ViewBag.RefundAmount has been issued to the Credit/Debit Card ending with @ViewBag.FourDigitOfCard for the following Virtual Account deleted by @ViewBag.Deleter;
+    </p>
+    <br />
+    Name of Account Registrar: @ViewBag.FaxerName
+    <br />
+    Account No: @ViewBag.MFTCNo
+    <br />
+    Name on Account: @ViewBag.CardUserName
+    <br />
+    Date of Birth of Registered Account User: @ViewBag.CardUserDOB
+    <br />
+    Account User Country: @ViewBag.CardUserCountry
+    <br />
+    Account User City: @ViewBag.CardUserCity
+    <br />
+    Amount on Account: @ViewBag.RefundAmount
+    <br />
+    @*Top - up Method: @ViewBag.TopUpMethod
+    <br />
+    Original Top-up Amount in Sender Currency: @ViewBag.OriginalTopUpAmountSendCurrency
+    <br />*@
+
+    <p>
+        Please find attached a receipt to confirm this refund. This is your official receipt, keep it safe!
+    </p>
+
+    <br />
+    
+
+</div>

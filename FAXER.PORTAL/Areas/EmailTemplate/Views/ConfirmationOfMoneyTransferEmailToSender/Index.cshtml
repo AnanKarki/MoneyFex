@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.CardUserName,
+    </p>
+    <p>
+        You have successfully made a transfer to @ViewBag.ReceiverFullName, he/she can now collect the money from one of our paying agents in @ViewBag.ReceiverCity.
+    </p>
+    <p>
+        In addition to the receiver's national Identification Document (ID), @ViewBag.ReceiverFullName will need the following information to collect the money:
+    </p>
+    <br />
+    <p>
+        MoneyFex Control Number (MFCN): @ViewBag.MFCN <br />
+        Transferred Amount: @ViewBag.TransferredAmount @ViewBag.FaxingCurrency<br />
+    </p>
+    <br />
+    <p>
+        Note that, government issued ID card, driving license and passport are the only acceptable forms of ID. <br />
+        You can use the MFCN to find the status of your transfer by using the tracking feature of MoneyFex
+        <a href=""> =>Here</a>
+    </p>
+    @if (ViewBag.IsLocalPayment == 0)
+    {
+    <p>
+        Please find attached, a receipt to confirm your transaction.
+    </p>
+    }
+
+
+
+
+</div>
+

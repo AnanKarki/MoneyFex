@@ -1,0 +1,205 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddPublicHolidayViewModel
+@{
+    ViewBag.Title = "AddPublicHoliday";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm(new { @id = "postId" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Add Public Holidays  </h4>
+                                        <a href="/Admin/SetPublicHolidays" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Holidays
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+
+                                                        <label> Country</label>
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "country" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "All Cities", new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "city" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Holiday Name</label>
+                                                        @Html.TextBoxFor(model => model.HolidayName, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(model => model.HolidayName, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Start Date</label>
+                                                        @Html.EditorFor(model => model.FromDate, new { htmlAttributes = new { @id = "fromDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                        @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Finish Date</label>
+                                                        @Html.EditorFor(model => model.ToDate, new { htmlAttributes = new { @id = "toDate", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                        @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","SetPublicHolidays")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button class="btn btn-primary btn-round pull-right" onclick="datefunctions();"><i class="fa fa-save"></i> Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function (e) {
+                var country = $(this).val();
+                window.location.href = "/Admin/SetPublicHolidays/AddPublicHoliday?country=" + country;
+
+            });
+
+            $("#city").change(function (e) {
+                var country = $("#country").val();
+                var city = $(this).val();
+                window.location.href = "/Admin/SetPublicHolidays/AddPublicHoliday?country=" + country + "&city=" + city;
+
+            });
+
+        });
+
+        function datefunctions() {
+
+            fromDateChange();
+            toDateChange();
+            $("#postId").submit();
+        }
+
+        function fromDateChange(date) {
+
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+
+            var partsFrom = fromDate.split('/');
+            var partsTo = "";
+            if (!(toDate == "")) {
+                partsTo = toDate.split('/');
+            }
+
+
+            var holidaysFromDate = new Date(partsFrom[2], partsFrom[1] - 1, partsFrom[0]);
+            var holidaysToDate = new Date(partsTo[2], partsTo[1] - 1, partsTo[0]);
+
+            var currentDate = new Date();
+            if (holidaysFromDate.getFullYear().toString().length != 4) {
+                alert("Please enter a valid date !");
+                //$("#fromDate").val("");
+                holidaysFromDate.val("");
+            }
+            else if (!(holidaysFromDate > currentDate)) {
+                alert("The Holiday Start date must be greater than the preset date !");
+                $("#fromDate").val("");
+            }
+            else if (holidaysFromDate > holidaysToDate) {
+                alert("Holiday End Date can't be smaller than the Holiday Start date !");
+                $("#fromDate").val("");
+            }
+
+
+        }
+
+        function toDateChange(date) {
+
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+
+            var partsFrom = fromDate.split('/');
+            var partsTo = toDate.split('/');
+
+            var holidaysFromDate = new Date(partsFrom[2], partsFrom[1] - 1, partsFrom[0]);
+            var holidaysToDate = new Date(partsTo[2], partsTo[1] - 1, partsTo[0]);
+
+            if (holidaysToDate.getFullYear().toString().length != 4) {
+                alert("Please enter a valid date !");
+                $("#toDate").val("");
+            }
+            else if ((holidaysFromDate > holidaysToDate)) {
+                alert("Holiday End Date can't be smaller than the Holiday Start date !");
+                $("#toDate").val("");
+            }
+
+
+        }
+
+
+
+
+
+    </script>
+
+
+
+}

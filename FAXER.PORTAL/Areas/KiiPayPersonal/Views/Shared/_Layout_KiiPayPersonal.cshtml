@@ -1,0 +1,1398 @@
+﻿@{
+    int PersonalId = 0;
+
+    if (FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel != null)
+    {
+
+        PersonalId = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.KiiPayPersonalWalletId;
+
+    }
+
+    string BalanceFirstPart = "0";
+    string BalanceSecondPart = "0";
+    string CurrencySymbol = "";
+    int BusinessId = 0;
+    if (FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel != null)
+    {
+
+        string[] bal = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard.ToString().Split('.');
+        if (bal.Length > 1)
+        {
+            BalanceFirstPart = bal[0];
+            BalanceSecondPart = bal[1];
+        }
+        CurrencySymbol = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol;
+    }
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFax Service">
+    <meta name="keywords" content="MoneyFax Service ">
+    <title>KiiPay Wallet - Mobile Payments App | Pay by Mobile </title>
+    <!-- Favicons
+    ================================================== -->
+    <link rel="icon" type="image/png" href="~/Areas/KiiPayPersonal/images/favicon.png">
+
+    <!-- Bootstrap -->
+    <link href="~/Areas/KiiPayPersonal/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/KiiPayPersonal/css/style.css" rel="stylesheet">
+    <link href="~/Areas/KiiPayPersonal/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/KiiPayPersonal/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/KiiPayPersonal/css/animsition.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link rel="stylesheet" type="text/css" href="~/Areas/KiiPayPersonal/css/niceCountryInput.css">
+    <link href="~/Areas/KiiPayPersonal/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Areas/KiiPayPersonal/css/owl.theme.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59b8ed860a46e80012bb442f&product=inline-share-buttons"></script>
+</head>
+<body class="animsition">
+    @if (FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel != null)
+    {
+        <div class="header">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-md-2 col-sm-3 col-xs-6   ">
+                        <!-- logo -->
+                        <div class="logo text-center">
+                            <a  href="@Url.Action("Home","Dashboard" ,new {@Area ="KiiPayPersonal" })">  <img src="~/Areas/KiiPayPersonal/images/logo.png" alt="MoneyFex Service"></a>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-6 col-sm-9 col-xs-6  hidden-md  hidden-lg">
+                        <!-- search start-->
+                        <div class="pull-right text-right">
+
+                            <ul class="after-login-menu pull-right">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="user_image  ">
+                                            <!-- <i class="fa fa-user"></i> -->
+                                            <img src="~/Areas/KiiPayPersonal/images/icon/svg/user.svg">
+                                        </div>
+                                        <!-- <span class="name">Ukesh Shrestha </span>
+                                        <p>Account No. XXXXXXXXXX </p>
+                                        <span class="fa fa caret"></span> -->
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index", "Dashboard")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("AccountProfile", "Dashboard")">Account Profile</a></li>
+                                        <li><a href="@Url.Action("Index", "SavedCreditDebitCard")">Saved Credit/Debit Card</a></li>
+                                        <li><a href="@Url.Action("Index", "KiiPayPersonalStandingOrderPayment")">Standing Order Payments</a></li>
+                                        <li class=""><a href="@Url.Action("LogOut", "LogIn")">Logout</a></li>
+                                    </ul>
+                                    <div class="clearfix">
+
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- logo -->
+
+                    <div class="col-lg-6 col-md-6col-sm-6 col-xs-6  pull-right  hidden-sm hidden-xs">
+
+                        <div id="navigation" class="hidden-xs">
+                            <!-- navigation start-->
+                            <ul>
+                                <li class="dropdown  hidden-xs" id="notificationList">
+                                    <a href="#" class="dropdown-toggle notification  " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class=""> <i class="fa fa-bell fa-stack-1x fa-inverse"></i></span>
+                                        <span class="badge" data-bind="text:Notifications().length">0</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu notify-drop  dropdown ">
+                                        <div class="notify-drop-title">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6" id="count">Notification  (<strong data-bind="text:Notifications().length"></strong>)</div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                            </div>
+                                        </div>
+                                        <!-- end notify title -->
+                                        <!-- notify content -->
+                                        <div class="drop-content">
+
+                                            <!-- ko foreach: Notifications() -->
+                                            <li>
+                                                <div class=" pd-l0">
+
+                                                    <a href="#">
+                                                        <h5>PAYMENTS</h5>Payment from <span class="text-black" data-bind="text:ReceiverName"> </span> , Amount: <span data-bind="text:Amount">$1000</span> <p data-bind="text:Time">01/02/2019 08:35 AM</p>
+                                                        <p class="time" data-bind="text:HourAgo">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+
+                                            <!-- /ko -->
+                                            @*<!--  -->
+                                                <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>PAYMENTS</h5>Payment from <span class="text-black"> Ukesh,</span> Amount: $1000 <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>PAYMENTS</h5>Payment from <span class="text-black"> Cyberlink,</span> Amount: $1000 <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>TRANSFER IN PROGRESS</h5>MFCN No. 677676 Collected <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>TRANSFER IN PROGRESS</h5>MFCN No. 677676 Held <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>MESSAGE</h5>Message from  <span class="text-black">Gaurav   </span>  <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                                <!--  -->*@
+                                        </div>
+                                        <div class="notify-drop-footer text-center">
+                                            <a href="notification.php"><i class="fa fa-eye"></i> See All  </a>
+                                        </div>
+                                    </ul>
+                                </li>
+
+
+                            </ul>
+                            <div class="clearfix">
+
+                            </div>
+                        </div>
+
+                        <!--   start-->
+
+
+                        <ul class="after-login-menu">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="user_image  ">
+                                        <!-- <i class="fa fa-user"></i> -->
+                                        <img src="~/Areas/KiiPayPersonal/images/icon/svg/user.svg">
+                                    </div>
+                                    <!--    <span class="name">Ukesh Shrestha </span>
+                                       <p>Account No. XXXXXXXXXX </p>
+                                       <span class="fa fa caret"></span> -->
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "Dashboard")">Dashboard</a></li>
+                                    <li><a href="@Url.Action("AccountProfile", "Dashboard")">Account Profile</a></li>
+                                    <li><a href="@Url.Action("Index", "SavedCreditDebitCard")">Saved Credit/Debit Card</a></li>
+                                    <li><a href="@Url.Action("Index", "KiiPayPersonalStandingOrderPayment")">Standing Order Payments</a></li>
+                                    <li class=""><a href="@Url.Action("LogOut", "LogIn")">Logout</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <!-- /.  end-->
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <header id="header" class="">
+
+
+            <nav class="navbar navbar-default">
+                <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="@Url.Action("Home","Dashboard" ,new {@Area ="KiiPayPersonal" })">  <img src="~/Areas/KiiPayPersonal/images/logo.png" alt="MoneyFex Service"></a>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li class=""><a href="@Url.Action("Login","KiiPayBusinessLogin",new { @Area = "KiiPayBusiness"})">Business</a> </li>
+                            <li class=""> <a href="@Url.Action("Index","LogIn",new {@Area="KiiPayPersonal"})">Personal</a> </li>
+                            <li class=""><a href="@Url.Action("Index", "LogIn",new {@Area="KiiPayPersonal"})">Log in</a></li>
+
+
+                        </ul>
+
+
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </nav>
+
+
+        </header><!-- /header -->
+    }
+    <!--
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <ul>
+        <li><a href="dashboard.php">Dashboard</a></li>
+        <li><a href="faxers-information.php">My Account Profile</a></li>
+        <li class=""><a href="index.php">Logout</a></li>
+      </ul>
+    </div> -->
+
+    @RenderBody()
+    @if (FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel != null)
+    {
+        <div class="footer section-space60">
+            <!-- footer -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-xs-6">
+                        <div class="  footerlinks">
+                            <div class="col-lg-6 col-md-6 col-xs-12 widget-footer">
+                                <ul class="listnone">
+                                    <li>  <a href="">KiiPay T&Cs</a></li>
+                                    <li>
+                                        <a href="privacy-policy.php">Privacy Policy</a>
+                                    </li>
+                                    <li><a href="cookie-policy.php">Cookies</a> </li>
+
+
+
+
+                                    <li><a href="faq.php">FAQ</a></li>
+
+
+                                </ul>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12 widget-footer">
+                                <ul class="listnone">
+
+                                    <li>
+                                        <a href="">KiiPay Software T&Cs</a>
+                                    </li>
+                                    <li><a href="site-terms-of-use.php">Site Terms of use</a></li>
+
+                                    <li><a href="contact.php">Contact Us</a></li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-xs-12  ">
+
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <a href="" class=" radius-20"><img src="~/Areas/KiiPayPersonal/images/google-play.png"></a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <a href="" class=" radius-20"><img src="~/Areas/KiiPayPersonal/images/apple-store.png"></a>
+                        </div>
+
+
+                        <div class="hidden-lg hidden-md clearfix">
+                            <div class="mt20"></div>
+                        </div>
+                        <div class=" text-right ">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12   ">
+
+                                <a href="#"><i class="fa fa-facebook"></i>  </a> <a href="#"><i class="fa fa-google-plus"></i>    </a>
+                                <a href="https://twitter.com/MoneyFex" target="_blank"><i class="fa fa-twitter"></i>  </a>
+                                <a href="#"><i class="fa fa-instagram"></i>  </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb60">
+
+                </div>
+                <div class="row   ">
+                    <div class="col-lg-8 col-md-6 col-xs-12">
+                        <p>MoneyFex Ltd. 1st floor, North Westgate House Harlow, Essex London CN !YS United Kingdom | Company Registration Number : 10105082 MoneyFex is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment service. Registration number: 745989</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12 text-right mt20">
+                        <p class=" "><img src="~/Areas/KiiPayPersonal/images/logo.png" width="60" class="radius-20 bg-white "> Payment <b>Wallet</b> is powered by <br>   <img src="~/Areas/KiiPayPersonal/images/mf-logo.png" width="100" class="radius-20  "></p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+    else
+    {
+        <div class="footer section-space60">
+            <!-- footer -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-6 col-xs-6">
+                        <div class="  footerlinks">
+                            <div class="col-lg-6 col-md-6 col-xs-12 widget-footer">
+                                <ul class="listnone">
+                                    <li>  <a href="">KiiPay T&Cs</a></li>
+                                    <li>
+                                        <a href="privacy-policy.php">Privacy Policy</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-xs-12 widget-footer">
+                                <ul class="listnone">
+                                    <li><a href="cookie-policy.php">Cookies</a> </li>
+                                    <li>
+                                        <a href="">KiiPay Software T&Cs</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                    <div class="col-lg-8 col-md-6 col-xs-12  ">
+
+
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <a href="" class=" radius-20"><img src="images/google-play.png"></a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-6 ">
+                            <a href="" class=" radius-20"><img src="images/apple-store.png"></a>
+                        </div>
+
+
+                        <div class="hidden-lg hidden-md clearfix">
+                            <div class="mt20"></div>
+                        </div>
+                        <div class=" text-right ">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12   ">
+
+                                <a href="#"><i class="fa fa-facebook"></i>  </a> <a href="#"><i class="fa fa-google-plus"></i>    </a>
+                                <a href="https://twitter.com/MoneyFex" target="_blank"><i class="fa fa-twitter"></i>  </a>
+                                <a href="#"><i class="fa fa-instagram"></i>  </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="mb60">
+
+                </div>
+                <div class="row   ">
+                    <div class="col-lg-8 col-md-6 col-xs-12">
+                        <p>MoneyFex Ltd. 1st floor, North Westgate House Harlow, Essex London CN !YS United Kingdom | Company Registration Number : 10105082 MoneyFex is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment service. Registration number: 745989</p>
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-xs-12 text-right mt20">
+                        <p class=" "><img src="images/logo.png" width="60" class="radius-20 bg-white "> Payment <b>Wallet</b> is powered by <br>   <img src="images/mf-logo.png" width="100" class="radius-20  "></p>
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    }
+
+    <!-- /.footer -->
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="~/Areas/KiiPayPersonal/js/jquery-3.4.1.min.js"></script>
+    <script src="~/Areas/KiiPayPersonal/js/bootstrap.min.js"></script>
+
+    <script src="~/Areas/KiiPayPersonal/js/niceCountryInput.js"></script>
+
+    <script>
+        function onChangeCallback(ctr) {
+            console.log("The country was changed: " + ctr);
+            //$("#selectionSpan").text(ctr);
+        }
+
+        $(document).ready(function () {
+            $(".niceCountryInputSelector").each(function (i, e) {
+                new NiceCountryInput(e).init();
+            });
+        });
+    </script>
+
+    <!-- Back to top script -->
+    <script src="~/Areas/KiiPayPersonal/js/back-to-top.js" type="text/javascript"></script>
+    <script>
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        })
+
+        $(document).ready(function () {
+            $(window).scroll(function () {
+
+                if ($(window).scrollTop() > 150) {
+                    $('.dbbottom-footer').css('position', 'fixed');
+                    $('.dbbottom-footer').css('bottom', '0');
+                } else if ($(window).scrollTop() <= 150) {
+                    $('.dbbottom-footer').css('position', '');
+                    $('.dbbottom-footer').css('top', '');
+                }
+                if ($('.dbbottom-footer').offset().top + $(".dbbottom-footer").height() > $("#footer").offset().top) {
+                    $('.dbbottom-footer').css('bottom', -($(".dbbottom-footer").offset().top + $(".dbbottom-footer").height() - $("#footer").offset().top));
+                }
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+
+        $(document).ready(function () {
+
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+
+        });
+
+
+           $(window).load(function () {
+            //$('#onload').modal('show');
+
+
+            @*if ('@FullName' != "") {
+
+                UpdateCurrentBal();
+            }*@
+            if ($(".wallet-balance")[0] != undefined) {
+            $(".wallet-balance").children().children()[0].innerText = '@BalanceSecondPart';
+            var val = $(".wallet-balance").children().children()[0].outerHTML;
+            $(".wallet-balance").children()[1].innerText = "";
+            $(".wallet-balance").children()[1].innerHTML = '@CurrencySymbol ' + '@BalanceFirstPart' + '.' + val;
+            @*$(".wallet-balance").children().children()[1].innerText = '@BalanceSecondPart';*@
+                }
+
+
+
+        });
+    </script>
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/KiiPayPersonal/datatables/css/dataTables.bootstrap.min.css">
+    <script type="text/javascript" src="~/Areas/KiiPayPersonal/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/KiiPayPersonal/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+    <script src="/signalr/hubs"></script>
+    <script src="~/Areas/KiiPayPersonal/js/animsition.js"></script>
+    <script src="~/Areas/KiiPayPersonal/js/animsition-script.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#DataTable').DataTable();
+
+        });
+    </script>
+
+    <script src="~/Areas/KiiPayPersonal/js/slogan-roulette.js"></script>
+    <script>
+        $('#swappable-title').sloganRoulette({
+            autoplay: true,
+            repeat: true,
+            startDelay: 2000,
+            interval: 2000,
+            outClass: "bounceOut",
+            inClass: "bounceIn",
+            slogans: ["Pay Bills", "Request Money", "Transfer Money"]
+        });
+    </script>
+    <script>
+        var dashBoardHub = $.connection.dashBoardHub;
+        var KiiPayPersonalHub = $.connection.kiiPayPersonalHub;
+
+        debugger;
+
+        @*$.connection.hubs.start({ transport: 'longPolling' }, function () {
+            console.log('connection started!');
+                 var BusinessId = @BusinessId;
+            dashBoardHub.server.addCompanyGroup(BusinessId);
+            //kitchenHub.server.addKitchenGroup(kitchenGroupId);
+            KiiPayBusinessHub.server.addKiiPayBusiness(BusinessId);
+        });*@
+        $.connection.hub.start().done(function () {
+            console.log('connection started!');
+            var PersonalId = @PersonalId;
+            dashBoardHub.server.addCompanyGroup(PersonalId);
+            //kitchenHub.server.addKitchenGroup(kitchenGroupId);
+            KiiPayPersonalHub.server.addKiiPayPersonal(PersonalId);
+        });
+        // Create a function that the hub can call to broadcast messages.\
+        debugger;
+        //var broadcastMessageFunc = [];
+        //dashBoardHub.client.broadcastMessage = function (name, message, amount , Time , hourago ,  data) {
+        //    $.each(broadcastMessageFunc, function (i) {
+        //        broadcastMessageFunc[i](name, message, amount, Time, hourago, data);
+        //    });
+        //};
+
+        var KiiPayPersonalbroadcastMessageFunc = [];
+        KiiPayPersonalHub.client.broadcastMessage = function (name, message, amount, Time, hourago, data) {
+            $.each(KiiPayPersonalbroadcastMessageFunc, function (i) {
+                KiiPayPersonalbroadcastMessageFunc[i](name, message, amount, Time, hourago, data);
+            });
+        };
+
+        //var addCounterOrderFunc = [];
+        //counterHub.client.addOrder = function (OrderNo, TableNo, id, CompanyId) {
+        //    $.each(addCounterOrderFunc, function (i) {
+        //        addCounterOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+        //    })
+        //};
+        //var deliveredOrderFunc = [];
+        //counterHub.client.orderDelivered = function (OrderNo, TableNo, id, CompanyId) {
+        //    $.each(deliveredOrderFunc, function (i) {
+        //        deliveredOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+        //    })
+        //};
+        //chat.server.send()
+
+    </script>
+    <script>
+        function NotificationController() {
+
+            var url = "/Notification";
+            self.Notifications = ko.observableArray([]);
+            //self.NotificationFor = ko.observableArray([
+
+            //    { Id: 0, Name: 'KiiPayBusiness' },
+            //    { Id: 1, Name: 'kiiPayPersonal' },
+            //    { Id: 2, Name: 'Sender' },
+            //    { Id: 3, Name: 'Agent' },
+            //    { Id: 4, Name: 'Admin' },
+            //    { Id: 5, Name: 'Staff' },
+
+            //]);
+
+            if (@PersonalId > 0)
+            {
+                Riddha.ajax.get(url + "/GetAllNotification?ReceiverId=" + @PersonalId + "&notificationFor=" + 1)
+                    .done(function (result) {
+                        self.Notifications(ko.toJS(result.Data));
+                    });
+
+            }
+            //self.sendRealtimeMessage = function (message) {
+            //    debugger;
+            //    $(".badge").text("1")
+
+            //    //var message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies eros at magna convallis, at maximus velit hendrerit."
+            //    //$("#message").append("<br/>")
+            //    //var dt = new Date();
+            //    //var time = dt.getHours() + ":" + dt.getMinutes();
+            //    //this.alert(message);
+            //    // self.showText("#message", time + "  -  " + message, 0, 1);
+            //}
+
+            //self.showText = function (target, message, index, interval) {
+            //    if (index < message.length) {
+            //        $(target).append(message[index++]);
+            //        this.alert(message);
+            //        setTimeout(function () { self.showText(target, message, index, interval); }, interval);
+            //    }
+            //    $("#message").parent().parent().scrollTop($("#message").parent().parent().height());
+            //}
+
+
+            // Declare a proxy to reference the hub.
+
+            // Create a function that the hub can call to broadcast messages.
+            KiiPayPersonalbroadcastMessageFunc.push(function (name, message, amount, Time, hourago, data ) {
+
+                //self.sendRealtimeMessage(message);
+
+                // Html encode display name and message.
+                //Riddha.UI.Toast(message, 4, name);
+                var url = "#";
+                //switch (notificationType) {
+                //    case 0:
+                //        url = "/ordermanagement/orderconfirm";
+                //        break;
+                //    case 1:
+                //        url = "/ordermanagement/orderDelivery";
+                //        break;
+                //    case 2:
+                //        url = "/ordermanagement/orderBill";
+                //        break;
+                //    default:
+                //        url = "#";
+
+                //}
+
+                var note = {
+
+                    ReceiverName: name,
+                    Message: message,
+                    Amount: amount,
+                    Time: Time,
+                    HourAgo: hourago
+
+                };
+                //add notification to ui
+                self.Notifications.push(note);
+
+            });
+            //addKiiPayBusinessItemfunc.push(function (name, message, amount, Time, hourago, data) {
+
+            //    //self.sendRealtimeMessage(message);
+
+            //    // Html encode display name and message.
+            //    //Riddha.UI.Toast(message, 4, name);
+            //    var url = "#";
+            //    //switch (notificationType) {
+            //    //    case 0:
+            //    //        url = "/ordermanagement/orderconfirm";
+            //    //        break;
+            //    //    case 1:
+            //    //        url = "/ordermanagement/orderDelivery";
+            //    //        break;
+            //    //    case 2:
+            //    //        url = "/ordermanagement/orderBill";
+            //    //        break;
+            //    //    default:
+            //    //        url = "#";
+
+            //    //}
+
+            //    var note = {
+
+            //        ReceiverName: name,
+            //        Message: message,
+            //        Amount: amount,
+            //        Time: Time,
+            //        HourAgo: hourago
+
+            //    };
+            //    //add notification to ui
+            //    self.Notifications.push(note);
+
+            //});
+
+        }
+        function removeNotification(control) {
+            var context = ko.contextFor(control);
+            var data = ko.dataFor(control);
+            context.$root.Notifications.remove(data);
+            console.log(context);
+        }
+    </script>
+    <script type="text/javascript">
+
+        ko.cleanNode(document.getElementById("notificationList"));
+        var obj = new NotificationController();
+        ko.applyBindings(obj, document.getElementById("notificationList"));
+    </script>
+
+    <!-- Modal -->
+    <div class="modal " id="myModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">You will need the following information to Sign Up for an account with MoneyFax Service: </h4>
+
+                </div>
+                <div class="modal-body">
+
+                    <p>Full name, date of birth, username (preferably email address), password, identification document information and contact details. </p>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="signup.php" class="btn btn-sm btn-primary">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <!-- ecard -->
+    <div class="modal fade" tabindex="-1" id="ecard" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog modal-card" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                    <div class="Wrap">
+                        <div class="Base">
+                            <div class="Inner-wrap">
+
+                                <!--       Header SVG -->
+
+                                <div class="Logo-name">
+                                    KiiPay eCard
+                                </div>
+
+                                <!--       Logo SVG -->
+                                <div class="logo">
+                                    <img src="https://www.persofoto.com/images/vorher-nachher/passfoto-beispiel-nachher.jpg" alt="">
+                                </div>
+
+                                <!-- Card Chip SVG -->
+
+                                <svg class="Chip" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 387.8 380.3" style="enable-background:new 0 0 387.8 380.3;" xml:space="preserve">
+                                <style type="text/css">
+                                    .st0 {
+                                        fill: url(#gold-gradient);
+                                        stroke: #000000;
+                                        stroke-width: 10;
+                                        stroke-miterlimit: 10;
+                                    }
+</style>
+                                <defs>
+                                <linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" stop-color="#c79750"></stop>
+                                <stop offset="20%" stop-color="#e6b964"></stop>
+                                <stop offset="50%" stop-color=" #f8e889"></stop>
+                                <stop offset="80%" stop-color=" #deb15f"></stop>
+                                <stop offset="100%" stop-color=" #dfb461"></stop>
+                                    </linearGradient>
+                                </defs>
+                                <g id="XMLID_4_">
+                                <path id="XMLID_1_" class="st0" d="M308.8,375.3H79.1C38.2,375.3,5,342.1,5,301.2V79.1C5,38.2,38.2,5,79.1,5h229.7
+                  c40.9,0,74.1,33.2,74.1,74.1v222.2C382.8,342.1,349.7,375.3,308.8,375.3z" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_2_" class="st0" x1="109.9" y1="5.1" x2="109.9" y2="375.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_3_" class="st0" x1="4.9" y1="95.1" x2="109.9" y2="95.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_7_" class="st0" x1="4.9" y1="185.1" x2="109.9" y2="185.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_8_" class="st0" x1="1.9" y1="275.1" x2="106.9" y2="275.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_9_" class="st0" x1="276.9" y1="275.1" x2="381.9" y2="275.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_10_" class="st0" x1="274.9" y1="185.1" x2="379.9" y2="185.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <line id="XMLID_11_" class="st0" x1="277.9" y1="95.1" x2="382.9" y2="95.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <g id="XMLID_6_">
+                                <g id="XMLID_14_">
+                                <g id="XMLID_32_">
+                                <path id="XMLID_33_" d="M277.4,90.1h-1c-2.5,0-4.5,2-4.5,4.5v272c0,2.5,2,4.5,4.5,4.5h1c2.5,0,4.5-2,4.5-4.5v-272
+                                        C281.9,92.1,279.9,90.1,277.4,90.1z" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                            </g>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                                <div class="Card-number">
+                                    <ul>
+                                        <li id="first-li">123</li>
+                                        <li> 456</li>
+                                        <li id="last-li"> 1789</li>
+                                    </ul>
+                                </div>
+
+                                <!--  <div class='Expire'>
+                                    <h4>Good Thru</h4>
+                                    <p>02/20</p>
+                                  </div> -->
+
+                                <div class='Name'>
+                                    <h3><span>Globecons Shop</span>Sofia Anegekuh</h3>
+                                </div>
+
+                                <!--       Visa Logo SVG -->
+
+                                <div class="Visa">
+                                    <img src="~/Areas/KiiPayPersonal/images/e-logo.png" alt="">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ecard -->
+    @RenderSection("Scripts", false);
+</body>
+
+</html>

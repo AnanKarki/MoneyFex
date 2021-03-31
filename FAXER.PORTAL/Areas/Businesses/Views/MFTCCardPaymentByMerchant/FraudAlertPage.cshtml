@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "FraudAlertPage";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <h1>Top-up a MoneyFex Card</h1>
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <div class="strip-prote">
+                    <h4 class="text-white" style="margin: 0;">For Your Protection</h4>
+                    <p class="text-white">MoneyFex is working to protect you and your family from froud.</p>
+                </div>
+                <br>
+                <p>
+                    Before you send your transaction, please be aware that someone may be trying to steal your
+                    money.
+                </p>
+
+                <p>
+                    If any of the below apply, DO NOT SEND the money transfer. Once the money is picked up - which
+                    can happen quickly — you cannot get a refund, even if you were a victim of fraud.
+                </p>
+
+                <h4>NEVER SEND MONEY:</h4>
+                <ul>
+                    <li>
+                        To a utilities company (for example: phone, internet or electricity suppliers) to settle bills or
+                        outstanding payments, or for any other reason.
+                    </li>
+                    <li>To someone you don't know personally, or whoso identity you cannot verify.</li>
+                </ul>
+                <br>
+                @*<label><input type="checkbox" name=""> Accept our Terms and Conditions</label>*@
+                
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <a href="@Url.Action("TopUpDetails")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                <a href="@Url.Action("MFTCCardTopUpTransactionSummary")" class="fbtn btn-next">Proceed to Pay <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br />
+                <a href="@Url.Action("TopUpDetails")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--  -->

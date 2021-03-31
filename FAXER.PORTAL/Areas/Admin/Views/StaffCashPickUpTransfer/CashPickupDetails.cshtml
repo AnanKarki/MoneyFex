@@ -1,0 +1,154 @@
+﻿
+
+@model FAXER.PORTAL.Areas.Agent.Models.CashPickUpReceiverDetailsInformationViewModel
+@{
+    ViewBag.Title = "CashPickupDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+                    @Html.HiddenFor(x => x.Country)
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Cash Pickup</h4>
+                                        <br />  <h5> @Html.ValidationMessage("InvalidReceiver", new { @class = "text-danger" })</h5>
+                                        <h5>
+                                            @Html.ValidationMessage("ServiceNotAvialable", "", new { @class = "text-danger" })
+                                        </h5>
+
+
+                                    </div>
+
+                                    <div class="card-body p-40">
+
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+
+                                            <!--  -->
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.DropDownListFor(model => model.PreviousReceiver, (IEnumerable<SelectListItem>)ViewBag.existingReceiver, "Select Previous Receiver ", new { @class = "form-control form-control-lg form-control-round ", id = "ReceiverId", onchange = "getReceiverDetails();" })
+                                                @Html.ValidationMessageFor(model => model.PreviousReceiver, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="form-group m-b-35 text-center">
+                                                <h3 class="text-primary">OR</h3>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.TextBoxFor(model => model.ReceiverFullName, new { @class = "form-control form-control-lg form-control-round ", placeholder = "Enter Full Name", @name = "ReceiverFirstName" })
+                                                @Html.ValidationMessageFor(model => model.ReceiverFullName, "", new { @class = "text-danger" })
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+
+
+
+                                            <div class="form-group m-b-35">
+                                                <div class="input-group input-group-round input-group-lg">
+                                                    <span class="input-group-addon" id="MobileCode" name="MobileCode">@Model.MobileCode</span>
+                                                    @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control form-control-lg form-control-round  contact-no-lg", @placeholder = "Enter Mobile Number ", @autocomplete = "off", @name = "MobileNo" })
+                                                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control form-control-lg form-control-round ", placeholder = "Email Address (Optional)", @name = "ReceiverEmailAddress" })
+                                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <!--  -->
+                                            <div id="MoroccoForm">
+                                                <!--  -->
+                                                <div class="form-group mb20">
+                                                    @Html.DropDownListFor(model => model.IdenityCardId, (IEnumerable<SelectListItem>)ViewBag.IdCardTypes, "Select Id Card", new { @class = "form-control form-control-lg form-control-round", @id = "IdenityCardId" })
+                                                    @Html.ValidationMessageFor(model => model.IdenityCardId, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group   mb20">
+                                                    @Html.TextBoxFor(x => x.IdentityCardNumber, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter IdCard number" })
+                                                    @Html.ValidationMessageFor(model => model.IdentityCardNumber, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.EnumDropDownListFor(model => model.ReasonForTransfer, new { @class = "form-control form-control-lg form-control-round " })
+                                                @Html.ValidationMessage("Reason", "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <!--  -->
+
+                                            @Html.HiddenFor(x => x.Country, new { id = "RecevingCountry" })
+
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-round  btn-block"> Continue <i class="fa fa-angle-right m-l-5"></i></button>
+                                            <a href="@Url.Action("Index","StaffCashPickUpTransfer")" class=" btn btn-link  btn-lg btn-round btn-block">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        $("#MoroccoForm").hide();
+
+        if ($("#RecevingCountry").val() == "MA") {
+            $("#MoroccoForm").show();
+        }
+
+        function getReceiverDetails() {
+            var ReceiverId = $("#ReceiverId").val();
+            window.location.href = "/Admin/StaffCashPickUpTransfer/CashPickupDetails?receiverId=" + ReceiverId;
+        }
+
+        $("#submit").click(function () {
+
+            $("#loader").show();
+            $("form").submit();
+        })
+    </script>
+
+}
+
+

@@ -1,0 +1,182 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+@*<table>
+        <thead>
+        </thead>
+        <tbody style="padding: 30px 0 !important; display: block;">
+            <tr>
+                <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/transfer-paused.png" width="100%"></td>
+                <td valign="top">
+                    <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.SenderFristName,</b></h1>
+                    <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                        Your transfer has been paused because we are verifying your identity.
+                        If you haven't uploaded a copy of your ID, please do so on your account profile under "Identity Information".
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <h3>Transfer details</h3>
+                    <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                        Transaction number:  @ViewBag.TransactionNumber<br>
+                        You sent: @ViewBag.SendingAmount to @ViewBag.Receivingcountry<br>
+                        Fee: @ViewBag.Fee<br>
+                        @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingAmount<br>
+                        @switch (ViewBag.TransactionServiceType)
+                        {
+                            case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                                <span>
+                                    Bank Name: @ViewBag.BankName<br>
+                                    Bank account: @ViewBag.BankAccount<br>
+                                    Sort code / Routing number: @ViewBag.BankCode
+
+                                </span>
+                                break;
+                            case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                                <span>
+                                    Wallet Provider: @ViewBag.WalletName<br>
+
+                                </span>
+                                break;
+                            case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                                <span>
+                                    MFCN Number: @ViewBag.MFCN<br>
+
+                                </span>
+                                break;
+                        }
+
+
+                    </p>
+
+
+                </td>
+            </tr>
+
+
+            <tr>
+                <td colspan="2">
+                    <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                        Your transfer will be processed as soon as your identity check is completed
+                    </p>
+                    <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                        Thank you
+
+
+                        <br><br>  The MoneyFex Team
+                    </p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>*@
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/transfer-paused.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFristName, </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                Your transfer has been paused because we are verifying your identity.
+                                If you haven't provided a copy of your ID, please reply to this email with a
+                                valid scanned copy of driving licence or
+                                passport.
+
+                            </h1>
+                            <h1 style="font-size: 19px; color:#333; line-height: 30px; margin-top: 0px;">
+                                Transfer details:
+
+                            </h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                Transaction number:  @ViewBag.TransactionNumber<br>
+                                You sent: @ViewBag.SendingAmount to @ViewBag.Receivingcountry<br>
+                                Fee: @ViewBag.Fee<br>
+                                @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingAmount<br>
+                                @switch (ViewBag.TransactionServiceType)
+                                {
+                                    case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                                        <span>
+                                            Bank Name: @ViewBag.BankName<br>
+                                            Bank account: @ViewBag.BankAccount<br>
+                                            Sort code/Routing number: @ViewBag.BankCode
+
+                                        </span>
+                                        break;
+                                    case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                                        <span>
+                                            Wallet Provider: @ViewBag.WalletName<br>
+
+                                        </span>
+                                        break;
+                                    case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                                        <span>
+                                            MFCN Number: @ViewBag.MFCN<br>
+
+                                        </span>
+                                        break;
+                                }
+
+
+                            </h1>
+
+
+                            <h1 style="font-size: 20px; color:#333;  line-height: 30px; margin-top: 20px;">
+                                Your transfer will be processed as soon your identity check is completed
+
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                Thank You<br>
+                                <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

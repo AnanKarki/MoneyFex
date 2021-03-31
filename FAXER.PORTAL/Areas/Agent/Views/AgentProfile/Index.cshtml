@@ -1,0 +1,317 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentProfileViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<style>
+    [type=file] {
+        position: absolute;
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+
+
+        input, [type=file] + label {
+            border: 1px solid #CCC;
+            border-radius: 3px;
+            text-align: left;
+            padding: 10px;
+            width: 150px;
+            margin: 0;
+            left: 0;
+            position: relative;
+        }
+
+        [type=file] + label {
+            text-align: center;
+            left: 0.5em;
+            top: 0.5em;
+            background: #4267b2;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            [type=file] + label:hover {
+                background: #3399ff;
+            }
+</style>
+
+
+
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2  ">
+
+                    <div class="login_signup mb50 clearfix">
+                        <h3> Business   Profile </h3>
+                        <hr>
+
+                        <div class=" ">
+                            <!--  -->
+                            <div class="profileinfo">
+
+                                <div class="gear">
+                                    <label>Account Number:</label>
+                                    <span id="accountNo" class="datainfo">@Model.AccountNo</span>
+                                </div>
+
+                                <div class="gear">
+                                    <label>Name of Business:</label>
+                                    <span id="fullname" class="datainfo">@Model.AgentName</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Business License:</label>
+                                    <span id="Address" class="datainfo">@Model.RegistrationNumber</span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="website" class="datainfo">@Model.Address1Hidden ,@Model.PostalCodeHidden ,@Model.CityHidden </span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Country:</label>
+                                    <span id="website" class="datainfo">@Model.Country</span>
+
+                                </div>
+
+
+
+                                <div class="gear">
+                                    <label>Telephone:</label>
+                                    <span id="Phone" class="datainfo"> @Model.CountryPhoneCode @Model.PhoneNubmerHidden </span>
+
+                                </div>
+
+                                <div class="gear">
+                                    <label>Email:</label>
+                                    <span id="fax" class="datainfo">@Model.EmailHidden</span>
+
+                                </div>
+
+
+
+                                <h3>  Contact Person </h3>
+                                <hr>
+                                <div class="gear">
+                                    <label>Name:</label>
+                                    <span id="website" class="datainfo">@Model.FullName</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="website" class="datainfo">@Model.Address1Hidden ,@Model.PostalCodeHidden ,@Model.CityHidden, @Model.Country</span>
+
+                                </div>
+                                <div class="gear">
+                                    <label>Country:</label>
+                                    <span id="Address" class="datainfo">@Model.Country</span>
+
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-sm btn-primary radius-20 mb30">Edit Profile</button>
+                            </div>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+
+                                <center>
+                                    <a href="@Url.Action("GoToDashboard","AgentDashboard" , new { @Area = "Agent"})" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back to Dashboard</a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    if (ViewBag.IsPinCodeSend == 1)
+    {
+        <!-- KiiPay Confirmation -->
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Moneyfex Confirmation</h4>
+                    </div>
+                    <div class="modal-body uk-text-center ">
+                        <div class="form-group">
+                            <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+
+                            <input type="number" class="form-control" placeholder="Enter code" name="UserEnterPinCode" id="UserEnterPinCode">
+
+                            @*@Html.TextBox("UserEnterPinCode", new { @class = "form-control", @placeholder = "Enter Code" })*@
+                            @Html.Hidden("PinCode", new { id = "PinCode" })
+                            <div class="text-center">
+                                @Html.ValidationMessage("InvalidPinCode", "", new { @class = "text-danger", id = "InvalidPinCode" })
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <a class="btn btn-primary btn-sm radius-20" onclick="Update()">Confirm</a>
+                        <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- KiiPay Confirmation end -->
+    }
+
+}
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        @*function UpdateAdress() {
+
+            $.getJSON("/AgentProfile/SendVerificationCode", function (data) {
+
+            });
+            $("#Verification").modal("show");
+
+        };
+        function UpdateAdressClose() {
+
+            $("#Verification").modal("Hide");
+
+        };
+        function Verfiy() {
+
+            var verificationCode = $("#verificationCode").val();
+            $.getJSON("/AgentProfile/VerifyAccountToEdit?verificationCode=" + verificationCode, function (data) {
+
+                if (data.AccountVerified == true) {
+
+                    $("#Verification").modal("hide");
+                    $("#UpdateAddress").modal("show");
+                }
+
+                else {
+                    $("#InvalidVerificationCode").text("Please enter the verification code sent to your email address!");
+
+                    $("#Verification").modal("show");
+                }
+
+            });
+
+        }
+        function UpdatePhoneNo() {
+            var phone = $('#Telephone-form').val();
+            if (phone.includes("*")) {
+                $("#InvalidPhoneNo").text("Please enter valid Phone No.");
+                return;
+            }
+            if (phone == "")
+            {
+                $("#InvalidPhoneNo").text("Please enter a non-empty value !");
+                return;
+            }
+            if (phone == undefined)
+            {
+                $("#InvalidPhoneNo").text("Please enter a valid value !");
+                return;
+            }
+            if (phone.match(/[a-z]/i)) {
+                $("#InvalidPhoneNo").text("Please enter a valid value !");
+                return;
+            }
+            else {
+                var agentStaffId = $("#agentStaffId").val();
+                window.location.href = "/AgentProfile/UpdatePhoneNumber?agentStaffId=" + agentStaffId + "&phoneNumber=" + phone;
+            }
+        }
+        function updateEmail() {
+            var re = /\S+@@\S+\.\S+/;
+            var email = $("#pemail-form").val();
+            var isValid = re.test(email);
+            if (isValid) {
+                var agentStaffId = $("#agentStaffId").val();
+                window.location.href = "/AgentProfile/UpdateEmail?agentStaffId=" + agentStaffId + "&email=" + email;
+            }
+            else {
+                $("#InvalidEmail").text("Please enter a valid email !");
+                return;
+            }
+        }
+        function UploadPhotoIDCard() {
+
+            if ($("#dataFile").val() != "" && $("#dataFile").val() != null) {
+
+                $("#UpdateImage").submit();
+            }
+        }
+        function forgotPassword() {
+            var userName = "";
+            userName = '@FAXER.PORTAL.Common.AgentSession.AgentStaffLogin.Username';
+            window.location.href = "/AgentLogin/ForgotPassword?EmailAddress=" + userName;
+            $("#EmailAddress").val(userName);
+            $("#formForgotPassword").submit();
+        }
+        window.onload = function() {
+            var InvalidAddress = '@TempData["InvalidInformation"]';
+            if (InvalidAddress == "True") {
+                $("#UpdateAddress").modal("show");
+            }
+
+        }*@
+
+        function Update() {
+
+            debugger;
+            var userpincode = $("#UserEnterPinCode").val();
+            var pincode = $("#PinCode").val();
+            if (userpincode == "" || userpincode == null || userpincode == undefined) {
+
+                $("#InvalidPinCode").text("Enter a code");
+            }
+            else if (userpincode != pincode) {
+
+                $("#InvalidPinCode").text("Enter a valid code");
+
+            } else {
+
+                window.location.href = "/Agent/AgentProfile/UpdateAgentProfile?PinCode=" + userpincode;
+            }
+        }
+        $("#myModal").modal('show');
+        $("#PinCode").val(@ViewBag.PinCode);
+
+    </script>
+
+}
+
+
+
+
+<!--new design ends here-->

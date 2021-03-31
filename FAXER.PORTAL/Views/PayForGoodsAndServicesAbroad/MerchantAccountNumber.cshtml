@@ -1,0 +1,180 @@
+﻿@model FAXER.PORTAL.Models.MerchantAccountNoViewModel
+@{
+    ViewBag.Title = "MerchantAccountNumber";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<style>
+    .ui-autocomplete {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 1000;
+        float: left;
+        display: none;
+        min-width: 160px;
+        padding: 4px 0;
+        margin: 0 0 10px 25px;
+        list-style: none;
+        background-color: #ffffff;
+        border-color: #ccc;
+        border-color: rgba(0, 0, 0, 0.2);
+        border-style: solid;
+        border-width: 1px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+        -webkit-background-clip: padding-box;
+        -moz-background-clip: padding;
+        background-clip: padding-box;
+        *border-right-width: 2px;
+        *border-bottom-width: 2px;
+    }
+
+    .ui-menu-item > a.ui-corner-all {
+        display: block;
+        padding: 3px 15px;
+        clear: both;
+        font-weight: normal;
+        line-height: 18px;
+        color: #555555;
+        white-space: nowrap;
+        text-decoration: none;
+        overflow-y : auto !important;
+    }
+
+    .ui-state-hover, .ui-state-active {
+        color: #ffffff;
+        text-decoration: none;
+        background-color: #0088cc;
+        border-radius: 0px;
+        -webkit-border-radius: 0px;
+        -moz-border-radius: 0px;
+        background-image: none;
+    }
+</style>
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay for goods & services abroad</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@*@using (Html.BeginForm("MerchantDetails", "PayForGoodsAndServicesAbroad", FormMethod.Get))
+    {
+        @Html.AntiForgeryToken()*@
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-8">
+                    <div class="form-group">
+
+                        @Html.DropDownList("Countries", (IEnumerable<SelectListItem>)ViewBag.Countries, "select service provider country", new { @class = "form-control", id = "Country", @onchange = "ShowSearchBox()" })
+                        @Html.ValidationMessage("Countries", "", new { @class = "text-danger" })
+
+                        @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control input-lg", @name = "BusinessName",  @placeholder = "Search Business Name/ Virtual Account number", @id = "BusinessName" })
+                        @*<input type="text" class="form-control input-lg" name="MerchantACNumber" placeholder="Search MoneyFex Merchant Name" id="MerchantACNumber" value="@ViewBag.AccountNo">*@
+                        @if (TempData["MerchantACNumber"] != null)
+                        {
+                            <label style="color:red">@TempData["MerchantACNumber"]</label>
+                        }
+                    </div>
+                </div>
+                <br /><div class="clearfix"></div>
+                <div class="row">
+                    @*<div class="col-lg-3">
+                        Account Number
+                    </div>*@
+                    <div class="col-lg-4">
+                        @Html.HiddenFor(model => model.BusinessMobileNo, new { @class = "form-control", @id = "BusinessMobileNo", @name = "BusinessMobileNo", @readonly = "readonly", @value = "@ViewBag.AccountNo" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@Url.Action("Index")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                @*  <input value="Next" class="fbtn btn-next" type="submit" />*@
+                <button onclick="submitt();" class="fbtn btn-next">Next</button>
+                <br>
+                <a href="@Url.Action("Index")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+@*}*@
+<!--  -->
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            src = '/PayForGoodsAndServicesAbroad/getMerchants';
+            $('#BusinessName').autocomplete({
+                
+                source: function (request, response) {
+                    debugger;
+                    $.ajax({
+                        url: src,
+                        dataType: "json",
+                        data: {
+                            term: request.term,
+                            country: $("#Country").val()
+                        },
+                        success: response //response is a callable accepting data parameter. no reason to wrap in anonymous function.
+                    });
+                },
+                select: function (event, ui) {
+                    //set tagids to save
+                    $("#BusinessMobileNo").val(ui.item.id);
+
+                    //Tags for display
+                    this.value = ui.item.value;
+                    //return false;
+                }
+            });
+        });
+
+        function submitt() {
+            var mfsCode = $("#BusinessMobileNo").val();
+            debugger;
+            window.location.href = "/PayForGoodsAndServicesAbroad/MerchantDetails?MerchantACNumber=" + mfsCode;
+        }
+
+         function ShowSearchBox() {
+            debugger;
+            var country = $("#Country").val();
+            if (country != "" || country != undefined) {
+
+                $("#BusinessName").show();
+            } else {
+                $("#BusinessName").hide();
+            }
+        }
+        var country = $("#Country").val("@ViewBag.ReceivingCountry");
+        if (country.val() == "") {
+            $("#BusinessName").hide();
+        } else {
+
+            $("#BusinessName").show();
+        }
+    </script>
+}

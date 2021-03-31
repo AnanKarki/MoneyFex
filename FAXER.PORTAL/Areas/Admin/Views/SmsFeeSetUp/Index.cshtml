@@ -1,0 +1,177 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.SmsFeeVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Sms Fee Setting</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a href="@Url.Action("SetNewFee","SmsFeeSetUp")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Set New Fee</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index","AdminDashboard")">Dashboard</a></li>
+                    <li class="active">Sms Fee Setting</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="search_countr">
+                    <form class="" action="/Admin/SmsFeeSetUp/index" method="post" id="indexForm">
+
+                        <div class="row ">
+                            <div class="col-sm-4">
+
+                            </div>
+
+                            <!--  -->
+                            <div class="col-sm-4">
+
+                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @id = "country" })
+                                @*@Html.DisplayFor(model => model.CountryCode, new { @class = "form-control", id = "countryCode" })*@
+                            </div>
+
+
+                        </div>
+
+
+
+
+
+                    </form>
+
+                </div>
+                <div class="white-box">
+
+
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered  csvprint table-striped" cellspacing="0" width="100%">
+                            <thead>
+
+
+                                <tr>
+
+                                    <th class="text-center"> Country</th>
+                                    <th class="text-center"> Country Code</th>
+                                    <th class="text-center"> Sms Fee</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!--  -->
+                                @foreach (var item in Model.SMSFeelistViewModels)
+                                {
+                                    <tr>
+                                        <td>@item.Country</td>
+                                        <td>@item.CountryCode</td>
+                                        <td>@item.SmsFee</td>
+                                        <td>
+                                            <a href="/Admin/SmsFeeSetUp/Edit?Id=@item.Id" class="btn btn-success btn-outline btn-circle btn-xs m-r-5"><i class="ti-pencil"></i></a>
+                                            <a class="btn btn-danger btn-outline btn-circle btn-xs m-r-5" onclick="showPopUp('@item.Id')"><i class="ti-trash"></i></a>
+
+                                        </td>
+                                    </tr>
+                                }
+
+                                @*<tr>
+                                        <td class="text-center">
+                                            <b>@Model.SmsFee</b>
+                                        </td>
+
+                                        <td align="center" rows="2">
+                                            <a href="/Admin/SmsFeeSetUp/Delete?Id=@Model.Id" class="btn btn-danger btn-outline btn-circle btn-xs m-r-5"><i class="ti-trash"></i></a>
+                                            <a href="/Admin/SmsFeeSetUp/Edit?Id=@Model.Id" class="btn btn-danger btn-outline btn-circle btn-xs m-r-5"><i class="ti-trash"></i></a>
+                                        </td>
+
+
+                                    </tr>*@
+                                <!--  -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+
+    </div>
+</div>
+
+
+<div class="modal " id="DeleteModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex Alert</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al" >
+                                <i class="fa fa-exclamation-triangle" style="font-size:48px;color:red"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <h4>Do you want to Delete this data?</h4>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-sm btn-primary" onclick="Delete()">Yes<i class="" aria-hidden="true"></i></a>
+                <a class="btn btn-sm btn-danger" onclick="NoDelete()">No<i class="" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        var tempId;
+        $("#country").on('change', function () {
+            var code = $("#country").val();
+            window.location.href = '/Admin/SmsFeeSetUp/Index?countryCode=' + code;
+        })
+
+
+        function showPopUp(data) {
+            debugger;
+            tempId = data ;
+            $("#DeleteModal").modal('show');
+        };
+
+        function Delete() {
+            window.location.href = '/Admin/SmsFeeSetUp/Delete?id=' + tempId;
+        };
+
+        function NoDelete() {
+            window.location.href = '/Admin/SmsFeeSetUp/Index';
+
+        };
+
+    </script>
+}

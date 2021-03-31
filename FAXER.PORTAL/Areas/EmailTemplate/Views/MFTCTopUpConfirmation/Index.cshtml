@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.CardUserName,
+    </p>
+
+
+    <p>
+        Thank you for making a deposit into the following virtual account:
+    </p>
+    <p>
+        Account Name: @ViewBag.ReceiverName
+    </p>
+    <p>
+        Account Number: @ViewBag.AccountNo
+    </p>
+    <p>
+        Amount: @ViewBag.FaxingCurrency @ViewBag.Amount
+    </p>
+    <p>
+        Fee : @ViewBag.FaxingCurrency @ViewBag.Fee
+    </p>
+
+    <p>
+        @ViewBag.ReceiverName can now withdraw the money and also pay for Goods and Services in @ViewBag.ReceiverCountry.
+    </p>
+    @if (ViewBag.IsLocalPayment == 1)
+    {
+        <p>
+            Please find attached a receipt to confirm your transaction.
+
+        </p>
+    }
+    @*Kind Regards
+        <p>
+            Thank you for making a deposit into virtual account, @ViewBag.ReceiverName can now withdraw money and pay for Goods and Services in @ViewBag.ReceiverCountry.
+        </p>
+
+        <p>
+            Please find attached, a receipt to confirm this transaction.
+        </p>
+        }*@
+
+
+
+</div>
+

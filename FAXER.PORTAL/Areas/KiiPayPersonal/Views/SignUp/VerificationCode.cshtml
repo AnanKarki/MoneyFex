@@ -1,0 +1,121 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.VerificationCodeViewModel
+@{
+    ViewBag.Title = "VerificationCode";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-center">
+                    <h3>Enter the verification Code </h3>
+                    <hr>
+                    <p>Confirm your account with the code sent to your mobile number or email address</p>
+
+                    @using (Html.BeginForm())
+                    {
+                        <div class="pincode-input-container">
+                            @Html.TextBoxFor(model => model.Code1, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text first input-lg" })
+                            @Html.TextBoxFor(model => model.Code2, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text mid input-lg" })
+                            @Html.TextBoxFor(model => model.Code3, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text mid input-lg" })
+
+                            <!-- <div>-</div> -->
+                            @Html.TextBoxFor(model => model.Code4, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text mid input-lg" })
+                            @Html.TextBoxFor(model => model.Code5, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text mid input-lg" })
+                            @Html.TextBoxFor(model => model.Code6, new { @minlength = "1", @maxlength = "1", @autocomplete = "off", @class = "form-control pincode-input-text last input-lg" })
+
+                        </div>
+
+                        if (!ViewData.ModelState.IsValid || @ViewBag.IsValidCode == "false")
+                        {
+                            <label class="text-danger">Invalid Code</label>
+                        }
+                        @Html.HiddenFor(model => model.Code1)
+                        @Html.HiddenFor(model => model.Code2)
+                        @Html.HiddenFor(model => model.Code3)
+                        @Html.HiddenFor(model => model.Code4)
+                        @Html.HiddenFor(model => model.Code5)
+                        @Html.HiddenFor(model => model.Code6)
+                        <div class="clearfix"><hr></div>
+                        <p>Didn't receive code?   <button class="btn  btn-link" type="button" onclick="ResendVerificationCode()"> Resend code</button> </p>
+                        @*<p>Didn't receive code?   <a class="btn  btn-link" href="@Url.Action("ResendVerification","SignUp")"> Resend code</a> </p>*@
+
+                        <button type="submit" class="btn btn-primary radius-20">Verify your account <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                    }
+
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@section scripts{
+    <script type="text/javascript">
+
+        //$('.pincode-input-text').bind('keyup', function (event) {
+        //    debugger;
+        //    //if (event.keyCode == "8") {
+        //    //    $(this).prev().focus();
+        //    //    return;
+        //    //}
+        //    if ($(this).val() == "") {
+
+
+        //    } else {
+
+        //        $(this).next().focus();
+        //        verificationCode = verificationCode + $(this).val();
+        //        $("#VerficationCode").val(verificationCode);
+        //        if ($(this)[0].id == "previous") {
+        //            $("#Next").focus();
+        //        }
+        //    }
+         
+
+        //});
+
+
+        var verificationCode = "";
+
+
+        $('.pincode-input-text').bind('keyup', function (event) {
+            debugger;
+
+            if ($(this).val() == "") {
+
+
+            } else {
+
+                $(this).next().focus();
+                verificationCode = verificationCode + $(this).val();
+                $("#VerficationCode").val(verificationCode);
+                if ($(this)[0].id == "previous") {
+                    $("#Next").focus();
+                }
+            }
+
+
+        });
+
+        if ($(this).next().context == undefined) {
+
+        @*@Url.Action("ResendVerification", "SignUp")*@
+          
+
+
+        function ResendVerificationCode() {
+            window.location.href = "/SignUp/ResendVerification/";
+        }
+
+    </script>
+    
+    }

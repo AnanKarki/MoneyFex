@@ -1,0 +1,74 @@
+﻿@model FAXER.PORTAL.Models.SenderBusinessDetailsViewModel
+@{
+    ViewBag.Title = "BusinessDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup text-center">
+                        <div class="text-center">
+                            <h3>Business Details</h3>
+
+                        </div>
+                        <hr>
+                        <form>
+                            <div class="pinside20">
+
+
+                                <!--  -->
+                                <div class="form-group">
+                                    <label style="text-align:left;">Business Registration Details</label>
+                                    @Html.TextBoxFor(model => model.RegistrationNumber, new { @class = "form-control", @placeholder = "Enter Registration Number" })
+                                    @Html.ValidationMessageFor(model => model.RegistrationNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <label style="text-align:left;">Business Name</label>
+                                    @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @placeholder = "Enter Business Name" })
+                                    @Html.ValidationMessageFor(model => model.BusinessName, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  --> <!--  -->
+                                <div class="form-group">
+                                    <label style="text-align:left;">Business Type</label>
+                                    @Html.EnumDropDownListFor(model => model.BusinessType, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.BusinessType, "", new { @class = "text-danger" })
+                                    @*@Html.ValidationMessage("BusinessType", "", new { @class = "text-danger" })*@
+                                </div>
+                                <!--  -->
+                                <!--  -->
+
+                            </div>
+                            <div class="clearfix">
+                                <hr>
+                            </div>
+                            <!--  -->
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Continue<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                @*<button type="submit" class="btn btn-primary radius-20">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                            </div>
+                            <!--  -->
+
+                            <div class="clearfix">
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+}

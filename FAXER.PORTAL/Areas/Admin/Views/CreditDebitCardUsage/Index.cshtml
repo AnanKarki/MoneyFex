@@ -1,0 +1,241 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.CreditDebitCardUsageViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+                        <div class="pcoded-content">
+                            <div class="pcoded-inner-content">
+
+                                <div class="main-body">
+                                    <div class="page-wrapper">
+
+                                        <div class="page-body">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+
+                                                    <div class="card">
+
+                                                        <div class="card-header border-bottom">
+                                                            <h4 class="f-left m-t-5 m-b-0">Card payment log</h4>
+                                                            <a href="@Url.Action("SetNewPayment", "CustomerPaymentFee")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                                                    <i class="icofont icofont-plus m-r-5"></i>  Set new payment
+                                                                </a>
+                                                        </div>
+
+                                                        <div class="card-body">
+                                                            <div class="row m-t-20 m-b-20">
+                                                                <hr />
+
+
+                                                                <div class="col-xl-4 col-md-6">
+                                                                    <div class="form-group">
+
+                                                                        @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "filter();" })
+
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+                                                            </div>
+
+                                                            <div class="dt-responsive table-responsive">
+                                                                <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>SN.</th>
+                                                                            <th>Sender name</th>
+                                                                            <th>Encrypted card No.</th>
+                                                                            <th>Card Issuing Country</th>
+                                                                            <th>Opstatus</th>
+                                                                            <th>Amount</th>
+                                                                            <th>Auth count</th>
+                                                                            <th>Date/Time</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        @{ int i = 0;}
+                                                                        @foreach (var item in Model)
+                                                                        {
+                                                                            ++i;
+                                                                            <tr>
+                                                                                <td>@i</td>
+                                                                                <td>@item.SenderName</td>
+                                                                                <td>@item.CardNumber</td>
+                                                                                <td>@item.CardIssuingCountry</td>
+                                                                                <td>@item.OpStatus</td>
+                                                                                <td>@item.Amount</td>
+                                                                                <td>@item.AuthCount</td>
+                                                                                <td>@item.DateTime</td>
+                                                                                <td class="action-icon">
+                                                                                    <a href="@Url.Action("BlockSender", "CreditDebitCardUsage", new { @id = item.SenderId })" data-toggle="tooltip" data-placement="top" data-original-title="Edit">Block</a>
+                                                                                </td>
+                                                                            </tr>
+
+
+                                                                        }
+
+
+
+
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Card payment log</h4>
+
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+
+
+
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By sender Name" class="form-control form-control-round form-control-bold" name="senderName" id="senderName" onchange="filter();">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN.</th>
+                                                    <th>Sender name</th>
+                                                    <th>Encrypted card No.</th>
+                                                    <th>Card Issuing Country</th>
+                                                    <th>Opstatus</th>
+                                                    <th>Amount</th>
+                                                    <th>Auth count</th>
+                                                    <th>Date/Time</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    ++i;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.SenderName</td>
+                                                        <td>@item.CardNumber</td>
+                                                        <td><i class="flag flag-icon flag-icon-@item.CardIssuingCountryFlag"></i> @item.CardIssuingCountry</td>
+                                                        <td>@item.OpStatus</td>
+                                                        <td>@item.Amount</td>
+                                                        <td>@item.AuthCount</td>
+                                                        <td>@item.DateTime</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("BlockSender", "CreditDebitCardUsage", new { @id = item.SenderId })" data-toggle="tooltip" data-placement="top" data-original-title="Edit">Block</a>
+                                                        </td>
+                                                    </tr>
+
+
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                            new { @page = page }))
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+        $('#basic-btn').dataTable();
+        function filter() {
+
+            var country = $("#Country").val();
+            var senderName = $("#senderName").val();
+            window.location.href = "/Admin/CreditDebitCardUsage/Index?Country=" + country + "&senderName=" + senderName;
+        }
+    </script>
+}

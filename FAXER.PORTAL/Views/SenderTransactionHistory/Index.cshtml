@@ -1,0 +1,394 @@
+﻿@model FAXER.PORTAL.Models.SenderTransactionHistoryViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string btnText = "Send Again";
+    int TotalPageCount = ViewBag.NumberOfPage;
+    int CurrentpageCount = ViewBag.CurrentpageCount;
+}
+
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+
+            <div class="row mb40">
+
+                <!--  -->
+                <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+                    <div class="form-group">
+                        <label>Year</label>
+                        @Html.DropDownListFor(x => x.Year, (IEnumerable<SelectListItem>)ViewBag.Year, "select Year", new { @class = "form-control", id = "year", onchange = "filter();" })
+
+                    </div>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+                    <div class="form-group">
+                        <label>Month</label>
+                        @Html.EnumDropDownListFor(x => x.Month, new { @class = "form-control", id = "month", onchange = "filter();" })
+                    </div>
+                </div>
+                <!--  -->
+                <!--  -->
+                <div class="col-lg-4 col-md-4 hidden-sm hidden-xs">
+                    <div class="form-group">
+                        <label>Transfer Method</label>
+                        @Html.EnumDropDownListFor(model => model.FilterKey, new { @class = "form-control", @id = "filterKey", @onchange = "filter()" })
+
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <br>
+                <div class="table-responsive ">
+                    <table class="table table-bordered DataTable">
+                        <thead>
+                            <tr>
+                                <th>Date & Name</th>
+                                <th>Type & Acc</th>
+                                <th>Reference</th>
+                                <th>Gross & Fee</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableData">
+                            @{
+                                int i = 0;
+                                string selector = "";
+                            }
+                            @{
+                                foreach (var item in Model.TransactionHistoryList)
+                                {
+                                    i++;
+                                    selector = i + "Fee";
+                                    <tr>
+                                        <td>@item.Date <br /> <span class="text-primary">@item.ReceiverName</span><br></td>
+                                        <td>@item.TransactionType<br> @item.AccountNumber</td>
+                                        <td>@item.Reference</td>
+                                        <td>@item.SendingCurrencySymbol<span id="@i">@item.GrossAmount</span> <br>@item.SendingCurrencySymbol<span id="@selector">@item.Fee </span></td>
+
+                                        @if (item.StatusName.ToLower() == "cancelled" || item.StatusName.ToLower() == "failed")
+                                        {
+                                            <td><span class="text-danger">@item.StatusName</span></td>
+                                        }
+                                        else if (item.StatusName.ToLower() == "in progress (id check)" || item.StatusName.ToLower() == "in progress" || item.StatusName.ToLower() == "payment pending")
+                                        {
+
+                                            <td><span class="text-warning">@item.StatusName</span></td>
+                                        }
+                                        else
+                                        {
+
+                                            <td><span class="text-success">@item.StatusName</span></td>
+                                        }
+                                        <td>
+                                            @*@if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.BankDeposit)
+                                                {
+
+                                                    <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeat('@item.AccountNumber', @item.Id)">Repeat</a>
+                                                }
+                                                else if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.MobileWallet)
+                                                {
+
+                                                    <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatMobileWallet('@item.AccountNumber', @item.Id)">Repeat</a>
+                                                }
+                                                else if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.BillPayment)
+                                                {
+
+                                                    if (item.BillpaymentCode == "BP")
+                                                    {
+                                                        <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatBillPayment('@item.AccountNumber', @item.Id);">Repeat</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatTopUp('@item.AccountNumber', @item.Id);">Repeat</a>
+                                                    }
+                                                }
+                                                else if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.CashPickUp)
+                                                {
+
+                                                    <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatCashPickUp('@item.Reference', @item.Id);">Repeat</a>
+                                                }
+                                                else if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.KiiPayWallet)
+                                                {
+
+                                                    <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatKiiPayWallet('@item.AccountNumber', @item.Id);">Repeat</a>
+                                                }
+                                                else
+                                                {
+
+                                                    <a class="btn btn-primary btn-block btn-sm radius-20" onclick="repeatPayForGoodsAndServices('@item.AccountNumber', @item.Id)">Repeat</a>
+                                                }*@
+
+                                            <a href="@Url.Action("TransactionDetail","SenderTransactionHistory", new { @id = item.Id , @transactionService = item.TransactionServiceType , @Year =Model.Year})" class="btn btn-primary btn-block btn-sm radius-20">Details</a>
+
+
+
+                                            <a href="@Url.Action("RecentTransfersSendAgain","SenderTransferMoneyNow" , new { @id = item.Id , @transactionServiceType = item.TransactionServiceType })" class="btn btn-primary btn-block btn-sm radius-20">
+
+
+                                                @{
+                                                    switch (item.TransactionServiceType)
+                                                    {
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.All:
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                                                            if (item.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.PaymentPending)
+                                                            {
+
+                                                                btnText = "Pay Now";
+                                                            }
+                                                            else
+                                                            {
+
+                                                                btnText = "Send Again";
+                                                            }
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.KiiPayWallet:
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.BillPayment:
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.ServicePayment:
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                                                            break;
+                                                        case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                                                            if (item.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.PaymentPending)
+                                                            {
+                                                                btnText = "Pay Now";
+                                                            }
+                                                            else
+                                                            {
+
+                                                                btnText = "Send Again";
+                                                            }
+                                                            break;
+                                                        default:
+                                                            break;
+                                                    }
+
+                                                }
+                                                @btnText
+
+                                            </a>
+
+                                        </td>
+
+
+
+
+
+                                    </tr>
+                                }
+                            }
+
+
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <div class="form-group">
+                            Page @ViewBag.PageNumber of @TotalPageCount
+                        </div>
+
+                        @if (TotalPageCount != 0)
+                        {
+                            <div class="form-group">
+
+                                @{int pagecount = CurrentpageCount;}
+                                <button style="color:white; background-color:#428bca; border-color:#428bca;" id="backButton" onclick="ChangeButton(false);">
+                                    <<
+                                </button>
+                                <div id="pageCountbtn">
+
+                                    @for (int buttonCount = 1; buttonCount <= ViewBag.ButtonCount; buttonCount++)
+                                    {
+                                        pagecount++;
+                                        <button style="color:white; background-color:#428bca; border-color:#428bca;">
+                                            @pagecount
+                                        </button>
+                                    }
+                                </div>
+                                <span style="display:none" id="pagecount">@pagecount</span>
+                                @if (TotalPageCount > 10 && TotalPageCount != pagecount)
+                                {
+                                    <button style="color:white; background-color:#428bca; border-color:#428bca;" id="nextButton" onclick="ChangeButton(true);">
+                                        >>
+                                    </button>
+                                }
+
+
+
+                            </div>
+                        }
+
+                        <div class="form-group">
+                            Show <select onchange="GetDataForPageSizeFilter()" id="PageSize">
+                                <option value="10">
+                                    10
+                                </option>
+                                <option value="20">
+                                    20
+                                </option>
+                                <option value="40">
+                                    40
+                                </option>
+                                <option value="50">
+                                    50
+                                </option>
+                                <option value="100">
+                                    100
+                                </option>
+                                <option value="500">
+                                    500
+                                </option>
+                                <option value="1000">
+                                    1000
+                                </option>
+
+                            </select>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <!-- back btn -->
+                <div class="clearfix">
+                    <hr>
+                    <center>
+                        <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </center>
+                </div>
+                <!-- back btn end-->
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!-- Refund Confirmation -->
+<div id="Refund" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40"> Do you want to refund  this payment?</h4>
+                <hr>
+                <button type="button" class="btn btn-primary   radius-20" data-dismiss="modal">Yes</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Refund Confirmation end -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        var pageSize = "";
+        var pageNum = "";
+
+         var CurrentpageCount ='@ViewBag.CurrentpageCount' ;
+        function filter() {
+            var filterKey = $("#filterKey").val();
+            var year = $("#year").val();
+            var month = $("#month").val();
+            window.location.href = "/SenderTransactionHistory/Index?transactionService=" + filterKey + "&year=" + year + "&month=" + month +
+                "&page=" + pageNum + "&PageSize=" + pageSize + "&CurrentpageCount=" + CurrentpageCount;
+        }
+
+         ShowBackButton();
+        function ShowBackButton() {
+            if (@CurrentpageCount != 0) {
+                $("#backButton").show();
+            } else {
+                $("#backButton").hide();
+            }
+        }
+
+         $("#PageSize").val('@ViewBag.PageSize');
+
+        function ChangeButton(isGoToNextPage) {
+              var TotalNumberOfpage = '@ViewBag.NumberOfPage';
+            var pageCount = $("#pagecount").text();
+            GetPagignationButton(TotalNumberOfpage, pageCount, isGoToNextPage);
+        }
+
+        $("#pageCountbtn button").each(function () {
+            $($(this)[0]).on('click', function () {
+                var pageno = $(this).text().trim();
+                console.log($(this).text());
+                pageNum = pageno;
+                filter();
+            });
+        })
+
+        function GetDataForPageSizeFilter() {
+            pageSize = $("#PageSize :selected").val();
+            filter();
+        }
+
+        $("#year").val('@ViewBag.SelectedYear');
+        function repeat(accountNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/Repeat?accountNo=" + accountNo + "&id=" + id;
+        };
+        function repeatCashPickUp(MFCN, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatCashPickUp?MFCN=" + MFCN + "&id=" + id;
+        };
+
+        function repeatKiiPayWallet(MobileNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatKiiPayWallet?MobileNo=" + MobileNo + "&id=" + id;
+        };
+
+        function repeatPayForGoodsAndServices(MobileNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatPayForGoodsAndServices?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatMobileWallet(MobileNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatMobileWallet?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatBillPayment(MobileNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatBillPayment?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatTopUp(MobileNo, id) {
+
+            window.location.href = "/SenderTransactionHistory/RepeatTopUp?MobileNo=" + MobileNo + "&id=" + id;
+
+        }
+
+
+        //$('.formattedAmount').text(GetFormattedAmount($('.formattedAmount').text()))
+
+        var index = 0;
+        $("#tableData tr").each(function () {
+            index = index + 1;
+            $('#' + index + "Fee").text(GetFormattedAmount($('#' + index + "Fee").text()));
+            $('#' + index).text(GetFormattedAmount($('#' + index).text()));
+        });
+
+    </script>S
+
+}

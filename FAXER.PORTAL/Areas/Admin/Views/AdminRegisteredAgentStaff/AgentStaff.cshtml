@@ -1,0 +1,100 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.AdminRegisteredAgentStaffViewModel>
+@{
+    ViewBag.Title = "AgentStaff";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+
+
+                    <div class="card-header border-bottom">
+                        <h2 class="f-left m-t-5 m-b-0" style="float:left;">Agent/Staff</h2>
+
+                        <a href="@Url.Action("AddAgentStaff", "AdminRegisteredAgentStaff")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                            <i class="icofont icofont-plus m-r-5"></i>  Add Agent Staff
+                        </a>
+
+                    </div>
+
+                    <div class="col-md-12">
+                        <hr />
+                        <div class="col-lg-4">
+
+                            @*Filter*@
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Branch</strong></td>
+                                    <td><strong>Staff Name</strong></td>
+                                    <td><strong>Email Address</strong></td>
+                                    <td><strong>Account Number</strong></td>
+                                    <td><strong>Action </strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    ++i;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.BranchName</td>
+                                        <td>@item.StaffName</td>
+                                        <td>@item.EmailAddress</td>
+                                        <td>@item.AccountNumber</td>
+                                        <td>
+
+                                            <div class="btn-group m-r-10">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu action_drop">
+                                                    <li>
+                                                        <a href="@Url.Action("MoreDetails" , "AdminRegisteredAgentStaff", new { AccountNumber = item.AccountNumber })" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="@Url.Action("ActivateDeactivate", "AdminRegisteredAgentStaff" , new  {AccountNumber = item.AccountNumber })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a>
+                                                    </li>
+
+
+                                                    <li>
+                                                        <a href="@Url.Action("ActivateDeactivate", "AdminRegisteredAgentStaff", new { AccountNumber = item.AccountNumber })" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivated</a>
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>
+
+
+                                        </td>
+                                    </tr>
+                                }
+                                <!--  -->
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>

@@ -1,0 +1,81 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<style>
+    /*button.btn-transfer, a.btn-transfer, input.btn-transfer {
+        background: #02b6ff;
+        color: #fff;
+        border: 0;
+        outline: 0;
+        padding: 10px 50px;
+        text-align: center;
+        display: block;
+        width: 100%;
+        border-radius: 8px;
+        font-size: 25px;
+        cursor: pointer;
+    }*/
+    .viewTransaction {
+        background: #02b6ff;
+        color: #fff;
+        border: 0;
+        outline: 0;
+        padding: 10px 0px;
+        text-align: center;
+        display: block;
+        width: 70%;
+        border-radius: 8px;
+        font-size: 25px;
+        cursor: pointer;
+    }
+</style>
+
+
+<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png" width="100%"></td>
+            <td valign="top">
+                <h1 style="font-size: 22px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b> @ViewBag.SenderFirstName</b>,</h1>
+                <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    Total of @ViewBag.sendingAmount received by  @ViewBag.receiverFullName in @ViewBag.City ,@ViewBag.receiverCountry
+                </h1>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td class="btn-transfer ">
+                <a style="background: #02b6ff;
+        color: #fff;
+        border: 0;
+        outline: 0;
+        padding: 10px 0px;
+        text-align: center;
+        display: block;
+        width: 70%;
+        border-radius: 8px;
+        font-size: 25px;
+        cursor: pointer;" href="@baseUrl/SenderTransactionHistory/Index" target="_blank">View Transaction Details</a>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    We look forward to facilitate your next money transfer
+                    <br><br> Thank you
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+

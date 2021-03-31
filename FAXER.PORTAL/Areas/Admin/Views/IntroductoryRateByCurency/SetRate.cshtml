@@ -1,0 +1,253 @@
+﻿@model  FAXER.PORTAL.Areas.Admin.ViewModels.IntroductoryRateByCurencyViewModel
+
+@{
+    ViewBag.Title = "SetRate";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    string range = Model.Range == null ? "" : Model.Range.Split('-')[0];
+
+}
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Introductory Set Rate  </h4>
+                                        <a href="@Url.Action("Index","IntroductoryRateByCurency")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Current Rate
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(model => model.Id)
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                @Html.HiddenFor(model => model.Id)
+                                                <div class="form-group">
+
+                                                    <label>Sending Currency</label>
+                                                    @Html.DropDownListFor(x => x.SendingCurrency, (IEnumerable<SelectListItem>)ViewBag.SendingCurrencies, "Select Sending Currency", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCurrency", @onchange = "GetAgentByCurrency();" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCurrency, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+
+                                                    <label>Receiving Currency</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCurrency, (IEnumerable<SelectListItem>)ViewBag.ReceivingCurrencies, "Select Receiving Currency", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCurrency" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCurrency, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Transfer Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransactionTransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferType", @onchange = "ChangeTransferType()" })
+                                                    @Html.ValidationMessageFor(x => x.TransactionTransferType, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransactionTransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                    @Html.ValidationMessageFor(x => x.TransactionTransferMethod, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "All", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "AgentId", @onchange = "getIntroductoryRate()" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Range</label>
+                                                    <select class="form-control  form-control-lg form-control-round form-control-bold" name="Range" id="Range">
+                                                        <option value="">Select Range</option>
+                                                        <option value="1">All</option>
+                                                        <option>1-100</option>
+                                                        <option>101-500</option>
+                                                        <option>501-1000</option>
+                                                        <option>1001-1500</option>
+                                                        <option>1501-2000</option>
+                                                        <option>2001-3000</option>
+                                                        <option>3001-5000</option>
+                                                        <option>5001-10000</option>
+                                                        <option>11000+</option>
+                                                    </select>
+                                                    @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Introductory Rate</label>
+                                                    @Html.TextBoxFor(x => x.Rate, new { @class = "form-control form-control-lg form-control-round", @name = "Rate", @placeholder = "Enter Exchange Rate" })
+                                                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Number of Transactions for intro rate</label>
+                                                    <select class="form-control  form-control-lg form-control-round form-control-bold" name="NoOfTransaction" id="NoOfTransaction">
+                                                        <option value="0">Select Number</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","IntroductoryRateByCurency")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        function getIntroductoryRate() {
+
+            var agent = $("#AgentId").val();
+
+
+            $.getJSON("/Admin/IntroductoryRateByCurency/GetPreviousRate?AgentId" + agent, function (result) {
+
+                for (var item in result)
+                {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                }
+            })
+        }
+        function ChangeTransferType() {
+
+
+            if ($("#TransferType").val() == 1) {
+                $("#AgentDiv").hide();
+            } else {
+                $("#AgentDiv").show();
+            }
+
+
+        }
+
+        function GetAgentByCurrency() {
+
+            var sendingCountry = $("#SendingCurrency").val();
+
+            $.getJSON("/Admin/IntroductoryRateByCurency/GetAgentByCurrency?Currency=" + sendingCountry, function (result) {
+
+                var agentselector = $("#AgentId");
+                $("#AgentId option").remove();
+                agentselector.append('<option value="0">All </option>');
+
+                for (var i = 0; i <= result.Data.length; i++) {
+
+                    agentselector.append('<option value=" ' + result.Data[i].AgentId + ' "> ' + result.Data[i].AgentName + '</option>');
+                }
+
+                //for (var data in result.Data) {
+
+                //}
+            })
+            search();
+        }
+
+        if ($("#TransferType").val() == 1) {
+            $("#AgentDiv").hide();
+        } else {
+            $("#AgentDiv").show();
+        }
+
+        $("#NoOfTransaction").val('@Model.NoOfTransaction');
+        $("#Range").val('@Model.Range');
+
+        if ("@Model.Id" == 0) {
+            $("#Range").val("Select Range");
+            $("#Range").val("");
+        }
+
+        if ("@range" == "11000")
+        {
+           $("#Range").val("11000+");
+        }
+        search();
+        function search() {
+            var data = {
+                id: $("#AgentId"),
+                country: "",
+                Currecny: $("#SendingCurrency").val(),
+                isBusiness: false,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "AgentId",
+                placeholder: "All"
+            }
+            SelectSearch(data);
+        }
+
+
+    </script>
+}
+

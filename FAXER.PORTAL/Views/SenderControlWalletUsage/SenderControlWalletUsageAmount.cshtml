@@ -1,0 +1,102 @@
+﻿@model FAXER.PORTAL.Models.SenderControlWalletUsageAmountVM
+@{
+    ViewBag.Title = "SenderControlWalletUsageAmount";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] AvailableBalance = Model.AvailableBal.ToString().Split('.');
+    string[] PreviousAmount = Model.PreviousAmount.ToString().Split('.');
+}
+
+@using (Html.BeginForm())
+{
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            @Html.HiddenFor(model => model.CurrencySymbol)
+            @Html.HiddenFor(model => model.Amount)
+            @Html.HiddenFor(model => model.Cent)
+
+            @Html.HiddenFor(model => model.Currency)
+            @Html.HiddenFor(model => model.WalletId)
+            @Html.HiddenFor(model => model.AvailableBal)
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Wallet Balance</h5>
+                    <h1 class="text-primary">@Model.CurrencySymbol @AvailableBalance[0].<small class="text-primary">@AvailableBalance[1]</small></h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                <div class="login_signup mb50 clearfix text-center">
+                    <!-- Available balance -->
+                    <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                        <div class="text-right wallet-balance  card-body">
+                            <h5>Current Weekly Limit</h5>
+                            <h1 class="text-primary">@Model.CurrencySymbol @PreviousAmount[0].<small class="text-primary">@PreviousAmount[1]</small></h1>
+                        </div>
+                    </div>
+                    <!-- Available balance -->
+                    <div class="clearfix">
+
+                    </div>
+
+
+                    <div class="amount-group  ">
+
+                        <div>
+                            <label>Enter New Limit</label>
+                            @*<input type="number" class="amount" placeholder="£0.00">*@
+                            @Html.TextBoxFor(model => model.NewLimit, new { @class = "amount", @placeholder = "£0.00"  , id= "NewLimit" })
+                            @Html.ValidationMessageFor(model => model.NewLimit, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+                    <div class="gbp">
+                       @Model.Currency
+                    </div>
+                    <div class="form-group">
+
+                        @Html.EnumDropDownListFor(m => m.LimitFrequencyId, "Select Limit frequency ", new { @class = "form-control" })
+
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <button type="submit" class="btn btn-primary btn-lg   ">Set Limit <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <div class="clearfix mb30"> </div>
+                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+}
+
+@section Scripts{
+    
+    <script type="text/javascript">
+
+        $("#NewLimit").focus(function () {
+
+            if ($("#NewLimit").val() <= 1) {
+                $("#NewLimit").val("");
+            }
+        })
+    </script>
+    }

@@ -1,0 +1,183 @@
+﻿@model List<FAXER.PORTAL.Areas.CardUsers.ViewModels.MyMoneyFaxCardWithdrawlSheetViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>myMoneyFex Card Withdrawals</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row ">
+                    <div class="col-lg-12 pull-right">
+                        
+                        <div class="col-lg-7 pull-right">
+                            <label id="Validate" class="col-lg-4" style="color:red;display:none">Please Enter Valid Date</label>
+                        </div>
+                        <div class="col-lg-7 pull-right">
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" ">
+                                        From:
+                                    </label>
+                                    <input type="date" id="From" class="form-control">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    <label class=" ">
+                                        To:
+                                    </label>
+                                    <input type="date" id="To" class="form-control">
+
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <br />
+                                <button type="button" class="btn btn-success btn-sm" onclick="Filter()">Search</button>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    @*<div class="col-lg-2 pull-left">
+                        <a class="btn btn-warning btn-sm " onclick="Refresh()">Refresh Table</a>
+
+                    </div>
+                    <div class="col-lg-9 pull-left">
+                        <button class="btn btn-danger btn-sm  pull-right">Download PDF</button>
+                    </div>*@
+                    <div class="clearfix"><br></div>
+                    @*<div class="col-lg-2 pull-left">
+                        <a class="btn btn-warning btn-sm " onclick="Refresh()">Refresh Table</a>
+
+                    </div>*@
+
+                    <div class="clearfix"><br></div>
+                    <div class="col-lg-11 pull-left">
+                        <button class="btn btn-danger btn-sm  pull-right">Download PDF</button>
+                    </div>
+
+                </div>
+
+
+                <br>
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Name of Agent</th>
+                                    <th>Agent MoneyFex No.</th>
+                                    <th>Withdrawal Amount</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 0; }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        @Html.Hidden("TransactionId", new { @value = item.TransactionId, id = "TransactionId" })
+                                        <td>@i</td>
+                                        <td>@item.NameOfAgency</td>
+                                        <td>@item.AgencyMFSCode</td>
+                                        <td>@item.WithdrwalAmount</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Time</td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="@Url.Action("Index" , "CardUserHome")" class="btn btn-sm btn-danger"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Filter() {
+
+            var from = $("#From").val();
+            var To = $("#To").val();
+            if (from == null || from == "") {
+                $("#Validate").show();
+            }
+            else if (To == null || To == "") {
+
+                $("#Validate").show();
+            }
+            else {
+                var fromParts = from.split('-');
+                var newDateFrom = new Date(fromParts[0], fromParts[1] - 1, fromParts[2]);
+                var ToParts = To.split('-');
+                var newDateTo = new Date(ToParts[0], ToParts[1] - 1, ToParts[2]);
+                if (newDateFrom.getFullYear().toString().length != "4" || newDateTo.getFullYear().toString().length != "4") {
+                    $("#Validate").show();
+
+                }
+                else if (newDateFrom > newDateTo) {
+
+                    $("#Validate").show();
+
+                }
+                else {
+                    $("#Validate").hide();
+                    window.location.href = "/CardUsers/MyMoneyFaxCardWithdrawlSheet/Index?FromDate=" + from + "&ToDate=" + To;
+                }
+            }
+
+        }
+        function Refresh() {
+            window.location.href = "/CardUsers/MyMoneyFaxCardWithdrawlSheet/Index?FromDate=" + "" + "&ToDate=" + "";
+
+        }
+
+    </script>
+}

@@ -1,0 +1,218 @@
+﻿
+
+@model FAXER.PORTAL.Areas.Agent.Models.CashPickUpReceiverDetailsInformationViewModel
+
+@{
+    ViewBag.Title = "CashPickUpReceiverDetailsInformation";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row Receiver ">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    @Html.HiddenFor(x => x.Country)
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Receiver Details</h3>
+                        <hr>
+                        <h5> @Html.ValidationMessage("InvalidReceiver", new { @class = "text-danger" })</h5>
+
+                        <div class="form-group mb30" style="display:none;">
+
+                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Receiving Country", new { @class = "form-blue", @id = "RecevingCountry", onchange = "getPhoneCode()" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group  mb30">
+
+                            @Html.TextBoxFor(model => model.City, new { @class = "form-blue", placeholder = "Enter City (optional)" })
+
+                        </div>
+
+                        <div class="form-group mb30">
+
+                            @Html.DropDownListFor(model => model.PreviousReceiver, (IEnumerable<SelectListItem>)ViewBag.existingReceiver, "Select Previous Receiver ", new { @class = "form-blue", id = "ReceiverId", onchange = "getReceiverDetails();" })
+                            @Html.ValidationMessageFor(model => model.PreviousReceiver, "", new { @class = "text-danger" })
+
+
+                        </div>
+
+
+                        @*<div class="form-group mb20">
+                                <h2 class="text-primary text-center">OR</h2>
+                            </div>*@
+
+                        <div class="form-group  mb30">
+                            @Html.TextBoxFor(model => model.ReceiverFullName, new { @class = "form-blue", placeholder = "Receiver Full  Name", @name = "ReceiverFirstName" })
+                            @Html.ValidationMessageFor(model => model.ReceiverFullName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group contact-no-group mb30">
+
+                            <div class="countr-code-lg">
+                                <span name="MobileCode"> @Model.MobileCode</span>
+                            </div>
+
+                            @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-blue contact-no-lg", @placeholder = "Enter Mobile Number ", @autocomplete = "off", @name = "MobileNo" })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group  mb30">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-blue", placeholder = "Email Address (Optional)", @name = "ReceiverEmailAddress" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        @if (Model.Country == "MA")
+                        {
+                            <div class="form-group mb20">
+                                @Html.DropDownListFor(model => model.IdenityCardId, (IEnumerable<SelectListItem>)ViewBag.IdCardTypes, "Select Id Card", new { @class = "form-blue", @id = "IdenityCardId" })
+                                @Html.ValidationMessageFor(model => model.IdenityCardId, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group   mb20">
+                                @Html.TextBoxFor(x => x.IdentityCardNumber, new { @class = "form-blue", @placeholder = "Enter IdCard number" })
+                                @Html.ValidationMessageFor(model => model.IdentityCardNumber, "", new { @class = "text-danger" })
+                            </div>
+                        }
+
+                        <div class="form-group mb30">
+                            @Html.EnumDropDownListFor(model => model.ReasonForTransfer, new { @class = "form-blue" })
+                            @Html.ValidationMessage("Reason", "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @Html.HiddenFor(x => x.Country, new { id = "RecevingCountry" })
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 " id="submit">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("CashPickUpEnterAmount","AgentCashPickUpTransfer")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="InvalidReceivingCountryPopUp" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4>PLease select the valid Receiver as respective to the receiving country</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function getReceiverDetails() {
+            debugger;
+            var ReceiverId = document.getElementById("ReceiverId").value;
+            var ReceivingCountry = document.getElementById("RecevingCountry").value;
+            if (ReceiverId != 0) {
+                $.getJSON("/agent/AgentCashPickUpTransfer/GetReceiverDetails/", {
+                    id: ReceiverId,
+                    RecevingCountry: ReceivingCountry
+                }, function (data) {
+
+                    if (data.InvalidReceivingCountry == true) {
+                        $("#InvalidReceivingCountryPopUp").modal("show");
+
+                    } else {
+                        $("#InvalidReceivingCountryPopUp").modal("hide");
+
+                        for (var item in data) {
+                            var selector = '[name="' + item + '"]';
+                            $(selector).val(data[item]);
+                            $(selector).text(data[item]);
+                            $(selector).prop('readonly', 'readonly');
+                            $('#ReceiverCountry').prop("disabled", "disabled");
+                        }
+                        $('[name="MobileCode"]').text(data[MobileCode]);
+                    }
+                });
+            }
+            else {
+                $('.Receiver input').prop('readonly', false);
+                $('#ReceiverCountry').prop("disabled", false);
+                $('.Receiver input').val("");
+                $('.Receiver select').val("");
+
+            }
+        }
+
+        function getPhoneCode() {
+
+
+            var recCountry = $("#RecevingCountry").val();
+
+            $.getJSON("/agent/AgentCashPickUpTransfer/GetPhoneCode?countryCode=" + recCountry, function (data) {
+                $(".countr-code-lg").text(data.MobileCode);
+                $("#MobileCode").val(data.MobileCode);
+                $('[name="MobileCode"]').text(data.MobileCode);
+
+            });
+            window.location.href = "/Agent/AgentCashPickUpTransfer/CashPickUpReceiverDetailsInformation?Country=" + recCountry;
+
+        }
+        $("#submit").click(function () {
+
+            $("#loader").show();
+            $("form").submit();
+        })
+    </script>
+
+}
+
+

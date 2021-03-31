@@ -1,0 +1,270 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.GenerateCashWithdrawalCodeVM>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">View-Withdrawal Code</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <a href="@Url.Action("GenerateWithdrawalCode", "CashWithdrawalCodeFromStaffOrAgent")" class="btn btn-info pull-right m-l-20   waves-effect waves-light btn-rounded">Generate Withdrawal Code</a>
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">View-Withdrawal Code</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                </div>
+            </div>
+            <div class="clearfix"></div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td><strong>SN</strong></td>
+                                        <td><strong>Country</strong></td>
+                                        <td><strong>City</strong></td>
+
+                                        <td><strong>Agent Name</strong> </td>
+                                        <td><strong>Agent Account</strong>  </td>
+                                        <td><strong>Staff Name</strong> </td>
+
+                                        <td><strong>Staff Code</strong></td>
+                                        <td><strong>Generated Code</strong></td>
+                                        <td><strong>Status</strong></td>
+
+
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @{
+                                        int i = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        i++;
+
+
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.CountryName</td>
+                                        <td>@item.City</td>
+                                        <td>@item.AgentName</td>
+
+                                        <td>@item.AgentCode </td>
+
+                                        <td> @item.StaffName</td>
+                                        <td>@item.StaffCode</td>
+                                        <td>@item.WithdrawalCode</td>
+                                        @if (item.Status == FAXER.PORTAL.DB.AgentWithdrawalCodeStatus.Expired)
+                                        {
+                                            <td style="background-color:red">@item.StatusName</td>
+                                        }
+                                        else if (item.Status == FAXER.PORTAL.DB.AgentWithdrawalCodeStatus.Use)
+                                        {
+                                            <td style="background-color:yellow">@item.StatusName</td>
+                                        }
+                                        else
+                                        {
+                                            <td  style = "background-color:greenyellow" > @item.StatusName</td>
+                                        }
+
+                                    </tr>
+                                    }
+
+
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Generate Withdrawal Code</h4>
+                                    <a href="@Url.Action("GenerateWithdrawalCode", "CashWithdrawalCodeFromStaffOrAgent")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i>  Generate Code
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Year / Month" autocomplete="off" id="Date" onchange="Filter();">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Agent Name" class="form-control form-control-round form-control-bold" name="AgentName" id="AgentName" value="@ViewBag.AgentName" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Account No" class="form-control form-control-round form-control-bold" name="AccountNo" id="AccountNo" value="@ViewBag.AccountNo" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                           <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Withdrawal Code " class="form-control form-control-round form-control-bold" name="WithdrawalCode" id="WithdrawalCode" value="@ViewBag.WithdrawalCode" onchange="Fliter();">
+                                            </div>
+                                        </div>  <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Withdrawal Staff " class="form-control form-control-round form-control-bold" name="WithdrawalStaff" id="WithdrawalStaff" value="@ViewBag.WithdrawalStaff" onchange="Fliter();">
+                                            </div>
+                                        </div><div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By status " class="form-control form-control-round form-control-bold" name="status" id="status" value="@ViewBag.status" onchange="Fliter();">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Agent Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Withdrawal Code</th>
+                                                    <th>Withdrawal Staff</th>
+                                                    <th>Staff ID</th>
+                                                    <th>Generated Staff</th>
+                                                    <th>Date Generated</th>
+                                                    <th>Status</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.CountryName</td>
+                                                        <td>@item.City</td>
+
+                                                        <td><a href="agent-dashboard.php">@item.AgentName</a> </td>
+
+                                                        <td><a href="">@item.AgentCode</a></td>
+                                                        <td>@item.WithdrawalCode</td>
+                                                        <td> @item.StaffName</td>
+                                                        <td><a href="">@item.StaffCode</a></td>
+                                                        <td><a href="">@item.GeneratedStaffName</a></td>
+                                                        <td>@item.GeneratedDate</td>
+                                                        <td><span class="text-success">@item.StatusName</span></td>
+
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                @section scripts{
+                    <script type="text/javascript">
+
+                        function Fliter() {
+                            var country = document.getElementById("Country").value;
+                            var city = document.getElementById("city").value;
+                            var date = document.getElementById("Date").value;
+                            var AgentName = $("#AgentName").val();
+                            var AccountNo = $("#AccountNo").val();
+                            var WithdrawalCode = $("#WithdrawalCode").val();
+                            var WithdrawalStaff = $("#WithdrawalStaff").val();
+                            var status = $("#status").val();
+                            window.location.href = "/Admin/CashWithdrawalCodeFromStaffOrAgent/Index?CountryCode=" + country + "&City=" + city + "&Date=" + date +
+                                "&AgentName=" + AgentName + "&AccountNo=" + AccountNo + "&WithdrawalCode=" + WithdrawalCode + "&WithdrawalStaff=" + WithdrawalStaff + "&status=" + status;
+                        }
+
+
+                    </script>
+                }

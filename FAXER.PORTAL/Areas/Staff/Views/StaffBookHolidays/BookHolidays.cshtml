@@ -1,0 +1,217 @@
+﻿@model IEnumerable<FAXER.PORTAL.Areas.Staff.ViewModels.StaffBookHolidaysViewModel>
+@{
+    ViewBag.Title = "BookHolidays";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+@{Html.RenderPartial("_mail_sidebar");}
+<div class="col-lg-9 col-md-10">
+
+    <div class="dashboard_header">
+        <h1>Book Holidays</h1>
+    </div>
+    <!--  -->
+    <div class="dashboard_body">
+        <!--
+    <div class="row">
+        <div class="col-lg-3 pull-right clearfix">
+            <div class="input-group stylish-input-group">
+                        <input type="text" class="form-control" value="Search Month">
+                        <span class="input-group-addon">
+                            <button type="submit" class="">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>
+        </div>
+    </div>
+    <br> -->
+        @if (TempData["Validation"] != null)
+        {
+
+            <label style="color:red"> @TempData["Validation"]</label>
+        }
+        else
+        {
+        }
+
+        <label id="invalid" style="color:red; display:none"> You have to request 5 days prior </label>
+
+        <label id="invalid1" style="color:red;display:none"> Start Date cannot be less than End date</label>
+
+        <label id="invalid3" style="color:red;display:none"> Please enter a valid date</label>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <td rowspan="2"><strong>SN.</strong></td>
+                    <td rowspan="2"><strong>Total Number of Holidays Allowed</strong></td>
+                    <td rowspan="2"><strong>No. of Days Left</strong></td>
+                    <td rowspan="2"><strong>No of days Req</strong></td>
+                    <td colspan="4"><strong>Book Holidays</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Holidays Start Date</strong></td>
+                    <td><strong> Holidays End Date</strong></td>
+                    <td><strong>No. of Days Taken</strong></td>
+                    <td><strong>Action/Status</strong></td>
+
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    int i = 0;
+                }
+                @foreach (var item in Model)
+                {
+                    @Html.Hidden("Id" , new { id ="HolidayId" , @value = item.BookHolidayId})
+                   
+                    i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.TotalNoOfHolidays</td>
+                    <td>@item.NoOfHolidaysLeft</td>
+                    <td>@item.NoOfHolidaysRequested</td>
+
+                    <td>@item.HolidaysStartDate</td>
+                    <td>@item.HolidaysEndDate</td>
+                    <td>@item.NoOfHolidaysTaken</td>
+
+                    @if (item.HolidaysRequestStatus == FAXER.PORTAL.DB.HollidayRequestStatus.Approved)
+                    {
+
+                        <td style="color:green">
+                            @item.HolidaysRequestStatus
+                            <button type="button" onclick="CancelApproved(@item.BookHolidayId)" class="btn btn-xs btn-danger waves-effect waves-light ">Cancel Holiday</button>
+                        </td>
+                    }
+                    else if (item.HolidaysRequestStatus == FAXER.PORTAL.DB.HollidayRequestStatus.Rejected)
+                    {
+                        <td style="color:red">@item.HolidaysRequestStatus</td>
+                    }
+                    else if (item.HolidaysRequestStatus == FAXER.PORTAL.DB.HollidayRequestStatus.Requested)
+                    {
+                        <td style="color:darkgoldenrod">
+                            @item.HolidaysRequestStatus
+                        <button type="button"  onclick="CancelApproved(@item.BookHolidayId)" class="btn btn-xs btn-danger waves-effect waves-light ">Cancel Holiday</button>
+                    </td>       
+                }
+                else
+                {
+
+                    <td style="color:red">
+                        @item.HolidaysRequestStatus</td>
+                    }
+                </tr>
+
+                }
+
+                <tr>
+                    <td></td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td rowspan="3"><input type="date" name="" id="StartDate" /> </td>
+                    <td><input type="date" name="" id="EndDate" /></td>
+                    <td>&nbsp;</td>
+                    <td><button type="button" id="Request" class="btn btn-xs btn-success waves-effect waves-light ">Request Holiday</button></td>
+                </tr>
+
+
+            </tbody>
+        </table>
+    </div><!--  -->
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="modal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Reasons For Holiday</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-9">
+                        @Html.TextArea("Reason", null, new { @class = "form-control", id = "reason", @placeholder = "Reasons For Holiday" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success btn-sm" id="GO" data-dismiss="modal">Send Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+
+            $("#Request").click(
+                function () {
+                    Date.prototype.addDays = function (days) {
+                        var date = new Date(this.valueOf());
+                        date.setDate(date.getDate() + days);
+                        return date;
+                    }
+                    var currentdate = new Date();
+                    var dateAfterdays = currentdate.addDays(5);
+
+
+                    var startDate = $("#StartDate").val();
+                    var endDate = $("#EndDate").val();
+                    var parts = startDate.split('-');
+                    var HolidaysStartDate = new Date(parts[0], parts[1] - 1, parts[2]);
+                    var parts2 = endDate.split('-');
+                    var HolidaysEndDate = new Date(parts2[0], parts2[1] - 1, parts2[2]);
+                    if (HolidaysStartDate.getFullYear().toString().length > 4 || HolidaysEndDate.getFullYear().toString().length > 4) {
+                        $("#invalid3").show();
+                        $("#invalid").hide();
+                        $("#invalid1").hide();
+                    }
+                    else if (!(HolidaysStartDate > dateAfterdays)) {
+                        $("#invalid").show();
+                        $("#invalid1").hide();
+
+                    }
+                    else if (HolidaysEndDate < HolidaysStartDate) {
+                        $("#invalid").hide();
+                        $("#invalid1").show();
+                    }
+
+                    else {
+                        $("#invalid").hide();
+                        $("#invalid1").hide();
+                        $("#modal").modal('show');
+
+
+                        $("#GO").click(function () {
+                            var reason = $("#reason").val();
+                            window.location.href = "/Staff/StaffBookHolidays/RequestHolidays?startdate=" + startDate + "&enddate=" + endDate + "&reason=" + reason;
+
+                        });
+
+                        
+                    }
+                }
+            );
+          
+
+        });
+
+       
+
+        function CancelApproved(Id) {
+
+            window.location.href = "/Staff/StaffBookHolidays/CancelHolidays?HolidayId=" + Id;
+
+
+        }
+     
+       
+      
+    </script>
+}

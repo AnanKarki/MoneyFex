@@ -1,0 +1,212 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Master View-System Summary</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Master View-System Summary</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td><strong>Day</strong></td>
+                                    <td><strong>Month</strong></td>
+                                    <td><strong>Year</strong></td>
+                                    <td><strong>Select Country</strong></td>
+                                    <td><strong>Select City</strong></td>
+                                    <td><strong>Agent Type</strong></td>
+                                    <td><strong>Agent Name</strong></td>
+                                    <td><strong>Agent MFS Code</strong></td>
+                                    <td><strong>Total Money Sent By</strong></td>
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select>
+                                            <option>Select Day</option>
+                                            <option>All</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
+                                            <option value="Sunday">Sunday</option>
+                                        </select>
+
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>Select Month</option>
+                                            <option>All</option>
+                                            <option selected="" value="1">Janaury</option>
+                                            <option value="2">February</option>
+                                            <option value="3">March</option>
+                                            <option value="4">April</option>
+                                            <option value="5">May</option>
+                                            <option value="6">June</option>
+                                            <option value="7">July</option>
+                                            <option value="8">August</option>
+                                            <option value="9">September</option>
+                                            <option value="10">October</option>
+                                            <option value="11">November</option>
+                                            <option value="12">December</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>Select Year</option>
+                                            <option>All</option>
+                                            <option value="2013">2013</option>
+                                            <option value="2012">2012</option>
+                                            <option value="2011">2011</option>
+                                            <option value="2010">2010</option>
+                                            <option value="2009">2009</option>
+                                            <option value="2008">2008</option>
+                                            <option value="2007">2007</option>
+                                            <option value="2006">2006</option>
+                                            <option value="2005">2005</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>Select Country</option>
+                                            <option>All</option>
+                                            <option value="United States">United States</option>
+                                            <option value="United Kingdom">United Kingdom</option>
+                                            <option value="Afghanistan">Afghanistan</option>
+                                            <option value="Albania">Albania</option>
+                                            <option value="Algeria">Algeria</option>
+                                            <option value="American Samoa">American Samoa</option>
+                                            <option value="Andorra">Andorra</option>
+                                            <option value="Angola">Angola</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>Select</option>
+                                            <option>All</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option> </option>
+                                            <option>Business Merchant</option>
+                                            <option>Paying Agent</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select>
+                                            <option>All</option>
+                                            <option>Agent 1</option>
+                                        </select>
+                                    </td>
+
+                                    <td></td>
+
+                                    <td colspan="3">
+                                        <select class="">
+                                            <option>All</option>
+                                            <option>Portal</option>
+                                            <option>Sender/Online </option>
+                                            <option>Agents</option>
+                                        </select>
+                                    </td>
+
+
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+
+                    <br>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+
+                            <thead>
+                                <tr>
+                                    <td>
+                                        <strong>
+                                            Total Fee
+                                        </strong>
+                                    </td>
+                                    <td><strong>Total Refund</strong></td>
+                                    <td><strong>Total Received</strong></td>
+                                    <td><strong>Total Rejection</strong></td>
+                                    <td><strong>Total NOT Received</strong></td>
+                                    <td><strong>Total MFS Card User</strong></td>
+                                    <td><strong>Total Deleted MFS Cards</strong></td>
+                                    <td><strong>Total Agents</strong></td>
+                                    <td><strong>Total Deleted Agents</strong></td>
+                                    <td><strong>Total Business Partners</strong></td>
+                                    <td><strong>Total Deleted Business Partners</strong></td>
+
+
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+       

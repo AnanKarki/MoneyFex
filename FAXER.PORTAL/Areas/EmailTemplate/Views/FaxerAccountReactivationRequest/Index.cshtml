@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear Admin,
+    </p>
+    <p>
+        A registered sender with the following informaion has requested for their account to be reactivated.
+
+    </p>
+    <p>
+        Full Name: @ViewBag.FullName
+    </p>
+    <p>
+        Country: @ViewBag.Country
+    </p>
+    <p>
+        City: @ViewBag.City
+    </p>
+    <p>
+        Email Address: @ViewBag.Email
+    </p>
+    <p>
+        MF Account Number: @ViewBag.MFNumber
+    </p>
+    <p>
+        Please verify information and go to the recovery folder in admin to reactivate the account.
+    </p>
+
+
+
+</div>

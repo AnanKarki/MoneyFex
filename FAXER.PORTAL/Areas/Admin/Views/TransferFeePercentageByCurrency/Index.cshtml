@@ -1,0 +1,174 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.TransferFeePercentageByCurrencyViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Transfer Fee</h4>
+                                    <a href="@Url.Action("AddTransferFeePercentageByCurrency", "TransferFeePercentageByCurrency")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set Transfer Fees
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="js-example-data-array form-control form-control-round form-control-bold" id="TransferType" name="TransferType" onchange="filter();">
+                                                    <option value="0">Select Transfer Type</option>
+                                                    <option value="1">Online</option>
+                                                    <option value="2">Agent</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-round form-control-bold" id="TransferMethod" name="TransferMethod" onchange="filter();">
+                                                    <option value="0">Select Transfer Method</option>
+                                                    <option value="7">All</option>
+                                                    <option value="1">CashPickUp</option>
+                                                    <option value="2">KiiPayWallet</option>
+                                                    <option value="3">OtherWallet</option>
+                                                    <option value="4">BankDeposit</option>
+                                                    <option value="5">BillPayment</option>
+                                                    <option value="6">ServicePayment</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("SendingCountry", (IEnumerable<SelectListItem>)ViewBag.SendingCurrency, "Select Sending Currency", new { @class = "form-control    form-control-round form-control-bold", @id = "SendingCurrency", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("ReceivingCountry", (IEnumerable<SelectListItem>)ViewBag.ReceivingCurrency, "Select Receiving Currency", new { @class = "form-control   form-control-round form-control-bold", @id = "ReceivingCurrency", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap ">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>Sending Currency</th>
+                                                    <th>Receiving Currency</th>
+                                                    <th>Sending Country</th>
+                                                    <th>Receiving Country</th>
+                                                    <th>Method</th>
+                                                    <th>Range</th>
+                                                    <th>Percentage</th>
+                                                    <th>Flat Fee</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+
+
+                                                        <td><i class="flag-icon flag-icon-@item.SendingCountryFlag"></i>@item.SendingCurrency</td>
+                                                        <td><i class="flag-icon flag-icon-@item.ReceivingCountryFlag"></i>@item.ReceivingCurrency</td>
+                                                        <td>@item.SendingCountry</td>
+                                                        <td>@item.ReceivingCountry</td>
+                                                        <td>@item.TransferMethod</td>
+                                                        <td>
+                                                            @foreach (var a in item.RangeList)
+                                                            {
+                                                                @a <br />
+                                                            }
+                                                        </td>
+                                                        <td>@item.Percentage</td>
+                                                        <td>@item.FlatFee</td>
+
+
+                                                        <td class="action-icon">
+
+                                                            <a href="@Url.Action("AddTransferFeePercentageByCurrency", "TransferFeePercentageByCurrency", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var TransferType = $("#TransferType").val();
+            var SendingCurrency = $("#SendingCurrency").val();
+            var ReceivingCurrency = $("#ReceivingCurrency").val();
+            var TransferMethod = $("#TransferMethod").val();
+            window.location.href = "/Admin/TransferFeePercentageByCurrency/Index?SendingCurrency=" + SendingCurrency + "&ReceivingCurrency=" + ReceivingCurrency +
+                "&TransferType=" + TransferType + "&TransferMethod=" + TransferMethod;
+
+        }
+        $("#TransferType").val('@ViewBag.TransferType');
+        $("#TransferMethod").val('@ViewBag.TransferMethod');
+
+            function DeletePopUp(id) {
+                Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                    Riddha.ajax.get("/Admin/TransferFeePercentageByCurrency/Delete?id=" + id, null)
+                        .done(function (result) {
+                            if (result.Data == true) {
+                                Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                            }
+                            else {
+                                Riddha.UI.Alert(result.Message, "Warning", 0);
+                            }
+                        });
+                });
+            }
+    </script>
+}

@@ -1,0 +1,105 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.SMSFeelistViewModel
+@{
+    ViewBag.Title = "SetNewRate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Set New Sms Fee</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a href="@Url.Action("Index","SmsFeeSetUp")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Fees</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index","AdminDashboard")">Dashboard</a></li>
+                    <li class="active">Set New Rates</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <form method="post">
+                        <div class="form-body">
+                            @Html.HiddenFor(x=>x.CountryName)
+                            @Html.HiddenFor(x=>x.Country)
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Country</label>
+
+                                        @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @id = "country" })
+                                        @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Country Code</label>
+                                        @Html.TextBoxFor(model => model.CountryCode, new { @class = "form-control", @placeholder = "", id = "countryCode" })
+                                        @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Enter Fee</label>
+                                        @Html.TextBoxFor(model => model.SmsFee, new { @class = "form-control" })
+                                    </div>
+                                    @Html.HiddenFor(model => model.Id);
+                                </div>
+
+                            </div>
+                            <!--/row-->
+
+
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success btn-rounded"> <i class="fa fa-check"></i> Set</button>
+                            <a href="@Url.Action("Index","SmsFeeSetUp")" class="btn btn-danger btn-rounded">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        $('#countryCode').on('change', function () {
+
+            var code = $("#country").val();
+            $("#countryCode").val(code);
+
+        });
+
+
+    </script>
+
+}
+

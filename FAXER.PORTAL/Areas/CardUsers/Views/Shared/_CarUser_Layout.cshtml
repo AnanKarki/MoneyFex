@@ -1,0 +1,1089 @@
+﻿
+@{
+    string MFTCCardNumber = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel == null ? "" : FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.MobileNumber ?? "";
+    string CardNo = "";
+    int LastRemaingNoOFDigit = 0;
+    string First = "";
+    string Mid = "";
+    string last = "";
+    if (!string.IsNullOrEmpty(MFTCCardNumber))
+    {
+        //string[] CardNumberSplit = MFTCCardNumber.Split('-');
+
+        //CardNo = CardNumberSplit[1];
+        CardNo = MFTCCardNumber;
+        //LastRemaingNoOFDigit = CardNo.Length - 6;
+        //First = CardNo.Substring(0, 3);
+        //Mid = CardNo.Substring(3, 3);
+
+        //last = CardNo.Substring(6, LastRemaingNoOFDigit);
+    }
+
+    string FullName = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel == null ? "" : FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.FullName;
+
+
+
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFex ">
+    <meta name="keywords" content="MoneyFex ">
+    <title>MoneyFex Service</title>
+
+    <link rel="icon" type="image/png" href="~/Areas/CardUsers/images/favicon.png">
+
+    <!-- Bootstrap -->
+    <link href="~/Areas/CardUsers/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/CardUsers/css/style.css" rel="stylesheet">
+    <link href="~/Areas/CardUsers/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/CardUsers/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/CardUsers/css/animsition.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link href="~/Areas/CardUsers/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Areas/CardUsers/css/owl.theme.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body class="animsition">
+    <div class="header">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-2 col-sm-6 col-xs-5  ">
+                    <!-- logo -->
+                    <div class="logo text-center">
+
+                        <a href="@Url.Action("Home","CardUserHome")">
+                            <img src="~/Areas/CardUsers/images/logo.png" alt="MoneyFex ">
+                        </a>
+                    </div>
+                </div>
+
+                @if (FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel == null)
+                {
+                    <div class="col-lg-6 col-md-7 col-xs-12 ">
+
+                        <!-- /.navigation start-->
+                    </div>
+                    <div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
+                        <!-- search start-->
+                        <div class="header-action   pull-right ">
+                            <a href="@Url.Action("Login", "CardUserLogin")" class="btn btn-primary btn-sm">Login</a> &nbsp;&nbsp;| &nbsp;&nbsp;
+                            <a href="@Url.Action("SignUp", "CardUserSignUp")" class="btn btn-success btn-sm ">Sign Up</a>
+
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-7   hidden-md  hidden-lg">
+                        <!-- search start-->
+                        <div class=" ">
+
+                            <ul class="after-login-menu">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="user_image  ">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <span class="name">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.FirstName @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.LastName </span>
+                                        <p>Account No. @CardNo </p>
+                                        <span class="fa fa caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index" ,"CardUserHome")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("Index" ,"CardUserInformation")">My Account Profile</a></li>
+                                        <li class=""><a href="@Url.Action("Logout" ,"CardUserLogin")">Logout</a></li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- logo -->
+                    <div class="col-lg-6 col-md-7 col-xs-12 ">
+                        <div id="navigation" class="pull-right hidden-xs hidden-sm">
+                            <!-- navigation start-->
+                            <ul>
+
+                                <li class="dropdown  hidden-xs ">
+                                    <a href="#" class="dropdown-toggle notification  hidden" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class=""> <i class="fa fa-bell fa-stack-1x fa-inverse"></i></span>
+                                        <span class="badge">5</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu notify-drop  hidden">
+                                        <div class="notify-drop-title">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">Notification  (<b>5</b>)</div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                            </div>
+                                        </div>
+                                        <!-- end notify title -->
+                                        <!-- notify content -->
+                                        <div class="drop-content">
+                                            <!--  -->
+                                            <li>
+                                                <div class=" pd-l0">
+                                                    <a href="">
+                                                        <h5>PAYMENTS</h5>Payment from <span class="text-black"> Ukesh,</span> Amount: $1000 <p>01/02/2019 08:35 AM</p>
+                                                        <p class="time">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <!--  -->
+                                            <li>
+                                                <div class=" pd-l0">
+                                                    <a href="">
+                                                        <h5>PAYMENTS</h5>Payment from <span class="text-black"> Cyberlink,</span> Amount: $1000 <p>01/02/2019 08:35 AM</p>
+                                                        <p class="time">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <!--  -->
+                                            <li>
+                                                <div class=" pd-l0">
+                                                    <a href="">
+                                                        <h5>TRANSFER IN PROGRESS</h5>MFCN No. 677676 Collected <p>01/02/2019 08:35 AM</p>
+                                                        <p class="time">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <!--  -->
+                                            <li>
+                                                <div class=" pd-l0">
+                                                    <a href="">
+                                                        <h5>TRANSFER IN PROGRESS</h5>MFCN No. 677676 Held <p>01/02/2019 08:35 AM</p>
+                                                        <p class="time">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <!--  -->
+                                            <li>
+                                                <div class=" pd-l0">
+                                                    <a href="">
+                                                        <h5>MESSAGE</h5>Message from  <span class="text-black">Gaurav   </span>  <p>01/02/2019 08:35 AM</p>
+                                                        <p class="time">2 hours ago</p>
+                                                    </a>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                        </div>
+                                        <div class="notify-drop-footer text-center">
+                                            <a href="notification.php"><i class="fa fa-eye"></i> See All  </a>
+                                        </div>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <div class="clearfix">
+
+                            </div>
+                        </div>
+                        <!-- /.navigation end-->
+
+
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6    hidden-sm hidden-xs">
+                        <!-- search start-->
+                        <div class=" ">
+
+                            <ul class="after-login-menu">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <div class="user_image  ">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                        <span class="name">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.FirstName @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.LastName </span>
+                                        <p>Account No. @CardNo </p>
+                                        <span class="fa fa caret"></span>
+                                    </a>
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("Index" ,"CardUserHome")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("Index" ,"CardUserInformation")">My Account Profile</a></li>
+                                        <li class=""><a href="@Url.Action("Logout" ,"CardUserLogin")">Logout</a></li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- /.search start-->
+                }
+            </div>
+        </div>
+    </div>
+
+    @*<section class="dashboard">
+        <div class="container">*@
+    @RenderBody()
+    @*</div>
+        </section>*@
+
+    <!-- /.footer -->
+    <div class="tiny-footer" id="footer">
+        <!-- small footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>© MoneyFex @DateTime.Now.Year, All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 col-sm-6 text-right col-xs-6">
+                    <a href="#"><i class="fa fa-facebook"></i>  </a>   <a href="#"><i class="fa fa-google-plus"></i>    </a>
+                    <a href="https://twitter.com/MoneyFex" target="_blank"><i class="fa fa-twitter"></i>  </a>  <a href="#"><i class="fa fa-linkedin"></i>  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.small footer -->
+    <!-- ecard -->
+
+    @if (LastRemaingNoOFDigit > 0)
+    {
+
+        <div class="modal fade" tabindex="-1" id="ecard" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-card" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <!--  <img src="https://www.visa.ca/en_CA/pay-with-visa/cards/credit-cards/_jcr_content/par/cardstack/cardStackColumn2/image_1788800659.img.jpg/1529504445934.jpg"> -->
+
+
+                        <div class="Wrap">
+                            <div class="Base">
+                                <div class="Inner-wrap">
+
+
+                                    <!--       Header SVG -->
+
+
+                                    <div class="Logo-name">
+
+                                        e-Card
+                                    </div>
+
+
+
+                                    <!--       Logo SVG -->
+                                    <div class="logo">
+                                        <img src="@ViewBag.Photo" alt="">
+                                    </div>
+
+
+
+
+
+
+                                    <!-- Card Chip SVG -->
+
+                                    <svg class="Chip" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 0 387.8 380.3" style="enable-background:new 0 0 387.8 380.3;" xml:space="preserve">
+
+<defs>
+<linearGradient id="gold-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                    <stop offset="0%" stop-color="#c79750"></stop>
+                                    <stop offset="20%" stop-color="#e6b964"></stop>
+                                    <stop offset="50%" stop-color=" #f8e889"></stop>
+                                    <stop offset="80%" stop-color=" #deb15f"></stop>
+                                    <stop offset="100%" stop-color=" #dfb461"></stop>
+    </linearGradient>
+</defs>
+<g id="XMLID_4_">
+                                    <path id="XMLID_1_" class="st0" d="M308.8,375.3H79.1C38.2,375.3,5,342.1,5,301.2V79.1C5,38.2,38.2,5,79.1,5h229.7
+    c40.9,0,74.1,33.2,74.1,74.1v222.2C382.8,342.1,349.7,375.3,308.8,375.3z" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_2_" class="st0" x1="109.9" y1="5.1" x2="109.9" y2="375.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_3_" class="st0" x1="4.9" y1="95.1" x2="109.9" y2="95.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_7_" class="st0" x1="4.9" y1="185.1" x2="109.9" y2="185.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_8_" class="st0" x1="1.9" y1="275.1" x2="106.9" y2="275.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_9_" class="st0" x1="276.9" y1="275.1" x2="381.9" y2="275.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_10_" class="st0" x1="274.9" y1="185.1" x2="379.9" y2="185.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <line id="XMLID_11_" class="st0" x1="277.9" y1="95.1" x2="382.9" y2="95.1" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                    <g id="XMLID_6_">
+                                    <g id="XMLID_14_">
+                                    <g id="XMLID_32_">
+                                    <path id="XMLID_33_" d="M277.4,90.1h-1c-2.5,0-4.5,2-4.5,4.5v272c0,2.5,2,4.5,4.5,4.5h1c2.5,0,4.5-2,4.5-4.5v-272
+          C281.9,92.1,279.9,90.1,277.4,90.1z" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      </g>
+    </g>
+  </g>
+</g>
+</svg>
+                                    <div class="Card-number">
+
+
+                                        <ul>
+                                            <li id="first-li">@First</li>
+                                            <li> @Mid</li>
+                                            <li id="last-li">@last </li>
+                                        </ul>
+                                    </div>
+
+                                    <!--  <div class='Expire'>
+                                       <h4>Good Thru</h4>
+                                       <p>02/20</p>
+                                     </div> -->
+
+                                    <div class='Name'>
+                                        <h3>@FullName</h3>
+                                    </div>
+
+                                    <!--       Visa Logo SVG -->
+
+
+                                    <div class="Visa">
+                                        <img src="~/Areas/CardUsers/images/e-logo.png" />
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+
+                        <div class="clearfix">
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    <!-- ecard -->
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="~/Areas/CardUsers/js/jquery.min.js"></script>
+    <script src="~/Areas/CardUsers/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/CardUsers/js/menumaker.js"></script>
+    <!-- animsition -->
+    <script type="text/javascript" src="~/Areas/CardUsers/js/animsition.js"></script>
+    <script type="text/javascript" src="~/Areas/CardUsers/js/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="~/Areas/CardUsers/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/Areas/CardUsers/js/sticky-header.js"></script>
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Areas/CardUsers/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Areas/CardUsers/js/slider-carousel.js"></script>
+    <script type="text/javascript" src="~/Areas/CardUsers/js/service-carousel.js"></script>
+    <!-- Back to top script -->
+    <script src="~/Areas/CardUsers/js/back-to-top.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+        $(document).ready(function () {
+
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+
+
+        });
+
+        $(':input[type=number]').bind('keyup', function () {
+
+
+
+            var regexp = "";
+
+            var amount = this.value;
+            if (amount.split(".").length > 1) {
+                regexp = /^\d+\.\d{0,2}$/;
+            } else {
+
+                regexp = /^\d+$/;
+
+            }
+            var IsValid = regexp.test(amount);
+
+            if (!IsValid) {
+
+                this.value = "";
+            }
+
+
+        })
+        $(':input[type=number]').bind('click', function () {
+
+
+
+
+            var amount = this.value;
+            if (amount == 0) {
+
+                this.value = "";
+            }
+
+
+        });
+        var month = "";
+        var day = "";
+        var year = "";
+
+        var date = month + "/" + day + "/" + year;
+        $('.day').bind('change', function () {
+
+
+            debugger;
+            //date.setDate(this.value);
+            day = this.value;
+            date = month + "/" + day + "/" + year;
+            $('.dateInput').val(date);
+
+
+        })
+
+        $('.month').bind('change', function () {
+
+            //date.setMonth(this.value);
+            month = this.value;
+            date = month + "/" + day + "/" + year;
+            $('.dateInput').val(date);
+
+        })
+        $('.year').bind('change', function () {
+
+            //date.setFullYear(this.value);
+            year = this.value;
+            date = month + "/" + day + "/" + year;
+            $('.dateInput').val(date);
+
+        })
+
+        var EXPmonth = "";
+        var EXPday = "";
+        var EXPyear = "";
+
+        var EXPdate = EXPmonth + "/" + EXPday + "/" + EXPyear;
+        $('.EXPday').bind('change', function () {
+
+
+            debugger;
+            //date.setDate(this.value);
+            day = this.value;
+            date = month + "/" + day + "/" + year;
+            $('#Expirydate').val(date);
+
+
+        })
+
+        $('.EXPmonth').bind('change', function () {
+
+            //date.setMonth(this.value);
+            month = this.value;
+            date = month + "/" + day + "/" + year;
+            $('#Expirydate').val(date);
+
+        })
+        $('.EXPyear').bind('change', function () {
+
+            //date.setFullYear(this.value);
+            year = this.value;
+            date = month + "/" + day + "/" + year;
+            $('#Expirydate').val(date);
+
+        })
+        
+        $(function () {
+            $("input[name='chkPinNo']").click(function () {
+                if ($("#chkYes").is(":checked")) {
+                    $("#dvPinNo").show();
+                } else {
+                    $("#dvPinNo").hide();
+                }
+            });
+        });
+
+        $(document).ready(function ($) {
+
+            // Disable scroll when focused on a number input.
+            $('form').on('focus', 'input[type=number]', function (e) {
+                $(this).on('wheel', function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            // Restore scroll on number inputs.
+            $('form').on('blur', 'input[type=number]', function (e) {
+                $(this).off('wheel');
+            });
+
+            // Disable up and down keys.
+            $('form').on('keydown', 'input[type=number]', function (e) {
+                if (e.which == 38 || e.which == 40)
+                    e.preventDefault();
+            });
+
+        });
+
+    </script>
+    <script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $('.dashboard_thumb').click(function () {
+                $('.dashboard_thumb').removeClass('active');
+                $(this).addClass('active');
+                var $div = $('#' + $(this).data('href'));
+                $('.demo').not($div).hide();
+                $div.slideToggle();
+            });
+        });
+
+
+
+    </script>
+    @RenderSection("Scripts", false)
+
+
+    <!-- Modal -->
+    <div class="modal " id="myModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">You will need the following information to Sign Up for an account with MoneyFex : </h4>
+
+                </div>
+                <div class="modal-body">
+                    <p>Full name, date of birth, username (preferably email address), password, identification document information and contact details. </p>
+
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("SignUp", "CardUserSignUp")" class="btn btn-sm btn-primary">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+

@@ -1,0 +1,102 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.SetNewRateViewModel
+@{
+    ViewBag.Title = "SetNewRate";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Set New Rates</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a href="@Url.Action("Index","ExchangeRateSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Rates</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index","AdminDashboard")">Dashboard</a></li>
+                    <li class="active">Set New Rates</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <form method="post">
+                        <div class="form-body">
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Faxing Country</label>
+                                        @*<select class="form-control select2" name="country" tabindex="1">
+                                                <option id="AF">Afghanistan</option>
+
+                                            </select>*@
+                                        @Html.DropDownListFor(model => model.SourceCountryCode, (IEnumerable<SelectListItem>)ViewBag.SourceCountries, "Select Faxing Country", new { @class = "form-control", @id = "SourceCountryCode" })
+
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Receiving Country</label>
+                                        @Html.DropDownListFor(model => model.DestinationCountryCode, (IEnumerable<SelectListItem>)ViewBag.DestinationCountries, "Select Receiving Country", new { @onchange = "getExchangeAmount();", @class = "form-control", @id = "DestinationCountryCode" })
+
+                                        @*<select class="form-control select2" tabindex="1">
+                                                <option id="AF">Nepal</option>
+                                            </select>*@
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Enter Amount</label>
+                                        @Html.TextBoxFor(model => model.Rate, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!--/row-->
+
+
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success btn-rounded"> <i class="fa fa-check"></i> Set</button>
+                            <a href="@Url.Action("Index","ExchangeRateSetting")" class="btn btn-danger btn-rounded">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+<script type="text/javascript">
+    function getExchangeAmount() {
+        ///Admin/ExchangeRateSetting/ShowExchangeRate
+        var SourceCountryCode = document.getElementById("SourceCountryCode").value;
+        var DestinationCountryCode = document.getElementById("DestinationCountryCode").value;
+        window.location.href = "/Admin/ExchangeRateSetting/SetNewRate?SourceCountryCode=" + SourceCountryCode + "&DestinationCountryCode=" + DestinationCountryCode + "&query=true";
+        //? value = "+val;
+    }
+</script>
+
+

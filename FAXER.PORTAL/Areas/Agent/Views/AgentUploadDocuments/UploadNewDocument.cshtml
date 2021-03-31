@@ -1,0 +1,180 @@
+﻿@model FAXER.PORTAL.DB.AgentNewDocument
+@{
+    ViewBag.Title = "UploadNewDocument";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm("UploadNewDocument", "AgentUploadDocuments", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+{
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+
+                    <h1>Upload Documents</h1>
+
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="text-right   pull-right ">
+                        <a href="@Url.Action("Index", "AgentUploadDocuments")" class="btn btn-primary">View</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+    <!--  -->
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <div class="row">
+                        <div class="col-lg-4  col-sm-12 col-xs-12 col-lg-offset-4">
+
+                            <!--  -->
+
+                            <div class="form-group">
+                                <label>Document Type</label>
+
+                                @Html.EnumDropDownListFor(x => x.DocumentType, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                @Html.ValidationMessageFor(x => x.DocumentType, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="form-group">
+                                <label>Does Document Expires?</label>
+                                @Html.EnumDropDownListFor(x => x.DocumentExpires, new { @class = "form-control form-control-lg form-control-round form-control-bold", id = "documentExpiresType", @onchange = "Filter()" })
+
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="form-group" id="ExpiryDatediv" style="display:none">
+                                <label>Expiry Date</label>
+
+                                @Html.TextBoxFor(x => x.ExpiryDate, new { @class = "form-control", @type = "date" })
+                                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="form-group">
+                                <label>Document Name </label>
+                                @Html.TextBoxFor(x => x.DocumentTitleName, new { @class = "form-control", @placeholder = "Enter name" })
+                                @Html.ValidationMessageFor(x => x.DocumentTitleName, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            @*<div class="form-group  text-center">
+
+                                    <img src="@Model.DocumentPhotoUrl" class="img-thumbnail" alt="Photo of MoneyFax Top-up Card User">
+                                </div>*@
+
+                            <!--  -->
+
+                            <div class="form-group   ">
+                                <label>Upload Document </label>
+                                @Html.TextBoxFor(x => x.DocumentPhotoUrl, new { @class = "form-control", type = "file" })
+                                @Html.ValidationMessageFor(Model => Model.DocumentPhotoUrl, "", new { @class = "text-danger" })
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4  col-sm-12 col-xs-12 col-lg-offset-4">
+                    <a href="@Url.Action("Index", "AgentUploadDocuments")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                    <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+}
+
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        Filter();
+
+        function Filter() {
+
+            var DocumentExpires = $("#documentExpiresType").val();
+            if (DocumentExpires == 2 || DocumentExpires == 0) {
+                $("#ExpiryDatediv").hide();
+
+            }
+            else {
+                $("#ExpiryDatediv").show();
+
+            }
+
+
+        }
+
+
+
+
+
+    </script>
+}

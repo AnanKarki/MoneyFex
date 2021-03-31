@@ -1,0 +1,95 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+
+<div style="padding:20px">
+
+
+    <h4 style="text-align:center">Business Virtual Account Withdrawal Confirmation of Payment Receipt</h4>
+
+        <table width="100%">
+
+            <tbody>
+                <tr>
+                    <td><b>MF Receipt Number</b></td>
+                    <td><b>@ViewBag.MFReceiptNumber</b></td>
+                </tr>
+                <tr>
+                    <td><b>Date</b></td>
+                    <td><b>@ViewBag.TransactionDate</b></td>
+                </tr>
+                <tr>
+                    <td><b>Time</b></td>
+                    <td><b>@ViewBag.TransactionTime</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business Virtual Account No</b></td>
+                    <td><b>@ViewBag.MFBCCardNumber</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business  Name</b></td>
+                    <td><b>@ViewBag.BusinessMerchantName</b></td>
+                </tr>
+                @*<tr>
+                        <td><b>MFBC Card Number</b></td>
+                        <td><b>@ViewBag.MFBCCardNumber</b></td>
+                    </tr>*@
+                @*<tr>
+                        <td><b>Business Card User Full Name </b></td>
+                        <td><b>@ViewBag.BusinessCardUserFullName</b></td>
+                    </tr>*@
+                <tr>
+                    <td><b>Business Account Registered Country</b></td>
+                    <td><b>@ViewBag.BusinessCountry</b></td>
+                </tr>
+                <tr>
+                    <td><b>Business Account Registered City</b></td>
+                    <td><b>@ViewBag.BusinessCity</b></td>
+                </tr>
+                @*<tr>
+                        <td><b>Telphone</b></td>
+                        <td><b>@ViewBag.Telephone</b></td>
+                    </tr>*@
+                <tr>
+                    <td><b>Paying Agent Name</b></td>
+                    <td><b>@ViewBag.AgentName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Paying Agent Account Number</b></td>
+                    <td><b>@ViewBag.AgentCode</b></td>
+                </tr>
+                <tr>
+                    <td><b>Paying Agent Country</b></td>
+                    <td><b>@ViewBag.AgentCountry</b></td>
+                </tr>
+                <tr>
+                    <td><b>Paying Agent City</b></td>
+                    <td><b>@ViewBag.AgentCity</b></td>
+                </tr>
+                <tr>
+                    <td><b>Paying Agent Telephone Number</b></td>
+                    <td><b>@ViewBag.AgentTelephoneNumber</b></td>
+                </tr>
+                @*<tr>
+                        <td><b>Amount Requested</b></td>
+                        <td><b>@ViewBag.AmountRequested</b></td>
+
+                    </tr>
+                    <tr>
+                        <td><b>Exchange Rate</b></td>
+                        <td><b>@ViewBag.ExchangeRate</b></td>
+                    </tr>*@
+
+                <tr>
+                    <td><b>Withdrawal Amount</b></td>
+                    <td><b>@ViewBag.AmountWithdrawn </b></td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    
+</div>
+

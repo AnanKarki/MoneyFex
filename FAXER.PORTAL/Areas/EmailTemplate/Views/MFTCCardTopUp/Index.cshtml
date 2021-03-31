@@ -1,0 +1,38 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseURl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName ,
+    </p>
+    <p>
+        Thank you for your virtual account Deposit, your user can now use the account to withdraw money and pay for goods and services in @ViewBag.CardUserCountry.
+    </p>
+    <p>
+        Please find attached, a receipt to confirm this transaction.
+    </p>
+    <br />
+ 
+
+    <table style="width:100%; ">
+        <tbody>
+            <tr>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="@baseURl/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoTopUp"><img src="@baseURl/Areas/EmailTemplate/Images/EmailImg/21.png" alt=""></a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+
+</div>

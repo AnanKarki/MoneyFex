@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+@*<table>
+        <thead>
+        </thead>
+        <tbody style="padding: 30px 0 !important; display: block;">
+            <tr>
+                <td width="25%;">
+                    <img src="@baseUrl/Areas/EmailTemplate/Images/transfer-cancelled.png" width="100%">
+
+                </td>
+                <td valign="top">
+                    <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.SenderFristName,</b></h1>
+                    <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                        This is to confirm that a refund of  @ViewBag.SendingCurrency @ViewBag.RefundAmount has been issued to the card used in making payment to MoneyFex.
+                    </h1>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <h3>
+                        Below are the full details of your transaction:
+
+                    </h3>
+                    <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                        Transaction number:  @ViewBag.TransactionNumber<br>
+                        You sent: @ViewBag.SendingCurrency @ViewBag.SendingAmount  to @ViewBag.SendingCountry <br>
+                        Fee: @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                        @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingCurrency @ViewBag.ReceivingAmount <br>
+                        Bank Name: @ViewBag.BankName <br>
+                        Bank account: @ViewBag.BankAccount <br>
+                        Branch code: @ViewBag.BranchCode <br>
+                    </p>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                        Please allow 5 working days for this refund to be reflected in your account.
+                        We look forward to facilitating your next transfer
+
+                    </p>
+                    <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                        Thank you
+                    </p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>*@
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFristName, </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                This is to confirm that a refund of @ViewBag.SendingCurrency @ViewBag.RefundAmount has been issued to the card used in making payment to MoneyFex.
+                            </h1>
+                            <h1 style="font-size: 19px; color:#333; line-height: 30px; margin-top: 0px;">
+                                Below are the full details of your transaction:
+
+                            </h1>
+
+                            @switch (ViewBag.TransactionServiceType)
+                            {
+                                case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                                    <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                        Transaction number:  @ViewBag.TransactionNumber<br>
+                                        You sent: @ViewBag.SendingCurrency @ViewBag.SendingAmount  to @ViewBag.SendingCountry <br>
+                                        Fee: @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                                        @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingCurrency @ViewBag.ReceivingAmount <br>
+                                        Bank Name: @ViewBag.BankName <br>
+                                        Bank account: @ViewBag.BankAccount <br>
+                                        Branch code: @ViewBag.BranchCode <br>
+                                    </h1>
+                                    break;
+                                case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                                    <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                        Transaction number:  @ViewBag.TransactionNumber<br>
+                                        You sent: @ViewBag.SendingCurrency @ViewBag.SendingAmount  to @ViewBag.SendingCountry <br>
+                                        Fee: @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                                        @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingCurrency @ViewBag.ReceivingAmount <br>
+                                        Mobile No: @ViewBag.MobileNo <br>
+                                    </h1>
+                                    break;
+                                case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                                    <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                        Transaction number:  @ViewBag.TransactionNumber<br>
+                                        You sent: @ViewBag.SendingCurrency @ViewBag.SendingAmount  to @ViewBag.SendingCountry <br>
+                                        Fee: @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                                        @ViewBag.ReceiverFirstName received: @ViewBag.ReceivingCurrency @ViewBag.ReceivingAmount <br>
+                                        Wallet Provider: @ViewBag.WalletName <br>
+                                        Mobile No: @ViewBag.MobileNo <br>
+                                    </h1>
+                                    break;
+                            }
+                            <h1 style="font-size: 20px; color:#333;  line-height: 30px; margin-top: 20px;">
+                                Please allow 5 working days for this refund to be reflected in your account.
+                                <br><br>
+                                We look forward to facilitating your next transfer
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:14px; margin: 40px 0;">Thank You</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+
+<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;">
+                <img src="@baseUrl/Areas/EmailTemplate/Images/transfer-cancelled.png" width="100%">
+
+            </td>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.SenderFristName,</b></h1>
+                <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    Money transferred to @ViewBag.RecipentName has been cancelled either because of slow processing time with our partners in
+                    @ViewBag.ReceiverCountry or incorrect
+                    recipient details
+                </h1>
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <h3>
+                    Please confirm the recipient details with us to re-try making this payment again:
+                </h3>
+
+                @if (ViewBag.TransferMethod == FAXER.PORTAL.DB.TransactionTransferMethod.BankDeposit)
+                {
+                    <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                        Transaction number:  @ViewBag.TransactionNumber<br>
+                        Recipient Name: @ViewBag.RecipentName<br>
+                        Bank Name: @ViewBag.BankName<br>
+                        Bank account: @ViewBag.BankAccount<br>
+                        Country: @ViewBag.ReceiverCountry<br>
+
+                    </p>
+                }
+                else if (ViewBag.TransferMethod == FAXER.PORTAL.DB.TransactionTransferMethod.CashPickUp)
+                {
+                    <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                        Transaction number:  @ViewBag.TransactionNumber<br>
+                        Recipient Name: @ViewBag.RecipentName<br>
+                        Mobile No: @ViewBag.MobileNo<br>
+                        Country: @ViewBag.ReceiverCountry<br>
+                    </p>
+                }
+                else
+                {
+                    <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                        Transaction number:  @ViewBag.TransactionNumber<br>
+                        Recipient Name: @ViewBag.RecipentName<br>
+                        Wallet Provider: @ViewBag.WalletName<br>
+                        Mobile No: @ViewBag.MobileNo<br>
+                        Country: @ViewBag.ReceiverCountry<br>
+                    </p>
+                }
+
+
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    We sincerely apologise for the delay and the inconvenience caused by this cancellation
+                </p>
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    Thank you
+
+
+                    @*<br><br>  The MoneyFex Team*@
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

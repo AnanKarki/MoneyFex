@@ -1,0 +1,173 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.KiiPayReceiverDetailsInformationViewModel
+@{
+    ViewBag.Title = "KiiPayReceiverDetailsInformation";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Receiver Details</h3>
+                        <hr>
+                        <h5> @Html.ValidationMessage("InvalidReceiver", new { @class = "text-danger" })</h5>
+
+                        @Html.HiddenFor(model => model.CountryPhoneCode, new { id = "CountryPhoneCode" })
+                        <div class="form-group mb30" style="display:none;">
+
+                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.countries, "Select Issuing Country", new { @class = "form-blue", id = "Country", onchange = "getPhoneCode()" })
+                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.PreviousMobileNumber, (IEnumerable<SelectListItem>)ViewBag.PhoneNumbers, "Select Previous Mobile Number", new { @class = "form-blue", @id = "phoneNumber", @onchange = "selectPhoneNumber();" })
+                            @Html.ValidationMessageFor(model => model.PreviousMobileNumber, "", new { @class = "text-danger" })
+                        </div>
+                        @*<div class="form-group mb20">
+                                <h2 class="text-primary text-center">OR</h2>
+                            </div>*@
+                        <!--  -->
+                        <div class="form-group contact-no-group mb30">
+                            <div class="countr-code-lg">
+                                <span name="CountryPhoneCode"></span>
+                            </div>
+                            @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-blue contact-no-lg", placeholder = "Enter Mobile Number", @maxlength = "10", @minlength = "10", @autocomplete = "off", @id = "phoneTextBox" })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                            @Html.ValidationMessage("InvalidNumber", "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <!--  -->
+
+
+                        <div class="form-group  mb30">
+
+                            @Html.TextBoxFor(model => model.ReceiverFullName, new { @class = "form-blue", placeholder = "Receiver Full  Name", @id = "ReceiverFullName" })
+                            @Html.ValidationMessageFor(model => model.ReceiverFullName, "", new { @class = "text-danger" })
+                        </div>
+
+
+
+                        <div class="form-group mb30">
+                            @Html.EnumDropDownListFor(model => model.ReasonForTransfer, new { @class = "form-blue" })
+                            @Html.ValidationMessage("Reason", "", new { @class = "text-danger" })
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 " id="submit">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("SendMoneyToKiiPayEnterAmount","AgentKiiPayWalletTransfer")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+@section scripts{
+    <script type="text/javascript">
+        function getPhoneCode() {
+            $("#loader").show();
+            var country = $("#Country").val();
+            $.getJSON("/Agent/AgentKiiPayWalletTransfer/GetCountryPhoneCode?CountryCode=" + country, function (result) {
+
+                $(".countr-code-lg").text(result.CountryPhoneCode);
+                $("#CountryPhoneCode").val(result.CountryPhoneCode);
+                $('[name="CountryPhoneCode"]').text(result.CountryPhoneCode);
+            })
+
+            window.location.href = "/Agent/AgentKiiPayWalletTransfer/KiiPayReceiverDetailsInformation?Country=" + country;
+
+
+        }
+        $(".countr-code-lg").text($("#CountryPhoneCode").val());
+
+        function selectPhoneNumber() {
+
+            var phoneNumber = $("#phoneNumber").val();
+            if (phoneNumber != null) {
+                $.getJSON("/Agent/AgentKiiPayWalletTransfer/GetNumberName?PhoneNumber=" + phoneNumber, function (result) {
+
+                    $("#phoneTextBox").val(result.phoneTextBox);
+                    $("#ReceiverFullName").val(result.ReceiverFullName);
+                    return;
+                })
+            }
+            else {
+                return;
+            }
+        }
+            //$("#submit").click(function () {
+
+            //    $("#loader").show();
+            //    $("form").submit();
+            //})
+
+    </script>
+}
+

@@ -1,0 +1,115 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUserLoginViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+}
+
+
+<!--  -->
+@using (Html.BeginForm())
+{
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h1>Login</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form pattern2" style="height:600px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup">
+                        <div class="text-center">
+                            <h4>Welcome ! Login into Your MoneyFex Virtual Account </h4>
+                            <p>Don't have an account ? <a href="@Url.Action("SignUp", "CardUserSignUp")">Sign Up</a></p>
+                        </div>
+                        <hr>
+                        <form method="post">
+
+                            <!--  -->
+
+
+                            <div class="col-lg-12 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "Email Address" })
+                                </div>
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-12 ">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", type = "password", @placeholder = "Password", @id = "show_password" })
+                                        <div class="input-group-addon" onclick="showPass();" id="passwoed_show"><i class="fa fa-eye"></i></div>
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            @*<div class="col-lg-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" name=" " value=" "> Remember me on this device (Not recommended on public shared devices)
+                                        </label>
+                                    </div>
+                                </div>*@
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-5">
+                                <p>
+                                    <a href="@Url.Action("ForgotPassword" , "CardUserLogin")">Forgot Password</a>
+                                </p>MFTCCardNumber
+                            </div>
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-7 ">
+                                <button type="submit" class="fbtn btn-next hidden-xs hidden-sm">Login<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                                @*<button type="submit" class="fbtn btn-next hidden-lg hidden-md">Login<i class="fa fa-chevron-right" aria-hidden="true"></i></button>*@
+                            </div>
+                            <!--  -->
+                            <div class="clearfix"></div>
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+}
+<!--  -->
+<script type="text/javascript">
+    function showPass() {
+        var x = document.getElementById("show_password");
+        if (x.type == "password") {
+            x.type = "text";
+        }
+        else {
+
+            x.type = "password";
+        }
+    };
+
+
+
+</script> 

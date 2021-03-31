@@ -1,0 +1,265 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.BankAccountCreditViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+    string NameOfLatestUpdater = "";
+    decimal TotalCurrentCustomerDeposit = 0;
+    string TotalCurrentBankDeposit = "";
+    string TotalDeposit = "";
+    string LatestTransactionDate = "";
+    if (Model != null)
+    {
+        NameOfLatestUpdater = Model.NameOfLatestUpdater ?? "";
+        TotalCurrentCustomerDeposit = Model.CurrentCustomerDeposit;
+        LatestTransactionDate = Model.LatestTransactionDateTime == null ? "" : Model.LatestTransactionDateTime.ToString("dd/MM/yyyy");
+    }
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Balance Account Credit Update</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+
+
+
+                    <!-- start -->
+                    <div class=" border_tbls">
+
+                        <div class="col-lg-6">
+                            <!--  -->
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Name of Agent</label>
+
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.AgentName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Agent Account Number</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.AgentAccountNumber, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Agent Country</label>
+                                </div>
+                                <div class="col-lg-6">
+
+                                    @Html.TextBoxFor(model => model.AgentCountry, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Agent City</label>
+                                </div>
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @readonly = "readonly" })
+
+
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Current Customer's Deposit</label>
+                                </div>
+                                @*<div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.CurrentCustomerDeposit, new { @class = "form-control", @readonly = "readonly" })
+                                </div>*@
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@Model.CurrencySymbol</span>
+                                        @Html.TextBoxFor(model => model.CurrentCustomerDeposit, new { @class = "form-control", @readonly = "readonly" })
+                                        <span class="input-group-addon">@Model.Currency</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Current Direct Bank Deposit</label>
+                                </div>
+                                @*<div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.CurrenctBankDeposit, new { @class = "form-control", @readonly = "readonly" })
+                                </div>*@
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@Model.CurrencySymbol</span>
+                                        @Html.TextBoxFor(model => model.CurrenctBankDeposit, new { @class = "form-control", @readonly = "readonly" })
+                                        <span class="input-group-addon">@Model.Currency</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>New Account Deposit</label>
+                                </div>
+                                @*<div class="col-lg-6">
+
+                                        @Html.TextBoxFor(model => model.NewAccountDeposit, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.NewAccountDeposit, "", new { @class = "text-danger" })
+                                    </div>*@
+
+                                <div class="col-lg-6">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@Model.CurrencySymbol</span>
+                                        @Html.TextBoxFor(model => model.NewAccountDeposit, new { @class = "form-control" })
+                                        <span class="input-group-addon">@Model.Currency</span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.NewAccountDeposit, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+
+                            <div class="form-group row">
+                                <div class="col-lg-6">
+                                    <label>Name of account Updater</label>
+                                </div>
+
+                                <div class="col-lg-6">
+                                    @Html.TextBoxFor(model => model.NameOfUpdater, new { @class = "form-control", @placeholder = "Enter Name of Updater" })
+                                    @Html.ValidationMessageFor(model => model.NameOfUpdater, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+
+
+
+
+                        </div>
+
+
+                        <div class="col-lg-6">
+
+                            <div class="table-responsive">
+
+
+                                <table class="table-bordered table">
+                                    <thead>
+                                        <tr>
+                                            <th>Name of Previous Updater</th>
+                                            <th colspan="4">MoneyFex Bank Account Statment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td>@NameOfLatestUpdater</td>
+                                            <td align="center">Customer's Deposit<br>(Transfer Credit)</td>
+                                            <td align="center">Customer's Deposit Fees</td>
+                                            <td>Direct Bank Deposit</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>Date:  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  @LatestTransactionDate</td>
+
+                                            <td>@Model.CurrencySymbol @Model.CurrentCustomerDeposit @Model.Currency</td>
+                                            <td>@Model.CurrencySymbol @Model.CurrentCustomerDepositFees @Model.Currency</td>
+                                            <td>@Model.CurrencySymbol @Model.CurrenctBankDeposit  @Model.Currency</td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>Total</td>
+                                            <td colspan="3">@Model.CurrencySymbol @Model.TotalAmountDeposited @Model.Currency</td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <a href="@Url.Action("GoToDashboard", "AgentDashboard")" class="fbtn btn-back" id=" ">Go To Dashboard</a>
+                    <button type="submit" class="fbtn btn-next" id=" ">Update Bank Account Balance<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts{
+<script type="text/javascript" >
+
+    var result = '@ViewBag.TransactionSuccessul';
+    var transactionId = '@ViewBag.TransactionId';
+    if (result == 1){
+
+        window.open("/Agent/BankAccountCreditUpdate/MoneyFexBankDeposit?transactionId=" + transactionId, '_blank');
+        
+    }
+</script>
+    }

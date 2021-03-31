@@ -1,0 +1,162 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.FormStaffPayslipViewModel
+@{
+    ViewBag.Title = "StaffPayslip";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Staff Payslip</h2>
+
+
+
+@using (Html.BeginForm("Index", "FormStaffPayslip", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    if (ViewBag.Message == "Operation Completed Successfully !")
+    {
+        <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("Payslip Submitted Successfully !", 4);
+    };
+        </script>
+    }
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">View - Staff Payslip</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Staff Payslip</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+
+                            <div class="form-body">
+
+
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select Country </label>
+                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All Country", new { @class = "form-control", id = "country" })
+                                    @Html.ValidationMessage("Country", "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select City </label>
+                                    @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.SCities, "All City", new { @class = "form-control", id = "city" })
+                                    @Html.ValidationMessage("City", "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Select Staff </label>
+                                    @Html.DropDownListFor(model => model.StaffId, (IEnumerable<SelectListItem>)ViewBag.Staffs, "All Staff", new { @class = "form-control", id = "staffId" })
+                                    @Html.ValidationMessage("StaffId", "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Staff MFS Code</label>
+                                    @Html.TextBoxFor(model => model.StaffMFSCode, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="row">
+                                    <div class="form-group col-lg-6">
+                                        <label>Select Year </label>
+                                        @Html.DropDownListFor(model => model.Year, (IEnumerable<SelectListItem>)ViewBag.Year, "Year", new { @class = "form-control", @id = "year" })
+                                        @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+
+                                    </div>
+                                    <div class="form-group col-lg-6">
+                                        <label>Select Month </label>
+                                        @Html.EnumDropDownListFor(model => model.Month, new { @class = "form-control", @id = "month" })
+                                        @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <hr>
+                                <!--  -->
+                                <div class="row ">
+                                    <div class="col-lg-4 pull-right">
+                                        <input type="file" id="" name="paySlip">
+                                        @Html.ValidationMessage("PayslipURL", "", new { @class = "text-danger" })
+                                    </div>
+
+                                </div>
+                                <br />
+                                <div class="row">
+                                    <div class="col-lg-4">
+                                        @*<button class="btn btn-success btn-lg   pull-left " style="background-color:cornflowerblue;" disabled>Generate Payslip</button>*@
+                                        <label class="btn btn-block " style="background-color:green; color:white;" >Generate Payslip</label>
+                                    </div>
+                                    <div class="col-lg-4 pull-right">
+                                        <label class="btn btn-block " style="background-color:darkred; color:white;">Upload Payslip</label>
+                                    </div>
+                                </div>
+                                <br />
+                                <div class="col-lg-4 pull-right">
+                                    <button class="btn btn-success btn-lg" style="background-color:green;">Submit Payslip</button>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function (e) {
+                var country = $(this).val();
+                window.location.href = "/Admin/FormStaffPayslip/Index?CountryCode=" + country;
+
+            });
+
+
+            $("#city").change(function (e) {
+                var country = $("#country").val();
+                var city = $(this).val();
+                window.location.href = "/Admin/FormStaffPayslip/Index?CountryCode=" + country + "&City=" + city;
+            });
+
+            $("#staffId").change(function () {
+                var staffId = $("#staffId").val();
+                $.getJSON("/Admin/FormStaffPayslip/getStaffMFSCode?id=" + staffId, function (data) {
+
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                    }
+                });
+            });
+
+        });
+    </script>
+
+
+
+
+
+}

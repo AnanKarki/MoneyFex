@@ -1,0 +1,186 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddPublicHolidayViewModel
+@{
+    ViewBag.Title = "EditPublicHoliday";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditPublicHoliday</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Edit Public Holiday</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="/Admin/SetPublicHolidays" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Public Holidays</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Edit Public Holiday</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="form-body">
+
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> Holiday Name <span class="required"></span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.HolidayName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.HolidayName, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                            <div class="col-lg-3 control-label">
+                                <label> Country Name <span class="required"></span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @readonly="readonly" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                            <div class="col-lg-3 control-label">
+                                <label> City Name <span class="required"></span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>From Date</label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.FromDate, new { @value = Model.FromDate, @class = "date", id = "fromDate", @data_date_change = "fromDateChange" })
+                                    @Html.ValidationMessageFor(model => model.FromDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Till Date</label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.ToDate, new { @value = Model.ToDate, @class = "date", id = "toDate", @data_date_change = "toDateChange" })
+                                    @Html.ValidationMessageFor(model => model.ToDate, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-4">
+                            <div class="form-actions text-center">
+                                <button class="btn btn-success btn-lg btn-block btn-rounded">   Set Holiday </button>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        function fromDateChange(date) {
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+
+            var partsFrom = fromDate.split('/');
+            var partsTo = "";
+            if (!(toDate == "")) {
+                partsTo = toDate.split('/');
+            }
+
+
+            var holidaysFromDate = new Date(partsFrom[2], partsFrom[1] - 1, partsFrom[0]);
+            var holidaysToDate = new Date(partsTo[2], partsTo[1] - 1, partsTo[0]);
+
+            var currentDate = new Date();
+            if (holidaysFromDate.getFullYear().toString().length != 4) {
+                alert("Please enter a valid date !");
+                //$("#fromDate").val("");
+                holidaysFromDate.val("");
+            }
+            else if (!(holidaysFromDate > currentDate)) {
+                alert("The Holiday Start date must be greater than the preset date !");
+                $("#fromDate").val("");
+            }
+            else if (holidaysFromDate > holidaysToDate) {
+                alert("Holiday End Date can't be smaller than the Holiday Start date !");
+                $("#fromDate").val("");
+            }
+
+
+        }
+
+        function toDateChange(date) {
+            var fromDate = $("#fromDate").val();
+            var toDate = $("#toDate").val();
+
+            var partsFrom = fromDate.split('/');
+            var partsTo = toDate.split('/');
+
+            var holidaysFromDate = new Date(partsFrom[2], partsFrom[1] - 1, partsFrom[0]);
+            var holidaysToDate = new Date(partsTo[2], partsTo[1] - 1, partsTo[0]);
+
+            if (holidaysToDate.getFullYear().toString().length != 4) {
+                alert("Please enter a valid date !");
+                $("#toDate").val("");
+            }
+            else if ((holidaysFromDate > holidaysToDate)) {
+                alert("Holiday End Date can't be smaller than the Holiday Start date !");
+                $("#toDate").val("");
+            }
+        }
+
+
+
+
+
+    </script>
+
+
+
+}

@@ -1,0 +1,193 @@
+﻿@model FAXER.PORTAL.Models.FaxerIdentification
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Sender Registration</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm("Identification", "FaxerAccount", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        <h3>Sender's Identification Document</h3>
+                        <hr>
+                        <div class="col-lg-5">
+                            <label>ID Card Type</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.IdCardType, null, "Select Card Type", htmlAttributes: new { @class = "form-control", id = "CardType" })
+                                @Html.ValidationMessageFor(model => model.IdCardType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>ID Card Number </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.IdCardNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.IdCardNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                    
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.IdCardExpiringDate, new { @class = "form-control dateInput" , style="display:none" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <div class="col-lg-5 clearfix">
+                            <label>ID Card Expiring Date <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+
+                                <input type="number" class="form-control day" placeholder="Day" >
+
+
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                <select class="form-control month" style="font-size: 11px;">
+                                    <option selected>Month</option>
+                                    <option value='1'>Janaury</option>
+                                    <option value='2'>February</option>
+                                    <option value='3'>March</option>
+                                    <option value='4'>April</option>
+                                    <option value='5'>May</option>
+                                    <option value='6'>June</option>
+                                    <option value='7'>July</option>
+                                    <option value='8'>August</option>
+                                    <option value='9'>September</option>
+                                    <option value='10'>October</option>
+                                    <option value='11'>November</option>
+                                    <option value='12'>December</option>
+                                </select>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <input type="number" class="form-control year" placeholder="Year">
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="form-group">
+
+                            @Html.ValidationMessageFor(model => model.IdCardExpiringDate, "", new { @class = "col-lg-6 col-lg-offset-5 text-danger" })
+
+                        </div>
+                        <!--  -->
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Issuing Country</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.IssuingCountry, null, "Select Issuing Country", htmlAttributes: new { @class = "form-control", id = "RecCountry" })
+                                @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <div class="form-group col-lg-5">
+                            Check this box if you are to send over a £1000 at any given time using MoneyFex.
+                            <div class="checkbox">
+                                @*<label><input type="checkbox" name="yes" value="yes"> Yes</label>*@
+                                <label>@Html.CheckBoxFor(model => model.CheckAmount , new { id = "CheckAmount"}) Yes</label>
+                                @*@Html.CheckBoxFor(model => model.CheckAmount)Yes*@
+                            </div>
+                        </div>
+                        <div id="UploadIdentificationDocument" style="display:none">
+                            <div class="form-group">
+                                To comply with anti-money laundering regulations, MoneyFex requires a copy of your photo ID (driving Licence and passport are the only acceptable forms of ID)
+                            </div>
+                            <div class="form-group col-lg-6 ">
+                                <input type="file" id="dataFile" name="file" class="form-control" />
+                                @Html.ValidationMessage("File", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    
+
+    <script type="text/javascript">
+
+
+        $('#CheckAmount').on('click', function () {
+            if ($(this)[0].checked == true) {
+                $("#UploadIdentificationDocument").show();
+
+            } else {
+
+                $("#UploadIdentificationDocument").hide();
+
+            }
+
+        })
+        
+    </script>
+    }

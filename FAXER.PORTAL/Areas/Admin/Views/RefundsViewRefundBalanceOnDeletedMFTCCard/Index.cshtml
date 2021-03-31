@@ -1,0 +1,113 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.RefundBalanceOnDeletedMFTCViewModel>
+@{
+    ViewBag.Title = "RefundsViewRefundBalanceOnDeletedMFTCCard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@*<h2>RefundsViewRefundBalanceOnDeletedMFTCCard</h2>*@
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Admin View-Refund Balance on Deleted Virtual Account</h4>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Admin View-Refund Balance on Deleted Virtual Account</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th><strong>SN</strong></th>
+                                    <th><strong>Sender's Name</strong></th>
+                                    <th><strong>Address</strong></th>
+                                    <th><strong>Country</strong></th>
+                                    <th><strong>City</strong></th>
+                                    <th><strong>Tel</strong></th>
+                                    <th><strong>Email</strong></th>
+                                    <th><strong>Virtual Account Number</strong></th>
+                                    <th><strong>Amount on Virtual Account</strong></th>
+                                    <th><strong>Virtual Account Deletion Date</strong></th>
+                                    <th><strong>Virtual Account Deleter</strong></th>
+                                    <th><strong>Name of Admin Refunder?</strong></th>
+                                    <th><strong>Refund Confirm?</strong></th>
+                                    <th><strong>Refund Date</strong></th>
+                                    <th><strong>Refund Time</strong></th>
+                                    <th><strong>Reason for Refund Request</strong></th>
+                                    <th><strong>Refund Receipt</strong></th>
+
+                                </tr>
+                            </thead>
+                            @{ int i = 0;}
+                            <tbody>
+
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.FaxerName</td>
+                                        <td>@item.Address</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.Telephone</td>
+                                        <td>@item.Email</td>
+                                        <td>@item.MFTCNumber</td>
+                                        <td>@item.AmountOnMFTC @item.Currency</td>
+                                        <td>@item.MFTCDeletionDate</td>
+                                        <td>@item.MFTCDeleter</td>
+                                        <td>@item.AdminRefunder</td>
+                                        <td>@item.RefundConfirm</td>
+                                        <td>@item.RefundDate</td>
+                                        <td>@item.RefundTime</td>
+                                        <td>@item.ReasonForRefundRequest</td>
+                                        <td><a href="@Url.Action("printReceipt","RefundsViewRefundBalanceOnDeletedMFTCCard",item)" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/RefundsViewRefundBalanceOnDeletedMFTCCard/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

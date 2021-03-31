@@ -1,0 +1,27 @@
+﻿
+
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.ReceiverName,
+    </p>
+    <p>
+        Good News!
+    </p>
+    <p>
+        You have received a money transfer from @ViewBag.SenderCountry, the sender will be contacting you soon to give you the information that needed to collect this money in @ViewBag.ReceiverCountry.
+    </p>
+    <p>
+        Once this information has been given to you, please take your Identification Document to the nearest MoneyFex agent in @ViewBag.ReceiverCountry to collect the money.
+    </p>
+
+    <br />
+    <br />
+  
+
+
+
+</div>

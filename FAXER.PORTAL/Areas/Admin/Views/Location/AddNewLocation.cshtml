@@ -1,0 +1,267 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddNewLocationViewModel
+@{
+    ViewBag.Title = "AddNewLocation";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Add Location</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index","Location")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Published Location</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Add Location</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+                            <form  class=" " method="post">
+                                <div class="form-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+
+                                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Choose Country", new {@class="form-control", @id = "country", @onChange = "getDetails();" })
+                                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+
+                                                @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.SCities, "City", new { @id = "city", @onChange = "getDetails();", @class="form-control" })
+                                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+
+                                            <div class="form-group">
+
+                                                @Html.EnumDropDownListFor(model=>model.AgentType,"Agent Type", new { @class="form-control", @onchange= "getDetails();", @id="agentType" } )
+                                                @Html.ValidationMessageFor(model=>model.AgentType, "", new { @class="text-danger"})
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-lg-6">
+
+
+                                            <div class="form-group">
+
+                                                @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent Name", new { @id = "agent", @onChange = "getDetails();",@class="form-control" })
+                                                @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+
+                                                @Html.TextBoxFor(model=>model.Address, new { @class="form-control", @readonly="readonly", @placeholder="Address"})
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+
+                                            <div class="form-group">
+
+                                                @Html.TextBoxFor(model=>model.ContactNo, new { @class="form-control", @placeholder="Contact No."})
+                                                @Html.ValidationMessageFor(model=>model.ContactNo,"", new { @class="text-danger"})
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </div>
+                                    <hr>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-success btn-lg  btn-rounded pull-right" type="submit">Set Location </button>
+                                    </div>
+
+
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>*@
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Location</h4>
+                                        <a href="@Url.Action("Index","Location")" class=" btn btn-primary f-right btn-round"> <i class="icofont icofont-eye m-r-5"></i> View Location </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+
+                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Choose Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "country", @onChange = "getDetails();" })
+                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "City", new { @id = "city", @onChange = "getDetails();", @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Agent Type</label>
+
+                                                        @Html.EnumDropDownListFor(model => model.AgentType, "Agent Type", new { @class = "form-control form-control-lg form-control-round form-control-bold", @onchange = "getDetails();", @id = "agentType" })
+                                                        @Html.ValidationMessageFor(model => model.AgentType, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Agent</label>
+                                                        @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent Name", new { @id = "agent", @onChange = "getDetails();", @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        @Html.TextBoxFor(model => model.Address, new { @class = "form-control form-control-lg form-control-round form-control-bold", @readonly = "readonly", @placeholder = "Address" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Contact Number</label>
+                                                        @Html.TextBoxFor(model => model.ContactNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Contact No." })
+                                                        @Html.ValidationMessageFor(model => model.ContactNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","Location")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+    <script type="text/javascript">
+        function getDetails() {
+            var country = $("#country").val();
+            var city = $("#city").val();
+            var agentType = $("#agentType").val();
+            var agentId = $("#agent").val();
+            window.location.href = "/Admin/Location/AddNewLocation?CountryCode=" + country + "&City=" + city + "&agentType=" + agentType + "&City=" + city + "&agentId=" + agentId;
+        }
+    </script>
+
+
+
+}

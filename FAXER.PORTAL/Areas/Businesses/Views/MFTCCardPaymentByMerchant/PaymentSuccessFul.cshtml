@@ -1,0 +1,98 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFTCCardTopUpByMerchantSuccessfulViewModel
+@{
+    ViewBag.Title = "PaymentSuccessFul";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+
+    string FaxingCurrency = FAXER.PORTAL.Common.BusinessSession.FaxingCurrency ?? "";
+    string ReceivingCurrency = FAXER.PORTAL.Common.BusinessSession.ReceivingCurrency ?? "";
+ }
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Virtual Account Payment</h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <form>
+                    <div class="completed-payment text-center">
+                        <h3>Account Payment Successfully</h3>
+                        <h4>We've sent you a Receipt</h4>
+                        <div class=" ">
+                            <div class="white-bg boxednew">
+
+                                <h3 style="color:#333;">Your Transaction Details:</h3>
+                                <div class="table-responsive text-left">
+                                    <table class="table table-bordered">
+
+                                        <tbody>
+                                            <tr>
+                                                <td>Account No.</td>
+                                                <td>@Model.MFTCCardNumber</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>@Model.CardUserName</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Country</td>
+                                                <td>@Model.CardUserCountry</td>
+                                            </tr>
+                                            <tr>
+                                                <td> Amount</td>
+                                                <td>@Model.FaxingAmount @FaxingCurrency</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Receive Amount</td>
+                                                <td>@Model.ReceivingAmount @ReceivingCurrency</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Exchange Rate</td>
+                                                <td>@Model.ExchangeRate </td>
+                                            </tr>
+
+
+
+                                            <tr>
+                                                <td>Receive  Option</td>
+                                                <td>E-Card Withdrawl</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <br>
+                        <a href="@Url.Action("Index" ,"BusinessHome")" title="" class="btn btn-primary">Go to your Dashboard  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
+
+
+
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->

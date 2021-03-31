@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.Title = "TopUpUsingSavedCreditDebitHurrayMessage";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Deposit confirmation</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+            <div class="completed-payment text-center">
+                <h3>Virtual Account Deposit Successfully</h3>
+                <h4>We've sent you a Receipt</h4>
+                <div class=" ">
+                    <div class="white-bg boxednew">
+
+                        <h3 style="color:#333;">Your Transaction Details:</h3>
+                        <div class="table-responsive text-left">
+                            <table class="table table-bordered">
+
+                                <tbody>
+                                    <tr>
+                                        <td>Account No.</td>
+                                        <td>@ViewBag.MFTCCardNumber</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Name</td>
+                                        <td>@ViewBag.CardUserName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Country</td>
+                                        <td>@ViewBag.CardUserCountry</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount</td>
+                                        <td>@ViewBag.TopUpAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receive Amount</td>
+                                        <td>@ViewBag.ReceiveAmount</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Exchange Rate</td>
+                                        <td>@ViewBag.ExchangeRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receive Option</td>
+                                        <td>@ViewBag.ReceiveOption</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix">
+
+                </div>
+                <br>
+                <a href="@Url.Action("Index","DashBoard")" title="" class="btn btn-primary">Go to your Dashboard  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            </div>
+
+        </div>
+    </div>
+</div>
+

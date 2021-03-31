@@ -1,0 +1,172 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentComplianceReportViewModel
+@{
+    ViewBag.Title = "UploadReport";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm("UploadReport", "AgentComplianceReport", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Upload Report </h4>
+                                        <a href="@Url.Action("Index", "AgentComplianceReport")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Report
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label> Country</label>
+                                                        @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "country" })
+                                                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.cities, "Select City", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "city", })
+                                                        @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Agent</label>
+                                                        @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "AgentId", @onchange = "GetAgentAccountNo();" })
+                                                        @Html.ValidationMessageFor(x => x.AgentId, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Account Number</label>
+                                                        @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "", @readonly = "readonly", @id = "AccountNumber" })
+                                                        @Html.ValidationMessageFor(x => x.AccountNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Report Title</label>
+                                                        @Html.TextBoxFor(x => x.ReportTitle, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Name/Title" })
+                                                        @Html.ValidationMessageFor(x => x.ReportTitle, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Writer</label>
+                                                        @Html.TextBoxFor(x => x.WriterName, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Enter Name" })
+                                                        @Html.ValidationMessageFor(x => x.WriterName, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Submission Date</label>
+                                                        @Html.EditorFor(x => x.SubmissionDate, new { htmlAttributes = new { @id = "date", @class = "form-control form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                        @Html.ValidationMessageFor(x => x.SubmissionDate, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Report Documents</h5>
+                                                        <hr />
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <div class="row form-group">
+                                                        <div class="col-lg-4">
+                                                            <a href="@Model.DocumentPhotoUrl" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                                ID 1
+
+                                                            </a>
+
+                                                            <a href="@Model.DocumentPhotoUrl" class="lead text-danger"> <i class="fa fa-close"></i></a>
+                                                        </div>
+
+                                                    </div>
+
+
+
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Upload Report</label>
+                                                        <input type="file" name="DocumentPhotoUrl" id="DocumentPhotoUrl" class="form-control form-control-lg form-control-round">
+                                                        @Html.ValidationMessageFor(Model => Model.DocumentPhotoUrl, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","AgentComplianceReport")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}

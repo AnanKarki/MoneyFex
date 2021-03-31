@@ -1,0 +1,790 @@
+﻿
+@{
+    ViewBag.Title = "RecentTransfersSendAgain";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    decimal amount = 3.00M;
+
+    var ReceivingCountries = new List<FAXER.PORTAL.Models.CountryViewModel>(ViewBag.ReceivingCountries);
+    string CountryNameWithCur = FAXER.PORTAL.Common.Common.GetCountryCurrency(ViewBag.ReceivingCountry) + " &nbsp;&nbsp; " +
+    FAXER.PORTAL.Common.Common.GetCountryName(ViewBag.ReceivingCountry);
+
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <!--  -->
+            <div class="col-lg-4">
+                <div class="login_signup mb20">
+
+                    <ul class="wiz">
+                        <li>
+                            <div class="wiz-list row">
+                                <div class="col-xs-2">
+                                    <div class="icon active">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <span class=" "><i class="flag-icon flag-icon-@ViewBag.ReceiverCountry"></i> @ViewBag.ReceivingCurrencyCode @ViewBag.Method</span>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <a>Edit</a>
+                                </div>
+
+                            </div>
+
+                        </li>
+                        <li>
+                            <div class="wiz-list row">
+                                <div class="col-xs-2">
+                                    <div class="icon active">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <span class=" "><i class="fa fa-money"></i> Amount @ViewBag.SendingCurrencyCode @ViewBag.SendingAmount </span>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <a>Edit</a>
+                                </div>
+
+                            </div>
+
+                        </li>
+
+                        <li>
+                            <div class="wiz-list row">
+                                <div class="col-xs-2">
+                                    <div class="icon active">
+                                        <i class="fa fa-check"></i>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-8">
+                                    <span class=" "><i class="fa fa-user"></i> @ViewBag.ReceiverName </span>
+                                </div>
+
+                                <div class="col-xs-2">
+                                    <a href="">Edit</a>
+                                </div>
+
+                            </div>
+
+                        </li>
+
+
+
+                        <li>
+                            <div class="wiz-list row">
+                                <div class="col-xs-2">
+                                    <div class="icon last">
+                                        <i class="fa fa-credit-card"></i>
+                                    </div>
+                                </div>
+
+                                <!--  <div class="col-xs-8">
+                                   <span class=" "><i class="fa fa-money"></i> Amount GBP 458445 </span>
+                                 </div>
+
+                                <div class="col-xs-2">
+                                    <a href=""  >Edit</a>
+                                 </div> -->
+
+                            </div>
+
+                        </li>
+
+                    </ul>
+                </div>
+            </div>
+            <!--  -->
+            <!--   <div class="col-lg-8 col-lg-offset-2">  -->
+            <div class="col-lg-8 ">
+
+                <!--  -->
+                <div class="dashboard_body mb10">
+
+                    <div class=" clearfix">
+
+
+                        <div class="col-lg-12  ">
+                            <!--  -->
+
+                            <div class=" clearfix"></div>
+                            <div class="flex-container amount-group flex-middle">
+                                <div>
+                                    <div class="userimage  ">
+                                        <img src="~/Content/images/user.svg" alt="">
+                                    </div>
+                                </div>
+                                <div>
+                                    <span class="font-30 text-primary"> @ViewBag.ReceiverName </span>
+                                </div>
+                            </div>
+                            <hr>
+                            <div class=" ">
+
+                                <div class="col-lg-12">
+                                    <p id="validationMsg" class="text-danger"></p>
+                                    <div class="exchange-rate-wraper-new" style="background-color:white;display:none" id="ValidationResultdiv">
+                                        <p class="text-danger" id="ValidationResult">
+                                        </p>
+                                    </div>
+                                    <div class="exchange-rate-wraper-new hidden-xs hidden-sm">
+                                        <h2>
+                                            1&nbsp;<span data-outbound-currency="GBP" name="SendingCurrency"></span>&nbsp;=&nbsp;<span name="ExchangeRate"></span>&nbsp;<span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency"></span> <a id="IsIntroductoryRate" href="avoide:javascript;" data-container="body" data-toggle="popover" data-placement="top" data-title="Rate Details" data-trigger="focus" data-content="The introductory rate is for your first transfer with MoneyFex">  <i class="fa fa-question"></i>  </a>
+                                        </h2>
+
+                                        <p id="IsIntroductoryFee">
+                                            Fee:
+                                            <del>
+                                                <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                            </del> (No fee for the first transaction)
+                                        </p>
+                                        <p id="IsNotIntroductoryFee" style="display:none">
+                                            Fee: <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                        </p>
+                                    </div>
+                                    <div class="exchange-rate-wraper-new hidden-lg hidden-md">
+                                        <h2 style="font-size:18px">
+                                            1&nbsp;<span data-outbound-currency="GBP" name="SendingCurrency"></span>&nbsp;=&nbsp;<span name="ExchangeRate">
+                                            </span>&nbsp;<span class="exchange-rate" data-inbound-currency="GHS" name="ReceivingCurrency">
+                                            </span>
+                                            <a id="IsIntroductoryRate" href="avoide:javascript;" data-container="body" data-toggle="popover" data-placement="top" data-title="Rate Details" data-trigger="focus" data-content="The introductory rate is for your first transfer with MoneyFex">
+                                                <i class="fa fa-question"></i>
+                                            </a>
+                                        </h2>
+                                        <p id="IsIntroductoryFee2">
+                                            Fee:
+                                            <del>
+                                                <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                            </del> (No fee for the first transaction)
+                                        </p>
+                                        <p id="IsNotIntroductoryFee2" style="display:none">
+                                            Fee: <span name="SendingCurrencySymbol"></span><span name="Fee"></span>
+                                        </p>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-12">
+
+                                    <!--  -->
+                                    <div class="mf-form-calculator">
+                                        <span class="mf-calculator-label">You send  </span>
+                                        <input type="number" id="SendingAmount" class="primary-placeholder" required placeholder="0.00" name="SendingAmount" onkeyup="GetPaymentSummary(false)" value="@ViewBag.sendingAmount">
+                                        <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                            <span class="mf-currency-select" data-currency="GBP" id="sendingCountry">GBP&nbsp;&nbsp; from United Kingdom</span>
+                                            <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                                        </div>
+                                        <!--  -->
+                                        @*<div class="currency-dropdown dropdown-menu" aria-labelledby=" dropdown-toggle">
+                                                <ul disabled>
+                                                    <li class="currency-dropdown_option" onclick="OnSendingCountryChange('GB')">
+                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-gb"></div>
+                                                        <span class="currency-dropdown_option_text">GBP&nbsp;&nbsp; United Kingdom</span>
+                                                    </li>
+
+                                                    <li class="currency-dropdown_option " onclick="OnSendingCountryChange('NG')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-ng "></div>
+                                                        <span class="currency-dropdown_option_text">NGN&nbsp;&nbsp; Nigeria</span>
+                                                    </li>
+
+                                                    <li class="currency-dropdown_option " onclick="OnSendingCountryChange('CM')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-cm "></div>
+                                                        <span class="currency-dropdown_option_text">XAF&nbsp;&nbsp; Cameroon</span>
+                                                    </li>
+                                                    <li class="currency-dropdown_option " onclick="OnSendingCountryChange('GH')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-gh "></div>
+                                                        <span class="currency-dropdown_option_text">GHS&nbsp;&nbsp; Ghana</span>
+                                                    </li>
+
+
+                                                </ul>
+                                            </div>*@
+                                        <!--  -->
+
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="mf-form-calculator">
+                                        <span class="mf-calculator-label">They receive</span>
+                                        <input type="number" class=" primary-placeholder" id="ReceivingAmount" placeholder="0.00" name="ReceivingAmount" onkeyup="GetPaymentSummary(true)">
+
+
+                                        <div class="mf-currency text-right dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true">
+                                            @* <span class="mf-currency-select" data-currency="GBP" id="receivingCountry">NGN &nbsp;&nbsp;Nigeria</span>*@
+                                            <span class="mf-currency-select" data-currency="GBP" id="receivingCountry">@CountryNameWithCur</span>
+                                            <div class="arrow-wrapper"><span class="select-arrow"></span></div>
+                                        </div>
+                                        <!--  -->
+
+
+                                        <div class="currency-dropdown dropdown-menu" aria-labelledby=" dropdown-toggle" id="receivingCountryList">
+                                            <div class="currency-search">
+                                                <div class="search-input">
+                                                    <input type="search" name="" class=" input-currency-search" id="searchcurency1" placeholder="Type a currency / country">
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <ul id="currencylist1">
+                                                @foreach (var item in ReceivingCountries)
+                                                {
+
+                                                    @*<li class="currency-dropdown_option" id="@item.CountryCode.ToUpper()" onclick="OnReceivingCountryChange('@item.CountryCode', '@item.Currency')">
+                                                            <div class="currency-dropdown_option_flag flag-icon   flag-icon-@item.CountryCode.ToLower()"></div>
+                                                            <span class="currency-dropdown_option_text">@item.Currency&nbsp;&nbsp;@item.CountryName</span>
+                                                        </li>*@
+
+                                                    <li class="currency-dropdown_option" onclick="OnReceivingCountryChange('@item.CountryCode', '@item.Currency')">
+                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-@item.CountryCode.ToLower()"></div>
+                                                        <span class="currency-dropdown_option_text">@item.Currency&nbsp;&nbsp;@item.CountryName</span>
+                                                    </li>
+
+
+                                                }
+                                                @*<li class="currency-dropdown_option" id="GB" onclick="OnReceivingCountryChange('GB')">
+                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-gb"></div>
+                                                        <span class="currency-dropdown_option_text">GBP&nbsp;&nbsp; United Kingdom</span>
+                                                    </li>
+                                                    <li class="currency-dropdown_option" id="BE" onclick="OnReceivingCountryChange('BE')">
+                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-be"></div>
+                                                        <span class="currency-dropdown_option_text">EURO&nbsp;&nbsp; Belgium</span>
+                                                    </li>
+                                                    <li class="currency-dropdown_option" id="DE" onclick="OnReceivingCountryChange('DE')">
+                                                        <div class="currency-dropdown_option_flag flag-icon   flag-icon-de"></div>
+                                                        <span class="currency-dropdown_option_text">EURO&nbsp;&nbsp; Germany</span>
+                                                    </li>
+                                                    <li class="currency-dropdown_option " id="NG" onclick="OnReceivingCountryChange('NG')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-ng "></div>
+                                                        <span class="currency-dropdown_option_text">NGN&nbsp;&nbsp; Nigeria</span>
+                                                    </li>
+
+                                                    <li class="currency-dropdown_option " id="CM" onclick="OnReceivingCountryChange('CM')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-cm "></div>
+                                                        <span class="currency-dropdown_option_text">XAF&nbsp;&nbsp; Cameroon</span>
+                                                    </li>
+                                                    <li class="currency-dropdown_option " id="GH" onclick="OnReceivingCountryChange('GH')">
+                                                        <div class="currency-dropdown_option_flag flag-icon flag-icon-gh "></div>
+                                                        <span class="currency-dropdown_option_text">GHS&nbsp;&nbsp; Ghana</span>
+                                                    </li>*@
+
+                                            </ul>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <!--  -->
+
+                                </div>
+
+
+                                <div class=" col-lg-12">
+
+                                    <div class="form-home">
+                                        <div class="transfer-type">
+                                            <h4 class="text-left">Transfer to a </h4>
+                                            @*<div class="display-inline mb10 mt10" id="transferMethod">
+
+
+                                                    <label class="radio-box" id="bac">
+
+                                                        <img src="~/Content/images/icon/svg/bank.svg" width="50">
+                                                        <h4 class="mb15 text-center"> Bank Account</h4>
+                                                        <input type="radio" name="radio" id="BankAccount" value="4" checked onchange="GetPaymentSummary(false)">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                    <label class="radio-box" id="wal">
+                                                        <img src="~/Content/Images/icon/svg/mobile-money.svg" width="50" />
+
+                                                        <h4 class="mb15 text-center"> Mobile Wallet</h4>
+                                                        <input type="radio" name="radio" id="MobileWallet" value="3" onchange="GetPaymentSummary(false)">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+
+
+                                                    <label class="radio-box" id="casp">
+                                                        <img src="~/Content/Images/icon/svg/cash-pickup.svg" width="50" />
+
+                                                        <h4 class="mb15 text-center"> Cash Pickup</h4>
+                                                        <input type="radio" name="radio" id="CashPickup" value="1" onchange="GetPaymentSummary(false)">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+
+
+                                                </div>*@
+
+                                            <div class="display-inline mb10 mt10" id="transferMethod">
+
+
+                                                <label class="radio-box" id="bac">
+
+                                                    <img src="~/Content/images/icon/svg/bank.svg" width="50">
+                                                    <h4 class="mb15 text-center"> Bank Account</h4>
+                                                    <input type="radio" name="radio" id="BankAccount" value="4" checked onchange="GetPaymentSummary(false)">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio-box" id="wal">
+                                                    <img src="~/Content/Images/icon/svg/mobile-money.svg" width="50" />
+                                                    @*<img src="~/Content/images/icon/svg/mobile-money-disabled.svg" width="50">*@
+                                                    <h4 class="mb15 text-center"> Mobile Wallet</h4>
+                                                    <input type="radio" name="radio" id="MobileWallet" value="3" onchange="GetPaymentSummary(false)">
+                                                    <span class="checkmark"></span>
+                                                </label>
+
+
+                                                <label class="radio-box" id="casp">
+                                                    <img src="~/Content/Images/icon/svg/cash-pickup.svg" width="50" />
+                                                    @*<img src="~/Content/images/icon/svg/cash-pickup-disabled.svg" width="50">*@
+                                                    <h4 class="mb15 text-center"> Cash Pickup</h4>
+                                                    <input type="radio" name="radio" id="CashPickup" value="1" onchange="GetPaymentSummary(false)">
+                                                    <span class="checkmark"></span>
+                                                </label>
+
+
+                                            </div>
+                                            <!--  -->
+                                            <div class="error-alert hidden-lg">
+                                                <span class="text-danger text-center" id="transferMethodvalidationMsg"> </span>
+
+                                            </div>
+                                            <!--  -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-home col-lg-12  mb30">
+                                    <button onclick="TransferNow()" class="btn-transfer " id="TransferNow">Transfer</button>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="dynamic-bank-list text-center hidden-xs hidden-sm">
+
+                                    <div class="col-lg-12">
+                                        <h3 class="mb30" id="logoHeaderText"></h3>
+                                        <ul class="owl-carousel owl-theme bank-list">
+                                        </ul>
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <!--  -->
+
+                    </div>
+
+                </div>
+
+            </div>
+            <!--  -->
+        </div>
+
+    </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>
+<!-- withdrawal-code -->
+<div class="modal fade" tabindex="-1" id="withdrawal-code" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-card" role="document">
+        <div class="modal-content">
+            <div class="modal-body  text-center">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="form-group">
+                            <h3>Select Virtual Account</h3>
+
+                            <select name="" class="form-control">
+                                <option>--Select Virtual Account --</option>
+
+                                <option value="">Card 1</option>
+                                <option value="">Card 1</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <hr class="clearfix">
+                    <h1 class="text-center">Your code is  <br> <span class="text-primary"> 121547547</span></h1>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts
+    {
+    <script type="text/javascript">
+
+        var previousReceivingCountry = "@ViewBag.ReceivingCountry";
+        var selectedSendingCountry = "@ViewBag.SendingCountry";
+        var selectedReceivingCountry = "@ViewBag.ReceivingCountry";
+        var selectedSendingCurrency = "@ViewBag.SendingCurrency";
+        var selectedReceivingCurrency = "@ViewBag.ReceivingCurrency";
+        var SendingCountry = "";
+        var ReceivingCountry = "";
+        var selectedTransferMethod = '@ViewBag.TransferMethod';
+
+
+
+        SetSendingCountryText(selectedSendingCountry);
+        function SetSendingCountryText(countrycode) {
+        
+            //var text = $("#" + countrycode).find("span").text();
+            $("#sendingCountry").html(selectedSendingCurrency + " &nbsp;&nbsp; " + countrycode);
+            $("#receivingCountry").html(selectedReceivingCurrency + " &nbsp;&nbsp; " + selectedReceivingCountry);
+            $("#sendingCountry").attr('data-currency', selectedSendingCurrency);
+            $("#receivingCountry").attr('data-currency', selectedReceivingCurrency);
+        }
+        CalculateSummary(false);
+
+
+
+
+        $("#receivingCountryList li").each(function () {
+      
+            var id = $(this)[0].id;
+            if (selectedReceivingCountry == id) {
+                $("#receivingCountry").text($($(this).find('span')[0]).text());
+            }
+        });
+
+        var validationResult = null;
+
+        function OnReceivingCountryChange(val, cur) {
+            
+            selectedTransferMethod = "";
+            $("#receivingCountry").text($($(event.currentTarget).find('span')[0]).text());
+            $("#receivingCountry").attr('data-currency', cur);
+            selectedReceivingCountry = val;
+            $("#SendingAmount").val(1);
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(false) }, cur);
+
+        }
+        //function OnSendingCountryChange(val) {
+        //    selectedTransferMethod = "";
+        //    $("#sendingCountry").text($($(event.currentTarget).find('span')[0]).text());
+        //    selectedSendingCountry = val;
+        //    $("#SendingAmount").val(1);
+        //    SendingCountry = selectedSendingCountry;
+        //    ReceivingCountry = selectedReceivingCountry;
+        //    EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(false)}) ;
+
+
+        //}
+        function CalculateSummary(IsReceivingAmount) {
+            
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+
+            EnableDisableServices(SendingCountry, ReceivingCountry, function () { GetPaymentSummary(IsReceivingAmount) }, ReceivingCurrency);
+
+        }
+
+        function GetPaymentSummary(IsReceivingAmount) {
+            debugger;
+            var SendingAmount = $("#SendingAmount").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+            SendingCountry = selectedSendingCountry;
+            ReceivingCountry = selectedReceivingCountry;
+            var IsReceivingAmount = IsReceivingAmount;
+
+            var SendingCurrency = $("#sendingCountry").attr('data-currency');
+            var ReceivingCurrency = $("#receivingCountry").attr('data-currency');
+
+            transferMethod = $("#transferMethod input[type='radio']:checked")[0].id;
+            transferMethodvalue = 0;
+            
+            switch (transferMethod) {
+
+                case "BankAccount":
+                    transferMethodvalue = 4;
+                    break;
+                case "MobileWallet":
+                    transferMethodvalue = 3;
+                    break;
+                case "CashPickup":
+                    transferMethodvalue = 1;
+                    break;
+                default:
+            }
+
+            var data = {
+
+                SendingAmount: SendingAmount,
+                ReceivingAmount: ReceivingAmount,
+                SendingCurrency: SendingCurrency,
+                ReceivingCurrency: ReceivingCurrency,
+                SendingCountry: SendingCountry,
+                ReceivingCountry: ReceivingCountry,
+                IsReceivingAmount: IsReceivingAmount,
+                TransferMethod: transferMethodvalue
+            };
+
+
+
+            Riddha.ajax.post("/EstimationSummary/GetTransferSummary", data)
+                .done(function (result) {
+
+                    result = result.response;
+                    for (var item in result) {
+
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                        $(selector).text(result[item]);
+                    }
+                    if (result.Fee == 0) {
+                        $('[name="Fee"]').text(result.ActualFee);
+                    }
+                    if (result.IsIntroductoryRate) {
+
+                        $("#IsIntroductoryRate").show();
+                    } else {
+                        $("#IsIntroductoryRate").hide();
+                    }
+
+                    if (result.IsIntroductoryFee) {
+
+                        if (result.Fee == 0) {
+                            $("#IsIntroductoryFee").show();
+                            $("#IsNotIntroductoryFee").hide();
+                            $("#IsIntroductoryFee2").show();
+                            $("#IsNotIntroductoryFee2").hide();
+                        }
+
+                        else {
+
+                            $("#IsIntroductoryFee").hide();
+                            $("#IsNotIntroductoryFee").show();
+                            $("#IsIntroductoryFee2").hide();
+                            $("#IsNotIntroductoryFee2").show();
+
+                        }
+                    } else {
+
+                        $("#IsIntroductoryFee").hide();
+                        $("#IsNotIntroductoryFee").show();
+                        $("#IsIntroductoryFee2").hide();
+                        $("#IsNotIntroductoryFee2").show();
+                    }
+
+                    var IsValid = result.IsValid;
+                    if (IsValid.Data == false) {
+
+                        validationResult = IsValid;
+                        $("#ValidationResult").text(validationResult.Message);
+                        $("#ValidationResultdiv").show();
+
+                    } else {
+                        validationResult = IsValid;
+                        $("#ValidationResult").text("");
+                        $("#ValidationResultdiv").hide();
+                    }
+
+                });
+            //GetPaymentSummary
+            //$.getJSON("/SenderTransferMoneyNow/GetPaymentSummary?SendingAmount="
+            //    + SendingAmount +
+            //    "&ReceivingAmount=" + ReceivingAmount +
+            //    "&SendingCountry=" + SendingCountry +
+            //    "&ReceivingCountry=" + ReceivingCountry +
+            //    "&IsReceivingAmount=" + IsReceivingAmount +
+            //    "&transferMethod=" + transferMethodvalue,
+            //    function (result) {
+
+            //        debugger;
+            //        for (var item in result) {
+
+            //            var selector = '[name="' + item + '"]';
+            //            $(selector).val(result[item]);
+            //            $(selector).text(result[item]);
+            //        }
+            //        if (result.Fee == 0) {
+            //            $('[name="Fee"]').text(result.ActualFee);
+            //        }
+            //        if (result.IsIntroductoryRate) {
+
+            //            $("#IsIntroductoryRate").show();
+            //        } else {
+            //            $("#IsIntroductoryRate").hide();
+            //        }
+            //        if (result.IsIntroductoryFee) {
+
+            //            if (result.Fee == 0) {
+            //                $("#IsIntroductoryFee").show();
+            //                $("#IsNotIntroductoryFee").hide();
+            //                $("#IsIntroductoryFee2").show();
+            //                $("#IsNotIntroductoryFee2").hide();
+            //            }
+
+            //            else {
+
+            //                $("#IsIntroductoryFee").hide();
+            //                $("#IsNotIntroductoryFee").show();
+            //                $("#IsIntroductoryFee2").hide();
+            //                $("#IsNotIntroductoryFee2").show();
+
+            //            }
+            //        } else {
+
+            //            $("#IsIntroductoryFee").hide();
+            //            $("#IsNotIntroductoryFee").show();
+            //            $("#IsIntroductoryFee2").hide();
+            //            $("#IsNotIntroductoryFee2").show();
+            //        }
+
+            //        var IsValid = result.IsValid;
+            //        if (IsValid.Data == false) {
+
+            //            validationResult = IsValid;
+            //            $("#ValidationResult").text(validationResult.Message);
+            //            $("#ValidationResultdiv").show();
+
+            //        } else {
+            //            validationResult = IsValid;
+            //            $("#ValidationResult").text("");
+            //            $("#ValidationResultdiv").hide();
+            //        }
+
+            //    });
+
+        }
+
+
+        if ($("#SendingAmount").val() == "")
+        {
+            $("#SendingAmount").val('@ViewBag.SendingAmount');
+            CalculateSummary();
+        }
+
+
+        $("#SendingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() == 3 || $("#SendingAmount").val() == 0) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+
+        })
+
+        $("#ReceivingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() == 3 || $("#SendingAmount").val() == 0) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+        })
+
+
+
+        $(document).on('data-selectedcountry', function () {
+
+
+            alert('Data changed to: ' + "");
+        });
+
+
+        function TransferNow() {
+
+
+            if (validationResult.Data == false) {
+                $("#ValidationResult").text(validationResult.Message)
+                $("#ValidationResult").show();
+                return;
+            }
+            $("#ValidationResult").hide();
+
+
+            var sendingAmount = $("#SendingAmount").val();
+            if (sendingAmount <= 0) {
+
+                $("#validationMsg").text("Please enter send amount greater than or equal to GBP 0");
+                $("#validationMsg").show();
+                return;
+            }
+            else if (sendingAmount > 50000) {
+
+
+                $("#validationMsg").text("Please enter send amount less than or equal to GBP 50,000");
+                $("#validationMsg").show();
+                return;
+            } else {
+                $("#validationMsg").hide();
+            }
+
+            transferMethod = $("#transferMethod input[type='radio']:checked")[0].id;
+
+            var selectedTransferMethod = '@ViewBag.TransferMethod';
+
+            if (selectedTransferMethod == "Mobile") {
+
+                selectedTransferMethod = "MobileWallet";
+            }
+            else if (selectedTransferMethod == "BankDeposit") {
+
+                selectedTransferMethod = "BankAccount";
+            }
+            else if (selectedTransferMethod == "CashPickUp") {
+
+                selectedTransferMethod = "CashPickup";
+            }
+
+            if (transferMethod == selectedTransferMethod && previousReceivingCountry == selectedReceivingCountry)
+            {
+                switch (transferMethod) {
+
+                    case "BankAccount":
+                        window.location.href = "/senderBankAccountDeposit/BankDepositAbroadSummary";
+                        break;
+                    case "MobileWallet":
+                        window.location.href = "/SenderMobileMoneyTransfer/MobileSummaryAbroad";
+                        break;
+                    case "CashPickup":
+                        window.location.href = "/SenderCashPickUp/CashPickUpSummary";
+                        break;
+                    default:
+                        $("#transferMethodvalidationMsg").text("Select a service");
+                        break;
+                }
+            }
+            else
+            {
+                switch (transferMethod) {
+
+                    case "BankAccount":
+                        window.location.href = "/senderBankAccountDeposit/Index";
+                        break;
+                    case "MobileWallet":
+                        window.location.href = "/SenderMobileMoneyTransfer/Index";
+                        break;
+                    case "CashPickup":
+                        window.location.href = "/SenderCashPickUp/Index";
+                        break;
+                    default:
+                        $("#transferMethodvalidationMsg").text("Select a service");
+                        break;
+                }
+            }
+        }
+
+
+
+    </script>
+}

@@ -1,0 +1,120 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.PayAReceiverKiiPayWalletEnteramountViewModel
+@{
+    ViewBag.Title = "PayAReceiverKiiPayWalletEnteramount";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    string[] WalletCurBalance = @Model.WalletCurBalance.ToString("0.00").Split('.');
+    string[] WeeklyLimitBalance = @Model.LimitBalance.ToString("0.00").Split('.');
+}
+
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.WalletName)
+    @Html.HiddenFor(model => model.WalletCurBalance)
+    @Html.HiddenFor(model => model.CashLimitType)
+    @Html.HiddenFor(model => model.LimitBalance)
+    @Html.HiddenFor(model => model.WalletCurrencySymbol)
+    @Html.HiddenFor(model => model.WalletCurrencyCode)
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@Model.WalletCurrencySymbol @WalletCurBalance[0].<small class="text-primary">@WalletCurBalance[1]</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="text-right wallet-balance  mb30">
+                            <h5>@Model.CashLimitType</h5>
+                            <h1 class="text-primary">@Model.WalletCurrencySymbol @WeeklyLimitBalance[0].<small class="text-primary">@WeeklyLimitBalance[1]</small></h1>
+                        </div>
+                        <hr />
+
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Areas/Agent/Content/images/icon/svg/buldings.svg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.WalletName</span>
+                            </div>
+                        </div>
+
+
+                        <div class="amount-group  ">
+
+                            <div>
+                                <label>Enter Amount</label>
+
+                                @Html.TextBoxFor(model => model.Amount, new { @class = "amount", @type = "number", @placeholder = Model.WalletCurrencySymbol + "0.00", id = "Amount" , @step = ".01" })
+
+                            </div>
+                        </div>
+
+                        <div class="gbp">
+                            @Model.WalletCurrencyCode
+                        </div>
+                        <div class="clearfix"></div>
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+
+                        <div class="form-group text-left">
+
+                            <label>@Html.CheckBoxFor(model => model.IsExpired) I confirm that the information required to transfer money into this wallet account has been fully verified by myself</label>
+                            @Html.ValidationMessage("IsConfirm", "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("TechnicalError", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("PayAReceiverKiiPayWallet","PayAReceiver")"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        $("#Amount").focus(function () {
+
+            if ($("#Amount").val() <= 1) {
+
+                $("#Amount").val("");
+             
+            }
+
+
+        })
+
+       
+
+    </script>
+}
+

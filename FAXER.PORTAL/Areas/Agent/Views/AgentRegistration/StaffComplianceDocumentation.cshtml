@@ -1,0 +1,215 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.StaffComplianceDocViewModel
+@{
+    ViewBag.Title = "StaffComplianceDocumentation";
+    //Layout = "~/Areas/Agent/Views/Shared/_Layout_Agent.cshtml";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Staff Compliance Documentation</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+
+@using (Html.BeginForm("StaffComplianceDocumentation", "AgentRegistration", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class=" ">
+                        <p>
+                            To comply with regulations, MoneyFex requires the following documents to complete the agent staff registration.
+                        </p>
+
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label>ID Type <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.IdCaardType, (IEnumerable<SelectListItem>)ViewBag.IdCardType, "Select ID Type", new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.IdCaardType, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label>ID Number<span class="required">*</span> </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.IdCardNumber, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.IdCardNumber, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6 clearfix">
+                            <label>ID Expiry Date <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ExpiryDay, new { @class = "form-control", @type = "number", placeholder = "DD", id = "Day" })
+                                @Html.ValidationMessageFor(Model => Model.ExpiryDay, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+
+                                @Html.EnumDropDownListFor(x => x.ExpiryMonth, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.ExpiryMonth, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.ExpiryYear, new { @class = "form-control", placeholder = "YYYY", id = "Year" })
+                                @Html.ValidationMessageFor(Model => Model.ExpiryYear, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label>Issuing Country</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @placeholder = "" })
+
+                                @Html.ValidationMessageFor(Model => Model.IssuingCountry, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"><br></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Upload photo of Government issued Identification Document. </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.IdentificationDoc, new { @class = "form-control", type = "file" })
+                                @Html.ValidationMessageFor(Model => Model.IdentificationDoc, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"><br></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Does the staff have an international passport? </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <label>
+                                @Html.CheckBoxFor(x => x.HaveInternationalPassport, new { @id = "HaveInternationalPassport" })
+                                Yes
+                            </label>
+                            @*<label>
+                                    @Html.RadioButtonFor(x => x.HaveInternationalPassport, false, new { @id = "radio2" , value=true })
+                                    No
+                                </label>*@
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div id="internationlPassport">
+                            <div class="col-lg-6">
+                                <label> Passport side 1</label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(x => x.PassportSide1, new { @class = "form-control", type = "file", id = "passport1" })
+                                    @Html.ValidationMessageFor(Model => Model.PassportSide1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6">
+                                <label> Passport side 2</label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(x => x.PassportSide2, new { @class = "form-control", type = "file", id = "passport2" })
+                                    @Html.ValidationMessageFor(Model => Model.PassportSide2, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+
+                    <button type="submit" class="fbtn btn-next">Finish Account Setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        $("#Year").val("");
+        $("#Day").val("");
+        $("input[name = 'HaveInternationalPassport']").click(function (e) {
+
+            if ($(this)[0].checked == true) {
+                $("#internationlPassport").show();
+            }
+            else {
+                $("#internationlPassport").hide();
+            }
+        });
+        $("#internationlPassport").hide();
+
+    </script>
+}

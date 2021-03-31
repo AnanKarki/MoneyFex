@@ -1,0 +1,146 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.ReceiverDetailsInformationViewModel
+@{
+    ViewBag.Title = "UpdateOtherWalletTransfer";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+                            @Html.HiddenFor(x=>x.Id)
+                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Send Money  to a Mobile Wallet </h4>
+
+                                    </div>
+
+                                    <div class="card-body p-40">
+
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round", id = "countryCode", @onchange = "GetCountryPhoneCode()" })
+                                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.DropDownListFor(model => model.MobileWalletProvider, (IEnumerable<SelectListItem>)ViewBag.MobileWalletProviders, "Select Mobile Wallet Provider", new { @class = "form-control form-control-lg form-control-round" })
+                                                @Html.ValidationMessageFor(model => model.MobileWalletProvider, "", new { @class = "text-danger" })
+
+
+                                            </div>
+                                            <!--  -->
+
+
+
+
+
+
+
+                                            <div class="form-group m-b-35">
+                                                <div class="input-group input-group-round input-group-lg">
+
+                                                    <span class="input-group-addon" id="countryPhoneCode" name="countryPhoneCode"> </span>
+                                                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control form-control-lg form-control-round ", placeholder = "Enter Mobile Number", @type = "number", maxlength = "10", minlength = "10", autocomplete = "off" })
+                                                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                            </div>
+
+
+                                            <!--  -->
+                                            <div class="form-group m-b-35">
+                                                @Html.TextBoxFor(model => model.ReceiverName, new { @class = "form-control form-control-lg form-control-round ", placeholder = "Receiver Full  Name" })
+                                                @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+
+                                            </div>
+                                            <!--  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                        </form>
+                                    </div>
+
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <button type="submit" class="btn btn-primary btn-lg btn-round  btn-block"> Update <i class="fa fa-angle-right m-l-5"></i></button>
+                                            <button onclick="window.history.go(-1);" class=" btn btn-link  btn-lg btn-round btn-block">
+                                                <i class="fa fa-angle-left m-r-5"></i> Back
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        $("#submit").click(function () {
+
+            $("#loader").show();
+            $("form").submit();
+        })
+        function GetCountryPhoneCode() {
+            $("#loader").show();
+
+            var countryCode = $("#countryCode").val();
+
+            $.getJSON("/Agent/AgentMobileMoneyTransfer/GetCountryPhone?countryCode=" + countryCode, function (result) {
+
+                $(".input-group input-group-round input-group-lg").text(result.countryPhoneCode);
+                $("#countryPhoneCode").val(result.countryPhoneCode);
+                $('[name="countryPhoneCode"]').text(result.countryPhoneCode);
+
+
+            })
+            window.location.href = "/Admin/StaffTransactionUpdate/UpdateOtherWalletTransfer?id="+@Model.Id+"&Country=" + countryCode;
+
+        }
+        $(".input-group input-group-round input-group-lg").text($("#countryPhoneCode").val());
+
+        $("#countryPhoneCode").text('@ViewBag.PhoneCode');
+
+
+    </script>
+}

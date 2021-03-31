@@ -1,0 +1,105 @@
+﻿@model FAXER.PORTAL.Models.SenderPayAPaymentRequestViewModel
+@{
+    ViewBag.Title = "PayARequest";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@Model.SendingCurrencySymbol @Model.AvailableBalance</h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                @Html.ValidationMessageFor(model => model.PayingAmount, "", new { @class = "text-danger" })
+                                <div class="userimage  ">
+                                    <img src="@Model.PhotoUrl" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.ReceiverName</span>
+                            </div>
+                        </div>
+
+                        <div class="estimate-calculator " style="">
+                            <div class="wrapper">
+                                <p class="font-20 text-left"> Payment Summary</p>
+                                <hr>
+                                <dl class="font-30">
+                                    <dt>Amount :</dt>
+                                    <dd class="fee" data-outbound-currency="USD">@Model.SendingCurrencySymbol @Model.Amount</dd>
+                                </dl>
+                                <dl class="font-30">
+                                    <dt>Receiving Amount :</dt>
+                                    <dd class="fee" data-outbound-currency="USD">@Model.ReceiverCurrencySymbol @Model.ReceivingAmount </dd>
+                                </dl>
+
+                                <dl class="font-30">
+                                    <dt>Fee :</dt>
+                                    <dd class="fee" data-outbound-currency="USD">@Model.SendingCurrencySymbol @Model.Fee</dd>
+                                </dl>
+                                <dl class="font-30">
+                                    <dt>You'll Pay :</dt>
+                                    <dd class="fee" data-outbound-currency="USD">@Model.SendingCurrencySymbol @Model.PayingAmount </dd>
+                                </dl>
+
+
+                                <div class="clearfix">
+
+                                </div>
+                                @Html.HiddenFor(x => x.Id)
+                                @Html.HiddenFor(x => x.PhotoUrl)
+                                @Html.HiddenFor(x => x.ReceiverName)
+                                @Html.HiddenFor(x => x.ReceiverWalletId)
+                                @Html.HiddenFor(x => x.Amount)
+                                @Html.HiddenFor(x => x.Fee)
+                                @Html.HiddenFor(x => x.PayingAmount)
+                                @Html.HiddenFor(x => x.ReceivingAmount)
+                                @Html.HiddenFor(x => x.ExchangeRate)
+                                @Html.HiddenFor(x => x.ReceiverCurrencySymbol)
+                            </div>
+                            Exchange Rate :  @Model.SendingCurrencySymbol 1 = @Model.ReceiverCurrencySymbol @Model.ExchangeRate
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Confirm & Pay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

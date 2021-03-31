@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;">
+                <img src="@baseUrl/Areas/EmailTemplate/Images/transfer-cancelled.png" width="100%">
+            </td>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>@ViewBag.SenderFristName</b>,</h1>
+                <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">Your transfer with the the following details has been cancelled.</h1>
+
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <h3>Below are the full details of your transaction:</h3>
+                <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                    Transaction number:@ViewBag.TransactionNumber<br>
+                    Sending amount :   @ViewBag.SendingAmount @ViewBag.SendingCurrency to @ViewBag.Receivingcountry<br>
+                    Fee: @ViewBag.Fee @ViewBag.SendingCurrency<br>
+                    Recipient name: @ViewBag.ReceiverName<br>
+                    @switch (ViewBag.TransactionServiceType)
+                    {
+                        case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                            <span>
+                                Bank Name: @ViewBag.BankName<br>
+                                Bank account: @ViewBag.BankAccount<br>
+                                Sort code / Routing number: @ViewBag.BankCode
+
+                            </span>
+                            break;
+                        case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                            <span>
+                                Wallet Provider: @ViewBag.WalletName<br>
+
+                            </span>
+                            break;
+                            <span>
+                                MFCN Number: @ViewBag.MFCN<br>
+
+                            </span>
+                            break;
+                    }
+
+
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    <br> Thank you
+                    <br>The MoneyFex Team
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

@@ -1,0 +1,84 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AgentPayaAnInvoiceSuccessVm
+
+@{
+    ViewBag.Title = "GeneralPayAnInvoiceSucess";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                            <div class="card">
+
+
+
+                                <div class="card-body p-40">
+
+
+                                    <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                        <div class="d-flex align-items-center amount-group  m-b-25">
+                                            <div>
+                                                <div class="userimage  ">
+                                                    <img src="assets/images/buldings.svg " alt="">
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <h2 class="text-primary"> @Model.Name</h2>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="m-t-20 text-center">
+
+                                            <h3 class="text-primary m-b-10"> Invoice No.: @Model.InvoiceNo</h3>
+                                            <!-- success -->
+                                            <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                                <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                                <span class="swal2-success-line-tip"></span>
+                                                <span class="swal2-success-line-long"></span>
+                                                <div class="swal2-success-ring"></div>
+                                                <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                                <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                            </div>
+                                            <!-- success -->
+                                            <!-- error -->
+                                            <!--
+                                            <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: flex;"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div> -->
+                                            <!-- error -->
+
+                                            <h2 class=" ">  <span class="text-primary">Done</span> </h2>
+                                            <h6>Thank You</h6>
+
+                                        </div>
+
+
+                                    </form>
+                                </div>
+
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="row">
+                                    <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                        <a href="@Url.Action("Index","PartnerPayInvoicing")" class="btn btn-primary btn-lg btn-round  btn-block"> Pay another invoice <i class="fa fa-angle-right m-l-5"></i></a>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

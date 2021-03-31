@@ -1,0 +1,510 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredFaxersViewModel
+@{
+    ViewBag.Title = "RegisterAFaxer";
+    //Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@*@using (Html.BeginForm("RegisterAFaxer", "ViewRegisteredFaxers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Sender Registration</h4>
+                    </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                        <a href="@Url.Action("Index", "ViewRegisteredFaxers")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View - Registered Senders</a>
+
+                        <ol class="breadcrumb">
+                            <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                            <li class="active">Sender Registration</li>
+                        </ol>
+
+                    </div>
+                     /.col-lg-12
+                </div>
+                 /.row
+                <div class="row">
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="col-md-12">
+                        <div class="white-box">
+
+
+                            <div class="form-body">
+                                <h3 class="box-title">Sender's Details</h3>
+
+
+
+                                <div class="col-lg-3 control-label">
+                                    <label> First Name <span class="required">*</span></label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3 control-label">
+                                    <label>Middle Name </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3 control-label">
+                                    <label>Last Name <span class="required">*</span></label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3 control-label">
+                                    <label>Date of Birth <span class="required">*</span></label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Gender <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.EnumDropDownListFor(model => model.Gender, "Select Gender", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Username (email address) <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.UsernameEmail, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.UsernameEmail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>ID Card Type</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.IDCardType, (IEnumerable<SelectListItem>)ViewBag.CardType, "Select your Card Type", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+
+                                <div class="col-lg-3 control-label">
+                                    <label>ID Card Number </label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.IDCardNumber, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+
+                                <div class="col-lg-3 control-label">
+                                    <label>ID Card Expiring Date</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.EditorFor(model => model.IDCardExpDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.IDCardExpDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Issuing Country</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.countries, "Select your issuing Country", new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        Are you most likely to make transactions of €1000 and over at a give time ?
+                                        <br /><label>
+                                            @Html.CheckBoxFor(x => x.TransactionOver1000, new { @class = " checkbox-success" }) &nbsp Yes
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        To comply with anti-money laundering regulations, MoneyFax Service requires a copy of your photo ID (driving Licence and passport are the only acceptable forms of ID)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group   ">
+                                        <input type="file" name="CardImage" class="form-control" value="Choose Image" />
+                                        @Html.ValidationMessageFor(model => model.IDCardImage)
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Address 1 <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Address 2</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>City <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3 control-label">
+                                    <label>State/Province/Region <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Zip/Postal Code <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Country <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.countries, "Select your Country", new { @class = "form-control", @id = "country", @onchange = "getCountryCode();" })
+                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                                <div class="col-lg-3 control-label">
+                                    <label>Phone Number <span class="required">*</span></label>
+                                </div>
+
+                                <div class="col-lg-1">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.CountryCode, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="clearfix"></div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-3 control-label"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-actions text-center">
+                                        <button type="submit" class="btn btn-success btn-lg btn-block btn-rounded">   Finish </button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>   <div class="col-lg-3"></div>
+
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+
+
+
+
+@using (Html.BeginForm("RegisterAFaxer", "ViewRegisteredFaxers", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">
+                                            Register a Senders
+                                        </h4>
+                                        <a href="@Url.Action("Index" ,"ViewRegisteredFaxers")" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> View - Registered Senders
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>First Name</label>
+                                                    @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Middle Name</label>
+                                                    @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Last Name</label>
+                                                    @Html.TextBoxFor(model => model.LastName, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Date of Birth</label>
+                                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control  form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Gender</label>
+                                                    @Html.EnumDropDownListFor(model => model.Gender, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    @Html.TextBoxFor(model => model.UsernameEmail, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.UsernameEmail, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Address 1 </label>
+                                                    @Html.TextBoxFor(model => model.Address1, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Address 2</label>
+                                                    @Html.TextBoxFor(model => model.Address2, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>City </label>
+                                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>State/Province/Region  </label>
+                                                    @Html.TextBoxFor(model => model.State, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Zip/Post code</label>
+                                                    @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "getCountryCode();" })
+                                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Mobile Number</label>
+                                                    <div class="input-group input-group-round input-group-lg">
+                                                        <span class="input-group-addon" id="CountryPhoneCodeSpan">@ViewBag.CountryPhoneCode </span>
+                                                        @Html.TextBoxFor(model => model.Phone, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Mobile Number ", @autocomplete = "off" })
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="p-10">
+                                                    <h5>Identification Information</h5>
+                                                    <hr>
+                                                </div>
+                                                  
+                                                  
+                                                <div class="form-group">
+                                                    <label>Issuing Country </label>
+                                                    @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select your issuing Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+                                                </div>
+                                                  
+                                                  
+                                                <div class="form-group">
+                                                    <label>Id Card Type  </label>
+                                                    @Html.DropDownListFor(model => model.IDCardType, (IEnumerable<SelectListItem>)ViewBag.CardType, "Select your Card Type", new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.IDCardExpDate, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                  
+                                                  
+                                                <div class="form-group">
+                                                    <label>Id Card Number</label>
+                                                    @Html.TextBoxFor(model => model.IDCardNumber, new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(model => model.IDCardNumber, "", new { @class = "text-danger" })
+                                                </div>
+                                                  
+                                                  
+                                                <div class="form-group">
+                                                    <label>Card Expiry Date</label>
+                                                    @Html.EditorFor(model => model.IDCardExpDate, new { htmlAttributes = new { @class = "form-control  form-control-lg form-control-round form-control-bold", type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.IDCardExpDate, "", new { @class = "text-danger" })
+                                                </div>
+                                                  
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index" ,"ViewRegisteredFaxers")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"> submit</button>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function getCountryCode() {
+            var countryCode = $("#Country").val();
+            $.getJSON("/Admin/ViewRegisteredFaxers/getCountryPhoneCode?countryCode=" + countryCode, function (data) {
+                //for (var item in data) {
+                //    var selector = '[name = "' + item + '"]';
+                //    $(selector).val(data[item]);
+                //}
+                $("#CountryPhoneCodeSpan").text(data.PhoneCode)
+            })
+        }
+
+
+    </script>
+
+}

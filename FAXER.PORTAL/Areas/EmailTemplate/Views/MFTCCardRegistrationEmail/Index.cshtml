@@ -1,0 +1,67 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseURL = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+    </p>
+    <p>
+        Good News!
+    </p>
+    <p>
+        You have successfully registered a MoneyFex virtual account  that can be used by your virtual account user <b>@ViewBag.CardUserName</b> to withdraw money from our paying agents and also pay for goods and services in @ViewBag.CardUserCountry.
+    </p>
+    <p>
+
+        The details of the registered virtual account are as follows:
+    </p>
+    <p>
+        <strong>Virtual Account No: </strong> @ViewBag.MFTCCardNumber
+    </p>
+    <p>
+        <strong>Name on Virtual Account:</strong> @ViewBag.CardUserName
+    </p>
+    <p>
+        <br />
+        Please contact MoneyFex customer service immediately if you think the information above is incorrect. You do not have do anything if no error(s) has/have been identified.
+    </p>
+    <br />
+    <p>
+        The registered bank-card-like shape will be securely sent as a physical and E-card by us to @ViewBag.CardUserName
+        . This card can be used to withdraw money from our agents and also pay for goods and services abroad once top up by you.
+    </p>
+    <br />
+    <p>
+        MoneyFex virtual account offers "ABC" benefits to you as a money Sender:
+    </p>
+    <p>
+        -	Set up "automatic deposit" to ensure that money is always available when needed by <b>@ViewBag.CardUserName</b>.
+    </p>
+    <p>
+        -	Limit how much can be collected/withdrawn from the MoneyFex virtual account by <b>@ViewBag.CardUserName</b>
+    </p>
+    <p>
+        -	View card usage history and transfer money between MoneyFex accounts that are registered in the same country for free.
+    </p>
+    <br />
+    
+
+    <table style="width:50%;margin-left:150px; ">
+        <tbody>
+            <tr>
+                
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+              
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

@@ -1,0 +1,119 @@
+﻿@model  FAXER.PORTAL.Models.TransferMoneyBetweenMoneyFaxTopUpCardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var CountryCurrencySymbol = "";
+    var CountryCurrency = "";
+    if (Model != null) {
+        CountryCurrency = Model.CountryCurrency ?? "";
+        CountryCurrencySymbol = Model.CountryCurrencySymbol ?? "";
+    }
+}
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h1>Transfer Money Between Virtual Accounts</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form  ">
+        <div class="container">
+            <div class="row">
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-4">
+                        <label> </label>
+                    </div>
+
+                    @Html.HiddenFor(model => model.CountryCurrency)
+                    @Html.HiddenFor(model => model.CountryCurrencySymbol)
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.TopUpCard, null, "Select Transfering Account", htmlAttributes: new { @class = "form-control", id = "TopUpCard", @onchange = "getMFTCCard(this.value);" })
+                            @Html.ValidationMessage("CardError", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4">
+                        <label>Registered Country</label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            @Html.HiddenFor(model => model.TransferringTopUpCardRegisteredCountryCode)
+                            @Html.EditorFor(model => model.TransferringTopUpCardRegisteredCountry, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            @Html.ValidationMessageFor(model => model.TransferringTopUpCardRegisteredCountry, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4 ">
+
+                        
+
+                        
+                        <label> Account Balance</label>
+                    </div>
+                
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@CountryCurrencySymbol</span>
+                            @Html.EditorFor(model => model.TransferringTopUpCardAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                            <span class="input-group-addon">@CountryCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessage("CardAmount", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="clearfix"><br /></div>
+                    <div class="col-lg-4 ">
+                        <label> Enter Transfer Amount</label>
+                    </div>
+                
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@CountryCurrencySymbol</span>
+                            @Html.EditorFor(model => model.AmountToBeTransferred, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon">@CountryCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessage("TransferAmount", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="clearfix"><br /></div>
+                    <div class="col-lg-10">
+                        <p>Please note that you can only transfer money between Receiver Virtual Account that are registered in the same country</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--  -->
+<script>
+    function getMFTCCard(val) {
+        window.location.href = "/TransferMoneyBetweenMoneyFaxTopUpCard/Index?mFTCCardInformationId=" + val;
+    }
+</script>

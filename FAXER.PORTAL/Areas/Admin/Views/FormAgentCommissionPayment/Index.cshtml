@@ -1,0 +1,188 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.FormAgentCommissionPaymentViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+
+    //var mode = mode;
+
+}
+
+<h2>Index</h2>
+
+<form method="post">
+    @if (ViewBag.Value == 0)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                Riddha.UI.Toast("@ViewBag.Message",4);
+            }
+        </script>
+    }
+    @if (ViewBag.Value == 1)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                Riddha.UI.Toast("@ViewBag.Message",2);
+            }
+        </script>
+    }
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Master Form - Agent Commission Payment</h4>
+                </div>
+                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Master Form - Agent Commission Paymenty</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+
+                                <thead>
+                                    <tr>
+                                        <td>SN</td>
+                                        <td>Year</td>
+                                        <td>Month</td>
+
+                                        <td>Country</td>
+                                        <td>City</td>
+                                        <td>Agent Name</td>
+                                        <td>Agent MFS Code</td>
+                                        <td>Status</td>
+                                        <td>Total Sent Pay't</td>
+                                        <td>Sent Comm Rate</td>
+                                        <td>Total Sent Comm</td>
+                                        <td>Total RCVed Pay't</td>
+                                        <td>RCVer Comm Rate</td>
+                                        <td>Total RCVed Comm</td>
+
+
+
+                                        <!--  -->
+
+                                        <td>Sent+RcVed Comm</td>
+                                        <td>Verify Info</td>
+                                        <td>Name of Admin Verifier</td>
+                                        <td>Make Payment</td>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>
+                                            @Html.DropDownListFor(model => model.Year, (IEnumerable<SelectListItem>)ViewBag.Year, "Year", new { @id = "year" })
+                                            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.EnumDropDownListFor(model => model.Month, new { @class = "", @onChange = "getDetails();", @id = "month" })
+                                            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                                        </td>
+
+
+                                        <td>
+                                            @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Choose Country", new { @id = "country", @onChange = "getDetails();" })
+                                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+
+                                            @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.SCities, "City", new { @id = "city", @onChange = "getDetails();" })
+                                            @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                                        </td>
+
+                                        <td>
+                                            @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "Agent", new { @id = "agent", @onChange = "getDetails();" })
+                                            @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td>
+                                            @Html.HiddenFor(model => model.MFSCode)
+
+                                            @Model.MFSCode
+                                        </td>
+                                        @Html.HiddenFor(model => model.Status)
+
+                                        <td>@Model.Status</td>
+
+                                        @Html.HiddenFor(model => model.TotalSentPayment)
+
+                                        <td>@Model.CurrencySymbol @Model.TotalSentPayment</td>
+
+                                        @Html.HiddenFor(model => model.SentCommissionRate)  
+
+                                        <td>@Model.SentCommissionRate</td>
+
+                                        @Html.HiddenFor(model => model.TotalSentCommission)
+
+                                        <td>@Model.CurrencySymbol @Model.TotalSentCommission</td>
+
+                                        @Html.HiddenFor(model => model.TotalReceivedPayment)
+
+                                        <td>@Model.CurrencySymbol @Model.TotalReceivedPayment</td>
+
+                                        @Html.HiddenFor(model => model.ReceiverCommissionRate)
+
+                                        <td>@Model.ReceiverCommissionRate</td>
+
+                                        @Html.HiddenFor(model => model.TotalReceivedCommission)
+
+                                        <td>@Model.CurrencySymbol @Model.TotalReceivedCommission</td>
+
+                                        @Html.HiddenFor(model => model.TotalCommission)
+                                        <td>
+                                            @Model.CurrencySymbol @Model.TotalCommission<br />
+
+                                            @Html.ValidationMessageFor(model => model.TotalCommission, "", new { @class = "text-danger" })
+                                        </td>
+                                        <td align="center">
+                                            @Html.CheckBoxFor(model => model.IsVerified)
+
+                                            @Html.ValidationMessageFor(model => model.IsVerified, "", new { @class = "text-danger" })
+                                        </td>
+                                        @Html.HiddenFor(model => model.AdminName)
+
+                                        <td>@Model.AdminName</td>
+
+                                        <td>
+                                            <button type="submit" class="btn btn-sm btn-success" value="">Pay Now</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/javascript">
+    function getDetails() {
+        var year = $("#year").val();
+        var month = $("#month").val();
+        var country = $("#country").val();
+        var city = $("#city").val();
+        var agentId = $("#agent").val();
+        window.location.href = "/Admin/FormAgentCommissionPayment/Index?year=" + year + "&monthId=" + month + "&CountryCode=" + country + "&City=" + city + "&agent=" + agentId;
+    }
+</script>

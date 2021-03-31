@@ -1,0 +1,97 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.LogInViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-left">
+                    <div class="text-center">
+                        <img src="~/Areas/KiiPayPersonal/images/logo.png" alt="">
+                    </div>
+                    <hr>
+                    @using (Html.BeginForm())
+                    {
+                        <div class="mt40">
+
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control", @placeholder = "Email or mobile number" })
+                                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Password, new { @type = "password", @class = "form-control", @id = "show_password", @placeholder = "Password" })
+                                        <div class="input-group-addon" onclick="showPass();" id="passwoed_show"><i class="fa fa-eye"></i></div>
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+                        <div class="text-center">
+
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Log in <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-12 mb20 ">
+                                <a href="@Url.Action("ForgotPassword","LogIn")">Forgot Password</a>
+                            </div>
+
+                            <div class="or-border mb20">
+                                OR
+                            </div>
+                            <div class="col-lg-12 ">
+                                <a href="@Url.Action("Index","SignUp")">Sign Up</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    }
+                </div>
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<script type="text/javascript">
+    function showPass() {
+        var x = document.getElementById("show_password");
+        if (x.type == "password") {
+            x.type = "text";
+        }
+        else {
+
+            x.type = "password";
+        }
+    };
+</script>

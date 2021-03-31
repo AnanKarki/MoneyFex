@@ -1,0 +1,129 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ExchangeRateSettingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Exchange Rate Setting</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a href="@Url.Action("SetNewRate","ExchangeRateSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Set New Rates</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="@Url.Action("Index","AdminDashboard")">Dashboard</a></li>
+                    <li class="active">Exchange Rate Setting</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="search_countr">
+                    <form class="" action="/Admin/ExchangeRateSetting/index" method="post">
+
+                        <div class="row ">
+                            <div class="col-sm-4">
+
+                                @Html.DropDownListFor(model => model.SourceCountryCode, (IEnumerable<SelectListItem>)ViewBag.SourceCountries, "Faxing Country", new { @class = "form-control" })
+                            </div>
+
+                            <!--  -->
+
+                            <div class="col-sm-4">
+
+
+                                @Html.DropDownListFor(model => model.DestinationCountryCode, (IEnumerable<SelectListItem>)ViewBag.DestinationCountries, "Receiving Country", new { @class = "form-control" })
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="submit" class="btn btn-info btn-rounded waves-effect waves-light " value="Show Rate" />
+
+                            </div>
+
+                        </div>
+
+
+
+
+
+                    </form>
+
+                </div>
+                <div class="white-box">
+
+
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered  csvprint table-striped" cellspacing="0" width="100%">
+                            <thead>
+
+
+                                <tr>
+
+                                    <th class="text-center"> Faxing Country</th>
+                                    <th class="text-center"> Receiving Country</th>
+
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <!--  -->
+                                <tr>
+
+                                    <td class="text-center"><span class="flag flag-@Model.SourceCountryCode.ToLower()"></span> <b>@Model.SourceCountryName</b></td>
+                                    <td class="text-center"><span class="flag flag-@Model.DestinationCountryCode.ToLower()"></span> <b>@Model.DestinationCountryName</b></td>
+
+                                    <td> </td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td class="text-center">
+                                        <b>  @Model.SourceCurrencySymbol 1 @Model.SourceCurrencyCode</b>
+                                    </td>
+
+                                    <td align="center"><b> @Model.DestinationCurrencySymbol @Model.ExchangeRate.ToString("#00.00") @Model.DestinationCurrencyCode</b></td>
+
+                                    <td align="center" rows="2">
+                                        <a href="/Admin/ExchangeRateSetting/SetNewRate?SourceCountryCode=@Model.SourceCountryCode&DestinationCountryCode=@Model.DestinationCountryCode" class="btn btn-success btn-outline btn-circle btn-xs m-r-5"><i class="ti-pencil-alt"></i></a>
+                                        <a href="/Admin/ExchangeRateSetting/DeleteRate?Id=@Model.Id" class="btn btn-danger btn-outline btn-circle btn-xs m-r-5"><i class="ti-trash"></i></a>
+                                    </td>
+
+
+                                </tr>
+                                <!--  -->
+
+
+
+
+
+                            </tbody>
+
+
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+
+    </div>
+</div>

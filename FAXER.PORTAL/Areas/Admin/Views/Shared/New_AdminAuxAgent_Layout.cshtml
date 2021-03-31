@@ -1,0 +1,830 @@
+﻿
+@{
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<!-- /Added by HTTrack -->
+
+<head>
+    <title>MoneyFex </title>
+
+    <!--[if lt IE 10]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="#">
+    <meta name="keywords" content="">
+    <meta name="author" content="#">
+
+
+    <!-- <link rel="icon" href="https://colorlib.com//polygon/adminty/files/assets/images/favicon.ico" type="image/x-icon"> -->
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/bower_components/bootstrap/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="~/Areas/Admin/AuxAgnetContent/assets/pages/chart/radial/css/radial.css" type="text/css" media="all">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/ion-icon/css/ionicons.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/themify-icons/themify-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/icofont/css/icofont.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/feather/css/feather.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/flag-icons/css/flag-icon.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/icon/font-awesome/css/font-awesome.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/css/jquery.mCustomScrollbar.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/bower_components/ekko-lightbox/css/ekko-lightbox.css">
+    <!-- datepicker -->
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/bower_components/bootstrap-daterangepicker/css/daterangepicker.css" />
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/bower_components/datedropper/css/datedropper.min.css" />
+
+    <!-- end -->
+
+    <link rel="stylesheet" href="~/Areas/Admin/AuxAgnetContent/assets/pages/sticky/css/jquery.postitall.css" type="text/css">
+    <link rel="stylesheet" href="~/Areas/Admin/AuxAgnetContent/assets/pages/sticky/css/trumbowyg.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/AuxAgnetContent/assets/pages/treeview/treeview.css">
+    <link rel="stylesheet" href="~/Areas/Admin/AuxAgnetContent/bower_components/select2/css/select2.min.css" />
+
+    <style type="text/css">
+        /**  =====================
+              Sticky css start
+        ==========================  **/
+        /*add Button css Start*/
+
+        .pulse-ring {
+            content: '';
+            width: 140px;
+            height: 55px;
+            border: 20px solid #1b8bf9;
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            background-color: #1b8bf9;
+            animation: pulsate infinite 1.5s;
+        }
+
+        @@-webkit-keyframes pulsate {
+            0% {
+                -moz-transform: scale(0);
+                opacity: 0.0;
+            }
+
+            25% {
+                -moz-transform: scale(0);
+                opacity: 0.1;
+            }
+
+            50% {
+                -moz-transform: scale(0.1);
+                opacity: 0.3;
+            }
+
+            75% {
+                -moz-transform: scale(0.5);
+                opacity: 0.5;
+            }
+
+            100% {
+                -moz-transform: scale(1);
+                opacity: 0.0;
+            }
+        }
+
+        @@-moz-keyframes pulsate {
+            0% {
+                -moz-transform: scale(0);
+                opacity: 0.0;
+            }
+
+            25% {
+                -moz-transform: scale(0);
+                opacity: 0.1;
+            }
+
+            50% {
+                -moz-transform: scale(0.1);
+                opacity: 0.3;
+            }
+
+            75% {
+                -moz-transform: scale(0.5);
+                opacity: 0.5;
+            }
+
+            100% {
+                -moz-transform: scale(1);
+                opacity: 0.0;
+            }
+        }
+        /*====== Sticky End ======*/
+    </style>
+</head>
+
+<body>
+
+    @RenderPage("~/Areas/Admin/Views/Shared/AdminAuxAgnet_SideMenuBar.cshtml")
+    @RenderBody()
+
+
+    </div>
+    </div>
+    </div>
+    </div>
+
+    <!--[if lt IE 10]>
+    <div class="ie-warning">
+        <h1>Warning!!</h1>
+        <p>You are using an outdated version of Internet Explorer, please upgrade <br/>to any of the following web browsers to access this website.</p>
+        <div class="iew-container">
+            <ul class="iew-download">
+                <li>
+                    <a href="http://www.google.com/chrome/">
+                        <img src="assets/images/browser/chrome.png" alt="Chrome">
+                        <div>Chrome</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.mozilla.org/en-US/firefox/new/">
+                        <img src="assets/images/browser/firefox.png" alt="Firefox">
+                        <div>Firefox</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://www.opera.com">
+                        <img src="assets/images/browser/opera.png" alt="Opera">
+                        <div>Opera</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.apple.com/safari/">
+                        <img src="assets/images/browser/safari.png" alt="Safari">
+                        <div>Safari</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="http://windows.microsoft.com/en-us/internet-explorer/download-ie">
+                        <img src="assets/images/browser/ie.png" alt="">
+                        <div>IE (9 & above)</div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <p>Sorry for the inconvenience!</p>
+    </div>
+    <![endif]-->
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/bootstrap/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/jquery-slimscroll/js/jquery.slimscroll.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/modernizr/js/modernizr.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/modernizr/js/css-scrollbars.js"></script>
+
+    @*<script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/datedropper/js/datedropper.min.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/advance-elements/custom-picker.js"></script>*@
+
+
+
+    <script type="text/javascript" src="~/Areas/Admin/Content/assets/pages/advance-elements/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/assets/pages/advance-elements/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/bootstrap-daterangepicker/js/daterangepicker.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/datedropper/js/datedropper.min.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/Content/assets/pages/advance-elements/custom-picker.js"></script>
+
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/chart.js/js/Chart.js"></script>
+
+    <!-- select 2 -->
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/select2/js/select2.full.min.js"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/multiselect/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/js/jquery.quicksearch.js"></script>
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/advance-elements/select2-custom.js"></script>
+    <!-- select 2 -->
+
+
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/ekko-lightbox/js/ekko-lightbox.js"></script>
+
+    <script type="text/javascript">
+            $('input[name="dates"]').daterangepicker();
+    </script>
+    <script type="text/javascript">
+        $(document).on("click", '[data-toggle="lightbox"]', function (event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $("#search").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#search-result ul li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+        $(document).ready(function () {
+            $('#example').DataTable();
+        });
+    </script>
+
+
+    <!--  -->
+
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/gauge/gauge.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/amchart/amcharts.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/amchart/serial.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/amchart/gauge.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/amchart/pie.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/widget/amchart/light.js" type="text/javascript"></script>
+
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/js/pcoded.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/js/vartical-layout.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/js/jquery.mCustomScrollbar.concat.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/dashboard/crm-dashboard.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/js/script.js"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/js/rocket-loader.min.js" defer=""></script>
+
+
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/bower_components/jstree/js/jstree.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/AuxAgnetContent/assets/pages/treeview/jquery.tree.js"></script>
+
+    <!-- table -->
+
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/datatables.net/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/js/jszip.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/js/pdfmake.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/js/vfs_fonts.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/extensions/buttons/js/dataTables.buttons.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/extensions/buttons/js/buttons.flash.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/extensions/buttons/js/jszip.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/extensions/buttons/js/vfs_fonts.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/assets/pages/data-table/extensions/buttons/js/buttons.colVis.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/datatables.net-buttons/js/buttons.print.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/datatables.net-buttons/js/buttons.html5.min.js" type="text/javascript"></script>
+    <script src="~/Areas/Admin/AuxAgnetContent/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js" type="text/javascript"></script>
+
+
+    <!-- email -->
+    <div class="modal fade" id="email" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Email</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="To">
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Cc">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Bcc">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+<textarea name="name" id="name" class="form-control" rows="5">Email</textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger  btn-round" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary  btn-round">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- email -->
+    <!-- SMS -->
+    <div class="modal fade" id="SMS" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">SMS</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="To">
+                        </div>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Subject">
+                        </div>
+<textarea name="name" id="name" class="form-control" rows="5">SMS</textarea>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger  btn-round" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary  btn-round">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- SMS -->
+    <!-- add note ad -->
+
+
+    <div id="RegisteredAgentsnotepopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+
+                <div class="modal-body">
+
+                    <a href="" data-toggle="modal" data-dismiss="modal" aria-label="Close" data-target="#addnewnote" class="btn btn-primary  btn-round m-b-10">Add New Note</a>
+                    <div class="table-responsive">
+
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Notes</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Staff Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="align-middle">
+                                        Lorem ipsum dolor sit<br> amet, consectetuer<br> adipiscing elit.
+                                    </td>
+                                    <td class="align-middle">08:00:00 </td>
+                                    <td class="align-middle">02-04-2018</td>
+                                    <td class="align-middle">Ukesh Raj</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        Lorem ipsum dolor sit<br> amet, consectetuer<br> adipiscing elit.
+                                    </td>
+                                    <td class="align-middle">08:00:00 </td>
+                                    <td class="align-middle">02-04-2018</td>
+                                    <td class="align-middle">Ukesh Raj</td>
+                                </tr>
+                                <tr>
+                                    <td class="align-middle">
+                                        Lorem ipsum dolor sit<br> amet, consectetuer<br> adipiscing elit.
+                                    </td>
+                                    <td class="align-middle">08:00:00 </td>
+                                    <td class="align-middle">02-04-2018</td>
+                                    <td class="align-middle">Ukesh Raj</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- add note ad -->
+    <!-- add note ad -->
+    <div id="addnewnote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Note</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Date:</th>
+                                    <th>Time:</th>
+                                    <th>Staff:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="3">
+                                        <textarea rows="8" class="form-control"></textarea>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="" class="btn btn-primary  btn-round">Save</a>
+                </div>
+
+            </div>
+        </div>
+        <!-- add note ad -->
+
+        <script>
+            function EnableDisableServices(sendingCountry, receivingCountry, callback) {
+
+
+                $.getJSON("/Home/GetTransferServiceInJson/", {
+                    sendingCountry: sendingCountry,
+                    receivingCountry: receivingCountry,
+
+                }, function (result) {
+
+                    if (result.Data != null) {
+                        //Select = 0 ,
+                        //KiiPayWallet = 1 ,
+                        //BankDeposit = 2 ,
+                        //CahPickUp = 3 ,
+                        //OtherWallet = 4 ,
+                        //PayBills = 5,
+                        //    All = 6
+                        //BankDeposit, CahPickUp, KiiPayWallet, OtherWallet, PayBills
+                        var enabledServices = result.Data;
+                        //debugger;
+
+                        if (enabledServices.includes("KiiPayWallet")) {
+
+                        }
+
+                        if (enabledServices.includes("CahPickUp")) {
+                            $("#casp").removeClass("disabled");
+                            $("#casp img").attr("src", "/Content/images/icon/svg/cash-pickup.svg");
+                            $("#casp input[type='radio']").attr("disabled", false);
+                        }
+                        else {
+
+                            $("#casp").addClass("disabled");
+                            $("#casp img").attr("src", "/Content/images/icon/svg/cash-pickup-disabled.svg");
+                            $("#casp input[type='radio']").attr("disabled", true);
+
+                            //$("#casp input[type='radio']").attr("checked", true);
+                        }
+                        if (enabledServices.includes("OtherWallet")) {
+                            $("#wal").removeClass("disabled");
+                            $("#wal img").attr("src", "/Content/images/icon/svg/mobile-money.svg");
+                            $("#wal input[type='radio']").attr("disabled", false);
+
+                            //$("#wal input[type='radio']").click();
+                        }
+
+                        else {
+
+                            $("#wal").addClass("disabled");
+                            $("#wal img").attr("src", "/Content/images/icon/svg/mobile-money-disabled.svg");
+                            $("#wal input[type='radio']").attr("disabled", true);
+
+                        }
+
+                        if (enabledServices.includes("BankDeposit")) {
+                            $("#bac").removeClass("disabled");
+                            $("#bac img").attr("src", "/Content/images/icon/svg/bank.svg");
+                            $("#bac input[type='radio']").attr("disabled", false);
+
+                            //$("#bac input[type='radio']").click();
+
+                        }
+                        else {
+
+                            $("#bac").addClass("disabled");
+                            $("#bac img").attr("src", "/Content/images/icon/svg/bank-disabled.svg");
+                            $("#bac input[type='radio']").attr("disabled", true);
+
+                        }
+
+                        if (enabledServices.includes("PayBills")) {
+
+                        }
+                        function CheckEnabledRadio() {
+
+                            //debugger;
+                            if
+                                (selectedTransferMethod != "" && selectedTransferMethod != null) {
+                                switch (selectedTransferMethod) {
+                                    case "BankDeposit":
+                                        $("#wal input[type='radio']").attr("checked", false);
+                                        $("#casp input[type='radio']").attr("checked", false);
+                                        if ($("#bac input[type='radio']")[0].disabled == false) {
+                                            $("#bac input[type='radio']").attr("checked", true);
+                                        }
+                                        else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    case "Mobile":
+
+                                        $("#casp input[type='radio']").attr("checked", false);
+                                        $("#bac input[type='radio']").attr("checked", false);
+                                        if ($("#wal input[type='radio']")[0].disabled == false) {
+                                            $("#wal input[type='radio']").attr("checked", true);
+                                        }
+                                        else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    case "CashPickup":
+
+                                        $("#bac input[type='radio']").attr("checked", false);
+                                        $("#wal input[type='radio']").attr("checked", false);
+                                        if ($("#casp input[type='radio']")[0].disabled == false) {
+                                            $("#casp input[type='radio']").attr("checked", true);
+                                        } else {
+
+                                            RefreshRadio();
+                                        }
+                                        break;
+                                    default:
+                                }
+
+                            }
+                            else {
+
+
+
+                                $("#transferMethod input:radio").each(function () {
+
+
+                                    //if ($(this)[0].disabled == true) {
+
+                                    //    $(this)[0].checked = false;
+                                    //} else {
+
+                                    //    $(this)[0].checked = true;
+                                    //}
+
+                                    //debugger;
+                                    if ($(this)[0].disabled == true) {
+
+                                        $(this)[0].checked = false;
+                                    } else {
+
+                                        $(this)[0].checked = true;
+                                    }
+
+
+                                })
+                            }
+
+
+                        }
+                        CheckEnabledRadio();
+                        callback();
+
+                    }
+                    //EnableDisabledTransferMethod();
+
+
+                });
+            }
+            var identifier = "";
+            function SelectSearch(data) {
+                $(document).ready(function () {
+                    var sender = data.id;
+                    identifier = data.identifier;
+                    //for Select2 Options: https://select2.github.io/options.html
+                    sender.select2({
+                        language: "tr",//don't forget to add language script (select2/js/i18n/tr.js)
+                        minimumInputLength: 0, //for listing all records > set 0
+                        maximumInputLength: 20, //only allow terms up to 20 characters long
+                        multiple: false,
+                        placeholder: data.placeholder,
+                        allowClear: true,
+                        tags: false, //prevent free text entry
+                        width: "100%",
+                        ajax: {
+                            url: data.url,
+                            dataType: 'json',
+                            delay: 250,
+                            type: "POST",
+                            data: function (params) {
+                                return {
+                                    query: params.term, //search term
+                                    country: data.country,
+                                    Currecny: data.Currecny,
+                                    isBusiness: data.isBusiness,
+                                    isAuxAgent: data.isAuxAgent,
+                                    page: params.page,
+                                    City: data.City
+                                };
+                            },
+                            processResults: function (data, page) {
+                                var newData = [];
+                                var values = data.results;
+                                for (var i = 0; i < values.length; i++) {
+                                    newData.push({
+                                        //id part present in data
+                                        id: values[i].Id,
+                                        //string to be displayed
+                                        text: values[i].text
+                                    });
+                                }
+                                console.log(newData);
+                                return { results: newData };
+                            },
+                            cache: true
+                        },
+                        escapeMarkup: function (markup) { return markup; }
+                    });
+
+
+                    //You can simply listen to the select2:select event to get the selected item
+                    sender.on('select2:select', onSelect)
+
+                    function onSelect(evt) {
+                        debugger;
+                        $('#select2-' + identifier + '-container').text("");
+                        $('#select2-' + identifier + '-container').text(evt.params.data.text);
+                        //$("#select2-id-container").text();
+                        //$("#select2-id-container").text(evt.params.data.text);
+                        console.log($(this).val());
+                    }
+
+                    //Event example for close event
+                    sender.on('select2:close', onClose)
+
+                    function onClose(evt) {
+                        console.log('Closed…');
+                    }
+                });
+
+            }
+            var currentButtonCount = 10;
+            function GetPagignationButton(TotalNumberOfpage, pageCount, isGoToNextPage) {
+
+                $.getJSON("/Admin/AdminCommon/GetPagignationButton?TotalNumberOfpage=" + TotalNumberOfpage +
+                    "&CurrentpageCount=" + pageCount +
+                    "&isGoToNextPage=" + isGoToNextPage, function (result) {
+                        if (isGoToNextPage == true) {
+                            $("#backButton").show();
+                        }
+                        else {
+                            if (result.IsStartCount == true) {
+
+                                $("#backButton").hide();
+                            }
+                            currentButtonCount = 10;
+                        }
+                        var j = 0;
+                        for (var i = result.PageNumber; i <= result.Count; i++) {
+                            try {
+
+                                $("#pageCountbtn button")[j].value = i;
+                                console.log($("#pageCountbtn button")[j].value);
+                                $("#pageCountbtn button")[j].innerText = i;
+                                $("#pageCountbtn button")[j].style.visibility = 'visible';
+                                j++;
+                            } catch (e) {
+
+                            }
+
+                        }
+                        if (result.IsEndCount == true) {
+                            $("#nextButton").hide();
+
+                            for (var x = j; x <= 10; x++) {
+                                try {
+                                    $("#pageCountbtn button")[x].value = 0;
+                                    $("#pageCountbtn button")[x].innerText = 0;
+                                    $("#pageCountbtn button")[x].style.visibility = 'hidden';
+                                } catch (e) {
+
+                                }
+
+
+                            }
+                        }
+                        else {
+                            $("#nextButton").show();
+                        }
+                        CurrentpageCount = result.CurrentpageCount;
+                        $("#pagecount").val(result.Count);
+                        $("#pagecount").text(result.Count);
+                    });
+            }
+
+            function GetSendingCountryByCurrency(sendingCurrency, sendingCountry) {
+                $.getJSON("/Admin/AdminCommon/GetCountryByCurrency?currency=" + sendingCurrency, function (result) {
+                    var sendingCountrySelector = $("#SendingCountry");
+                    $("#SendingCountry option").remove();
+                    sendingCountrySelector.append('<option value=All>All</option>');
+                    for (var i = 0; i < result.Data.length; i++) {
+                        sendingCountrySelector.append('<option value="' + result.Data[i].Code + '">' + result.Data[i].Name + '</option>');
+                    }
+                    if (sendingCountry != undefined || sendingCountry != "" || sendingCountry != null) {
+                        $("#SendingCountry").val(sendingCountry);
+                    }
+                });
+
+            }
+            function GetReceivingCountryByCurrency(receivingCurrency, receivingCountry) {
+                $.getJSON("/Admin/AdminCommon/GetCountryByCurrency?currency=" + receivingCurrency, function (result) {
+                    var receivingCountrySelector = $("#ReceivingCountry");
+                    $("#ReceivingCountry option").remove();
+                    receivingCountrySelector.append('<option value=All>All</option>');
+                    for (var i = 0; i < result.Data.length; i++) {
+                        receivingCountrySelector.append('<option value="' + result.Data[i].Code + '">' + result.Data[i].Name + '</option>');
+                    }
+                    if (receivingCountry != undefined || receivingCountry != "" || receivingCountry != null) {
+                        $("#ReceivingCountry").val(receivingCountry);
+                    }
+                });
+
+            }
+
+        </script>
+
+        <script>
+
+            $('.print, .data_table_csv').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    //  'copy', 'csv', 'excel',
+                    // 'pdf', 'print'
+                    'pdf'
+                ],
+                "order": [
+                    [2, 'asc']
+                ],
+            });
+
+            $('.csv, .data_table_csv').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    //  'copy', 'csv', 'excel',
+                    // 'pdf', 'print'
+                    'csv'
+                ],
+                "order": [
+                    [2, 'asc']
+                ],
+            });
+
+
+            $('.csvprint, .data_table_csv').DataTable({
+                responsive: true,
+                dom: 'Bfrtip',
+                buttons: [
+                    //  'copy', 'csv', 'excel',
+                    // 'pdf', 'print'
+                    'csv', 'pdf'
+                ],
+                "order": [
+                    [2, 'asc']
+                ],
+            });
+
+        </script>
+        @RenderSection("Scripts", false);
+</body>
+
+</html>

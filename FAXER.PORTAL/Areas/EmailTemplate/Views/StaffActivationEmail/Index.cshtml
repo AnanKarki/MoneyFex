@@ -1,0 +1,44 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.NameOfContactPerson
+    </p>
+    <br />
+    <p>
+        Thank you for accepting to join the growing team of professionals working to make money transfer and payment abroad simple, easy and secure.
+    </p>
+    <p>
+        Here are your <b>account details</b>. Please keep this email for future reference. You will need your Unique Staff Login Code to login to your account.
+    </p>
+
+    <p style="background-color:#e0ffff;">
+
+        <strong>New Email address :</strong> @ViewBag.EmailAddress <br />
+        <br />
+        <strong>Login Code :</strong> @ViewBag.LoginCode <br />
+        @*<strong>Your password :</strong> @ViewBag.Password<br >*@
+
+    </p>
+
+    <br />
+    <p>
+        Before we can activate your account, one last step must be taken to complete your registration.
+    </p>
+    <p>
+        To complete your registration, please click or visit this URL:<br />
+        <u><a href="@ViewBag.Link">@ViewBag.Link</a></u>
+    </p>
+    <p>
+    <p>
+        Once again, congratulations, your contribution to ensure that our customers have the best experience at all time is what we need most.
+    </p>
+    <br />
+ 
+
+
+</div>

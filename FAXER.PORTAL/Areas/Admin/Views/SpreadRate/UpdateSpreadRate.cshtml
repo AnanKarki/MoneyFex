@@ -1,0 +1,282 @@
+﻿@model  FAXER.PORTAL.Areas.Admin.ViewModels.SpreadRateViewModel
+
+@{
+    ViewBag.Title = "UpdateSpreadRate";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+@*@using (Html.BeginForm())
+    {
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card" style="">
+
+                                <div class="card-header border-bottom">
+                                    <h2 class="f-left f-left m-t-5 m-b-0" style="float:left;">Set Spread Rate  </h2>
+                                    <a href="@Url.Action("Index","SpreadRate")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Spread Rate
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+                                                <div class="form-group">
+
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Sending Country", new { @class = "form-control", @id = "SendingCountry", @onchange = "GetAgentByCountry();" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Receiving Country", new { @class = "form-control" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+                                                    <label>Transfer Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(x => x.TransferType, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+                                                    <label>Transfer Method</label>
+
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold" })
+                                                    @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agent, "All", new { @class = "form-control" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+                                                    <label>Add Spread  </label>
+                                                    @Html.TextBoxFor(x => x.Rate, new { @class = "form-control", @placeholder = "Enter Spread Rate" })
+                                                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","SpreadRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+    }*@
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Spread Rate  </h4>
+                                        <a href="@Url.Action("Index","SpreadRate")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Spread Rate
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Sending Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry", @onchange = "GetAgentByCountry();" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Receiving Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold" })
+
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Transfer Type</label>
+
+                                                    @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferType" })
+                                                    @Html.ValidationMessageFor(x => x.TransferType, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                    @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agent, "All", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "AgentId", @onchange = "getSpreadRate();" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Add Spread  </label>
+                                                    @Html.TextBoxFor(x => x.Rate, new { @class = "form-control  form-control-lg form-control-round ", @placeholder = "Enter Spread Rate" })
+                                                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","SpreadRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        function GetAgentByCountry() {
+
+            var sendingCountry = $("#SendingCountry").val();
+
+            $.getJSON("/Admin/SpreadRate/GetAgentByCountry?Country=" + sendingCountry, function (result) {
+
+                var agentselector = $("#AgentId");
+                $("#AgentId option").remove();
+                agentselector.append('<option value="0">All </option>');
+
+                for (var i = 0; i <= result.Data.length; i++) {
+
+                    agentselector.append('<option value=" ' + result.Data[i].AgentId + ' "> ' + result.Data[i].AgentName + '</option>');
+                }
+
+            })
+            search();
+        }
+        search();
+        function search() {
+            var data = {
+                id: $("#AgentId"),
+                country: $("#SendingCountry").val(),
+                Currecny: "",
+                isBusiness: false,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "AgentId",
+                placeholder: "All"
+            }
+            SelectSearch(data);
+        }
+
+    </script>
+
+}

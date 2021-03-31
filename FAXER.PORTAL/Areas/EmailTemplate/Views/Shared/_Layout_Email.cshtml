@@ -1,0 +1,117 @@
+﻿
+@{ 
+
+    var baseURL = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+}
+<!DOCTYPE html>
+<html>
+@*<head>
+
+    <title>@Page.Title</title>
+
+
+
+    @RenderSection("head", required: false)
+</head>*@
+
+<head>
+    <title>MoneyFex</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        p {
+            margin: 0 0 6px;
+            line-height: 23px;
+        }
+
+        table img {
+            max-width: 100%;
+            width: 100%;
+        }
+
+        ol li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif; font-weight: 300;">
+    <div style="margin: 0 auto;
+         max-width: 650px;
+         width: 100%;
+         border: solid 1px #eee;">
+        <div style="padding: 5px;     background: #f5f5f5;">
+            <p style="font-size: 13px; "><i> The secure and simplest way to pay for services and make money available to friends and families  abroad  </i></p>
+            <ul style="
+               margin: 0;
+               padding: 0;
+               display: inline-flex;
+               list-style: none;
+               margin-top: 0px;     float: right;">
+                <span style=" float: right;   margin: 0;
+                  padding: 0;
+                  font-size: 12px;
+                  margin-right: 5px;
+                  margin-top: 8px;">Follow Us</span>
+                <li style="margin-right:10px;"><a href=""><img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/facebook.png" width="25"></a></li>
+                <li style="margin-right:10px;"><a href=""><img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/twitter.png" width="25"></a></li>
+                <li style="margin-right:10px;"><a href=""><img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/linkedin.png" width="25"></a></li>
+                
+                <li><a href=""><img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/instagram.png" width="25"></a></li>
+            </ul>
+            <div style="clear: both;">
+            </div>
+        </div>
+        <div style="   border-bottom: solid 1px #eee;
+            border-top: solid 1px #eee;
+            padding: 10px 15px;
+            margin-bottom: 0px;">
+            <div style="float: left;">
+                <img src="@baseURL/Areas/EmailTemplate/Images/EmailImg/logo.png" width="200">
+            </div>
+            <div style="float: right;">
+            </div>
+            <div style="clear:both ;">
+            </div>
+        </div>
+     
+
+
+        @RenderBody()
+        <div style="    background: #f5f5f5;
+        padding:   15px;
+        margin-bottom: 0px;">
+            <p> Kind Regards </p>
+            <br>
+            <p>Customer Service<br><b>MoneyFex</b></p>
+            <p>Direct: <a href="tel:+44-2081445215">+44 (0) 2081445215</a></p>
+            <p>Email:  <a href="mailto:customerservice@moneyfex.com"> customerservice@moneyfex.com</a></p>
+            <p>Web: <a href="http://www.moneyfex.com">www.moneyfex.com</a></p>
+
+        </div>
+    </div>
+    <div style="margin: 0 auto;
+         max-width: 650px;
+         width: 100%;
+         text-align: justify; margin-top: 20px;     font-size: 12px;">
+        <p>
+            MoneyFex Ltd is Authorised and Regulated by the Financial Conduct Authority (FCA) under the
+            Payment Service Regulations 2017 for the provision of payment services. Registration number:
+            745989
+        </p>
+        <p>MoneyFex Ltd is registered in England and Wales, Company Registration Number: 10105032</p>
+        <p>
+            The content of this email is confidential and intended for the recipient specified in message only. It is
+            strictly forbidden to share any part of this message with any third party, without a written consent of
+            the sender. If you received this message by mistake, please reply to this message and follow with its
+            deletion, so that we can ensure such a mistake does not occur in the future.
+        </p>
+    </div>
+</body>
+</html>

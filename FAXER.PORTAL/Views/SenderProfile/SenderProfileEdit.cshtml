@@ -1,0 +1,231 @@
+﻿@model FAXER.PORTAL.Models.SenderProfileEditViewModel
+@{
+    ViewBag.Title = "SenderProfileEdit";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+
+
+
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2  ">
+
+                    <div class="login_signup mb50 clearfix">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <h3>Account Update  </h3>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <h3 class=" "> @Model.AccountNo </h3>
+                            </div>
+                        </div>
+                        <div class="clearfix">  </div>
+                        <hr>
+
+
+                        @Html.HiddenFor(model => model.Id)
+                        @Html.HiddenFor(model => model.UserEnterPinCode)
+                        @Html.HiddenFor(model => model.MobileCode, new { @id = "MobileCode" })
+
+                        <form>
+                            <div class="col-lg-8 col-lg-offset-2  ">
+
+
+                                <div class="form-group">
+                                    <label> Date of Birth </label>
+                                    @*@Html.TextBoxFor(model => model.DateOfBirth, new { @class = "form-control", placeholder = "" })*@
+                                    @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+
+                                    @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label> Address Line 1</label>
+                                    @Html.TextBoxFor(model => model.Address, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label> Address Line 2</label>
+                                    @Html.TextBoxFor(model => model.AddressLine2, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label> PostCode/ZipCode</label>
+                                    @Html.TextBoxFor(model => model.PostCode, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.PostCode, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  --><!--  -->
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label> Country </label>
+                                    @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "GetCountryPhoneCode();" })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+
+                                <div class="form-group contact-no-group">
+                                    <label> Mobile No.</label>
+                                    <div class="countr-code">
+                                        @Model.MobileCode
+                                    </div>
+                                    @Html.TextBoxFor(model => model.MobileNumber, new { @class = "form-control  contact-no", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label> Email Address </label>
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", placeholder = "" })
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                            <hr>
+                            <div class="text-center  clearfix">
+                                <button type="submit" class="btn  btn-primary    radius-20 mb30">Update Details</button>&nbsp;&nbsp;&nbsp;
+
+                                <!-- back btn -->
+                                <div class="clearfix ">
+
+                                    <center>
+                                        <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                    </center>
+                                </div>
+                                <!-- back btn end-->
+                            </div>
+
+
+
+
+                        </form>
+
+                    </div>
+
+                    <!--  -->
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+
+<!-- Delete Confirmation -->
+<div id="delete" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt10"> Do you want to delete this Account?</h4>
+                <hr>
+                <button type="button" class="btn btn-primary   radius-20" data-dismiss="modal">Yes</button>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!-- Delete Confirmation end -->
+<!--Access Code  Confirmation -->
+<div id="AccessCode" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Access Code</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+                <div class="form-group">
+                    <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+                    <input type="number" class="form-control" placeholder="Enter code">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="profile-edit.php" class="btn btn-primary btn-sm radius-20">Confirm</a>
+                <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Access Code  Confirmation end -->
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        function SendMobilePin() {
+            var url = "/SenderProfile/SendMobilePin";
+
+            $.getJSON(url)
+                .done(function (data) {
+                    $("#myModal").modal('show');
+
+                });
+        }
+        function GetCountryPhoneCode() {
+            debugger;
+            var Country = $("#Country").val();
+            var url = "/SenderProfile/GetCountryPhoneCode?CountryCode=" + Country;
+
+            $.getJSON(url)
+                .done(function (data) {
+                    $("#MobileCode").val(data.PhoneCode);
+                    $(".countr-code").text(result.PhoneCode);
+
+                });
+
+        }
+
+        $("#myModal").modal('show');
+
+        if ($('input[name="Day"]').val() == 0) {
+            $('input[name="Day"]').val('');
+            $('input[name="Month"]').val('');
+            $('input[name="Year"]').val('');
+
+        }
+
+    </script>
+}
+

@@ -1,0 +1,73 @@
+﻿@model List<FAXER.PORTAL.Areas.Staff.ViewModels.StaffPayslipsViewModel>
+@{
+                /**/
+
+                ViewBag.Title = "Payslips";
+                Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+@{Html.RenderPartial("_mail_sidebar");}
+<div class="col-lg-9 col-md-8">
+
+    <div class="dashboard_header">
+        <h1>My Payslips</h1>
+    </div>
+    <!--  -->
+    <div class="dashboard_body">
+
+        <div class="row">
+            <div class="col-lg-3 pull-right clearfix">
+                <label>Filter By Month :</label>
+                @Html.DropDownList("Month", EnumHelper.GetSelectList(typeof(FAXER.PORTAL.Areas.Agent.Models.Month)), new { @class = "form-control", id = "month", onchange = "FilterMonth();" })
+                @*<div class="input-group stylish-input-group">
+                        <input type="text" class="form-control" value="Search Month">
+                        <span class="input-group-addon">
+                            <button type="submit" class="">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </button>
+                        </span>
+                    </div>*@
+            </div>
+        </div>
+        <br>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>SN</th>
+                    <th>Date</th>
+                    <th>Downloadable PDF</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int i = 0;}
+                @foreach (var item in Model)
+                {
+                    i++;
+                    <tr>
+                        <td>@i</td>
+                        <td>@item.Date</td>
+                        <td><a href="@item.PayslipUrl" target="_blank" class="btn btn-sm btn-warning">Download Payslip</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+
+    </div>
+    <!--  -->
+
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function FilterMonth() {
+            
+            var month = document.getElementById("month").value;
+            window.location.href = "/Staff/StaffPayslips/Payslips?month=" +  month;
+        }
+
+
+    </script>
+}

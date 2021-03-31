@@ -1,0 +1,196 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddStaffHolidaysViewModel
+@{
+    /**/
+
+    ViewBag.Title = "EditHolidays";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditHolidays</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Add Holidays</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index", "StaffHolidays")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View - Staff Holidays</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Add Holidays</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+                            <div class="form-body">
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.HiddenFor(model => model.Id)
+                                    <label>Country</label>
+                                    @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.TextBoxFor(model => model.City, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Staff Name</label>
+                                    @Html.HiddenFor(model => model.StaffId, new { id = "StaffId" })
+                                    @Html.TextBoxFor(model => model.StaffName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>No. Of Days</label>
+                                    @Html.TextBoxFor(model => model.NoOfDays, new { @class = "form-control", placeholder = " No. Days", id = "noOfDays" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Start Date</label>
+                                    @Html.TextBoxFor(model => model.StartDate, new { id = "startDate", @class = "date", @data_date_change = "DateOfStartChange" })
+                                    @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Finish Date</label>
+                                    @Html.TextBoxFor(model => model.FinishDate, new { id = "finishDate", @class = "date", @data_date_change = "DateOfFinishChange" })
+                                    @Html.ValidationMessageFor(model => model.FinishDate, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>No. Taken</label>
+                                    @Html.TextBoxFor(model => model.NoTaken, new { @class = "form-control", placeholder = "No. Taken" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>No. Left</label>
+                                    @Html.TextBoxFor(model => model.NoLeft, new { @class = "form-control", placeholder = "No. Left" })
+                                </div>
+                                <!--  -->
+                                <hr>
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                    <button class="btn btn-success btn-lg  btn-rounded pull-right">Publish Holidays</button>
+                                </div>
+                                <!--  -->
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        function DateOfStartChange(date) {
+            Date.prototype.addDays = function (days) {
+                var date = new Date(this.valueOf());
+                date.setDate(date.getDate() + days);
+                return date;
+            }
+
+            var startDate = $("#startDate").val();
+            var parts = startDate.split('/');
+            var HolidaysStartDate = new Date(parts[2], parts[1] - 1, parts[0]);
+            var currentdate = new Date();
+            var dateAfterdays = currentdate.addDays(5);
+            if (!(HolidaysStartDate > dateAfterdays)) {
+
+                alert("You Are Only Allowed to Request 5 days After Date to current date ");
+                $("#startDate").val("");
+
+            }
+        }
+
+        function DateOfFinishChange(date) {
+
+            var startDate = $("#startDate").val();
+            var finishDate = $("#finishDate").val();
+            var staffId = $("#StaffId").val();
+
+            var partsStart = startDate.split('/');
+            var partsFinish = finishDate.split('/');
+
+            var HolidaysStartDate = new Date(partsStart[2], partsStart[1] - 1, partsStart[0]);
+            var HolidaysFinishDate = new Date(partsFinish[2], partsFinish[1] - 1, partsFinish[0]);
+
+            if (HolidaysFinishDate < HolidaysStartDate) {
+                debugger;
+                alert("Finish Date can't be smaller than Start Date !");
+                $("#finishDate").val("");
+            }
+            else {
+                //var oneDay = 24 * 60 * 60 * 1000;
+                //var diffDays = Math.round(Math.abs((HolidaysStartDate.getTime() - HolidaysFinishDate.getTime()) / (oneDay)));
+                //$("#noOfDays").val(diffDays);
+                $.getJSON("/Admin/StaffHolidays/NoOfDaysCalculation?StaffId=" + staffId + "&StartDate=" + startDate.toString("dd/MM/yyyy") + "&FinishDate=" + finishDate.toString("dd/MM/yyyy"), function (data) {
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                    }
+                    //if ($("#AlreadyTaken").val() == "false") {
+                    //    alert("Sorry, The holiday on this date is already taken !");
+                    //    $("#NoLeft").val("");
+                    //    $("#noOfDays").val("");
+                    //    $("#NoTaken").val("");
+                    //    $("#finishDate").val("");
+                    //}
+                     if ($("#NoLeft").val() < 0) {
+                        alert("The number of requested days is greater than the no. of holidays left !");
+                        $("#NoLeft").val("");
+                        $("#noOfDays").val("");
+                        $("#NoTaken").val("");
+                        $("#finishDate").val("");
+                    }
+                     else if ($("#NoLeft").val() = 0) {
+                         alert("You don't have any holidays reamaining !");
+                         $("#NoLeft").val("");
+                         $("#noOfDays").val("");
+                         $("#NoTaken").val("");
+                         $("#finishDate").val("");
+                     }
+
+
+
+                });
+
+
+            }
+
+        }
+
+
+
+
+    </script>
+}

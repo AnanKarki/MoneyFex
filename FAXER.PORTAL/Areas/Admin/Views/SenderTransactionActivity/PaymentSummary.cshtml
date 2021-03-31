@@ -1,0 +1,149 @@
+﻿@model FAXER.PORTAL.Models.SenderTransferSummaryVm
+@{
+    ViewBag.Title = "BankDepositAbroadSummary";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm("PaymentSuccessfully" , "SenderTransactionActivity"  , FormMethod.Post  ))
+{
+    
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Payment Summary</h5>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class=" row">
+
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> Amount </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @*@Model.SendingCurrencySymbol*@<span class="amountspan">@Model.Amount </span> @Model.SendingCurrencyCode
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> Fee </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @*@Model.SendingCurrencySymbol*@ <span class="amountspan">@Model.Fee </span> @Model.SendingCurrencyCode
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> You'll Pay </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @*@Model.SendingCurrencySymbol*@ <span class="amountspan">@Model.PaidAmount </span> @Model.SendingCurrencyCode
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> @Model.ReceiverName will Receive </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        <span class="amountspan">@Model.ReceivedAmount </span> @Model.ReceivingCurrencyCode
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+
+
+
+
+
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="card-footer ">
+                                                        <div class="row">
+                                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                                <button type="submit" class="btn btn-lg btn-block btn-primary btn-round "> Continue <i class="fa fa-angle-right"></i></button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                   
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        $("#submit").click(function () {
+
+            $("#loader").show();
+            $("form").submit();
+        })
+
+    </script>
+}

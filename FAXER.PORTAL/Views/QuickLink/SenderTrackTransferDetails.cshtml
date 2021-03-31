@@ -1,0 +1,89 @@
+﻿@model FAXER.PORTAL.Models.TrackFaxDetails
+
+@{
+    ViewBag.Title = "SenderTrackTransferDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Track a Transfer</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <form>
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> MoneyFex Control Number (MFCN)</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @*<input type="text" name="" class="form-control" placeholder="">*@
+                                @Html.EditorFor(model => model.MFCNNumber, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.MFCNNumber, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Status of Transfer</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @*<input type="text" name="" class="form-control" placeholder="">*@
+                                @Html.EditorFor(model => model.StatusOfFax, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                @Html.ValidationMessageFor(model => model.StatusOfFax, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@Url.Action("Index","SenderDashboard")" class="fbtn btn-next pull-right">Go to the Dashboard for Details <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="clearfix hidden-lg hidden-md"><br></div>
+                    <a href="@Url.Action("SenderTrackATransfer","QuickLink")" class="fbtn btn-next pull-left  ">Track another Transfer</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+}

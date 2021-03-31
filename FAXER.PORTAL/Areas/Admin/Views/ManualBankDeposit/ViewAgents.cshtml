@@ -1,0 +1,182 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredAgentsViewModel>
+@{
+
+    ViewBag.Title = "ViewAgents";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+             /.col-lg-12 
+        </div>
+         /.row 
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Agent's Name</strong></td>
+                                    <td><strong>Account No.</strong></td>
+                                    <td><strong>Address</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>Telephone</strong></td>
+                                    <td><strong>Email</strong></td>
+                                    <td><strong>status</strong></td>
+                                    <td><strong>Action</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    ++i;
+                                    <tr>
+
+                                        <td>@i</td>
+                                        <td><a href="@Url.Action("ViewRegisteredAgentsMore", "ViewRegisteredAgents", new { RegistrationNumber = item.RegistrationNumber })">@item.Name</a></td>
+                                        <td>@item.AccountNo</td>
+                                        <td>
+                                            @item.Address1
+                                            <br>@item.Address2
+                                        </td>
+                                        <td>@item.Country</td>
+                                        <td>@item.PhoneNumber</td>
+                                        <td>@item.Email</td>
+                                        @if (item.AgentStatus == true)
+                                        {
+                                            <td>
+                                                Active
+
+                                            </td>
+                                        }
+                                        else
+                                        {
+                                            <td>InActive</td>
+                                        }
+
+                                        <td>
+                                            <a href="@Url.Action("Index","ManualBankDeposit",new { AgentId = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light ">
+                                                <span class="btn-label"><i class=" ti-pencil-alt"></i></span>
+                                                Manaul Bank Deposit
+                                            </a>
+
+                                        </td>
+
+                                    </tr>
+                                }
+                                  
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+         .row 
+        /.row 
+        row 
+    </div>
+</div>*@
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">
+                                     Current Agent Payments 
+                                    </h4>
+                                   
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="custom-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <td><strong>SN.</strong></td>
+                                                    <td><strong>Agent's Name</strong></td>
+                                                    <td><strong>Account No.</strong></td>
+                                                    <td><strong>Address</strong></td>
+                                                    <td><strong>Country</strong></td>
+                                                    <td><strong>Telephone</strong></td>
+                                                    <td><strong>Email</strong></td>
+                                                    <td><strong>status</strong></td>
+                                                    <td><strong>Action</strong></td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    ++i;
+                                                    <tr>
+
+                                                        <td>@i</td>
+                                                        <td><a href="@Url.Action("ViewRegisteredAgentsMore", "ViewRegisteredAgents", new { RegistrationNumber = item.RegistrationNumber })">@item.Name</a></td>
+                                                        <td>@item.AccountNo</td>
+                                                        <td>
+                                                            @item.Address1
+                                                            <br>@item.Address2
+                                                        </td>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.PhoneNumber</td>
+                                                        <td>@item.Email</td>
+                                                        @if (item.AgentStatus == true)
+                                                        {
+                                                            <td>
+                                                                Active
+
+                                                            </td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td>InActive</td>
+                                                        }
+
+                                                        <td>
+                                                            <a href="@Url.Action("Index","ManualBankDeposit",new { AgentId = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light ">
+                                                                <span class="btn-label"><i class=" ti-pencil-alt"></i></span>
+                                                                Manaul Bank Deposit
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

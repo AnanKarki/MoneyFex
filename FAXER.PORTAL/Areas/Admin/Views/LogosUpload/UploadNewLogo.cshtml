@@ -1,0 +1,210 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.LogosUploadViewModel
+@{
+    ViewBag.Title = "UploadNewLogo";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+@*@using (Html.BeginForm("UploadNewLogo", "LogosUpload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card" style="">
+
+                                <div class="card-header border-bottom">
+                                    <div style="float:left;">
+                                        <h2 class="f-left f-left m-t-5 m-b-0">Upload Logos</h2>
+                                    </div>
+                                    <div style="float:right;">
+
+                                        <a href="@Url.Action("Index","LogosUpload")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">
+                                            <i class="icofont icofont-eye m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <div class="form-group">
+
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country" })
+                                                    @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>Services</label>
+                                                    @Html.EnumDropDownListFor(x => x.Service, new { @class = "form-control", @id = "Service" })
+                                                    @Html.ValidationMessageFor(x => x.Service, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label>Title</label>
+                                                    @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label>WebSite URL</label>
+                                                    @Html.TextBoxFor(x => x.WebstieUrl, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => x.WebstieUrl, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+
+                                                    <label>Logo</label>
+                                                    @Html.TextBoxFor(x => x.Logo, new { @class = "form-control", Type = "file" })
+                                                    @Html.ValidationMessageFor(x => x.Logo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "LogosUpload")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }*@
+
+@using (Html.BeginForm("UploadNewLogo", "LogosUpload", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Upload Logos</h4>
+                                        <a onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label> Country</label>
+                                                        @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Country" })
+                                                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Services</label>
+                                                        @Html.EnumDropDownListFor(x => x.Service, new { @class = "form-control form-control-round form-control-bold", @id = "Service" })
+                                                        @Html.ValidationMessageFor(x => x.Service, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Title</label>
+                                                        @Html.TextBoxFor(x => x.Title, new { @class = "form-control form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(x => x.Title, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Website URL</label>
+                                                        @Html.TextBoxFor(x => x.WebstieUrl, new { @class = "form-control form-control-round form-control-bold" })
+                                                        @Html.ValidationMessageFor(x => x.WebstieUrl, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="card-block">
+                                                        <div class="sub-title">Logo</div>
+                                                        @Html.TextBoxFor(x => x.Logo, new { @class = "form-control form-control-round form-control-bold", Type = "file" })
+                                                        @Html.ValidationMessageFor(x => x.Logo, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <!--  -->
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "LogosUpload")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

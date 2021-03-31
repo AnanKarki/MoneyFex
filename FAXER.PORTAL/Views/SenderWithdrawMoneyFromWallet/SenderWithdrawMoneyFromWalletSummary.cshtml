@@ -1,0 +1,183 @@
+﻿@model FAXER.PORTAL.Models.SenderWithdrawMoneyFromWalletSummaryViewModel
+
+@{
+    ViewBag.Title = "SenderWithdrawMoneyFromWalletSummary";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                <div class="login_signup mb50 clearfix text-center">
+
+
+
+                    <h3 class="text-center">Review</h3>
+                    <hr>
+
+
+
+
+                    <div class="text-left">
+
+
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> From </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-control form-text">
+                                    @Model.SendFromName
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> To </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-control form-text">
+                                    @Model.SendToName @Model.FormattedAccNo
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> Amount </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-control form-text">
+                                    @Model.SendingCurrencySymbol @Model.SendingBalance @Model.SendingCurrencyCode
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label>  Fee </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-control form-text">
+                                    @Model.SendingCurrencySymbol @Model.FeeBalance @Model.SendingCurrencyCode
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label> You will Receive </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <div class="form-control form-text">
+                                    @Model.SendingCurrencySymbol @Model.ReceiveBalance @Model.SendingCurrencyCode
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center   clearfix">
+                    <hr>
+                    <button data-toggle="modal" class="btn btn-primary btn-lg  mb30 " data-target="#ConfirmationWithdraw">Confirm Withdrawal <i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+
+
+ if (ViewBag.IsPinCodeSend == 1)
+    {
+<!--   Confirmation -->
+<div id="ConfirmationWithdraw" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Confirm Withdrawal</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+                <div class="form-group">
+                    <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+
+                    @Html.TextBoxFor(model => model.UserEnterPinCode, new { @class = "form-control", @placeholder="Enter Code" })
+                    @Html.HiddenFor(model => model.PinCode)
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary btn-sm radius-20">Confirm</button>
+                <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--   Confirmation end -->
+}
+}
+
+@section scripts
+{
+<script type="text/javascript">
+
+
+    function SendMobilePin() {
+        var url = "/SenderWithdrawMoneyFromWallet/SendMobilePin";
+
+        $.getJSON(url)
+            .done(function (data) {
+                $("#ConfirmationWithdraw").modal('show');
+
+            });
+    }
+
+    $("#ConfirmationWithdraw").modal("show");
+</script>
+
+}

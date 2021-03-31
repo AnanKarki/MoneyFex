@@ -1,0 +1,84 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessPayAnInvoiceSummaryvm
+@{
+    ViewBag.Title = "PayInvoiceSummary";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                <div class="login_signup mb50 clearfix text-left">
+
+
+                    <div class="pinside20">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Areas/KiiPayBusiness/images/icon/svg/buldings.svg" />
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.BusinessName</span>
+                            </div>
+                        </div>
+
+
+                        <div class="estimate-calculator" style="">
+                            <div class="wrapper">
+                                <p class="font-20 text-primary"> Invoice No:@Model.InvoiceNo</p>
+                                <hr>
+                                <dl>
+                                    <dt>Amount:</dt>
+                                    <dd class="fee" data-outbound-currency="USD"> @Model.CurrencySymbol@Model.Amount</dd>
+                                </dl>
+
+                                <dl>
+                                    <dt>Fee:</dt>
+                                    <dd class="fee" data-outbound-currency="USD">@Model.CurrencySymbol@Model.Fee</dd>
+                                </dl>
+                                <dl>
+                                    <dt>Total:</dt>
+                                    <dd class="fee" data-outbound-currency="USD"> @Model.CurrencySymbol@Model.TotalAmount</dd>
+                                </dl>
+
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <a href="@Url.Action("PayInvoice", new { Id = Model.Id})" class="btn btn-primary btn-lg   ">Confirm and Pay <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="clearfix mb30"> </div>
+                    <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,264 @@
+﻿
+@model  FAXER.PORTAL.Models.StartFaxingMoneyViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var ReceivingCurrency = "";
+    var ReceivingcurrencySymbol = "";
+    double TotalCardAmount = 0;
+    if (Model != null)
+    {
+
+        ReceivingCurrency = Model.ReceivingCurrency ?? "";
+        ReceivingcurrencySymbol = Model.ReceivingCurrencySymbol ?? "";
+        TotalCardAmount = Model.TotalCardAmount;
+
+
+    }
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Receiver Virtual Account Deposit</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="real_form">
+        <div class="container">
+            <div class="col-lg-8 col-lg-offset-2">
+                @if (ViewBag.CardCount <= 0)
+                {
+                    <p>You do not have a receiver  virtual account registered!</p>
+                }
+
+                <div class="mobile_design text-center row">
+
+
+                    @Html.HiddenFor(model => model.ReceivingCurrency)
+                    @Html.HiddenFor(model => model.ReceivingCurrencySymbol)
+
+                    @if (ViewBag.CardCount > 0)
+                    {
+                        <div class="col-lg-6 col-lg-offset-2">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(x => x.TopUpCard, null, "Select Receiver Virtual Account", htmlAttributes: new { @class = "form-control", id = "TopUpCard", @onchange = "getMFTCCard(this.value);" })
+                                @Html.ValidationMessageFor(model => model.TopUpCard, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <h3>
+                                <span id="Card" class="  account-balance">
+                                    Account Balance :
+                                    <strong class="  text-primary italic">
+                                        @ReceivingcurrencySymbol @TotalCardAmount
+                                    </strong>
+                                </span>
+                            </h3>
+                        </div>
+
+                        @*<div id="Card" style="display:none">
+                                <div class="col-lg-6 col-lg-offset-2">
+                                    <label>Balance on virtual account</label>
+                                </div>
+                                <div class="clearfix">
+                                    <center>
+
+                                    </center>
+                                </div>
+                                <div class="col-lg-6 col-lg-offset-2">
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@ReceivingcurrencySymbol</span>
+                                        @Html.EditorFor(model => model.TotalCardAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+                                        <span class="input-group-addon">@ReceivingCurrency</span>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.TotalCardAmount, "", new { @class = "text-danger" })
+                                </div>
+                            </div>*@
+                        <div class="clearfix"></div>
+                        <div class="col-lg-4 col-lg-offset-3 col-xs-2">
+                            <br />
+                            <br />
+                            <h3>OR</h3>
+                        </div>
+
+                        <div class="clearfix"><br /></div>
+                        <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 col-lg-offset-3 col-xs-offset-3">
+                            <div class="dashboard_thumb">
+                                <a href="@Url.Action("index","TopUpSomeoneElseMFTCCard")">
+                                    <div class="das-icon">
+                                        <img src="/images/icon/7.png">
+                                    </div>
+                                    <h4>
+                                        Pay Someone else's Virtual Account
+                                    </h4>
+                                </a>
+                            </div>
+                        </div>
+
+                    }
+                    else
+                    {
+
+                        <div class="col-lg-6 col-md-6  col-xs-5 ">
+                            <div class="newone">
+                                <a href="@Url.Action("UserContactDetails" , "TopUpRegestration")">
+                                    <div class="das-icon">
+                                        <img src="images/icon/12.png">
+                                    </div>
+                                    <h4>Open a Receiver Virtual Account</h4>
+                                </a>
+                            </div>
+                        </div>
+
+
+                        <!--  -->
+                        <div class="col-lg-6 col-md-6  col-xs-5">
+                            <div class="newone    ">
+                                <a href="@Url.Action("index","TopUpSomeoneElseMFTCCard")">
+                                    <div class="das-icon">
+                                        <img src="images/icon/7.png">
+                                    </div>
+                                    <h4>Pay Someone else's  Virtual Account</h4>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-lg-12 text-left">
+                                <hr>
+                                <h4 data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">
+                                    What is a Virtual Account?
+                                </h4>
+                                <hr>
+                                <div class="collapse" id="collapseExample">
+                                    <div class="card card-body">
+                                        <p>
+                                            This is an account that you register in the name of your money receiver who lives abroad.
+                                        </p>
+                                        <p>
+                                            You can deposit money into this account in any of our agent or online using either a credit/debit or direct online bank payment to our bank account.
+                                        </p>
+                                        <p>
+                                            The money deposited is instantly available for the receiver to withdraw from one of paying agents in their country of residence.
+                                        </p>
+                                        <p>
+                                            As the owner of a virtual account, you can control how much the receiver can withdraw at a given time, automatically deposit money, see how the account is being used, and transfer money between multiple accounts registerd in the same country.
+                                        </p>
+                                        <p>
+                                            The user of this account on his/her part, can see payments made to the account, transaction history, withdrawal limits, pay for goods and services and transfer money free of charge in their country of residence.
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }<!--  -->
+
+                    <div class="clearfix"></div>
+
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button value="Next" class="fbtn btn-next" type="submit">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+}
+@section scripts{
+    <script type="text/javascript">
+        function getMFTCCard(val) {
+
+            window.location.href = "/StartFaxingMoney/Index?mFTCCardInformationId=" + val;
+
+        }
+
+        function SearchSomeoneElseMFTCCard() {
+            var val = $("#CardNumber").val();
+            window.location.href = "/TopUpSomeoneElseMFTCCard/MFTCCardAccountNo?MFTCCardNO=" + val;
+
+
+        }
+
+        //function OoChangeofOtherCards() {
+
+        //    var val = $("#CardNumber").val();
+        //    if (val == "") {
+        //        $("#TopUpCard").prop("disabled", false);
+
+
+        //    }
+        //    else {
+
+        //        $("#TopUpCard").prop("disabled", true);
+
+
+        //    }
+        //}
+
+        //var val = $("#TopUpCard").val();
+        //if (val == "") {
+        //    $("#CardNumber").prop("readonly", false);
+        //    $("#otherCardSearchbtn").prop("disabled", false);
+        //}
+        //else {
+
+        //    $("#CardNumber").prop("readonly", true);
+        //    $("#otherCardSearchbtn").prop("disabled", true);
+        //}
+        //var val2 = $("#CardNumber").val();
+        //if (val2 == "") {
+        //    $("#TopUpCard").prop("disabled", false);
+
+
+        //}
+        //else {
+
+        //    $("#TopUpCard").prop("disabled", true);
+
+
+        //}
+
+        var card = $("#TopUpCard").val();
+        if (card > 0) {
+            $("#Card").show();
+        } else {
+            $("#Card").hide();
+        }
+    </script>
+}

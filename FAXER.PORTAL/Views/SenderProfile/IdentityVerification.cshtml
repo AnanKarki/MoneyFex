@@ -1,0 +1,130 @@
+﻿@model FAXER.PORTAL.Models.IdentificationDetailModel
+@{
+    ViewBag.Title = "IdentityVerification";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+@using (Html.BeginForm("IdentityVerification", "SenderProfile", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "UploadIdentificationDocumentForm" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    <div class="boxheader">
+                        <i class="fa fa-exclamation"></i>
+                    
+                        <h2>Identity Verification</h2>
+                    </div>
+                    
+                    <div class="login_signup mb50 clearfix text-left">
+
+                        <div class=" ">
+
+                            <div class="    text-center ">
+                                <p>We need to verify your identity to ensure we remain in compliance with Anti-Money Laundering requirements.</p>
+                                <hr class="clearfix">
+                            </div>
+
+                            <div class=" ">
+                                <!--  -->
+                                <div class="form-group">
+
+                                    @Html.DropDownListFor(model => model.IdentificationTypeId, (IEnumerable<SelectListItem>)ViewBag.IdenticationTypes, "Select Identity Type", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.IdentificationTypeId, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.IdentityNumber, new { @class = "form-control", @placeholder = "Enter Identity Number" })
+                                    @Html.ValidationMessageFor(model => model.IdentityNumber, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group row">
+                                    <div class="col-lg-12 mb10">
+                                        <label>Expiry Date</label>
+                                    </div>
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="form-group mb20">
+                                            @Html.TextBoxFor(model => model.Day, new { @type = "number", @placeholder = "DD", @class = "form-control" })
+                                            @*<input type="number" placeholder="Day" class="form-control">*@
+                                            @Html.ValidationMessageFor(model => model.Day, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="form-group mb20">
+                                            @Html.EnumDropDownListFor(model => model.Month, new { @class = "form-control" })
+
+
+                                            @Html.ValidationMessageFor(model => model.Month, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="form-group mb20">
+                                            @Html.TextBoxFor(model => model.Year, new { @type = "number", @placeholder = "Year", @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.Year, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <div class="form-group">
+                                        @Html.ValidationMessage("ExpiryDate", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Issuing Country",
+                                   new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Upload a colour copy of identification document 
+                                    (PNG, JPEG or PDF format with maximum size 3MB)</label>
+                                    <input type="file" class="form-control mt10" name="Document">
+                                    @Html.ValidationMessage("document", "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--      <div class="form-group files">
+                 <label>Drag and Drop File Or Select File to Upload </label>
+                 <input type="file" class=" " multiple="">
+                </div> -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+                        <!--  <a href="add-money-to-wallet-success.php" class="btn btn-primary btn-lg mb30">Confirm <i class="fa fa-chevron-right" aria-hidden="true"></i></a> -->
+                        <button type="submit" class="btn btn-primary btn-lg mb30" onclick="Submit()">Confirm <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}

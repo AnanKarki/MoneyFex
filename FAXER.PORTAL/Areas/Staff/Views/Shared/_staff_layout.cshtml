@@ -1,0 +1,400 @@
+﻿
+@{
+    var conf = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath);
+    var section = (System.Web.Configuration.SessionStateSection)conf.GetSection("system.web/sessionState");
+    string timeout = ((section.Timeout.TotalMinutes * 600) - 20).ToString();
+    bool isLogOut = FAXER.PORTAL.Common.StaffSession.LoggedStaff == null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFax Service">
+    <meta name="keywords" content="MoneyFax Service ">
+    <title>MoneyFeX Service</title>
+
+    <link rel="icon" type="image/png" href="~/Areas/Staff/images/favicon.png">
+    <!-- Bootstrap -->
+    <link href="~/Areas/Staff/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Areas/Staff/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Staff/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Staff/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/Staff/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Staff/css/animsition.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link href="~/Areas/Staff/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Areas/Staff/css/owl.theme.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<body class="animsition">
+
+    <div id="loader">
+        <div class="loader">
+        </div>
+    </div>
+
+
+
+    <div class="top-bar hidden-xs">
+        <!-- top-bar -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pull-right col-sm-6">
+                    <div class="">
+                        <div class="col-lg-6 text-right">
+                            <ul>
+                                <li><a href="">Contact Us</a></li>
+                                <li><a href="">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div id="imaginary_container" class="col-lg-6  text-right">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.top-bar -->
+    <div class="header-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="@Url.Action("Index","StaffHome")"><img src="~/Areas/Staff/images/logo.png" alt=" "></a>
+                    </div>
+                </div>
+                <!-- logo -->
+                <div class="col-md-4 text-center col-md-offset-5 hidden-xs">
+                    <div class="header-action ">
+                        <br>
+                        @if (FAXER.PORTAL.Common.StaffSession.LoggedStaff == null)
+                        {
+                            <a href="@Url.Action("StaffMainLogin", "StaffLogin")" class="btn btn-primary btn-sm">Login</a>
+                            <a href="@Url.Action("Index", "StaffsignUp")" class="btn btn-success btn-sm">Sign Up</a>
+                        }
+                        else
+                        {
+                            <div class="login_dropdown mt10">
+                                <ul>
+                                    <li class="dropdown">
+                                        <a class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <div class="user_image  hidden-xs">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            @FAXER.PORTAL.Common.StaffSession.LoggedStaff.FirstName , @FAXER.PORTAL.Common.StaffSession.LoggedStaff.LastName
+                                            <span class="caret"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li class=""><a href="@Url.Action("StaffInformation" ,"StaffInformation")">My Account</a></li>
+                                            <li class=""><a href="@Url.Action("Logout" ,"StaffLogin")">Logout</a></li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div id="navigation">
+                            <!-- navigation start-->
+                            <ul>
+                                <li><a href="@Url.Action("Index","StaffHome")"><i class="fa fa-home home_ico"></i></a></li>
+                                <li><a href="@Url.Action("Index","StaffHome")">Notice Board</a></li>
+                                <li><a href="@Url.Action("Payslips","StaffPayslips")">My Payslips</a></li>
+                                <li><a href="@Url.Action("Training","StaffTraining")">My Trainings</a></li>
+                                <!-- <li><a href="my-moneyfax.php">My MoneyFax</a></li> -->
+                                <li><a href="http://cyberlinknepal.com/design/louis/">My MoneyFeX</a></li>
+                                <li><a href="@Url.Action("BookHolidays","StaffBookHolidays")">Book Holidays</a></li>
+                                <li class="pull-right"><a href="@Url.Action("AdminPortalStaffLogin","StaffLogin")" class="btn btn-sm btn-danger">Go to Admin Portal</a></li>
+                                <li><a href="@Url.Action("Index", "WhatsApp")">WhatsApp</a></li>
+
+                            </ul>
+                        </div>
+                        <!-- /.navigation start-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="sessionOutModal" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">MoneyFeX Service-Login Confirmation</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <h4>The system will log out in <span class="w3-badge w3-large w3-padding w3-green" id="timer_div"></span> seconds.</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="@Url.Action("Logout","StaffLogin")" class="btn btn-primary btn-sm">YES</a>
+                        <a href="@Request.Url" class="btn btn-default btn-sm">NO</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    <!--header end-->
+
+
+
+
+    <section class="dashboard">
+        <div class="container">
+            @RenderBody()
+        </div>
+    </section>
+
+    <div class="footer section-space40">
+        <!-- footer -->
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="widget-footer mt40">
+                        <!-- widget footer -->
+                        <h4>Quick Link</h4>
+                        <ul class="listnone">
+                            <li><a href="">About Us</a></li>
+                            <li><a href="">News</a></li>
+                            <li><a href="">Career</a></li>
+                            <li><a href="">Contact Us</a></li>
+                            <li><a href="">FAQ</a></li>
+                            <li><a href="">Become an Agent</a></li>
+                            <li><a href="">Report a Fraud </a></li>
+                        </ul>
+                    </div>
+                    <!-- /.widget footer -->
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="widget-footer mt40">
+                        <!-- widget footer -->
+                        <h4>Tools</h4>
+                        <ul class="listnone">
+                            <li><a href="">Find Locations</a></li>
+                            <li><a href="">Track a Transfer</a></li>
+                            <li><a href="estimate.php">Estimate Sending Fees</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.widget footer -->
+                </div>
+
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="widget-footer mt40">
+                        <!-- widget footer -->
+                        <h4>My Account</h4>
+                        <ul class="listnone">
+                            <li><a href="login.php">Login</a></li>
+                            <li><a href="/Staff/StaffSignUp">Sign Up</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.widget footer -->
+                </div>
+                <div class="col-md-3 col-sm-3 col-xs-6">
+                    <div class="widget-footer mt40">
+                        <!-- widget footer -->
+
+                        <ul class="listnone">
+                            <li><a href="">Privacy Policy</a></li>
+                            <li><a href="">Terms and Conditions</a></li>
+                            <li><a href="">Cookie Policy</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.widget footer -->
+                </div>
+
+                <br><br>
+
+                <div class="col-lg-12 ">
+                    <p>MoneyFeX Service Limited is an authorised payment institution in UK by the Financial Conduct Authority</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.footer -->
+    <div class="tiny-footer">
+        <!-- small footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>© MoneyFeX Service 2017, 66 Phoenix House, 92a Bath Road, London TW3 3FF</p>
+                </div>
+                <div class="col-md-6 col-sm-6 text-right col-xs-6">
+                    <a href="#"><i class="fa fa-facebook"></i>  </a>   <a href="#"><i class="fa fa-google-plus"></i>    </a>   <a href="#"><i class="fa fa-twitter"></i>  </a>  <a href="#"><i class="fa fa-linkedin"></i>  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.small footer -->
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="~/Areas/Staff/js/jquery.min.js"></script>
+    <script src="~/Areas/Staff/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Staff/js/menumaker.js"></script>
+    <!-- animsition -->
+    <script type="text/javascript" src="~/Areas/Staff/js/animsition.js"></script>
+    <script type="text/javascript" src="~/Areas/Staff/js/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="~/Areas/Staff/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/Areas/Staff/js/sticky-header.js"></script>
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Areas/Staff/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Staff/js/slider-carousel.js"></script>
+    <script type="text/javascript" src="~/Areas/Staff/js/service-carousel.js"></script>
+    <!-- Back to top script -->
+    <script src="~/Areas/Staff/js/back-to-top.js" type="text/javascript"></script>
+
+
+    <script src="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script type="text/javascript">
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [{
+                        "visible": false,
+                        "targets": 2
+                    }],
+                    "order": [
+                        [2, 'asc']
+                    ],
+                    "displayLength": 25,
+                    "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+
+
+        $(document).ready(function () {
+
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+
+
+          var time = @timeout * 100000;
+            var timeout;
+            var isLogout =@Json.Encode(isLogOut);
+
+                timeout = setTimeout(function() {
+                    //Things you need to do
+                    if (isLogout == false) {
+                        setCountDown();
+                        $("#sessionOutModal").modal("show");
+                        isLogout = true;
+                    }
+                }, time);
+
+                $(document).on('click', function () {
+                    if (!isLogout) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(function() {
+                            //Things you need to do
+                             isLogout = true;
+                        }, time);
+                    }
+                });
+
+        });
+
+        function setCountDown() {
+            var seconds_left = 20000;
+            var interval = setInterval(function () {
+                document.getElementById('timer_div').innerHTML = --seconds_left;
+
+                if (seconds_left <= 0) {
+                    //document.getElementById('timer_div').innerHTML = 'You are ready';
+                    window.location.href = "/Staff/StaffLogin/Logout";
+                    clearInterval(interval);
+                }
+            }, 100000);
+        }
+        $(window).load(function () {
+            $('#onload').modal('show');
+        });
+
+
+    </script>
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>

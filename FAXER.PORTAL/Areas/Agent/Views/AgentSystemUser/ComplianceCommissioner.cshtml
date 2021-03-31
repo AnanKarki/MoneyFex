@@ -1,0 +1,178 @@
+﻿@model List<FAXER.PORTAL.Areas.Agent.Models.ComplianceCommissionerViewModel>
+    @{
+    ViewBag.Title = "ComplianceCommissioner";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    }
+    <style>
+        .popUpPadding {
+            padding: 25px;
+        }
+    </style>
+
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+    <div class="modal    in" id="messagePopup" role="dialog" style="display: none;">
+        <div class="modal-dialog">
+
+            <div class="modal-content popUpPadding">
+                <h3>@ViewBag.Message</h3>
+            </div>
+
+        </div>
+    </div>
+    }
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1>
+                        Compliance Commissioner
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <button onclick="showPopup();" type="button" class="btn btn-success pull-right">Add Compliance Commissioner</button>
+
+                    <div class="clearfix">
+                        <br>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td>SN</td>
+                                    <td><strong>  Staff Name   </strong></td>
+                                    <td><strong> Staff Type   </strong></td>
+
+                                    <td><strong>Appointment Date </strong></td>
+                                    <td>End Time</td>
+
+                                    <td>Status</td>
+                                    <td>Action</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                i++;
+                                <tr>
+
+                                    <td>
+                                        @i
+                                    </td>
+                                    <td> @item.StaffName </td>
+                                    <td>@item.StaffType</td>
+                                    <td> @item.AppointmentDate</td>
+                                    <td>@item.EndTime</td>
+                                    <td>
+                                        @item.Status
+                                    </td>
+                                    <td>
+                                        <div class="btn-group m-r-10">
+                                            <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle  " type="button">Action <span class="caret"></span></button>
+                                            <ul role="menu" class="dropdown-menu text-white ">
+                                                @if (item.Status == "Active")
+                                                {
+                                                <li><a class="btn   btn-warning " onclick="deactivateComplianceCOmmission(@item.Id)"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+                                                }
+                                                else
+                                                {
+
+                                                <li><a class="btn   btn-warning disabled"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <a href="/Agent/AgentSystemUser/Index" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal  in" id="AddComplianceCommissioner" role="dialog" style="display: none;">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body  ">
+                    <div class="form-group  pinside20 ">
+                        <h4>Select Compliance Commissioner</h4>
+                        @Html.DropDownList("Agent Staff", (IEnumerable<SelectListItem>)ViewBag.AgentStaffs, "Select AgentStaff", new { @class="form-control", @id= "agetnStaff" })
+                    </div>
+                    <hr>
+                    <div class="form-group">
+
+                        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="button" onclick="addComplianceCOmmission();" class="btn btn-primary pull-right">Add</button>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    @section Scripts{
+
+
+    <script type="text/javascript">
+
+        function deactivateComplianceCOmmission(agentComplianceId) {
+            if (agentComplianceId != 0) {
+                window.location.href = "/Agent/AgentSystemUser/DeactivateComplianceCommission?complianceCommissionId=" + agentComplianceId;
+            }
+        };
+
+        function addComplianceCOmmission() {
+            var agentStaffId = $('#agetnStaff').val();
+            if (agentStaffId != 0) {
+                window.location.href = "/Agent/AgentSystemUser/AddComplianceCommission?agentStaffId=" + agentStaffId;
+            };
+
+        }
+
+        function showPopup() {
+            $('#AddComplianceCommissioner').modal('show');
+
+        }
+        $('#messagePopup').modal('show');
+
+    </script>
+    }

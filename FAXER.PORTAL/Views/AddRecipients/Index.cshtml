@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <!--  -->
+                    <div class="dashboard_body">
+
+                        <div class=" clearfix">
+                            <h3> Select Service</h3>
+
+
+                            <div class="clearfix">
+
+                            </div>
+                            <hr>
+                            <div class="mobile_design text-center">
+
+
+                                <!--  -->
+                                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("RecipientsBankAccount","AddRecipients")">
+                                            <div class="das-icon">
+                                                <img src="images/icon/svg/bank.svg">
+                                            </div>
+                                            <h4>Bank Account </h4>
+
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("RecipientsMobileAccount","AddRecipients")">
+                                            <div class="das-icon">
+                                                <img src="images/icon/svg/mobile-money.svg">
+                                            </div>
+                                            <h4>Mobile Wallet</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("RecipientsCashPickup","AddRecipients")">
+                                            <div class="das-icon">
+                                                <img src="images/icon/svg/cash-pickup.svg">
+                                            </div>
+                                            <h4>Cash Pickup</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("RecipientsKiipayWallet","AddRecipients")">
+                                            <div class="das-icon">
+                                                <img src="images/icon/svg/kiipay.svg">
+                                            </div>
+                                            <h4>KiiPay Wallet</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!-- back btn -->
+                                <div class="clearfix">
+                                    <hr>
+                                    <center>
+                                        <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                    </center>
+                                </div>
+                                <!-- back btn end-->
+                            </div>
+                        </div>
+
+                    </div>
+                    <!--  -->
+              
+
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        </div>
+        </div>
+        <!--  -->
+        </div>
+        <!--  -->
+    </section>

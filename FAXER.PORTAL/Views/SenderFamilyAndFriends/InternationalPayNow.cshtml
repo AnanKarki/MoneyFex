@@ -1,0 +1,115 @@
+﻿@model FAXER.PORTAL.Models.PaymentMethodViewModel
+@{
+    ViewBag.Title = "InternationalPayNow";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] amountSplited = Model.TotalAmount.ToString("0.00").Split('.');
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary">@Model.SendingCurrencySymbol @amountSplited[0].<small class="text-primary">@amountSplited[1]</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+
+                        </div>
+
+
+
+                        <ul class="paymentmethod-list mt20 mb20">
+                            <h4 class="text-left">How do you want to pay ?</h4>
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.SavedDebitCreditCard)
+                                    <span class="cardsaved hidden-xs">
+                                        <img src="images/icon/card/visa.png">
+                                    </span>
+                                    <span class="title">Saved Credit/Debit Card</span>
+                                    <span class="subtitle">Card No. </span>
+                                </label>
+                            </li>
+
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard , new {  @checked = "true" })
+                                    <span class="cardsaved hidden-xs"> <img src="~/Content/images/icon/card/visa.png">  </span> <span class="title"> Credit/Debit  </span> <span class="subtitle"><span>Card details required</span></span>
+                                </label>
+                            </li>
+
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.KiiPayWallet)
+                                    <span class="cardsaved hidden-xs"><img src="~/Content/images/icon/svg/kiipay.svg"></span> <span class="title"> KiiPay Wallet Balance   </span> <span class="subtitle">Balance</span>
+                                </label>
+                            </li>
+
+
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount)
+                                    <span class="cardsaved hidden-xs"><img src="~/Content/images/mf-fav-logo.png"></span> <span class="title"> MoneyFex Bank Account  </span> <span class="subtitle"><span>Deposit Money into our Account</span></span>
+                                </label>
+                            </li>
+
+                            <li>
+                                <label class="text-left">
+                                    <a href="add-new-card.php"><i class="fa fa-plus"></i> Add New Card</a>
+                                </label>
+                            </li>
+
+                        </ul>
+
+                        <div class="form-group mb30">
+                            <label class="label-checkbox ">Do you want to set a standing <br>order payment to this wallet?  </label>
+                            <br>
+                            <label class="label-checkbox ">&nbsp;&nbsp;Yes&nbsp;&nbsp;<input type="checkbox"> </label>
+                        </div>
+                        <div class="form-group">
+                            <input type="number" placeholder="Enter Amount" class="form-blue" autocomplete="off">
+                        </div>
+                        <div class="form-group mb30">
+                            <select class="form-blue">
+                                <option>Select Payment Frequency</option>
+                            </select>
+                        </div>
+                        <div class="clearfix">  </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg mb30">Confirm Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

@@ -1,0 +1,387 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.BusinessDocumentationViewModel
+
+@{
+    ViewBag.Title = "UploadDocument";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("UploadDocument", "BusinessDocumentation", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Upload Document  </h4>
+                                        <a href="@Url.Action("Index","BusinessDocumentation")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Document
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Sending Country</label>
+                                                        @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "GetSenderByCountry();" })
+                                                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.cities, "Select City", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "City", @onchange = "GetSenderByCountry();" })
+                                                        @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Business</label>
+                                                        @Html.DropDownListFor(x => x.SenderId, (IEnumerable<SelectListItem>)ViewBag.Business, "Select Business", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SenderId", @onchange = "GetAccountNumber();" })
+                                                        @Html.ValidationMessageFor(x => x.SenderId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Account Number</label>
+                                                        @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "", @readonly = "readonly", @id = "AccountNumber" })
+                                                        @Html.ValidationMessageFor(x => x.AccountNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Document Type</label>
+                                                        @Html.EnumDropDownListFor(x => x.DocumentType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })
+                                                        @Html.ValidationMessage("DocumentType", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Does Document Expires?</label>
+
+                                                        @Html.EnumDropDownListFor(x => x.DocumentExpires, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Frequency", @id = "DocumentExpires", @onchange = "Filter()" })
+                                                        @Html.ValidationMessage("DocumentExpires", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group" id="ExpiryDatediv">
+                                                        <label>Expiry Date</label>
+                                                        @Html.TextBoxFor(x => x.ExpiryDate, new { @class = "form-control form-control-lg form-control-round form-control-bold", @type = "date" })
+                                                        @Html.ValidationMessage("ExpiryDate", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Document Name/Title</label>
+                                                        @Html.TextBoxFor(x => x.DocumentName, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Document Name" })
+                                                        @Html.ValidationMessageFor(x => x.DocumentName, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Documents</h5>
+                                                        <hr>
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <div class="row form-group">
+
+                                                        <div class="col-lg-4">
+                                                            <a href="@Model.DocumentPhotoUrl" target="_blank">
+                                                                <img src="@Model.DocumentPhotoUrl"
+                                                                     id="Image" name="Image" alt=" " style="float: left; margin-right: 15px; width: 100px;">
+                                                            </a>
+                                                            <a href="@Model.DocumentPhotoUrl" target="_blank" id="DocumentPhotoUrlAnchor">
+                                                                Open Doc
+                                                            </a>
+
+                                                        </div>
+                                                        <div class="col-lg-4">
+                                                            <a href="@Model.DocumentPhotoUrlTwo" target="_blank">
+                                                                <img src="@Model.DocumentPhotoUrlTwo"
+                                                                     id="Image2" name="Image2" alt=" " style="float: left; margin-right: 15px; width: 100px;">
+                                                            </a>
+                                                            <a href="@Model.DocumentPhotoUrlTwo" target="_blank" id="DocumentPhotoUrlAnchorTwo">
+                                                                Open Doc
+                                                            </a>
+
+                                                        </div>
+
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Upload Documents</h5>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Front</label>
+                                                        <input type="file" name="DocumentPhotoUrl" id="DocumentPhotoUrl" class="form-control form-control-lg form-control-round">
+                                                        @Html.ValidationMessageFor(Model => Model.DocumentPhotoUrl, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Back</label>
+                                                        @Html.TextBoxFor(x => x.DocumentPhotoUrlTwo, new { @class = "form-control   form-control-lg form-control-round", type = "file", id = "DocumentPhotoUrlTwo" })
+                                                        @Html.ValidationMessageFor(Model => Model.DocumentPhotoUrlTwo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Status </label>
+                                                        @Html.EnumDropDownListFor(x => x.Status, "Select", new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Status", @id = "Status", @onchange = "GetDisapprovalDiv();" })
+                                                        @Html.ValidationMessageFor(x => x.Status, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group" id="ReasonDiv">
+                                                        <label>Reason For Disapproval</label>
+                                                        @Html.EnumDropDownListFor(x => x.ReasonForDisApproval, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Reason For DisApproval", @id = "ReasonForDisApproval", @onchange = "GetDisapprovalByAdminDiv();" })
+                                                        @Html.ValidationMessage("ReasonForDisApproval", "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <div class="form-group" id="ReasonFromAdminDiv">
+                                                        @Html.TextAreaFor(x => x.ReasonForDisApprovalByAdmin, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter reason, 50 characters only", @id = "ReasonForDisApprovalByAdmin" })
+                                                        @Html.ValidationMessage("ReasonForDisApprovalByAdmin", "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","BusinessDocumentation")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        Filter();
+        function Filter() {
+            var DocumentExpires = $("#DocumentExpires").val();
+
+            if (DocumentExpires == 2 || DocumentExpires == 0) {
+                $("#ExpiryDatediv").hide();
+
+            }
+            else {
+                $("#ExpiryDatediv").show();
+
+            }
+        }
+        $("#ReasonDiv").hide();
+        $("#ReasonFromAdminDiv").hide();
+        GetDisapprovalDiv();
+        GetDisapprovalByAdminDiv();
+        function GetDisapprovalDiv() {
+            var Status = $("#Status").val();
+            if (Status == 1) {
+                $("#ReasonDiv").show();
+            }
+            else {
+                $("#ReasonDiv").hide();
+            }
+        }
+        function GetDisapprovalByAdminDiv() {
+            var ReasonForDisApproval = $("#ReasonForDisApproval").val();
+            if (ReasonForDisApproval == 9) {
+                $("#ReasonFromAdminDiv").show();
+            }
+            else {
+                $("#ReasonFromAdminDiv").hide();
+            }
+        }
+
+        function GetSenderByCountry() {
+            var Country = $("#Country").val();
+            var City = $("#City").val();
+
+            $.getJSON("/Admin/BusinessTransferLimit/GetsenderByCountry?Country=" + Country + "&City=" + City, function (result) {
+
+                var senderSelector = $("#SenderId");
+                $("#SenderId option").remove();
+                senderSelector.append('<option value="">Select </option>');
+
+                for (var i = 0; i <= result.Data.length; i++) {
+
+                    senderSelector.append('<option value=" ' + result.Data[i].senderId + ' "> ' + result.Data[i].senderName + '</option>');
+                }
+
+            })
+            $("#AccountNumber").val('');
+            search();
+
+        }
+
+        function GetAccountNumber() {
+            var SenderId = $("#SenderId").val();
+            $.getJSON("/Admin/BusinessTransferLimit/GetAccountNumber?SenderId=" + SenderId, function (result) {
+
+                var AccountNumber = result.Data;
+                $("#AccountNumber").val(AccountNumber);
+            })
+        }
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Image').attr('src', e.target.result);
+                    $('#DocumentPhotoUrlAnchor').attr('href', e.target.result);
+                    $("#DocumentPhotoUrlAnchor").text('open Doc');
+                    //$('#AnchorDocumentPhotoUrl').attr('Text', e.target.result);
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $("#DocumentPhotoUrl").change(function () {
+            readURL(this);
+        });
+        $("#DocumentPhotoUrlTwo").change(function () {
+            readSecondURL(this);
+        });
+        function readSecondURL(input) {
+            debugger;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#Image2').attr('src', e.target.result);
+                    $('#DocumentPhotoUrlAnchorTwo').attr('href', e.target.result);
+                    $("#DocumentPhotoUrlAnchorTwo").text('open Doc');
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        search();
+        function search() {
+            var data = {
+                id: $("#SenderId"),
+                country: $("#Country").val(),
+                Currecny: "",
+                isBusiness: true,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetSenders',
+                identifier: "SenderId",
+                placeholder: "Select"
+            }
+            SelectSearch(data);
+        }
+
+
+
+                                                    //$(document).ready(function () {
+                                                    //    var sender = $("#SenderId");
+                                                    //    //for Select2 Options: https://select2.github.io/options.html
+                                                    //    sender.select2({
+                                                    //        language: "tr",//don't forget to add language script (select2/js/i18n/tr.js)
+                                                    //        minimumInputLength: 0, //for listing all records > set 0
+                                                    //        maximumInputLength: 20, //only allow terms up to 20 characters long
+                                                    //        multiple: false,
+                                                    //        placeholder: "Select",
+                                                    //        allowClear: true,
+                                                    //        tags: false, //prevent free text entry
+                                                    //        width: "100%",
+                                                    //        ajax: {
+                                                    //            url: '/Admin/AdminCommon/GetSenders',
+                                                    //            dataType: 'json',
+                                                    //            delay: 250,
+                                                    //            type: "POST",
+                                                    //            data: function (params) {
+                                                    //                return {
+                                                    //                    query: params.term, //search term
+                                                    //                    country: $("#Country").val(),
+                                                    //                    page: params.page,
+                                                    //                    isBusiness: true
+                                                    //                };
+                                                    //            },
+                                                    //            processResults: function (data, page) {
+                                                    //                var newData = [];
+                                                    //                var values = data.senders;
+                                                    //                for (var i = 0; i < values.length; i++) {
+                                                    //                    newData.push({
+                                                    //                        //id part present in data
+                                                    //                        id: values[i].Id,
+                                                    //                        //string to be displayed
+                                                    //                        text: values[i].text
+                                                    //                    });
+                                                    //                }
+
+                                                    //                return { results: newData };
+                                                    //            },
+                                                    //            cache: true
+                                                    //        },
+                                                    //        escapeMarkup: function (markup) { return markup; }
+                                                    //    });
+
+
+                                                    //    //You can simply listen to the select2:select event to get the selected item
+                                                    //    sender.on('select2:select', onSelect)
+                                                    //    function onSelect(evt) {
+                                                    //        $("#select2-SenderId-container").text("");
+                                                    //        $("#select2-SenderId-container").text(evt.params.data.text);
+                                                    //        console.log($(this).val());
+                                                    //    }
+
+                                                    //    //Event example for close event
+                                                    //    sender.on('select2:close', onClose)
+
+                                                    //    function onClose(evt) {
+                                                    //        console.log('Closed…');
+                                                    //    }
+                                                    //});
+
+
+    </script>
+
+}
+

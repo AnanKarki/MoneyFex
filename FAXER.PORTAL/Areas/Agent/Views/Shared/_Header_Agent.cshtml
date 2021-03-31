@@ -1,0 +1,250 @@
+﻿
+
+<div class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-2 col-sm-6 col-xs-5  ">
+                <!-- logo -->
+                <div class="logo text-center">
+
+                    <a href="@Url.Action("Index","Home", new { @Area=""})">
+                        <img src="~/Areas/Agent/images/logo.png" alt="MoneyFex Service">
+
+                    </a>
+                </div>
+            </div>
+            @if (FAXER.PORTAL.Common.AgentSession.LoggedUser == null)
+            {
+                <div class="col-lg-6 col-md-7 col-xs-12 ">
+
+                    <!-- /.navigation start-->
+                </div>
+                <div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
+                    <!-- search start-->
+                    <div class="header-action   pull-right ">
+                        <a href="@Url.Action("Login","AgentLogin")" class="btn btn-primary btn-sm">Login</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-7   hidden-md  hidden-lg">
+
+                    <div class=" ">
+
+                        <ul class="after-login-menu">
+                            <li class="dropdown nav-item ">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <div class="user_image  ">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <span class="name">@FAXER.PORTAL.Common.AgentSession.LoggedUser.PayingAgentStaffName </span>
+                                    <p>Account No. @FAXER.PORTAL.Common.AgentSession.LoggedUser.PayingAgentAccountNumber </p>
+                                    <span class="fa fa caret"></span>
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "AgentDashboard")">Dashboard</a></li>
+                                    <li><a href="@Url.Action("Index","AgentProfile")">Profile</a></li>
+                                    <li><a href="@Url.Action("Logout","AgentLogin")">Logout</a></li>
+                                </ul>
+
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+                <!-- logo -->
+                <div class="col-lg-6 col-md-7 col-xs-12  ">
+
+                    <div id="navigation" class="pull-right  hidden-xs hidden-sm">
+                        <!-- navigation start-->
+                        <ul>
+
+                            <li class="dropdown  hidden-xs hidden">
+                                <a href="#" class="dropdown-toggle notification  " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                    <span class=""> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span>
+                                    <span class="badge">5</span>
+                                </a>
+
+                                <ul class="dropdown-menu notify-drop hidden   ">
+                                    <div class="notify-drop-title">
+                                        <div class="row">
+                                            <div class="col-md-6 col-sm-6 col-xs-6">Message  (<b>5</b>)</div>
+                                            <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                        </div>
+                                    </div>
+                                    <!-- end notify title -->
+                                    <!-- notify content -->
+                                    <div class="drop-content">
+
+
+                                        <!--  -->
+                                        <li>
+                                            <div class=" pd-l0">
+                                                <a href="">
+                                                    <h5>MESSAGE</h5>Message from  <span class="text-black">Gaurav   </span>  <p>01/02/2019 08:35 AM</p>
+                                                    <p class="time">2 hours ago</p>
+                                                </a>
+                                            </div>
+                                        </li>
+                                        <!--  -->
+                                    </div>
+                                    <div class="notify-drop-footer text-center">
+                                        <a href="notification.php"><i class="fa fa-eye"></i> See All  </a>
+                                    </div>
+                                </ul>
+                            </li>
+
+                        </ul>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                    <!-- /.navigation end-->
+
+
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6    hidden-sm hidden-xs">
+                    <!-- search start-->
+                    <div class=" ">
+
+                        <ul class="after-login-menu">
+                            <li class="dropdown nav-item ">
+                                <a class="nav-link dropdown-toggle" data-toggle="dropdown" type="button" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+
+                                    <div class="user_image  ">
+                                        <i class="fa fa-user"></i>
+                                    </div>
+                                    <span class="name">@FAXER.PORTAL.Common.AgentSession.LoggedUser.PayingAgentStaffName</span>
+                                    <p>Account No. @FAXER.PORTAL.Common.AgentSession.LoggedUser.PayingAgentAccountNumber </p>
+                                    <span class="fa fa caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="@Url.Action("Index", "AgentDashboard")">Dashboard</a></li>
+                                    <li><a href="@Url.Action("Index","AgentProfile")">Profile</a></li>
+                                    <li class=""><a href="@Url.Action("Logout","AgentLogin")">Logout</a></li>
+                                </ul>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <!-- /.search start-->
+            }
+        </div>
+    </div>
+</div>
+
+<div id="loader">
+    <div class="loader">
+    </div>
+</div>
+
+
+@*to delete from here*@
+@*<div class="top-bar hidden-xs">
+        <!-- top-bar -->
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pull-right col-sm-6">
+                    <div class="">
+                        <div class="col-lg-6 text-right">
+                            <ul>
+                                <li><a href="">Contact Us</a></li>
+                                <li><a href="">FAQ</a></li>
+                            </ul>
+                        </div>
+                        <div id="imaginary_container" class="col-lg-6  text-right">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.top-bar -->
+    <div class="header-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-xs-6">
+                    <!-- logo -->
+                    <div class="logo">
+                        <a href="@Url.Action("Index","AgentDashboard",new { area="agent"})"><img src="~/Areas/Agent/images/logo.png" alt=" "></a>
+                    </div>
+                </div>
+                <!-- logo -->
+                <div class="col-md-4 text-center col-md-offset-5 hidden-xs">
+                    <div class="header-action  ">
+                        <br>
+                        @if (FAXER.PORTAL.Common.AgentSession.AgentInformation == null)
+                        {
+                            <div class="mt20 ">
+                                <a href="@Url.Action("Login","AgentLogin")" class="btn btn-primary btn-sm">Login</a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="login_dropdown mt10">
+                                <ul>
+                                    <li class="dropdown">
+                                        <a class=" dropdown-toggle" type="button" data-toggle="dropdown">
+                                            <div class="user_image  hidden-xs">
+                                                <i class="fa fa-user"></i>
+                                            </div>
+                                            @FAXER.PORTAL.Common.AgentSession.AgentInformation.Name
+                                            <span class="caret"></span>
+                                        </a>
+
+                                        <ul class="dropdown-menu">
+                                            <li><a href="@Url.Action("Index", "AgentDashboard")">Dashboard</a></li>
+                                            <li><a href="@Url.Action("Logout","AgentLogin")">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+
+                            </div>
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="navigation-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div id="navigation">
+                            <!-- navigation start-->
+                            <ul>
+                                <li style="background-color:#b30609"><a href="@Url.Action("Index","AgentDashboard")">MyDashboard</a></li>
+                                <li><a href="@Url.Action("Index","CalculateHowMuch")">Calculate how much</a></li>
+                                <li><a href="@Url.Action("Index","PayAReceiver")">Pay a Receiver</a></li>
+                                <li><a href="@Url.Action("Index","AgentFaxMoney")">Send money</a></li>
+                                <li><a href="@Url.Action("Index","UpdateFaxingInformation")">Update Send Information</a></li>
+                                <li><a href="">Receive Form PDF</a></li>
+                                <li><a href="">Send Money Form PDF</a></li>
+                                <li><a href="">Refund Form PDF</a></li>
+                                <li><a href="@Url.Action("Index","RefundRequest")">Refund Request</a></li>
+                            </ul>
+                        </div>
+                        <!-- /.navigation start-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+@*to delete till here*@

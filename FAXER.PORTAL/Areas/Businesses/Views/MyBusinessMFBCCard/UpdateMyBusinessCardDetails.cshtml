@@ -1,0 +1,191 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFBCCardProfileViewModel
+@{
+    ViewBag.Title = "UpdateMyBusinessCardDetails";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-0">
+
+                <a href="@Url.Action("Index" , "BusinessHome")" class="btn btn-sm btn-primary">Dashboard</a>
+
+            </div>
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Details on MoneyFex Business Card</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <div class="profileinfo">
+
+                        @Html.HiddenFor(model => model.CardId, new { id = "CardId" })
+                        <div class="gear">
+                            <label> MoneyFex Business Card Number:</label>
+                            <span id="cardnumber" class="datainfo">@Model.MFBCCardNumber</span>
+
+                        </div>
+
+
+
+                        <div class="gear">
+                            <label>Name on MoneyFex Business Card:</label>
+                            <span id="fullname" class="datainfo">@Model.FullName</span>
+
+                        </div>
+
+
+
+
+                        <div class="gear">
+                            <label>Country of MoneyFex Business Card:</label>
+                            <span id="country" class="datainfo">@Model.Country</span>
+
+                        </div>
+
+
+                        <div class="gear">
+                            <label>City of MoneyFex Business Card:</label>
+                            <span id="City" class="datainfo">@Model.City</span>
+                            <a href="#" class="editlink">Update</a>
+                            <a class="savebtn" onclick="UpdateCity(@Model.CardId)">Save</a>
+                        </div>
+
+
+
+
+
+                        <div class="gear">
+                            <label>Telephone Number:</label>
+                            <span id="Telephone" class="datainfo">@Model.PhoneNumber</span>
+                            <a href="#" class="editlink">Update</a>
+                            <a class="savebtn" onclick="UpdatePhoneNumber(@Model.CardId)">Save</a>
+                        </div>
+
+
+
+                        <div class="gear">
+                            <label>Email Address:</label>
+                            <span id="Email" class="datainfo">@Model.EmailAddres</span>
+                            <a href="#" class="editlink">Update</a>
+                            <a class="savebtn" onclick="UpdateEmailAddress(@Model.CardId)">Save</a>
+                        </div>
+
+
+
+
+
+                        <div class="gear">
+                            <label>Status of MoneyFex Business Card:</label>
+                            <span id="status" class="datainfo">@Model.CardStatus</span>
+
+                        </div>
+
+
+
+
+
+                        <div class="gear">
+                            <label>Amount on MoneyFex Business Card:</label>
+                            <span id="amounton" class="datainfo">@Model.AmountOnCard</span>
+
+                        </div>
+
+
+
+
+
+                        <div class="gear">
+                            <label>Photo ID:</label>
+                            <span id="Password" class="datainfo">
+                                <img src="@Model.UserIdentificationURL" class=" img-thumbnail" style="max-width: 150px; min-height: 100px; height: 100%; width: 100%;">
+                                @*<input type="file" class="datafile" id="CardPhoto">*@
+                                <br />
+                               
+                            </span>
+
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+}
+@section scripts{
+
+    <script type="text/javascript">
+
+        function UpdateCity(id) {
+
+            var City = $("#City-form").val();
+            window.location.href = "/MyBusinessMFBCCard/UpdateCity?City=" + City + "&CardId=" + id;
+        }
+        function UpdatePhoneNumber(id) {
+            var Telephone = $("#Telephone-form").val();
+            window.location.href = "/MyBusinessMFBCCard/UpdatePhoneNumber?Telephone=" + Telephone + "&CardId=" + id;
+        }
+
+        function UpdateEmailAddress(id) {
+
+            var Email = $("#Email-form").val();
+            window.location.href = "/MyBusinessMFBCCard/UpdateEmailAddress?Email=" + Email + "&CardId=" + id;
+
+        }
+        //$(document).ready(function () {
+        //    document.getElementById('UpdateCardPhoto').onclick = function () {
+        //        var CardId = document.getElementById('CardId').value;
+        //        var formdata = new FormData(); //FormData object
+        //        var fileInput = document.getElementById('CardPhoto');
+        //        //Iterating through each files selected in fileInput
+        //        for (i = 0; i < fileInput.files.length; i++) {
+        //            //Appending each file to FormData object
+        //            formdata.append(fileInput.files[i].name, fileInput.files[i]);
+        //        }
+        //        $.ajax({
+        //            url: '/MyBusinessMFBCCard/UpdateCardPhoto?id=' + CardId,
+        //            type: "POST",
+        //            datatype: "json",
+        //            contentType: false, // Not to set any content header
+        //            processData: false, // Not to process data
+        //            data: formdata,
+        //            success: function (result) {
+        //                location.reload();
+        //            },
+        //            error: function (err) {
+
+        //            }
+        //        });
+        //    }
+        //});
+
+    </script>
+}
+<!--  -->

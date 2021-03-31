@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "SetReferral";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm()) { 
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">  Set New Referral  </h4>
+                                    <a href="@Url.Action("CurrentReferral", "Marketing")" class=" btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Referral
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Campaing Name</label>
+                                                    <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Name">
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Country</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Country</option>
+                                                        <option>United kingdom (GBP)</option>
+                                                        <option>Nigeria (NGN)</option>
+                                                        <option>Cameroon (XAF)</option>
+                                                        <option>Ghana (GHS)</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select City</option>
+                                                        <option>Delhi</option>
+                                                        <option>Kathmandu</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Target User</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Target User</option>
+                                                        <option>All</option>
+                                                        <option>Agent </option>
+                                                        <option>Sender</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Services</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Service</option>
+                                                        <option>KiiPay Wallet</option>
+                                                        <option>Bank Deposit</option>
+                                                        <option>Cash Pickup</option>
+                                                        <option>Other Wallet</option>
+                                                        <option>Bill Payment</option>
+                                                        <option>Top-up</option>
+                                                        <option>Service Payment</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Reward Type</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Reward Type</option>
+                                                        <option>Cash Give Away</option>
+                                                        <option>Fee Free Transfer</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Cash Give Away</label>
+                                                    <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount">
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Free Fee Away</label>
+                                                    <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Number of Free Fee Transfers">
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Start Date</label>
+                                                    <input type="text" name="date" class="form-control form-control-lg form-control-round form-control-bold" placeholder="10/24/1984">
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>End Date</label>
+                                                    <input type="text" name="date" class="form-control form-control-lg form-control-round form-control-bold" placeholder="10/24/1984">
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Staff</label>
+                                                    <input type="text" class="form-control form-control-lg form-control-round"
+                                                           placeholder="">
+
+                                                </div>
+
+                                                <!--  -->
+
+
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <button type="button" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</button>
+
+                                            <button type="button" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+}

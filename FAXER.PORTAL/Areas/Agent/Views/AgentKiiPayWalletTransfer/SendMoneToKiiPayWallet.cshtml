@@ -1,0 +1,402 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SendMoneToKiiPayWalletViewModel
+@{
+    ViewBag.Title = "SendMoneToKiiPayWallet";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+@*@using (Html.BeginForm())
+    {
+        @Html.HiddenFor(x => x.Id)
+
+        @Html.HiddenFor(model => model.CountryPhoneCode, new { id = "CountryPhoneCode" })
+
+        @Html.HiddenFor(x => x.Country)
+
+
+        <div class="real_form pattern2 pdt40 ">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-8 col-lg-offset-2 ">
+
+
+                        <div class="login_signup mb50 clearfix  ">
+                            <div class="row ">
+
+                                <div class="col-lg-6">
+                                    <h3>Send Money to a KiiPay Wallet</h3>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="input-group stylish-input-group">
+                                        @Html.TextBoxFor(model => model.Search, new { @class = "form-control", @placeholder = "Search mobile No./ EmailAddress", @id = "AccountNo/PhoneNo" })
+                                        <span class="input-group-addon">
+                                            <button type="button" class="" onclick="getFaxerDetails()">
+                                                <span class="glyphicon glyphicon-search"></span>
+                                            </button>
+                                        </span>
+                                    </div>
+                                    @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("InvalidCountry", "", new { @class = "text-danger" })
+                                </div>
+
+
+                            </div>
+                            <div class="clearfix">
+
+                            </div>
+                            <hr>
+                            <div class="row Faxer">
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-blue", @placeholder = "Enter First Name" })
+                                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-blue", @placeholder = "Enter Middle Name" })
+                                        @Html.ValidationMessageFor(model => model.MiddleName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Last/Family Name</label>
+                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-blue", @placeholder = "Enter Last/Family Name" })
+                                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Date of Birth  </label>
+                                        @Html.EditorFor(model => model.DOB, new { htmlAttributes = new { @class = "form-blue", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.DOB, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessage("InvalidAge", "", new { @class = "text-danger" })
+                                        @Html.ValidationMessage("", "", new { @class = "text-danger" })
+
+
+
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+
+
+
+
+
+
+                            </div>
+
+                            <h3>Identification Information</h3>
+                            <hr>
+
+                            <div class="row Faxer">
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>ID Type <span class="required">*</span></label>
+                                        @Html.DropDownListFor(model => model.IdType, (IEnumerable<SelectListItem>)ViewBag.IDTypes, "Select ID Types", new { @class = "form-blue" })
+                                        @Html.ValidationMessageFor(model => model.IdType, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>ID Number <span class="required">*</span></label>
+                                        @Html.TextBoxFor(model => model.IdNumber, new { @class = "form-blue", @placeholder = "Enter ID Number" })
+                                        @Html.ValidationMessageFor(model => model.IdNumber, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Expiry Date <span class="required">*</span></label>
+
+                                        @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "form-blue", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.ExpiryDate, "", new { @class = "text-danger" })
+                                        @Html.ValidationMessage("IDExpired", "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Issuing Country <span class="required">*</span></label>
+
+                                        @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.countries, "Select Issusing Country", new { @class = "form-blue", @id = "CountryCode", @onclick = "GetCountryPhoneCode();" })
+                                        @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+                                <div class="clearfix">
+
+                                </div>
+
+
+
+
+                            </div>
+
+
+                            <h3>Address</h3>
+                            <hr>
+
+                            <div class="row Faxer">
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Address Line 1 <span class="required">*</span></label>
+                                        @Html.TextBoxFor(model => model.AddressLine1, new { @class = "form-blue", @placeholder = "Enter Address Line 1" })
+                                        @Html.ValidationMessageFor(model => model.AddressLine1, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Address Line 2</label>
+                                        @Html.TextBoxFor(model => model.AddressLine2, new { @class = "form-blue", @placeholder = "Enter Address Line 2" })
+                                        @Html.ValidationMessageFor(model => model.AddressLine2, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Postcode/Zipcode</label>
+                                        @Html.TextBoxFor(model => model.PostCode, new { @class = "form-blue", @placeholder = "Enter Postcode/Zipcode" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Country <span class="required">*</span></label>
+                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue" })
+                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                                <div class="clearfix">
+
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group contact-no-group">
+                                        <label>Mobile Number <span class="required">*</span></label>
+
+                                        <div class="countr-code-lg">
+                                            <span id="CountryPhoneCodeSpan"> @Model.CountryPhoneCode </span>
+                                        </div>
+                                        @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-blue contact-no-lg", @placeholder = "Enter Mobile Number ", @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="col-lg-6">
+                                    <div class="form-group mb30">
+                                        <label>Email Address  </label>
+                                        @Html.TextBoxFor(model => model.Email, new { @class = "form-blue", @placeholder = "Enter Email Address(Optional)" })
+                                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                        <div class="text-center   clearfix">
+                            <hr>
+
+                            <button type="submit" class="btn btn-primary btn-lg  mb30 " id="submit">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                             back btn
+                            <div class="clearfix ">
+
+                                <center>
+                                    <a href="@Url.Action("Index","TransferMoney")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                             back btn end
+                        </div>
+                    </div>
+
+
+
+                </div>
+
+            </div>
+        </div>
+    }
+    @if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+    {
+        <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <h4>@ViewBag.AgentResult.Message</h4>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    }*@
+
+
+
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-8 col-lg-offset-2 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center ">
+                        <h3>Sender's Details</h3>
+                        <hr>
+                        <br>
+                        <a class="btn btn-lg btn-primary mb20" data-toggle="collapse" data-target="#recentsender">Recent Sender <i class="fa fa-angle-down"></i></a>
+                        <div class="col-lg-8 col-lg-offset-2 collapse" id="recentsender">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Search, new { @class = "form-control", @placeholder = "Enter telephone / email", @id = "AccountNo/PhoneNo" })
+                                @Html.ValidationMessage("Search", "", new { @class = "text-danger" })
+                                @Html.ValidationMessage("InvalidAccount", "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <a class="btn btn-lg btn-primary mb20" href="@Url.Action("AddSenderDetails","AgentBankAccountDeposit")">New Sender <i class="fa fa-plus"></i></a>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back(1)" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        $("#submit").click(function () {
+
+            $("#loader").show();
+            $("form").submit();
+        })
+
+        function getFaxerDetails() {
+            $("#loader").show();
+            var AccountNoORPhoneNo = document.getElementById("AccountNo/PhoneNo").value;
+            window.location.href = "/Agent/AgentKiiPayWalletTransfer/SendMoneToKiiPayWallet?AccountNoORPhoneNo=" + AccountNoORPhoneNo;
+        }
+
+         var Searched = "@Model.Searched" =="True" ;
+        $('.Faxer input').prop('readonly', Searched);
+        $('.Faxer select').prop("readonly", Searched);
+
+
+        $('.Address input').prop('readonly', Searched);
+        $('.Address select').prop("readonly", Searched);
+
+        function GetCountryPhoneCode() {
+
+            var countryCode = $("#CountryCode").val();
+            $.getJSON("/SenderBankAccountDeposit/GetCountryPhonCode?CountryCode=" + countryCode, function (result) {
+
+
+                $("#CountryPhoneCodeSpan").text(result.CountryCode)
+                $("#CountryPhoneCode").text(result.CountryCode)
+            })
+
+        }
+
+    </script>
+}
+
+

@@ -1,0 +1,111 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessBusinessWalletProfileVM
+@{
+    ViewBag.Title = "ViewProfile";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2  ">
+
+                <div class="login_signup mb50 clearfix">
+                    <h3> Business Wallet Profile </h3>
+                    <hr>
+
+
+
+                    <div class=" ">
+                        <!--  -->
+                        <div class="profileinfo">
+
+                            <div class="gear">
+                                <label>Name of Business:</label>
+                                <span id="fullname" class="datainfo">@Model.NameofBusiness</span>
+                            </div>
+
+                            <div class="gear">
+                                <label>Business License:</label>
+                                <span id="Address" class="datainfo">@Model.BusinessLicense</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Address:</label>
+                                <span id="website" class="datainfo">@Model.Address</span>
+
+                            </div>
+                            <div class="gear">
+                                <label>Country:</label>
+                                <span id="Address" class="datainfo">@Model.Country</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Telephone / Wallet Number:</label>
+                                <span id="Phone" class="datainfo">@Model.TelephoneWalletNumber</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Email:</label>
+                                <span id="fax" class="datainfo">@Model.Email</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Bill Issuing Company</label>
+                                <span id="email" class="datainfo">@Model.BillIssuingCompany</span>
+
+                            </div>
+
+                            <h3>  Contact Person </h3>
+                            <hr>
+                            <div class="gear">
+                                <label>Name:</label>
+                                <span id="website" class="datainfo">@Model.ContactPersonName</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Address:</label>
+                                <span id="website" class="datainfo">@Model.ContactPersonAddress</span>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Country:</label>
+                                <span id="website" class="datainfo">@Model.ContactPersonCountry</span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <div class="text-center">
+                            <a href="@Url.Action("UpdateBusinessWalletProfile")" class="btn btn-sm btn-primary radius-20 mb30">Edit Profile</a>
+
+                        </div>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+</div>

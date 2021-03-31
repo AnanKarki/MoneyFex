@@ -1,0 +1,108 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessRegisterECardUserIdentificationInformationVM
+@{
+    ViewBag.Title = "IdentificationInformation";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>KiiPay User Registration</h3>
+                        <hr>
+
+                        <div class="pinside40">
+                            <p><b>Enter  Identification Information</b> </p>
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.DropDownListFor(model => model.IDCardType , (IEnumerable<SelectListItem>)ViewBag.IDCardTypes
+                                                    , "Select ID Card Type",  new { @class= "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.IDCardType, "", new { @class = "text-danger" })
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.TextBoxFor(model => model.IDCardNumber, new { @type = "text", @placeholder = "Enter ID Card Number", @class = "form-control" })
+                            </div>
+                            <!--  -->
+                            @Html.ValidationMessageFor(model => model.IDCardNumber, "", new { @class = "text-danger" })
+
+                            <div class="row">
+
+                                <div class="col-lg-12 text-left">
+                                    <label>Expiring Date</label>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.ExpiringDateDay, new { @type = "number", @placeholder = "Day", @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ExpiringDateDay, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.EnumDropDownListFor(model => model.ExpiringDateMonth, "", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ExpiringDateMonth, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.ExpiringDateYear, new { @type = "number", @placeholder = "Year", @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ExpiringDateYear, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+
+                            </div>
+
+
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.DropDownListFor(model => model.IDIssueCountry , (IEnumerable<SelectListItem>)ViewBag.Countries
+                                                                                   , "Select ID Issuing Country",  new { @class= "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.IDIssueCountry, "", new { @class = "text-danger" })
+                            <!--  -->
+
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}

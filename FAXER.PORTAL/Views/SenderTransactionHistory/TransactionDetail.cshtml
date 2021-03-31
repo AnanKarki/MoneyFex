@@ -1,0 +1,1112 @@
+﻿@model FAXER.PORTAL.Models.SenderTransactionHistoryViewModel
+@{
+    ViewBag.Title = "TransactionDetail";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string ExchangeRateAmountOne = "1";
+}
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="kiipay-main-header">
+
+
+                <div class="clearfix">
+
+                </div>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+
+
+                <div class=" login_signup ">
+
+                    <div class="clearfix">
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.CashPickUp)
+                        {
+                            <!-- CashPickUp -->
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>MFCN:  @Model.TransactionDetails.AccountNumber<br><span class="text-primary"> @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.TotalAmount  @Model.TransactionDetails.SendingCurrency</span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+
+                                    @if (Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.Received || Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.Hold || Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.NotReceived)
+                                    {
+
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>Awaiting Pickup</h4>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                            <h4 class="text-success">  @Model.TransactionDetails.StatusName</h4>
+                                        </div>
+                                    }
+                                    else
+                                    { <!--  -->
+                                        <!--  -->
+                                        <!--  -->
+                                        <!--  -->
+                                        if (Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.Refund)
+                                        {
+
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+                                                    <i class="fa fa-repeat"></i>
+                                                </div>
+                                                <h4>Refunded</h4>
+                                            </div>
+                                        }
+                                        else if (Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.PaymentPending)
+                                        {
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+                                                    <i class="fa fa-exclamation"></i>
+                                                </div>
+                                                <h4>Payment Pending</h4>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+                                                    <i class="fa fa-close"></i>
+                                                </div>
+                                                <h4>Cancelled</h4>
+                                            </div>
+                                        }
+
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  last">
+                                            </div>
+
+                                        </div>
+                                    }
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+                                        <div class="table-responsive " id="printtemplate">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+                                                    @*<tr>
+
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.ReceiverCity</td>
+
+                                                        </tr>*@
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        @*<td class="text-left">  @Model.TransactionDetails.ReceivingCurrencySymbol<span class="formattedAmount"> @Model.TransactionDetails.ReceivingAmount </span> </td>*@
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> 1  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        @if (Model.TransactionDetails.Status == FAXER.PORTAL.DB.FaxingStatus.PaymentPending)
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeat('@Model.TransactionDetails.AccountNumber',  @Model.TransactionDetails.Id)"> Pay Now</button>
+                                            <a href="@Url.Action("DeletePendingTransaction", "SenderTransactionHistory",new { @id= Model.TransactionDetails.Id , @transactionService = Model.TransactionDetails.TransactionServiceType })" class="btn btn-warning radius-20">Cancel</a>
+
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-primary radius-20" onclick="repeatCashPickUp(@Model.TransactionDetails.AccountNumber,  @Model.TransactionDetails.Id);">Repeat Transfer</a>
+
+                                            @*<a id="receiptPrint" class="btn btn-warning radius-20">Print</a>*@
+                                            <a href="@Url.Action("printReceipt", "RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", MFCN = Model.TransactionDetails.Reference })" class="btn btn-warning radius-20" target="_blank">print</a>
+                                        }
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+
+
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.KiiPayWallet)
+                        {
+                            <!-- CashPickUp -->
+
+
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>KiiPay Wallet<br><span class="text-primary"> @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.TotalAmount  @Model.TransactionDetails.SendingCurrency</span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle  active">
+
+                                        </div>
+                                        <h4>Awaiting Payment</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active last">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <h4 class="text-success">Completed</h4>
+                                    </div>
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+
+
+                                        <div class="table-responsive ">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+                                                    @*<tr>
+
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.ReceiverCity</td>
+
+                                                        </tr>*@
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Wallet No</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Reference </td>
+                                                        <td class="text-left">  @Model.TransactionDetails.Reference</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> 1  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <button class="btn btn-primary radius-20" onclick="repeatKiiPayWallet(@Model.TransactionDetails.AccountNumber,  @Model.TransactionDetails.Id);">Pay Wallet Again</button>
+                                        <button class="btn btn-warning radius-20">Print</button>
+
+
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+
+                        <!-- Model.TransactionDetails end -->
+                        <!-- Model.TransactionDetails -->
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.MobileWallet)
+                        {
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>Mobile Wallet<br><span class="text-primary"> @Model.TransactionDetails.TransactionIdentifier </span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    @if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.PaymentPending)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+                                                <i class="fa fa-exclamation"></i>
+                                            </div>
+                                            <h4>Payment Pending</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+                                    else if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.InProgress
+
+                                       || Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.IdCheckInProgress
+                                       || Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.PendingBankdepositConfirmtaion
+                                       || Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.Abnormal)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+                                                <i class="fa fa-exclamation"></i>
+                                            </div>
+                                            <h4>In Progress</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+
+                                            </div>
+                                        </div>
+
+
+
+                                    }
+                                    else if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.Paid)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>Awaiting Payment</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                            <h4 class="text-success">Completed</h4>
+                                        </div>
+
+
+                                    }
+                                    else if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.Paid)
+                                    {
+
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>In Progress</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+                                            <h4 class="text-success">Completed</h4>
+                                        </div>
+                                    }
+                                    else if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.Cancel
+                                        )
+                                    {
+
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>In Progress</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+                                                <i class="fa fa-close"></i>
+                                            </div>
+                                            <h4 class="text-danger">Cancel</h4>
+                                        </div>
+                                    }
+                                    else if (Model.TransactionDetails.StatusofMobileTransfer == FAXER.PORTAL.DB.MobileMoneyTransferStatus.Failed
+                                    )
+                                    {
+
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>In Progress</h4>
+                                        </div>
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active last">
+                                                <i class="fa fa-close"></i>
+                                            </div>
+                                            <h4 class="text-danger">Failed</h4>
+                                        </div>
+                                    }
+
+                                    <!--  -->
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+
+
+                                        <div class="table-responsive ">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+                                                    @*<tr>
+
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.ReceiverCity</td>
+
+                                                        </tr>*@
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Wallet No</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> 1  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        @if (Model.TransactionDetails.statusOfMobileWallet == FAXER.PORTAL.DB.MobileMoneyTransferStatus.PaymentPending)
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeat(' @Model.TransactionDetails.AccountNumber',  @Model.TransactionDetails.Id)"> Pay Now</button>
+                                            <a href="@Url.Action("DeletePendingTransaction", "SenderTransactionHistory",new { @id= Model.TransactionDetails.Id , @transactionService = Model.TransactionDetails.TransactionServiceType })" class="btn btn-warning radius-20">Cancel</a>
+
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeatMobileWallet( @Model.TransactionDetails.AccountNumber,  @Model.TransactionDetails.Id)">Pay Wallet Again</button>
+
+                                            <a href="@Url.Action("printReceiptOfMobileWallet", "RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", @AccountNo = Model.TransactionDetails.AccountNumber, @Id = Model.TransactionDetails.Id })" class="btn btn-warning radius-20" target="_blank">Print</a>
+                                        }
+
+
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+                        }
+
+
+                        <!-- Model.TransactionDetails end -->
+                        <!-- Model.TransactionDetails -->
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.BillPayment)
+                        {
+                            <!-- CashPickUp -->
+
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>Bill Payment<br><span class="text-primary"> @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.GrossAmount  @Model.TransactionDetails.SendingCurrency</span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle  active">
+
+                                        </div>
+                                        <h4>Awaiting Payment</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active last">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <h4 class="text-success">Completed</h4>
+                                    </div>
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+
+                                        <div class="table-responsive ">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+                                                    @*<tr>
+
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.ReceiverCity</td>
+
+                                                        </tr>*@
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Wallet No</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Bill Reference No.</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.BillReferenceNo</td>
+                                                    </tr>
+
+
+                                                    @if (Model.TransactionDetails.BillpaymentCode == "BP")
+                                                    {
+                                                        <tr>
+                                                            <td class="text-left">Bill No.</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.BillNo</td>
+                                                        </tr>
+                                                    }
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        <td class="text-left">   @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> 1  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        @if (Model.TransactionDetails.BillpaymentCode == "BP")
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeatBillPayment(@Model.TransactionDetails.AccountNumber, @Model.TransactionDetails.Id);">Pay Wallet Again</button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeatTopUp(@Model.TransactionDetails.AccountNumber, @Model.TransactionDetails.Id);">Pay Wallet Again</button>
+
+                                        }
+                                        <button class="btn btn-warning radius-20">Print</button>
+
+
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+
+                        <!-- Model.TransactionDetails end -->
+                        <!-- Model.TransactionDetails -->
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.ServicePayment)
+                        {
+                            <!-- CashPickUp -->
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>Service Pyt<br><span class="text-primary"> @Model.TransactionDetails.SendingCurrencySymbol <span class="TotalAmount">  @Model.TransactionDetails.TotalAmount</span>  @Model.TransactionDetails.SendingCurrency</span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle  active">
+
+                                        </div>
+                                        <h4>Awaiting Payment</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active last">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                        <h4 class="text-success">Completed</h4>
+                                    </div>
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+
+
+                                        <div class="table-responsive ">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+                                                    @*<tr>
+
+                                                            <td class="text-left">City</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.ReceiverCity</td>
+
+                                                        </tr>*@
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Wallet No</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Reference</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.Reference</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol  @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> 1  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                        @if (Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.PaymentPending)
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeat('@Model.TransactionDetails.AccountNumber',  @Model.TransactionDetails.Id)"> Pay Now</button>
+                                            <a href="@Url.Action("DeletePendingTransaction", "SenderTransactionHistory" ,new { @id= Model.TransactionDetails.Id , @transactionService = Model.TransactionDetails.TransactionServiceType })" class="btn btn-warning radius-20">Cancel</a>
+
+                                        }
+                                        else
+                                        {
+
+                                            <button class="btn btn-primary radius-20" onclick="repeatPayForGoodsAndServices(@Model.TransactionDetails.AccountNumber,  @Model.TransactionDetails.Id)">Pay Wallet Again</button>
+                                            <button class="btn btn-warning radius-20">Print</button>
+                                        }
+
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+
+                        <!-- Model.TransactionDetails end -->
+                        @if (Model.FilterKey == FAXER.PORTAL.Models.TransactionServiceType.BankDeposit)
+                        {
+                            <!-- CashPickUp -->
+
+                            <div class="transfer-progress clearfix">
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress">
+                                        <h4><b>1.</b>  @Model.TransactionDetails.ReceiverName<br><span class="text-primary"> @Model.TransactionDetails.Date</span></h4>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-xs-6">
+                                    <div class="details-progress text-right">
+                                        <h4>Bank Deposit<br><span class="text-primary"> @Model.TransactionDetails.TransactionIdentifier</span></h4>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="progress-circle-text-wraper">
+
+
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        <div class="progress-circle active">
+
+                                        </div>
+                                        <h4>Payment Made</h4>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+
+                                    @if (Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.Incomplete || Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.Held || Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.UnHold)
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+
+                                            <div class="progress-circle  active">
+                                                <i class="fa fa-check"></i>
+
+
+                                            </div>
+                                            <h4>Awaiting Payment</h4>
+                                        </div>
+                                    }
+                                    else if (Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.PaymentPending)
+                                    {
+
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+
+                                            <div class="progress-circle  active">
+                                                <i class="fa fa-exclamation"></i>
+
+                                            </div>
+                                            <h4>Payment Pending</h4>
+
+                                        </div>
+
+                                    }
+                                    else
+                                    {
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+
+
+                                            <div class="progress-circle active">
+
+                                            </div>
+                                            <h4>Awaiting Payment</h4>
+                                        </div>
+                                    }
+
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                        @if (Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.Confirm)
+                                        {
+                                            <div class="progress-circle active last">
+
+
+                                                <i class="fa fa-check"></i>
+
+                                            </div>
+                                            <h4 class="text-success">Completed</h4>
+                                        }
+                                        else
+                                        {
+
+                                            <div class="progress-circle active last">
+
+
+                                                <i class=""></i>
+
+                                            </div>
+                                        }
+                                    </div>
+                                    <!--  -->
+                                    <div class="clearfix">
+
+                                    </div>
+                                    <div class="pinside30">
+
+
+
+
+                                        <div class="table-responsive ">
+                                            <table class="table table-bordered">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="text-left">Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceiverName</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Country</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingCountryName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Bank Name</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.BankName</td>
+                                                    </tr>
+                                                    @if (Model.TransactionDetails.IsEuropeTransfer == true)
+                                                    {
+                                                        <tr>
+                                                            <td class="text-left">BIC/SWIFT</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.BankCode</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">IBAN</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                        </tr>
+                                                    }
+                                                    else
+                                                    {
+                                                        <tr>
+                                                            <td class="text-left">Bank Code</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.BankCode</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Account No</td>
+                                                            <td class="text-left">  @Model.TransactionDetails.AccountNumber</td>
+                                                        </tr>
+                                                    }
+
+                                                    <tr>
+                                                        <td class="text-left">Reference</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.Reference</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Sending Amount</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.GrossAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Fee</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.Fee</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Amount Paid</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.SendingCurrencySymbol @Model.TransactionDetails.TotalAmount</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left"> @Model.TransactionDetails.ReceiverName will Receive</td>
+                                                        <td class="text-left">  @Model.TransactionDetails.ReceivingAmount  @Model.TransactionDetails.ReceivingCurrrency  </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Exchange Rate</td>
+                                                        <td class="text-left"> @ExchangeRateAmountOne  @Model.TransactionDetails.SendingCurrency =  @Model.TransactionDetails.ExchangeRate  @Model.TransactionDetails.ReceivingCurrrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Payment Method</td>
+                                                        <td class="text-left"> @Model.TransactionDetails.PaymentMethod</td>
+                                                    </tr>
+                                                <td class="text-left">Date</td>
+                                                <td class="text-left"> @Model.TransactionDetails.Date</td>
+                                                <tr></tr>
+                                                <tr></tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+
+                                        @if (Model.TransactionDetails.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.PaymentPending)
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeat('@Model.TransactionDetails.AccountNumber', @Model.TransactionDetails.Id)"> Pay Now</button>
+                                            <a href="@Url.Action("DeletePendingTransaction","SenderTransactionHistory",new { @id= Model.TransactionDetails.Id , @transactionService = Model.TransactionDetails.TransactionServiceType })" class="btn btn-warning radius-20">Cancel</a>
+
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary radius-20" onclick="repeat(' @Model.TransactionDetails.AccountNumber',  @Model.TransactionDetails.Id)"> Pay Account Again</button>
+                                            @*<button class="btn btn-warning radius-20">Print</button>*@
+                                            <a href="@Url.Action("printReceiptOfManualDeposit", "RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", @AccountNo = Model.TransactionDetails.AccountNumber , @Id = Model.TransactionDetails.Id})" class="btn btn-warning radius-20" target="_blank">Print</a>
+
+                                        }
+
+
+
+                                        <div class="clearfix">
+                                        </div>
+
+                                    </div>
+
+                                    <div class="clearfix"> </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+
+                    </div>
+                    <!--  btn -->
+                    <div class="clearfix ">
+                        <hr>
+                        <center>
+                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!--  btn end-->
+
+                    @RenderPage("~/Views/Shared/_mobile-menu-dashboard.cshtml")
+                </div>
+
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+    </div>
+    <!--  -->
+</section>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function repeat(accountNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/Repeat?accountNo=" + accountNo + "&id=" + id;
+        };
+        function repeatCashPickUp(MFCN, id) {
+            window.location.href = "/SenderTransactionHistory/RepeatCashPickUp?MFCN=" + MFCN + "&id=" + id;
+        };
+        function repeatKiiPayWallet(MobileNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/RepeatKiiPayWallet?MobileNo=" + MobileNo + "&id=" + id;
+        };
+
+        function repeatPayForGoodsAndServices(MobileNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/RepeatPayForGoodsAndServices?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatMobileWallet(MobileNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/RepeatMobileWallet?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatBillPayment(MobileNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/RepeatBillPayment?MobileNo=" + MobileNo + "&id=" + id;
+        };
+        function repeatTopUp(MobileNo, id) {
+            debugger;
+            window.location.href = "/SenderTransactionHistory/RepeatTopUp?MobileNo=" + MobileNo + "&id=" + id;
+
+        }
+
+        $('.TotalAmount').text(GetFormattedAmount($('.TotalAmount').text()));
+                                                                                                                                                                                                            //$('.GrossAmount').text(GetFormattedAmount($('.GrossAmount').text()));
+                                                                                                                                                                                                            //$('.Fee').text(GetFormattedAmount($('.Fee').text()));
+                                                                                                                                                                                                            //$('.TotalAmount').text(GetFormattedAmount($('.TotalAmount').text()));
+                                                                                                                                                                                                            //$('.ReceiveAmount').text(GetFormattedAmount($('.ReceiveAmount').text()));
+
+    </script>
+}

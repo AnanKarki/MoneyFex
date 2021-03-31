@@ -1,0 +1,74 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml"; ;
+}
+
+<div style="padding : 20px">
+
+    <h4 style="text-align:center">
+        Cash withdrawal Receipt
+    </h4>
+
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>MF Receipt Number</b></td>
+                <td><b>@ViewBag.ReceiptNo</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.Date</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.Time</b></td>
+            </tr>
+            <tr>
+                <td><b>Agent Name </b></td>
+                <td><b>@ViewBag.AgentName</b></td>
+            </tr>
+            <tr>
+                <td><b>Agent Account No</b></td>
+                <td><b>@ViewBag.AgentAccountNo</b></td>
+            </tr>
+            <tr>
+                <td><b>Withdrawal type</b></td>
+                <td><b>@ViewBag.WithdrawalType</b></td>
+            </tr>
+            @if (ViewBag.IsWithdrawalByAgent == false)
+            {
+            <tr>
+                <td><b>MoneyFex Staff Name</b></td>
+                <td><b>@ViewBag.StaffName </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Staff Code</b></td>
+                <td><b>@ViewBag.StaffCode </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Withdrawal Code</b></td>
+                <td><b>@ViewBag.WithdrawalCode </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Admin Code Generator</b></td>
+                <td><b>@ViewBag.AdminCodeGenerator </b></td>
+            </tr>
+            }
+            <tr>
+                <td><b>Withdrawal Amount</b></td>
+                <td><b>@ViewBag.WithdrawalAmount @ViewBag.Currency</b></td>
+            </tr>
+
+            
+
+        </tbody>
+    </table>
+
+    <br />
+    <p style="text-align:center"><b>This is confirmation of withdrawal from Agent Account</b></p>
+</div>
+

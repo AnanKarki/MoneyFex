@@ -1,0 +1,124 @@
+﻿@model List<FAXER.PORTAL.Models.SenderSavedBanklAccountVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Saved Bank Account</h3>
+                        <hr>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Bank Account</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.BankName <br>Account No.<span class="text-primary">@item.FormattedAccNo</span></td>
+                                            <td><span class="text-success">Active</span></td>
+                                            <td>
+                                                <a class="btn btn-danger radius-20 btn-sm btn-block" data-toggle="modal" onclick="showDeleteModal(@item.Id)">Remove</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <hr>
+                            <a href="@Url.Action("AddNewBankAccount", "SenderPersonalKeyPayBankAccount")"><i class="fa fa-plus"></i> Add a New Bank Account</a>
+                        </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+
+
+
+                        <!-- back btn -->
+                        <div class="clearfix">
+                            <hr>
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- Delete Confirmation -->
+    <div id="delete" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md text-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">  Confirmation</h4>
+                </div>
+                <div class="modal-body uk-text-center ">
+
+                    <h4 class="mt40"> Do you want to delete this account?</h4>
+                    <hr>
+                    <button type="button" class="btn btn-primary   radius-20" data-dismiss="modal" onclick="Remove() ">Yes</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- Delete Confirmation end -->
+}
+@section scripts{
+    <script type="text/javascript">
+
+        var bankId = 0;
+
+        function showDeleteModal(id) {
+            $("#delete").modal('show');
+            bankId = id;
+        }
+
+        function Remove() {
+            debugger;
+            var url = "/SenderPersonalKeyPayBankAccount/Delete?id=" + bankId;
+            $.getJSON(url)
+                .done(function (data) {
+                    if (data == true) {
+                        $("#delete").modal('hide');
+                    }
+
+                });
+            window.location.reload(true);
+        }
+    </script>
+}

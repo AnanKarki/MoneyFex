@@ -1,0 +1,114 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MerchantNationalPaymentAmountViewModel
+@{
+    ViewBag.Title = "PaymentAmount";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+
+    string FaxingCurrency = FAXER.PORTAL.Common.BusinessSession.FaxingCurrency ?? "";
+    string FaxingCurrencySymbol = FAXER.PORTAL.Common.BusinessSession.FaxingCurrencySymbol ?? "";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1 row">
+
+                <h1>
+                    Pay for goods &  services
+
+                    <span class="pull-right account-balance">Account Balance :<strong class="  text-primary italic"> @ViewBag.CreditonCard</strong></span>
+                </h1>
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+
+<form method="post">
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <h4>Payment Amount</h4>
+                    <hr>
+
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Paying Amount </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.FaxingAmount, new { @class = "form-control"  , type="number"})
+                                <span class="input-group-addon">@FaxingCurrency</span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FaxingAmount, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <br>
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Payment Reference</label>
+                    </div>
+
+                    <div class="col-lg-4 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.PaymentReference, new { @class = "form-control", @placeholder = "E.g. First Name-Fee Payment", maxlength = 20 })
+
+                            @Html.ValidationMessageFor(model => model.PaymentReference, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <a href="@Url.Action("MerchantDetails", new { @MerchantAccountNo=FAXER.PORTAL.Common.BusinessSession.MerchantAccountNumber})" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("MerchantDetails", new { @MerchantAccountNo=FAXER.PORTAL.Common.BusinessSession.MerchantAccountNumber})" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+
+
+

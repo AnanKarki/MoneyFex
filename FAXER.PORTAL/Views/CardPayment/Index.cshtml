@@ -1,0 +1,375 @@
+﻿@model FAXER.PORTAL.Models.CreditDebitCardViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var FaxingCurrency = "";
+    var FaxingCurrencySymbol = "";
+
+    if (Model != null)
+    {
+
+        FaxingCurrency = Model.FaxingCurrency ?? "";
+        FaxingCurrencySymbol = Model.FaxingCurrencySymbol ?? "";
+
+    }
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="progress">
+        <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+             aria-valuemin="0" aria-valuemax="100" style="width:28%">
+
+        </div>
+        <div class="arrow"></div>
+    </div>
+
+
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h1>Deposit using Credit/Debit Card</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!--  -->
+                    @Html.HiddenFor(model => model.FaxingCurrency)
+                    @Html.HiddenFor(model => model.FaxingCurrencySymbol)
+                    <div class="col-lg-5">
+                        <label> Amount  </label>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.FaxingAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+
+                            <span class="input-group-addon">@FaxingCurrency</span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.FaxingAmount, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="clearfix"><br></div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                       
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+                            @Html.ValidationMessage("ErrorMessage", "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="col-lg-5">
+                        <label> Name on Card </label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.NameOnCard, new { htmlAttributes = new { @class = "form-control", @placeholder = "Name on Card" } })
+                            @Html.ValidationMessageFor(model => model.NameOnCard, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> Card Number</label>
+                    </div>
+
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Number" } })
+                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label> End Date</label>
+                    </div>
+
+                    <div class="col-lg-3 ">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.EndMM, new { htmlAttributes = new { @class = "form-control", @placeholder = "EndMonth" } })
+                            @Html.ValidationMessageFor(model => model.EndMM, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 ">
+                        <div class="form-group">
+
+                            @Html.EditorFor(model => model.EndYY, new { htmlAttributes = new { @class = "form-control", @placeholder = "EndYear" } })
+                            @Html.ValidationMessageFor(model => model.EndYY, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Security Code</label>
+                    </div>
+
+                    <div class="col-lg-3 ">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.SecurityCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Security Code" } })
+                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-3 ">
+                        <div class="form-group">
+
+                            <img src="images/code.png">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+                    <hr>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.SaveCard, new { htmlAttributes = new { @class = "form-control", id = "SaveCard" } })
+                                    @Html.ValidationMessageFor(model => model.SaveCard, "", new { @class = "text-danger" })Save this Credit/Debit card for future use
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="clearfix"></div>
+                    <hr>
+                    <h4>Your home & billing Address: </h4>
+                    <p>For security and verification purposes, your home and billing address must be same</p>
+
+                    <!--  -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.AddressLineOne, new { htmlAttributes = new { @class = "form-control", placeholder = "Address line 1" } })
+                            @Html.ValidationMessageFor(model => model.AddressLineOne, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.AddressLineTwo, new { htmlAttributes = new { @class = "form-control", placeholder = "Address line 2 (optional)" } })
+                            @Html.ValidationMessageFor(model => model.AddressLineTwo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.CityName, new { htmlAttributes = new { @class = "form-control", placeholder = "City" } })
+                            @Html.ValidationMessageFor(model => model.CityName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Post/Zip Code" } })
+                            @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+                        <div class="form-group">
+
+                            @Html.DropDownListFor(model => model.CountyName, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                            @*@Html.EditorFor(model => model.CountyName, new { htmlAttributes = new { @class = "form-control", placeholder = "Country Name" } })*@
+                            @Html.ValidationMessageFor(model => model.CountyName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="clearfix"></div>
+                    @if (ViewBag.AutoTopup == 0)
+                    {
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label>Would you like to auto deposit money into this Receiver Virtual Account ?</label>
+                                <div class="checkbox">
+                                    @*@Html.CheckBoxFor(model => model.AutoTopUp, new { @class = "form-control", @id = "Auto", @onChange = "ABC();" })
+                        @Html.ValidationMessageFor(model => model.AutoTopUp, "", new { @class = "text-danger" }) Yes*@
+                                    <label>@Html.CheckBoxFor(model => model.AutoTopUp, new { id = "Auto" })Yes</label>
+
+                                    @*<label><input type="checkbox" name="prog" value="Yes"> Yes</label>*@
+
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    <div class="col-lg-4">
+
+                        <div id="submit_prog">
+                            <h5>Select deposit Amount</h5>
+                            <input list="browsers" name="AutoTopUpAmount" class="form-control" />
+                            <datalist id="browsers">
+                                <option value="10">
+                                <option value="20">
+                                <option value="50">
+                                <option value="100">
+                                <option value="150">
+                                <option value="200">
+                            </datalist>
+                        </div>
+                    </div>
+                    @if (ViewBag.AutoTopup == 0)
+                    {
+                        <div class="col-lg-12">
+                            <p><b>This MoneyFex Receiver Virtual Account will be credited as soon as the balance in the account reaches zero (0). Additionally, the exchange rates and fees at the time will be applied.</b></p>
+                        </div>
+                    }
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <div class="checkbox">
+                                <label>
+                                    @Html.CheckBoxFor(model => model.Confirm, new { htmlAttributes = new { @class = "form-control" } })
+                                    Accept our Terms and Conditions
+                                    @Html.ValidationMessageFor(model => model.Confirm, "", new { @class = "text-danger" })
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <input type="hidden" value="@ViewBag.CardCount" id="CardCount">
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="/PaymentMethod/Index" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Review Payment <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="credit_debit_card_validation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-dialog" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex Alert Message</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <p>
+                                Please save credit/debit Card to Enable Auto Deposit Money
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        //var checker = document.getElementById('acceptCheck');
+        //var sendbtn = document.getElementById('nextBtn');
+        //sendbtn.disabled = !this.checked;
+        //checker.onchange = function () {
+        //    sendbtn.disabled = !this.checked;
+        //};
+        $(document).ready(function () {
+            $('#Auto').click(function (event) {
+                if (this.checked) {
+
+                    var Count = $("#CardCount").val();
+                    var TONum = parseInt(Count);
+                    if ($("#SaveCard").prop("checked") == true) {
+
+                        $('#submit_prog').show();
+                    }
+                    else if (TONum > 0) {
+
+                        $('#submit_prog').show();
+
+                    }
+                    else {
+
+                        $('#submit_prog').hide();
+                        $("#Auto").prop("checked", false);
+                        $("#credit_debit_card_validation").modal("show");
+
+                    }
+                }
+
+
+
+                else {
+                    $('#submit_prog').hide()
+                }
+            });
+            $('#SaveCard').click(function (event) {
+                var Count = $("#CardCount").val();
+                var TONum = parseInt(Count);
+                if (TONum == 0) {
+                    if (this.checked == false && $("#Auto").prop("checked") == true) {
+
+
+                        $('#submit_prog').hide();
+                        $("#Auto").prop("checked", false);
+                        $("#credit_debit_card_validation").modal("show");
+
+                    }
+                    else {
+
+                    }
+                }
+            });
+
+        });
+
+
+    </script>
+
+}

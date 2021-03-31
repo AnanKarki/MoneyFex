@@ -1,0 +1,822 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PaySomeoneElseCardByAdminViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    var CardUrl = "";
+    var InvalidSenderDetails = false;
+    var InvalidCardUserDetails = false;
+
+
+    if (Model != null)
+    {
+        CardUrl = Model.CardUserPhotoURL ?? "";
+        InvalidSenderDetails = Model.InvalidSenderDetails;
+        InvalidCardUserDetails = Model.InvalidCardUserDetails;
+
+    }
+
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@*@using (Html.BeginForm(new { @id="mainForm"}))
+    {*@
+<form method="post" id="mainForm">
+    @Html.AntiForgeryToken()
+    @if (ViewBag.TransactionMessage != null)
+    {
+        <script type="text/javascript">
+
+
+            window.onload = function () {
+               Riddha.UI.Toast("@ViewBag.TransactionMessage", 4);
+
+            };
+
+
+        </script>
+    }
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Form - Portal Pay Someone Else's Account</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard </a></li>
+                        <li class="active">Form - Portal Pay Someone Else's Account</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+
+                        <form>
+                            <div class="col-lg-4 pull-right">
+                                <div class=" ">
+                                    <label>Name of Admin Depositor</label>
+                                    @Html.TextBoxFor(model => model.PayingAdminName, new { @class = "form-control", @placeholder = "Name of Admin Depositor", @readonly = "readonly" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <div class="col-lg-4 pull-right">
+                                <div class="input-group">
+                                    <input type="text" id="SenderAccountNo" name="example-input1-group2" class="form-control " " placeholder="Search Sender Account No">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn waves-effect waves-light btn-info " onclick="GetSenderDetails();"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                                @Html.ValidationMessage("CustomError", "", new { @class = "text-danger" })
+
+
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+
+
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-12">
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Sender's Details</h3>
+                                        </div>
+                                        @Html.HiddenFor(x => x.SenderId, new { @id = "SenderId" })
+                                        @Html.HiddenFor(x => x.SenderCountryCode, new { @id = "FaxingCountry" })
+                                        @Html.HiddenFor(x => x.SenderCurrencySymbol)
+                                        @Html.HiddenFor(x => x.SenderCurrency)
+                                        @Html.HiddenFor(x => x.SenderAccountNo)
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                @Html.TextBoxFor(model => model.SenderFirstName, new { @class = "form-control", placeholder = "First Name", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            @Html.TextBoxFor(model => model.SenderMiddleName, new { @class = "form-control", placeholder = "Middle Name", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+
+                                            <label>Family/Last Name</label>
+                                            @Html.TextBoxFor(model => model.SenderLastName, new { @class = "form-control", placeholder = "Family/Last Name", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Photo Id Card Number</label>
+                                            @Html.TextBoxFor(model => model.SenderIdCardNumber, new { @class = "form-control", placeholder = "Photo Id Card Number", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Photo Id Type</label>
+                                            @Html.TextBoxFor(model => model.SenderIdCardType, new { @class = "form-control", placeholder = "Photo Id Type", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Expiring Date</label>
+                                            @Html.TextBoxFor(model => model.SenderIdCardExpDate, new { @class = "form-control", placeholder = "Expiring Date", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Issuing Country</label>
+                                            @Html.TextBoxFor(model => model.SenderIdCardIssuingCountry, new { @class = "form-control", placeholder = "Issuing Country", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            @Html.TextBoxFor(model => model.SenderAddress, new { @class = "form-control", placeholder = "Address", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            @Html.TextBoxFor(model => model.SenderCity, new { @class = "form-control", placeholder = "City", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            @Html.TextBoxFor(model => model.SenderCountry, new { @class = "form-control", placeholder = "Country", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Telephone</label>
+                                            @Html.TextBoxFor(model => model.SenderTelephone, new { @class = "form-control", placeholder = "Telephone", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <label>Email Address</label>
+                                            @Html.TextBoxFor(model => model.SenderEmail, new { @class = "form-control", placeholder = "Email Address", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+                                </div><div class="clearfix"></div>
+                            </div>
+                            <div class=" border_tbls">
+                                <div class="col-lg-12">
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Virtual Account User's Details</h3>
+                                        </div>
+                                        <div class="col-lg-4 pull-left">
+                                            <div class="input-group">
+                                                <input type="text" id="MFTCCardNo" name="example-input1-group2" class="form-control " placeholder="Search Virtual Account No">
+                                                <span class="input-group-btn">
+                                                    <button type="button" class="btn waves-effect waves-light btn-info " onclick="GetMFTCCardDetails();"><i class="fa fa-search"></i></button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <br /><br /><br />
+                                        <div class="row">
+                                            <div class="col-lg-8">
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>First Name</label>
+                                                        @Html.TextBoxFor(model => model.CardUserFirstName, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Middle Name</label>
+                                                        @Html.TextBoxFor(model => model.CardUserMiddleName, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        @Html.HiddenFor(x => x.CardUserId, new { @id = "CardUserId" })
+                                                        <label>Family/Last Name</label>
+                                                        @Html.TextBoxFor(model => model.CardUserLastName, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Address</label>
+                                                        @Html.TextBoxFor(model => model.CardUserAddress, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.TextBoxFor(model => model.CardUserCity, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Country</label>
+                                                        @Html.HiddenFor(model => model.CardUserCountryCode, new { @id = "ReceivingCountry" })
+                                                        @Html.HiddenFor(model => model.CardUserCurrency)
+                                                        @Html.HiddenFor(model => model.CardUserCurrencySymbol)
+                                                        @Html.TextBoxFor(model => model.CardUserCountry, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4">
+                                                    <div class="form-group">
+                                                        <label>Telephone</label>
+                                                        @Html.TextBoxFor(model => model.CardUserTelephone, new { @class = "form-control",  @readonly = "readonly" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <img src="@CardUrl" width="150" class="img-thumbnail" />
+
+                                            </div>
+                                        </div>
+                                        <div class="row">
+
+
+                                        </div>
+
+
+                                        <div class="col-lg-3">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+
+                                </div><div class="clearfix"></div>
+                            </div>
+
+                            <div class="border_tbls">
+                                <div class="col-lg-12">
+                                    <div class="form-row">
+                                        <div class="col-lg-12">
+                                            <h3>Deposit Details</h3>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label> Enter Deposit Amount</label>
+                                        </div>
+
+                                        <div class="col-lg-1 no-right-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrencySymbol, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-2 no-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.EditorFor(model => model.TopUpAmount, new { htmlAttributes = new { @id = "topUpAmount", @class = "form-control", style = "font-weight:bold;", @placeholder = "Enter Amount in Sender's Currency", @onchange = "getDetails();" } })
+                                                @Html.ValidationMessageFor(model => model.TopUpAmount, "", new { @class = "text-danger" })
+                                                @Html.ValidationMessage("TopUpAmount", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-1 no-left-padding">
+                                            <div class="form-group no-left-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrency, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label>Deposit Fee</label>
+                                        </div>
+                                        <div class="col-lg-1 no-right-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrencySymbol, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-2 no-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.EditorFor(model => model.TopUpFee, new { htmlAttributes = new { @class = "form-control", @readonly = true, style = "font-weight:bold;" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 no-left-padding">
+                                            <div class="form-group no-left-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrency, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix"><br></div>
+                                        <div class="clearfix"><br></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label>Total Amount including Fee</label>
+                                        </div>
+                                        <div class="col-lg-1 no-right-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrencySymbol, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 no-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.EditorFor(model => model.AmountIncludingFee, new { htmlAttributes = new { @class = "form-control", @readonly = true, style = "font-weight:bold;" } })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 no-left-padding">
+                                            <div class="form-group no-left-padding">
+                                                @Html.TextBoxFor(model => model.SenderCurrency, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label>Current Exchange Rate</label>
+                                        </div>
+                                        <div class="col-lg-4 ">
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.CurrentExchangeRate, new { htmlAttributes = new { @class = "form-control", @readonly = true, style = "font-weight:bold;" } })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label>Receiving Amount on Virtual Account</label>
+                                        </div>
+                                        <div class="col-lg-1 no-right-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.TextBoxFor(model => model.CardUserCurrencySymbol, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-2 no-padding">
+                                            <div class="form-group no-padding">
+                                                @Html.EditorFor(model => model.ReceivingAmount, new { htmlAttributes = new { @class = "form-control", id = "ReceivingAmount", @placeholder = "Receiver's Currency", style = "font-weight:bold;", @onchange = "getDetails()" } })
+                                                @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 no-left-padding">
+                                            <div class="form-group no-left-padding">
+                                                @Html.TextBoxFor(model => model.CardUserCurrency, new { @class = "form-control", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="clearfix"></div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-3">
+                                            <label>Deposit Reference</label>
+                                        </div>
+                                        <div class="col-lg-4 ">
+                                            <div class="form-group">
+                                                @Html.EditorFor(model => model.TopUpReference, new { htmlAttributes = new { @class = "form-control", @placeholder = "Deposit reference", style = "font-weight:bold;" } })
+                                                @Html.ValidationMessageFor(model => model.TopUpReference, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                        <div class="clearfix"></div>
+
+                                        <hr>
+
+                                        <div class="col-lg-12">
+                                            <label>Is the Credit/Debit Card Available to transfer this money ?</label>
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <div class="radio radio-success">
+                                                @Html.RadioButtonFor(m => m.IsCardAvailabled, true, new { @class = "radio radio-success disable_fieldset", id = "radio1", @checked = "checked" })
+                                                <label for="radio1"> Yes </label>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="col-lg-1">
+                                            <div class="radio radio-success">
+                                                @Html.RadioButtonFor(m => m.IsCardAvailabled, false, new { @class = "radio radio-success enable_fieldset", id = "radio2" })
+                                                <label for="radio2"> No </label>
+                                                @Html.ValidationMessageFor(model => model.IsCardAvailabled, "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"><br></div>
+                                        <fieldset id="paymentDetails">
+                                            <div class="col-lg-3">
+                                                <label>  Saved Card  </label>
+                                            </div>
+                                            <div class="col-lg-4 ">
+                                                <div class="form-group">
+
+                                                    @Html.DropDownListFor(model => model.CardNumberDropDown, (IEnumerable<SelectListItem>)ViewBag.cardNumbers, "Select Card", new { @class = "form-control", @id = "savedCard", onchange = "populateCardDetails();" })
+                                                    @Html.ValidationMessage("CardError", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-3">
+                                                <label> Name on Card </label>
+                                            </div>
+                                            <div class="col-lg-4 ">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.NameOnCard, new { @class = "form-control" })
+                                                    @Html.ValidationMessage("CardNameOnCard", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-3">
+                                                <label> Card Number</label>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control number", @maxlength = "16" })
+                                                    @Html.ValidationMessage("CardNumber", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-3">
+                                                <label> End Date</label>
+                                            </div>
+                                            <div class="col-lg-2">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.CardEndMonth, new { @class = "form-control number", @placeholder = "MM", @maxlength = "2" })
+                                                    @Html.ValidationMessage("CardEndMonth", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-2 ">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.CardEndYear, new { @class = "form-control number", @placeholder = "YY", @maxlength = "2" })
+                                                    @Html.ValidationMessage("CardEndYear", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-3">
+                                                <label>Security Code</label>
+                                            </div>
+                                            <div class="col-lg-4 ">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(model => model.CardSecurityNo, new { @class = "form-control number", @maxlength = "3" })
+                                                    @Html.ValidationMessage("CardSecurityNo", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-3 ">
+                                                <div class="form-group">
+                                                    <img src="plugins/images/code.png">
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <hr>
+                                            <h4>Your home &amp; billing Address: </h4>
+                                            <p>For security and verification purposes, your home and biling address must be same</p>
+                                            <!--  -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Address line 1</label>
+                                                    @Html.TextBoxFor(model => model.BillingAddress1, new { @class = "form-control", @placeholder = "Address line 1" })
+                                                    @Html.ValidationMessage("BillingAddress1", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Address line 2 (optional)</label>
+                                                    @Html.TextBoxFor(model => model.BillingAddress2, new { @class = "form-control", @placeholder = "Address line 2 (optional)" })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    @Html.TextBoxFor(model => model.BillingCity, new { @class = "form-control", @placeholder = "City" })
+                                                    @Html.ValidationMessage("BillingCity", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Post/Zip Code</label>
+                                                    @Html.TextBoxFor(model => model.BillingPostalCode, new { @class = "form-control", @placeholder = "Post/Zip Code" })
+                                                    @Html.ValidationMessage("BillingPostalCode", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(model => model.BillingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                                    @*@Html.TextBoxFor(model => model.BillingCountry, new { @class = "form-control", @placeholder = "Country" })*@
+                                                    @Html.ValidationMessage("BillingCountry", "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <!--  -->
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-12">
+                                            <div class="form-group">
+
+
+                                                @Html.CheckBoxFor(model => model.AcceptTerms, new { @class = "checkbox checkbox-success", @id = "checkbox5" })
+                                                <label>
+                                                    Accept our Terms and Conditions
+                                                    @Html.ValidationMessage("AcceptTerms", "", new { @class = "text-danger" })
+                                                </label>
+
+
+
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class=" border_tbls">
+
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Payment</h3>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+                                        <div class="col-lg-6">
+                                            <div class="border_1 clearfix">
+                                                <p><b>Bank to Bank Payment</b></p>
+                                                <div class="border_1 clearfix">
+                                                    <p> Has the Sender make a payment to MFS Bank Account ?</p>
+                                                    <div class="col-lg-2">
+                                                        <div class="">
+                                                            @Html.RadioButtonFor(m => m.bankToBankPayment, true, new { id = "radio3" })
+                                                            <label for="radio3"> Yes </label>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                    <div class="col-lg-2">
+                                                        <div class="">
+                                                            @Html.RadioButtonFor(m => m.bankToBankPayment, false, new { id = "radio4" })
+                                                            @Html.ValidationMessageFor(model => model.bankToBankPayment, "", new { @class = "text-danger" })
+                                                            <label for="radio4"> No </label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <p>
+                                            <b>Note to Admin Staff</b>
+                                            <br>
+                                            <i>Please login to MFS Bank Account and confirm payment before proceeding to complete this money sending</i>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+                            <!-- end -->
+                            <div class="col-lg-3 pull-right">
+                                <a class="btn btn-block btn-info btn-rounded" onclick="showConfirmModal();">Deposit on Account Now </a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!--row -->
+        </div>
+    </div>
+</form>
+@*}*@
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Deposit Confirmation</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to perform the Deposit ?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" onclick="confirmTopUp();">Yes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="InvalidModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:orange">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="VaidationTitle" style="color:white"></h5>
+
+            </div>
+            <div class="modal-body">
+                <span id="text"></span>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Ok</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>*@
+    <script type="text/javascript">
+
+
+        function GetSenderDetails() {
+
+
+            var SenderAccountNo = $("#SenderAccountNo").val();
+
+            window.location.href = "/Admin/PaySomeoneElseCardByAdmin/Index?SenderAccountNo=" + SenderAccountNo;
+            //$.getJSON("/admin/PaySomeoneElseCardByAdmin/GetSenderDetails?SenderAccountNo=" + SenderAccountNo, function (data) {
+            //    for (var item in data) {
+            //        var selector = '[name="' + item + '"]';
+            //        $(selector).val(data[item]);
+
+            //    }
+            //    debugger;
+            //    if (data.InvalidSenderDetails == true) {
+            //        $("#InvalidModal").modal("show");
+            //        $("#text").text("Please enter a valid sender account no");
+            //        $("#VaidationTitle").text("Invalid Account No");
+            //    }
+
+
+            //});
+        }
+
+        function GetMFTCCardDetails() {
+
+            var MFTCCardNo = $("#MFTCCardNo").val();
+            $.getJSON("/admin/PaySomeoneElseCardByAdmin/GetMFTCCardDetails?MFTCCardNo=" + MFTCCardNo, function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+                }
+                if (data.InvalidCardUserDetails == true) {
+                    
+                    $("#InvalidModal").modal("show");
+                    $("#VaidationTitle").text("Invalid MFTC Card No");
+                    $("#text").text(data.ErrorMessage);
+                }
+            });
+
+
+        }
+
+        var PreviousFaxingAmount = "";
+
+
+
+        function getDetails() {
+            var topUpAmount = $("#topUpAmount").val() || 0;
+            if (topUpAmount <= 0) {
+
+                $("#InvalidModal").modal("show");
+                $("#VaidationTitle").text("Invalid Deposit Amount");
+                $("#text").text("Please enter a amount greater than Zero {0}");
+                $("#topUpAmount").val(0);
+                return;
+            }
+            var FaxingCountry = $("#FaxingCountry").val();
+            var ReceivingCountry = $("#ReceivingCountry").val();
+            //var IncludingFee = $("#IncludingFee").val();
+            var ReceivingAmount = $("#ReceivingAmount").val() || 0;
+            if (PreviousFaxingAmount != topUpAmount) {
+                ReceivingAmount = 0;
+            }
+            $.getJSON("/Admin/PaySomeoneElseCardByAdmin/GetTopUpDetails?TopUpAmount=" + topUpAmount + "&RecevingAmount=" + ReceivingAmount + "&FaxingCountry=" + FaxingCountry
+                + "&ReceivingCountry=" + ReceivingCountry, function (data) {
+                    for (var item in data) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(data[item]);
+                    }
+
+                    PreviousFaxingAmount = $("#topUpAmount").val();
+
+
+                });
+        }
+
+        function populateCardDetails() {
+
+            var CardNumber = $("#savedCard").val();
+            var SenderId = $("#SenderId").val();
+            $.getJSON("/Admin/PaySomeoneElseCardByAdmin/GetSavedCardDetails?CardNum=" + CardNumber +  "&FaxerId=" + SenderId ,function (data) {
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+                }
+            });
+        }
+
+        function confirmTopUp() {
+            debugger;
+
+            $("#mainForm").submit();
+        }
+        function showConfirmModal() {
+            debugger;
+
+            if ($("#SenderId").val() == 0 || $("#SenderId").val() == undefined) {
+                Riddha.UI.Toast("Please search sender information ", 0);
+
+            }
+            else if ($("#CardUserId").val() == 0 || $("#CardUserId").val() == undefined) {
+                Riddha.UI.Toast("Please search Virtual Account information ", 0);
+
+            } else {
+                $("#confirmModal").modal('show');
+            }
+        }
+
+
+        $('input:radio[name="IsCardAvailabled"]').click(function () {
+            $("#paymentDetails").prop("disabled", true);
+            if ($(this).hasClass('disable_fieldset')) {
+                $("#paymentDetails").prop("disabled", false);
+                // $('[name="PortalNonCardFaxingPaymentDetails.^"]').prop("disabled", false);
+            }
+        });
+
+        if ($('input[id=radio1]:checked').length > 0) {
+
+            $("#paymentDetails").prop("disabled", false);
+        } else {
+
+            $("#paymentDetails").prop("disabled", true);
+        }
+
+
+
+
+    </script>
+
+}
+
+
+

@@ -1,0 +1,115 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Start Sending Money</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="mobile_design text-center row">
+                    <!--  -->
+                    <div class="col-lg-4 col-md-4  col-xs-5 ">
+                        <div class="newone  bgcolor2 ">
+                            <a href="@Url.Action("Index", "NonCardMoneyFax")">
+                                <div class="das-icon">
+                                    <img src="/images/icon/2.png">
+                                </div>
+                                <h4>Cash to Cash Transfer</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="col-lg-4 col-xs-2">
+                        <br />
+                        <br />
+                        <h3>OR</h3>
+                    </div>
+                    <!--  -->
+                    <div class="col-lg-4 col-md-4  col-xs-5 ">
+                        <div class="newone  bgcolor4 ">
+                            <a href="@Url.Action("UserContactDetails", "TopUpRegestration")">
+                                <div class="das-icon">
+                                    <img src="/images/icon/12.png">
+                                </div>
+                                <h4>Open a new Virtual Account</h4>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 col-lg-offset-4 col-xs-offset-3">
+                        <div class="dashboard_thumb">
+                            <a href="@Url.Action("index","TopUpSomeoneElseMFTCCard")">
+                                <div class="das-icon">
+                                    <img src="/images/icon/7.png">
+                                </div>
+                                <h4>
+                                    Pay Someone else's Virtual Account
+                                </h4>
+                            </a>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="clearfix"></div>
+                </div>
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-lg-12 text-left">
+                        <hr>
+                        <h4 data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample" style="cursor: pointer;">What is a Virtual Account?</h4>
+                        <hr>
+                        <div class="collapse" id="collapseExample">
+                            <div class="card card-body">
+
+                                <p>
+                                    This is an account that you register in the name of your money receiver who lives abroad.
+                                </p>
+                                <p>
+                                    You can deposit money into this account in any of our agent or online using either a credit/debit or direct online bank payment to our bank account.
+                                </p>
+                                <p>
+                                    The money deposited is instantly available for the receiver to withdraw from one of paying agents in their country of residence.
+                                </p>
+                                <p>
+                                    As the owner of a virtual account, you can control how much the receiver can withdraw at a given time, automatically deposit money into the account, see how the account is being used, and transfer money between multiple accounts registerd in the same country free of charge.
+                                </p>
+                                <p>
+                                    The user of this account on his/her part, can see payments made to the account, transaction history, withdrawal limits, pay for goods and services and transfer money free of charge in their country of residence.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+@*<div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup">
+                        <p>Does the "Receiver" have a MoneyFex Top-up Card ? </p>
+                        <a href="@Url.Action("Index","StartFaxingMoney")" class="btn btn-success btn-sm">Yes</a>
+                        <a href="@Url.Action("NoCard","StartFaxingMoney")" class="btn btn-primary btn-sm">No</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>*@
+

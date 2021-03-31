@@ -1,0 +1,1475 @@
+﻿@{
+    /**/
+
+    var currentUser = FAXER.PORTAL.Common.StaffSession.LoggedStaff;
+}
+<div class="theme-loader">
+    <div class="ball-scale">
+        <div class='contain'>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+            <div class="ring">
+                <div class="frame"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pcoded" class="pcoded">
+    <div class="pcoded-overlay-box"></div>
+    <div class="pcoded-container navbar-wrapper">
+        <nav class="navbar header-navbar pcoded-header">
+            <div class="navbar-wrapper">
+                <div class="navbar-logo">
+                    <a class="mobile-menu" id="mobile-collapse" href="#!">
+                        <i class="feather icon-menu"></i>
+                    </a>
+                    <a href="index.php">
+                        <img class="img-fluid" src="~/Areas/Admin/Content/assets/images/logo.png" alt="Logo" />
+                    </a>
+                    <a class="mobile-options">
+                        <i class="feather icon-more-horizontal"></i>
+                    </a>
+                </div>
+                <div class="navbar-container container-fluid">
+                    <ul class="nav-left">
+                        <li class="header-search">
+                            <div class="main-search morphsearch-search">
+                                <div class="input-group">
+                                    <span class="input-group-addon search-close"><i class="feather icon-x"></i></span>
+                                    <input type="text" class="form-control">
+                                    <span class="input-group-addon search-btn"><i class="feather icon-search"></i></span>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                    <ul class="nav-right">
+                        <li class="header-notification" id="notificationList">
+                            <div class="dropdown-primary dropdown">
+                                <div class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="feather icon-bell"></i>
+                                    <span class="badge bg-c-pink" data-bind="text:'0'">0</span>
+                                </div>
+                                <ul class="show-notification notification-view dropdown-menu" data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                    <li>
+                                        <h6>Notifications</h6>
+                                        <label class="label label-danger">New</label>
+                                    </li>
+                                    <li>
+
+                                        @*<a href="#" onclick="removeNotification(this)">
+
+                                                <div class="media">
+
+                                                    <img class="d-flex align-self-center img-radius" src="~/Areas/Admin/Content/assets/images/avatar-4.jpg" alt="Generic">
+                                                    <div class="media-body">
+                                                        <h5 class="notification-user" data-bind="text:ReceiverName"></h5>
+                                                        <p class="notification-msg" data-bind="text:Message"> </p>
+                                                        <span class="notification-time" data-bind="text:Time">30 minutes ago</span>
+                                                    </div>
+
+                                                </div>
+                                            </a>*@
+
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/AdminNotification/Notification"><i class="fa fa-eye"></i> See All  </a>
+
+                                    </li>
+                                </ul>
+
+
+
+                            </div>
+                        </li>
+                        <li class="header-notification">
+                            <div class="dropdown-primary dropdown">
+                                <div class="displayChatbox dropdown-toggle" data-toggle="dropdown">
+                                    <i class="feather icon-message-square"></i>
+                                    <span class="badge bg-c-green">3</span>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="user-profile header-notification">
+                            <div class="dropdown-primary dropdown">
+                                <div class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="assets/images/avatar-4.jpg" class="img-radius" alt="User-Profile-Image">
+                                    @if (currentUser != null)
+                                    {
+                                        <span>Welcome @currentUser.FirstName</span>
+                                    }
+
+                                    <i class="feather icon-chevron-down"></i>
+                                </div>
+                                <ul class="show-notification profile-notification dropdown-menu"
+                                    data-dropdown-in="fadeIn" data-dropdown-out="fadeOut">
+                                    <li>
+                                        <a href="#!">
+                                            <i class="feather icon-settings"></i> Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="user-profile.html">
+                                            <i class="feather icon-user"></i> Profile
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="email-inbox.html">
+                                            <i class="feather icon-mail"></i> My Messages
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="auth-lock-screen.html">
+                                            <i class="feather icon-lock"></i> Lock Screen
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/Login/AdminLogOut">
+                                            <i class="feather icon-log-out"></i> Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="sidebar" class="users p-chat-user showChat">
+            <div class="had-container">
+                <div class="card card_main p-fixed users-main">
+                    <div class="user-box">
+                        <div class="chat-inner-header">
+                            <div class="back_chatBox">
+                                <div class="right-icon-control">
+                                    <input type="text" class="form-control  search-text" placeholder="Search Friend" id="search-friends">
+                                    <div class="form-icon">
+                                        <i class="icofont icofont-search"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-friend-list">
+                            <div class="media userlist-box" data-id="1" data-status="online" data-username="Josephin Doe" data-toggle="tooltip" data-placement="left" title="Josephin Doe">
+                                <a class="media-left" href="#!">
+                                    <img class="media-object img-radius img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image ">
+                                    <div class="live-status bg-success"></div>
+                                </a>
+                                <div class="media-body">
+                                    <div class="f-13 chat-header">Josephin Doe</div>
+                                </div>
+                            </div>
+                            <div class="media userlist-box" data-id="2" data-status="online" data-username="Lary Doe" data-toggle="tooltip" data-placement="left" title="Lary Doe">
+                                <a class="media-left" href="#!">
+                                    <img class="media-object img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                    <div class="live-status bg-success"></div>
+                                </a>
+                                <div class="media-body">
+                                    <div class="f-13 chat-header">Lary Doe</div>
+                                </div>
+                            </div>
+                            <div class="media userlist-box" data-id="3" data-status="online" data-username="Alice" data-toggle="tooltip" data-placement="left" title="Alice">
+                                <a class="media-left" href="#!">
+                                    <img class="media-object img-radius" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                                    <div class="live-status bg-success"></div>
+                                </a>
+                                <div class="media-body">
+                                    <div class="f-13 chat-header">Alice</div>
+                                </div>
+                            </div>
+                            <div class="media userlist-box" data-id="4" data-status="online" data-username="Alia" data-toggle="tooltip" data-placement="left" title="Alia">
+                                <a class="media-left" href="#!">
+                                    <img class="media-object img-radius" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                                    <div class="live-status bg-success"></div>
+                                </a>
+                                <div class="media-body">
+                                    <div class="f-13 chat-header">Alia</div>
+                                </div>
+                            </div>
+                            <div class="media userlist-box" data-id="5" data-status="online" data-username="Suzen" data-toggle="tooltip" data-placement="left" title="Suzen">
+                                <a class="media-left" href="#!">
+                                    <img class="media-object img-radius" src="assets/images/avatar-2.jpg" alt="Generic placeholder image">
+                                    <div class="live-status bg-success"></div>
+                                </a>
+                                <div class="media-body">
+                                    <div class="f-13 chat-header">Suzen</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="showChat_inner">
+            <div class="media chat-inner-header">
+                <a class="back_chatBox">
+                    <i class="feather icon-chevron-left"></i> Josephin Doe
+                </a>
+            </div>
+            <div class="media chat-messages">
+                <a class="media-left photo-table" href="#!">
+                    <img class="media-object img-radius img-radius m-t-5" src="assets/images/avatar-3.jpg" alt="Generic placeholder image">
+                </a>
+                <div class="media-body chat-menu-content">
+                    <div class="">
+                        <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+                        <p class="chat-time">8:20 a.m.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="media chat-messages">
+                <div class="media-body chat-menu-reply">
+                    <div class="">
+                        <p class="chat-cont">I'm just looking around. Will you tell me something about yourself?</p>
+                        <p class="chat-time">8:20 a.m.</p>
+                    </div>
+                </div>
+                <div class="media-right photo-table">
+                    <a href="#!">
+                        <img class="media-object img-radius img-radius m-t-5" src="assets/images/avatar-4.jpg" alt="Generic placeholder image">
+                    </a>
+                </div>
+            </div>
+            <div class="chat-reply-box p-b-20">
+                <div class="right-icon-control">
+                    <input type="text" class="form-control search-text" placeholder="Share Your Thoughts">
+                    <div class="form-icon">
+                        <i class="feather icon-navigation"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pcoded-main-container">
+            <div class="pcoded-wrapper">
+                <nav class="pcoded-navbar">
+                    <div class="pcoded-inner-navbar main-menu">
+                        <div class="pcoded-navigatio-lavel"> Navigation</div>
+                        <ul class="pcoded-item pcoded-left-item">
+
+                            <!--  -->
+                            <li class="pcoded">
+                                <a href="index.php">
+                                    <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                    <span class="pcoded-mtext">Dashboard</span>
+                                </a>
+
+                            </li>
+                            <!--  -->
+                            <!--  -->
+                            <li class="pcoded">
+                                <a href="">
+                                    <span class="pcoded-micon"><i class="feather icon-cpu"></i></span>
+                                    <span class="pcoded-mtext">Sticky Notes</span>
+                                </a>
+
+                            </li>
+
+                            @if (FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level3 ||
+                            FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level4)
+                            {
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-send-o"></i></span>
+                                        <span class="pcoded-mtext">Sender</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ViewRegisteredFaxers/Index"> <span class="pcoded-mtext">Registered Senders</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/TransactionHistoryOfAllSender/Index"> <span class="pcoded-mtext">Recent Transactions</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="@Url.Action("Index", "ViewRegisteredFaxers", new { @IsFormTransactionStatement = true })"> <span class="pcoded-mtext">Transaction Statement</span> </a>
+                                        </li>
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Transaction Limits</span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <li>
+                                                    <a href="@Url.Action("Index", "BusinessTransferLimit", new { @IsBusiness = false })"> <span class="pcoded-mtext">Current Limit</span> </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="@Url.Action("BusinessTransferLimitHisotry", "BusinessTransferLimit", new { @IsBusiness = false })"> <span class="pcoded-mtext">History</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/SenderDocumentation/Index"> <span class="pcoded-mtext">Sender Documentation</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                            }
+                            else if (FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.level5)
+                            {
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-send-o"></i></span>
+                                        <span class="pcoded-mtext">Sender</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="@Url.Action("Index", "SenderDocumentation")"> <span class="pcoded-mtext">Sender Documentation</span> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+
+                            }
+                            else
+                            {
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="icofont icofont-cur-dollar-flase"></i></span><span class="pcoded-mtext">Service Settings </span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ServiceSettings/Index"> <span class="pcoded-mtext">Current Settings</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/ServiceSettings/ViewCurrentSettingByCurrency"> <span class="pcoded-mtext">Current Settings By Currency</span> </a>
+                                        </li>
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Service Provider Logos</span> </a>
+                                            <ul class="pcoded-submenu">
+                                                <li><a href="/Admin/LogosUpload/Index">Current Logos</a></li>
+                                                <li><a href="/Admin/LogoAssign/LogoAssign">Assign logos to Services</a></li>
+                                            </ul>
+                                        </li>
+
+
+
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="feather icon-file"></i></span><span class="pcoded-mtext">Threshold Management</span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/CreditCardAttemptLimit"> <span class="pcoded-mtext">Daily Card Payment Attempts</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/RecipientTransactionCount/Index"> <span class="pcoded-mtext">Daily Recipent Transactions </span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/SenderTransactionCount/Index"> <span class="pcoded-mtext">Daily Sender Transaction Count</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/TransactionAmountLimit/Index"> <span class="pcoded-mtext">Payout Approval Amount</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/TransactionAmountLimit/StaffTransactionApprovalLimit"> <span class="pcoded-mtext">Staff Transaction Approval Limit</span> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="feather icon-globe"></i></span><span class="pcoded-mtext">Social Media Tracking</span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/SocialMediaTracking/AddTrackingPage"> <span class="pcoded-mtext">Add Tracking to Page</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/SocialMediaTracking/Index"> <span class="pcoded-mtext">Current Tracking</span> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="ti-settings"></i></span><span class="pcoded-mtext">API Provider</span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/APIProvider/Index"> <span class="pcoded-mtext">Current API Providers</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/APIProviderSelection/Index"> <span class="pcoded-mtext">Provider Payment Selection</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/APIProviderSelectionByCurrency/Index"> <span class="pcoded-mtext">Provider Payment Selection By Currency</span> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="ti-settings"></i></span><span class="pcoded-mtext">Card Processor </span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/CardProcessor/Index"> <span class="pcoded-mtext">Current Card Processor Providers</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/CardProcessorSelection/Index"> <span class="pcoded-mtext"> Card Processor Provider Selection</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="#">  <span class="pcoded-micon"><i class="ti-money"></i></span><span class="pcoded-mtext">Payout Provider</span> </a>
+
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/PayoutProvider/Index"> <span class="pcoded-mtext">Current  Providers</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/PayoutProvider/AddPayoutProviders"> <span class="pcoded-mtext">Add Providers</span> </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded">
+                                    <a href="/Admin/PayoutFlowControl">
+                                        <span class="pcoded-micon"><i class="fa fa-money"></i></span>
+                                        <span class="pcoded-mtext"> Payout Flow Control</span>
+                                    </a>
+
+                                </li>
+
+                                <li class="pcoded">
+                                    <a href="/Admin/PayoutProviderRate">
+                                        <span class="pcoded-micon"><i class="fa fa-money"></i></span>
+                                        <span class="pcoded-mtext"> Payout Provider Rate</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <li class="pcoded">
+                                    <a href="/Admin/BankAccount">
+                                        <span class="pcoded-micon"><i class="fa fa-bank"></i></span>
+                                        <span class="pcoded-mtext"> Bank Account Details Setup </span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded">
+                                    <a href="/Admin/CustomerPaymentFee">
+                                        <span class="pcoded-micon"><i class="ti-user"></i></span>
+                                        <span class="pcoded-mtext">Customer Payment Fees</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded" nav-type="st2">
+                                    <a href="/Admin/CreditDebitCardUsage">
+                                        <span class="pcoded-micon"><i class="fa fa-history"></i></span>
+                                        <span class="pcoded-mtext">Card Payment Logs</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded" nav-type="st2">
+                                    <a href="/Admin/PaymentSelection">
+                                        <span class="pcoded-micon"><i class="fa fa-credit-card-alt"></i></span>
+                                        <span class="pcoded-mtext">Payment Method Selection</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded">
+                                    <a href="/Admin/TransferCalculator">
+                                        <span class="pcoded-micon"><i class="feather ion-calculator"></i></span>
+                                        <span class="pcoded-mtext"> Transfer Calculator </span>
+                                    </a>
+
+                                </li>
+
+                                <li class="pcoded">
+                                    <a href="/Admin/MobileNotification">
+                                        <span class="pcoded-micon"><i class="feather ion-android-notifications"></i></span>
+                                        <span class="pcoded-mtext"> Mobile Notification</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                if (FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level1)
+                                {
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-micon"><i class="icofont icofont-cur-dollar-flase"></i></span>
+                                            <span class="pcoded-mtext">Rate</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="/Admin/SystemExchangeRate"> <span class="pcoded-mtext">System Exchange Rate</span> </a>
+                                            </li>
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Transfer Exchange Rate</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/TransferExchangeRate">Current Exchange Rate</a></li>
+                                                    <li><a href="/Admin/TransferExchangeRate/SetTransferExchangeRate">Set Rate</a></li>
+                                                    <li><a href="/Admin/TransferExchangeRate/TransferExchangeRateHistory">Rate History</a></li>
+                                                </ul>
+                                            </li>
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Introductory Rate</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/IntroductoryRate/Index">Current Rate</a></li>
+                                                    <li><a href="/Admin/IntroductoryRate/SetRate">Set Rate</a></li>
+                                                    <li><a href="/Admin/IntroductoryRate/RateHistory">Rate History</a></li>
+                                                </ul>
+                                            </li>
+
+
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Spread Rate </span> </a>
+
+                                                <ul class="pcoded-submenu">
+
+                                                    <li>
+                                                        <a href="/Admin/SpreadRate/Index"> <span class="pcoded-mtext">Current Spread Rate</span> </a>
+                                                    </li>
+                                                    <li>
+                                                        <a href="/Admin/SpreadRate/SetSpreadRate"> <span class="pcoded-mtext">Set Spread Rate</span> </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="/Admin/SpreadRate/SpreadRateHistory"> <span class="pcoded-mtext">Spread History</span> </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Transfer Fee  </span> </a>
+
+                                                <ul class="pcoded-submenu">
+                                                    <li> <a href="/Admin/TransferFeePercentage"> <span class="pcoded-mtext">Current Transfer Fee</span> </a></li>
+                                                    <li>
+                                                        <a href="/Admin/TransferFeePercentage/SetTransferfee"> <span class="pcoded-mtext">Set Transfer Fees</span> </a>
+                                                    </li>
+
+                                                    <li>
+                                                        <a href="/Admin/TransferFeePercentage/TransferFeeHistory"> <span class="pcoded-mtext">Transfer Fees History</span> </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Introductory Fees</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/IntroductoryFee">Current Fees</a></li>
+                                                    <li><a href="/Admin/IntroductoryFee/SetIntroductoryfee">Set Fees</a></li>
+                                                    <li><a href="/Admin/IntroductoryFee/IntroductoryFeeHistory">Fees History</a></li>
+                                                </ul>
+                                            </li>
+
+
+
+                                        </ul>
+                                    </li>
+                                    <li class="pcoded-hasmenu">
+                                        <a href="javascript:void(0)">
+                                            <span class="pcoded-micon"><i class="icofont icofont-cur-dollar-flase"></i></span>
+                                            <span class="pcoded-mtext">Rate By Currency</span>
+                                        </a>
+                                        <ul class="pcoded-submenu">
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Transfer Exchange Rate</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/TransferExchangeRateByCurrency">Current Exchange Rate</a></li>
+                                                    <li><a href="/Admin/TransferExchangeRateByCurrency/SetTransferExchangeRate">Set Rate</a></li>
+                                                    @*<li><a href="/Admin/TransferExchangeRate/TransferExchangeRateHistory">Rate History</a></li>*@
+                                                </ul>
+                                            </li>
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Introductory Rate</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/IntroductoryRateByCurency/Index">Current Rate</a></li>
+                                                    <li><a href="/Admin/IntroductoryRateByCurency/SetRate">Set Rate</a></li>
+                                                    @*<li><a href="/Admin/IntroductoryRate/RateHistory">Rate History</a></li>*@
+                                                </ul>
+                                            </li>
+
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Transfer Fee  </span> </a>
+
+                                                <ul class="pcoded-submenu">
+                                                    <li> <a href="/Admin/TransferFeePercentageByCurrency"> <span class="pcoded-mtext">Current Transfer Fee</span> </a></li>
+                                                    <li>
+                                                        <a href="/Admin/TransferFeePercentageByCurrency/AddTransferFeePercentageByCurrency"> <span class="pcoded-mtext">Set Transfer Fees</span> </a>
+                                                    </li>
+
+                                                    @*<li>
+                                                            <a href="/Admin/TransferFeePercentage/TransferFeeHistory"> <span class="pcoded-mtext">Transfer Fees History</span> </a>
+                                                        </li>*@
+                                                </ul>
+                                            </li>
+
+
+
+                                            <li class="pcoded-hasmenu">
+                                                <a href="#"> <span class="pcoded-mtext">Introductory Fees</span> </a>
+                                                <ul class="pcoded-submenu">
+                                                    <li><a href="/Admin/IntroductoryFeeByCurrency">Current Fees</a></li>
+                                                    <li><a href="/Admin/IntroductoryFeeByCurrency/SetIntroductoryFeeByCurrency">Set Fees</a></li>
+                                                    @*<li><a href="/Admin/IntroductoryFee/IntroductoryFeeHistory">Fees History</a></li>*@
+                                                </ul>
+                                            </li>
+
+
+
+                                        </ul>
+                                    </li>
+                                }
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-list"></i></span>
+                                        <span class="pcoded-mtext">Marketing </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+
+                                        <li>
+                                            <a href="/Admin/Marketing/CurrentPormotion"> <span class="pcoded-mtext">Current Promotion</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/Marketing/CurrentReferral"> <span class="pcoded-mtext">Current Referral </span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-list"></i></span>
+                                        <span class="pcoded-mtext">Compliance</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext"> Compliance Alert <span class="pcoded-badge label label-danger">3</span></span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/ComplianceAlertAgent">
+                                                        <span class="pcoded-mtext">Agent </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/ComplianceAlertSender">
+                                                        <span class="pcoded-mtext">Sender </span>
+                                                    </a>
+                                                </li>
+
+
+                                                <li>
+                                                    <a href="/Admin/ComplianceAlertBusiness">
+                                                        <span class="pcoded-mtext">Business </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/AgentComplianceReport"> <span class="pcoded-mtext">Agent Compliance Report</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/PartnerComplianceReport"> <span class="pcoded-mtext"> Partner Compliance Report</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/AgentSubmittedForm"> <span class="pcoded-mtext">Agent Submitted Form</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/AdminSubmittedForm"> <span class="pcoded-mtext">Admin Submitted Form</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!-- sub -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ion-ios-people"></i></span>
+                                        <span class="pcoded-mtext">Agent </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li><a href="/Admin/ViewRegisteredAgents"><span class="pcoded-mtext"> Registered Agent</span></a></li>
+
+                                        <li><a href="/Admin/AgentTransansactionActivity/AgentRecentTransactionStatememt"><span class="pcoded-mtext">Agent Recent Transaction</span></a></li>
+
+                                        <li><a href="/Admin/AdminRegisteredAgentStaff"><span class="pcoded-mtext"> Agent Staff</span></a></li>
+                                        <li><a href="@Url.Action("Index", "ViewRegisteredAgents", new { IsFromActivity = true })"><span class="pcoded-mtext">Transaction Activity</span></a></li>
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext"> Manual Bank Account Payment </span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/EnableManualBankDeposit">
+                                                        <span class="pcoded-mtext"> Enable Agent Payments </span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="@Url.Action("Index", "ViewRegisteredAgents", new { IsFromManualBankAccount = true })">
+                                                        <span class="pcoded-mtext">Current Agent Payments </span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+
+                                        </li>
+
+
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext"> Commission</span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/AgentCommissionSetting">
+                                                        <span class="pcoded-mtext">Current Commission</span>
+                                                    </a>
+                                                </li>
+
+
+                                                <li>
+                                                    <a href="/Admin/AgentCommissionSetting/AgentCommissionHistory">
+                                                        <span class="pcoded-mtext">Commission History</span>
+                                                    </a>
+                                                </li>
+
+
+
+                                            </ul>
+
+                                        </li>
+
+
+                                        <li><a href=""><span class="pcoded-mtext"> Commission payment</span></a></li>
+
+
+
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext">Transfer Limit</span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/AgentTransferLimit">
+                                                        <span class="pcoded-mtext">Current limit</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/AgentTransferLimit/LimitHistory">
+                                                        <span class="pcoded-mtext">History</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext"> Hold Cash Limit </span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/AgentHoldCashLimit">
+                                                        <span class="pcoded-mtext">Current limit</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/AgentHoldCashLimit/HoldCashLimitHistory">
+                                                        <span class="pcoded-mtext">History</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+                                        <!--  -->
+                                        <li>
+                                            <a href="/Admin/AgentDocumentation"><span class="pcoded-mtext"> Agent Documentation </span></a>
+                                        </li>
+                                        <!--  -->
+                                        <!--  -->
+                                        <!--  <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext">Admin Withdrawal Limit</span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="admin-transfer-limit-set.php">
+                                                        <span class="pcoded-mtext">Set</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="admin-transfer-limit-history.php">
+                                                        <span class="pcoded-mtext">History</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li> -->
+                                        <!--  -->
+
+                                    </ul>
+
+                                </li>
+                                <!-- sub -->
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded" nav-type="st2">
+                                    <a href="/Admin/AUXAgentDashBoard">
+                                        <span class="pcoded-micon"><i class="feather icon-users"></i></span>
+                                        <span class="pcoded-mtext">AUX Agent</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-unity-hand"></i></span>
+                                        <span class="pcoded-mtext">Partners</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ViewRegisteredPartners"> <span class="pcoded-mtext">Registered Partners</span> </a>
+                                        </li>
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext"> Commission</span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/PartnerCommission/CurrentCommission">
+                                                        <span class="pcoded-mtext">Current Commission</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/PartnerCommission/History">
+                                                        <span class="pcoded-mtext">History</span>
+                                                    </a>
+                                                </li>
+
+
+
+
+                                            </ul>
+
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/PartnerPaymentCommission"> <span class="pcoded-mtext">Commission Payment </span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/PartnerAgentTransaction"> <span class="pcoded-mtext">Partner Agent Transaction</span> </a>
+                                        </li>
+
+
+
+                                        <li>
+                                            <a href="/Admin/PartnerDocumentation"> <span class="pcoded-mtext">Partner Documentation</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-shopping-bag"></i></span>
+                                        <span class="pcoded-mtext">Businesses </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/RegisteredBusinessSender"> <span class="pcoded-mtext">Registered Business</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/RegisteredBusinessSender/TransactionStatementOfSenderBusiness"> <span class="pcoded-mtext">Transaction Statement</span> </a>
+                                        </li>
+
+
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)"><span class="pcoded-mtext">Transfer Limit</span></a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li>
+                                                    <a href="/Admin/BusinessTransferLimit">
+                                                        <span class="pcoded-mtext">Current limit</span>
+                                                    </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/BusinessTransferLimit/BusinessTransferLimitHisotry">
+                                                        <span class="pcoded-mtext">History</span>
+                                                    </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+
+                                        <li>
+                                            <a href="/Admin/BusinessDocumentation"> <span class="pcoded-mtext">Business Documentation</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-send-o"></i></span>
+                                        <span class="pcoded-mtext">Sender</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ViewRegisteredFaxers/Index"> <span class="pcoded-mtext">Registered Senders</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/TransactionHistoryOfAllSender/Index"> <span class="pcoded-mtext">Recent Transactions</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="@Url.Action("Index", "ViewRegisteredFaxers", new { @IsFormTransactionStatement = true })"> <span class="pcoded-mtext">Transaction Statement</span> </a>
+                                        </li>
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Transaction Limits</span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <li>
+                                                    <a href="@Url.Action("Index", "BusinessTransferLimit", new { @IsBusiness = false })"> <span class="pcoded-mtext">Current Limit</span> </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="@Url.Action("BusinessTransferLimitHisotry", "BusinessTransferLimit", new { @IsBusiness = false })"> <span class="pcoded-mtext">History</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/SenderDocumentation/Index"> <span class="pcoded-mtext">Sender Documentation</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ion-arrow-down-a"></i></span>
+                                        <span class="pcoded-mtext">Receiver </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/Receiver/Index"> <span class="pcoded-mtext">Registered Receivers</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="@Url.Action("ReceiverTransactionStatement", "Receiver")"> <span class="pcoded-mtext">Receiving  Statement</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/BanReceiver/Index"> <span class="pcoded-mtext">Banned Receiver</span> </a>
+                                        </li>
+
+
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Receiving  Limits</span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <li>
+                                                    <a href="/Admin/ReceiverLimit/Index"> <span class="pcoded-mtext">Current  Limit</span> </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/ReceiverLimit/ReceiverLimitHistory"> <span class="pcoded-mtext">History</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li><a href="/Admin/Receiver/ReceiverDocumentation"><span class="pcoded-mtext">Receiver Documentation</span></a></li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-users"></i></span>
+                                        <span class="pcoded-mtext">Staff Transactions</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/StaffTransferMoney"> <span class="pcoded-mtext">Transfer Money</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/StaffTransactionHistory"> <span class="pcoded-mtext">Transactions History</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/StaffTransactionUpdate"> <span class="pcoded-mtext">Transactions Update</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/BankAccountPaymentConfirmation"> <span class="pcoded-mtext">Bank Payment Confirmation</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="staff-refunds.php"> <span class="pcoded-mtext">Staff Refunds</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ion-ios-people"></i></span>
+                                        <span class="pcoded-mtext">Agent Cash Withdrawal</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/RegisteredWithdrawalStaff"> <span class="pcoded-mtext">Registered Withdrawal  Staff</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/CashWithdrawalCodeFromStaffOrAgent"> <span class="pcoded-mtext">Generate Withdrawal Code</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/AgentCashWithdrawalHistory"> <span class="pcoded-mtext"> Cash Withdrawal History </span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="withdrawal-staff-documentation.php"> <span class="pcoded-mtext">Withdrawal Staff Documentation</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="withdrawal-staff-payslip.php"> <span class="pcoded-mtext"> Withdrawal Staff Payslip </span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-clip-board"></i></span>
+                                        <span class="pcoded-mtext">Staff</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ViewRegisteredStaffDetails"> <span class="pcoded-mtext">Registered Staff</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/StaffNoticeBoard"> <span class="pcoded-mtext">Staff Notice Board </span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/ViewStaffTraining"> <span class="pcoded-mtext">Staff Training</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/StaffHolidays"> <span class="pcoded-mtext">Staff Holidays</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/SetPublicHolidays"> <span class="pcoded-mtext">Public Holidays Calendar </span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/ViewStaffPayslip"> <span class="pcoded-mtext">Staff Payslip</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/StaffDocumentation"> <span class="pcoded-mtext">Staff Documentation</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-warning"></i></span>
+                                        <span class="pcoded-mtext">Alerts</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/ViewAlerts"> <span class="pcoded-mtext">Agent Alerts</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/SenderAlerts"> <span class="pcoded-mtext">Sender Alerts</span> </a>
+                                        </li>
+                                        <li>
+                                            <a href="/Admin/ViewBusinessAlerts"> <span class="pcoded-mtext">Business  Alerts</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/StaffAlerts"> <span class="pcoded-mtext">Staff Alerts</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-receipt"></i></span>
+                                        <span class="pcoded-mtext">Invoicing </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Agent </span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <!--  <li><a href="agent-invoice.php"><span class="pcoded-mtext">Invoice</span></a></li> -->
+
+                                                <li>
+                                                    <a href="/Admin/AgentInvoicing"> <span class="pcoded-mtext">Send</span> </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/AgentPayInvoicing"> <span class="pcoded-mtext">Pay</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">Partner  </span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <!--  <li><a href="partner-invoice.php"><span class="pcoded-mtext">Invoice</span></a></li> -->
+                                                <li>
+                                                    <a href="/Admin/PartnerSendInvoicing"> <span class="pcoded-mtext">Send</span> </a>
+                                                </li>
+                                                <li>
+                                                    <a href="/Admin/PartnerPayInvoicing"> <span class="pcoded-mtext">Pay</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+                                        <!--  -->
+                                        <li class="pcoded-hasmenu">
+                                            <a href="#"> <span class="pcoded-mtext">General   </span> </a>
+
+                                            <ul class="pcoded-submenu">
+                                                <!--   <li><a href="general-invoice.php"><span class="pcoded-mtext">Invoice</span></a></li> -->
+                                                <li>
+                                                    <a href="/Admin/GeneralSendInvoicing"> <span class="pcoded-mtext">Send</span> </a>
+                                                </li>
+
+                                                <li>
+                                                    <a href="/Admin/GeneralPayInvoicing"> <span class="pcoded-mtext">Pay</span> </a>
+                                                </li>
+
+                                            </ul>
+                                        </li>
+                                        <!--  -->
+
+
+
+
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-file"></i></span>
+                                        <span class="pcoded-mtext">Others</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+
+                                        <li>
+                                            <a href="/Admin/News"> <span class="pcoded-mtext">News</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/Career"> <span class="pcoded-mtext">Careers</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/Location"> <span class="pcoded-mtext">Location Service</span> </a>
+                                        </li>
+
+                                        <li>
+                                            <a href="/Admin/FeedBack"> <span class="pcoded-mtext">Feedback</span> </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-file-alt"></i></span>
+                                        <span class="pcoded-mtext">Operation Summary</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+
+                                                <span class="pcoded-mtext">Transfers</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li><a href="/Admin/OnlineTransferOperationSummary"><span class="pcoded-mtext">Online </span></a></li>
+                                                <li><a href="/Admin/OnlineTransferOperationSummary/AgentTransferOperationSummary"><span class="pcoded-mtext">Agent</span></a></li>
+                                                <li><a href="/Admin/OnlineTransferOperationSummary/PartnerTransferOperationSummary"><span class="pcoded-mtext">Partner</span></a></li>
+                                            </ul>
+
+                                        </li>
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+
+                                                <span class="pcoded-mtext">Pre-funding</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+                                                <li><a href="/Admin/RefundingOperationSummary/TotalPrefundingAmount"><span class="pcoded-mtext">Total pre-funding amount</span></a></li>
+                                                <li><a href="/Admin/RefundingOperationSummary/PrefundigStatement"><span class="pcoded-mtext">Pre-funding statement</span></a></li>
+
+                                            </ul>
+
+                                        </li>
+                                    </ul>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-file-alt"></i></span>
+                                        <span class="pcoded-mtext">System Performance</span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li><a href="/Admin/SystemPerformance/PerformanceReport"><span class="pcoded-mtext"> Performance Report</span></a></li>
+                                        <li>
+                                            <a href="/Admin/SystemPerformance/SecurityReport">
+                                                <span class="pcoded-mtext">
+                                                    Security  Report
+                                                </span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+                                <!--  -->
+                                <!-- sub -->
+                                <!--  <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="fa fa-file"></i></span>
+                                        <span class="pcoded-mtext">Reports </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-mtext">Compliance</span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li><a href="#"><span class="pcoded-mtext">Agent Due Diligence Report</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">Agent Due Diligence Documents</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">Partner Due Diligence</span></a></li>
+
+                                                <li><a href="#"><span class="pcoded-mtext">Partner Due Diligence Documents</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">Customer Due Diligence</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">Customer Due Diligence Documents</span></a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="pcoded-hasmenu">
+                                            <a href="javascript:void(0)">
+                                                <span class="pcoded-mtext">Sanction list </span>
+                                            </a>
+                                            <ul class="pcoded-submenu">
+
+                                                <li><a href="#"><span class="pcoded-mtext">United Kingdom</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">Europ</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">USA</span></a></li>
+                                                <li><a href="#"><span class="pcoded-mtext">International</span></a></li>
+
+                                            </ul>
+                                        </li>
+
+                                    </ul>
+
+                                </li> -->
+                                <!-- sub -->
+                                <!-- sub -->
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-settings"></i></span>
+                                        <span class="pcoded-mtext">System Control  </span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li><a href="/Admin/SystemControl/Sender"><span class="pcoded-mtext">Sender</span></a></li>
+                                        <li><a href="/Admin/SystemControl/Agent"><span class="pcoded-mtext">Agent</span></a></li>
+
+                                        <li><a href="/Admin/SystemControl/Business"><span class="pcoded-mtext">Business</span></a></li>
+
+                                        <li><a href="/Admin/SystemControl/Admin"><span class="pcoded-mtext">Admin</span></a></li>
+
+
+                                    </ul>
+
+                                </li>
+                                <!-- sub -->
+                                <!--  -->
+                                <li>
+                                    <a href="/Admin/Analytics">
+                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                        <span class="pcoded-mtext">Analytics</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li>
+                                    <a href="/Admin/CRM">
+                                        <span class="pcoded-micon"><i class="feather icon-home"></i></span>
+                                        <span class="pcoded-mtext">CRM</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                                <!--  -->
+                                <li>
+                                    <a href="/Admin/RecoveryFolder">
+                                        <span class="pcoded-micon"><i class="icofont icofont-ui-folder"></i></span>
+                                        <span class="pcoded-mtext">Recovery Folder</span>
+                                    </a>
+
+                                </li>
+                                <!--  -->
+                            }
+                        </ul>
+
+                    </div>
+                </nav>
+
+
+
+

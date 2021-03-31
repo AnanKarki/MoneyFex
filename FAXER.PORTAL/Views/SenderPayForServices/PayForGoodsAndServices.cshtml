@@ -1,0 +1,95 @@
+﻿@model FAXER.PORTAL.Models.SenderPayForGoodsAndServicesVM
+@{
+    ViewBag.Title = "PayForGoodsAndServices";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Pay for Services</h3>
+                        <hr>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue", id = "CountryCode", @onchange = "GetWalletNo()" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.RecentlyPaidBusiness, (IEnumerable<SelectListItem>)ViewBag.RecenltyPaidInternationalBusinesses, "Recently Paid Business", new { @class = "form-blue", @onChange = "GetRecentBusinessName()", @id = "recentlyPaidBusiness" })
+                            @Html.ValidationMessageFor(model => model.RecentlyPaidBusiness, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+                        <div class="form-group contact-no-group mb20 ">
+                            <div class="countr-code-lg">
+                                <span id="CountryPhoneCode"> </span>
+                            </div>
+                            @Html.TextBoxFor(x => x.BusinessMobileNo, new { @class = "form-blue contact-no-lg", @placeholder = "Business Name or Wallet No.", @id = "businessName" })
+                            @Html.ValidationMessage("InvalidMobileNo", "", new { @class = "text-danger" })
+                        </div>
+
+                        <h4 class="text-center mb30">Paying a Local Business ?   <a href="@Url.Action("PayForServicesLocal","SenderPayForServices")">Change</a></h4>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href="@Url.Action("Index", "SenderPayForServices") " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        
+        function GetRecentBusinessName() {
+            var businessName = $("#recentlyPaidBusiness").val();
+            $("#businessName").val(businessName);
+        }
+        function GetWalletNo() {
+            debugger;
+            var countryCode = $("#CountryCode").val();
+            window.location.href = "/SenderPayForServices/PayForGoodsAndServices?Country=" + countryCode;
+        }
+        function GetCountryPhoneCode() {
+            debugger;
+            var countryCode = $("#CountryCode").val();
+            $.getJSON("/SenderPayForServices/GetCountryPhonCode?CountryCode=" + countryCode, function (result) {
+
+
+                $("#CountryPhoneCode").text(result.CountryCode)
+            })
+
+        }
+        var countryCode = $("#CountryCode").val();
+        if (countryCode != "" || countryCode == undefined) {
+            GetCountryPhoneCode();
+        }
+    </script>
+}

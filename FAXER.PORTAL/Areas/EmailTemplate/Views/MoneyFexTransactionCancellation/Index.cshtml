@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+
+    Dear Admin,
+    <br />
+    <p>
+        A MoneyFex transaction with the following information has
+        been cancelled by : @ViewBag.NameOfCancellar 
+    </p>
+
+    <p>
+        Name of Sender: @ViewBag.SenderName
+        <br />
+        Name of Receiver: @ViewBag.ReceiverName
+        <br />
+        MoneyFex Control Number (MFCN):: @ViewBag.MFCN
+        <br />
+        Transaction Amount : @ViewBag.TransactionAmount
+        <br />
+    </p>
+    <p>
+        Please make a refund to this user accordingly.
+        <br />
+   
+    </p>
+
+
+
+
+</div>
+

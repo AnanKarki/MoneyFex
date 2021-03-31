@@ -1,0 +1,43 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+<body>
+    <p>
+        Dear @ViewBag.FaxerName,
+    </p>
+
+    <p>
+        You have successfully setup an auto deposit of @ViewBag.AutoPaymentAmount
+        @ViewBag.CountryCurrencySymbol
+        to @ViewBag.CardUserName, this amount will be debited from your Credit/Debit card ending with @ViewBag.CreditORDebitCardlast4digits
+        once every @ViewBag.AutoPaymentFrequency.
+    </p>
+    <p>
+        You can add amend this payment through the <i><b>My Standing Order Payments icon </b> </i> on your MoneyFex Account Dashboard.
+    </p>
+
+
+    <table style="width:70%;margin-left:80px ">
+        <tbody>
+            <tr>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoPayment"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/21.png" alt=""></a>
+                </td>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUPMFTCCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/24.png" alt=""></a>
+                </td>
+               
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</body>
+

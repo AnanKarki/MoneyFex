@@ -1,0 +1,261 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentStaffInformationViewModel
+@{
+    ViewBag.Title = "AgentStaffDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    var baseurl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Details <label class="text-primary">@Model.Name</label> <span>Staff ID: @Model.StaffId<br>Staff Login Code:@Model.StaffLoginCode</span></h4>
+                                    <a href="@Url.Action("Index","AuxAgentComplianceForm")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                                <div class="card-body p-t-30 b-b-30">
+
+                                    <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Date of Birth</label>
+                                                    @Html.TextBoxFor(x => x.DateOfBirth, new { @class = "form-control  form-control-lg form-control-round", @id = "name", })
+                                                    @Html.ValidationMessageFor(x => x.DateOfBirth, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Address</label>
+                                                    @Html.TextAreaFor(x => x.Address1, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.Address1, "", new { @class = "text-danger" })
+                                                    @*<textarea name="" class="form-control form-control-lg form-control-round form-control-bold" value="Pako New Road, Kathmandu, Nepal"></textarea>*@
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.TextBoxFor(x => x.Country, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+
+                                                    @*<input type="text" class="form-control form-control-lg form-control-round form-control-bold" value="Nepal">*@
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Phone No.</label>
+                                                    @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "text-danger" })
+
+                                                    @*<input type="text" class="form-control form-control-lg form-control-round form-control-bold" value="+977-6565874547">*@
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Email Address</label>
+                                                    @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.EmailAddress, "", new { @class = "text-danger" })
+
+                                                    @*<input type="text" class="form-control form-control-lg form-control-round form-control-bold" value="info@email.com">*@
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="p-10">
+                                                    <h5>Identification Information</h5>
+                                                    <hr>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>ID Card Type</label>
+                                                    @Html.TextBoxFor(x => x.IdCardType, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.IdCardType, "", new { @class = "text-danger" })
+
+                                                    @*<input type="text" class="form-control form-control-lg form-control-round form-control-bold" value="Driving Licence">*@
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>ID Card Number</label>
+                                                    @Html.TextBoxFor(x => x.IdCardNumber, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.IdCardNumber, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+
+                                                <div class="row">
+                                                    <!--  -->
+                                                    <div class="col-lg-3">
+                                                        <div class="form-group">
+                                                            <label>Day</label>
+                                                            @Html.TextBoxFor(x => x.IdCardExpiryDate.Day, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                            @Html.ValidationMessageFor(x => x.IdCardExpiryDate.Day, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-5">
+                                                        <div class="form-group">
+                                                            <label>Month</label>
+                                                            @Html.TextBoxFor(x => x.IdCardExpiryDate.Month, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                            @Html.ValidationMessageFor(x => x.IdCardExpiryDate.Month, "", new { @class = "text-danger" })
+
+
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <label>Year</label>
+                                                            @Html.TextBoxFor(x => x.IdCardExpiryDate.Year, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                            @Html.ValidationMessageFor(x => x.IdCardExpiryDate.Year, "", new { @class = "text-danger" })
+
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+
+                                                </div>
+
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>ID Issuing Country</label>
+                                                    @Html.TextBoxFor(x => x.IssuingCountry, new { @class = "form-control  form-control-lg form-control-round", @id = "name" })
+                                                    @Html.ValidationMessageFor(x => x.IssuingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="p-10">
+                                                    <h5>Compliance</h5>
+                                                    <hr>
+                                                </div>
+
+                                                <!--  -->
+
+                                                <button onclick="OpenDoc('@Model.Id1')" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                    ID 1
+                                                </button>
+
+                                                <button onclick="OpenDoc('@Model.Id2')" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                    ID 2
+                                                </button>
+
+                                                <button onclick="OpenDoc('@Model.Id3')" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                    ID 3
+                                                </button>
+
+
+
+
+
+
+
+                                            </div>
+
+
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("UpdaeAgentStaffDetails","AuxAgentComplianceForm",new { AgentStaffId=@Model.StaffId})" class="btn btn-primary btn-round m-r-5"><i class="fa fa-refresh"></i> Update</a>
+
+                                            @if (@Model.IsActive == true)
+                                            {
+
+                                                <a href="@Url.Action("Deactived","AuxAgentComplianceForm",new {Id=@Model.Id,IsActive=@Model.IsActive })" class="btn btn-warning btn-round m-r-5"><i class="fa fa-ban"></i> Deactivate</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a href="@Url.Action("Deactived","AuxAgentComplianceForm",new {Id=@Model.Id,IsActive=@Model.IsActive })" class="btn btn-success btn-round m-r-5"><i class="fa fa-ban"></i> Active</a>
+
+                                            }
+
+
+
+                                            <a href="@Url.Action("Deleted","AuxAgentComplianceForm",new {Id=@Model.Id })" class="btn btn-danger btn-round"><i class="fa fa-remove"></i> Delete</a>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function OpenDoc(src) {
+
+            $("#docSrc").attr('src', src);
+            window.open('@baseurl' + '/' + src, "_blank");
+        }
+        $("#Cities").val('@ViewBag.City');
+
+    </script>
+}

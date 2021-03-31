@@ -1,0 +1,33 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px;">
+
+
+    <p>
+        The management @ViewBag.NameOfAgent - MF @ViewBag.AgentMFCode
+    </p>
+
+    <br />
+
+
+
+    <p>
+        MoneyFex has made a payment of <b><i>@ViewBag.FaxedAndRcVedComm</i></b> for paying out <b><i>@ViewBag.TotalRCVedPayment</i></b>and Transfering <b><i> @ViewBag.TotalSendPayment</i></b>
+
+    </p>
+
+    <p>
+        Find the receipt for this payment attached.
+    </p>
+    <p>
+        Please do not hesitate to contact customer service if you have any question.
+    </p>
+
+
+
+
+</div>

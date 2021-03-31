@@ -1,0 +1,236 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.StaffNextOfKinViewModel
+@{
+    ViewBag.Title = "StaffNextOfKin";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>StaffNextOfKin</h2>
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Staff's Next of KIN</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="/Admin/ViewRegisteredStaffDetails" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Registered Staff</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Staff's Next of KIN</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+
+                        <div class="form-body">
+
+
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> First Name <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKFirstName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKFirstName, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Middle Name </label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKMiddleName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Last Name <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKLastName, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKLastName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> Address 1 <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKAddress1, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKAddress1, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> Address 2  </label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKAddress2, new { @class = "form-control" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>City <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKCity, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKCity, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>State/Province/Region <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKState, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKState, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Zip/Postal Code <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKPostalCode, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKPostalCode, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Country   <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.NOKCountry, (IEnumerable<SelectListItem>)ViewBag.countries, "Select your Country", new { @class = "form-control", @id = "country", @onchange = "getCountryCode();" })
+                                    @Html.ValidationMessageFor(model => model.NOKCountry, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+                            <div class="col-lg-1">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.CountryCode, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKPhoneNumber, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKPhoneNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label>Relationship to the next of kin <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.NOKRelationship, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.NOKRelationship, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                        </div>
+
+                        <div class="col-lg-3"></div>
+                        <div class="col-lg-4">
+                            <div class="form-actions text-center">
+                                <button class="btn btn-success btn-lg btn-block btn-rounded">   Next </button>
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function getCountryCode() {
+            var countryCode = $("#country").val();
+            $.getJSON("/Admin/ViewRegisteredStaffDetails/getCountryCode?countryCode=" + countryCode, function (data) {
+                for (var item in data) {
+                    var selector = '[name = "' + item + '"]';
+                    $(selector).val(data[item]);
+
+                }
+            })
+        }
+
+
+    </script>
+
+}

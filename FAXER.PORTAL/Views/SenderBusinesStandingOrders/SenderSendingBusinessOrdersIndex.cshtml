@@ -1,0 +1,159 @@
+﻿@model List<FAXER.PORTAL.Models.SenderSendingBusinessOrdersViewModel>
+@{
+    /**/
+
+    ViewBag.Title = "SenderSendingBusinessOrdersIndex";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2 ">
+
+
+
+                <div class="login_signup mb50 clearfix text-center">
+                    <h3>Business Standing Orders</h3>
+                    <hr>
+                    <div class="col-lg-6  col-lg-offset-3 ">
+
+                        <div class="form-group">
+                            @Html.DropDownList("MobileNo", (IEnumerable<SelectListItem>)ViewBag.MobileNo, "Select Recent Mobile No", new { @class = "form-blue",id= "mobileno",
+                           @onchange = "getMerchantDetails()"})
+
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix mb20"> </div>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Name & Wallet No.</th>
+                                    <th>Country & City</th>
+                                    <th>Amount</th>
+                                    <th>Frequency</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+
+                                    <tr>
+                                        <td><span class="text-primary"> @item.WalletName</span><br> @item.MobileNo</td>
+                                        <td>@item.Country<br />@item.City</td>
+                                        <td>@item.AutoAmount</td>
+                                        <td>@item.FrequencyDetails</td>
+
+                                        <td>
+
+
+                                            @if (item.EnableAutoPayment == "Yes")
+                                            {
+                                                <a class="btn btn-primary radius-20 btn-block" href="@Url.Action("UpdateBusinessStandingOrder","SenderBusinesStandingOrders")"> Update</a>
+
+                                                <a class="btn btn-danger radius-20 btn-block"  onclick="GetId(@item.Id);">Remove</a>
+
+                                            }
+                                            else
+                                            {
+                                                <a class="btn btn-preview radius-20 btn-block" href="@Url.Action("SenderAutoPaymentAdd","SenderBusinesStandingOrders")"> Add </a>
+
+                                            }
+                                            @*<a class="btn btn-preview radius-20 btn-block" href="@url.action("senderautopaymentadd","senderbusinesstandingorders")"> add  </a>
+                                                <a class="btn btn-primary radius-20 btn-block" href="@url.action("updatebusinessstandingorder","senderbusinesstandingorders")">update</a>
+                                                <button class="btn btn-danger radius-20 btn-block" data-toggle="modal" data-target="#delete">remove</button>*@
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="dashboard.php" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i>  Back to Dashboard </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+
+<!-- Delete Confirmation -->
+
+@using (Html.BeginForm("DeleteMerchantAutoPayments", "SenderBusinesStandingOrders", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="delete" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-md text-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">  Confirmation</h4>
+                </div>
+                <div class="modal-body uk-text-center ">
+                    @Html.Hidden("Id", null, new { @id = "Id" })
+                    <h4 class="mt40"> Do you want to remove this standing order?</h4>
+                    <hr>
+                    <button type="button" class="btn btn-primary   radius-20" onclick="deleteItem()">Yes</button>&nbsp;&nbsp;&nbsp;
+                    <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+}
+<!-- Delete Confirmation end -->
+
+
+@section Scripts{
+    <script>
+        function getMerchantDetails(val) {
+            var MobileNo = $("#mobileno").val();
+            window.location.href = "/SenderBusinesStandingOrders/SenderSendingBusinessOrdersIndex?MobileNo=" + MobileNo;
+        }
+
+        var itemId = 0;
+        function GetId(val) {
+            debugger;
+            itemId = val;
+
+            $("#delete").modal('show');
+            //document.getElementById("Id").value = val;
+        };
+
+        function deleteItem() {
+            window.location.href = "/SenderBusinesStandingOrders/DeleteMerchantAutoPayments?Id=" + itemId;
+        }
+
+
+    </script>
+}

@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+
+    <p>
+        Dear @ViewBag.SenderName,
+    </p>
+    <p>
+        Your payment of @ViewBag.ReceivingAmount  @ViewBag.ReceivingCurrency to @ViewBag.ReceiverBusinessName has been successful, the Service Provider's MoneyFex account has been credited.
+    </p>
+    <p>
+        Please find attached a receipt to confirm this transaction.
+    </p>
+    <p>
+        The Service Provider can now withdraw the money from one of paying agents in @ViewBag.ReceiverCountry or pay for other services in their country of operation.
+    </p>
+
+
+
+
+
+    <br />
+    
+</div>

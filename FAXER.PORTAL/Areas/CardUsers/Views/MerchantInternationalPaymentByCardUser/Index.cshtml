@@ -1,0 +1,138 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUserPreviousPayeeViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+    var AccountNumber = "";
+    if (Model != null)
+    {
+
+        AccountNumber = Model.BusinessMFCode ?? "";
+    }
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Pay for goods &  services</h1>
+
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+
+<form method="post" id="form">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-lg-offset-1">
+
+                    <h4 class="">Have you made a payment to this Service Provider before?</h4>
+
+                    <div class="col-lg-8">
+
+
+                        @*<label> <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked="checked"> Yes</label>
+                            <label><input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> No</label>*@
+                        <label for="chkYes">
+                            <input type="radio" id="chkYes" name="chkPinNo" class="" checked /> Yes
+                        </label>
+                        &nbsp;&nbsp;
+                        &nbsp;&nbsp;
+                        <label for="chkNo">
+                            <input type="radio" id="chkNo" name="chkPinNo" class=""  checked/> No
+                        </label>
+                        <hr>
+
+
+                        <div class="clearfix"></div>
+
+                        <div id="dvPinNo" style="display:none" class="col-lg-6">
+
+                            @Html.DropDownListFor(model => model.BusinessMFCode, (IEnumerable<SelectListItem>)ViewBag.PreviousPayee, "Select a previous payee", new { @class = "form-control", id = "txtPinNo" })
+
+                        </div>
+                        <label id="val" style="color:red"></label>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <a href="@Url.Action("Index" , "PayGoodsAndServicesAbroad")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+                    <a class="fbtn btn-next" onclick="OnSubmit()">Next  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <br />
+                    <a href="@Url.Action("Index" , "PayGoodsAndServicesAbroad")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>
+@section scripts{
+    <script type="text/javascript">
+
+
+     var AccountNumber = '@AccountNumber';
+        if (AccountNumber != "") {
+
+            $("#chkYes").prop("checked", true);
+            $("#dvPinNo").show();
+
+
+        }
+
+        function OnSubmit() {
+
+            if ($("#chkYes").prop("checked") == true) {
+
+                if ($("#txtPinNo").val() == undefined || $("#txtPinNo").val() == "") {
+
+                    $("#val").text("Please select your previous payee");
+                }
+                else {
+
+                    $("#form").submit();
+
+                }
+
+            } else {
+
+                $("#form").submit();
+
+            }
+        }
+
+
+    </script>
+
+}
+
+

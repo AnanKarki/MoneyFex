@@ -1,0 +1,127 @@
+﻿
+@{
+    ViewBag.Title = "TransferMoney";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class="dashboard_body">
+
+                    <div class=" clearfix">
+                        <h3>Select a Transfer Method</h3>
+                        <hr>
+                        <div class="mobile_design text-center">
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("SearchKiiPayPersonalWalletForLocalPayment" , "KiiPayBusinessPayAnotherKiiPayWallet")">
+
+                                        <div class="das-icon">
+                                            <img src="/Areas/KiiPayBusiness/images/icon/svg/kiipay.svg">
+                                        </div>
+                                        <h4>Pay into Another <br>KiiPay Wallet </h4>
+                                        <span class="numbervisible"> New </span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("SearchKiiPayPersonalWalletForLocalPayment" , "KiiPayBusinessPayAnotherKiiPayWallet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/KiiPayBusiness/images/icon/svg/mobile-money.svg">
+                                        </div>
+                                        <h4>Mobile Money Transfer</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("LocalBankAccountDeposit" , "KiiPayBusinessBankAccountDeposit")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/KiiPayBusiness/images/icon/svg/bank.svg">
+                                        </div>
+                                        <h4>Bank Account Deposit</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="/Areas/KiiPayBusiness/images/icon/sud.png">
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+
+
+                            <!-- back btn -->
+                            <div class="clearfix">
+                                <hr>
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+                <!--  -->
+                
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>
+<!-- withdrawal-code -->
+<div class="modal fade" tabindex="-1" id="withdrawal-code" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-card" role="document">
+        <div class="modal-content">
+            <div class="modal-body  text-center">
+                <div class="row">
+                    <div class="col-lg-6 col-lg-offset-3">
+                        <div class="form-group">
+                            <h3>Select Virtual Account</h3>
+
+                            <select name="" class="form-control">
+                                <option>--Select Virtual Account --</option>
+
+                                <option value="">Card 1</option>
+                                <option value="">Card 1</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <hr class="clearfix">
+                    <h1 class="text-center">Your code is  <br> <span class="text-primary"> 121547547</span></h1>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- withdrawal-code -->
+<?php include("include/footer-login.php");?>

@@ -1,0 +1,316 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ReceiverDetailsInfoViewModel
+@{
+    ViewBag.Title = "BanAReceiver";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card" style="">
+
+                                <div class="card-header border-bottom">
+                                    <h2 class="f-left f-left m-t-5 m-b-0" style="float:left;"> Ban a Receiver</h2>
+                                    <a href="@Url.Action("Index","BanReceiver")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Banned Receiver
+                                    </a>
+
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <div class="form-group">
+
+                                                    <label> Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceiverCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>BankName/MobileWalletProvider Name</label>
+                                                    @Html.TextBoxFor(x => x.BankNameOrMobileWalletProvider, new { @class = "form-control", @placeholder = "BankName/MobileWalletProvider Name" })
+                                                    @Html.ValidationMessageFor(x => x.BankNameOrMobileWalletProvider, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>Bank Code</label>
+                                                    @Html.TextBoxFor(x => x.BankCode, new { @class = "form-control", @placeholder = "Enter Bank Code" })
+                                                    @Html.ValidationMessageFor(x => x.BankCode, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Transfer Method Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferType" })
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>Receiver Name</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverName, new { @class = "form-control", @placeholder = "Receiver's Name" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+
+                                                <div class="form-group">
+                                                    <label>Receiver Account Number</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverAccountNo, new { @class = "form-control", @placeholder = "Enter Reveciver's Account Number" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverAccountNo, "", new { @class = "text-danger" })
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label>Reveciver Phone Number</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverTelephone, new { @class = "form-control", @placeholder = "Enter Reveciver's Phone Number" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverTelephone, "", new { @class = "text-danger" })
+                                                </div>
+
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","SocialMediaTracking")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    }*@
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Ban a Receiver</h4>
+                                        <a href="@Url.Action("Index","BanReceiver")" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceiverCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Service</label>
+
+                                                    @Html.EnumDropDownListFor(x => x.Service, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select a service", @id = "Service", @onchange = "GetBankorWalletProviderList();" })
+                                                    @Html.ValidationMessage("Service", "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group" id="Bank">
+                                                    <label>Bank  </label>
+                                                    @Html.DropDownListFor(x => x.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "BankId" })
+                                                    @Html.ValidationMessageFor(x => x.BankId, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group" id="MobileWalletprovider">
+                                                    <label>Mobile Wallet Provider</label>
+                                                    @Html.DropDownListFor(x => x.MobileWalletProvider, (IEnumerable<SelectListItem>)ViewBag.MobileWalletProvider, "Select Wallet Provider", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "MobileWalletProvider" })
+                                                    @Html.ValidationMessageFor(x => x.MobileWalletProvider, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Account No./Mobile Wallet No.</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverAccountNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Account Number" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverAccountNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group" id="BankCode">
+                                                    <label>Bank Code</label>
+                                                    @Html.TextBoxFor(x => x.BankCode, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Bank Code" })
+                                                    @Html.ValidationMessageFor(x => x.BankCode, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiver's Name</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverName, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Name" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverName, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiver's Telephone</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverPhoneNo, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Telephone" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverPhoneNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","BanReceiver")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function GetBankorWalletProviderList() {
+            var service = $("#Service").val();
+
+            if (service == 0) {
+                $('#MobileWalletprovider').hide();
+                $('#Bank').show();
+                $('#BankCode').show();
+            }
+            else if (service == 1) {
+                $('#MobileWalletprovider').show();
+                $('#Bank').hide();
+                $('#BankCode').hide();
+            }
+            else {
+                $('#MobileWalletprovider').hide();
+                $('#Bank').hide();
+                $('#BankCode').hide();
+            }
+        }
+
+        var service = $("#Service").val();
+
+        if (service == 0) {
+            $('#MobileWalletprovider').hide();
+            $('#Bank').show();
+            $('#BankCode').show();
+        }
+        else if (service == 1) {
+            $('#MobileWalletprovider').show();
+            $('#Bank').hide();
+            $('#BankCode').hide();
+        }
+        else {
+            $('#MobileWalletprovider').hide();
+            $('#Bank').hide();
+            $('#BankCode').hide();
+        }
+
+    </script>
+
+}

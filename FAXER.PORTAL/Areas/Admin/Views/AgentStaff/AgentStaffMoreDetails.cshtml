@@ -1,0 +1,208 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewAgentStaffMoreDetailsViewModel
+    @{
+        ViewBag.Title = "AgentStaffMoreDetails";
+        Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    }
+
+
+
+
+
+    <!-- ============================================================== -->
+    <!-- Page Content -->
+    <!-- ============================================================== -->
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+
+
+
+
+                    <a href="/Admin/AgentStaff" class="btn btn-info btn-rounded waves-effect waves-light"><span class="btn-label"><i class="fa fa-angle-left"></i></span> Back to Agent Staff </a>
+
+
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li><a href="/Admin/AgentStaff">Agent Staff</a></li>
+                        <li class="active">@Model.StaffName</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+
+                                        <td rowspan="2"><strong>Agent Staff Level</strong></td>
+
+
+                                        <td colspan="4"><strong>ID Information</strong></td>
+
+                                        <td colspan="4"><strong>Login Time and Day System Access      </strong></td>
+
+
+                                        <td rowspan="2"><strong>Staff Document</strong></td>
+
+
+                                    </tr>
+                                    <tr>
+                                        <td><strong>ID Type</strong></td>
+                                        <td><strong>ID Number</strong></td>
+                                        <td><strong>Exp. Date</strong></td>
+                                        <td><strong>Issuing Country</strong></td>
+
+
+
+
+                                        <td><strong>Start Time</strong></td>
+                                        <td><strong>End Time</strong></td>
+                                        <td><strong>Start Day</strong></td>
+                                        <td><strong>End Day</strong></td>
+
+
+
+
+
+
+
+
+
+
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    <tr>
+
+                                        <td>@Model.AgentStaffLevel </td>
+                                        <td>@Model.IDType</td>
+
+                                        <td>@Model.IDNumber</td>
+                                        <td>@Model.ExpiryDate</td>
+                                        <td>@Model.IssuingCountry</td>
+                                        <td>@Model.StartTime</td>
+                                        <td>@Model.EndTime</td>
+                                        <td>@Model.StartDay </td>
+
+                                        <td>@Model.EndDay </td>
+                                        <td><button class="btn btn-sm btn-primary" onclick="showModal();">  View Document</button></td>
+                                        @*<td><button class="btn btn-sm btn-primary" href="avoide:javascript;" data-toggle="modal" data-target="#StaffDoc">  View Document</button></td>*@
+
+
+                                    </tr>
+
+
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+            <!--/.row -->
+            <!--row -->
+            <!-- Staff documents -->
+
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="StaffDoc" >
+
+                <div class="modal-dialog modal-lg">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">Agent Staff Document</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <td rowspan="2"><strong>SN.</strong></td>
+                                                    <td rowspan="2"><strong>Staff Name</strong></td>
+                                                    <td colspan="6"><strong>Compliance Documents</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>ID</td>
+                                                    <td><strong>Type</strong></td>
+                                                    <td>ID Card No.</td>
+                                                    <td>Exp. Date</td>
+                                                    <td>Passport Side 1</td>
+                                                    <td>Passport Side 2</td>
+
+                                                </tr>
+
+                                            </thead>
+
+                                            <tbody>
+                                                <tr>
+                                                    <td>1</td>
+                                                    <td>@Model.StaffName</td>
+                                                    <td><a href="@Model.StaffIDUrl" target="_blank"><img src="@Model.StaffIDUrl" class="document_attached"></a></td>
+                                                    <td>@Model.IDType </td>
+                                                    <td>@Model.IDNumber </td>
+                                                    <td>@Model.ExpiryDate </td>
+                                                    <td><a href="@Model.PassportSide1Url" target="_blank"><img src="@Model.PassportSide1Url" class="document_attached"></a></td>
+                                                    <td><a href="@Model.PassportSide2Url" target="_blank"><img src="@Model.PassportSide2Url" class="document_attached"></a></td>
+
+
+                                                </tr>
+
+
+
+
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger brn-sm" data-dismiss="modal">Close</button>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        function showModal() {
+            $('#StaffDoc').modal('show');
+        }
+
+    </script>
+    }
+

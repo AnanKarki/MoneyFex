@@ -1,0 +1,68 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessSearchSuppliersVM
+@{
+    ViewBag.Title = "TopUpAnAccount";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Top-up an Account </h3>
+                        <hr>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.Supplier , (IEnumerable<SelectListItem>)ViewBag.Suppliers
+                                                      , "Select Suppliers",  new { @class= "form-blue" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Supplier, "", new { @class = "text-danger" })
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+
+                        <div class="form-group  ">
+                            @Html.TextBoxFor(model => model.WalletNo, new { @type = "number", @placeholder = "Suppliers Name or Wallet  No.", @class = "form-blue" })
+                        </div>
+                        @Html.ValidationMessageFor(model => model.WalletNo, "", new { @class = "text-danger" })
+
+
+                        <h4 class="text-center mb30">Top-up Supplier  Abroad?   <a href="@Url.Action("InternationalTopUpAnAccount")">Change</a></h4>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}

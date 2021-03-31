@@ -1,0 +1,149 @@
+﻿
+@model List<FAXER.PORTAL.Areas.Admin.ViewModels.InvoicingViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">
+                                        Send an Invoice
+                                        <!--  <label class="text-primary">Rohan </label>  <span>Account No: 15484814
+                                         <br>Country: United Kingdom</span> -->
+                                    </h4>
+                                    <a href="@Url.Action("GeneralCreateInvoice","GeneralSendInvoicing")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i>  Create Invoice
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("General", (IEnumerable<SelectListItem>)ViewBag.Agents, "Select General", new { @class = "form-control  form-control form-control-round form-control-bold", @id = "GeneralId", @onchange = "Fliter()" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Date From" autocomplete="off" id="Date" onchange="Fliter();">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap print">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>General & Account No.</th>
+                                                    <th>Date & Invoice No.</th>
+                                                    <th>Amount & Status</th>
+                                                    <th>View</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+
+
+                                                    <tr>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td align="center">
+                                                            @item.Name<br>
+                                                            <span class="text-primary">@item.AccountNo</span>
+                                                        </td>
+                                                        <td align="center">
+                                                            @item.Date<br>@item.InvoiceNo
+                                                        </td>
+                                                        <td align="center">
+                                                            @item.CurrencySymbol@item.Amount<br><span class="text-danger">@item.StatusName</span>
+                                                        </td>
+
+                                                        <td><a href="@Url.Action("InvoicePreview","GeneralSendInvoicing")" class="btn btn-success btn-round">See Invoice</a></td>
+                                                        <td>
+                                                            <select class="form-control">
+                                                                <option value="0">Select</option>
+                                                                <option value="1">Remind</option>
+                                                                <option value="2">Edit</option>
+                                                                <option value="3">Resend</option>
+                                                                <option value="4">Cancel</option>
+                                                                <option value="5">Delete</option>
+                                                            </select>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var general = document.getElementById("GeneralId").value;
+            var date = document.getElementById("Date").value;
+            window.location.href = "/Admin/GeneralSendInvoicing/Index?CountryCode=" + country + "&City=" + city + "&GeneralId=" + general + "&Date=" + date;
+        }
+    </script>
+}

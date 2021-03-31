@@ -1,0 +1,80 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.SystemExchangeRateViewModel
+@{
+    ViewBag.Title = "SetSystemExchangeRate";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="page-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">System Exchange Rate</h4>
+                                        <a onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCurrency, (IEnumerable<SelectListItem>)ViewBag.SendingCurrencies, "Select Sending Currency", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SendingCountry", @onchange = "GetAgentByCountry();" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCurrency, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCurrency, (IEnumerable<SelectListItem>)ViewBag.ReceivingCurrencies, "Select Receiving Currency", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCurrency, "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label> Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                    @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>System Exchange Rate</label>
+                                                    @Html.EnumDropDownListFor(x => x.ExchangeRateType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ExchangeRateType" })
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","SystemExchangeRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+}

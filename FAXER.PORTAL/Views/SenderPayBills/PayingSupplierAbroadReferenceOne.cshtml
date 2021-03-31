@@ -1,0 +1,98 @@
+﻿@model FAXER.PORTAL.Models.SenderPayingSupplierAbroadReferenceOneVM
+    @{
+        ViewBag.Title = "PayingSupplierAbroadReferenceOne";
+        Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    }
+   @using (Html.BeginForm())
+   {
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    @Html.HiddenFor(x => x.PhotoUrl)
+                    @Html.HiddenFor(x=>x.ReceiverName)
+                    @Html.HiddenFor(x=>x.ReferenceNo)
+
+                    <div class="login_signup mb50 clearfix text-left">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    @*<img src="images/icon/svg/buldings.svg" alt="">*@
+                                    <img src="@Model.PhotoUrl" alt="">
+
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.ReceiverName</span>
+                            </div>
+                        </div>
+
+                        <div class="pinside20">
+                            <label>Payment Reference</label>
+                            <div class="referencecode mb20">
+                                <div class="col-lg-5">
+                                    <img src="~/Content/images/kiipay.png" width="80"> <b>Ref:</b>
+                                </div>
+
+                                <div class="col-lg-7">
+                                    @*HV8HJC*@
+                                    @Model.ReferenceNo
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+
+
+
+                            <div class="estimate-calculator" style="">
+                                <div class="wrapper">
+
+                                    <dl>
+                                        <dt>Bill No.:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.BillNo</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt>Amount:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.Amount @Model.Currency</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Fee:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.Fee @Model.Currency</dd>
+                                    </dl>
+
+                                    <dl>
+                                        <dt>Total:</dt>
+                                        <dd class="fee" data-outbound-currency="USD"> @Model.Total @Model.Currency</dd>
+                                    </dl>
+                                    <div class="clearfix">
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Confirm and Pay <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+                                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+   }

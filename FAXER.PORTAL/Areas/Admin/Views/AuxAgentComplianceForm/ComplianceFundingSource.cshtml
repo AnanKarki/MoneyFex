@@ -1,0 +1,692 @@
+﻿@model FAXER.PORTAL.DB.SourceOfFundDeclarationFormData
+@{
+    ViewBag.Title = "ComplianceFundingSource";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b, strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+            white-space: normal;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+@using (Html.BeginForm())
+{
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+
+                                        <a href=" @Url.Action("Index", "AuxAgentComplianceForm")" class=" btn btn-primary f-left btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+
+                                    <div class="card-body">
+
+                                        <!--  -->
+                                        <div class="forms-wrapper">
+
+                                            <div class="form-main-title">
+                                                CERTIFICATE FOR DECLARATION OF CUSTOMER’S SOURCE OF FUND & PURPOSE OF USE
+                                            </div>
+                                            <p>Required for all cash and Non-cash transactions in excess of £3000 Transactions and for all Third Party Transactions</p>
+                                            <div class="forms">
+                                                <div class="forms-header">
+                                                    Sender's Details
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Sender Full Name or Business Name:</label>
+
+                                                                    </td>
+                                                                    <td><label><b>@Model.SenderFullName</b></label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Date of Birth: </label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.SenderDateOfBirth</b></label>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label>Country of Birth: </label>
+                                                                    </td>
+
+                                                                    <td><label>@Model.SenderCountry</label></td>
+
+
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>
+                                                                            Gender :
+                                                                        </label>
+                                                                    </td>
+
+                                                                    <td><label><b>@Model.SenderGender</b></label></td>
+
+
+                                                                </tr>
+
+
+                                                                <tr>
+
+
+                                                                    <td>
+                                                                        <label>
+                                                                            Address:
+                                                                        </label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@Model.SenderAddress</b></label>
+                                                                    </td>
+
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Telephone Number:</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.SenderPhoneNo</b></label>
+                                                                    </td>
+
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Email Address:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.SenderEmailAddress</b></label></td>
+                                                                </tr>
+
+
+
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>ID Type:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.SenderIdCardType</b> </label></td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> ID Number:</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.SenderIdNumber</b></label>
+                                                                    </td>
+
+
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Expiring Date:</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@Model.SenderIdExpiryDate</b></label>
+                                                                    </td>
+
+
+
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label> Issuing Country:</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@Model.SenderIdIssuingCountry</b></label>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Occupation:</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.SenderOccupation</b></label>
+                                                                    </td>
+
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+
+                                                <div class="forms-header">
+                                                    Receiver's Details
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Receiver Full Name:</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@Model.ReceiverName</b></label>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>City:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.ReceiverCity</b></label></td>
+
+
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label>Country:</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.ReceverCountry</b></label>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> Telephone:</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@Model.ReceiverTelephone</b></label>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+
+                                                                    <td><label> Email:</label></td>
+                                                                    <td><label><b>@Model.ReceiverEmail</b> </label></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> Relationship to sender :</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label><b>@Model.RelationShipToSender</b></label>
+                                                                    </td>
+
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+
+                                                <div class="forms-header">
+                                                    Amount / Type / Purpose
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>One Off Amount:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.OneOffAmount</b></label></td>
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> Linked Amount: </label>
+                                                                    </td>
+
+                                                                    <td><label><b>@Model.LinkedAmount</b></label></td>
+
+
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> Transfer Type:</label>
+                                                                    </td>
+
+                                                                    <td><label><b>@Model.TransferType</b></label></td>
+
+
+                                                                </tr>
+
+
+
+                                                                <tr>
+                                                                    <td colspan="4">I hereby declare that I am not involved in any criminal or money laundering activity and the funds for the above transaction were obtained by me, are clear and are not derived from any illegal activities. These funds are derived from the following source <b>@Model.MeansOfVerification</b></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <label>
+                                                                            Check this box to confirm
+                                                                            @if (Model.IsConfirm == true)
+                                                                            {
+                                                                                <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span style="color:red; font-weight: bold; font-size: 20px;">&times; </span>
+
+                                                                            }
+
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+
+                                                <div class="forms-header">
+                                                    Agent / MoneyFex Admin Verification
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>ID Available?</label>
+                                                                        @if (Model.IDAvailable)
+                                                                        {
+                                                                            <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            <span style="color:red; font-weight: bold; font-size: 20px;">&times; </span>
+                                                                        }
+
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>
+                                                                            Proof of Source of Income?
+                                                                            @if (Model.ProofOfSourceOfIncome)
+                                                                            {
+                                                                                <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span>
+                                                                            }
+                                                                            else
+                                                                            {
+                                                                                <span style="color:red; font-weight: bold; font-size: 20px;">&times; </span>
+                                                                            }
+
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Bank Statement </label>
+
+                                                                        <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>
+                                                                            Legal Letter
+                                                                            <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span>
+                                                                        </label>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>
+                                                                            Other <br>
+                                                                            <label><b>@Model.Others</b></label>
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+
+
+
+
+                                                                <tr>
+
+                                                                    <td colspan="2">
+                                                                        <label> Purpose of Transfer ?</label>
+                                                                    </td>
+
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="2">
+                                                                        <label> <b>@Model.ProofOfPurpose</b></label>
+                                                                    </td>
+                                                                </tr>
+
+
+
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label> Phone</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label> <b>@ViewBag.AdminPhoneNo </b></label>
+                                                                </tr>
+
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label> Email</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label> <b>@ViewBag.AdminEmail</b></label>
+                                                                </tr>
+
+
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label> Face to Face</label>
+                                                                    </td>
+
+                                                                    <td>
+                                                                        <label> <b>@Model.FaceToFace</b></label>
+                                                                </tr>
+
+
+
+
+
+
+                                                            </tbody>
+                                                        </table>
+
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-header">
+                                                    Agent
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Agent Name:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.AgentStaffName</b></label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Country:</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.AgentCountry</b></label></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>Agent Account No.:</label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label><b>@ViewBag.AgentAccountNo</b></label>
+                                                                    </td>
+
+                                                                </tr>
+                                                                <tr>
+
+                                                                    <td>
+                                                                        <label>Agent Staff ID :</label>
+                                                                    </td>
+                                                                    <td><label><b>@Model.AgentStaffAccountNo</b></label></td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                                <div class="forms-header">
+                                                    Admin
+                                                </div>
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+                                                        <table>
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <label>
+                                                                            Admin Name:
+                                                                            <input type="text" name="" value="@Model.AdminStaffName">
+                                                                        </label>
+                                                                    </td>
+                                                                    <td>
+                                                                        <label>
+                                                                            Admin Staff ID:
+                                                                            <input type="text" name="" value="@Model.ApprovedStaffAccountNo">
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+
+                                                <div class="forms-footer  ">
+                                                    <table width="100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td> <button type="" onclick="Cancel()"  class="button button-cancel  ">Cancel </button></td>
+                                                                <td align="center" style="text-align: center;"><button type="submit" class="button button-Submit  " style="float: none;">Submit</button> </td>
+                                                                <td> <button type="" class="button button-Submit  ">Print</button></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Cancel() {
+
+            window.location.href = "/Admin/AuxAgentComplianceForm/Index";
+
+        }
+
+    </script>
+}

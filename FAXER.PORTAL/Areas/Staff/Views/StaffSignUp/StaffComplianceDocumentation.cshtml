@@ -1,0 +1,164 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffComplianceDocumentationViewModel
+@{
+    ViewBag.Title = "StaffComplianceDocumentation";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Staff Compliance Documentation</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm("StaffComplianceDocumentation", "StaffSignUp", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class=" ">
+                        <p>
+                            To comply with employment laws and regulations, MoneyFax Service requires the following documents to support your employment
+                        </p>
+
+
+
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Residence Permit</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                <input type="file" id="datafile0" name="ResidentPermit" class="form-control" required/>
+                                @Html.ValidationMessageFor(x => x.ResidencePermitUrl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Passport side 1</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="file" id="dataFile1" name="Passport1" class="form-control" required/>
+
+                                @Html.ValidationMessageFor(x => x.PassportSide1Url, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Passport side 2</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="file" id="dataFile2" name="Passport2" class="form-control"  required/>
+                                @Html.ValidationMessageFor(x => x.PassportSide2Url, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Utility bill (not more then 3 months old)</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="file" id="dataFile3" name="UtilityBill" class="form-control" required/>
+                                @Html.ValidationMessageFor(x => x.UtilityBillUrl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label>Curiculum Vitae</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                <input type="file" id="dataFile4" name="CV" class="form-control"  required/>
+                                @Html.ValidationMessageFor(x => x.CVUrl, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-6">
+                            <label> Highest Qualification</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+
+                                <input type="file" id="dataFile5" name="HighestQual" class="form-control" required/>
+                                @Html.ValidationMessageFor(x => x.HighestQualificationUrl ,"" , new { @class="text-danger"})
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <!--  -->
+        <!--  -->
+        <div class="dynamic_footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+
+                        <button type="submit" id="submit"class="fbtn btn-next">Finish Account Setup <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+    <!--  -->
+@section Scripts{
+<script type="text/javascript">
+
+   
+</script>
+}

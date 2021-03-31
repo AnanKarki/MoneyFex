@@ -1,0 +1,186 @@
+﻿@model FAXER.PORTAL.Models.NonCardReceiversDetailsViewModel
+
+@{
+    ViewBag.Title = "NonCardReceiversDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    var CountryPhoneCode = "";
+    if (Model != null)
+    {
+
+        CountryPhoneCode = Model.CountryPhoneCode ?? "";
+    }
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>
+                    Cash to Cash Transfer
+                </h1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("NonCardReceiversDetails", "NonCardMoneyFax", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <h3>Receiver's Details</h3>
+                    <hr />
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @Html.HiddenFor(model => model.CountryPhoneCode)
+                    <div class="form-group">
+                        <label class=" col-md-5">Previous Receivers</label>
+                        <div class="col-lg-6">
+                            @Html.DropDownListFor(x => x.PreviousReceivers, null, "Select From Previous Receivers", htmlAttributes: new { @class = "form-control", id = "Country", @onchange = "getReciverDetails(this.value);" })
+                            @Html.ValidationMessageFor(model => model.PreviousReceivers, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverFirstName, htmlAttributes: new { @class = "col-md-5 " })
+
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverFirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverMiddleName, htmlAttributes: new { @class = "col-md-5" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverMiddleName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverMiddleName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverLastName, htmlAttributes: new { @class = "col-md-5 " })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverLastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverLastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverCity, htmlAttributes: new { @class = "col-md-5 " })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverCity, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverCity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverCountry, htmlAttributes: new { @class = "col-md-5 " })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverCountry, new { htmlAttributes = new { @class = "form-control", @readonly = true, @Value = ViewBag.RecvingCountry } })
+                            @Html.ValidationMessageFor(model => model.ReceiverCountry, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @*<div class="form-group">
+                            @Html.LabelFor(model => model.ReceiverPhoneNumber, htmlAttributes: new { @class = "col-md-5 " })
+                            <div class="col-md-2 no-right-padding">
+                                @Html.EditorFor(model => model.CountryPhoneCode, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly" } })
+                            </div>
+                            <div class="col-md-4 no-left-padding">
+                                @Html.EditorFor(model => model.ReceiverPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.ReceiverPhoneNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>*@
+
+                    <div class="col-lg-5">
+
+                        @Html.LabelFor(model => model.ReceiverPhoneNumber, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@CountryPhoneCode</span>
+
+                            @Html.EditorFor(model => model.ReceiverPhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverPhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"><br /></div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ReceiverEmailAddress, htmlAttributes: new { @class = "col-md-5 " })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.ReceiverEmailAddress, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ReceiverEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="clearfix"><br /></div>
+
+
+                    <div class="form-group">
+                        <label class="col-md-5">Reason for the transfer</label>
+                        <div class="col-md-6">
+                            @Html.EnumDropDownListFor(model => model.ReasonForTransfer, new { @class = "form-control" , onchange = "openPopup()"  })
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="/NonCardMoneyFax/NonCardFaxingSummary" , class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" value="Next" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                    <br />
+                    <a href="/NonCardMoneyFax/NonCardFaxingSummary" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"><i class="fa fa-book"></i> Do you want to pay the education provider directly ?</h4>
+                </div>
+                <div class="modal-body">
+
+                    <a  class="btn btn-success" data-dismiss="modal">Yes</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button class="btn btn-primary " data-dismiss="modal">No</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+<script>
+    function getReciverDetails(val) {
+        window.location.href = "/NonCardMoneyFax/NonCardReceiversDetails?id=" + val;
+    }
+
+    function openPopup() {
+        $("#myModal").modal();
+    }
+
+</script>
+

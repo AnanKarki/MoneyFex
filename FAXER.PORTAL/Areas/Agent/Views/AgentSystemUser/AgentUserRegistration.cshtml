@@ -1,0 +1,185 @@
+﻿
+@model FAXER.PORTAL.Areas.Agent.Models.AgentUserDetailsViewModel
+@{
+    ViewBag.Title = "AgentUserRegistration";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                @{
+                    if (Model.Id != 0)
+                    {
+                       
+                        <h1>Update Agent User Registration </h1>
+                    }
+
+                    else
+                    {
+                        <h1>Agent User Registration </h1>
+                    }
+                }
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        @Html.HiddenFor(model => model.AgentStaffId)
+                        @Html.HiddenFor(model => model.Id)
+                        <h3>User Details</h3>
+                        <hr>
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> First Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Middle Name </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.MiddleName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Last Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Date of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Day, new { @class = "form-control", @placeholder = "Day", @type = "number" })
+                                @Html.ValidationMessageFor(Model => Model.Day, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                @Html.EnumDropDownListFor(x => x.Month, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.Month, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Year, new { @class = "form-control", @placeholder = "Year", @type = "number" })
+                                @Html.ValidationMessageFor(Model => Model.Year, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="col-lg-offset-5 col-lg-6">
+                            <div class="form-group">
+
+                                @Html.ValidationMessage("DOB", "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(x => x.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Gender <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EnumDropDownListFor(x => x.Gender, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    @*  <a href="agent-user-registration-staff-contact-details.php" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+}

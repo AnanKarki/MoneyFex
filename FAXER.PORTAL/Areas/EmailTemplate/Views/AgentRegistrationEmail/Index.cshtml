@@ -1,0 +1,27 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+
+    <p>
+        Dear @ViewBag.AgentName,
+    </p>
+    <p>
+        Thank you for registering with MoneyFex, please click on the following registration link to start the process of completing your registration to become an Agent of MoneyFex.
+        
+    </p>
+    <p>
+        <a href="@ViewBag.Link">@ViewBag.Link</a>
+    </p>
+
+
+    <p>
+        Please contact Customer Service should you have any problem in completing the registration process.
+    </p>
+
+
+
+
+</div>

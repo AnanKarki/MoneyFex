@@ -1,0 +1,2067 @@
+﻿
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+        <div class="main-body">
+            <div class="page-wrapper">
+                <div class="page-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="card">
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Admin System Control </h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select Country</option>
+                                                    <option>United Kingdom (GBP)</option>
+                                                    <option>Nigeria (NGN)</option>
+                                                    <option>Cameroon (XAF)</option>
+                                                    <option>Ghana (GHS)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select City</option>
+                                                    <option>London</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select Staff</option>
+                                                    <option>All</option>
+                                                    <option>Rohit Shrestha</option>
+                                                    <option>Ram Krishna Dhakal</option>
+                                                    <option>Dipendra Shrestha</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option>Select Login Level</option>
+                                                    <option>Level 1</option>
+                                                    <option>Level 2</option>
+                                                    <option>Level 3</option>
+                                                    <option>Level 4</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <label>Account Number</label>
+                                                <input type="text" name="" class=" form-control form-control-round form-control-bold" value="" placeholder="4165464" disabled>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <h4>System</h4>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="border-checkbox-section m-b-20">
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    <input class="border-checkbox" type="checkbox" id="dashboard">
+                                                    <label class="border-checkbox-label" for="dashboard">Dashboard</label>
+                                                </div>
+                                            </div>
+                                            <div class="border-checkbox-section m-b-20">
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    <input class="border-checkbox" type="checkbox" id="ServiceSetting">
+                                                    <label class="border-checkbox-label" for="ServiceSetting">Service Setting</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="border-checkbox-section m-b-20">
+                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                    <input class="border-checkbox" type="checkbox" id="Calculatehowmuch">
+                                                    <label class="border-checkbox-label" for="Calculatehowmuch">Calculate how much </label>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="rates">
+                                                        <label class="border-checkbox-label" for="rates"><b>Rates</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="transferexchangerate">
+                                                            <label class="border-checkbox-label" for="transferexchangerate">Transfer Exchange Rate</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="currentexchangerate">
+                                                                <label class="border-checkbox-label" for="currentexchangerate">Current Exchange Rate</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="setrate">
+                                                                <label class="border-checkbox-label" for="setrate">Set Rate</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="RateHistory">
+                                                                <label class="border-checkbox-label" for="RateHistory">Rate History</label>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="checkbox-control">
+                                                            <li>
+                                                                <div class="border-checkbox-section">
+                                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                        <input class="border-checkbox" type="checkbox" id="DownloadHistory">
+                                                                        <label class="border-checkbox-label" for="DownloadHistory">Download History</label>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="IntroductoryRate">
+                                                            <label class="border-checkbox-label" for="IntroductoryRate">Introductory Rate</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="IRcurrentexchangerate">
+                                                                <label class="border-checkbox-label" for="IRcurrentexchangerate">Current Exchange Rate</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="IRsetrate">
+                                                                <label class="border-checkbox-label" for="IRsetrate">Set Rate</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="IRRateHistory">
+                                                                <label class="border-checkbox-label" for="IRRateHistory">Rate History</label>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="checkbox-control">
+                                                            <li>
+                                                                <div class="border-checkbox-section">
+                                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                        <input class="border-checkbox" type="checkbox" id="IRDownloadHistory">
+                                                                        <label class="border-checkbox-label" for="IRDownloadHistory">Download History</label>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Spread">
+                                                            <label class="border-checkbox-label" for="Spread">Spread</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="currentSpreadrate">
+                                                                <label class="border-checkbox-label" for="currentSpreadrate">Current Spread Rate</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="setcurrentSpread">
+                                                                <label class="border-checkbox-label" for="setcurrentSpread">Set Spread</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="SpreadHistory">
+                                                                <label class="border-checkbox-label" for="SpreadHistory">Spread History</label>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="checkbox-control">
+                                                            <li>
+                                                                <div class="border-checkbox-section">
+                                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                        <input class="border-checkbox" type="checkbox" id="DownloadSpreadHistory">
+                                                                        <label class="border-checkbox-label" for="DownloadSpreadHistory">Download History</label>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="transferfee">
+                                                            <label class="border-checkbox-label" for="transferfee">Transfer Fee</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="CurrentTransferFees">
+                                                                <label class="border-checkbox-label" for="CurrentTransferFees">Current Transfer Fees</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="SetTransferFees">
+                                                                <label class="border-checkbox-label" for="SetTransferFees">Set Transfer Fees</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="TransferFeesHistory">
+                                                                <label class="border-checkbox-label" for="TransferFeesHistory">Transfer Fees History</label>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="checkbox-control">
+                                                            <li>
+                                                                <div class="border-checkbox-section">
+                                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                        <input class="border-checkbox" type="checkbox" id="DownloadTransferFeesHistory">
+                                                                        <label class="border-checkbox-label" for="DownloadTransferFeesHistory">Download History</label>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="IntroductoryFees">
+                                                            <label class="border-checkbox-label" for="IntroductoryFees">Introductory Fees</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="CurrentIntroductoryFees">
+                                                                <label class="border-checkbox-label" for="CurrentIntroductoryFees">Current Transfer Fees</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="SetIntroductoryFeesFees">
+                                                                <label class="border-checkbox-label" for="SeIntroductoryFeesrFees">Set Transfer Fees</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="IntroductoryFeesHistory">
+                                                                <label class="border-checkbox-label" for="IntroductoryFeesHistory">Transfer Fees History</label>
+                                                            </div>
+                                                        </div>
+                                                        <ol class="checkbox-control">
+                                                            <li>
+                                                                <div class="border-checkbox-section">
+                                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                        <input class="border-checkbox" type="checkbox" id="DownloadIntroductoryFeesHistory">
+                                                                        <label class="border-checkbox-label" for="DownloadIntroductoryFeesHistory">Download History</label>
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        </ol>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Marketing">
+                                                        <label class="border-checkbox-label" for="Marketing"><b>Marketing</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="CurrentPromotion">
+                                                            <label class="border-checkbox-label" for="CurrentPromotion">Current Promotion</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="CurrentReferral">
+                                                            <label class="border-checkbox-label" for="CurrentReferral">Current Referral</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Compliance">
+                                                        <label class="border-checkbox-label" for="Compliance"><b>Compliance</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="ComplianceAlert">
+                                                            <label class="border-checkbox-label" for="ComplianceAlert">Compliance Alert</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ComplianceAlertAgent">
+                                                                    <label class="border-checkbox-label" for="ComplianceAlertAgent">Agent</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ComplianceAlertSender">
+                                                                    <label class="border-checkbox-label" for="ComplianceAlertSender">Sender</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ComplianceAlertBusiness">
+                                                                    <label class="border-checkbox-label" for="ComplianceAlertBusiness">Business</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="AgentComplianceReport">
+                                                            <label class="border-checkbox-label" for="AgentComplianceReport">Agent Compliance Report  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="PartnerComplianceReport">
+                                                            <label class="border-checkbox-label" for="PartnerComplianceReport">Partner Compliance Report  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Agent-SubmitedComplianceForm">
+                                                            <label class="border-checkbox-label" for="Agent-SubmitedComplianceForm">Agent Submited Compliance Form  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Admin-SubmitedComplianceForm">
+                                                            <label class="border-checkbox-label" for="Admin-SubmitedComplianceForm">Admin Submited Compliance Form  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SubmitedSARForm">
+                                                            <label class="border-checkbox-label" for="SubmitedSARForm">Submited SAR Form</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="SubmitANewSARForm">
+                                                                <label class="border-checkbox-label" for="SubmitANewSARForm">Submit a new SAR form</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="ThirdPartyMoneyTransfer">
+                                                            <label class="border-checkbox-label" for="ThirdPartyMoneyTransfer">Third Party Money Transfer</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="ThirdParty-">
+                                                                <label class="border-checkbox-label" for="ThirdParty-Submitnewform">Submit a new form</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="LFMT">
+                                                            <label class="border-checkbox-label" for="LFMT">Large Fund Money Transfer</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="LFMT-SubmitNewForm">
+                                                                <label class="border-checkbox-label" for="LFMT-SubmitNewForm">Submit a new form</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="AgentAMLRecod">
+                                                            <label class="border-checkbox-label" for="AgentAMLRecod">Agent AML Training Record</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="AgentAMLRecod-SubmitNewForm">
+                                                                <label class="border-checkbox-label" for="AgentAMLRecod-SubmitNewForm">Submit a new form</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                                <!--  -->
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SOFD">
+                                                            <label class="border-checkbox-label" for="SOFD">Source of Funds Declaration</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <ol class="checkbox-control">
+                                                    <li>
+                                                        <div class="border-checkbox-section">
+                                                            <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                <input class="border-checkbox" type="checkbox" id="SOFD-SubmitNewForm">
+                                                                <label class="border-checkbox-label" for="SOFD-SubmitNewForm">Submit a new form</label>
+                                                            </div>
+                                                        </div>
+                                                    </li>
+                                                </ol>
+                                                <!--  -->
+                                            </ol>
+                                            <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Agent">
+                                                        <label class="border-checkbox-label" for="Agent"><b>Agent</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="CurrentPromotion">
+                                                            <label class="border-checkbox-label" for="CurrentPromotion">Registered Agent</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="AgentDashboard">
+                                                                    <label class="border-checkbox-label" for="AgentDashboard">Agent Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="Active/DeactiveProfile">
+                                                                            <label class="border-checkbox-label" for="Active/DeactiveProfile">Active/Deactive Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="Active/DeleteProfile">
+                                                                            <label class="border-checkbox-label" for="Active/DeleteProfile">Delete Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="TransactionActivity">
+                                                            <label class="border-checkbox-label" for="TransactionActivity">Transaction Activity</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="manualbankaccountpayment">
+                                                            <label class="border-checkbox-label" for="manualbankaccountpayment">Manual Bank Account Payment</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="EnableAgentPayments">
+                                                                    <label class="border-checkbox-label" for="EnableAgentPayments">Enable Agent Payments</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CurrentAgentPayments">
+                                                                    <label class="border-checkbox-label" for="CurrentAgentPayments">Current Agent Payments</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="AgentCommission">
+                                                            <label class="border-checkbox-label" for="AgentCommission">Agent Commission</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CurrentCommission">
+                                                                    <label class="border-checkbox-label" for="CurrentCommission">Current Commission</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CommissionHistory">
+                                                                    <label class="border-checkbox-label" for="CommissionHistory">Commission History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="AgentCommissionPayment">
+                                                            <label class="border-checkbox-label" for="AgentCommissionPayment">Agent Commission Payment</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="TransferLimit">
+                                                            <label class="border-checkbox-label" for="TransferLimit">Transfer Limit</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CurrentLimit">
+                                                                    <label class="border-checkbox-label" for="CurrentLimit">Current Limit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="LimitHistory">
+                                                                    <label class="border-checkbox-label" for="LimitHistory"> History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="HoldCashLimit">
+                                                            <label class="border-checkbox-label" for="HoldCashLimit">Hold Cash Limit</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="holdcurrentlimit">
+                                                                    <label class="border-checkbox-label" for="holdcurrentlimit">Current Limit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="holdcurrenthistory">
+                                                                    <label class="border-checkbox-label" for="holdcurrenthistory"> History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="AgentDocumentation">
+                                                            <label class="border-checkbox-label" for="AgentDocumentation">Agent Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                            <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Partners">
+                                                        <label class="border-checkbox-label" for="Partners"><b>Partners</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredPartners">
+                                                            <label class="border-checkbox-label" for="RegisteredPartners">Registered Partners</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="PartnersDashboard">
+                                                                    <label class="border-checkbox-label" for="PartnersDashboard">Partners Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="PartnersActive/DeactiveProfile">
+                                                                            <label class="border-checkbox-label" for="PartnersActive/DeactiveProfile">Active/Deactive Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="PartnersActive/DeleteProfile">
+                                                                            <label class="border-checkbox-label" for="PartnersActive/DeleteProfile">Delete Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="PartnersCommission">
+                                                            <label class="border-checkbox-label" for="PartnersCommission">Partners Commission</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="PartnersCommissionSetting">
+                                                                    <label class="border-checkbox-label" for="PartnersCommissionSetting">Commission Setting</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CommissionHistory">
+                                                                    <label class="border-checkbox-label" for="CommissionHistory">Commission History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="partnersCommissionPayment">
+                                                                    <label class="border-checkbox-label" for="partnersCommissionPayment">Commission Payment</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="PartnersAgentTransaction">
+                                                                    <label class="border-checkbox-label" for="PartnersAgentTransaction">Partner Agent Transaction</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="PartnersAgentTransactionStatement">
+                                                                            <label class="border-checkbox-label" for="PartnersAgentTransactionStatement">Download Statement</label>
+                                                                        </div>
+                                                                    </div>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="PartnerDocumentation">
+                                                            <label class="border-checkbox-label" for="PartnerDocumentation">Partner Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ol>
+                                            <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Business">
+                                                        <label class="border-checkbox-label" for="Business"><b>Business</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredSender">
+                                                            <label class="border-checkbox-label" for="RegisteredSender">Registered Business</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="BusinessDashboard">
+                                                                    <label class="border-checkbox-label" for="BusinessDashboard">Business Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="BusinessProfile">
+                                                                            <label class="border-checkbox-label" for="BusinessProfile">Business Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ol class="checkbox-control">
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="BusinessActivate/Deactivate">
+                                                                                    <label class="border-checkbox-label" for="BusinessActivate/Deactivate">Activate/Deactivate/Update</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="Businessdeleteprofile">
+                                                                                    <label class="border-checkbox-label" for="Businessdeleteprofile">Delete</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ol>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="BusinessTransactionStatement">
+                                                            <label class="border-checkbox-label" for="BusinessTransactionStatement">Transaction Statement</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="BusinessTransactionDownloadStatement">
+                                                                    <label class="border-checkbox-label" for="BusinessTransactionDownloadStatement">Download Statement</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="BusinessTransactionLimits">
+                                                            <label class="border-checkbox-label" for="BusinessTransactionLimits">Transaction Limits</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="BusinessCurrentLimits">
+                                                                    <label class="border-checkbox-label" for="BusinessCurrentLimits">Current limit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="BusinessCurrentLimitsHistory">
+                                                                    <label class="border-checkbox-label" for="BusinessCurrentLimitsHistory">History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="BusinessDocumentation">
+                                                            <label class="border-checkbox-label" for="BusinessDocumentation">Business Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Sender">
+                                                        <label class="border-checkbox-label" for="Sender"><b>Sender</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredSender">
+                                                            <label class="border-checkbox-label" for="RegisteredSender">Registered Sender</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="SenderDashboard">
+                                                                    <label class="border-checkbox-label" for="SenderDashboard">Sender Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="SenderProfile">
+                                                                            <label class="border-checkbox-label" for="SenderProfile">Sender Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ol class="checkbox-control">
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="Activate/Deactivate">
+                                                                                    <label class="border-checkbox-label" for="Activate/Deactivate">Activate/Deactivate</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="senderdeleteprofile">
+                                                                                    <label class="border-checkbox-label" for="senderdeleteprofile">Delete</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ol>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SenderTransactionStatement">
+                                                            <label class="border-checkbox-label" for="SenderTransactionStatement">Transaction Statement</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="SenderTransactionDownloadStatement">
+                                                                    <label class="border-checkbox-label" for="SenderTransactionDownloadStatement">Download Statement</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="TransactionLimits">
+                                                            <label class="border-checkbox-label" for="TransactionLimits">Transaction Limits</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="SenderCurrentLimits">
+                                                                    <label class="border-checkbox-label" for="SenderCurrentLimits">Current limit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="SenderCurrentLimitsHistory">
+                                                                    <label class="border-checkbox-label" for="SenderCurrentLimitsHistory">History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SenderDocumentation">
+                                                            <label class="border-checkbox-label" for="SenderDocumentation">Sender Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Receiver">
+                                                        <label class="border-checkbox-label" for="Receiver"><b>Receiver</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredReceiver">
+                                                            <label class="border-checkbox-label" for="RegisteredReceiver">Registered Receiver</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ReceiverDashboard">
+                                                                    <label class="border-checkbox-label" for="ReceiverDashboard">Receiver Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="ReceiverProfile">
+                                                                            <label class="border-checkbox-label" for="ReceiverProfile">Receiver Profile</label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <ol class="checkbox-control">
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="ReceiverActivate/Deactivate">
+                                                                                    <label class="border-checkbox-label" for="ReceiverActivate/Deactivate">Activate/Deactivate</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                        <li>
+                                                                            <div class="border-checkbox-section">
+                                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                                    <input class="border-checkbox" type="checkbox" id="Receiverdeleteprofile">
+                                                                                    <label class="border-checkbox-label" for="Receiverdeleteprofile">Delete</label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </li>
+                                                                    </ol>
+                                                                </li>
+                                                            </ol>
+                                                        </li>
+                                                    </ol>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="ReceiverStatement">
+                                                            <label class="border-checkbox-label" for="ReceiverStatement">Receiver Statement</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="DownloadReceiverStatement">
+                                                                    <label class="border-checkbox-label" for="DownloadReceiverStatement">Download Statement</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="ReceivingLimit">
+                                                            <label class="border-checkbox-label" for="ReceivingLimit">Receiving Limits</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ReceivingCurrentLimit">
+                                                                    <label class="border-checkbox-label" for="ReceivingCurrentLimit">Current limit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="ReceivingLimitHistory">
+                                                                    <label class="border-checkbox-label" for="ReceivingLimitHistory">History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="ReceiverDocumentation">
+                                                            <label class="border-checkbox-label" for="ReceiverDocumentation">Receiver Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="StaffTransactions">
+                                                        <label class="border-checkbox-label" for="StaffTransactions"><b>Staff Transactions</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="TransferMoney">
+                                                            <label class="border-checkbox-label" for="TransferMoney">Transfer Money</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffTKiiPay">
+                                                                    <label class="border-checkbox-label" for="StaffTKiiPay">KiiPay Wallet</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffTBankDeposit">
+                                                                    <label class="border-checkbox-label" for="StaffTBankDeposit">Bank Deposit</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffTOtherWallet">
+                                                                    <label class="border-checkbox-label" for="StaffTOtherWallet">Other Wallet</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffTCashPickup">
+                                                                    <label class="border-checkbox-label" for="StaffTCashPickup">Cash Pickup</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffTTransactionStatement">
+                                                            <label class="border-checkbox-label" for="StaffTTransactionStatement">Transaction Statement</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="DownloadStaffTStatement">
+                                                                    <label class="border-checkbox-label" for="DownloadStaffTStatement">Download Statement</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffTTransactionUpdate">
+                                                            <label class="border-checkbox-label" for="StaffTTransactionUpdate">Transaction Update</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffTStaffRefund">
+                                                            <label class="border-checkbox-label" for="StaffTStaffRefund">Staff Refund</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="AgentCashWithdrawal">
+                                                        <label class="border-checkbox-label" for="AgentCashWithdrawal"><b>Agent Cash Withdrawal</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredWithdrawalStaff">
+                                                            <label class="border-checkbox-label" for="RegisteredWithdrawalStaff">Registered Withdrawal Staff</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="WithdrawalStaffDashboard">
+                                                                    <label class="border-checkbox-label" for="WithdrawalStaffDashboard">Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="GenerateWithdrawalCode">
+                                                            <label class="border-checkbox-label" for="GenerateWithdrawalCode">Generate Withdrawal Code</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="CashWithdrawalHistory">
+                                                                    <label class="border-checkbox-label" for="CashWithdrawalHistory">Cash Withdrawal History</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="WithdrawalStaffDocumentation">
+                                                            <label class="border-checkbox-label" for="WithdrawalStaffDocumentation"> Withdrawal Staff Documentation  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="WithdrawalStaffPayslip">
+                                                            <label class="border-checkbox-label" for="WithdrawalStaffPayslip"> Withdrawal Staff Payslip  </label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Staff">
+                                                        <label class="border-checkbox-label" for="Staff"><b>Staff</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="RegisteredStaff">
+                                                            <label class="border-checkbox-label" for="RegisteredStaff">Registered  Staff</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="RStaffDashboard">
+                                                                    <label class="border-checkbox-label" for="RStaffDashboard">Dashboard</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffNoticeBoard">
+                                                            <label class="border-checkbox-label" for="StaffNoticeBoard">Staff Notice Board</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffNoticeBoardSet">
+                                                                    <label class="border-checkbox-label" for="StaffNoticeBoardSet">Set</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffTraining">
+                                                            <label class="border-checkbox-label" for="StaffTraining">Staff Training</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="StaffTrainingSet">
+                                                                    <label class="border-checkbox-label" for="StaffTrainingSet">Set</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="StaffHolidays">
+                                                            <label class="border-checkbox-label" for="StaffHolidays">Staff Holidays</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="PublicHolidaysCalendar">
+                                                            <label class="border-checkbox-label" for="PublicHolidaysCalendar">Public Holidays Calendar</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="PublicHolidaysCalendarSet">
+                                                                    <label class="border-checkbox-label" for="PublicHolidaysCalendarSet">Set</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Staff-Payslip">
+                                                            <label class="border-checkbox-label" for="Staff-Payslip">Staff Payslip</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Staff-Documentation">
+                                                            <label class="border-checkbox-label" for="Staff-Documentation">Staff Documentation</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Alerts">
+                                                        <label class="border-checkbox-label" for="Alerts"><b>Alerts</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Agent_Alerts">
+                                                            <label class="border-checkbox-label" for="Agent_Alerts">Agent Alerts</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Sender_Alerts">
+                                                            <label class="border-checkbox-label" for="Sender_Alerts">Sender Alerts</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Staff_Alerts">
+                                                            <label class="border-checkbox-label" for="Staff_Alerts">Staff Alerts</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Business_Alerts">
+                                                            <label class="border-checkbox-label" for="Business_Alerts">Business Alerts</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Invoicing">
+                                                        <label class="border-checkbox-label" for="Invoicing"><b>Invoicing</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Invoicing-Agent">
+                                                            <label class="border-checkbox-label" for="Invoicing-Agent">Agent</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Agent-Send">
+                                                                    <label class="border-checkbox-label" for="Agent-Send">Send</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Agent-Pay">
+                                                                    <label class="border-checkbox-label" for="Agent-Pay">Pay</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Invoicing-Partner">
+                                                            <label class="border-checkbox-label" for="Invoicing-Partner">Partner</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Partner-Send">
+                                                                    <label class="border-checkbox-label" for="Partner-Send">Send</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Partner-Pay">
+                                                                    <label class="border-checkbox-label" for="Partner-Pay">Pay</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Invoicing-General">
+                                                            <label class="border-checkbox-label" for="Invoicing-General">General</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="General-Send">
+                                                                    <label class="border-checkbox-label" for="General-Send">Send</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="General-Pay">
+                                                                    <label class="border-checkbox-label" for="General-Pay">Pay</label>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+
+                                                    </ol>
+                                                </li>
+
+
+
+
+
+
+
+
+
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="OTHERs">
+                                                        <label class="border-checkbox-label" for="OTHERs"><b>Others</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="News">
+                                                            <label class="border-checkbox-label" for="News">News</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Career">
+                                                            <label class="border-checkbox-label" for="Career">Career</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="LocationService">
+                                                            <label class="border-checkbox-label" for="LocationService">Location Service</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="OperationSummary">
+                                                        <label class="border-checkbox-label" for="OperationSummary"><b>Operation Summary</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="OSTransfer">
+                                                            <label class="border-checkbox-label" for="OSTransfer">Transfer</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Online">
+                                                                    <label class="border-checkbox-label" for="Online">Online</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="OSDownload">
+                                                                            <label class="border-checkbox-label" for="OSDownload">Download</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ol>
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="OSAgent">
+                                                                    <label class="border-checkbox-label" for="OSAgent">Agent</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="AgentDownload">
+                                                                            <label class="border-checkbox-label" for="AgentDownload">Download</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ol>
+                                                        </li>
+
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="OSPartner">
+                                                                    <label class="border-checkbox-label" for="OSPartner">Partner</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="PartnerDownload">
+                                                                            <label class="border-checkbox-label" for="PartnerDownload">Download</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ol>
+                                                        </li>
+
+
+
+                                                    </ol>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="Pre-Funding">
+                                                            <label class="border-checkbox-label" for="Pre-Funding">Pre-Funding</label>
+                                                        </div>
+                                                    </div>
+                                                    <ol class="checkbox-control">
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Totalpre-fundingamount">
+                                                                    <label class="border-checkbox-label" for="Totalpre-fundingamount">Total pre-funding Amount</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="Pre-Funding-Download">
+                                                                            <label class="border-checkbox-label" for="OSDownload">Download</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ol>
+                                                        </li>
+
+                                                        <li>
+                                                            <div class="border-checkbox-section">
+                                                                <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                    <input class="border-checkbox" type="checkbox" id="Pre-fundingstatement">
+                                                                    <label class="border-checkbox-label" for="Pre-fundingstatement">Pre-funding Statement</label>
+                                                                </div>
+                                                            </div>
+                                                            <ol class="checkbox-control">
+                                                                <li>
+                                                                    <div class="border-checkbox-section">
+                                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                                            <input class="border-checkbox" type="checkbox" id="Pre-fundingstatementDownload">
+                                                                            <label class="border-checkbox-label" for="Pre-fundingstatementDownload">Download</label>
+                                                                        </div>
+                                                                    </div>
+                                                                </li>
+
+                                                            </ol>
+                                                        </li>
+
+
+
+
+
+                                                    </ol>
+                                                </li>
+
+
+
+
+
+
+
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="SystemPerformance">
+                                                        <label class="border-checkbox-label" for="SystemPerformance"><b>System Performance</b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="PerformanceReport">
+                                                            <label class="border-checkbox-label" for="PerformanceReport"> Performance Report</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SecurityReport">
+                                                            <label class="border-checkbox-label" for="SecurityReport">Security  Report</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="SystemControl">
+                                                        <label class="border-checkbox-label" for="SystemControl"><b>System Control  </b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <!--  -->
+                                            <ol class="checkbox-control">
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SC-Sender">
+                                                            <label class="border-checkbox-label" for="SC-Sender"> Sender</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SC-Agent">
+                                                            <label class="border-checkbox-label" for="SC-Agent"> Agent</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SC-Staff">
+                                                            <label class="border-checkbox-label" for="SC-Staff"> Staff</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SC-Business">
+                                                            <label class="border-checkbox-label" for="SC-Business"> Business</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+                                                <li>
+                                                    <div class="border-checkbox-section">
+                                                        <div class="border-checkbox-group border-checkbox-group-primary">
+                                                            <input class="border-checkbox" type="checkbox" id="SC-Admin">
+                                                            <label class="border-checkbox-label" for="SC-Admin"> Admin</label>
+                                                        </div>
+                                                    </div>
+                                                </li>
+
+
+
+
+
+                                                <!--  -->
+                                        </ul>
+                                    </div>
+                                    <hr>
+
+
+                                    <div class="row">
+                                        <ul class="col-lg-12">
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="Analysis">
+                                                        <label class="border-checkbox-label" for="Analysis"><b>Analysis </b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="CRM">
+                                                        <label class="border-checkbox-label" for="CRM"><b>CRM </b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+
+
+                                            <li>
+                                                <div class="border-checkbox-section">
+                                                    <div class="border-checkbox-group border-checkbox-group-primary">
+                                                        <input class="border-checkbox" type="checkbox" id="RecoverFolder">
+                                                        <label class="border-checkbox-label" for="RecoverFolder"><b>Recover Folder </b></label>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <hr>
+                                    <button type="" class=" btn btn-primary  btn-round">Set Control</button>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

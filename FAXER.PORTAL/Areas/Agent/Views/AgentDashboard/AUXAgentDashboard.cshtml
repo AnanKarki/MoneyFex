@@ -1,0 +1,170 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentDashBoardViewModel
+
+@{
+    ViewBag.Title = "AUXAgentDashboard";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    string[] AUXAgentAccountBalance = Model.AUXAgentAccountBalance.ToString("0.00").Split('.');
+
+}
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <!--  -->
+                <div class=" dashboard_body">
+
+                    <div class=" clearfix ">
+                        <div class="text-right   wallet-balance   ">
+                            <h5>Account Balance</h5>
+                            <h2 class="text-primary mb0"> @AUXAgentAccountBalance[0].<small class="text-primary">@AUXAgentAccountBalance[1] @Model.AgentCurrency</small></h2>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <hr>
+
+                        <div class="mobile_design text-center">
+
+                            <div class="col-lg-2">
+                                <span class="exchange-title text-secondary">Exchange Rate</span>
+                            </div>
+                            <div class="col-lg-10">
+                                <marquee behavior="scroll" direction="left" onmousedown="this.stop();" onmouseup="this.start();">
+                                    <ul class="exchangerate">
+                                        @foreach (var item in Model.ExchangeRate)
+                                        {
+                                            <li>@item.SourceCurrencyCode/@item.DestinationCurrencyCode = @item.ExchangeRate</li>
+                                        }
+                                        @if (Model.ExchangeRate.Count() != 0)
+                                        {
+                                            <li><a href="">More</a></li>
+                                        }
+                                    </ul>
+                                </marquee>
+
+                            </div>
+                            <div class="mb20 clearfix"></div>
+
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","TransferMoney")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/transfermoney.svg">
+                                        </div>
+                                        <h4>Transfer Money</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","ExchangeRate")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/exchange-rate.svg">
+                                        </div>
+                                        <h4>Set Exchange Rate</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","TransferFee")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/transfer-fee.svg">
+                                        </div>
+                                        <h4>Set Transfer Fee</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("GoToTransactionSatement" ,"AgentDashboard")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/statement.svg">
+                                        </div>
+                                        <h4>Recent Transaction</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","FundAccount")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/manual-bank-payment.svg">
+                                        </div>
+                                        <h4>Fund Account </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","Accounting")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/accounting.svg">
+                                        </div>
+                                        <h4>Accounting</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","CalculateHowMuch")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/1.png">
+                                        </div>
+                                        <h4>Calculate how much</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index" , "AgentForms" )">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/compliance-form.svg">
+                                        </div>
+                                        <h4>Compliance Form</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-4 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index", "AgentUploadDocuments", new { area = "agent" })">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/Agent/Content/images/icon/svg/upload-documents.svg">
+                                        </div>
+                                        <h4>Upload Documents</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+
+        </div>
+    </div>
+    <!--  -->
+    </div>
+    <!--  -->
+</section>

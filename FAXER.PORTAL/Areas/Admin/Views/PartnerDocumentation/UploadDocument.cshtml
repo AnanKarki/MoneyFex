@@ -1,0 +1,230 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.BusinessDocumentationViewModel
+
+@{
+    ViewBag.Title = "UploadDocument";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+@using (Html.BeginForm("UploadDocument", "PartnerDocumentation", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Upload Document  </h4>
+                                        <a href="@Url.Action("Index","PartnerDocumentation")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Document
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Sending Country</label>
+                                                        @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "GetSenderByCountry();" })
+                                                        @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>City</label>
+                                                        @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.cities, "Select City", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "City", @onchange = "GetSenderByCountry();" })
+                                                        @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Business</label>
+                                                        @Html.DropDownListFor(x => x.SenderId, (IEnumerable<SelectListItem>)ViewBag.Business, "Select Partner", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "PartnerId", @onchange = "GetAccountNumber();" })
+                                                        @Html.ValidationMessageFor(x => x.SenderId, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Account Number</label>
+                                                        @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "", @readonly = "readonly", @id = "AccountNumber" })
+                                                        @Html.ValidationMessageFor(x => x.AccountNo, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Document Type</label>
+                                                        @Html.EnumDropDownListFor(x => x.DocumentType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })
+                                                        @Html.ValidationMessage("DocumentType", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Does Document Expires?</label>
+
+                                                        @Html.EnumDropDownListFor(x => x.DocumentExpires, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Frequency", @id = "DocumentExpires", @onchange = "Filter()" })
+                                                        @Html.ValidationMessage("DocumentExpires", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Expiry Date</label>
+                                                        @Html.TextBoxFor(x => x.ExpiryDate, new { @class = "form-control form-control-lg form-control-round form-control-bold", @type = "date" })
+                                                        @Html.ValidationMessage("ExpiryDate", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Document Name/Title</label>
+                                                        @Html.TextBoxFor(x => x.DocumentName, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Document Name" })
+                                                        @Html.ValidationMessageFor(x => x.DocumentName, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="p-10">
+                                                        <h5>Documents</h5>
+                                                        <hr>
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <div class="row form-group">
+
+                                                        <div class="col-lg-4">
+                                                            <a href="@Model.DocumentPhotoUrl" target="_blank"><img src="@Model.DocumentPhotoUrl" id="Image" name="Image" alt=" " style="float: left; margin-right: 15px; width: 100px;"></a>
+
+                                                        </div>
+
+                                                        @*<div class="col-lg-4">
+                                                                <span href="https://picsum.photos/1200/768.jpg?random=2" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                                    ID 2
+
+                                                                </span>
+                                                                <a href="" class="lead text-danger"> <i class="fa fa-close"></i></a>
+                                                            </div>
+
+                                                            <div class="col-lg-4">
+                                                                <span href="https://picsum.photos/1200/768.jpg?random=3" data-toggle="lightbox" data-gallery="gallery" type="button" class="btn btn-inverse btn-lg m-r-5">
+                                                                    ID 3
+
+                                                                </span>
+                                                                <a href="" class="lead text-danger"> <i class="fa fa-close"></i></a>
+                                                            </div>*@
+
+                                                    </div>
+
+
+
+
+
+
+
+
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Upload Document</label>
+                                                        <input type="file" name="DocumentPhotoUrl" id="DocumentPhotoUrl" class="form-control form-control-lg form-control-round">
+                                                        @Html.ValidationMessageFor(Model => Model.DocumentPhotoUrl, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+
+
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","PartnerDocumentation")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+        Filter();
+        function Filter() {
+            var DocumentExpires = $("#DocumentExpires").val();
+
+            if (DocumentExpires == 2 || DocumentExpires == 0) {
+                $("#ExpiryDatediv").hide();
+
+            }
+            else {
+                $("#ExpiryDatediv").show();
+
+            }
+        }
+
+
+        //function GetAccountNumber() {
+        //    var SenderId = $("#SenderId").val();
+        //    $.getJSON("/Admin/BusinessTransferLimit/GetAccountNumber?SenderId=" + SenderId, function (result) {
+
+        //        var AccountNumber = result.Data;
+        //        $("#AccountNumber").val(AccountNumber);
+        //    })
+        //}
+
+    </script>
+
+}
+

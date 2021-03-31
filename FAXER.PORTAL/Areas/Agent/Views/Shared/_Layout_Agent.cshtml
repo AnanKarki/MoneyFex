@@ -1,0 +1,256 @@
+﻿
+
+@{
+    var conf = System.Web.Configuration.WebConfigurationManager.OpenWebConfiguration(System.Web.Hosting.HostingEnvironment.ApplicationVirtualPath);
+    var section = (System.Web.Configuration.SessionStateSection)conf.GetSection("system.web/sessionState");
+    string timeout = ((section.Timeout.TotalMinutes * 10000000) - 200000).ToString();
+    bool isLogOut = FAXER.PORTAL.Common.AgentSession.AgentInformation == null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFex Service">
+    <meta name="keywords" content="MoneyFex Service ">
+    <title>MoneyFex - Money Transfer, You're in Control </title>
+    <link rel="icon" type="image/png" href="~/Areas/Agent/images/favicon.png">
+
+    <!-- Bootstrap -->
+    <link href="~/Areas/Agent/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Agent/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Agent/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/Agent/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Agent/css/animsition.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link href="~/Areas/Agent/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Areas/Agent/css/owl.theme.css" rel="stylesheet">
+    <link href="~/Areas/Agent/datatables/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        .w3-green, .w3-hover-green:hover {
+            color: #fff !important;
+            background-color: #000 !important;
+        }
+
+        .w3-padding {
+            padding: 8px 16px !important;
+        }
+
+        .w3-large {
+            font-size: 14px !important;
+        }
+
+        .w3-badge {
+            border-radius: 50%;
+        }
+
+        /*label {
+            color: blue;
+        }*/
+    </style>
+</head>
+
+<body class="animsition">
+
+
+
+    <!-- Modal -->
+
+    
+
+    @{Html.RenderPartial("_Header_Agent"); }
+
+    @RenderBody()
+    @{Html.RenderPartial("_Footer_Agent"); }
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="~/Areas/Agent/js/jquery.min.js"></script>
+    <script src="~/Areas/Agent/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/js/menumaker.js"></script>
+    <!-- animsition -->
+    <script type="text/javascript" src="~/Areas/Agent/js/animsition.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/js/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="~/Areas/Agent/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/js/sticky-header.js"></script>
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Areas/Agent/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/js/slider-carousel.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/js/service-carousel.js"></script>
+    <!-- Back to top script -->
+    <script src="~/Areas/Agent/js/back-to-top.js" type="text/javascript"></script>
+    <script src="~/Areas/Agent/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Areas/Agent/datatables/js/jquery.dataTables.min.js"></script>
+    @*<script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59b8ed860a46e80012bb442f&product=inline-share-buttons"></script>*@
+
+    <script src="~/Areas/Admin/css/knockout-3.4.2.js"></script>
+    <script src="~/Areas/Admin/css/Riddha.Globals.ko.js"></script>
+    <script src="~/Areas/Admin/css/toastr.js"></script>
+
+    <script type="text/javascript">
+
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+
+
+
+        $(document).ready(function () {
+
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+
+            @*var time = @timeout * 1000;
+            var timeout;
+            var isLogout =@Json.Encode(isLogOut);
+
+                timeout = setTimeout(function() {
+                    //Things you need to do
+                    if (isLogout == false) {
+                        setCountDown();
+                        $("#sessionOutModal").modal("show");
+                        isLogout = true;
+                    }
+                }, time);
+
+                $(document).on('click', function () {
+                    if (!isLogout) {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(function() {
+                            //Things you need to do
+                             isLogout = true;
+                        }, time);
+                    }
+                });*@
+
+            $(':input[type=number]').bind('keyup', function () {
+
+                var regexp = "";
+
+                var amount = this.value;
+                if (amount.split(".").length > 1) {
+                    regexp = /^\d+\.\d{0,2}$/;
+                } else {
+
+                    regexp = /^\d+$/;
+
+                }
+                var IsValid = regexp.test(amount);
+
+                if (!IsValid) {
+
+                    this.value = "";
+                }
+
+
+            })
+            $(':input[type=number]').bind('click', function () {
+
+
+
+
+                var amount = this.value;
+                if (amount == 0) {
+
+                    this.value = "";
+                }
+
+
+            })
+
+        });
+
+
+
+
+        function setCountDown() {
+            var seconds_left = 20;
+            var interval = setInterval(function () {
+                document.getElementById('timer_div').innerHTML = --seconds_left;
+
+                if (seconds_left <= 0) {
+                    //document.getElementById('timer_div').innerHTML = 'You are ready';
+                    window.location.href = "/agent/AgentLogin/Logout";
+                    clearInterval(interval);
+                }
+            }, 1000);
+        }
+
+        $(document).ready(function ($) {
+
+            // Disable scroll when focused on a number input.
+            $('form').on('focus', 'input[type=number]', function (e) {
+                $(this).on('wheel', function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            // Restore scroll on number inputs.
+            $('form').on('blur', 'input[type=number]', function (e) {
+                $(this).off('wheel');
+            });
+
+            // Disable up and down keys.
+            $('form').on('keydown', 'input[type=number]', function (e) {
+                if (e.which == 38 || e.which == 40)
+                    e.preventDefault();
+            });
+
+        });
+
+        $(window).load(function () {
+            $('#onload').modal('show');
+        });
+
+
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+    </script>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="sessionOutModal" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex-Login Confirmation</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>The system will log out in <span class="w3-badge w3-large w3-padding w3-green" id="timer_div"></span> seconds.</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a href="@Url.Action("Logout","AgentLogin")" class="btn btn-primary btn-sm">YES</a>
+                    <a href="@Request.Url" class="btn btn-default btn-sm">NO</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

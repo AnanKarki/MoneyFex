@@ -1,0 +1,203 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.RequestHistoryViewModel
+@{
+    ViewBag.Title = "RequestHistory";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Request History</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row ">
+            <div class="col-lg-4">
+
+            </div>
+            <div class="col-lg-2  ">
+
+                <div class="form-group">
+                    @Html.DropDownListFor(model => model.FilterKey, (IEnumerable<SelectListItem>)ViewBag.Filter, new { @class = "form-control", @id = "filterKey", @onchange = "filter()" })
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 pull-right">
+                <a href="@Url.Action("Index","SendARequest")" class="btn btn-primary radius-20 btn-sm pull-right mb20"><i class="fa fa-plus"></i> Send a Request</a>
+            </div>
+
+
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+
+
+
+                <form>
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="DataTable">
+                            <thead>
+                                <tr>
+                                    <th>Name  & Wallet No.</th>
+                                    <th>Date & Amount.</th>
+                                    <th>  Status</th>
+                                    <th>Action</th>
+
+
+
+
+
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.RequestHistoryList)
+                                {
+
+
+                                    <tr>
+                                        <td>@item.Name<br><span class="text-primary">@item.WalletNumber</span></td>
+                                        <td>@item.Date <br><span class="text-primary">@item.Amount</span></td>
+
+                                        <td> <span class="text-danger">@item.Status</span></td>
+
+                                        <td>
+                                            <select onchange="xx(this, '@item.Id', '@item.Status')">
+                                                <option value="">Select</option>
+                                                <option value="Remind">Remind</option>
+                                                <option value="Edit">Edit</option>
+                                                <option value="Resend">Resend</option>
+                                                <option value="Cancel">Cancel</option>
+                                                <option value="Delete">Delete</option>
+                                            </select>
+                                        </td>
+
+
+                                    </tr>
+                                }
+
+
+
+                            </tbody>
+                        </table>
+                    </div>
+                    <hr>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </form>
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<div id="ConfirmDelete" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40" id="message">Are you sure you want to delete this request?</h4>
+                <hr>
+                <a onclick="deleteRequest()" class="btn btn-primary   radius-20" id="link">Yes</a>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<div id="ConfirmCancel" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-md text-center">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+
+                <h4 class="mt40" id="message">Are you sure you want to cancel this request?</h4>
+                <hr>
+                <a onclick="cancelRequest()" class="btn btn-primary   radius-20" id="link">Yes</a>&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default   radius-20" data-dismiss="modal">No</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+<!--  -->
+@section Scripts{
+    <script type="text/javascript">
+        var subjectId = "";
+        function filter() {
+            var filterKey = $("#filterKey").val();
+            window.location.href = "/KiiPayPersonal/RequestAPayment/RequestHistory?filterKey=" + filterKey;
+        }
+
+        function xx(param, id, status) {
+            debugger;
+            subjectId = id;
+
+            if (status == "UnPaid") {
+                if (param.value == "Edit") {
+                    window.location.href = "/KiiPayPersonal/RequestAPayment/EditRequest?id=" + subjectId;
+                }
+                else if (param.value == "Cancel") {
+                    $("#ConfirmCancel").modal('show');
+                }
+                else if (param.value == "Delete") {
+                    $("#ConfirmDelete").modal('show');
+                }
+            }
+            return;
+
+        };
+
+        function deleteRequest() {
+            window.location.href = "/KiiPayPersonal/RequestAPayment/DeleteRequest?id=" + subjectId;
+        }
+
+        function cancelRequest() {
+            window.location.href = "/KiiPayPersonal/RequestAPayment/CancelRequest?id=" + subjectId;
+        }
+
+
+
+
+
+    </script>
+
+}

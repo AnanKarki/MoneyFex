@@ -1,0 +1,164 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ExchangeRateSettingViewModel
+@{
+    ViewBag.Title = "SetExchanegRate";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+<style type="text/css">
+    .selectpicker {
+        background: #fff;
+        border: 1px solid #02b6ff;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!--  -->
+                    <div class=" dashboard_body">
+                        <div class=" clearfix ">
+                            <h2>Set Exchange Rate <a class="btn btn-primary pull-right" href="@Url.Action("Index","ExchangeRate")">View Rate</a></h2>
+                            <hr>
+                            <div class="mobile_design  ">
+                                <div class="row">
+
+                                    <div class="col-lg-6  col-lg-offset-3">
+                                        <!--  -->
+                                        @Html.ValidationMessage("HasExceedRateLimit", "", new { @class = "text-danger" })
+
+                                        @Html.HiddenFor(x => x.Id)
+                                        @Html.HiddenFor(x => x.TransferType)
+                                        @Html.HiddenFor(x => x.SourceCountryCode)
+                                        @Html.HiddenFor(x => x.SourceCurrencyCode)
+                                        @Html.HiddenFor(x => x.SourceCurrencyCode)
+                                        @*<div class="form-group">
+                                                <label>Sending Country</label>
+                                                @Html.DropDownListFor(x => x.SourceCountryCode, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                @Html.ValidationMessageFor(x => x.SourceCountryCode, "", new { @class = "text-danger" })
+                                            </div>*@
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Receiving Currency</label>
+                                            @Html.DropDownListFor(x => x.DestinationCurrencyCode, (IEnumerable<SelectListItem>)ViewBag.ReceivingCurrencies,
+                                           "Select Receiving Currency", new
+                                           {
+                                               @class = "form-control form-control-lg form-control-round form-control-bold selectpicker",
+                                               @data_show_subtext = "true",
+                                               @data_live_search = "true",
+                                               @id = "ReceivingCurrency"
+                                           })
+                                            @Html.ValidationMessageFor(x => x.DestinationCurrencyCode, "", new { @class = "text-danger" })
+                                        </div>
+
+                                        <!--  -->
+                                        <!--  -->
+
+                                        <div class="form-group">
+                                            <label>Receiving Country</label>
+                                            @Html.DropDownListFor(x => x.DestinationCountryCode, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries,
+                                           "Select Receiving Country", new
+                                                {
+                                               @class = "form-control form-control-lg form-control-round form-control-bold selectpicker",
+                                               @data_show_subtext = "true",
+                                               @data_live_search = "true",
+                                                    @id = "ReceivingCountry"
+                                                })
+                                            @Html.ValidationMessageFor(x => x.DestinationCountryCode, "", new { @class = "text-danger" })
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Method</label>
+                                            @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                            @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Range</label>
+                                            <select class="form-control form-control-lg form-control-round form-control-bold" name="Range" id="Range" onchange="getPreviousRate();">
+                                                <option value="">Select Range</option>
+                                                <option value="0-0">All</option>
+                                                <option value="1-100">1-100</option>
+                                                <option value="101-500">101-500</option>
+                                                <option value="501-1000">501-1000</option>
+                                                <option value="1001-1500">1001-1500</option>
+                                                <option value="1501-2000">1501-2000</option>
+                                                <option value="2001-3000">2001-3000</option>
+                                                <option value="3001-5000">3001-5000</option>
+                                                <option value="5001-10000">5001-10000</option>
+                                                <option value="11000+">11000+</option>
+                                            </select>
+                                            @Html.ValidationMessage("Range", "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Exchange Rate</label>
+                                            @Html.TextBoxFor(x => x.ExchangeRate, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Exchange Rate" })
+                                            @Html.ValidationMessageFor(x => x.ExchangeRate, "", new { @class = "text-danger" })
+
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="border-top bg-light">
+                                <hr>
+                                <a href="@Url.Action("Index","ExchangeRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+    </section>
+}
+@section scripts{
+    <script type="text/javascript">
+           $("#Range").val('@Model.Range');
+        if ("@Model.Range" == "All") {
+            $("#Range").val('0-0');
+        }
+
+        function getPreviousRate() {
+
+            var ReceivingCurrency = $("#ReceivingCurrency").val();
+            var ReceivingCountry = $("#ReceivingCountry").val();
+            var TransferMethod = $("#TransferMethod").val();
+            var Range = $("#Range").val();
+            $.getJSON("/Agent/ExchangeRate/GetPreviousRate?ReceivingCurrency=" + ReceivingCurrency + "&ReceivingCountry=" + ReceivingCountry + "&TransferMethod=" + TransferMethod +
+                "&Range=" + Range
+
+                , function (result) {
+
+                    for (var item in result) {
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                    }
+                })
+        }
+        function GetReceivingCountryByCurrency() {
+            var Currency = $("#ReceivingCurrency").val();
+            $.getJSON("/Admin/AdminCommon/GetCountryByCurrency?currency=" + Currency, function (result) {
+                var countrySelector = $("#ReceivingCountry");
+                $("#ReceivingCountry option").remove();
+                countrySelector.append('<option value="All">All </option>');
+                for (var i = 0; i <= result.Data.length; i++) {
+                    countrySelector.append('<option value="' + result.Data[i].Code + '">' + result.Data[i].Name + '</option>');
+                }
+
+            })
+        }
+
+
+    </script>>
+
+}

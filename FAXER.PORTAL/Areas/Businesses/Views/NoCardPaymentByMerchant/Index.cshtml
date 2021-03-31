@@ -1,0 +1,207 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.NonCardPaymentViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+
+    string FaxerCurrency = FAXER.PORTAL.Common.BusinessSession.FaxingCurrency ?? "";
+    string FaxerCurrencySymbol = FAXER.PORTAL.Common.BusinessSession.FaxingCurrencySymbol ?? "";
+
+    string ReceiverCurrency = FAXER.PORTAL.Common.BusinessSession.ReceivingCurrency ?? "";
+    string ReceiverCurrencySymbol = FAXER.PORTAL.Common.BusinessSession.ReceivingCurrencySymbol ?? "";
+    
+}
+
+<form method="post">
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <h1>
+                        Start Sending
+                        <span class="pull-right account-balance">Account Balance :<strong class="  text-primary italic"> @ViewBag.CreditonCard</strong></span>
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+
+
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Receiving Country </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "select Receiving Country", new { @class = "form-control", id = "ReceivingCountry", @onchange = "ChangeReceivecontent(this.value);" })
+                            @Html.ValidationMessageFor(model => model.ReceivingCountry, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Sending Amount </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxerCurrencySymbol</span>
+                                @Html.EditorFor(model => model.TopUpAmount, new { htmlAttributes = new { @class = "form-control", id = "FaxingAmount", type = "number" } })
+
+                                @*@Html.EditorFor(model => model.TopUpAmount, new { @class = "form-control", id = "FaxingAmount", type = "number" })*@
+                                <span class="input-group-addon">@FaxerCurrency</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div id="ReceivingContent" style="display:none">
+                        <!--  -->
+                        <div class="col-lg-7 text-center">
+                            <center>OR</center><br>
+                        </div>  <div class="clearfix"></div>
+
+
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <label>Amount to be Received </label>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <span class="input-group-addon">@ReceiverCurrencySymbol</span>
+                                    @Html.TextBoxFor(model => model.ReceivingAmount, new { @class = "form-control", id = "ReceivingAmount", type = "number" })
+                                    <span class="input-group-addon">@ReceiverCurrency</span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.TopUpAmount, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <br>
+
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <label>Does this Sending Amount Include Fee ? </label>
+                        </div>
+
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                <label> @Html.RadioButtonFor(model => model.IncludingFee, true, new { @checked = true }) Yes</label> &nbsp;&nbsp;
+                                <label> @Html.RadioButtonFor(model => model.IncludingFee, false, new { @checked = true }) No</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    @if (ViewBag.ExchangeRate != null)
+                    {
+
+                        <label class="text-danger">@ViewBag.ExchangeRate</label>
+                    }
+                    @if (TempData["InSufficientBalance"] != null)
+                    {
+                        <label class="text-danger">@TempData["InSufficientBalance"]</label>
+
+                    }
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <a href="@Url.Action("Index" ,"TransferMoneyNow")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("Index" ,"TransferMoneyNow")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  -->
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+
+        var FaxingAmount = document.getElementById('FaxingAmount'),
+            ReceivingAmount = document.getElementById('ReceivingAmount');
+
+        function enableToggle(current, other) {
+
+            other.disabled = current.value.replace(/\s+/, '').length > 0;
+        }
+
+
+        FaxingAmount.onkeyup = function () {
+            enableToggle(this, ReceivingAmount);
+            document.getElementById("ReceivingAmount").value = "0";
+        }
+        ReceivingAmount.onkeyup = function () {
+            enableToggle(this, FaxingAmount);
+            document.getElementById("FaxingAmount").value = "0";
+        }
+        var ReceivingCountry = $("#ReceivingCountry").val();
+        //$("#ReceivingContent").hide();
+        function ChangeReceivecontent(CountryCode) {
+
+            debugger;
+        
+            if (CountryCode == '@FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.CountryCode')
+            {
+                $("#ReceivingContent").hide();
+
+
+            } else {
+
+                $("#ReceivingContent").show();
+
+            }
+        }
+
+
+        
+        window.onload = function () {
+            if (ReceivingCountry != '@FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.CountryCode') {
+                $("#receivingcontent").show();
+            }
+        }
+      
+
+    </script>
+
+}

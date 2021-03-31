@@ -1,0 +1,245 @@
+﻿@model FAXER.PORTAL.Models.SenderBankAccountDepositVm
+@{
+    ViewBag.Title = "RecipientsBankAccount";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                @Html.HiddenFor(x => x.Id)
+                <!--  -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    <div class="login_signup  clearfix text-center">
+                        <h3>Bank Account </h3>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-xs-8 text-left">
+                                <h3 class="mb0"> New recipient</h3>
+                                <p>Is this a Business ?</p>
+                            </div>
+                            <div class="col-lg-2 col-xs-4">
+                                <label class="switch">
+                                    <input type="checkbox" name="IsBusiness" Id="IsBusiness" onchange="ChangeText();">
+                                    <span class="tgl round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix mb10">
+
+                        </div>
+                        <div class="form-group">
+
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue", id = "Country", @onchange = "GetBankByCountry();" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.AccountOwnerName, new { @class = "form-blue", @placeholder = "Account owner Name" , @maxlength = "21"})
+                            @Html.ValidationMessageFor(model => model.AccountOwnerName, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group contact-no-group mb20">
+
+                            <div class="countr-code-lg">
+                                <span id="CountryPhoneCode"> @ViewBag.CountryPhoneCode </span>
+                            </div>
+                            @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-blue contact-no-lg", @placeholder = "Enter Mobile Number(Optional)", @type = "number", @id = "MobileNumber" })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+
+                        </div>
+                        
+                        <div id="SouthAfricaform">
+                            <div class="form-group mb30">
+
+                                @Html.TextBoxFor(x => x.ReceiverStreet, new { @class = "form-blue", @placeholder = "Enter Address" })
+                                @Html.ValidationMessageFor(model => model.ReceiverStreet, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb30">
+
+                                @Html.TextBoxFor(x => x.ReceiverPostalCode, new { @class = "form-blue", @placeholder = "Enter Postcode" })
+                                @Html.ValidationMessageFor(model => model.ReceiverPostalCode, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb30">
+
+                                @Html.TextBoxFor(x => x.ReceiverCity, new { @class = "form-blue", @placeholder = "Enter City" })
+                                @Html.ValidationMessageFor(model => model.ReceiverCity, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group mb30">
+                                @Html.TextBoxFor(x => x.ReceiverEmail, new { @class = "form-blue", @placeholder = "Enter Email Address" })
+                                @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                            </div>
+
+                            @*<div class="form-group mb20">
+                                @Html.TextBoxFor(x => x.AccountNumber, new { @class = "form-blue", @placeholder = "Enter Account Number" })
+                                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                            </div>*@
+                        </div>
+                        
+                        <div class="form-group">
+
+                            @Html.DropDownListFor(x => x.BankId, (IEnumerable<SelectListItem>)ViewBag.BankNames, "Select Bank", new { @class = "form-blue", @id = "BankId", @onchange = " GetBankCode()" })
+                            @Html.ValidationMessageFor(x => x.BankId, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        @*<div class="form-group">
+                                @Html.TextBoxFor(x => x.AccountNumber, new { @class = "form-blue", @placeholder = "Enter Account Number", @type = "number" })
+                                @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+                            </div>*@
+
+                        @*@if (Model.CountryCode != "NG")
+                            {
+
+                                <div class="form-group" id="BranchCode">
+                                    @Html.TextBoxFor(x => x.BranchCode, new { @class = "form-blue", @placeholder = "Enter code" })
+                                    @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                                    <small>Bank code / branch code / sort cord / routing number etc</small>
+                                </div>
+                            }*@
+                        @if (Model.CountryCode == "GH")
+                        {
+                            <div class="form-group mb30">
+
+                                @Html.DropDownListFor(model => model.BranchCode, (IEnumerable<SelectListItem>)ViewBag.Branches, "Select Branch", new { @class = "form-blue" })
+                                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                            </div>
+                        }
+
+
+                        <div class="form-group mb20">
+                            @Html.TextBoxFor(x => x.AccountNumber, new { @class = "form-blue", @placeholder = "Enter Account Number", @type = "number" })
+                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                        @if (Model.CountryCode != "GH")
+                        {
+                            <div class="form-group   mb20" style="display:none">
+                                @Html.HiddenFor(x => x.BranchCode, new { @class = "form-blue", @placeholder = "Enter code", @readonly = true, @style = "display:none" })
+                                @Html.ValidationMessageFor(model => model.BranchCode, "", new { @class = "text-danger" })
+                                <p style="font-size:15px"><i> Bank code / branch code / sort code / routing number etc</i> </p>
+                            </div>
+                        }
+
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(model => model.ReasonForTransfer, new { @class = "form-blue" })
+                            @Html.ValidationMessage("Reason", "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        @if (Model.Id != 0)
+                        {
+                            <button type="submit" class="btn btn-primary btn-lg   ">Confirm and Update <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary btn-lg   ">Confirm and Add <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+
+                        <div class="clearfix mb30"> </div>
+                        <a href="javascript:history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        ChangeText();
+        function ChangeText() {
+            debugger;
+            var isBusiness = $("#IsBusiness")[0].checked;
+
+            if (isBusiness == true) {
+
+                $("#AccountOwnerName").attr('placeholder', 'Business Name');
+            }
+            else if (isBusiness == false) {
+                $("#AccountOwnerName").attr('placeholder', 'Recipient Name');
+
+            }
+
+        }
+
+        $("#SouthAfricaform").hide();
+        var Country = $("#Country").val();
+        if (Country == "ZA") {
+            debugger;
+            $("#SouthAfricaform").show();
+            $("#MobileNumber").attr('placeholder', 'Enter Mobile Number');
+        }
+        function GetBankCode() {
+
+            var bankId = $("#BankId").val();
+            $.getJSON("/SenderBankAccountDeposit/GetBankCode?bankId=" + bankId, function (result) {
+
+                debugger;
+                for (var item in result) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+                if (result.Branches != null) {
+                    $("#BranchCode option").remove();
+                    $("#BranchCode").append('<option value="">Select Branch</option>');
+                    for (var item in result.Branches) {
+                        $("#BranchCode").append('<option value="' + result.Branches[item].Code + '">' + result.Branches[item].Name + '</option>');
+                    }
+
+                }
+            })
+
+        }
+        function GetBankByCountry() {
+            debugger;
+            var Country = $("#Country").val();
+
+            if (Country == "NG") {
+                $("#BranchCode").hide();
+            }
+            else if (Country == "ZA") {
+                $("#SouthAfricaform").show();
+                $("#MobileNumber").attr('placeholder', 'Enter Mobile Number');
+            }
+            else {
+                $("#BranchCode").show();
+            }
+            $.getJSON("/AddRecipients/GetsenderByCountry?Country=" + Country, function (result) {
+                $("#CountryPhoneCode").text(result.MobileCode);
+                var BankSelector = $("#BankId");
+                $("#BankId option").remove();
+                BankSelector.append('<option value="0">Select Bank </option>');
+                for (var i = 0; i <= result.Data.length; i++) {
+                    let id = result.Data[i].Id;
+                    let Name = result.Data[i].Name;
+                    BankSelector.append('<option value="' + id + '">' + Name + '</option>');
+                }
+            })
+        }
+    </script>
+}

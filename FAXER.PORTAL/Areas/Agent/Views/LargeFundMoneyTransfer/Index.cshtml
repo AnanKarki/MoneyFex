@@ -1,0 +1,600 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.LargeFundMoneyTransferFormVM
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 25px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+<!--  -->
+<div class="real_form">
+    <div class="container">
+
+        <div class="row">
+            <div class="forms-wrapper">
+
+
+                <div class="form-main-title">
+                    LARGE FUNDS MONEY TRANSFER FORM
+                </div>
+                <p>
+                    FOR USE WITH MONEY TRANSFERS EQUAL OR EXCEEDING USD $7,500 OR
+                    LOCAL CURRENCY EQUIVALENT
+                </p>
+                <form method="post">
+                    <div class="forms">
+                        <div class="forms-header">
+                            TRANSACTION INFORMATION
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <h3>Send Amount</h3>
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    LOCAL CURRENCY:  @Html.TextBoxFor(model => model.AmountInLocalCurrency)
+                                                    @Html.ValidationMessageFor(model => model.AmountInLocalCurrency, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    USD: @Html.TextBoxFor(model => model.AmountInUSD)
+                                                    @Html.ValidationMessageFor(model => model.AmountInLocalCurrency, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Destination City & Country:  @Html.TextBoxFor(model => model.DestinationCountryAndCity)
+                                                    @Html.ValidationMessageFor(model => model.DestinationCountryAndCity, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Expected Payout Date: @Html.EditorFor(model => model.ExpectedPaymentDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.ExpectedPaymentDate, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Source of funds:  @Html.TextBoxFor(model => model.SourceOfFund)
+                                                    @Html.ValidationMessageFor(model => model.SourceOfFund, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Purpose of the transfer (Briefly explain purpose):  @Html.TextBoxFor(model => model.PurposeOfTransfer)
+                                                    @Html.ValidationMessageFor(model => model.PurposeOfTransfer, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="forms-header">
+                            SENDER INFORMATION
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Sender Full Name:@Html.TextBoxFor(model => model.SenderFullName)
+                                                    @Html.ValidationMessageFor(model => model.SenderFullName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Date of Birth:@Html.EditorFor(model => model.SenderDateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+
+                                                    @Html.ValidationMessageFor(model => model.SenderDateOfBirth, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("InvalidAge", "" , new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Gender: <select>
+                                                        <option>Male</option>
+                                                        <option>Female</option>
+                                                    </select>
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Address: @Html.TextBoxFor(model => model.SenderAddress)
+                                                    @Html.ValidationMessageFor(model => model.SenderAddress, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Telephone: @Html.TextBoxFor(model => model.SenderPhoneNo)
+                                                    @Html.ValidationMessageFor(model => model.SenderPhoneNo, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Email: @Html.TextBoxFor(model => model.SenderEmailAddress)
+                                                    @Html.ValidationMessageFor(model => model.SenderEmailAddress, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    ID Type: @Html.TextBoxFor(model => model.SenderIdCardType)
+                                                    @Html.ValidationMessageFor(model => model.SenderIdCardType, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    ID Number: @Html.TextBoxFor(model => model.SenderIdNumber)
+                                                    @Html.ValidationMessageFor(model => model.SenderIdNumber, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Expiration Date:@Html.EditorFor(model => model.SenderIdExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.SenderIdExpiryDate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("SenderIdExpired", "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Issuing Country @Html.DropDownListFor(model => model.SenderIdIssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, new { })
+                                                    @Html.ValidationMessageFor(model => model.PurposeOfTransfer, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Occupation: @Html.TextBoxFor(model => model.SenderOccupation)
+                                                    @Html.ValidationMessageFor(model => model.SenderOccupation, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td><label>How many money transfers have you sent using MoneyFex in the past three months? </label></td>
+                                            <td>
+                                                <label>
+                                                    @Html.TextBoxFor(model => model.MoneyTransferCountInLastThreeMonth, new { @type = "number" })
+                                                    @Html.ValidationMessageFor(model => model.MoneyTransferCountInLastThreeMonth, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+
+
+                        <div class="forms-header">
+                            RECEIVER INFORMATION
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Receiver Name:   @Html.TextBoxFor(model => model.ReceiverName)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Telephone: @Html.TextBoxFor(model => model.ReceiverTelephone)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverTelephone, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Address: @Html.TextBoxFor(model => model.ReceiverAddress)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverAddress, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    ID Type: @Html.TextBoxFor(model => model.ReceiverIdCardType)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverIdCardType, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    ID Number: @Html.TextBoxFor(model => model.ReceiverIdCardNumber)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverIdCardNumber, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Expiration Date: @Html.EditorFor(model => model.ReceiverIdCardExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.ReceiverIdCardExpiryDate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("ReceiverIdExpired", "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Nationality: @Html.TextBoxFor(model => model.ReceiverNationality)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverNationality, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+
+
+
+
+                        <div class="forms-header">
+                            Official User
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Is there documentation attached to support the purpose of the transfer?
+                                                    @*<select onchange="GetIsDocumentAttachedSelected()" id="IsDocumentAttachedSelected">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                    </select>*@
+                                                    @Html.CheckBoxFor(model => model.IsDocumentAttached, new { @id = "IsDocumentAttached" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Is the sender aware of the charges & F/X rates; and agree to them?
+                                                    @*<select onchange="GetIsSenderAwareOfChargesSelected()" id="IsSenderAwareOfChargesSelected">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                    </select>*@
+                                                    @Html.CheckBoxFor(model => model.IsSenderAwareOfCharges, new { @id = "IsSenderAwareOfCharges" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Did you check the country restrictions ?
+                                                    @*<select onchange="GetIsCheckedTheCountryRestrictionSelected()" id="IsCheckedTheCountryRestrictionSelected">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                    </select>*@
+                                                    @Html.CheckBoxFor(model => model.IsCheckedTheCountryRestriction, new { @id = "IsCheckedTheCountryRestriction" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    What is the relationship between sender and receiver?
+                                                    @Html.TextBoxFor(model => model.RelationshipBetnSenderAndReceiver)
+                                                    @Html.ValidationMessage("RelationshipBetnSenderAndReceiver",  "" ,new  { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Has the send money form been attached?
+                                                    @*<select onchange="GetIsMoneyFormAttachedSelected()" id="IsMoneyFormAttachedSelected">
+                                                        <option>Yes</option>
+                                                        <option>No</option>
+                                                    </select>*@
+                                                    @Html.CheckBoxFor(model => model.IsMoneyFormAttached, new { @id = "IsMoneyFormAttached" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="forms-footer  ">
+                            <a href="@Url.Action("LargeFundMoneyTransfer" , "AgentForms")" class="btn btn-danger">Cancel </a>
+
+                            <button type="submit" class="button button-Submit  ">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="Refresh()">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="Refresh()">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<!--  -->
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+
+        function GetIsDocumentAttachedSelected() {
+
+            if ($("#IsDocumentAttachedSelected option:selected").val() == "Yes") {
+                $("#IsDocumentAttached").val(true);
+            } else {
+                $("#IsDocumentAttached").val(false);
+            }
+        }
+        function GetIsSenderAwareOfChargesSelected() {
+
+            if ($("#IsSenderAwareOfChargesSelected option:selected").val() == "Yes") {
+                $("#IsSenderAwareOfCharges").val(true);
+            } else {
+                $("#IsSenderAwareOfCharges").val(false);
+            }
+        }
+        function GetIsCheckedTheCountryRestrictionSelected() {
+
+            if ($("#IsCheckedTheCountryRestrictionSelected option:selected").val() == "Yes") {
+                $("#IsCheckedTheCountryRestriction").val(true);
+            } else {
+                $("#IsCheckedTheCountryRestriction").val(false);
+            }
+        }
+        function GetIsMoneyFormAttachedSelected() {
+
+            if ($("#IsMoneyFormAttachedSelected option:selected").val() == "Yes") {
+                $("#IsMoneyFormAttached").val(true);
+            } else {
+                $("#IsMoneyFormAttached").val(false);
+            }
+        }
+
+        function Refresh() {
+
+            window.location.href = "/Agent/LargeFundMoneyTransfer/Index";
+
+        }
+    </script>
+}

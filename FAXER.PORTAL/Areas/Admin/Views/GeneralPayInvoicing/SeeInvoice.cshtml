@@ -1,0 +1,174 @@
+﻿
+@model FAXER.PORTAL.Areas.Admin.ViewModels.CreateAgentInvoicingViewModel
+@{
+    ViewBag.Title = "SeeInvoice";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">
+                                        Pay Invoice
+                                    </h4>
+
+                                    <a href="@Url.Action("GeneralCreateInvoice","GeneralSendInvoicing")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i>  Create Invoice
+                                    </a>
+
+
+
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-10 offset-lg-1">
+
+                                            <!--  -->
+                                            <div class="invoice ">
+                                                <!-- start -->
+                                                <div class="row">
+
+                                                    <div class="col-lg-5">
+                                                        <div class="invoice-box">
+                                                            <h5>Invoice From</h5>
+
+
+                                                            <h3 class="text-primary">Gloab Emarket</h3>
+                                                            <p>2587454745 <br>Plot 4 Lagos Nigeria</p>
+                                                            <!-- <img src="assets/images/logo-orginal.png" alt="" width="180"> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-7 text-right pull-right ">
+                                                        <!--  -->
+
+                                                        <div class="text-right m-t-50">
+                                                            <div class="text-bold">
+                                                                Invoice Number: @Model.InvoiceNo
+                                                            </div>
+
+
+                                                            <div class="text-bold">
+                                                                Date: @Model.InvoiceDate
+                                                            </div>
+                                                        </div>
+                                                        <!--  -->
+
+                                                    </div>
+                                                </div>
+                                                <!-- end -->
+                                                <hr>
+                                                <!-- start -->
+                                                <div class="row mt20">
+                                                    <div class="col-lg-6">
+
+                                                        <!--  -->
+                                                        <div class="form-group row">
+                                                            <div class="col-lg-3 text-right">
+                                                                <label><b>Invoice to: </b></label>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class=" ">
+                                                                    @Model.Name<br>@Model.AccountNo<br />@Model.Address
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <!--  -->
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="pull-right wallet-balance mb20 ">
+                                                            <h6>Amount Due:</h6>
+                                                            <h2 class="text-primary">@Model.CountrySymbol @Model.TotalAmount .<small class="text-primary">86</small></h2>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- end -->
+                                                <!-- start -->
+                                                <div class="table-responsive mt10">
+                                                    <table class="table table-bordered">
+
+                                                        <tbody>
+                                                            <tr>
+                                                                <th>Description</th>
+                                                                <th>Quantity</th>
+                                                                <th>Price</th>
+                                                                <th>Amount</th>
+                                                            </tr>
+                                                            @foreach (var item in Model.Item)
+                                                            {
+                                                                <tr>
+                                                                    <td>@item.Description</td>
+                                                                    <td>@item.Quantity</td>
+                                                                    <td>@item.Price </td>
+                                                                    <td>@item.Amount</td>
+                                                                </tr>
+                                                            }
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- end -->
+                                                <!-- start -->
+                                                <div class="table-responsive">
+                                                    <table class="table table-bordered">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td rowspan="5" class="text-left   " width="30%">
+                                                                    <p>
+                                                                        It is a long established fact that a reader will be
+                                                                        <br> distracted by the readable
+                                                                        <br> content of a page when looking at its layout.
+                                                                    </p>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">Subtotal</td>
+                                                                <td class="text-right">@Model.CountrySymbol @Model.SubTotal </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">Discount</td>
+                                                                <td class="text-right">@Model.CountrySymbol @Model.Discount</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right">Shipping</td>
+                                                                <td class="text-right">@Model.CountrySymbol @Model.ShippingAmount</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-right"><b>Total</b></td>
+                                                                <td class="text-right">@Model.CountrySymbol @Model.TotalAmount</td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <!-- end -->
+
+                                            </div>
+                                            <div class="clearfix m-t-10"></div>
+                                            <a href="@Url.Action("GeneralPayInvoice","GeneralPayInvoicing")" class="btn btn-round btn-primary f-right">Pay Invoice</a>
+                                            <!--  -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

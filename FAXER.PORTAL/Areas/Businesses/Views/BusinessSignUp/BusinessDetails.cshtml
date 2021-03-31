@@ -1,0 +1,114 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessDetailsViewModel
+@{
+    ViewBag.Title = "BusinessDetails";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Business Details</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+
+
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> Business Name </label>
+                        </div>
+
+                        @Html.HiddenFor(model => model.RegistrationNumber )
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @placeholder = "Business Name" ,@readonly ="readonly"})
+                                @Html.ValidationMessageFor(model => model.BusinessName , "" , new { @class="text-danger"})
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        
+                        <div class="col-lg-5">
+                            <label>Business License/Registration Number </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.BusinessLicenseNumber, new { @class = "form-control", @placeholder = "Business License/Registration Number", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.BusinessLicenseNumber, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Email Address </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = " Email Address", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Name of Contact Person </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.NameOfContactPerson, new { @class = "form-control", @placeholder = "Name Of Contact Person", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => model.NameOfContactPerson, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  -->

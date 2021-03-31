@@ -1,0 +1,174 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.AgentTransferLimtViewModel>
+
+@{
+    ViewBag.Title = "ReceiverLimitHistory";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+
+                    <div class="row">
+
+
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Transaction History </h4>
+                                    <a href="@Url.Action("SetReceiverLimit","ReceiverLimit")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set New Limit
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "js-example-data-array form-control form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+
+                                            <div class="form-group">
+                                                <select class="js-example-data-array form-control form-control-round form-control-bold" id="TransferMethod" name="TransferMethod" onchange="filter();">
+                                                    <option value="0">Select Services</option>
+                                                    <option value="7">All</option>
+                                                    <option value="1">CashPickUp</option>
+                                                    <option value="2">KiiPayWallet</option>
+                                                    <option value="3">OtherWallet</option>
+                                                    <option value="4">BankDeposit</option>
+                                                    <option value="5">BillPayment</option>
+                                                    <option value="6">ServicePayment</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <input type="text" name="datefilter" class="form-control form-control-round form-control-bold " value="" placeholder="Year Month" id="Date" onchange="filter()" />
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Service</th>
+
+                                                    <th>Amount</th>
+                                                    <th>Frequency</th>
+                                                    <th>Date</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+                                                @{ int i = 1;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td>@item.TransferMethodName</td>
+
+                                                        <td>@item.CountryCurrencySymbol @item.Amount</td>
+                                                        <td>@item.FrequencyName</td>
+
+                                                        <td>
+                                                            @item.CreationDate
+                                                        </td>
+                                                        @{i++;}
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("ReceiverLimitHistory",
+                                                            new { @page = page }))
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                @section Scripts{
+                    <script type="text/javascript">
+
+        function filter() {
+
+            var country = $("#Country").val();
+            var service = $("#TransferMethod").val();
+            var city = $("#City").val();
+            var Date = $("#Date").val();
+
+
+            window.location.href = "/Admin/ReceiverLimit/ReceiverLimitHistory?Country=" + country + " &Services=" + service + " &city=" + city + " &Date=" + Date;
+        }
+
+        $(".applyBtn").click(function () {
+            filter();
+        });
+        $('input[name="datefilter"]').val('@ViewBag.DateRange');
+
+
+                    </script>
+                }

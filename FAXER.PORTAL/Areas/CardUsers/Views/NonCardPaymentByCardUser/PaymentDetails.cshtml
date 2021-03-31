@@ -1,0 +1,159 @@
+﻿@model FAXER.PORTAL.Areas.CardUsers.ViewModels.CardUser_NonCardPaymentDetailsViewModel
+@{
+    ViewBag.Title = "PaymentDetails";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+
+    string FaxingCurrency = FAXER.PORTAL.Common.CardUserSession.FaxingCurrency ?? "";
+    string FaxingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.FaxingCurrencySymbol ?? "";
+    string ReceivingCurrency = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrency ?? "";
+    string ReceivingCurrencySymbol = FAXER.PORTAL.Common.CardUserSession.ReceivingCurrencySymbol ?? "";
+
+    int ReceiverId = FAXER.PORTAL.Common.CardUserSession.NonCardReceiverId;
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Start Sending</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Sending Amount </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.faxingAmount, new { @class = "form-control", @readonly = "readonly" })
+                                <span class="input-group-addon">@FaxingCurrency</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Sending fee </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.FaxingFee, new { @class = "form-control", @readonly = "readonly" })
+                                <span class="input-group-addon">@FaxingCurrency</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Total Amount Including fee </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.TotalAmountIncludingFee, new { @class = "form-control", @readonly = "readonly" })
+                                <span class="input-group-addon">@FaxingCurrency</span>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Current Exchange Rate </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.CurrentExchangeRate, new { @class = "form-control", @readonly = "readonly" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Amount to be Received </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">@ReceivingCurrencySymbol</span>
+                                @Html.TextBoxFor(model => model.AmountToBeReceived, new { @class = "form-control", @readonly = "readonly" })
+                                <span class="input-group-addon">@ReceivingCurrency</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+
+
+
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("PayingAmount")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    @if (!string.IsNullOrEmpty(FAXER.PORTAL.Common.CardUserSession.TransactionSummaryURL))
+                    {
+                        <a href="@FAXER.PORTAL.Common.CardUserSession.TransactionSummaryURL" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+
+                    }
+                    else
+                    { <a href="@Url.Action("ReceiverDetails" , new { id = ReceiverId})" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    }
+                    <br />
+                    <a href="@Url.Action("PayingAmount")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  -->

@@ -1,0 +1,288 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.CreateAgentInvoicingViewModel
+@{
+    ViewBag.Title = "CreateInvoice";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm("CreateInvoice", "AgentInvoicing", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Create an Invoice</h4>
+                                        <a href="@Url.Action("Index","AgentInvoicing")" class="btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i>  View Invoice
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-10 offset-lg-1">
+                                                <form action="" method="get" accept-charset="utf-8">
+                                                    <div class="invoice ">
+                                                        <!-- start -->
+                                                        <div class="row">
+                                                            <div class="col-lg-5 mb20">
+                                                                <div class="invoice-box">
+                                                                    <h5>Invoice From</h5>
+                                                                    <img src="~/Areas/Admin/Content/assets/images/logo-orginal.png" alt="" width="180">
+                                                                    <!--   <h3 class="text-primary">AFCED</h3>
+                                                                      <p>Wallet No. 44 8875474587</p> -->
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix">
+
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-12 col-sm-12 pull-right m-t-40">
+                                                                <div class="row">
+                                                                    <!--  -->
+                                                                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 text-right">
+                                                                        <label>Invoice Number</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                                                                        <div class="form-group">
+                                                                            @Html.TextBoxFor(model => model.InvoiceNo, new { @class = "form-control form-control-round" })
+                                                                            @Html.ValidationMessageFor(model => model.InvoiceNo, "", new { @class = "text-danger" })
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--  -->
+                                                                </div>
+
+                                                                <div class="clearfix ">
+                                                                    <div class="m-t-20">
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row">
+                                                                    <!--  -->
+                                                                    <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 text-right">
+                                                                        <label>Date</label>
+                                                                    </div>
+                                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                                                                        <div class="form-group">
+                                                                            @Html.EditorFor(model => model.InvoiceDate, new { htmlAttributes = new { @id = "endDate", @class = "form-control form-control-round", type = "date" } })
+                                                                            @Html.ValidationMessageFor(model => model.InvoiceDate, "", new { @class = "text-danger" })
+
+                                                                        </div>
+                                                                    </div>
+                                                                    <!--  -->
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- end -->
+                                                        <hr>
+                                                        <!-- start -->
+                                                        <div class="  mt20">
+                                                            <div class="row">
+                                                                <!--  -->
+
+                                                                <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right">
+                                                                    <label><b>Invoice to: </b></label>
+                                                                </div>
+                                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8  ">
+                                                                    <div class="form-group">
+                                                                        @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control form-control-round", id = "country" })
+                                                                        @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+
+                                                                    </div>
+
+                                                                    <div class="form-group">
+                                                                        @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "All Cities", new { @class = "form-control form-control-round", id = "city" })
+                                                                        @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+
+                                                                    </div>
+                                                                    <div class="row">
+                                                                        <div class="col-lg-10">
+                                                                            <div class="form-group">
+                                                                                @Html.DropDownListFor(model => model.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agents, "All Agents", new { @class = "form-control form-control-round", id = "agent", @onchange = "GetAgentAccountNo()" })
+                                                                                @Html.ValidationMessageFor(model => model.AgentId, "", new { @class = "text-danger" })
+
+                                                                            </div>
+
+                                                                            <div class="form-group">
+                                                                                @Html.TextBoxFor(model => model.AccountNo, new { @class = "form-control form-control-round", @id = "AccountNumber" })
+                                                                                @Html.ValidationMessageFor(model => model.AccountNo, "", new { @class = "text-danger" })
+
+
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="col-lg-2 m-t-25">
+                                                                            <button class="btn btn-primary   btn-icon"><i class="icofont icofont-plus"></i></button>
+                                                                        </div>
+
+                                                                    </div>
+
+
+                                                                </div>
+
+                                                                <!--  -->
+
+
+
+
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- end -->
+                                                        <!-- start -->
+                                                        <div class="table-responsive m-t-10">
+
+                                                            <table class="table table-bordered">
+
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <th>Description</th>
+                                                                        <th>Quantity</th>
+                                                                        <th>Price</th>
+                                                                        <th>Amount</th>
+                                                                    </tr>
+                                                                    @foreach (var item in Model.Item)
+                                                                    {
+                                                                        <tr>
+                                                                            <td contenteditable="true">  @Html.TextBoxFor(model => item.Description, new { @placeholder = "Enter item Name &amp; Description" })</td>
+                                                                            <td contenteditable="true"> @Html.TextBoxFor(model => item.Quantity, new { @placeholder = "" }) </td>
+                                                                            <td contenteditable="true">@Html.TextBoxFor(model => item.Quantity, new { @placeholder = "0.00" }) </td>
+                                                                            <td contenteditable="true">@Html.TextBoxFor(model => item.Quantity, new { @placeholder = "$0.00 " }) </td>
+                                                                        </tr>
+                                                                    }
+
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                        <!-- end -->
+                                                        <!--  -->
+                                                        <div class="add-lineitem m-b-30 ">
+                                                            <a href="">
+                                                                <span><i class="fa fa-plus"></i></span> Add another line item
+                                                            </a>
+                                                        </div>
+                                                        <!--  -->
+                                                        <!-- start -->
+                                                        <div class="table-responsive">
+
+                                                            <table class="table table-bordered">
+                                                                <tbody>
+
+                                                                    <tr>
+                                                                        <th>Note to Receipient</th>
+                                                                        <th colspan="3" class="text-right">Subtotal</th>
+                                                                        <td>@Model.CountrySymbol @Model.SubTotal&nbsp;</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td rowspan="4">
+                                                                            @Html.TextAreaFor(model => model.NoteToReceipient, new { @class = "form-control form-control-round", rows = "5" })
+                                                                            @Html.ValidationMessageFor(model => model.NoteToReceipient, "", new { @class = "text-danger" })
+
+
+                                                                        </td>
+
+                                                                        <th><span class="">Discount</span> </th>
+                                                                        <td>
+                                                                            <div class="form-group">
+                                                                                @Html.TextBoxFor(model => model.Discount, new { @class = "form-control form-control-round", @placeholder = "0" })
+                                                                                @Html.ValidationMessageFor(model => model.Discount, "", new { @class = "text-danger" })
+
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div class="form-group">
+                                                                                @Html.DropDownListFor(model => model.DiscountPercentage, (IEnumerable<SelectListItem>)ViewBag.Cities, "%", new { @class = "form-control form-control-round", })
+                                                                                @Html.ValidationMessageFor(model => model.DiscountPercentage, "", new { @class = "text-danger" })
+
+                                                                                @*<select class="form-control form-control-round">
+                                                                                        <option value="percentage" selected="">%</option>
+                                                                                        <option value="dollar">£</option>
+                                                                                    </select>*@
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>-£0.40&nbsp;</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <th>Shipping</th>
+                                                                        <td colspan="2">
+                                                                            <div class="form-group">
+                                                                                @Html.TextBoxFor(model => model.ShippingAmount, new { @class = "form-control form-control-round  text-right", @size = "6", @maxlength = "15" })
+                                                                                @Html.ValidationMessageFor(model => model.ShippingAmount, "", new { @class = "text-danger" })
+
+                                                                            </div>
+                                                                        </td>
+                                                                        <td valign="top">£2.00&nbsp;</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <th colspan="3" class="text-right">Total</th>
+                                                                        <td>£21.60&nbsp;GBP</td>
+                                                                        <div class="form-group">
+                                                                            @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control form-control-round  text-right", @type = "hidden", })
+                                                                            @Html.ValidationMessageFor(model => model.TotalAmount, "", new { @class = "text-danger" })
+                                                                        </div>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div>
+                                                        <!-- end -->
+
+                                                        <p class="text-center">
+                                                            It is the user's responsibility to create an invoice that is compliant with local laws and regulations
+                                                        </p>
+                                                    </div>
+
+                                                    <div class="pull-right m-t-20">
+                                                        <a href="@Url.Action("InvoicePreview","AgentInvoicing")" class="btn btn-warning btn-round">Preview</a>
+                                                        <button type="submit" class="btn btn-primary btn-round">Send</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#country").change(function () {
+
+                var country = $("#country").val();
+                window.location.href = "/Admin/AgentInvoicing/CreateInvoice?Country=" + country;
+            });
+
+            $("#city").change(function () {
+
+                var country = $("#country").val();
+                var city = $("#city").val();
+                window.location.href = "/Admin/AgentInvoicing/CreateInvoice?Country=" + country + "&City=" + city;
+            });
+
+
+
+        });
+    </script>
+}

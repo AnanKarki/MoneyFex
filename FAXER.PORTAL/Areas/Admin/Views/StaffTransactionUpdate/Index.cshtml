@@ -1,0 +1,244 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Agent.Models.DailyTransactionStatementListVm>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    @*<h4 class="f-left f-left m-t-5 m-b-0">
+                                            Transaction Update
+                                            <label class="text-primary">Rohan </label>  <span>
+                                                Account No: 15484814
+                                                <br>Country: United Kingdom
+                                            </span>
+                                        </h4>*@
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold" id="day" onchange="filter()">
+                                                    <option value="">Select Day</option>
+                                                    <option value="1">1</option>
+                                                    <option value="2">2</option>
+                                                    <option value="3">3</option>
+                                                    <option value="4">4</option>
+                                                    <option value="5">5</option>
+                                                    <option value="6">6</option>
+                                                    <option value="7">7</option>
+                                                    <option value="8">8</option>
+                                                    <option value="9">9</option>
+                                                    <option value="10">10</option>
+                                                    <option value="11">11</option>
+                                                    <option value="12">12</option>
+                                                    <option value="13">13</option>
+                                                    <option value="14">14</option>
+                                                    <option value="15">15</option>
+                                                    <option value="16">16</option>
+                                                    <option value="17">17</option>
+                                                    <option value="18">18</option>
+                                                    <option value="19">19</option>
+                                                    <option value="20">20</option>
+                                                    <option value="21">21</option>
+                                                    <option value="22">22</option>
+                                                    <option value="23">23</option>
+                                                    <option value="24">24</option>
+                                                    <option value="25">25</option>
+                                                    <option value="26">26</option>
+                                                    <option value="27">27</option>
+                                                    <option value="28">28</option>
+                                                    <option value="29">29</option>
+                                                    <option value="30">30</option>
+                                                    <option value="31">31</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold" id="month" onchange="filter()">
+                                                    <option value="">Select Month </option>
+                                                    <option value="1">January</option>
+                                                    <option value="2">February</option>
+                                                    <option value="3">March</option>
+                                                    <option value="4">April</option>
+                                                    <option value="5">May</option>
+                                                    <option value="6">June</option>
+                                                    <option value="7">July</option>
+                                                    <option value="8">August</option>
+                                                    <option value="9">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Years, "Select Year", new { @class = "form-control form-control-round form-control-bold", id = "year", onchange = "filter();" })
+
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="form-control form-control-round form-control-bold" id="transferMethod" name="transferMethod" onchange="filter();">
+                                                    <option value="">Select Transfer Method</option>
+                                                    <option value="7">All</option>
+                                                    <option value="1">CashPickUp</option>
+                                                    <option value="2">KiiPayWallet</option>
+                                                    <option value="3">OtherWallet</option>
+                                                    <option value="4">BankDeposit</option>
+
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-round form-control-bold", id = "country", onchange = "filter();" })
+
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Receiver" class="form-control form-control-round form-control-bold" name="Receiver" id="Receiver" value="@ViewBag.Receiver" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Identifier" class="form-control form-control-round form-control-bold" name="Identifier" id="Identifier" value="@ViewBag.Identifier" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="custom-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>Receiver</th>
+                                                    <th>Method</th>
+                                                    <th>Amount</th>
+                                                    <th>Identifier</th>
+                                                    <th>Date & Time</th>
+
+                                                    <th>Status</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.ReceivingCountry</td>
+                                                        <td>@item.ReceiverName</td>
+                                                        <td>@item.TransactionTypeName</td>
+                                                        <td>@item.CurrencySymbol@item.Amount</td>
+
+                                                        <td>
+                                                            <a href="#" onclick="SenderTransactionView('@item.Id','@item.TransactionServiceType','@item.SenderId')">@item.TransactionIdentifier</a>
+
+                                                        </td>
+
+                                                        <td>@item.FormatedDate</td>
+                                                        <td>@item.StatusName</td>
+                                                        <td>
+                                                            <a href="#" onclick="Update('@item.Id','@item.TransactionType')">Update</a>
+
+                                                        </td>
+
+                                                    </tr>
+
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                @section scripts{
+                    <script type="text/javascript">
+
+        function filter() {
+
+
+            var transferMethod = $("#transferMethod").val();
+            var month = $("#month").val();
+            var year = $("#year").val();
+            var day = $("#day").val();
+            var country = $("#country").val();
+            var Receiver = $("#Receiver").val();
+            var Identifier = $("#Identifier").val();
+            window.location.href = "/Admin/StaffTransactionUpdate/Index?Services=" + transferMethod + "&Month=" + month + "&Year=" + year + "&Day=" + day + "&Country=" + country + "&Receiver=" + Receiver + "&Identifier=" + Identifier;
+
+        }
+
+        $("#transferMethod").val('@ViewBag.TransferMethod');
+        $("#month").val('@ViewBag.Month');
+        $("#day").val('@ViewBag.Day');
+        $("#year").val('@ViewBag.Year');
+        $("#country").val('@ViewBag.Country');
+        function SenderTransactionView(id, services, senderId) {
+            window.location.href = "/Admin/SenderTransactionActivity/CashPickUpDetails?id=" + id + "&transactionServiceType=" + services + "&SenderId=" + senderId;
+
+        }
+        function Update(id, services) {
+            window.location.href = "/Admin/StaffTransactionUpdate/UpdateTransaction?id=" + id + "&transactionService=" + services;
+
+        }
+
+                    </script>
+                }

@@ -1,0 +1,93 @@
+﻿@{
+    ViewBag.Title = "MerchantHurrayMessage";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:100%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay for goods & services abroad</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="completed-payment text-center">
+                <h3>Merchant Payment Successfully Completed</h3>
+                <h4>We've sent you a Receipt</h4>
+                <div class=" ">
+                    <div class="white-bg boxednew">
+
+                        <h3 style="color:#333;">Your Transaction Details:</h3>
+                        <div class="table-responsive text-left">
+                            <table class="table table-bordered">
+                                <tbody>
+                                    <tr>
+                                        <td>Business MF Code</td>
+                                        <td>@ViewBag.BusinessMFCode</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Business Merchant Name</td>
+                                        <td>@ViewBag.BusinessMerchantName</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Business Merchant Country</td>
+                                        <td>@ViewBag.BusinessMerchantCountry</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount Paid</td>
+                                        <td>@ViewBag.AmountPaid</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Amount in Local Currency</td>
+                                        <td>@ViewBag.AmountInLocalCurrency</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Exchange Rate</td>
+                                        <td>@ViewBag.ExchangeRate</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Payment Reference</td>
+                                        <td>@ViewBag.PaymentReference</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Receive Option</td>
+                                        <td>@ViewBag.ReceiveOption</td>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="clearfix">
+
+                </div>
+                <br>
+                <a href="@Url.Action("Index","DashBoard")" title="" class="btn btn-primary">Go to your Dashboard  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+            </div>
+
+
+           
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+
+
+

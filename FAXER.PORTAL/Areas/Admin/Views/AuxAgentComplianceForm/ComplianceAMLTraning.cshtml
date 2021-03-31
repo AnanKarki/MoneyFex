@@ -1,0 +1,304 @@
+﻿@model FAXER.PORTAL.DB.AgentAMLTrainingRecordDetails
+@{
+    ViewBag.Title = "ComplianceAMLTraning";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5);
+        /* IE */
+        -moz-transform: scale(1.5);
+        /* FF */
+        -webkit-transform: scale(1.5);
+        /* Safari and Chrome */
+        -o-transform: scale(1.5);
+        /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b,
+    strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    p {
+        font-size: 17px;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table,
+        .forms .forms-body table tr,
+        td,
+        th {
+            border: 0;
+            text-align: left;
+            white-space: normal;
+        }
+
+        .forms .forms-body input,
+        select {
+            background: #fff;
+            border: solid 1px #00adef;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        @Html.HiddenFor(x=>x.AgentAMLTrainingRecordMasterId)
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+
+                                        <a href="@Url.Action("Index", "AuxAgentComplianceForm")" class=" btn btn-primary f-left btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="forms-wrapper">
+
+
+                                            <div class="form-main-title">
+                                                Agent Anti-Money Laundering Compliance Training Record
+                                            </div>
+                                            <p>This Agent Training Record should be kept up to date and on file at the Agent location. Be sure to fill in all fields of the log when training is completed. Employee Initials: Next to the Employee Name, each employee is required to write his or her initials to signify that the indicated training has been received.</p>
+                                            <div class="forms">
+
+                                                <!--  -->
+                                                <div class="forms-body">
+                                                    <div class="form-block">
+
+                                                        <table>
+                                                            <tbody>
+
+
+                                                                <tr>
+                                                                    <td><label>Agent Name and Address:</label></td>
+                                                                    <td><label><b>@ViewBag.AgentStaffNameAndAddress</b></label></td>
+
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><label>Agent Account No.: </label></td>
+                                                                    <td><label><b>@ViewBag.AgentStaffAccountNo</b></label></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td><label>Date of Training</label></td>
+                                                                    <td><label><b>@Model.DateOfTraining</b></label></td>
+                                                                </tr>
+
+                                                                <tr>
+                                                                    <td><label>Employee Name  </label></td>
+                                                                    <td><label><b>@Model.EmployeeName</b></label></td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td><label>Employee Initials    </label></td>
+                                                                    <td><label><b>@Model.EmployeeInitials</b></label></td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td colspan="2"><label>Type of Training (Check appropriate box)  </label></td>
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td><label>Initial</label></td>
+                                                                    @if (Model.IsInitial)
+                                                                    {
+                                                                        <td><label> <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span></label></td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td><label> <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span></label></td>
+                                                                    }
+
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td><label>On-going</label></td>
+                                                                    @if (Model.IsOnGoing)
+                                                                    {
+                                                                        <td><label> <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span></label></td>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <td><label> <span style="color:#00adef; font-weight: bold; font-size: 20px;">&#10003;  </span></label></td>
+                                                                    }
+
+                                                                </tr>
+
+
+                                                                <tr>
+                                                                    <td><label>Training Conducted by     </label></td>
+                                                                    <td><label><b>@Model.TrainingConductedBy</b></label></td>
+                                                                </tr>
+
+
+
+                                                            </tbody>
+
+
+
+                                                        </table>
+
+
+
+
+
+
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+
+
+
+
+
+
+
+
+
+                                                <div class="forms-footer  ">
+                                                    <button type="" onclick="Cancel()" class="button button-cancel  ">Cancel </button>
+
+                                                    <button type="submit" class="button button-Submit  ">Submit</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+
+        function Cancel() {
+
+            window.location.href = "/Admin/AuxAgentComplianceForm/Index";
+
+        }
+
+    </script>
+}

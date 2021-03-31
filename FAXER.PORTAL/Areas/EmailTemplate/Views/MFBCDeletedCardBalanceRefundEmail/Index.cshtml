@@ -1,0 +1,41 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        The Management of  @ViewBag.MerchantName,
+    </p>
+    <p>
+        This is to confirm that a balance refund of @ViewBag.RefundAmount has been issued to the Merchant account - @ViewBag.MerchantAccountNo  for the following MFBC Card deleted by  @ViewBag.Deleter ;
+    </p>
+    <br />
+    MFBC Card Number: @ViewBag.MFBCNo
+    <br />
+    Name on MFB Card:@ViewBag.CardUserName
+    <br />
+    Merchant Name: @ViewBag.MerchantName
+    <br />
+    Merchant Account Number: @ViewBag.MerchantAccountNo
+    <br />
+    Date of Birth of Registered Card User: @ViewBag.CardUserDOB
+    <br />
+    Card User Country: @ViewBag.CardUserCountry
+    <br />
+    Card User City: @ViewBag.CardUserCity
+    <br />
+    Amount on Card: @ViewBag.RefundAmount
+    <br />
+
+    <p>
+        Please find attached a receipt to confirm this refund. This is your official receipt, keep it safe!
+    </p>
+    <br />
+
+    
+
+
+
+
+</div>

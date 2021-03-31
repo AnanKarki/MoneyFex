@@ -1,0 +1,111 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentLoginVm
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <h1>Login</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup">
+                        <div class="text-center">
+                            <h4>Welcome to your MoneyFex Agent's Account</h4>
+                            <!-- 		<p>Don't have an account  <a href="signup.php">Sign Up</a></p>
+                             -->
+                        </div>
+                        <hr>
+
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @* <input type="email" name="" class="form-control" placeholder="Email Address">*@
+                                @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "email", placeholder = "Email Address" })
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @* <input type="text" name="" class="form-control" placeholder="Staff Code">*@
+                                @Html.TextBoxFor(x => x.StaffCode, new { @class = "form-control", placeholder = "Staff Code" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @*<input type="text" name="" class="form-control" placeholder="Agent Code">*@
+                                @Html.TextBoxFor(x => x.AgentCode, new { @class = "form-control", placeholder = "Agent Code" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+
+
+                                <div class="input-group">
+
+                                    @*<input type="text" class="form-control" id="show_password" placeholder="Password">*@
+                                    @Html.TextBoxFor(x => x.Password, new { htmlAttributes = new { @class = "form-control", @type = "password", placeholder = "Password" , @style = "font-weight:bold" } })
+
+                                    <div class="input-group-addon" id="passwoed_show"><i class="fa fa-eye"></i></div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-5">
+                            <p>   <a @Url.Action("", "")>Forgot Password</a></p>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-7 ">
+                            <a href="" class="fbtn btn-next" data-toggle="modal" data-target="#confirmpassword">Login <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+<!--  -->

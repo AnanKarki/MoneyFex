@@ -1,0 +1,167 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.BusinessDocumentationViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    var baseurl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Partner Documentation</h4>
+                                    <a href="@Url.Action("UploadDocument","PartnerDocumentation")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Upload Document
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold" id="transferType" onchange="filter();">
+                                                    <option value="">Select Transfer Type</option>
+                                                    <option value="0">All</option>
+                                                    <option value="1">Compliance</option>
+                                                    <option value="2">Staff</option>
+                                                    <option value="3">Transaction</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Partner", (IEnumerable<SelectListItem>)ViewBag.Partner, "Select Partner", new { @class = "form-control form-control-round form-control-bold", @id = "PartnerId", @onchange = "filter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-lg-3  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Partner Account No " class="form-control form-control-round form-control-bold" name="PartnerAccountNo" id="PartnerAccountNo" value="@ViewBag.PartnerAccountNo" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Document Name " class="form-control form-control-round form-control-bold" name="DocumentName" id="DocumentName" value="@ViewBag.DocumentName" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Staff " class="form-control form-control-round form-control-bold" name="Staff" id="Staff" value="@ViewBag.Staff" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-3  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="dates" class="form-control form-control-round form-control-bold" placeholder="From to Date" id="dates" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap print">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>Partner</th>
+                                                    <th>Partner Account No.</th>
+                                                    <th>Document Name</th>
+                                                    <th>Expiry Date</th>
+                                                    <th>Staff (upload)</th>
+                                                    <th>Date + Time</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td><i class="flag flag-icon flag-icon-@item.CountryFlag"></i> @item.Country</td>
+                                                        <td><a href="">@item.StaffName</a></td>
+                                                        <td> <a href="">@item.AccountNo</a></td>
+
+                                                        <td>
+                                                            <a onclick="OpenDoc('@item.DocumentPhotoUrl')">
+                                                                @item.DocumentName
+                                                            </a>
+
+                                                        </td>
+
+                                                        <td>@item.DocumentExpires</td>
+                                                        <td><a href="">@item.CreatedByStaffName</a></td>
+                                                        <td>@item.CreationDate</td>
+                                                        <td class="action-icon">
+                                                            <a href="upload-document.php" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#!" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var Country = $("#Country").val();
+            var partner = $("#PartnerId").val();
+            var type = $("#transferType").val();
+            var PartnerAccountNo = $("#PartnerAccountNo").val();
+            var DocumentName = $("#DocumentName").val();
+            var Staff = $("#Staff").val();
+            var DateRange = $('input[name="dates"]').val();
+            window.location.href = "/Admin/PartnerDocumentation/Index?CountryCode=" + Country + "&PartnerId=" + partner + "&type=" + type
+                + "&PartnerAccountNo=" + PartnerAccountNo + "&DocumentName=" + DocumentName + "&Staff=" + Staff + "&DateRange=" + DateRange;
+
+        }
+        function OpenDoc(src) {
+
+            $("#docSrc").attr('src', src);
+            window.open('@baseurl' + '/' + src, "_blank");
+        }
+        $("#Cities").val('@ViewBag.City');
+
+    </script>
+}

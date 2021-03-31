@@ -1,0 +1,43 @@
+﻿
+
+@{
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+
+
+    <p><b>Non-Virtual Account  Money transfer </b></p>
+    <br />
+    <p>
+        Name of sender : <b>@ViewBag.FaxerName</b>
+    </p>
+    <p>
+        Sender Account Number : <b>@ViewBag.FaxerAccountNo</b>
+    </p>
+    <p>
+        Receiver Full Name : <b>@ViewBag.ReceiverFullName</b>
+    </p>
+    <p>
+        Receiver Telephone : <b>@ViewBag.ReceiverTelephone</b>
+    </p>
+    <p>
+        Receiver Email : <b>@ViewBag.ReceiverEmail</b>
+    </p>
+
+    <p>
+        Receiver City : <b>@ViewBag.ReceiverCity</b>
+    </p>
+    <p>
+        Receiver Country : <b>@ViewBag.ReceiverCountry</b>
+    </p>
+
+    <p>
+        Amount : <b>@ViewBag.Amount</b>
+    </p>
+    <p>
+        Bank Reference : <b>@ViewBag.BankReference</b>
+    </p>
+
+</div>

@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+                <div class="dashboard_body">
+
+                    <div class=" clearfix">
+                        <div class="col-lg-6 col-xs-12">
+                            <h3> Invoicing</h3>
+                        </div>
+
+                        <div class="col-lg-6 col-xs-12">
+                            <select name="" class="form-control pull-right  ">
+                                <option>Menu</option>
+                                <option value="">Unpaid Invoices (50)</option>
+                                <option value="">Paid Invoices (50)</option>
+                                <option value="">Sent Invoices (50)</option>
+
+                            </select>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <hr>
+                        <div class="mobile_design text-center">
+
+
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","KiiPayBusinessSendAnInvoice")">
+
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/send-invoice.svg">
+                                        </div>
+                                        <h4>Send an Invoice </h4>
+
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","KiiPayBusinessPayAnInvoice")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/pay-invoice.svg">
+                                        </div>
+                                        <h4>Pay an Invoice</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+                            <div class="clearfix">
+                                <hr>
+                            </div>
+
+
+                            <a href="dashboard.php"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Dashboard</a>
+                        </div>
+                    </div>
+
+                </div>
+                <!--  -->
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <!--  -->
+</section>
+

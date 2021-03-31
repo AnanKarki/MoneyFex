@@ -1,0 +1,92 @@
+﻿@model FAXER.PORTAL.Models.SenderPayingSupplierAbroadReferenceVM
+@{
+    ViewBag.Title = "PayingSupplierAbroadReference";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-left">
+
+                        <label>Enter Payment Reference</label>
+
+                        <div class="referencecode mb20">
+                            <div class="col-lg-4">
+                                <img src="~/Content/images/kiipay.png" width="80"> <b>Ref:</b>
+                            </div>
+
+                            <div class="col-lg-8">
+                                @Model.ReferenceNo
+                                @*<input type="text" name="" class="refedashedinput" maxlength="1">*@
+                                @Html.TextBoxFor(model => model.ReferenceNo1, new { @class = "refedashedinput", @placeholder = "", maxlength = "1" })
+
+                                @*<input type="text" name="" class="refedashedinput" maxlength="1">*@
+                                @Html.TextBoxFor(model => model.ReferenceNo2, new { @class = "refedashedinput", @placeholder = "", maxlength = "1" })
+
+                                @*<input type="text" name="" class="refedashedinput" maxlength="1">*@
+                                @Html.TextBoxFor(model => model.ReferenceNo3, new { @class = "refedashedinput", @placeholder = "", maxlength = "1" })
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Enter <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        
+        $('.refedashedinput').bind('keyup', function (event) {
+
+            if (event.keyCode == 8) {
+
+                $(this).prev().focus();
+                return;
+            }
+
+            if ($(this).val() == "") {
+
+
+            } else {
+
+                $(this).next().focus();
+
+            }
+
+
+        });
+
+
+
+
+
+
+    </script>
+}

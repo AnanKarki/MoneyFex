@@ -1,0 +1,203 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+    string sURL = @baseUrl + "/SenderTransferMoneyNow/RecentTransfersSendAgain?id=" + ViewBag.TransactionId + "&transactionServiceType=" + ViewBag.TransactionServiceType;
+}
+
+
+@*<table>
+
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/payment-pending.png" width="100%"></td>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b>  @ViewBag.SenderFristName </b>,</h1>
+                <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    The payment for the following transfer is pending.
+                    <br>
+                    <br>Pay now to enjoy today's exchange rate
+                </h1>
+        </tr>
+        <tr>
+
+            <td></td>
+            <td>
+                <h3>Below are the full details of your transaction:</h3>
+
+                <p style="line-height: 30px; color: #02b6ff;  font-weight: 600; font-size: 18px;">
+                    Transaction number: @ViewBag.TransactionNumber<br>
+                    Exchange rate:  @ViewBag.SendingCurrency 1 = @ViewBag.ExchangeRate  @ViewBag.Receivingurrency <br>
+                    Sending amount:  @ViewBag.SendingCurrency  @ViewBag.SendingAmount to @ViewBag.Receivingcountry<br>
+                    Fee:  @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                    Recipient name: @ViewBag.ReceiverName <br>
+
+                    @switch (ViewBag.TransactionServiceType)
+                    {
+                        case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                            <span>
+                                Bank Name: @ViewBag.BankName<br>
+                                Bank account: @ViewBag.BankAccount<br>
+                                Sort code / Routing number: @ViewBag.BankCode
+
+                            </span>
+                            break;
+                        case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                            <span>
+                                Wallet Provider : @ViewBag.WalletName<br>
+                                Mobile No : @ViewBag.MobileNo<br>
+                            </span>
+                            break;
+                        case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                            <span>
+                                MFCN: @ViewBag.MFCN<br>
+
+                            </span>
+                            break;
+                    }
+
+                </p>
+                <br />
+                <br />
+                <a style="
+                        background: #02b6ff;
+    color: #fff;
+    border: 0;
+    font-size: 25px;
+    padding: 15px 80px;
+    border-radius: 30px;
+    box-shadow: 0px 8px 10px #cecece;
+    cursor: pointer;
+    text-decoration:none
+    " href="@sURL">
+                    Pay Now
+                </a>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td colspan="2">
+
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    Thank you
+
+
+                    <br><br>  The MoneyFex Team
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>*@
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/payment-pending.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFristName, </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                The payment for the following transfer is pending.
+                                <br><br>
+                                Pay now to enjoy today's exchange rate
+                            </h1>
+                            <h1 style="font-size: 18px; color:#333; line-height: 10px; margin-top: 20px;">   Below are the full details of your transaction:</h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                Transaction number: @ViewBag.TransactionNumber<br>
+                                Exchange rate:  @ViewBag.SendingCurrency 1 = @ViewBag.ExchangeRate  @ViewBag.Receivingurrency <br>
+                                Sending amount:  @ViewBag.SendingCurrency  @ViewBag.SendingAmount to @ViewBag.Receivingcountry<br>
+                                Fee:  @ViewBag.SendingCurrency @ViewBag.Fee<br>
+                                Recipient name: @ViewBag.ReceiverName <br>
+
+                                @switch (ViewBag.TransactionServiceType)
+                                {
+                                    case FAXER.PORTAL.Models.TransactionServiceType.BankDeposit:
+                                        <span>
+                                            Bank Name: @ViewBag.BankName<br>
+                                            Bank account: @ViewBag.BankAccount<br>
+                                            Sort code/Routing number: @ViewBag.BankCode
+
+                                        </span>
+                                        break;
+                                    case FAXER.PORTAL.Models.TransactionServiceType.MobileWallet:
+                                        <span>
+                                            Wallet Provider : @ViewBag.WalletName<br>
+                                            Mobile No : @ViewBag.MobileNo<br>
+                                        </span>
+                                        break;
+                                    case FAXER.PORTAL.Models.TransactionServiceType.CashPickUp:
+                                        <span>
+                                            MFCN: @ViewBag.MFCN<br>
+
+                                        </span>
+                                        break;
+                                }
+
+                            </h1>
+                            <a style="
+                       background: #02b6ff;
+                       margin-top: 15px;
+                        color: #fff;
+                        border: 0;
+                        outline: 0;
+                        padding: 10px 50px;
+                        text-align: center;
+                        border-radius: 8px;
+                        font-size: 25px;
+                        cursor: pointer;
+                        " href="@sURL">
+                                Pay Now
+                            </a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                Thank You<br>
+                                <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                            </h1>
+                        </td>
+                    </tr>
+
+
+
+
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+</table>

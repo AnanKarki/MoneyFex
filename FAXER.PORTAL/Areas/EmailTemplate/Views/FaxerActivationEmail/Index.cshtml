@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+    </p>
+    <p>
+        Thank you for opening a money transfer account with MoneyFex, 
+        before we can activate your account,
+        there is one last step you will need to take to complete your registration.
+    </p>
+    <p>
+        To complete your registration, please click or visit this URL:<br />
+        <u><a href="@ViewBag.link">@ViewBag.link</a></u>
+
+    </p>
+    <br />
+    <p>
+        **** Does The Above URL Not Work? **** <br />
+        If you are still having problems signing up, please contact customer service using the following email address customerservice@moneyfex.com
+    </p>
+    <br />
+    
+</div>

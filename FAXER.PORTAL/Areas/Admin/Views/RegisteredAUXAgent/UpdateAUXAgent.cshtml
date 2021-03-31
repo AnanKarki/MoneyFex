@@ -1,0 +1,114 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.RegisteredAUXAgentViewModel
+@{
+    ViewBag.Title = "UpdateAUXAgent";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+                    <div class="page-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="card">
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Update Aux Agent Status</h4>
+                                        <a href="@Url.Action("Index","RegisteredAUXAgent")" class="btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+                                    @Html.HiddenFor(x => x.Id)
+                                    @Html.HiddenFor(x => x.CountryCode)
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.TextBoxFor(x => x.Country, new { @class = "form-control  form-control-lg form-control-round ", @readonly = "readonly" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Agent Name</label>
+                                                    @Html.TextBoxFor(x => x.AgentName, new { @class = "form-control  form-control-lg form-control-round " })
+                                                    @Html.ValidationMessageFor(x => x.AgentName, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Account No</label>
+                                                    @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round ", @readonly = "readonly" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Business Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TypeOfBusiness, new { @class = "form-control form-control-lg form-control-round ", @placeholder = "select Business Type", @id = "TypeOfBusiness" })
+                                                    @Html.ValidationMessageFor(x => x.TypeOfBusiness, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Mobile Number</label>
+                                                    <div class="input-group input-group-round input-group-lg">
+                                                        <span class="input-group-addon" id="CountryPhoneCodeSpan">@ViewBag.CountryPhoneCode </span>
+                                                        @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Mobile Number ", @autocomplete = "off" })
+                                                    </div>
+                                                    @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control  form-control-lg form-control-round " })
+                                                    @Html.ValidationMessageFor(x => x.Email, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Status</label>
+                                                    <select name="AgentStatus" id="AgentStatus" class="form-control  form-control-lg form-control-round ">
+                                                        <option value="0"> Active</option>
+                                                        <option value="1"> In active</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+
+                                            <!--  -->
+                                            <!--  -->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","RegisteredAUXAgent")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        getAgentStatus();
+        function getAgentStatus() {
+            if ("@Model.AgentStatus" == "@FAXER.PORTAL.DB.AgentStatus.Active") {
+            $("#AgentStatus").val(0);
+        }
+        if ("@Model.AgentStatus" == "@FAXER.PORTAL.DB.AgentStatus.Inactive") {
+            $("#AgentStatus").val(1);
+            }
+        }
+    </script>
+
+}
+
+
+

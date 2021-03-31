@@ -1,0 +1,73 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.RegisteredAUXAgentViewModel
+@{
+    ViewBag.Title = "AuxAgentContactPersonDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Registered AUX Agent Contact Details</h4>
+                                    <a href="@Url.Action("Index", "AUXAgentDashBoard")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>Contact person</th>
+                                                    <th>Date of Birth</th>
+                                                    <th>Gender</th>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Address</th>
+                                                    <th>Email Address</th>
+                                                    <th>Telephone</th>
+                                                    <th>Email</th>
+                                                    <th>Registration Date/ Time</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+                                                    <td>@Model.AgentName</td>
+                                                    <td>@Model.DOB</td>
+                                                    <td>@Model.Gender</td>
+                                                    <td>@Model.Country</td>
+                                                    <td>@Model.City</td>
+                                                    <td>@Model.Address</td>
+                                                    <td>@Model.Email</td>
+                                                    <td>@Model.Telephone</td>
+                                                    <td>@Model.Email</td>
+                                                    <td>@Model.Date</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

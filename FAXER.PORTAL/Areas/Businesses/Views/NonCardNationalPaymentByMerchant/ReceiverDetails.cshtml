@@ -1,0 +1,206 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.ReceiverDetailsViewModel
+@{
+    ViewBag.Title = "ReceiverDetails";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+    string CountryPhoneCode = "";
+    if (Model != null)
+    {
+
+        CountryPhoneCode = Model.CountryPhoneCode ?? "";
+    }
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Start Sending </h1>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+
+                    <h4>Receiver's Details</h4>
+                    <hr>
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Previous Receivers </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            @Html.DropDownListFor(model => model.PreviousReceivers, (IEnumerable<SelectListItem>)ViewBag.PreviousReceiver, "Select Previous Receiver", new { @class = "form-control", @onchange = "getReciverDetails(this.value);" })
+                            @Html.ValidationMessageFor(model => model.PreviousReceivers, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>First Name </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverFirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReceiverFirstName, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Middle Name </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverMiddleName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReceiverMiddleName, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Last Name </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverLastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReceiverLastName, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>City </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverCity, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReceiverCity, "", new { @class = "text-danger" })
+
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Country </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverCountry, new { @class = "form-control", @readonly = "readonly" })
+                            @*@Html.DropDownListFor(model => model.ReceiverCountry , (IEnumerable<SelectListItem>) ViewBag.Countries , "Select Receiver Country" , new { @class="form-control"})*@
+                            @Html.ValidationMessageFor(model => model.ReceiverCountry, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Phone Number </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <div class="input-group">
+                                @Html.HiddenFor(model => model.CountryPhoneCode)
+                                <span class="input-group-addon">@CountryPhoneCode</span>
+                                @Html.TextBoxFor(model => model.ReceiverPhoneNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.ReceiverPhoneNumber, "", new { @class = "tex-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Email </label>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ReceiverEmailAddress, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ReceiverEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Reason for the transfer </label>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <select class="form-control" name="type_val[]" id="type_val" onchange="openPopup()">
+                                <option>--Select Reason--</option>
+                                <option value="1">For Education</option>
+                                <option value="2">To Pay for Services </option>
+                                <option value="2">For Charity Donation</option>
+                                <option value="3">For an Investment </option>
+                                <option value="4">For Family Support</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("Index" , "NoCardPaymentByMerchant")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("Index" , "NoCardPaymentByMerchant")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<!--  -->
+
+<script>
+    function getReciverDetails(val) {
+        window.location.href = "/Businesses/NonCardNationalPaymentByMerchant/ReceiverDetails?id=" + val;
+    }
+</script>

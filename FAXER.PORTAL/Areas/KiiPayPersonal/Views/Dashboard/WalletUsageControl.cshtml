@@ -1,0 +1,76 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.WalletUsageControlViewModel
+@{
+    ViewBag.Title = "WalletUsageControl";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2" style="height: 500px;">
+
+                <!--  -->
+                <div class="dashboard_body">
+
+                    <div class=" clearfix">
+                        <h3>Wallet Usage Control</h3>
+                        <hr>
+                        <div class="table-responsiv">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th colspan="2"> Withdrawal</th>
+                                        <th colspan="2">Purchase</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <!--  -->
+                                    <tr>
+                                        <td><b>Amount</b></td>
+
+                                        <td><b>Type</b></td>
+                                        <!--  -->
+                                        <td><b>Amount</b></td>
+
+                                        <td><b>Type</b></td>
+
+                                    </tr>
+
+                                    <tr>
+                                        <td>@Model.WithdrawalAmount</td>
+                                        <td>@Model.WithdrawalType</td>
+                                        <td>@Model.PurchaseAmount</td>
+                                        <td>@Model.PurchaseType</td>
+                                    </tr>
+                                </tbody>
+
+
+
+
+                            </table>
+                        </div>
+
+                        <!-- back btn -->
+                        <div class="clearfix">
+                            <hr>
+                            <center>
+                                <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+
+                </div>
+                <!--  -->
+                
+
+            </div>
+        </div>
+    </div>
+    <!--  -->
+   
+    <!--  -->
+</section>

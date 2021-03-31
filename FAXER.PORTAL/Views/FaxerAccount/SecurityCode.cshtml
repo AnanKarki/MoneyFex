@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "SecurityCode";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+
+                <h1>Password Reset</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form pattern1">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup">
+                    <div class=" ">
+                        <h4>To reset your password, you must enter the one time security code sent to your registered email address by the security team at MoneyFex Services</h4>
+
+                    </div>
+                    <hr>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                <input type="number" name="code" class="form-control" placeholder=" Enter one time Security Code">
+                                @Html.ValidationMessage("Error", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+                        <div class="col-lg-12 ">
+                            <input type="submit" class="btn btn-primary  btn-sm" value="Proceed to Password Reset >" />
+                        </div>
+                        <!--  -->
+
+
+
+                        <div class="clearfix"></div>
+
+                    }
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->

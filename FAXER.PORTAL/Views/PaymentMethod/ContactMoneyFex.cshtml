@@ -1,0 +1,126 @@
+﻿
+@model FAXER.PORTAL.Models.ContactMoneyFexViewModel
+@{
+    ViewBag.Title = "ContactMoneyFex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Top-up payment using Bank-to-Bank payment </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <h4>Email</h4>
+                    <hr>
+
+                    <div class=" ">
+                        <div class="login_signup">
+
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3">
+                                <label>To</label>
+                            </div>
+
+                            <div class="col-lg-8 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.MoneyFexEmail, new { @class = "form-control", @placeholder = "noncardfex@moneyfex.com" , @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.MoneyFexEmail, "", new { @class = "text-danger" })
+                                    @*<input type="text" name="" class="form-control" placeholder="noncardfax@moneyfaxservice.com">*@
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3">
+                                <label>Subject</label>
+                            </div>
+
+                            <div class="col-lg-8 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "Bank transfer MoneyFes" ,@readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                                    @*<input type="text" name="" class="form-control" placeholder="Bank transfer MoneyFaxed">*@
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-3">
+                                <label>Top-Up Card No.</label>
+                            </div>
+
+                            <div class="col-lg-8 ">
+                                <div class="form-group">
+
+                                    @Html.TextBoxFor(model => model.MFTCCardNumber, new { @class = "form-control", @placeholder = "MFTC Card Number", @readonly = "readonly" })
+                                    @Html.ValidationMessageFor(model => model.MFTCCardNumber, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+
+
+                            <div class="col-lg-12 ">
+                                <div class="form-group">
+                                    @Html.Label("Reference your payment as follows:")
+                                    @Html.TextAreaFor(model => model.PaymentRefernce, new { @class = "form-control", @placeholder = "Your Family/Surname, sending amount-MF (e.g. Ugiekum 100-MF)", @rows = "5" })
+                                    @Html.ValidationMessageFor(model => model.PaymentRefernce, "", new { @class = "text-danger" })
+                                    @*<textarea class="form-control" name=""  placeholder="Enter Bank Payment Reference" rows="5"></textarea>*@
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="/PaymentMethod/MFTCTopUpUsingBankToBankPaymentMethod" class="fbtn btn-back   hidden-xs hidden-sm"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next">Send Email Now<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewBag.Title = "MerchantDetails";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Pay for goods & services abroad</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>Merchant's Details</h3>
+                <hr>
+                <form>
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Name of Merchant </label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <input type="text" name="" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>MoneyFex Account Number  </label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <input type="text" name="" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Registered City </label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <input type="text" name="" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Registered Country </label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+                            <input type="text" name="" class="form-control" placeholder="">
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-12">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name=" " value=" ">I confirm that this is the merchant i wish to make payment to and have contacted the merchant and agree on the exact amount.
+                            </label>
+                        </div>
+                    </div>
+                    <!--  -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@Url.Action("MerchantAccountNumberAfterLogin")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <a href="@Url.Action("MerchantAmount")" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href="merchant-account-number.php" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

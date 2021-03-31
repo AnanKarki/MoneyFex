@@ -1,0 +1,226 @@
+﻿@model FAXER.PORTAL.Controllers.CalculateFaxingFeeVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    var FaxingCurrencySymbol = "";
+    var FaxingCurrency = "";
+    var ReceivingCurrency = "";
+    var ReceivingCurrencySymbol = "";
+    string ExchangeRate = "";
+    if (Model != null)
+    {
+        FaxingCurrencySymbol = Model.SendingCurrencySymbol ?? "";
+        FaxingCurrency = Model.SendingCurrency ?? "";
+        ReceivingCurrency = Model.ReceivingCurrency ?? "";
+        ReceivingCurrencySymbol = Model.ReceivingCurrencySymbol ?? "";
+        ExchangeRate = Model.ExchangeRate.ToString() ?? "" ;
+    }
+}
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:14%">
+
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Calculate Sending fees</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <!--  -->
+
+                    @Html.HiddenFor(model => model.SendingCurrency)
+                    @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                    @Html.HiddenFor(model => model.ReceivingCurrency)
+                    @Html.HiddenFor(model => model.ReceivingCurrencySymbol)
+                    <div class="col-lg-5">
+                        <label> Enter Amount  </label>
+                    </div>
+
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.TopUpAmount, new { htmlAttributes = new { @id = "topUpAmount", type="number" , @class = "form-control", @placeholder = "Sender's Currency", @onchange = "getDetails(this.val);" } })
+
+                            <span class="input-group-addon">@FaxingCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessage("Error", new { @class = "text-danger" })
+
+                    </div>
+
+                    <div class="clearfix"><br></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Fees</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.TopUpFees, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+
+                            <span class="input-group-addon">@FaxingCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.TopUpFees, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="clearfix"><br></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Total Amount including Fee</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@FaxingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.TotalAmountIncludingFees, new { htmlAttributes = new { @class = "form-control", @readonly = true } })
+
+                            <span class="input-group-addon">@FaxingCurrency</span>
+                        </div>
+
+                        @Html.ValidationMessageFor(model => model.TotalAmountIncludingFees, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="clearfix"><br></div>
+                    <div class="col-lg-5">
+                        <label>Current Exchange Rate</label>
+                    </div>
+                    <div class="col-lg-6 ">
+                        <div class="form-group">
+
+                            @Html.TextBoxFor(model => model.ExchangeRate, new { @class = "form-control", @readonly = true , @value = "@ExchangeRate"   })
+
+                            @Html.ValidationMessageFor(model => model.ExchangeRate, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-5">
+                        <label>Amount to be available on <br>Reciever Account</label>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <div class="input-group">
+                            <span class="input-group-addon">@ReceivingCurrencySymbol</span>
+                            @Html.EditorFor(model => model.ReceivingAmount, new { htmlAttributes = new { @class = "form-control", @readonly = true, @placeholder = "Receiver's Currency" } })
+
+                            <span class="input-group-addon">@ReceivingCurrency</span>
+
+                        </div>
+                        @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <!--  -->
+
+                    <div class="col-lg-7">
+                        @if (ViewBag.ExchangeRate != null)
+                        {
+                            <label style="color:red">@ViewBag.ExchangeRate </label>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="@Url.Action("Index", "StartFaxingMoney")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    @*<a href="@Url.Action("Index","PaymentMethod")" class="fbtn btn-next">Proceed to payment  <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Next<i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href="@Url.Action("Index", "StartFaxingMoney")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal" id="AlertPopUp" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display:none">
+    <div class="modal-dialog" >
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>MoneyFex</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            You are about to make a transfer of over  1000 .<br />
+                            To comply with anti-money laundering regulations, MoneyFex is required by law to ask for a copy of
+                            "your Photo Identification Document (ID).<br />
+                            Please upload a copy of your ID to proceed with this Transaction
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a data-toggle="modal" data-target="#UploadIdentificationDocument" class="btn btn-primary btn-sm">Upload Identification Document</a>
+                <button type="button" class="btn btn-danger btn-sm" onclick="CloseModal()">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+    function getDetails(val) {
+        //debugger;
+        //var x = document.getElementsByTagName("form");
+        //x[0].submit();// Form submission
+        var topUpAmount = $("#topUpAmount").val();
+        var receivingCountryCode ="@ViewBag.ReceivingCountryCode";
+        window.location.href = "/CalculateFaxingFees/Index?TopUpAmount=" + topUpAmount + "&ReceivingCountryCode=" + receivingCountryCode;
+    }
+
+
+     function CloseModal() {
+
+
+            $("#AlertPopUp").hide("modal");
+        }
+        var val = "@ViewBag.ToUrl";
+        if (val == undefined || val == "") {
+
+        } else {
+
+            $("#AlertPopUp").show("modal");
+
+        }
+    </script>
+
+}

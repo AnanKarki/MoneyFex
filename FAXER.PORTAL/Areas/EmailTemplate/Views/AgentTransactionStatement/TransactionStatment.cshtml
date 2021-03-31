@@ -1,0 +1,188 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.DailyTransactionStatementViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>MoneyFex</title>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+
+        p {
+            margin: 0 0 6px;
+            line-height: 23px;
+        }
+
+        table img {
+            max-width: 100%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body style="font-family: 'Poppins', sans-serif; font-weight: 300;">
+
+    <div style="margin: 0 auto;
+      max-width: 90%;
+       width: 100%;
+      border: solid 1px #eee;">
+
+        <div style="   border-bottom: solid 1px #eee;
+        border-top: solid 1px #eee;
+        padding: 10px 15px;
+        margin-bottom: 0px;">
+            <div style="float: left;">
+                <img src="/Areas/Agent/Content/Images/logo.png" width="200">
+            </div>
+            <div style="float: right;">
+
+
+            </div>
+            <div style="clear:both ;">
+
+            </div>
+        </div>
+        <br>
+        <!--  -->
+        <div class="dynamic_bg_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h2 style="text-align:center"> Agent Daily Transaction Statement     </h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+
+        <div class="real_form">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8  ">
+                        <br><br><br><br>
+                        <h4>Reference Number :   <span id="refNo">@Model.ReferenceNumber</span></h4>
+                        @Html.HiddenFor(x => x.ReferenceNumber)
+                    </div>
+
+
+                    <div class="col-lg-4 pull-right mb40   ">
+                        <div class="cardbody" style="text-align:right">
+
+                            <h3 class="text-primary  ">@ViewBag.AgentName</h3>
+                            <i class="fa fa-map-mark"></i> @ViewBag.Address1 , @ViewBag.Address2
+                            <br>
+                            <i class="fa fa-phone"></i>  @ViewBag.PhoneNo<br>
+                            <i class="fa fa-envelope"></i>  <a href="mailto:@ViewBag.Email">@ViewBag.Email</a><br>
+                            @*<i class="fa fa-globe"></i> <a href="http://@ViewBag.Website" target="_blank"> @ViewBag.Website</a><br>*@
+                            MoneyFex Account No.   @ViewBag.AccountNo
+
+                        </div>
+                    </div>
+
+                    <div class="col-lg-12">
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <div class="row mb40">
+                            <!--  -->
+                            <label>Day : @ViewBag.Day</label><br />
+                            <label>Month : @ViewBag.Month </label><br />
+                            <label>Year : @ViewBag.Year</label><br />
+                            <label>Transaction Type : @ViewBag.TransactionTypeName </label><br />
+
+                            <h4 style="text-align:right">  <span class="pull-right account-balance">Account Balance :<strong class="  text-primary italic"> @Model.AgentCurrencySymbol@Model.AccountBalance</strong></span></h4>
+
+                            <div class="mb30 ">
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+                            <div class="table-responsive" style="padding:0px">
+
+                                <table width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>SN</th>
+                                            <th>Method </th>
+                                            <th>Type </th>
+                                            <th>Amount</th>
+                                            <th>Fee</th>
+                                            <th>Commission</th>
+                                            <th>Identifier</th>
+                                            <th>Date & Time</th>
+                                            <th>Staff Name</th>
+
+                                        </tr>
+                                    </thead>
+
+
+
+                                    <tbody>
+
+
+                                        <!--  -->
+
+
+                                        @{ int i = 0;}
+                                        @foreach (var item in Model.TransactionList)
+                                        {
+                                            i++;
+                                            <tr>
+
+                                                <td>@i</td>
+                                                <td>@item.TransactionTypeName</td>
+                                                <td>@item.Type </td>
+                                                <td>@item.CurrencySymbol@item.Amount</td>
+                                                <td>@item.CurrencySymbol@item.Fee</td>
+                                                <td>@item.CurrencySymbol@item.AgentCommission</td>
+                                                <td>
+                                                    @item.TransactionIdentifier
+                                                </td>
+                                                <td>@item.FormatedDate</td>
+                                                <td>@item.StaffName</td>
+
+                                            </tr>
+                                        }
+
+                                    </tbody>
+
+
+
+
+
+
+                                </table>
+
+
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div style="    background: #f5f5f5;
+            padding:   15px;
+            margin-bottom: 0px;">
+
+
+            </div>
+        </div>
+
+</body>
+</html>

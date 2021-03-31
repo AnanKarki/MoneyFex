@@ -1,0 +1,526 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.NonCardFaxingRefundRequestViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+    string date = "---";
+    string time = "---";
+    if (Model != null)
+    {
+
+        DateTime DateTime = DateTime.Now;
+        date = DateTime.ToString("dd/MM/yyyy");
+        time = DateTime.ToString("HH:mm");
+
+    }
+}
+
+<h2>Index</h2>
+
+@if (ViewBag.Message == "Refund Request Completed !")
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Admin Form-Non Virtual Account Transfer Refund Request</h4>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Admin Form-Non Virtual Account Transfer Refund Request</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <form method="post">
+                        @Html.HiddenFor(model => model.AgentId)
+                        @Html.HiddenFor(model => model.FaxerId)
+                        @Html.HiddenFor(model => model.MFCNNumber)
+                        @Html.HiddenFor(model => model.StatusOfFaxName)
+                        @Html.HiddenFor(model => model.StatusOfFax)
+                        @Html.HiddenFor(model => model.FaxerCountryCode)
+                        @Html.HiddenFor(mdoel => Model.ReceiverCountryCode)
+                        @Html.HiddenFor(model => model.DateTime)
+                        @Html.HiddenFor(model => model.TransactionDate)
+                        <div class="col-lg-4 pull-right">
+                            <div class="input-group">
+                                <input type="text" id="MFCN" name="example-input1-group2" class="form-control  " placeholder="Search MFCN Number">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn waves-effect waves-light btn-info " onclick="GetAllDetails()"><i class="fa fa-search"></i></button>
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4 pull-in">
+                            @Html.ValidationMessage("InvalidMFCN", "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="clearfix"></div>
+                        <br>
+                        <!-- start -->
+                        <div class=" border_tbls">
+                            <div class="col-lg-8">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Sender's Details</h3>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            @Html.TextBoxFor(model => model.FaxerFirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Middle Name</label>
+                                            @Html.TextBoxFor(model => model.FaxerMiddleName, new { @class = "form-control", @placeholder = "Middle Name", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            @Html.TextBoxFor(model => model.FaxerLastName, new { @class = "form-control", @placeholder = "Family/Last Name", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Addres</label>
+                                            @Html.TextBoxFor(model => model.FaxerAddress, new { @class = "form-control", @placeholder = "Address", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>City</label>
+                                            @Html.TextBoxFor(model => model.FaxerCity, new { @class = "form-control", @placeholder = "City", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Country</label>
+                                            @Html.TextBoxFor(model => model.FaxerCountry, new { @class = "form-control", @placeholder = "Country", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Telephone</label>
+                                            @Html.TextBoxFor(model => model.FaxerTelephone, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Email</label>
+                                            @Html.TextBoxFor(model => model.FaxerEmail, new { @class = "form-control", @placeholder = "Email", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-3">
+                                <br><br>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Status of Transaction</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            @if (Model != null)
+                                            {
+                                                if (Model.StatusOfFaxName == "Received")
+                                                {
+                                                    <td style="background-color:#ffb3b3;">Received</td>
+                                                }
+                                                else if (Model.StatusOfFaxName == "NotReceived")
+                                                {
+                                                    <td style="background-color:#9fff80;">Not Received </td>
+                                                }
+                                                else if (Model.StatusOfFaxName == "Refund")
+                                                {
+                                                    <td style="background-color:#ffb3b3;">Refunded</td>
+                                                }
+                                                else if (Model.StatusOfFaxName == "Cancel")
+                                                {
+                                                    <td style="background-color:#9fff80;">Cancel</td>
+                                                }
+                                            }
+                                            @Html.ValidationMessageFor(model => model.StatusOfFaxName, "", new { @class = "text-danger" })
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <br>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <td>Date</td>
+                                            <td>Time</td>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>@date</td>
+                                            <td>@time</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>MFCN and Amount</h3>
+
+                                        <a href="@Url.Action("printReceipt","RefundsFormNonCardFaxingRefundRequest", new { @MFCN=Model.MFCNNumber})" target="_blank" class="btn btn-warning pull-right btn-sm ">Original PDF Sent Receipt</a>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+
+                                    <div class="col-lg-4">
+                                        <label class="col-lg-12 no-left-padding">Amount Sent</label>
+                                        <div class="col-lg-3 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                        </div>
+                                        <div class="col-lg-6 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingAmount, new { @class = "form-control", @placeholder = "Amount Sent", @readonly = "readonly", style = "font-weight:bold;" })
+                                        </div>
+                                        <div class="col-lg-3 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label class="col-lg-12 no-left-padding">Fee</label>
+                                        <div class="col-lg-3 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                        </div>
+                                        <div class="col-lg-6 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingFee, new { @class = "form-control", @placeholder = "Fee", @readonly = "readonly", style = "font-weight:bold;" })
+                                        </div>
+                                        <div class="col-lg-3 no-padding">
+                                            @Html.TextBoxFor(model => model.FaxingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <label>MFCN</label>
+                                        @Html.TextBoxFor(model => model.MFCNNumber, new { @class = "form-control", @placeholder = "MFCN", @id = "MFCNNo", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class=" border_tbls">
+                            <div class=" col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Receiver's Details</h3>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("First Name");
+                                        @Html.TextBoxFor(x => x.ReceiverFirstName, new { @class = "form-control", @placeholder = "First Name", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.FaxerLastName, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("Middle Name");
+                                        @Html.TextBoxFor(x => x.ReceiverMiddleName, new { @class = "form-control", @placeholder = "Middle Name", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.FaxerMiddleName, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("Family/Last Name");
+                                        @Html.TextBoxFor(x => x.ReceiverLastName, new { @class = "form-control", @placeholder = "Family/Last Name", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.ReceiverLastName, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-4">
+                                        @Html.Label("Email");
+                                        @Html.TextBoxFor(x => x.ReceiverEmailAddress, new { @class = "form-control", @placeholder = "Email", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.ReceiverEmailAddress, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("City");
+                                        @Html.TextBoxFor(x => x.ReceiverCity, new { @class = "form-control", @placeholder = "City", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.ReceiverCity, "", new { @class = "text-danger" })
+
+                                    </div>
+
+
+                                    <div class="col-lg-4">
+                                        @Html.Label("Receiver Country");
+                                        @Html.TextBoxFor(x => x.ReceiverCountry, new { @class = "form-control", @placeholder = "Receiver Country", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.ReceiverCountry, "", new { @class = "text-danger" })
+                                    </div>
+
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-4">
+                                        @Html.Label("Telephone")
+                                        @Html.TextBoxFor(x => x.ReceiverTelephone, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+                                        @Html.ValidationMessageFor(x => x.ReceiverTelephone, "", new { @class = "text-danger" })
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Reasons</h3>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        @Html.TextAreaFor(x => x.RefundReason, new { @class = "form-control", @placeholder = "Reason for refund request", id = "RefundReason" })
+                                        @Html.ValidationMessageFor(x => x.RefundReason, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Sending Agent</h3>
+
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Name of Agent</label>
+                                            @Html.TextBoxFor(model => model.NameOfAgency, new { @class = "form-control", @placeholder = "Name of Agent", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>MFS Code</label>
+                                            @Html.TextBoxFor(model => model.AgencyMFSCode, new { @class = "form-control", @placeholder = "MFS Code", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <br>
+                                    <div class="clearfix"></div>
+                                    <div class="col-lg-12">
+                                        <h3>Administrator</h3>
+
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>Name of Admin Refunder</label>
+                                            @Html.TextBoxFor(model => model.NameOfRefunder, new { @class = "form-control", @placeholder = "Name of Admin Refunder", id = "Refunder" })
+
+                                        </div>
+                                    </div>
+
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            <label>MFS Sent Receipt Number</label>
+                                            @Html.TextBoxFor(model => model.FaxReceiptNumber, new { @class = "form-control", @placeholder = "MFS Sent Receipt Number", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class=" border_tbls">
+
+                            <div class="col-lg-12">
+                                <div class="form-row ">
+                                    <div class="col-lg-12">
+                                        <h3>Confirmation</h3>
+                                        <p>Confirm Refund Request</p>
+                                    </div>
+
+
+                                    <div class="col-lg-1">
+                                        <div class="form-group">
+                                            <label>@Html.CheckBoxFor(model => model.YesConfirmed, new { @id = "Yes", onclick = "getYesChecked();" }) Yes</label>
+
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-lg-1">
+
+                                        <div class="form-group">
+
+                                            <label>@Html.CheckBoxFor(model => model.NoConfirmed, new { @id = "No", onclick = "getNoChecked();" }) No</label>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <div class="form-group">
+                                            @Html.ValidationMessageFor(model => model.YesConfirmed, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+
+
+                                    @Html.HiddenFor(model => model.OperatingUserType)
+
+
+
+
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+                        <!-- end -->
+                        <div class="col-lg-3 pull-right">
+                            <button type="submit" id="Submit" class="btn btn-block btn-lg btn-info btn-rounded">Submit Refund Request Now </button>
+                        </div>
+                        <div class="clearfix"></div>
+                    </form>
+                    <!--  -->
+                    <!--  -->
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        <div class="modal" id="fax-cancellation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>MoneyFex - Alert</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;font-size:100px"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                
+                                <h4>The Transaction is made through Agent so you will not be able to refund this transaction</h4>
+
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+@section scripts{
+
+    <script type="text/javascript">
+        function getYesChecked() {
+
+            $('#Yes').attr('checked', true); // Checks it
+            $('#No').attr('checked', false); // Unchecks it
+
+
+        }
+        function getNoChecked() {
+            $('#Yes').attr('checked', false); // Checks it
+            $('#No').attr('checked', true); // Unchecks it
+
+        }
+        function printReceipt() {
+            var MFCN = $("MFCNNo").val();
+            window.location.href = "/Admin/RefundsFormNonCardFaxingRefundRequest/printReceipt?MFCN=" + MFCN;
+        }
+        function GetAllDetails() {
+
+            var MFCN = $("#MFCN").val();
+            window.location.href = "/Admin/RefundsFormNonCardFaxingRefundRequest/Index?MFCN=" + MFCN;
+        }
+
+         @*var faxingStatus = "@Model.StatusOfFaxName" == "NotReceived";*@
+        var faxingStatus = false;
+        var Status = "@Model.StatusOfFaxName";
+        if (Status == "NotReceived") {
+
+            faxingStatus = true;
+        }
+        else if (Status == "Cancel") {
+            faxingStatus = true;
+        }
+
+        $('#RefundReason').prop('readonly', !faxingStatus);
+        $('.real_form select').prop("disabled", !faxingStatus);
+        $('#Refunder').prop('readonly', !faxingStatus);
+        $('#Submit').prop("disabled", !faxingStatus);
+
+        var OperatingUser = '@Model.OperatingUserType' == "Agent";
+        if (OperatingUser == true) {
+
+          
+            $('#RefundReason').prop('readonly', true);
+            $('.real_form select').prop("disabled", true);
+            $('#Refunder').prop('readonly', true);
+            $('#Submit').prop("disabled", true);
+            $("#fax-cancellation").modal("show");
+        }
+
+
+    </script>
+}

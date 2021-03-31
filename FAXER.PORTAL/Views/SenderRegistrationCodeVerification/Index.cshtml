@@ -1,0 +1,161 @@
+﻿@model FAXER.PORTAL.Models.RegistrationCodeVerificationViewModel
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    
+}
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+
+@*<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-center">
+
+
+                    <h3>Enter the verification Code </h3>
+                    <hr>
+                    <p>Please enter the verification code sent to the phone number ending in @PhoneNo or the email address provided.</p>
+                    <form method="post" accept-charset="utf-8">
+                        @Html.HiddenFor(model => model.Country)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.HiddenFor(model => model.Message)
+                        @Html.HiddenFor(model => model.RegistrationOf)
+                        @Html.HiddenFor(model => model.PhoneNo)
+                        <div class="pincode-input-container">
+
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text first input-lg" max="1">
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg" max="1">
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text last input-lg" max="1" id="previous">
+                            <div>-</div>
+
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text first input-lg" max="1" id="Next">
+
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg" max="1">
+
+                            <input type="text" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text last input-lg" max="1">
+                        </div>
+
+                        <div class="clearfix"><hr></div>
+                        @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })
+
+                        <p>Didn't receive code?   <button class="btn  btn-link" type="ResendCode('@Model.PhoneNo')"> Resend code</button> </p>
+
+                        <button type="submit" class="btn btn-primary radius-20">Login to your account  <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                        @Html.HiddenFor(model => model.VerificationCode, new { @id = "VerficationCode" })
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>*@
+
+
+
+<!--  -->
+<!--  -->
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-center">
+                    <h3>Enter the verification Code </h3>
+                    <hr>
+                    <p>Confirm your account with the code sent to your mobile number or email address</p>
+                  
+                    <form method="post" accept-charset="utf-8">
+                        @Html.HiddenFor(model => model.Country)
+                        @Html.HiddenFor(model => model.UserId)
+                        @Html.HiddenFor(model => model.Message)
+                        @Html.HiddenFor(model => model.RegistrationOf)
+                        @Html.HiddenFor(model => model.PhoneNo)
+                        <div class="pincode-input-container">
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text first input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <!-- <div>-</div> -->
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text mid input-lg">
+
+                            <input type="number" minlength="1" maxlength="1" autocomplete="off" class="form-control pincode-input-text last input-lg">
+                        </div>
+
+                        <div class="clearfix"><hr></div>
+                        @Html.ValidationMessage("ErrorMessage", new { @class = "text-danger" })
+
+                        <p>Didn't receive code?   <button type="button" class="btn  btn-link" onclick="ResendCode('@Model.PhoneNo')"> Resend code</button> </p>
+
+
+
+                        <button type="submit" class="btn btn-primary radius-20">Verify your account <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                        @Html.HiddenFor(model => model.VerificationCode, new { @id = "VerficationCode" })
+
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+
+
+<!--  -->
+<!--  -->
+@section Scripts{
+    <script type="text/javascript">
+
+
+        function ResendCode(PhoneNo) {
+            debugger;
+
+            window.location.href = "/SenderRegistrationCodeVerification/ReSendVerficationCode?PhoneNo=" + PhoneNo;
+            $.ajax()
+        }
+
+        var verificationCode = "";
+
+
+        $('.pincode-input-text').bind('keyup', function (event) {
+
+            if (event.keyCode == 8) {
+
+                $(this).prev().focus();
+                return;
+            }
+
+            if ($(this).val() == "") {
+
+
+            } else {
+
+                $(this).next().focus();
+                verificationCode = verificationCode + $(this).val();
+                $("#VerficationCode").val(verificationCode);
+                if ($(this)[0].id == "previous") {
+                    $("#Next").focus();
+                }
+            }
+
+
+        });
+
+        if ($(this).next().context == undefined) {
+
+
+
+        }
+    </script>
+}

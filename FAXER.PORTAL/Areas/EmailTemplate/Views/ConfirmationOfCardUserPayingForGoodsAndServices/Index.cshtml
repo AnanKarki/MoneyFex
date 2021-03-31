@@ -1,0 +1,21 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<body>
+
+    <p>
+        Dear @ViewBag.CardUserName,
+    </p>
+    <p>
+        Your  payment to  @ViewBag.BusinessMerchantName
+        has been successful, the receiver's MoneyFex Service account has been credited.
+    </p>
+    <p>
+        Please login to your MoneyFex service account and go to "myMoneyFex card Purchase Sheet" to see your statement of expenditure.
+    </p>
+    <br />
+   
+
+</body>

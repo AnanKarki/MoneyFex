@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+
+<div class="progress">
+    <div class="progress-bar  " role="progressbar" aria-valuenow="40"
+         aria-valuemin="0" aria-valuemax="100" style="width:7%">
+    </div>
+    <div class="arrow"></div>
+</div>
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Search for Someone else's Virtual Account</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm("MFTCCardAccountNo", "TopUpSomeoneElseMFTCCard", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control input-lg" name="MFTCCardNO" placeholder="Enter Someone else's Virtual Account No." id="MFTCCardNo" value="@ViewBag.MFTCCardNO">
+                            @if (TempData["MFTCCardNumber"] != null)
+                            {
+                                <label style="color:red">@TempData["MFTCCardNumber"]</label>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <input value="Next" class="fbtn btn-next" type="submit" />
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--  -->

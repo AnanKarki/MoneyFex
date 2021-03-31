@@ -1,0 +1,97 @@
+﻿
+@{
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+    <h4 style="text-align:center">Business Virtual Account Deposit Confirmation of Payment Receipt</h4>
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>Receipt Number</b></td>
+                <td><b>@ViewBag.ReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.Date</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.Time</b></td>
+            </tr>
+            <tr>
+                <td><b>Sender's Full Name</b></td>
+                <td><b>@ViewBag.FaxerFullName</b></td>
+            </tr>
+            <tr>
+                <td><b>Sender's Country</b></td>
+                <td><b>@ViewBag.FaxerCountry</b></td>
+            </tr>
+
+
+            <tr>
+                <td><b>Business Virtual Account No</b></td>
+                <td><b>@ViewBag.BusinessMFCode</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Business Name</b></td>
+                <td><b>@ViewBag.BusinessMerchantName</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Business Account Registered Country</b></td>
+                <td><b>@ViewBag.BusinessCountry</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Business Account Registered City</b></td>
+                <td><b>@ViewBag.BusinessCity</b></td>
+            </tr>
+            <tr>
+                <td><b>Deposit Type</b></td>
+                <td><b>@ViewBag.DepositType</b></td>
+            </tr>
+
+            @*<tr>
+                    <td><b>Staff Name</b></td>
+                    <td><b>@ViewBag.StaffName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Staff Code</b></td>
+                    <td><b>@ViewBag.StaffCode</b></td>
+                </tr>*@
+
+
+            <tr>
+                <td><b>Deposit Amount</b></td>
+                <td><b>@ViewBag.AmountPaid</b></td>
+            </tr>
+            <tr>
+                <td><b>Deposit Fees</b></td>
+                <td><b>@ViewBag.Fee</b></td>
+            </tr>
+            <tr>
+                <td><b>Exchange Rates</b></td>
+                <td><b>@ViewBag.ExchangeRate</b></td>
+            </tr>
+            <tr>
+                <td><b>Deposit Amount + Fees</b></td>
+                <td><b>@ViewBag.TotalAmount</b></td>
+            </tr>
+            <tr>
+                <td>
+                    <b>
+                        Amount deposited into virtual account
+                    </b>
+                </td>
+                <td><b>@ViewBag.AmountInLocalCurrency</b></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>

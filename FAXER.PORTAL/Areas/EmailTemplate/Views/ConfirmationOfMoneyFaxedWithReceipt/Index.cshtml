@@ -1,0 +1,65 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+        ,
+    </p>
+    <br />
+    <p>
+        You have successfully send Money to @ViewBag.ReceiverName, he/she can now collect the money from one of our paying agent in @ViewBag.ReceiverCity.
+    </p>
+    <p>
+        In addition to the receiver's national Identification Document (ID), he/she will need the following information to receive the money:
+    </p>
+    <br />
+    <p>
+        <strong>MoneyFex Control Number (MFCN): </strong> @ViewBag.MFCN<br />
+        <strong>Sent amount:</strong> @ViewBag.FaxAmount<br />
+        <strong>Sender's Full Name: </strong> @ViewBag.FaxerName<br />
+        <strong>Sender's Country:</strong> @ViewBag.FaxerCountry
+    </p>
+    <br />
+    <p>
+        Note that, government issued ID card, driving license and passport are the only acceptable forms of ID
+        You can use the MFCN to find the status of your tranfer by using the tracking feature of MoneyFex  Here
+    </p>
+    <p>
+        Why don't you try our MoneyFex Virtual Account service which is an easier and quicker way to send money abroad?
+    </p>
+    <p>
+        This bank-card-like shape which is securely sent as a physical and E-card by us to your money receiver (beneficiary) can be used to withdraw money from our agents and also pay for goods and services abroad once deposit by you.
+    </p>
+    <br />
+    <p>
+        MoneyFex Virtual Account offers "ABC" benefits to you as a sender:
+    </p>
+    <p>
+        -	Set up "automatic deposit" to ensure that money is always available when needed by receivers.<br />
+        -	Limit how much can be collected/withdrawn from the MoneyFex Virtual Account by the receiver at a given time.<br />
+        -	View card usage history and the possibility to transfer money between MoneyFex Virtual Accounts that are registered in the same country.<br />
+    </p>
+
+    <br />
+    <br />
+    <p>
+        Please find attached, a receipt to confirm your transaction.
+    </p>
+    <br />
+  
+
+    <table style="width:50%; margin-left:150px ">
+        <tbody>
+            <tr>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.RegisterMFTC"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/22.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

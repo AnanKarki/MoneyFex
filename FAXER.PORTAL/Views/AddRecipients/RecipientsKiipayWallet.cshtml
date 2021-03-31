@@ -1,0 +1,97 @@
+﻿@model FAXER.PORTAL.Models.SearchKiiPayWalletVM
+@{
+    ViewBag.Title = "RecipientsKiipayWallet";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <!--  -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    <div class="login_signup  clearfix text-center">
+                        <h3>KiPay Wallet </h3>
+                        <hr>
+                        <div class="form-group">
+                            <div class="col-lg-10 col-xs-8 text-left">
+                                <h3 class="mb0"> New recipient</h3>
+                                <p>Is this a Business ?</p>
+
+                            </div>
+                            <div class="col-lg-2 col-xs-4">
+                                <label class="switch">
+                                    <input type="checkbox" name="IsBusiness" Id="IsBusiness">
+                                    <span class="tgl round"></span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix mb10">
+
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue", @id = "CountryCode", @onchange = "GetCountryPhoneCode()" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <div class="form-group">
+                            @Html.TextBoxFor(x => x.ReceiverName, new { @class = "form-blue", @placeholder = "Recipient Full Name" })
+                            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group contact-no-group mb20">
+                            <div class="countr-code-lg">
+                                <span id="Phonecode"> @ViewBag.CountryPhoneCode</span>
+
+                            </div>
+                            @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-blue contact-no-lg", @placeholder = "Enter Mobile Number" })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+
+                        @if (Model.Id != 0)
+                        {
+                            <button type="submit" class="btn btn-primary btn-lg   ">Confirm and Update <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-primary btn-lg   ">Confirm and Add <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        }
+                        <div class="clearfix mb30"> </div>
+                        <a href="javascript:history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+
+    <script type="text/javascript">
+        function GetCountryPhoneCode() {
+            var CountryCode = $("#CountryCode").val();
+            $.getJSON("/AddRecipients/GetCountryPhoneCode?CountryCode=" + CountryCode, function (result) {
+
+                $("#Phonecode").text(result.CountryPhoneCode);
+            })
+
+        }
+    </script>
+}

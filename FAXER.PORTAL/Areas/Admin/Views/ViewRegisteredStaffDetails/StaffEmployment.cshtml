@@ -1,0 +1,131 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.StaffEmploymentViewModel
+@{
+    ViewBag.Title = "StaffEmployment";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>StaffEmployment</h2>
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Staff Employment</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="/Admin/ViewRegisteredStaffDetails" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View Registered Staff</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Staff Employment</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        
+                            <div class="form-body">
+
+
+
+
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Position</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(model => model.Position, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Position, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label> Salary</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.TextBoxFor(model => model.Salary, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.Salary, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label> Mode (F/PT)</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.EnumDropDownListFor(model => model.ModeOfJob,"Select Mode of Job", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ModeOfJob, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label> Date of Employment</label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.EditorFor(model => model.EmploymentDate, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.EmploymentDate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 control-label">
+                                    <label>Date of Leaving  </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+
+                                        @Html.EditorFor(model => model.DateOfLeaving, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                        @Html.ValidationMessageFor(model => model.DateOfLeaving, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                            </div>
+
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-4">
+                                <div class="form-actions text-center">
+                                    <button class="btn btn-success btn-lg btn-block btn-rounded">   Finish Account Setup  </button>
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

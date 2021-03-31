@@ -1,0 +1,190 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentFundAccountViewModel
+@{
+    ViewBag.Title = "SetFundAccount";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Fund Account </h4>
+                                        <a href="@Url.Action("Index","AUXAgentFundAccount")" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(model => model.Id)
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.AgentCountry, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "GetCitiesByCountry();" })
+                                                    @Html.ValidationMessageFor(x => x.AgentCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    @Html.DropDownListFor(x => x.City, (IEnumerable<SelectListItem>)ViewBag.City, "Select city", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "City", @onchange = "GetAgentByCountry();" })
+                                                    @Html.ValidationMessageFor(x => x.City, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Business</label>
+                                                    @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agent, "select Agent", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "AgentId", @onchange = "GetAgentAccount();" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Account No.</label>
+                                                    @Html.TextBoxFor(x => x.AgentAccountNo, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Enter Account No", @readonly = "readonly", @id = "AgentAccountNo" })
+                                                    @Html.ValidationMessageFor(x => x.AgentAccountNo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group ">
+                                                    <label>Amount</label>
+                                                    <div class="input-group">
+                                                        <div class="input-group-addon">GBP</div>
+                                                        @Html.TextBoxFor(x => x.Amount, new { @class = "form-control ", @placeholder = "Enter Amount " })
+                                                        @Html.ValidationMessageFor(x => x.Amount, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <p>Has the AUX agent credit this amount to MoneyFex's bank account?</p>
+
+                                                    <label class="radio-inline">
+
+                                                        @Html.RadioButtonFor(m => m.IsPaid, true, "true") Yes
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        @Html.RadioButtonFor(m => m.IsPaid, false, "false") No
+                                                    </label>
+
+                                                </div>
+
+                                                <!--  -->
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","AUXAgentFundAccount")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        $("#City").val('@ViewBag.selectedCity');
+
+        function GetCitiesByCountry() {
+
+            var Country = $("#Country").val();
+
+            $.getJSON("/Admin/AUXAgentFundAccount/GetCitiesByCountry?Country=" + Country, function (result) {
+                var cityselector = $("#City");
+                $("#City option").remove();
+                cityselector.append('<option value="0">Select City </option>');
+
+                for (var i = 0; i <= result.Cities.length; i++) {
+
+                    cityselector.append('<option value="' + result.Cities[i].City + '">' + result.Cities[i].City + '</option>');
+                }
+            })
+            search();
+        }
+
+        function GetAgentByCountry() {
+            $("#AgentAccountNo").val("");
+            $("#AgentId").val(0);
+            search();
+        }
+
+        function GetAgentAccount() {
+            var AgentId = $("#AgentId").val();
+            $.getJSON("/Admin/AdminCommon/GetAgentAccountNumber?agentId=" + AgentId, function (result) {
+                debugger;
+                if (result == null) {
+
+                    $("#AgentAccountNo").val("");
+                }
+                else {
+                    $("#AgentAccountNo").val(result.Data);
+                }
+            })
+        }
+
+
+
+        search();
+        function search() {
+            var data = {
+                id: $("#AgentId"),
+                country: $("#Country").val(),
+                Currecny: "",
+                isBusiness: false,
+                isAuxAgent: true,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "AgentId",
+                placeholder: "Select",
+                City: $("#City").val()
+            }
+            SelectSearch(data);
+        }
+
+    </script>
+}

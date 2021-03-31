@@ -1,0 +1,114 @@
+﻿
+@{
+    ViewBag.Title = "PrintOtherWalletStatement";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+
+    <h4 style="text-align:center"> Confirmation of Transfer Receipt</h4>
+
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>MF Receipt Number</b></td>
+                <td><b>@ViewBag.MFReceiptNumber</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Sender Name</b></td>
+                <td><b>@ViewBag.SenderFullName</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Email Address</b></td>
+                <td><b> @ViewBag.SenderEmail </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Telephone</b></td>
+                <td><b> @ViewBag.SenderTelephone </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Sender Date Of Birth</b></td>
+                <td><b> @ViewBag.SenderDOB </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Receiver Name </b></td>
+                <td><b>@ViewBag.ReceiverFullName</b></td>
+            </tr>
+
+
+            <tr>
+                <td><b> Telephone</b></td>
+                <td><b>@ViewBag.ReceiverTelephone</b></td>
+            </tr>
+
+            <tr>
+                <td><b> Agent Name</b></td>
+                <td><b>@ViewBag.AgentName </b></td>
+            </tr>
+
+            <tr>
+                <td><b> Agent Number</b></td>
+                <td><b> @ViewBag.AgentAcountNumber </b></td>
+            </tr>
+
+            <tr>
+                <td><b> Transaction Staff</b></td>
+                <td><b> @ViewBag.StaffName </b></td>
+            </tr>
+
+            <tr>
+                <td><b> ReceiverCountry </b></td>
+                <td><b> @ViewBag.ReceiverCountry </b></td>
+            </tr>
+
+            <tr>
+                <td><b>Sending Amount</b></td>
+                <td><b>@ViewBag.TotalAmount  </b></td>
+
+            </tr>
+
+            <tr>
+                <td><b>Fee</b></td>
+                <td><b>@ViewBag.Fee </b></td>
+
+            </tr>
+
+            <tr>
+                <td><b>Amount Paid</b></td>
+                <td><b>@ViewBag.SendingAmount </b></td>
+
+            </tr>
+            <tr>
+                <td><b>@ViewBag.ReceiverFirstName wil receive</b></td>
+                <td><b>@ViewBag.SendingAmount </b></td>
+
+            </tr>
+
+            <tr>
+                <td><b>Exchange Rate</b></td>
+                <td><b>1 @ViewBag.SendingCurrency  =  @ViewBag.ExchangeRate @ViewBag.SendingCurrency </b></td>
+
+            </tr>
+            <tr>
+                <td><b>Payment Method </b></td>
+                <td><b> @ViewBag.PaymentMethod</b></td>
+            </tr>
+
+            <tr>
+                <td><b> Date </b></td>
+                <td><b>@ViewBag.TransactionDate</b></td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+
+</div>

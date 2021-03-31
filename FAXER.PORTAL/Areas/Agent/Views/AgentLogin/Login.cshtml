@@ -1,0 +1,239 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentLoginViewModel
+@{
+    /**/
+
+    /**/
+
+    ViewBag.Title = "Login";
+    //Layout = "~/Areas/Agent/Views/Shared/_Layout_Agent.cshtml";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+}
+<!--  -->
+@*<div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    @*<h1>Login</h1>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup">
+                        <div class="text-center">
+                            <h4>Welcome to your MoneyFex Agent's Account</h4>
+
+                            @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+                            @*<p>Don't have an account  <a href="@Url.Action("SignUp")">Sign Up</a></p>*@
+                        </div>
+                        <hr>
+
+                        <!--  -->
+
+                        <input type="hidden" name="IsFirstLogin" value="@Model.IsFirstLogin" />
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", @type = "email", @placeholder = "Email Address" })
+                                @Html.ValidationMessage("Email", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <input type="hidden" id="TimeZone" name="TimeZone">
+                        <!--  -->
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.AgentCode, new { @class = "form-control", @placeholder = "Agent code", @id = "AgentCode", onchange = "ShowStaffCodediv()" })
+                                @Html.ValidationMessage("AgentCode", "", new { @class = "text-danger" })
+                                <span id="AgentCodeValidation"></span>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="col-lg-12" id="staffCode">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.StaffCode, new { @class = "form-control", @placeholder = "Staff Code" })
+                                @Html.ValidationMessage("StaffCode", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", id = "show_password", @placeholder = "Password", @style = "font-family: caption;" })
+                                    @Html.ValidationMessage("Password", "", new { @class = "text-danger" })
+                                    <div class="input-group-addon" id="passwoed_show" onclick="togglePassword();"><i class="fa fa-eye"></i></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-7 ">
+
+                                <a href="dashboard.php" class="fbtn btn-next">Login <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                                <button class="fbtn btn-next" type="submit">
+                                    Login <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>*@
+                        <!--  -->
+
+
+
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+                        <div class="text-center">
+
+
+                            <div class="col-lg-12 mb20 ">
+
+                                <button class="btn btn-primary radius-20" type="submit">
+                                    Login <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-12 mb20 ">
+                                <p>   <a href="@Url.Action("ForgotPassword")">Forgot Password</a></p>
+
+                            </div>
+
+                            <div class="or-border mb20">
+                                OR
+                            </div>
+                            <div class="col-lg-12 ">
+                                <a href="/Agent/AgentRegistration/BecomeAuxAgent">Sign Up</a>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    @*@if (ViewBag.Message != "")
+        {
+            <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">×</button>
+                            <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="icon_al">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4>@ViewBag.Message</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }*@
+
+    @if (ViewBag.TransactionStaffFirstLogin == 1)
+    {
+        <div class="modal" id="confirmpassword" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">This is your first login, please change your PASSWORD</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="control-label">New Password:</label>
+                            @Html.PasswordFor(model => model.NewPassword, new { @class = "form-control" })
+                            @Html.ValidationMessage("InCorrectPassword", null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">Confirm Password:</label>
+
+                            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+                            @Html.ValidationMessage("InvalidConfirmPassword", null, new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <b>Password Policy :</b> Password should contain atleast one upper case, one number, one special character and one lower case
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</form>
+
+@section Scripts{
+
+    <!--  -->
+    <script type="text/javascript">
+        function togglePassword() {
+            var x = document.getElementById("show_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        var d = new Date();
+        var n = d.getTimezoneOffset();
+        $("#TimeZone").val(n);
+
+        $("#onload").modal('show');
+        $("#confirmpassword").modal('show');
+        ShowStaffCodediv();
+        function ShowStaffCodediv() {
+            var agentCode = $("#AgentCode").val();
+
+            $.getJSON("/Agent/AgentLogin/IsAgentCodeValid?agentCode=" + agentCode, function (result) {
+
+                if (result.Data == true) {
+                    $("#staffCode").show();
+                }
+                else {
+
+                    $("#AgentCodeValidation").text(result.Message);
+                    $("#AgentCodeValidation").css('color', '#a94442');
+                    $("#staffCode").hide();
+                }
+            });
+
+        }
+
+    </script>
+}
+

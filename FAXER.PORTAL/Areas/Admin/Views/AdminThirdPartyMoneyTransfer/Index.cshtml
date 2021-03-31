@@ -1,0 +1,122 @@
+﻿@model List<FAXER.PORTAL.Areas.Agent.Models.ThirdPartyMoneyTransferListVM>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Third Party Money Transfer</h4>
+                                    <a href="@Url.Action("Index","AdminThirdPartyMoneyTransfer")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Submit Third Party Money Transfer
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6 offset-lg-3">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option value="">Select Month</option>
+                                                    <option>All</option>
+                                                    <option value="01">January</option>
+                                                    <option value="02">February</option>
+                                                    <option value="03">March</option>
+                                                    <option value="04">April</option>
+                                                    <option value="05">May</option>
+                                                    <option value="06">June</option>
+                                                    <option value="07">July</option>
+                                                    <option value="08">August</option>
+                                                    <option value="09">September</option>
+                                                    <option value="10">October</option>
+                                                    <option value="11">November</option>
+                                                    <option value="12">December</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control   form-control-round form-control-bold">
+                                                    <option>Select Year</option>
+                                                    <option>All</option>
+                                                    <option value="2018">2018</option>
+                                                    <option value="2017">2017</option>
+                                                    <option value="2016">2016</option>
+                                                    <option value="2015">2015</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sub Date</th>
+                                                    <th>Staff Name</th>
+                                                    <th>Staff ID</th>
+                                                    <th>Form Action</th>
+                                                    <th>Action Note</th>
+                                                    <th>Compliance ID</th>
+                                                    <th>Action Date</th>    
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.AgentAccountNo</td>
+                                                        <td>@item.SenderName</td>
+                                                        <td><a href="agent-staff-details.php">@item.AgentAccountNo</a></td>
+                                                        <td><span class="text-danger">@item.AgentName</span></td>
+                                                        <td align="center"><a href="" data-toggle="modal" data-target="#compliance-add-note"><i class="fa fa-plus"></i></a></td>
+                                                        <td><a href="">@item.AgentStaffLoginCode</a></td>
+
+                                                        <td>@item.Year</td>
+                                                    </tr>
+
+
+
+
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,151 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.AddNewBankAccountViewModel
+@{
+    /**/
+
+    ViewBag.Title = "AddNewBankAccount";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                <form method="post">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Add a New Account</h3>
+                        <hr>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group  ">
+                            @Html.TextBoxFor(model => model.NameOfAccountOwner, new { @placeholder = "Name of Account Owner", @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.NameOfAccountOwner, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group  ">
+                            @Html.TextBoxFor(model => model.AccountNumber, new { @placeholder = "Enter Account Number", @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.AccountNumber, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.BankId, (IEnumerable<SelectListItem>)ViewBag.Banks, "Select Bank Name", new { @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.BankId, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb30 ">
+                            @Html.TextBoxFor(model => model.Branchcode, new { @placeholder = "Enter Branch Code", @class = "form-blue", @type = "number" })
+                            @Html.ValidationMessageFor(model => model.Branchcode, "", new { @class = "text-danger" })
+                        </div>
+
+
+                        <div class="form-group mb20">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+                        <div class="form-group mb30">
+                            @*@Html.DropDownListFor(model => model.Branch, (IEnumerable<SelectListItem>)ViewBag.Branches, "Select Branch", new { @class = "form-blue" })*@
+                            @Html.DropDownListFor(model => model.Branch, new SelectList(new List<Object> { new { value = "0", text = "Red" }, new { value = "1", text = "Blue" }, new { value = "2", text = "Green" } }, "value", "text", Model.Branch))
+                            @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.Address, (IEnumerable<SelectListItem>)ViewBag.Addresses, "Select your Address", new { @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+
+                    </div>
+                </form>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <button type="button" class="btn btn-primary btn-lg  mb30 " onclick="sendVerification()"  >Confirm & Add <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+
+
+<!-- bank add confirmation -->
+<div id="BankAccountConfirmation" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Bank Account Confirmation</h4>
+            </div>
+            <div class="modal-body uk-text-center ">
+                <div class="form-group">
+                    <p class="mb0">Enter the code sent to your mobile number</p> <div class="clearfix"><br></div>
+                    <input type="number" class="form-control" placeholder="Enter code" id="verificationCode">
+                    <label id="validationCode" ></label>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="postPage()"  class="btn btn-primary btn-sm radius-20">Confirm</button>
+                <button type="button" class="btn btn-default btn-sm radius-20" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!-- bank add confirmation end -->
+@section Scripts{
+    <script type="text/javascript">
+        var code = '';
+        function sendVerification() {
+            $.getJSON("/KiiPayPersonal/PersonalKiiPayBankAccount/SendVerificationCode", function (data) {
+                if (data.result == true) {
+                    code = data.code;;
+                    $("#BankAccountConfirmation").modal('show');
+                    return;
+                }
+            });
+            return;
+        }
+
+        function postPage() {
+            var userCode = $("#verificationCode").val();
+            if (userCode == code) {
+                $("form").submit();
+            }
+            else {
+                $("#validationCode").text("Invalid Code !");
+                return;
+            }
+
+        };
+
+
+    </script>
+
+}

@@ -1,0 +1,120 @@
+﻿
+@model FAXER.PORTAL.Areas.Admin.ViewModels.NewReceiverTransactionStatement
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<br />
+<br />
+<br />
+
+<div>
+    <h3 style="color:blue">@ViewBag.ReceiverName </h3>
+
+    <h5><b>AccountNo: @ViewBag.ReceiverTelephoneNo</b> </h5>
+
+    <h5><b>Country:@ViewBag.ReceiverCountryName </b></h5>
+</div>
+<br />
+
+<div class="table-responsive ">
+
+    <table class="table table-bordered" cellspacing="0" width="300%">
+
+        <thead>
+
+            <tr>
+                <td colspan="13" class="text-center">
+                    Transaction Metre
+                </td>
+            </tr>
+            <tr>
+
+                <td><b>Month</b></td>
+                <td><b>Jan</b></td>
+                <td><b>Feb</b></td>
+                <td><b>March</b></td>
+                <td><b>April</b></td>
+                <td><b>May</b></td>
+                <td><b>June</b></td>
+                <td><b>July</b></td>
+                <td><b>Aug</b></td>
+                <td><b>Sep</b></td>
+                <td><b>Oct</b></td>
+                <td><b>Nov</b></td>
+                <td><b>Dec</b></td>
+            </tr>
+        </thead>
+        <tbody style="margin-bottom: 30px !important;">
+
+
+            <tr>
+                <td> Amount</td>
+                <td> @Model.Monthly.Jan   </td>
+                <td> @Model.Monthly.Feb   </td>
+                <td> @Model.Monthly.March </td>
+                <td> @Model.Monthly.April </td>
+                <td> @Model.Monthly.May   </td>
+                <td> @Model.Monthly.Jun   </td>
+                <td> @Model.Monthly.July  </td>
+                <td> @Model.Monthly.Aug   </td>
+                <td> @Model.Monthly.Sep   </td>
+                <td> @Model.Monthly.Oct   </td>
+                <td> @Model.Monthly.Nov   </td>
+                <td> @Model.Monthly.Dec   </td>
+
+            </tr>
+
+
+
+        </tbody>
+
+    </table>
+
+</div>
+<br />
+
+
+<div class="table-responsive">
+    <table class="table table-bordered" cellspacing="0" width="300%">
+        <thead>
+            <tr>
+                <th>#SN</th>
+                <th>Transaction ID</th>
+                <th>Sender</th>
+                <th>Date</th>
+                <th>Bank Wallet Number</th>
+                <th>Bank Wallet Name</th>
+                <th>Amount</th>
+                <th>Fee</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody style="margin-bottom: 30px !important;">
+
+            @{ int i = 0;}
+            @foreach (var item in Model.TransactionList)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@item.Identifier</td>
+                    <td>@item.SenderName</td>
+                    <td>@item.DateTime</td>
+                    <td>@item.BanKWalletNumber</td>
+                    <td>@item.BanKWalletName</td>
+                    <td>@item.ReceiverCountryCurrency @item.Amount</td>
+                    <td>@item.Fee</td>
+                    <td>@item.Status</td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+
+</div>
+

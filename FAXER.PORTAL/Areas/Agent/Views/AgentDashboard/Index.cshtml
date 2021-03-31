@@ -1,0 +1,759 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentDashBoardViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    string[] Commission = Model.Commission.ToString("0.00").Split('.');
+}
+
+
+@*<section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <!--  -->
+                    <div class=" dashboard_body">
+
+                        <div class=" clearfix ">
+
+                            <h3>
+                                Dashboard
+                                @if (FAXER.PORTAL.Common.AgentSession.AgentStaffLogin.AgentStaff.AgentStaffType == FAXER.PORTAL.Areas.Agent.Models.StaffType.Admin)
+                                {
+                                    <span class="pull-right">
+                                        <a href="@Url.Action("Index","CashWithdrawal")" class="btn btn-sm btn-primary ">cash withdrawal</a>
+                                        <a href="@Url.Action("DailyTransactionStatement")" class="btn btn-sm btn-primary ">Daily Transaction Statement</a>
+                                        <a href="@Url.Action("Index","BankAccountCreditUpdate")" class="btn btn-sm btn-primary ">MoneyFex Account Credit</a>
+                                    </span>
+                                }
+                            </h3>
+                            <hr>
+                            <div class="mobile_design text-center">
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","CalculateHowMuch")">
+                                            <div class="das-icon">
+
+                                                <img src="~/Areas/Agent/images/icon/1.png" />
+                                            </div>
+                                            <h4>Calculate how much</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","PayAReceiver")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/images/icon/svg/withdraw-money-from-wallet.svg">
+                                            </div>
+                                            <h4>Pay a Receiver</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","TransferMoney")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/images/icon/svg/transfermoney.svg">
+                                            </div>
+                                            <h4>Transfer money</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","UpdateFaxingInformation")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/images/icon/4.png">
+                                            </div>
+                                            <h4>Update Money Transfer Information</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","RefundRequest")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/images/icon/5.png">
+                                            </div>
+                                            <h4>Refund a Transfer</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                @if (FAXER.PORTAL.Common.AgentSession.AgentStaffLogin.AgentStaff.AgentStaffType == FAXER.PORTAL.Areas.Agent.Models.StaffType.Admin)
+                                {
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "MoneyFaxedByAgent", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/6.png">
+                                                </div>
+                                                <h4>Money Transfered & Deposited by my Agent</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "MFTCPaymentsByMyAgent", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/7.png">
+                                                </div>
+                                                <h4>E-Card Payments by my Agent</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "NonNFTCPaymentsByMyAgent", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/8.png">
+                                                </div>
+                                                <h4>Cash to Cash Payments by my Agent </h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "MFBCPaymentsByAgent", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/9.png">
+                                                </div>
+                                                <h4>Business Card User Payments by my Agent</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("RefundPaidByAgent", "RefundPaidByAgent", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/10.png">
+                                                </div>
+                                                <h4>Refunds Paid by my Agent</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "AgentCommision", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/images/icon/11.png">
+                                                </div>
+                                                <h4>My Commission</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    @*<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                            <div class="dashboard_thumb">
+                                                <a href="">
+                                                    <div class="das-icon">
+                                                        <img src="~/Areas/Agent/images/icon/12.png">
+                                                    </div>
+                                                    <h4>Service Under Developement</h4>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "AgentSystemUser", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="/images/icon/12.png">
+                                                </div>
+                                                <h4>Agent System Users</h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                }
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index" , "AgentForms" )">
+                                            <div class="das-icon">
+                                                <img src="/images/icon/13.png">
+                                            </div>
+                                            <h4>Forms</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="">
+                                            <div class="das-icon">
+                                                <img src="/images/icon/14.png">
+                                            </div>
+                                            <h4>Under Development</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="">
+                                            <div class="das-icon">
+                                                <img src="/images/icon/14.png">
+                                            </div>
+                                            <h4>Under Development</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="">
+                                            <div class="das-icon">
+                                                <img src="/images/icon/14.png">
+                                            </div>
+                                            <h4>Under Development</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+
+                            <input type="hidden" name="AlertPhoto" id="AlertPhoto" />
+
+                            <input type="hidden" name="AlertHeading" id="AlertHeading" />
+
+                            <input type="hidden" name="AlertFullMessage" id="AlertFullMessage" />
+
+                            <input type="hidden" name="AlertCount" id="AlertCount" value="@ViewBag.Count" />
+
+
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+    </section>*@
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="text-right wallet-balance mb30 ">
+                    <h5>30-Day Commission</h5>
+                    <h1 class="text-primary">@Model.AgentCurrencySymbol@Commission[0].<small class="text-primary">@Commission[1]</small></h1>
+                </div>
+
+
+                <div class="clearfix">
+                </div>
+
+                <!--  -->
+                <div class=" dashboard_body">
+                    <div class=" clearfix ">
+
+                        
+                        <div class=" clearfix ">
+                            <h3>
+                                Dashboard
+                                <span class="pull-right">
+                                    <a href="@Url.Action("Index","CashWithdrawal")" class="btn btn-sm btn-primary ">Cash withdrawal</a>
+
+                                    @*<a href="@Url.Action("Index","BankAccountCreditUpdate")" class="btn btn-sm btn-primary ">MoneyFex Account Credit</a>*@
+                                    <a href="@Url.Action("Index","SystemSummaryCredit")" class="btn btn-sm btn-primary ">System summary/credit</a>
+                                </span>
+                            </h3>
+                            <hr>
+                            <div class="mobile_design text-center">
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+
+                                        <a href="@Url.Action("Index","CalculateHowMuch")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/1.png">
+                                            </div>
+                                            <h4>Calculate how much</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","PayAReceiver")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/withdraw-money-from-wallet.svg">
+                                            </div>
+                                            <h4>Pay a Receiver</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","TransferMoney")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/transfermoney.svg">
+                                            </div>
+                                            <h4>Transfer Money</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->  
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","AgentPayBills")">
+
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/paybills.svg">
+                                            </div>
+                                            <h4>Pay Bills</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","AgentManualDeposit")">
+
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/manual-bank-payment.svg">
+                                            </div>
+                                            <h4>Manual Bank Account Payment</h4>
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","RefundRequest")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/refund-request.svg">
+                                            </div>
+                                            <h4>Refund Request</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index" , "AgentForms" )">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/compliance-form.svg">
+                                            </div>
+                                            <h4>Compliance Form</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("GoToTransactionSatement" ,"AgentDashboard")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/statement.svg">
+                                            </div>
+                                            <h4>Transaction Statement</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                @if (ViewBag.AgentType == FAXER.PORTAL.Areas.Agent.Models.StaffType.Admin)
+                                {
+
+                                    <!--  -->
+                                    <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                        <div class="dashboard_thumb">
+                                            <a href="@Url.Action("Index", "AgentSystemUser", new { area = "agent" })">
+                                                <div class="das-icon">
+                                                    <img src="~/Areas/Agent/Content/images/icon/svg/agent-system-users.svg">
+                                                </div>
+                                                <h4>Agent System Users </h4>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                }
+
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index", "AgentCommision", new { area = "agent" })">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/commission.svg">
+                                            </div>
+                                            <h4>Commission</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index", "AgentUploadDocuments", new { area = "agent" })">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/upload-documents.svg">
+                                            </div>
+                                            <h4>Upload Documents</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="@Url.Action("Index","UpdateFaxingInformation")">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/svg/update-money-transfer-information.svg">
+
+                                            </div>
+                                            <h4>Update Money Transfer Information</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+
+                                <div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+                                    <div class="dashboard_thumb">
+                                        <a href="">
+                                            <div class="das-icon">
+                                                <img src="~/Areas/Agent/Content/images/icon/14.png">
+                                            </div>
+                                            <h4>Under Development</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  -->
+
+            </div>
+        </div>
+        <!--  -->
+    </div>
+    <!--  -->
+</section>
+
+
+
+@*<section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+
+
+                <div class="col-lg-12">
+
+                    <div class="text-right">
+
+                        <p><b>Agent's MF Code.</b> @ViewBag.AgentMoneyFaxAcNo</p>
+
+                        <a href="@Url.Action("Index","BankAccountCreditUpdate")" class="btn btn-sm btn-primary">MoneyFex Account Credit</a>
+
+                    </div>
+                    <br>
+                    <!-- <div class="dashboard_header">
+
+
+
+                          <h1>Estimate Faxing Fees</h1>
+
+
+                    </div> -->
+                    <!--  -->
+                    <div class=" ">
+
+
+                        <div class="  ">
+                            <h3>Dashboard</h3>
+                            <hr>
+                            <div class="mobile_design text-center">
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6 ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("Index","MoneyFaxedByAgent",new { area="agent"})">
+                                            <h4>Money Sent by My Agent</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6  ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("Index","MFTCPaymentsByMyAgent",new { area="agent"})">
+                                            <h4>MFTC Payments by My Agent</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6 ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("Index","NonNFTCPaymentsByMyAgent",new { area="agent"})">
+                                            <h4>Non-MFTC Payments by my Agent </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6  ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("Index","MFBCPaymentsByAgent",new { area="agent"})">
+                                            <h4>MFBC Payments By My Agent </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6  ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("RefundPaidByAgent","RefundPaidByAgent",new { area="agent"})">
+                                            <h4>Refunds Paid by my Agent </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4 col-xs-6  ">
+                                    <div class="dashboard_thumb pdt60">
+                                        <a href="@Url.Action("Index","AgentCommision",new { area="agent"})">
+                                            <h4>My Commission </h4>
+                                        </a>
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                            </div>
+
+                            <input type="hidden" name="AlertPhoto" id="AlertPhoto" />
+
+                            <input type="hidden" name="AlertHeading" id="AlertHeading" />
+
+                            <input type="hidden" name="AlertFullMessage" id="AlertFullMessage" />
+
+                            <input type="hidden" name="AlertCount" id="AlertCount" value="@ViewBag.Count" />
+
+
+
+
+                        </div>
+
+
+                    </div>
+
+
+                </div>
+                <!--  -->
+
+            </div>
+
+
+        </div>
+        <!--  -->
+    </section>*@
+
+@if (ViewBag.FirstLogin != "" && ViewBag.Count > 0)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false" style="display: none;">
+
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>You have an alert message from MoneyFex Service, Please read this message before you can proceed!</h4>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-dismiss="modal" data-target="#alert">Read Alert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="alert" data-backdrop="static" data-keyboard="false" style="display:none;">
+
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+
+            <div class="modal-body">
+
+
+
+                <table class="table table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.AlersViewModel)
+                        {
+
+                            <tr>
+                                <td>@item.AlertHeading</td>
+                                <td><a onclick="GetAlertDetials(@item.Id)" class="btn btn-danger btn-sm" id="@item.Id">Read Alert</a></td>
+                                <td>@item.Date</td>
+                                <td>@item.Time</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal" id="CloseAlert" onclick="ClearAlerts()" style="display:none">Close alert window</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="alertDetails" data-backdrop="static" data-keyboard="false" style="display: none;">
+
+    <div class="modal-dialog" style="width:500px;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-7">
+                        <h3 id="Head"></h3>
+                        <p id="Message"></p>
+
+                    </div>
+                    <div class="col-lg-4">
+                        <img src="" class="img-thumbnail " alt="Alert Photo" id="my-image" style="height:150px;width:150px;">
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        var array = [];
+
+        function GetAlertDetials(id) {
+
+
+            CountAlerts(id);
+            $.getJSON("/Agent/AgentDashboard/GetAlertsFullDetails/" + id, function (data) {
+
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+
+                }
+                var url = $("#AlertPhoto").val();
+                var heading = $("#AlertHeading").val();
+                var FullMessage = $("#AlertFullMessage").val();
+
+                $("#my-image").attr("src", url);
+                $("#alertDetails").modal('show');
+                $("#Head").html(heading);
+                $("#Message").html(FullMessage);
+
+            });
+
+
+        }
+        function CountAlerts(id) {
+            var itemcount = $("#AlertCount").val();
+
+            if (!array.includes(id)) {
+                array.push(id);
+                document.getElementById(id).style.backgroundColor = "#0000ff";
+            }
+            if (array.length.toString() == itemcount) {
+                $("#CloseAlert").show();
+            }
+        }
+
+        function ClearAlerts() {
+
+            window.location.href = "/Agent/AgentDashboard/ClearAlert";
+
+        }
+    </script>
+}
+
+

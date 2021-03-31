@@ -1,0 +1,102 @@
+﻿
+@model FAXER.PORTAL.Areas.Admin.ViewModels.BankAccountDepositPropertyVm
+@{
+    ViewBag.Title = "UpdateBankDepositProperty";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0"> Update Transaction Property</h4>
+
+                                        <a href="@Url.Action("Index","TransactionHistoryOfAllSender")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                            <i class="icofont icofont-eye m-r-5"></i> Update Transaction Property
+                                        </a>
+
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(x => x.ReceiptNo)
+
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiver Name</label>
+                                                    @Html.TextBoxFor(x => x.ReceiverName, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Receiver Name" })
+                                                    @Html.ValidationMessageFor(x => x.ReceiverName, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label>Bank Code</label>
+                                                    @Html.TextBoxFor(x => x.BankCode, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Bank Code" })
+                                                    @Html.ValidationMessageFor(x => x.BankCode, "", new { @class = "text-danger" })
+
+                                                </div>
+                                              
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Account No</label>
+                                                    @Html.TextBoxFor(x => x.AccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Account no" })
+                                                    @Html.ValidationMessageFor(x => x.AccountNo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","TransactionHistoryOfAllSender")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+
+}
+
+

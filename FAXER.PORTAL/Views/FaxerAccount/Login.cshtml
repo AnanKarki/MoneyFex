@@ -1,0 +1,285 @@
+﻿@using FAXER.PORTAL.Models
+@model LoginViewModel
+@{
+    /**/
+
+    ViewBag.Title = "Login";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+}
+@*<div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+
+                    <h1>Login</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>*@
+
+@*<div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup">
+
+                        <div class="text-center">
+                            <h4>Welcome ! Login into Your MoneyFex Account </h4>
+                            <p>Don't have an account ? <a href="@Url.Action("Register","Faxeraccount")">Sign Up</a></p>
+                        </div>
+                        <hr />
+
+
+                        @if (TempData["RequestSuccessful"] != null)
+                        {
+
+                            <label style="color:green">@TempData["RequestSuccessful"]</label>
+                        }
+                        @using (Html.BeginForm("Login", "FaxerAccount", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="col-lg-12 ">
+                                <div class="form-group">
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email Address" } })
+
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 ">
+                                @*<div class="input-group">
+                                        @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password" } })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                        <div class="input-group-addon" id="passwoed_show" onclick="togglePassword();"><i class="fa fa-eye"></i></div>
+                                    </div>
+    <div class="form-group">
+        <div class="input-group">
+            @*<input type="password" name="Password" class="form-control" id="show_password" placeholder="Password">
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password", id = "show_password", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+            <div class="input-group-addon" id="passwoed_show" onclick="togglePassword();"><i class="fa fa-eye"></i></div>
+        </div>
+
+    </div>
+
+                            </div>
+
+    <!--  -->
+    <div class="col-lg-12">
+        <div class="checkbox">
+            <label>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+            </label>
+        </div>
+    </div>
+    <!--  -->
+
+
+    <div class="col-lg-5">
+        <p>
+            <br />
+            @Html.ActionLink("Forgot your password?", "ForgotPassword")
+        </p>
+    </div>
+
+
+    <div class="col-lg-7 ">
+        <input type="submit" value="Log in" class="fbtn btn-next" />
+    </div>
+    <!--  -->
+
+    <div class="clearfix"></div>
+
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    @*<div class="col-md-4">
+            <section id="socialLoginForm">
+                @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+            </section>
+        </div>
+    </div>*@
+<div class="modal" id="AccountReActivationmodal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Account Re-Activation Request</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <h4>An account already exist for this email address , request for account re-activation form MoneyFex</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</a>
+                <a href="@Url.Action("RequestForReactivation" ,"FaxerAccount" , new { Email = Model.Email})" class="btn btn-primary btn-sm" data-dismiss="modal">Request for Reactivation</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<!--  -->
+<div class="real_form pattern2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup text-left">
+                    <div class="text-center">
+
+
+                        @if (Model.isBusiness)
+                        {
+                            <h3>Business</h3>
+
+                        }
+                        else
+                        {
+                            @*<img src="~/Content/images/logo.png" alt="">*@
+                        }
+                    </div>
+
+
+                    <hr>
+                    @if (TempData["RequestSuccessful"] != null)
+                    {
+
+                        <label style="color:green">@TempData["RequestSuccessful"]</label>
+                    }
+                    @using (Html.BeginForm("Login", "FaxerAccount", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" , @autocomplete="off"}))
+                    {
+
+                        @Html.HiddenFor(model => model.isBusiness)
+                        @Html.AntiForgeryToken()
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @*@Html.CheckBoxFor(model => model.isBusiness, new { style = "display:none;" })*@
+
+                        <div class="mt40">
+
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+
+                                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email or mobile number" } })
+
+                                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-12  mb20">
+                                <div class="form-group">
+
+
+                                    <div class="input-group">
+
+                                        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password",
+                                       id = "show_password", @placeholder = "Password" , @onpaste="return false;" })
+
+                                        <div class="input-group-addon" id="passwoed_show" onclick="togglePassword();"><i class="fa fa-eye"></i></div>
+
+
+                                    </div>
+                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("Attempt", "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+                        <div class="text-center">
+
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Log in <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-12 mb20 ">
+                                @Html.ActionLink("Forgot Password", "ForgotPassword")
+                                @*<a href="forgotpassword.php">Forgot Password</a>*@
+                            </div>
+
+                            <div class="or-border mb20">
+                                OR
+                            </div>
+                            <div class="col-lg-12 ">
+                                @if (!Model.isBusiness)
+                                {
+                                    <a href="/SenderSignUp/PersonalLoginInfo">Sign Up</a>
+
+                                }
+                                else
+                                {
+                                    <a href="/SenderBusinessSignUp/BusinessLoginInfo">Sign Up</a>
+                                }
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+
+                    }
+                </div>
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<!--  -->
+@section Scripts {
+
+    @*@Scripts.Render("~/bundles/jqueryval")*@
+
+    <script type="text/javascript">
+        function togglePassword() {
+            var x = document.getElementById("show_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+
+    </script>
+}

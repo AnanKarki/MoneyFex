@@ -1,0 +1,107 @@
+﻿@model FAXER.PORTAL.Areas.Admin.Controllers.AgentDetialsVm
+@{
+    ViewBag.Title = "AgentDetails";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class=" login_signup ">
+
+                        <div class="clearfix">
+
+                            <div class="card">
+
+                                <div class="col-lg-offset-2 col-lg-8 transfer-progress clearfix">
+
+                                    <div class="clearfix"></div>
+                                    <div class="progress-circle-text-wraper">
+
+
+
+                                        <div class="clearfix">
+
+                                        </div>
+                                        <div class="pinside30">
+
+
+                                            <div class=" table-responsive" id="printtemplate">
+                                                <table class="table table-striped table-bordered">
+
+                                                    <tbody>
+                                                        <tr>
+                                                            <td class="text-left">Agent Name</td>
+                                                            <td class="text-left"> @Model.AgentName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Agent Number</td>
+                                                            <td class="text-left"> @Model.AgentNumber</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Country</td>
+                                                            <td class="text-left"> @Model.AgentCountry</td>
+                                                        </tr>
+                                                        <tr>
+
+                                                            <td class="text-left">Agent Telephone</td>
+                                                            <td class="text-left"> @Model.AgentPhoneNo</td>
+
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Transaction Staff</td>
+                                                            <td class="text-left"> @Model.TransactionStaffName</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Staff Account No</td>
+                                                            <td class="text-left"> @Model.StaffAccountNo</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-left">Staff Email Address</td>
+                                                            <td class="text-left"> @Model.StaffEmail</td>
+                                                        </tr>
+                                                        <tr></tr>
+                                                        <tr></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="clearfix"> </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                        </div>
+                        <!--  btn -->
+                        <div class="clearfix ">
+                            <hr>
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!--  btn end-->
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+
+
+

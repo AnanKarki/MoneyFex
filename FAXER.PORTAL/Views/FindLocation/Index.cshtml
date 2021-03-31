@@ -1,0 +1,331 @@
+﻿@model FAXER.PORTAL.Models.FindLocationVm
+@{
+    ViewBag.Title = "Index";
+    //Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+}
+
+
+
+
+
+
+<div class="page-header" style="background:  url(/images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+
+                <ol class="breadcrumb ">
+                    <li> <a href="index.php">Home</a></li>
+                    <li class="active">Find a Location</li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pinside20 mb80 mt20">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="page-new">Find a Location</h1>
+                        </div>
+                        <div class="col-lg-3">
+
+                            <div class="pinside20 bg-white">
+                                <!--  -->
+                                <div class="form-group">
+
+                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", id = "Country", @onchange = "GetCities()" })
+                                    @*<select class="form-control">
+                                            <option>Select Country</option>
+                                        </select>*@
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+
+                                    @Html.DropDownListFor(model => model.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control", @id = "City", @onChange = "getDetails()" })
+                                    @*<select class="form-control">
+
+                                            <option>Select City</option>
+                                        </select>*@
+                                </div>
+                                <div class="form-group">
+                                    @Html.EnumDropDownListFor(model => model.ServiceType, "Select Service Type", new { @class = "form-control", @id = "ServiceType", @onChange = "getDetails()" })
+                                    @*<select class="form-control">
+                                            <option>Select Service Type</option>
+                                        </select>*@
+                                </div>
+                                <!--  -->
+                                <div class="form-group text-center">
+
+                                    <b>OR</b>
+
+                                </div>
+
+                                <!--  -->
+                                <div class="form-group">
+                                    @*<input type="text" class="form-control" placeholder="Enter City / Postcode Zip Code">*@
+                                    @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control", @placeholder = "Postcode Zip Code", id = "PostCode" })
+                                </div>
+                                <!--  -->
+
+                                <div class="form-group">
+                                    <button type="button" class="btn btn-primary" onclick="getDetails()">Search</button>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+
+                            <div class="row">
+                                <div class="mb10">
+                                    <div class="col-lg-7">
+
+
+
+                                        <nav aria-label="breadcrumb">
+                                            <ol class="breadcrumb">
+                                                <li class="breadcrumb-item text-primary "><span id="CountryText"> All </span> </li>
+                                                <li class="breadcrumb-item text-primary "> <span id="CityText">All</span>  </li>
+                                                <li class="breadcrumb-item  text-primary "><span id="ServiceTypeText">All</span> </li>
+                                            </ol>
+                                        </nav>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class=" ">
+                                            <div class="input-group stylish-input-group">
+                                                <input type="text" id="SearchText" class="form-control" placeholder="Search Name / Business Type" autocomplete="off">
+                                                <span class="input-group-addon">
+                                                    <button type="submit" class="" onclick="getDetails()">
+                                                        <span class="glyphicon glyphicon-search"></span>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix">
+
+                                </div>
+
+                                @foreach (var item in Model.ServiceTypeDetails)
+                                {
+
+
+                                    <div class="col-lg-6">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">@item.BusinessName</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">@item.BusinessType</span></p>
+                                            <i class="fa fa-map-mark"></i> @item.City , @item.Country
+                                            <br>
+                                            <i class="fa fa-phone"></i> @item.PhoneCode  @item.Telephone<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:@item.EmailAddress">@item.EmailAddress</a><br>
+                                            <i class="fa fa-globe"></i> <a href="@item.Website"> @item.Website</a>
+                                        </div>
+
+                                    </div>
+                                }
+                                <!--  -->
+                                @*<div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-4">
+                                        <div class="cardbody mb20">
+
+                                            <h3 class="text-primary  ">Cyberlink Pvt. Ltd.</h3>
+                                            <p style="margin-bottom: 5px;"><b>Business Type:</b> <span class="text-primary">Education</span></p>
+                                            <i class="fa fa-map-mark"></i> Kathmandu, Nepal
+                                            <br>
+                                            <i class="fa fa-phone"></i>  +977-01-9587454<br>
+                                            <i class="fa fa-envelope"></i>  <a href="mailto:info@cyberlink.com.np">info@cyberlink.com.np</a><br>
+                                            <i class="fa fa-globe"></i> <a href="https://www.cyberlink.com.np"> www.cyberlink.com.np</a>
+                                        </div>
+
+                                    </div>*@
+                                <!--  -->
+                                <div class="clearfix"></div>
+
+                                <br />
+
+                                <br />
+
+                                <br />
+                                <center>
+                                    <button type="button" class="btn btn-primary radius-20" onclick="getDetails(true)"> View All</button>
+                                </center>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        var ViewAll = false;
+        function getDetails(ViewAll) {
+
+            if (ViewAll == true) {
+                this.ViewAll = ViewAll;
+            }
+
+            var Country = $("#Country").val();
+            var City = $("#City").val();
+            var ServiceType = $("#ServiceType").val();
+
+            var PostalCode = $("#PostCode").val();
+
+            var SearchText = $("#SearchText").val();
+
+            window.location.href = "/FindLocation/Index?ServiceType=" + ServiceType + "&Country=" + Country + "&City=" + City + "&PostalCode=" + PostalCode + "&SearchText=" + SearchText + "&ViewAll=" + ViewAll;
+
+
+
+        }
+
+
+        
+        $("#CountryText").text($("#Country option:selected").text());
+        $("#CityText").text($("#City").val());
+        $("#ServiceTypeText").text($("#ServiceType option:selected").text());
+
+        function GetCities() {
+
+
+            var country = $("#Country").val();
+            window.location.href = "/FindLocation/Index?Country=" + country;
+            getDetails();
+        }
+
+
+    </script>
+}
+

@@ -1,0 +1,210 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffEmailComposeViewModel
+@{
+    ViewBag.Title = "Compose";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+@{Html.RenderPartial("_mail_sidebar");}
+
+
+@using (Html.BeginForm("Compose", "StaffMessage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div class="col-lg-9 col-md-8">
+
+        <div class="dashboard_header">
+            <h1>Compose</h1>
+        </div>
+        <!--  -->
+        <div class="dashboard_body">
+            <div class=" ">
+                <div class=" ">
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>From</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.FromEmailAddress, new { @class = "form-control", @placeholder = "Your Registered Email Address", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>To</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ToEmailAddress, new { @class = "form-control", @id="toEmail", @placeholder = "Receiver Staff Email Address" })
+                            @Html.ValidationMessageFor(model => model.ToEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-lg-1">
+                        <span class="badge" onclick="showEmailList();">Contact<br /> List</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Subject</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "Message Subject" })
+                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Attachment</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            <input type="file" id="" name="AttachmentURL">
+
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+
+
+                    <div class="col-lg-12 ">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.BankPaymentReference, new { @class = "form-control", @placeholder = "Enter Bank Payment Reference", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.BankPaymentReference, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-12 ">
+
+
+            <button class="fbtn btn-danger" type="submit" name="Draft" value=true>Save as Draft <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            <button class="fbtn btn-next" type="submit" name="Draft">&nbsp &nbsp &nbsp &nbsp Send > &nbsp &nbsp &nbsp &nbsp &nbsp <i class="" aria-hidden="true"></i></button>
+
+            <br>
+        </div>
+    </div>
+
+}
+
+<div class="modal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="contactList" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="post-block mb40">
+                            <h1 style="text-align:center;"><span>Contact List</span></h1><br />
+                            <h3 style="text-align:center;">Please select Email from the list below.</h3>
+                            <div class="white-box">
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Search By Country", new { @class = "form-control", id = "Country", onchange = "SearchByCountry();" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "SearchByCity();" })
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <td>SN</td>
+                                                <td>Full Name</td>
+                                                <td>Staff Email</td>
+                                                <td>Telephone</td>
+                                                <td>Country</td>
+                                                <td>City</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ int i = 0;}
+                                            @foreach (var item in Model.EmailList)
+                                            {
+                                                i++;
+                                                <tr>
+                                                    <td>@i</td>
+                                                    <td>@item.FullName</td>
+                                                    <td onclick="setEmail('@item.EmailId')">@item.EmailId</td>
+                                                    <td>@item.Telephone</td>
+                                                    <td>@item.Country</td>
+                                                    <td>@item.City</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-lg    pull-right" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        function showEmailList() {
+            
+            $("#contactList").modal("show");
+
+        }
+
+        function setEmail(email) {
+            
+            $("#toEmail").val(email);
+            $("#contactList").modal("hide");
+        }
+
+        function SearchByCountry() {
+
+
+            var Country = $("#Country").val();
+            window.location.href = "/Staff/StaffMessage/Compose?Country=" + Country + "&City=" + "";
+        }
+        function SearchByCity() {
+
+
+            var Country = $("#Country").val();
+            var City = $("#city").val();
+
+            window.location.href = "/Staff/StaffMessage/Compose?Country=" + Country + "&City=" + City;
+        }
+
+        var showContactList = '@ViewBag.SearchByCountryorCity';
+        if (showContactList != null || showContactList == undefined) {
+            if (showContactList == "True") {
+
+                $("#contactList").modal("show");
+
+            }
+        }
+    </script>
+    }

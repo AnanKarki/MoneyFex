@@ -1,0 +1,189 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AddNewNewsViewModel
+@{
+    /**/
+
+    ViewBag.Title = "AddNewNews";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddNewNews</h2>
+
+@using (Html.BeginForm("EditNews", "News", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Edit News</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index", "News")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View all News</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Edit News</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+                            <div class="form-body">
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>News Headline</label>
+                                    @Html.TextBoxFor(model => model.Headline, new { @class = "form-control", @id = "Header" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Full News  </label>
+                                    @Html.TextAreaFor(model => model.FullNews, new { @class = "form-control", @id = "Parag" })
+                                </div>
+
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.HiddenFor(x=>x.OldImagePath)
+                                    <img src="@Model.Image" id="oldImage" name="" alt=" " style="float: left; margin-right: 5px; width: 50px;">
+                                    <input type="file" name="newsImage" id="newsImage" class="form-control"  onchange="changeImage();">
+                                </div>
+
+                                <hr>
+                                <!--  -->
+                                <div class="form-group">
+                                    <a class="btn btn-success btn-lg  btn-rounded pull-right" data-toggle="modal" onclick="loadData();">Preview </a>
+                                </div>
+                                <!--  -->
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+            <!--/.row -->
+            <!--row -->
+            <!-- Large modal -->
+
+
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" id="previwe_before_publish" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="post-block mb40">
+                                        <h1 style="text-align:center;"><span id="Head"></span></h1>
+
+
+                                        <div id="spa">
+                                            <img src="@Model.Image" id="Image" name="Image" alt=" " style="float: left; margin-right: 15px; width: 300px;">
+                                        </div>
+
+                                        <p><span id="Para"></span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success btn-lg    pull-right">Publish </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+
+    <script type="text/javascript">
+        let theEditor;
+        ClassicEditor
+            .create(document.querySelector('#Parag'))
+            .then(editor => {
+                theEditor = editor;
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        function changeImage() {
+            debugger;
+            newreadURL(document.getElementById("newsImage"));
+            $("#Image").show();
+            $("#oldImage").show();
+
+        }
+        function loadData() {
+            debugger;
+            var head = $("#Header").val();
+            var para = theEditor.getData();
+            //var para = $("#Parag").val();
+            //var para = CKEDITOR.instances.Parag.getData();
+            document.getElementById("Para").innerHTML = para;
+            document.getElementById("Head").innerHTML = head;
+            readURL(document.getElementById("newsImage"));
+
+           
+            $("#previwe_before_publish").modal("show");
+        }
+        function readURL(input) {
+            debugger;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#Image').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        function newreadURL(input) {
+            debugger;
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#oldImage').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+        $("#imgInp").change(function () {
+            readURL(this);
+
+        });
+
+        window.onload = function () {
+            debugger;
+            var src = "@Model.Image";
+            if (src == "" || src == undefined) {
+                $("#oldImage").hide();
+                $("#Image").hide();
+            } else {
+                $("#oldImage").show();
+                $("#Image").show();
+
+            }
+        }
+
+
+    </script>
+
+
+
+}

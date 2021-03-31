@@ -1,0 +1,135 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.TotalPrefundingAmontViewModel>
+@{
+    ViewBag.Title = "TotalPrefundingAmount";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Pre-Funding  </h4>
+
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "Country", onchange = "filter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Select Year and Month" autocomplete="off" id="dates">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap print">
+                                            <thead>
+                                                <tr>
+                                                    <th>Sending Country</th>
+                                                    <th>Year</th>
+                                                    <th>Month</th>
+                                                    <th>Agent</th>
+                                                    <th>Account No.</th>
+                                                    <th>Current Funds</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td rowspan="1"><i class="flag flag-icon flag-icon-@item.SendingCountryFlag"></i>@item.SendingCountry</td>
+
+                                                        <td>@item.Year</td>
+                                                        <td>@item.Month</td>
+                                                        <td><a href="">@item.AgentName </a></td>
+                                                        <td><a href="">@item.AccountNo </a></td>
+                                                        <td>@item.Currency @item.CurrentFunds</td>
+                                                    </tr>
+
+
+
+                                                }
+
+
+
+
+
+
+                                            </tbody>
+                                            <tfoot>
+
+
+                                                <tr>
+
+                                                    <th colspan="5" class="text-center">Total</th>
+
+                                                    <th>GBP 30,000</th>
+
+                                                </tr>
+
+
+                                            </tfoot>
+
+
+
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+            var sendingCountry = $("#Country").val();
+            var date = $("#dates").val();
+            window.location.href = "/Admin/RefundingOperationSummary/TotalPrefundingAmount?SendingCountry=" + sendingCountry + "&Date=" + date;
+
+        }
+
+
+        $(".applyBtn").click(function () {
+            filter();
+        });
+    </script>
+}

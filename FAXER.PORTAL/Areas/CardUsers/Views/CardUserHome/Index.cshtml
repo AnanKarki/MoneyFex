@@ -1,0 +1,237 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/CardUsers/Views/Shared/_CarUser_Layout.cshtml";
+
+    string MFTCCardNumber = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.MFTCCardNo;
+
+    string[] CardNumberSplit = MFTCCardNumber.Split('-');
+
+    string CardNo = CardNumberSplit[1];
+
+    int LastRemaingNoOFDigit = CardNo.Length - 6;
+}
+
+
+
+
+<style type="text/css">
+    .st0 {
+        fill: url(#gold-gradient);
+        stroke: #000000;
+        stroke-width: 10;
+        stroke-miterlimit: 10;
+    }
+</style>
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="col-lg-7 col-md-6 col-sm-6 mb20 ">
+                    <button type="button" class="btn btn-primary radius-20 mt40 hidden-xs" data-toggle="modal" data-target="#ecard">My MoneyFex E-Card </button>
+                </div>
+                <div class="barometer col-lg-5 col-md-6 col-sm-6 hidden">
+                    <h4>Yearly Transaction Barometer </h4>
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 30%;" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">
+                            $ 500.60
+                        </div>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+
+                <br>
+                <div class="dashboard_body">
+
+                    <div class="  ">
+                        <h3>
+                            <span class="">Account Balance :<strong class="  text-primary italic"> @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard   </strong></span>
+                        </h3>
+                        <hr><br />
+                        <div class="mobile_design text-center">
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="newone  bgcolor1  ">
+                                    <a href="@Url.Action("Index", "PayGoodsAndServicesAbroad")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/1.png">
+                                        </div>
+                                        <h4>Pay a Bill</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="newone  bgcolor2 ">
+                                    <a href="@Url.Action("Index", "TransferMoneyByCardUser")">
+                                        <div class="das-icon">
+
+                                            <img src="/Areas/CardUsers/images/icon/2.png">
+                                        </div>
+                                        <h4>Transfer Money Now</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index" , "MyMoneyFaxCardPurchaseSheet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/3.png">
+                                        </div>
+                                        <h4>Account Purchases & Payments</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","MyMoneyFaxCardWithdrawlSheet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/4.png">
+                                        </div>
+                                        <h4>My E-Card Withdrawals</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index" , "MyMoneyFaxCardLimit")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/5.png">
+                                        </div>
+                                        <h4>My Account Usage Limits</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index","MyMoneyFaxCardTopUpHistory")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/6.png">
+                                        </div>
+                                        <h4>My Account Payment History</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+
+                                    <a href="@Url.Action("Index","TransferInProgressCardUser")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/7.png">
+                                        </div>
+                                        <h4>Money Transfers in Progress</h4>
+                                        <span class="numbervisible"><b>@ViewBag.TransferinProgressCount </b></span>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index", "TransferHistoryOfCardUser")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/8.png">
+                                        </div>
+                                        <h4>Money Transfer history</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a onclick="getAccessCode()">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/9.png">
+                                        </div>
+                                        <h4>Get Withdrawal Code</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="/Areas/CardUsers/images/icon/10.png">
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+
+
+                    @RenderPage("~/Areas/CardUsers/Views/Shared/mobile-menu-dashboard.cshtml");
+                </div>
+                <!--  -->
+
+
+            </div>
+
+        </div>
+    </div>
+    <!--  -->
+
+</section>
+
+<!-- withdrawal-code -->
+<div class="modal fade" tabindex="-1" id="withdrawal-code" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-card" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h1>Your code is  <br> <span class="text-primary" id="AccessCode"> </span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- ecard -->
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        // get Access Code for card user
+
+        function getAccessCode() {
+
+
+            $.getJSON("/CardUsers/CardUserHome/GetWithdrawalCode", function (result) {
+
+
+                $("#AccessCode").text(result.AccessCode);
+                $("#withdrawal-code").modal('show');
+            });
+        }
+
+
+    </script>
+    
+    
+    }

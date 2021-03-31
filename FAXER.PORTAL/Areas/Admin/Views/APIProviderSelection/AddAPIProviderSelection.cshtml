@@ -1,0 +1,324 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.APIProviderSelectionViewModel
+@{
+    ViewBag.Title = "AddAPIProviderSelection";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card" style="">
+
+                                <div class="card-header border-bottom">
+                                    <h2 class="f-left f-left m-t-5 m-b-0" style="float:left;"> API Provider Selection</h2>
+                                    <a href="@Url.Action("Index","APIProviderSelection")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Selection
+                                    </a>
+
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <div class="form-group">
+
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+
+                                                    <label> Transfer Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Type", @id = "TransferType" })
+                                                    @Html.ValidationMessage("TransferType", "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <div class="form-group">
+
+                                                    <label> Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Method", @id = "TransferMethod" })
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                    <label>Range </label>
+
+                                                    <select class="form-control " name="Range" id="Range" onchange="Filter();">
+                                                        <option value="">Select Range</option>
+                                                        <option value="1.00-100.00">1-100</option>
+                                                        <option value="101.00-500.00">101-500</option>
+                                                        <option value="501.00-1000.00">501-1000</option>
+                                                        <option value="1001.00-1500.00">1001-1500</option>
+                                                        <option value="1501.00-2000.00">1501-2000</option>
+                                                        <option value="2001.00-3000.00">2001-3000</option>
+                                                        <option value="3001.00-5000.00">3001-5000</option>
+                                                        <option value="5001.00-10000.00">5001-10000</option>
+                                                        <option value="11000.00">11000+</option>
+                                                    </select>
+                                                    @Html.ValidationMessageFor(x => x.Range, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+
+                                                    <label> API Provider</label>
+                                                    @Html.DropDownListFor(x => x.ApiProviderId, (IEnumerable<SelectListItem>)ViewBag.APIProviders, "Select API Provider", new { @class = "form-control", @id = "APIProvider" })
+                                                    @Html.ValidationMessageFor(x => x.ApiProviderId, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                                <div class="form-group">
+
+                                                    <label> Api Service </label>
+                                                    @Html.EnumDropDownListFor(x => x.Apiservice, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Corrider", @id = "ApiCorrider" })
+                                                    @Html.ValidationMessage("Apiservice", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","APIProviderSelection")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    }*@
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">API Provider Selection</h4>
+                                        <a href="@Url.Action("Index","APIProviderSelection")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Selection
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                            <div class="row">
+                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Sending Country</label>
+                                                        @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                        @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Receiving Country</label>
+
+                                                        @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                        @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>Transfer Type</label>
+                                                        @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Type", @id = "TransferType", @onchange = "ShowAgent();" })
+                                                        @Html.ValidationMessage("TransferType", "", new { @class = "text-danger" })
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Method</label>
+                                                        @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Method", @id = "TransferMethod" })
+                                                        @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <!--  -->
+                                                    <!---->
+                                                    <div class="form-group" id="AgentDiv">
+                                                        <label>Agent</label>
+                                                        @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agent, "Select Agent", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "AgentId" })
+                                                        @Html.ValidationMessageFor(x => x.AgentId, "", new { @class = "text-danger" })
+
+                                                    </div>
+                                                    <!---->
+                                                    <!--  -->
+                                                    <div class="form-group">
+                                                        <label>Range</label>
+                                                        <select class="form-control  form-control-lg form-control-round form-control-bold" name="Range" id="Range" onchange="Filter();">
+                                                            <option value="">Select Range</option>
+                                                            <option value="0.00-0.00">All</option>
+                                                            <option value="1.00-100.00">1-100</option>
+                                                            <option value="101.00-500.00">101-500</option>
+                                                            <option value="501.00-1000.00">501-1000</option>
+                                                            <option value="1001.00-1500.00">1001-1500</option>
+                                                            <option value="1501.00-2000.00">1501-2000</option>
+                                                            <option value="2001.00-3000.00">2001-3000</option>
+                                                            <option value="3001.00-5000.00">3001-5000</option>
+                                                            <option value="5001.00-10000.00">5001-10000</option>
+                                                            <option value="11000.00">11000+</option>
+                                                        </select>
+                                                        @Html.ValidationMessageFor(x => x.Range, "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+                                                        <label>API Provider</label>
+                                                        @Html.DropDownListFor(x => x.ApiProviderId, (IEnumerable<SelectListItem>)ViewBag.APIProviders, "Select API Provider", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "APIProvider" })
+                                                        @Html.ValidationMessageFor(x => x.ApiProviderId, "", new { @class = "text-danger" })
+                                                    </div>
+                                                    <!--  -->
+
+                                                    <div class="form-group">
+
+                                                        <label> Api Service </label>
+                                                        @Html.EnumDropDownListFor(x => x.Apiservice, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Corrider", @id = "ApiCorrider" })
+                                                        @Html.ValidationMessage("Apiservice", "", new { @class = "text-danger" })
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </form>
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","APIProviderSelection")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        function Filter() {
+            var SendingCountry = $("#SendingCountry").val();
+            var ReceivingCountry = $("#ReceivingCountry").val();
+            var TransferType = $("#TransferType").val();
+            var TransferMethod = $("#TransferMethod").val();
+            var Range = $("#Range").val();
+            window.location.href = "/Admin/APIProviderSelection/AddAPIProviderSelection?SendingCountry=" + SendingCountry + "&ReceivingCountry=" + ReceivingCountry
+                + "&TransferType=" + TransferType + "&TransferMethod=" + TransferMethod + "&Range=" + Range;
+        }
+
+        $("#Range").val('@ViewBag.Range');
+        ShowAgent();
+        function ShowAgent() {
+            var TransferType = $("#TransferType").val();
+            if (TransferType == 4 ) {
+                $("#AgentDiv").show();
+                search(true);
+            }
+            else if (TransferType == 2) {
+                $("#AgentDiv").show();
+                search(false);
+            }else {
+                $("#AgentDiv").hide();
+            }
+        }
+        function search(isAuxAgent) {
+            var data = {
+                id: $("#AgentId"),
+                country: $("#SendingCountry").val(),
+                Currecny: "",
+                isBusiness: false,
+                isAuxAgent: isAuxAgent,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "AgentId",
+                placeholder: "All",
+            }
+            SelectSearch(data);
+        }
+    </script>
+}
+
+

@@ -1,0 +1,80 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.FaxingCommissionSettingViewModel
+@{
+    ViewBag.Title = "AddFaxingContinentCommission";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+       
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Add Sending Continent Commission</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <a href="@Url.Action("Index","FaxingCommissionSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">View Add Sending Continent Commission</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Add Sending Continent Commission</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <form method="post">
+                        <div class="form-body">
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Select Continent</label>
+                                        @Html.DropDownListFor(model => model.Continent, (IEnumerable<SelectListItem>)ViewBag.Continents, "Select Continent", new { @onchange = "GetCommission();", @class = "form-control", @id = "Continent", @data_commision = ViewBag.Continents })
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class="control-label">Enter Amount</label>
+                                        @Html.TextBoxFor(model => model.Commission, new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/row-->
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success"> <i class="fa fa-check"></i> Save</button>
+                            <a href="@Url.Action("Index","FaxingCommissionSetting")"  class="btn btn-danger">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+        </div>
+    </div>
+
+<script type="text/javascript">
+    function GetCommission() {
+        ///Admin/FaxingCommissionSetting/AddFaxingContinentCommission
+        var Continent = document.getElementById("Continent").value;
+        window.location.href = "/Admin/FaxingCommissionSetting/AddFaxingContinentCommission?Continent=" + Continent ;
+        
+    }
+</script>
+

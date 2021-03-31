@@ -1,0 +1,141 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessRegisterECardUserPersonalDetailVM
+@{
+    ViewBag.Title = "PersonalDetail";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3> KiiPay User Registration</h3>
+                        <hr>
+
+                        <div class="pinside40">
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.TextBoxFor(model => model.FirstName, new { @type = "text", @placeholder = "First Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.TextBoxFor(model => model.MiddleName, new { @type = "text", @placeholder = "Middle Name (optional) ", @class = "form-control" })
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group mb20">
+                                @Html.TextBoxFor(model => model.LastName, new { @type = "text", @placeholder = "Last Name", @class = "form-control" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                            <!--  -->
+
+                            <div class="row">
+
+                                <div class="col-lg-12 text-left">
+                                    <label>Birth Date</label>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.BirthDateDay, new { @type = "number", @placeholder = "Day", @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BirthDateDay, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.EnumDropDownListFor(model => model.BirthDateMonth, new { @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BirthDateMonth, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-4">
+                                    <div class="form-group mb20">
+                                        @Html.TextBoxFor(model => model.BirthDateYear, new { @type = "number", @placeholder = "Year", @class = "form-control" })
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.BirthDateYear, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+
+                            </div>
+
+
+
+                            <div class="row">
+
+                                <div class="col-lg-12 text-left">
+                                    <label>Gender</label>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-3 text-left">
+                                    <div class="form-group mb20">
+                                        <label for=@FAXER.PORTAL.Models.Gender.Male>
+                                            @Html.RadioButtonFor(m => m.Gender, FAXER.PORTAL.Models.Gender.Male, new { @name = "mf", @type = "radio", id = FAXER.PORTAL.Models.Gender.Male })
+                                            @FAXER.PORTAL.Models.Gender.Male
+                                        </label>
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="col-lg-3 text-left">
+                                    <div class="form-group mb20">
+                                        <label for=@FAXER.PORTAL.Models.Gender.Female>
+                                            @Html.RadioButtonFor(m => m.Gender, FAXER.PORTAL.Models.Gender.Female, new { @name = "mf", @type = "radio", id = FAXER.PORTAL.Models.Gender.Female })
+                                            @FAXER.PORTAL.Models.Gender.Female
+                                        </label>
+                                    </div>
+                                </div>
+                                @*<div class="col-lg-3 text-left">
+                                    <div class="form-group mb20">
+                                        <label for=@FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.Gender.Others>
+                                            @Html.RadioButtonFor(m => m.Gender, FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.Gender.Others, new { @name = "mf", @type = "radio", id = FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.Gender.Others })
+                                            @FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.Gender.Others
+                                        </label>
+                                    </div>
+                                </div>*@
+                                <!--  -->
+
+                            </div>
+
+
+
+
+                        </div>
+
+
+
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}

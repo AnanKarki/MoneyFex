@@ -1,0 +1,503 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.FormNonCardUserMoneyFaxedUpdateViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (ViewBag.Message == "Updated Successfully !")
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                Riddha.UI.Toast("@ViewBag.Message", 4);
+            };
+        </script>
+    }
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Form-Non Virtual Account User Money Sent Update</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Form-Non Virtual Account User Money Sent Update</li>
+                    </ol>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <form>
+                            <div class="col-lg-4 pull-right">
+                                <div class="input-group">
+                                    <input type="text" id="MFTC" name="example-input1-group2" class="form-control  " placeholder="Search MFCN">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn waves-effect waves-light btn-info" onclick="populateFaxerDetails();"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-8">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Sender's Details</h3>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                @Html.HiddenFor(x => x.FormNonCardUserFaxerDetails.FaxerId)
+                                                @Html.HiddenFor(x => x.FaxingNonCardTransactionId)
+                                                <label>First Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerFirstName, new { @class = "form-control", placeholder = "First Name", @readonly = "readonly" })
+                                                @Html.ValidationMessage("FaxerFirstName", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Middle Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerMiddleName, new { @class = "form-control", placeholder = "Middle Name", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Family/Last Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerLastName, new { @class = "form-control", placeholder = "Family/Last Name", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Photo Id Card Number</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerIDCardNumber, new { @class = "form-control", placeholder = "Photo Id Card Number", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Photo Id Type</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerIDCardType, new { @class = "form-control", placeholder = "Photo Id Type", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Expiring Date</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerIDCardExpDate, new { @class = "form-control", placeholder = "Expiring Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerAddress, new { @class = "form-control", placeholder = "Address", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerCity, new { @class = "form-control", placeholder = "City", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                @Html.HiddenFor(x => x.FormNonCardUserFaxerDetails.FaxerCountryCode, new { @id = "faxingCC" })
+                                                <label>Country</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerCountry, new { @class = "form-control", placeholder = "Country", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Telephone</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerTelephone, new { @class = "form-control", placeholder = "Telephone", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Email</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxerDetails.FaxerEmailAddress, new { @class = "form-control", placeholder = "Email", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <br><br>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Status of Transaction</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                @{
+                                                    var faxingStatus = Model == null ? "..." : Model.FormNonCardUserFaxerDetails.FaxingStatus;
+                                                    var color = Model == null ? "white;color:black;" : Model.FormNonCardUserFaxerDetails.FaxingStatus == "Not Received" ? "green;color:white;" : "#F54;color:white;";
+
+                                                }
+                                                <td style="background-color:@color">@faxingStatus</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Sent Amount</h3>
+                                        </div>
+                                        @*new dropdown added*@
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Receiving Country</label>
+                                                @Html.DropDownListFor(model => model.FormNonCardUserFaxAmount.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Receiving Country", new { @class = "form-control", @id = "receivingCC", @disabled = "disabled" })
+                                                @Html.ValidationMessage("ReceivingCountry", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Sent Amount </label>
+
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.FaxingAmount, new { @id = "faxingAmount", @class = "form-control col-lg-8", placeholder = "Sent Amount", @readonly = "readonly", style = "font-weight:bold;" })
+                                                    @Html.ValidationMessageFor(model => model.FormNonCardUserFaxAmount.FaxingAmount, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("FaxingAmount", "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+
+
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Fee</label>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.FaxingFee, new { @class = "form-control", placeholder = "Fee", @readonly = "readonly", style = "font-weight:bold;" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Total Amount Including Fee</label>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.TotalAmount, new { @class = "form-control", placeholder = "Total Amount Including Fee", @readonly = "readonly", style = "font-weight:bold;" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.SendingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Current Exchange Rate</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.ExchangeRate, new { @class = "form-control", placeholder = "Current Exchange Rate", @readonly = "readonly", style = "font-weight:bold;" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Amount to be Received</label>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.ReceivingCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.ReceivingAmount, new { @class = "form-control", placeholder = "Amount to be Received", @readonly = "readonly", style = "font-weight:bold;" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.FormNonCardUserFaxAmount.ReceivingCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class=" col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Receiver's Details</h3>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+
+
+                                                <input type="hidden" name="oldRecieverFirstName" value="@Model.FormNonCardUserReceiverDetails.ReceiverFirstName" />
+                                                <label>First Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceiverFirstName, new { @class = "form-control ", placeholder = "First Name", @Id = "ReceiverFirstName" }) @*// class= interChangeName*@
+                                                @Html.ValidationMessage("ReceiverFirstName", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                @Html.HiddenFor(x => x.FormNonCardUserReceiverDetails.ReceiverId)
+                                                <label>Middle Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceiverMiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <input type="hidden" name="oldRecieverLastName" value="@Model.FormNonCardUserReceiverDetails.ReceiverLastName" />
+                                                <label>Family/Last Name</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceiverLastName, new { @class = "form-control interChangeName", placeholder = "Family/Last Name", @Id = "ReceiverLastName" })
+                                                @Html.ValidationMessage("ReceiverLastName", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceiverCity, new { @class = "form-control", placeholder = "City" })
+                                                @Html.ValidationMessage("ReceiverCity", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                @Html.DropDownListFor(model => model.FormNonCardUserReceiverDetails.ReceiverCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Country", new { @class = "form-control", @disabled = "disabled" })
+                                                @Html.ValidationMessage("ReceiverCountry", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Email Address</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceiverAddress, new { @class = "form-control", placeholder = "Email Address" })
+                                                @Html.ValidationMessage("ReceiverAddress", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Telephone</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserReceiverDetails.ReceieverTelephone, new { @class = "form-control", placeholder = "Telephone" })
+                                                @Html.ValidationMessage("ReceieverTelephone", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Agent/Admin Details</h3>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Name of Agency</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserAdminDetails.AgencyName, new { @class = "form-control", placeholder = "Name of Agency" })
+                                                @Html.ValidationMessage("AgencyName", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>MFS Code</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserAdminDetails.MFSCode, new { @class = "form-control", placeholder = "MFS Code" })
+                                                @Html.ValidationMessage("MFSCode", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Name of Admin Updater</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserAdminDetails.NameOfUpdater, new { @class = "form-control", placeholder = "Name of Admin Updater", @readonly = "readonly" })
+                                                @Html.ValidationMessage("NameOfUpdater", "", new { @class = "text-danger" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Date</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserAdminDetails.Date, new { @class = "form-control", placeholder = "Date" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Time</label>
+                                                @Html.TextBoxFor(model => model.FormNonCardUserAdminDetails.Time, new { @class = "form-control", placeholder = "Time" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Information Verification</h3>
+                                        </div>
+                                        <div class="col-lg-12">
+
+                                            @Html.CheckBoxFor(x => x.CheckConfirmation, new { @class = "checkbox-success" }) &nbsp I confirm that the information required to send this money has been fully verified by myself.
+                                            @Html.ValidationMessageFor(model => model.CheckConfirmation, "", new { @class = "text-danger" })
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <button class="btn btn-warning  ">Orginal PDF Sent Receipt</button>
+                            <!-- end -->
+                            <div class="col-lg-3 pull-right">
+                                <button class="btn btn-block btn-info btn-rounded">Update </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+            <!-- .row -->
+            <!--/.row -->
+            <!--row -->
+        </div>
+    </div>
+
+
+}
+
+@if (ViewBag.AdminResult.Status == FAXER.PORTAL.Areas.Admin.ViewModels.AdminResultStatus.Warning)
+{
+    @*<div class="modal" id="WarningAlert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4> MoneyFex Alert Message</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;font-size:100px"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+
+                            <h4>Sorry! This Transaction can not be completed because it has been @ViewBag.AdminResult.Message . You cannot update the transaction information</h4>
+
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>*@
+}
+@section Scripts{
+
+    <script type="text/javascript">
+        function populateFaxerDetails() {
+            var MFTCCard = document.getElementById("MFTC").value;
+            window.location.href = "/Admin/FormNonCardUserMoneyFaxedUpdate/Index?MFTC=" + MFTCCard;
+        }
+
+        $(document).ready(function () {
+            $('.interChangeName').change(function (e) {
+                var oldFirstName = $('[name="oldRecieverFirstName"]').val();
+                var oldLastName = $('[name="oldRecieverLastName"]').val();
+                var currentValue = $(this).val();
+                if (currentValue == oldFirstName || currentValue == oldLastName) {
+                    $('[data-valmsg-for="ReceiverLastName"]').text('');
+                }
+                else {
+                    $(this).val('');
+                    $('[data-valmsg-for="ReceiverLastName"]').text('First Name and Last Name can be only interchanged')
+                }
+            });
+        });
+        //function getFaxingDetails() {
+        //    var faxingAmount = $("#faxingAmount").val();
+        //    var faxingCountry = $("#faxingCC").val();
+        //    var receivingCountry = $("#receivingCC").val();
+        //    $.getJSON("/Admin/FormNonCardUserMoneyFaxedUpdate/getFaxingSummary?faxingAmount=" + faxingAmount + "&faxingCC=" + faxingCountry + "&receivingCC=" + receivingCountry, function (data) {
+        //        for (var item in data) {
+        //            var selector = '[name="FormNonCardUserFaxAmount.' + item + '"]';
+        //            $(selector).val(data[item]);
+        //        }
+
+
+        //    });
+        //}
+
+        window.onload = function () {
+
+            $("#WarningAlert").modal('show');
+        }
+
+
+    </script>
+}

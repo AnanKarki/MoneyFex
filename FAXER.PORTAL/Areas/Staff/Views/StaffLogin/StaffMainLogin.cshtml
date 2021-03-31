@@ -1,0 +1,225 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffLoginViewModel
+@{
+    ViewBag.Title = "StaffMainLogin";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Login</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 col-lg-offset-3">
+                <div class="login_signup">
+                    <div class="text-center">
+                        <h4>Welcome to your MoneyFeX Service Staff's Account</h4>
+                        <p>Don't hav an account ? <a href="@Url.Action("Index","StaffSignUp")">Sign Up</a></p>
+                    </div>
+                    <hr>
+                    <form method="post">
+                        <!--  -->
+
+                        @Html.HiddenFor(model => model.StaffCurrentLocation, new { id = "Location" })
+                        @Html.ValidationMessageFor(model => model.StaffCurrentLocation, "", new { @class = "text-danger" })
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.StaffEmail, new { @class = "form-control", @placeholder = "Email Address" })
+                                @Html.ValidationMessageFor(x => x.StaffEmail, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(x => x.LoginCode, new { @class = "form-control", @placeholder = "Login Code" })
+                                @Html.ValidationMessageFor(x => x.LoginCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+
+
+                        <div class="col-lg-12 ">
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(x => x.StaffPassword, new { @class = "form-control", @placeholder = "Password", @type = "password" })
+                                @Html.ValidationMessageFor(x => x.StaffPassword, "", new { @class = "text-danger" })
+
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+
+
+                        <div class="clearfix"></div>
+                        <br>
+
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <p>
+                                <a href="@Url.Action("RequestSecurityCode" , "StaffLogin")">Forgot Password</a>
+                            </p>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-7 ">
+                            <button type="submit" class="fbtn btn-next">Login <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                        <!--  -->
+
+                        <div class="clearfix"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--  -->
+
+@section Scripts{
+
+    <script>
+        //function getLocation() {
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.getCurrentPosition(showPosition);
+        //    } else {
+        //        alert("Geolocation is not supported by this browser.");
+        //    }
+        //}
+        //var country, state, city, pinCode;
+        //var Api_key = "AIzaSyBVE8xAKentLHODYx_8k1eG44Kx_R-cB6A";
+        //function createCORSRequest(method, url) {
+        //    var xhr = new XMLHttpRequest();
+
+        //    if ("withCredentials" in xhr) {
+        //        // XHR for Chrome/Firefox/Opera/Safari.
+        //        xhr.open(method, url, true);
+
+        //    } else if (typeof XDomainRequest != "undefined") {
+        //        // XDomainRequest for IE.
+        //        xhr = new XDomainRequest();
+        //        xhr.open(method, url);
+
+        //    } else {
+        //        // CORS not supported.
+        //        xhr = null;
+        //    }
+        //    return xhr;
+        //}
+        //function showPosition(position) {
+
+        //    //alert("Latitude: " + position.coords.latitude +
+        //    //    "<br>Longitude: " + position.coords.longitude);
+
+        //    latitude1 = position.coords.latitude;
+        //    longitude1 = position.coords.longitude;
+
+        //    //var url = "https://maps.googleapis.com/maps/api/geocode/json?client=" + Api_key
+        //    //   + "&latlng=" + latitude1 + "," + longitude1 + +  "&sensor=true";
+        //    var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + latitude1 + "," + longitude1 + "$sensor=true";
+
+        //    var xhr = createCORSRequest('POST', url);
+        //    if (!xhr) {
+        //        alert('CORS not supported');
+        //    }
+
+        //    xhr.onload = function () {
+
+        //        var data = JSON.parse(xhr.responseText);
+
+        //        if (data.results.length > 0) {
+
+        //            var locationDetails = data.results[0].formatted_address;
+        //            var value = locationDetails.split(",");
+
+        //            count = value.length;
+
+        //            country = value[count - 1];
+        //            state = value[count - 2];
+        //            city = value[count - 3];
+        //            pin = state.split(" ");
+        //            pinCode = pin[pin.length - 1];
+        //            state = state.replace(pinCode, ' ');
+        //            $("#Location").val(country + " | " + state + " | " + city + "  | " + pinCode);
+        //        }
+        //        else {
+
+        //        }
+
+        //    };
+
+        //    xhr.onerror = function () {
+        //        alert('Woops, there was an error making the request.');
+
+        //    };
+        //    xhr.send();
+        //}
+
+        //var options = {
+        //    enableHighAccuracy: true,
+        //    timeout: 5000,
+        //    maximumAge: 0
+        //};
+
+
+        //function error(err) {
+        //    console.warn(`ERROR(${err.code}): ${err.message}`);
+        //}
+        //function getLocation() {
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.getCurrentPosition(showPosition, error);
+        //    }
+        //    else {
+        //        alert("Geolocation is not supported by this browser.");
+        //    }
+        //}
+
+
+        //function getLocation() {
+        //    if (navigator.geolocation) {
+        //        navigator.geolocation.watchPosition(showPosition);
+        //    } else {
+        //        x.innerHTML = "Geolocation is not supported by this browser.";
+        //    }
+        //}
+
+        //function showPosition(position) {
+        //    //x = "Latitude: " + position.coords.latitude +
+        //    //    "<br>Longitude: " + position.coords.longitude;
+
+        //    var lat = position.coords.latitude;
+        //    var lng = position.coords.longitude;
+        //    var latlng = new google.maps.LatLng(lat, lng);
+        //    var geocoder = geocoder = new google.maps.Geocoder();
+        //    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        //        if (status == google.maps.GeocoderStatus.OK) {
+        //            if (results[1]) {
+        //                x = "Location: " + results[1].formatted_address;
+        //                y = results[1].formatted_address;   
+        //                document.getElementById('Location').value = y;
+        //            }
+        //        }
+        //    });
+        //}
+        //window.onload = getLocation;
+    </script>
+
+}

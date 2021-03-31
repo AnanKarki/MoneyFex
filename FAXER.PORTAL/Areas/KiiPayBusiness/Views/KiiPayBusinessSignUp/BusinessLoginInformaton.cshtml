@@ -1,0 +1,123 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.SignUpViewModel.BusinessLoginInformationVM
+@{
+    ViewBag.Title = "BusinessLoginInformaton";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <!--  -->
+    <div class="real_form pattern2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup text-center">
+                        <div class="text-center">
+                            <h3>Business Login Information</h3>
+                        </div>
+                        <hr>
+                        <form>
+                            <div class="pinside20">
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "getPhoneCode()" })
+                                    @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group contact-no-group">
+                                    <div class="countr-code">
+                                        @Html.HiddenFor(mode => Model.CountryPhoneCode, new { @id = "CountryPhoneCode" })
+
+                                    </div>
+                                    @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control contact-no", @placeholder = "Enter Mobile Number", @maxlength = "10", @minlength = "10" })
+
+                                    @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @type = "email", @placeholder = "Enter Email Address" })
+
+                                    @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+                                    @*<input type="email" class="form-control" placeholder="Enter Email Address">*@
+
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", @type = "password", @id = "show_password", @placeholder = "Password" })
+                                        @*<input type="text" class="form-control" id="show_password" placeholder="Password">*@
+                                        <div class="input-group-addon" id="passwoed_show" onclick="togglePassword()"><i class="fa fa-eye"></i></div>
+
+                                    </div>
+
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        @Html.TextBoxFor(model => model.ConfirmPassword, new { @class = "form-control", @type = "password", @id = "show_Confirmpassword", @placeholder = "Confirm Password" })
+                                        @*<input type="text" class="form-control" id="show_password" placeholder="Confirm Password">*@
+                                        <div class="input-group-addon" id="passwoed_show" onclick="toggleConfirmPassword()"><i class="fa fa-eye"></i></div>
+
+
+
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+
+
+                            </div>
+                            <div class="clearfix">
+                                <hr>
+                            </div>
+                            <!--  -->
+
+                            <div class="col-lg-12 mb20 ">
+                                <button type="submit" class="btn btn-primary radius-20">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i> </button>
+                                @*<a href="personal-details.php" class="btn btn-primary radius-20">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                            </div>
+                            <!--  -->
+
+                            <div class="clearfix">
+
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+}
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function getPhoneCode() {
+
+            var country = $("#Country").val();
+            $.getJSON("/KiiPayBusiness/KiiPayBusinessSignUp/GetCountryPhoneCode?CountryCode=" + country, function (result) {
+
+                $(".countr-code").text(result.PhoneCode);
+                $("#CountryPhoneCode").val(result.PhoneCode);
+            })
+        }
+        $(".countr-code").text($("#CountryPhoneCode").val());
+    </script>
+}

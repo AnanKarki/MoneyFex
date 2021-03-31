@@ -1,0 +1,153 @@
+﻿@model FAXER.PORTAL.Areas.Businesses.ViewModels.MFTCCardTopUpTransactionSummaryViewModel
+@{
+    ViewBag.Title = "MFTCCardTopUpTransactionSummary";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+
+    string FaxingCurrency = FAXER.PORTAL.Common.BusinessSession.FaxingCurrency ?? "";
+    string FaxingCurrencySymbol = FAXER.PORTAL.Common.BusinessSession.FaxingCurrencySymbol ?? "";
+    string ReceivingCurrency = FAXER.PORTAL.Common.BusinessSession.ReceivingCurrency ?? "";
+    string ReceivingCurrencySymbol = FAXER.PORTAL.Common.BusinessSession.ReceivingCurrencySymbol ?? "";
+}
+
+<form method="post">
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+                    <h1>Virtual Account Payment Summary</h1>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Card User Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>You are Topping-Up to:</b></p>
+                                <p>
+                                    @Model.CardUsername<br>
+                                    @Model.MFTCCardNumber
+                                </p>
+                                <p>
+                                    <a href="@Url.Action("Index")" class="theme-color">Change Business Merchant</a>
+                                    <br><b>Receive Option</b> <br>E-Card Withdrawal
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center">Your Personal Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Contact Information</b></p>
+                                <p>
+                                    @Model.MerchantName<br>@Model.MerchantPhoneNumber<br>
+                                    @Model.MerchantEmail
+                                </p>
+                                <p> <b>Country of Operation</b><br>@Model.CountryOfBirth</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <div class="clearfix"></div>
+
+
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">s
+                                <h2 class="panel-title text-center">Your Payment Information</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p><b>Your Card Information</b></p>
+
+                                @Model.MerchantMFBCCardNumber
+                                
+                                <p>
+                                    <b>Your home Billing Address</b><br>@Model.streetAddress
+                                    @Model.City
+                                    @Model.PostalCode
+                                    @Model.State
+                                    @Model.CountryOfBirth
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-6">
+
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h2 class="panel-title text-center"> Your Transaction Details</h2>
+                            </div>
+                            <div class="panel-body text-center">
+                                <p>
+                                    <b>Transaction Total</b><br>
+                                    Payment Amount : @Model.SentAmount @FaxingCurrency<br>
+                                    Fees : @Model.Fees @FaxingCurrency<br>
+                                    Total Cost : @Model.TotalAmount @FaxingCurrency<br>
+
+                                    Total Receive Amount : @Model.TotalReceiveAmount @ReceivingCurrency
+                                </p>
+
+
+                                <a href="@Url.Action("TopUpAmount")" title="">Change Transaction Amount</a>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!--  -->
+
+
+                    @Html.HiddenFor(model => model.KiiPayBusinessInformationId)
+                    @Html.HiddenFor(model => model.MerchantCardID)
+                    @Html.HiddenFor(model => model.CardUserId)
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <a href="@Url.Action("TopUpDetails")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                    <button type="submit" class="fbtn btn-next">Top-Up Now <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br />
+                    <a href="@Url.Action("TopUpDetails")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+
+</form>

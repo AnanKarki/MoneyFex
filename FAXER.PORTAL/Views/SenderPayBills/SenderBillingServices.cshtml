@@ -1,0 +1,52 @@
+﻿
+
+@model FAXER.PORTAL.Models.SenderPayMonthlyBillVM
+
+@{
+    ViewBag.Title = "SenderBillingServices";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+
+                        <div class="form-group mb30">
+                            @*<select class="form-blue">
+                                    <option>Select Supplier Country</option>
+                                </select>*@
+                            @Html.DropDownListFor(model => model.SupplierCountryCode, (IEnumerable<SelectListItem>)ViewBag.SenderCountries, "Select Supplier Country", new { @class = "form-blue" })
+                            @Html.ValidationMessageFor(model => model.SupplierCountryCode, "", new { @class = "text-danger" })
+
+                        </div>
+
+                        <h4 class="text-center mb30">Paying a Local Supplier?   <a href="@Url.Action("PayingALocalSupplier","SenderPayBills")">Change</a></h4>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}

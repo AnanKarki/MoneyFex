@@ -1,0 +1,433 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.LargeFundMoneyTransferFormVM
+@{
+    ViewBag.Title = "SubmitLargeFundMoneyTransfer";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5);
+        /* IE */
+        -moz-transform: scale(1.5);
+        /* FF */
+        -webkit-transform: scale(1.5);
+        /* Safari and Chrome */
+        -o-transform: scale(1.5);
+        /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table,
+        .forms .forms-body table tr,
+        td,
+        th {
+            border: 0;
+            text-align: left;
+        }
+
+
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-left btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+
+                                <div class="card-body">
+
+                                    <!--  -->
+                                    <div class="forms-wrapper">
+
+
+                                        <div class="form-main-title">
+                                            LARGE FUNDS MONEY TRANSFER FORM
+                                        </div>
+                                        <p>
+                                            FOR USE WITH MONEY TRANSFERS EQUAL OR EXCEEDING USD $7,500 OR
+                                            LOCAL CURRENCY EQUIVALENT
+                                        </p>
+                                        <div class="forms">
+                                            <div class="forms-header">
+                                                TRANSACTION INFORMATION
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <h3>Send Amount</h3>
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td><label>LOCAL CURRENCY:  <input type="text" name=""></label></td>
+                                                                <td><label>USD: <input type="text" name=""></label></td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label>Destination City & Country:  <input type="text" name=""></label></td>
+                                                                <td><label> Expected Payout Date: <input type="date" name=""></label></td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td><label>Source of funds:  <input type="text" name=""></label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2"><label>Purpose of the transfer (Briefly explain purpose):  <input type="text" name=""></label></td>
+                                                            </tr>
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+
+                                            <div class="forms-header">
+                                                SENDER INFORMATION
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td colspan="2"><label>Sender Full Name: <input type="text" name=""></label></td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label>Date of Birth: <input type="date" name=""></label></td>
+                                                                <td>
+                                                                    <label>
+                                                                        Gender: <select>
+                                                                            <option>Male</option>
+                                                                            <option>Fenale</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan="2"><label>Address: <input type="text" name=""></label></td>
+
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td><label> Telephone: <input type="text" name=""></label></td>
+                                                                <td><label> Email: <input type="text" name=""></label></td>
+
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label> ID Type: <input type="text" name=""></label></td>
+                                                                <td><label> ID Number: <input type="text" name=""></label></td>
+
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label> Expiration Date: <input type="date" name=""></label></td>
+                                                                <td><label> Issuing Country <input type="text" name=""></label></td>
+
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan="2"><label>Occupation: <input type="text" name=""></label></td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td><label>How many money transfers have you sent using MoneyFex in the past three months? </label></td>
+                                                                <td>
+                                                                    <label><input type="text" name=""></label>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+
+
+
+                                            <div class="forms-header">
+                                                RECEIVER INFORMATION
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+
+
+                                                            <tr>
+                                                                <td><label>Receiver Name: <input type="text" name=""></label></td>
+                                                                <td><label>Telephone: <input type="text" name=""></label></td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td colspan="2"><label>Address: <input type="text" name=""></label></td>
+
+                                                            </tr>
+
+
+
+                                                            <tr>
+                                                                <td><label> ID Type: <input type="text" name=""></label></td>
+                                                                <td><label> ID Number: <input type="text" name=""></label></td>
+
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td><label> Expiration Date: <input type="date" name=""></label></td>
+                                                                <td><label> Nationality: <input type="text" name=""></label></td>
+
+
+                                                            </tr>
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+
+
+
+
+
+                                            <div class="forms-header">
+                                                Official User
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Is there documentation attached to support the purpose of the transfer?
+                                                                        <select>
+                                                                            <option>Yes</option>
+                                                                            <option>No</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Is the sender aware of the charges & F/X rates; and agree to them?
+                                                                        <select>
+                                                                            <option>Yes</option>
+                                                                            <option>No</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Did you check the country restrictions ?
+                                                                        <select>
+                                                                            <option>Yes</option>
+                                                                            <option>No</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        What is the relationship between sender and receiver?
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Has the send money form been attached?
+                                                                        <select>
+                                                                            <option>Yes</option>
+                                                                            <option>No</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+
+
+
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+
+                                            <div class="forms-footer  ">
+                                                <button type="" class="button button-cancel  ">Cancel </button>
+
+                                                <button type="" class="button button-Submit  ">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--  -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

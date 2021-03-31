@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml"; ;
+}
+
+<div style="padding : 20px">
+
+
+    <h4 style="text-align:center">MoneyFex Account Deposit Receipt</h4>
+
+        <table  width="100%">
+
+            <tbody>
+                <tr>
+                    <td><b>MF Receipt Number</b></td>
+                    <td><b>@ViewBag.ReceiptNo</b></td>
+                </tr>
+                <tr>
+                    <td><b>Date</b></td>
+                    <td><b>@ViewBag.Date</b></td>
+                </tr>
+                <tr>
+                    <td><b>Time</b></td>
+                    <td><b>@ViewBag.Time</b></td>
+                </tr>
+                <tr>
+                    <td><b>Agent Name </b></td>
+                    <td><b>@ViewBag.AgentName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Agent Account Number</b></td>
+                    <td><b>@ViewBag.AgentCode</b></td>
+                </tr>
+                <tr>
+                    <td><b>Name of Updater</b></td>
+                    <td><b>@ViewBag.NameOfUpdater</b></td>
+                </tr>
+                <tr>
+                    <td><b>Deposit Amount</b></td>
+                    <td><b>@ViewBag.DepositedAmount @ViewBag.Currency</b></td>
+                </tr>
+
+
+
+            </tbody>
+        </table>
+    
+    <br />
+    <p style="text-align:center"><b>This is a confirmation of amount held by the agent</b></p>
+</div>
+

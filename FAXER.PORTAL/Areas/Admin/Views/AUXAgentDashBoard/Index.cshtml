@@ -1,0 +1,181 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">AUX Agents</h4>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class=" dashboard_body ">
+
+                                        <div class="mobile_design text-center row ">
+
+
+
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXAgentRecentTransaction")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/statement.svg" />
+                                                        </div>
+                                                        <h4>Recent Transaction</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","RegisteredAUXAgent")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/aux-agent.svg">
+                                                        </div>
+                                                        <h4>Registered AUX Agent</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","RegisteredAUXSender")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/aux-sender.svg">
+                                                        </div>
+                                                        <h4>Registered AUX Senders</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXExchangeRate")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/exchange-rate.svg">
+                                                        </div>
+                                                        <h4>Set Exchange Rate Limit</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("ViewExchangeRate","AUXExchangeRate")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/exchange-rate.svg">
+                                                        </div>
+                                                        <h4>View Exchange Rate </h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXAgentExchangeFee")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/transfer-fee.svg">
+                                                        </div>
+                                                        <h4>View Transfer Fee</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXAgentFundAccount")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/manual-bank-payment.svg">
+                                                        </div>
+                                                        <h4>Fund Account</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXSenderDocumentation")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/documents.svg">
+                                                        </div>
+                                                        <h4>AUX Sender Documents</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXAgentDocumentation")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/documents.svg">
+                                                        </div>
+                                                        <h4>Agent Documents</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AuxAgentComplianceForm")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/compliance-form.svg">
+                                                        </div>
+                                                        <h4>Compliance Form</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 col-sm-4">
+                                                <div class="dashboard_thumb">
+                                                    <a href="@Url.Action("Index","AUXAccounting")">
+                                                        <div class="das-icon">
+                                                            <img src="~/Areas/Admin/Content/assets/images/svg/accounting.svg">
+                                                        </div>
+                                                        <h4>Accounting</h4>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

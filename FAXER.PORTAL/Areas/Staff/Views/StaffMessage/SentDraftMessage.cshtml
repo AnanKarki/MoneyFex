@@ -1,0 +1,149 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffEmailComposeViewModel
+
+@{
+    ViewBag.Title = "SentDraftMessage";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+
+@{Html.RenderPartial("_mail_sidebar");}
+
+
+@using (Html.BeginForm("SentDraftMessage", "StaffMessage", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div class="col-lg-9 col-md-8">
+
+        <div class="dashboard_header">
+            <h1>Compose</h1>
+        </div>
+        <!--  -->
+        <div class="dashboard_body">
+            <div class=" ">
+                <div class=" ">
+
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>From</label>
+                    </div>
+                    @Html.HiddenFor(model => model.Id)
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.FromEmailAddress, new { @class = "form-control", @placeholder = "Your Registered Email Address", @readonly = "readonly" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>To</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.ToEmailAddress, new { @class = "form-control", @placeholder = "Receiver Staff Email Address" })
+                            @Html.ValidationMessageFor(model => model.ToEmailAddress, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Subject</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "Message Subject" })
+                            @Html.ValidationMessageFor(model => model.Subject, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-3">
+                        <label>Attachment</label>
+                    </div>
+
+                    <div class="col-lg-8 ">
+                        <div class="form-group">
+                            <input type="file" id="" name="AttachmentURL" onclick="RemoveAttactment()">
+                            @if (ViewBag.FileName != null)
+                            {
+                                <a id="attach" href="@Model.AttachmentURL" target="_blank">@ViewBag.FileName</a> <button id="Close" type="button" onclick="RemoveAttactment()">X</button>
+                            }
+                            @Html.HiddenFor(model => model.AttachmentURL)
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <!--  -->
+                    <!--  -->
+
+
+                    <div class="col-lg-12 ">
+                        <div class="form-group">
+                            @Html.TextAreaFor(model => model.BankPaymentReference, new { @class = "form-control", @placeholder = "Enter Bank Payment Reference", @rows = "5" })
+                            @Html.ValidationMessageFor(model => model.BankPaymentReference, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+
+                    <!--  -->
+
+
+                </div>
+            </div>
+        </div>
+        @*<div class="col-lg-12">
+                <div class="col-lg-5 pull-right">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" name="Draft"> Send > </button>
+
+
+                    </div>
+
+
+                </div>
+                <div class="col-lg-10 pull-left">
+
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-danger pull-left" name="Draft" value=true>Save as Draft > </button>
+
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="col-lg-12 ">
+
+
+            @*<a href="/TrackFax/FaxDetails" ,="" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>*@
+            <button class="fbtn btn-danger" type="submit" name="Draft" value=true>Save as Draft <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+            <button class="fbtn btn-next" type="submit" name="Draft">&nbsp &nbsp &nbsp &nbsp Send > &nbsp &nbsp &nbsp &nbsp &nbsp <i class="" aria-hidden="true"></i></button>
+
+            <br>
+        </div>
+    </div>
+    @*<div class="col-lg-offset-5 pull-right">
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary ">   Send </button>
+            </div>
+        </div>*@
+
+}
+@section scripts{
+
+    <script type="text/javascript">
+
+        function RemoveAttactment() {
+            $("#attach").hide();
+            $("#Close").hide();
+
+        }
+    </script>
+}
+
+
+

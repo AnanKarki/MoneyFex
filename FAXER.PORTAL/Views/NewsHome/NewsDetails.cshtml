@@ -1,0 +1,173 @@
+﻿@model FAXER.PORTAL.Models.PaticularNewsViewModel
+@{
+    ViewBag.Title = "NewsDetails";
+    //Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mt40 mb40 bg-white pinside40">
+                    <div class="row">
+                        <div class="col-md-8 col-sm-12 col-xs-12">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="post-holder">
+                                        <div class="post-block mb40">
+                                            <h2>@Model.Headline </h2>
+                                       
+                                            <div class="bg-white">
+                                                  @if (Model.NewsImage != null)
+                                                {
+                                                    <img src="@Model.NewsImage" alt=" "    style="float:left; width:200px; margin-right:10px;">
+                                                }
+                                                else
+                                                {
+                                                    
+                                                }
+                                                @Html.Raw(Model.FullNews)
+                                                <div class="addthis_inline_share_toolbox_27ra"></div>
+                                                <div class="sharethis-inline-share-buttons">
+
+
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    @*<div class="post-related mb40">
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <h2 class="post-related-title mb20">Related post</h2>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 mb30 col-sm-6 col-xs-6">
+                                                    <div class="related-img mb20">
+                                                        <a href="#"> <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive" class="img-responsive"> </a>
+                                                    </div>
+                                                    <div class="post-related-content">
+                                                        <h4 class="related-title mb10"><a href="#" class="title"> Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque </a></h4>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                                    <div class="related-img mb20">
+                                                        <a href="#"> <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive" class="img-responsive"> </a>
+                                                    </div>
+                                                    <div class="post-related-content">
+                                                        <h4 class="related-title mb10"><a href="#" class="title">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a></h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-sm-12 col-xs-12">
+                            <div class="sidebar-area">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="bg-primary">
+                                            <div class="widget widget-search">
+                                                <h3 class="widget-title">Search Bar</h3>
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Search" id="search" onkeydown="if (event.keyCode == 13)
+                        searchNews();">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-primary btn-sm" type="button" onclick="searchNews();"><i class="fa fa-search"></i></button>
+                                                    </span>
+                                                </div>
+                                                <!-- /input-group -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-12">
+                                            <div class="bg-primary">
+                                                <div class="widget widget-category">
+                                                    <h3 class="widget-title">Categories</h3>
+                                                    <ul class="listnone bullet bullet-arrow-circle-right">
+                                                        <li><a href="#"> Aenean commodo ligula eget dolor. </a></li>
+                                                        <li><a href="#"> Aenean commodo ligula eget dolor. </a></li>
+                                                        <li><a href="#"> Aenean commodo ligula eget dolor. </a></li>
+                                                        <li><a href="#"> Aenean commodo ligula eget dolor. </a></li>
+                                                        <li><a href="#"> Aenean commodo ligula eget dolor. </a></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>*@
+                                    <div class="col-md-12">
+                                        <div class="bg-primary">
+                                            <div class="widget widget-recent-post">
+                                                <h3 class="widget-title mb30">Recent post</h3>
+                                                <ul class="listnone">
+                                                    @foreach (var item in Model.ShowRecentNews)
+                                                    {
+                                                        <li>
+                                                            <div class="recent-block mb20">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-sm-2 col-xs-5">
+
+                                                                        <a href="@Url.Action("NewsDetails","NewsHome", new { @id=item.Id})"> <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive mb10"> </a>
+                                                                    </div>
+                                                                    <div class="col-md-8 col-sm-10 col-xs-7">
+                                                                        <h4 class="recent-title mb10"><a href="@Url.Action("NewsDetails","NewsHome", new { @id=item.Id})" class="title">@item.Headline  </a></h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                    }
+                                                    @*<li>
+                                                            <div class="recent-block mb20">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-sm-2 col-xs-5">
+                                                                        <a href="#"> <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive" class="img-responsive mb10"> </a>
+                                                                    </div>
+                                                                    <div class="col-md-8 col-sm-10 col-xs-7">
+                                                                        <h4 class="recent-title mb10"><a href="#" class="title">Aenean commodo ligula eget dolor.  </a></h4>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="recent-block mb20">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 col-sm-2 col-xs-5">
+                                                                        <a href="#"> <img src="https://dummyimage.com/800x600/e6e6e6/00000" alt=" " class="img-responsive" class="img-responsive mb10"> </a>
+                                                                    </div>
+                                                                    <div class="col-md-8 col-sm-10 col-xs-7">
+                                                                        <h4 class="recent-title mb10"><a href="#" class="title">Aenean commodo ligula eget dolor.  </a></h4>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </li>*@
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5bf501e31992d209"></script>
+@section scripts{
+    <script type="text/javascript">
+        function searchNews() {
+            debugger;
+            var text = $("#search").val();;
+            window.location.href = "/NewsHome/Index?search=" + text;
+        }
+    </script>
+
+
+}

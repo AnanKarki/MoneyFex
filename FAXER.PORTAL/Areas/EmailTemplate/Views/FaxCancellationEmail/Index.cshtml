@@ -1,0 +1,46 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName,
+    </p>
+
+    <p>
+        A cancellation request has been issued to the Transfer containing the following information:
+    </p>
+    <br />
+    <p>
+        MoneyFex Control Number (MFCN): @ViewBag.MFCN
+    </p>
+    <p>
+        Sent Amount: @ViewBag.SentAmount
+    </p>
+    <p>
+        Receiver's Name: @ViewBag.ReceiverName
+    </p>
+    <p>
+        Receiver's Country: @ViewBag.ReceiverCountry
+    </p>
+    <p>
+        Receiver's City: @ViewBag.ReceiverCity
+    </p>
+    <p>
+        Sent Dated: @ViewBag.SentDate
+    </p>
+    <br />
+    <p>
+        The customer service team at MoneyFex  will now process a refund of @ViewBag.SentAmount
+        This amount will be credited to the card or account that you used for the transaction.
+    </p>
+    <p>
+        A refund can take up to 5 working days to reach your card or account.
+    </p>
+    <p>
+        As stipulated by our terms and conditions, we are unable to refund the Sending fee.
+    </p>
+    <br />
+ 
+</div>

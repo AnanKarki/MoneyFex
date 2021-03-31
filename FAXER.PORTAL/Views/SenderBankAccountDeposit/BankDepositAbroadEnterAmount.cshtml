@@ -1,0 +1,401 @@
+﻿@model FAXER.PORTAL.Models.SenderBankAccoutDepositEnterAmountVm
+@{
+    /**/
+    ViewBag.Title = "BankDepositAbroadEnterAmount";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string AmountOne = "1";
+}
+
+<!--  -->
+<!--  -->
+<!--  -->
+<form method="post">
+    @Html.HiddenFor(x => x.ReceiverId)
+    @Html.HiddenFor(x => x.Fee)
+    @Html.HiddenFor(x => x.TotalAmount)
+    @*@Html.HiddenFor(x => x.ReceivingAmount)*@
+    @Html.HiddenFor(x => x.ReceiverName)
+    @Html.HiddenFor(x => x.SendingCurrencyCode)
+    @Html.HiddenFor(x => x.SendingCurrencySymbol)
+    @Html.HiddenFor(x => x.ExchangeRate)
+    @Html.HiddenFor(x => x.ReceivingCurrencySymbol)
+    @Html.HiddenFor(x => x.ReceivingCurrencyCode)
+
+
+    <!--  -->
+
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Content/Images/user.svg" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary"> @Model.ReceiverName</span>
+                            </div>
+                        </div>
+
+                        @*<div class="amount-group mb5  row  ">
+
+
+                <div class="col-lg-5">
+                    <label>Sending Amount</label>
+                    @Html.TextBoxFor(x => x.SendingAmount, new { @class = "amount", @placeholder = Model.SendingCurrencySymbol + "0.00", @type = "number", id = "SendingAmount", @onkeyup = "GetPaymentSummary(false)", @step = ".01" })
+                    <div class="gbpusd">
+                        @Model.SendingCurrencyCode
+                    </div>
+                    <div></div>
+                    @Html.ValidationMessageFor(model => model.SendingAmount, "", new { @class = "text-danger" })
+
+                </div>
+
+                <div class="col-lg-2">
+                    <span class="text-primary font-20">OR</span>
+                </div>
+                <div class="col-lg-5">
+                    <label>Receiving Amount</label>
+                    @Html.TextBoxFor(x => x.ReceivingAmount, new { @class = "amount", @placeholder = Model.ReceivingCurrencySymbol + "0.00", @type = "number", id = "ReceivingAmount", @onkeyup = "GetPaymentSummary(true)", @step = ".01" })
+
+                    <div class="gbpusd">
+                        @Model.ReceivingCurrencyCode
+                    </div>
+
+                    <div></div>
+                    @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+
+                </div>
+            </div>*@
+
+
+                        <div class="amount-group mb5  row  hidden-md hidden-sm hidden-xs">
+
+                            <div class="col-lg-5">
+                                <label>Sending Amount</label>
+                                @Html.TextBoxFor(x => x.SendingAmount, new { @class = "amount", @placeholder = Model.SendingCurrencySymbol + "0.00", @type = "number", id = "SendingAmount", @onkeyup = "GetPaymentSummary(false)", @step = ".01" })
+                                <div class="gbpusd">
+                                    @Model.SendingCurrencyCode
+                                </div>
+                                <div></div>
+                                @Html.ValidationMessageFor(model => model.SendingAmount, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-lg-2">
+                                <span class="text-primary font-20">OR</span>
+                            </div>
+                            <div class="col-lg-5">
+                                <label>Receiving Amount</label>
+                                @Html.TextBoxFor(x => x.ReceivingAmount, new { @class = "amount", @placeholder = Model.ReceivingCurrencySymbol + "0.00", @type = "number", id = "ReceivingAmount", @onkeyup = "GetPaymentSummary(true)", @step = ".01" })
+
+                                <div class="gbpusd">
+                                    @Model.ReceivingCurrencyCode
+                                </div>
+
+                                <div></div>
+                                @Html.ValidationMessageFor(model => model.ReceivingAmount, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="  row  text-left">
+                            <div class="form-home hidden-lg ">
+
+                                <div class="col-lg-7 col-md-8 col-sm-8 col-xs-6 ">
+                                    <div class="form-home-page mb30">
+                                        <div class="form-group  contact-no-group">
+                                            <input type="number" id="SendingAmount2" class=" form-calculate  primary-placeholder" required placeholder="0.00" name="SendingAmount2"   onkeyup = "GetPaymentSummaryMobile(false)"  step=".01">
+                                            <label class="form-control-placeholder" for="SendingAmount">You Send</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-4 col-sm-4 col-xs-6">
+                                    <div class="form-home-page form-group mb30">
+
+                                        @*@Html.DropDownList("SendingCountrydiv" , (IEnumerable<SelectListItem>)ViewBag.Countries , "" , new { @class= "form-calculate js-example-templating", @id = "SendingCountrydiv"
+                    , @onchange = "GetPaymentSummary(false)"  })*@
+
+                                        <select class="form-calculate js-example-templating" disabled>
+
+                                            <option value="GB" selected>GBP United kingdom</option>
+                                            <option value="BE">EUR Belgium</option>
+                                            <option value="DE">EUR Germany</option>
+                                            <option value="NG">NGN Nigeria</option>
+                                            <option value="CM">XAF Cameroon</option>
+                                            <option value="GH">GHS Ghana</option>
+
+                                        </select>
+                                        <div class="clearfix"></div>
+
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="form-home hidden-lg ">
+                                <div class="col-lg-7 col-md-8 col-sm-8 col-xs-6 ">
+                                    <div class="form-home-page mb30">
+                                        <div class="  contact-no-group">
+
+                                            <input type="number" class="form-calculate  primary-placeholder" id="ReceivingAmount2" placeholder="0.00" name="ReceivingAmount2"  onkeyup = "GetPaymentSummaryMobile(true)"  step=".01">
+                                            <label class="form-control-placeholder" for="ReceivingAmount">They receive</label>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-5 col-md-4 col-sm-4 col-xs-6">
+                                    <div class="form-home-page form-group mb30">
+
+
+                                        @*@Html.DropDownList("SendingCountrydiv" , (IEnumerable<SelectListItem>)ViewBag.Countries , "" , new { @class= "form-calculate js-example-templating", @id = "SendingCountrydiv"
+                    , @onchange = "GetPaymentSummary(false)" })*@
+                                        <select class="form-calculate js-example-templating"  disabled>
+
+                                            <option value="GB">GBP United kingdom</option>
+                                            <option value="BE">EUR Belgium</option>
+                                            <option value="DE">EUR Germany</option>
+                                            <option value="NG" selected>NGN Nigeria</option>
+                                            <option value="CM">XAF Cameroon</option>
+                                            <option value="GH">GHS Ghana</option>
+
+                                        </select>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                            <div class="form-home col-lg-12">
+
+
+                                <div class="estimate-calculator" style="">
+                                    <div class="wrapper">
+                                        <dl>
+                                            <dt>Fee</dt>
+                                            <dd class="fee" id="Fee" data-outbound-currency="USD"> @Model.SendingCurrencySymbol<span name="Fee">@Model.Fee</span></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>You pay</dt>
+                                            <dd class="fee" data-outbound-currency="USD" id="TotalAmount"> @Model.SendingCurrencySymbol<span name="TotalAmount">@Model.TotalAmount</span></dd>
+                                        </dl>
+                                        <dl>
+                                            <dt>They receive</dt>
+                                            <dd class="fee" data-outbound-currency="USD"> @Model.ReceivingCurrencySymbol<span name="ReceiveAmount">@Model.ReceivingAmount</span></dd>
+                                        </dl>
+
+                                        <div class="clearfix">
+
+                                        </div>
+                                    </div>
+                                    <div class="exchange-rate-holder">
+                                        Exchange rate
+                                        <span data-outbound-currency="GBP">@Model.SendingCurrencyCode @AmountOne</span> = <span class="exchange-rate" data-inbound-currency="GHS">@Model.ReceivingCurrencyCode @Model.ExchangeRate</span>
+                                    </div>
+                                    <br>
+
+                                </div>
+                                <div class="clearfix"></div>
+                                <label id="FeeValidation" class="text-danger" style="display:none">Operation for this country is not available.Try again later</label>
+                            </div>
+
+
+
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+
+                    @*<div class="pinside20">
+
+                        <div class="estimate-calculator" style="">
+                            <div class="wrapper">
+                                <dl>
+                                    <dt>Fee</dt>
+                                    <dd class="fee" id="Fee" data-outbound-currency="USD"> @Model.SendingCurrencySymbol<span name="Fee">@Model.Fee</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>You pay</dt>
+                                    <dd class="fee" data-outbound-currency="USD" id="TotalAmount"> @Model.SendingCurrencySymbol<span name="TotalAmount">@Model.TotalAmount</span></dd>
+                                </dl>
+                                <dl>
+                                    <dt>They receive</dt>
+                                    <dd class="fee" data-outbound-currency="USD"> @Model.ReceivingCurrencySymbol<span name="ReceiveAmount">@Model.ReceivingAmount</span></dd>
+                                </dl>
+
+                                <div class="clearfix">
+
+                                </div>
+                            </div>
+                            <div class="exchange-rate-holder">
+                                Exchange rate
+                                <span data-outbound-currency="GBP">@Model.SendingCurrencyCode @AmountOne</span> = <span class="exchange-rate" data-inbound-currency="GHS">@Model.ReceivingCurrencyCode @Model.ExchangeRate</span>
+                            </div>
+                        </div>
+
+
+                    </div>*@
+
+                </div>
+                    <div class="clearfix"></div>
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg   ">Send This Amount <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+                            <hr>
+
+                            <center>
+                                <a href="@Url.Action("Index")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+</form>
+
+
+
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+        function GetPaymentSummary(IsReceivingAmount) {
+            debugger;
+            var SendingAmount = $("#SendingAmount").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+
+            if (SendingAmount == "") {
+
+                SendingAmount = 0;
+            }
+            if (ReceivingAmount == "") {
+
+                ReceivingAmount = 0;
+            }
+            //GetPaymentSummary
+            $.getJSON("/SenderBankAccountDeposit/GetPaymentSummary?SendingAmount=" + SendingAmount + "&ReceivingAmount=" + ReceivingAmount + "&IsReceivingAmount=" + IsReceivingAmount, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                    $(selector).text(GetFormattedAmount(result[item]));
+
+                }
+
+                $("#SendingAmount2").val($("#SendingAmount").val());
+                $("#ReceivingAmount2").val($("#ReceivingAmount").val());
+
+                if (result.HasFeeSetup == false) {
+
+                    $("#FeeValidation").show();
+                } else {
+                    $("#FeeValidation").hide();
+                }
+                //$('.amountspan').text(GetFormattedAmount($('.amountspan').text()));
+
+            })
+        }
+        $('[name="Fee"]').text(GetFormattedAmount($('[name="Fee"]').text()));
+        $('[name="TotalAmount"]').text(GetFormattedAmount($('[name="TotalAmount"]').text()));
+        $('[name="ReceiveAmount"]').text(GetFormattedAmount($('[name="ReceiveAmount"]').text()));
+
+        function GetPaymentSummaryMobile(IsReceivingAmount) {
+
+            var SendingAmount = $("#SendingAmount2").val();
+            var ReceivingAmount = $("#ReceivingAmount2").val();
+
+            if (SendingAmount == "") {
+
+                SendingAmount = 0;
+            }
+            if (ReceivingAmount == "") {
+
+                ReceivingAmount = 0;
+            }
+
+            $.getJSON("/SenderBankAccountDeposit/GetPaymentSummary?SendingAmount=" + SendingAmount + "&ReceivingAmount=" + ReceivingAmount + "&IsReceivingAmount=" + IsReceivingAmount, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+                $("#SendingAmount2").val($("#SendingAmount").val());
+                $("#ReceivingAmount2").val($("#ReceivingAmount").val());
+                if (result.HasFeeSetup == false) {
+
+                    $("#FeeValidation").show();
+                } else {
+                    $("#FeeValidation").hide();
+                }
+            })
+        }
+
+        $("#SendingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() <= 1) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+        })
+
+        $("#ReceivingAmount").focus(function () {
+
+            if ($("#SendingAmount").val() <= 1) {
+
+                $("#SendingAmount").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+        })
+        $("#SendingAmount2").focus(function () {
+
+            if ($("#SendingAmount2").val() <= 1) {
+
+                $("#SendingAmount2").val("");
+                $("#ReceivingAmount2").val("");
+            }
+
+        })
+
+        $("#ReceivingAmount2").focus(function () {
+
+            if ($("#SendingAmount2").val() <= 1) {
+
+                $("#SendingAmount2").val("");
+                $("#ReceivingAmount2").val("");
+            }
+
+        });
+
+        $(".select2-selection__arrow").remove();
+    </script>
+}

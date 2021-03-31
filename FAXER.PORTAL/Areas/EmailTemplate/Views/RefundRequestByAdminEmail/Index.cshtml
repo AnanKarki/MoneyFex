@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+    </p>
+    <br />
+    <p>
+        A refund  has been issued to the transfer containing the following information:
+    </p>
+    <br />
+    <p>
+        Sender's Full name: @ViewBag.FaxerName
+    </p>
+    <p>
+        MoneyFex Control Number (MFCN): @ViewBag.MFCNNumber
+    </p>
+    <p>
+        Sent Amount: @ViewBag.FaxedAmount
+    </p>
+    <p>
+        Receiver's Name: @ViewBag.ReceiverName
+    </p>
+    <p>
+        Receiver's Country: @ViewBag.ReceiverCountry
+    </p>
+    <p>
+        Receiver's City: @ViewBag.ReceiverCity
+    </p>
+    <p>
+        Sent Date: @ViewBag.FaxedDate
+    </p>
+    <br />
+    <p>
+        Name of admin refund requester: <b>@ViewBag.NameOfAdminRefundRequester</b>
+    </p>
+    <br />
+    <p>
+        A refund can take up to 5 working days to reach your card or account.
+    </p>
+    <p>
+        As stated by our terms and conditions, we are unable to refund the Sending fee.
+    </p>
+    <br />
+    <br />
+    
+</div>

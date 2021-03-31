@@ -1,0 +1,177 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+@*<table>
+        <thead>
+        </thead>
+        <tbody style="padding: 30px 0 !important; display: block;">
+            <tr>
+                <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png" width="100%"></td>
+                @{
+
+                    if (ViewBag.IsTransactionHeld == true)
+                    {
+                        <td valign="top">
+                            <h1 style="font-size: 22px; color: #004468; margin-bottom: 5px; line-height: 35px;">Hi <b> @ViewBag.FirstName</b>,</h1>
+                            <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 5px; line-height: 35px;">Money transferred to <b> @ViewBag.receiverFullName</b> is in progress</h1>
+                        </td>
+                    }
+                    else
+                    {
+                        <td valign="top">
+                            <h1 style="font-size: 22px; color: #004468; margin-bottom: 5px; line-height: 35px;">Hi <b> @ViewBag.FirstName</b>,</h1>
+                            <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 5px; line-height: 35px;">Money transferred to <b> @ViewBag.receiverFullName</b> has started</h1>
+                        </td>
+                    }
+                }
+
+            </tr>
+
+            <tr>
+                <td></td>
+                <td>
+                    <h3 style="color: #004468; margin-top: 0;">Below are the full details of your transaction:</h3>
+                    <p style="line-height: 30px; font-size: 18px; color: #02b6ff;">
+                        <br> <b> Transaction number</b>: @ViewBag.transactionNo
+                        @if (ViewBag.SenderPaymentMode == FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount)
+                        {
+                            <span><br>  <b> Payment Reference</b>: @ViewBag.paymentReference </span>
+
+                        }
+                        <br> <b>You sent</b>: @ViewBag.sendingCurrency  @ViewBag.SendingAmount  to  @ViewBag.receivingCountry
+                        <br> <b>Fee</b>:  @ViewBag.sendingCurrency @ViewBag.fee
+                        <br> <b>@ViewBag.receiverFirstName  received</b> :     @ViewBag.ReceiveingCurrency  @ViewBag.ReceivingAmount
+                        <br> <b>Bank Name</b>:   @ViewBag.BankName
+                        <br> <b>Bank account</b>:   @ViewBag.bankAccount
+                        <br> <b>Branch Code</b>: @ViewBag.bankCode
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2">
+                    <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                        We look forward to facilitate your next money transfer
+                        <br><br> Thank you
+                    </p>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>*@
+
+
+<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+
+                    <tr>
+                        <td>
+
+
+                            <h1 style="        font-size: 30px;
+        color: #004468;
+        line-height: 14px;
+        margin: 20px 0;">
+                                Hi @ViewBag.FirstName,
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+
+                                @*@{
+
+                                        if (ViewBag.IsTransactionHeld == true)
+                                        {
+
+                                            <h1 style="font-size: 22px; color: #004468; margin-bottom: 5px; line-height: 35px;">Hi <b> @ViewBag.FirstName</b>,</h1>
+                                            <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 5px; line-height: 35px;">Money transferred to <b> @ViewBag.receiverFullName</b> is in progress</h1>
+
+                                        }
+                                        else
+                                        {
+
+                                            <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 5px; line-height: 35px;">Money transferred to <b> @ViewBag.receiverFullName</b> has started</h1>
+
+                                        }
+                                    }*@
+                                Money transferred to <span style="color:#02b6ff;">@ViewBag.receiverFullName</span> is in progress.
+
+                            </h1>
+                            <h1 style="        font-size: 18px;
+        line-height: 20px;
+        margin-top: 20px;
+        color: #004468;
+">
+                                Below are the full details of your transaction:
+                            </h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 30px;">
+                                <br> <b> Transaction number</b>: @ViewBag.transactionNo
+                                @if (ViewBag.SenderPaymentMode == FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount)
+                                {
+                                    <span><br>  <b> Payment Reference</b>: @ViewBag.paymentReference </span>
+
+                                }
+                                <br> <b>You sent</b>: @ViewBag.sendingCurrency  @ViewBag.SendingAmount  to  @ViewBag.receivingCountry
+                                <br> <b>Fee</b>:  @ViewBag.sendingCurrency @ViewBag.fee
+                                <br> <b>@ViewBag.receiverFirstName  received</b> :     @ViewBag.ReceiveingCurrency  @ViewBag.ReceivingAmount
+                                <br> <b>Bank Name</b>:   @ViewBag.BankName
+                                <br> <b>Bank account</b>:   @ViewBag.bankAccount
+                                <br> <b>Branch Code</b>: @ViewBag.bankCode
+
+                            </h1>
+
+
+                            <h1 style="        font-size: 17px;
+        line-height: 20px;
+        margin-top: 20px;
+        color: #004468">
+
+                                We look forward to facilitate your next money transfer
+                            </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:14px; margin: 40px 0;">Thank You</h1>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+
+</table>

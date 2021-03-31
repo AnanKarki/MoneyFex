@@ -1,0 +1,63 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseURl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.Faxername
+    </p>
+    <p>
+
+        A MoneyFex Virtual Account registered with the following information has been deleted:
+    </p>
+    <p>
+        <strong>Account No</strong> @ViewBag.MFTCCardNumber
+    </p>
+    <p>
+        <strong>Name on Account</strong>  @ViewBag.CardUserName
+    </p>
+    <p>
+        <strong>Account User Date of Birth:</strong> @ViewBag.CardUserDOB
+    </p>
+    <p>
+        <strong>Accont User Telephone No:</strong> @ViewBag.CardUserPhoneNumber
+    </p>
+    <p>
+        <strong>Account User Email address :</strong> @ViewBag.CardUserEmailAddress
+    </p>
+    <p>
+        <strong>Country of Registered Account User :</strong> @ViewBag.CardUserCountry
+    </p>
+    <p>
+
+        <strong>City of Registered Account User:</strong> @ViewBag.CardUserCity
+    </p>
+    <br />
+    <p>
+        The customer service team will now process a refund of the balance amount on this account.
+    </p>
+    <p>
+        Please allow 5 working days for this amount to be credited to you the bank account or the debit/credit card that you used to deposit the account .
+
+    </p>
+    <br />
+    
+    <table style="width:50%;margin-left:150px; ">
+        <tbody>
+            <tr>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.RegisterMFTC"><img src="@baseURl/Areas/EmailTemplate/Images/EmailImg/22.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+</div>

@@ -1,0 +1,117 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PartnerCommissionPaymentDetailsViewModel
+@{
+    ViewBag.Title = "PartnerCommissionPaymentDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@Model.PartnerName </label>  <span>Account No: @Model.AccountNo<br>Country: @Model.Country</span></h4>
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                        <div class="dt-responsive table-responsive">
+
+
+                                            <table class="table table-striped table-bordered nowrap">
+
+
+                                                <tbody>
+
+                                                    <tr>
+
+                                                        <td class="text-left">Transaction Date</td>
+                                                        <td class="text-left"> @Model.TransactionDate</td>
+
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Commission Rate </td>
+                                                        <td class="text-left">@Model.CommissionRate %</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Commission Type</td>
+                                                        <td class="text-left"> @Model.CommissionType</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Service Type</td>
+                                                        <td class="text-left">
+                                                           @Model.ServiceType
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Total Number of Transaction</td>
+                                                        <td class="text-left">@Model.TotalNoOfTransaction</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Total  Transaction Amount</td>
+                                                        <td class="text-left">@Model.CurrencySymbol @Model.TotalAmount</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Total Commission</td>
+                                                        <td class="text-left"> @Model.CurrencySymbol @Model.TotalCommission</td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td class="text-left">Status</td>
+                                                        <td class="text-left"><span class="text-danger">@Model.Status</span></td>
+                                                    </tr>
+
+
+
+
+
+
+
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+
+                                            <button type="button" class="btn btn-danger btn-round m-r-20"><i class="fa fa-remove"></i> Cancel</button>
+
+                                            <button type="button" class="btn btn-primary btn-round m-r-20"><i class="fa fa-send"></i> Pay</button>
+
+
+
+                                            <button type="button" class="btn btn-warning btn-round"><i class="fa fa-print"></i> Print</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,330 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffInformationViewModel
+@{
+    ViewBag.Title = "StaffInformation";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Staff's Information</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class=" ">
+
+                        <form name="StaffInformation">
+                            <div class="profileinfo">
+
+                                <div class="gear">
+                                    <label>Full Name:</label>
+                                    <span id="fullname" class="datainfo">@Model.FullName</span>
+
+                                </div>
+                                @Html.HiddenFor(model => model.StaffId, new { id = "StaffId" })
+
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="Address" class="datainfo">@Model.Address</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateAddress(@Model.StaffId)">Save</a>
+                                </div>
+
+                                <div class="gear">
+                                    <label>Telephone:</label>
+                                    <span id="Telephone" class="datainfo">@Model.Telephone</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateTelephone(@Model.StaffId)">Save</a>
+                                </div>
+
+
+
+                                <div class="gear">
+                                    <label>Email Address:</label>
+                                    <span id="pemail" class="datainfo">@Model.Email</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateEmail(@Model.StaffId)">Save</a>
+                                </div>
+
+
+                                <!-- <div class="gear">
+                                    <label>Password:</label>
+                                    <span id="Password" class="datainfo">Pako, New Road, Kathmandu, Nepal</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn">Save</a>
+                                </div> -->
+                                <h4>Staff's Next of Kin</h4>
+                                <hr>
+                                <div class="gear">
+                                    <label>Full Name:</label>
+                                    <span id="fullnameq" class="datainfo">@Model.KinFullName</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateKinFullName(@Model.StaffId)">Save</a>
+
+                                </div>
+
+
+                                <div class="gear">
+                                    <label>Address:</label>
+                                    <span id="AddressKin" class="datainfo">@Model.KinAddress</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateKinAddress(@Model.StaffId)">Save</a>
+                                </div>
+
+                                <div class="gear">
+                                    <label>Telephone:</label>
+                                    <span id="TelephoneKin" class="datainfo">@Model.KinTelephone</span>
+                                    <a href="#" class="editlink">Edit Info</a>
+                                    <a class="savebtn" onclick="UpdateKinTelephone(@Model.StaffId)">Save</a>
+                                </div>
+                                <h4>Compliance Documents</h4>
+                                <hr>
+                                <div class="gear">
+                                    <div class="col-lg-4"><label>Residence Permit</label></div>
+                                    <div class="col-lg-4"><img src="@Model.ResidentPermit" width="50"></div>
+                                    <div class="col-lg-4"><span id="datafile" class="datainfo"><input type="file" id="ResidencePermit" name="ResidencePermit" required></span></div>
+                                    <button type="button" id="ResidencePermitUpdata">Update</button>
+                                    <div class="clearfix"> </div>
+
+
+                                </div>
+
+                                <div class="gear">
+                                    <div class="col-lg-4"><label>Passport side 1</label></div>
+                                    <div class="col-lg-4"><img src="@Model.PassportSide1" width="50"></div>
+                                    <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" id="PassporSide1" name="PassporSide1" required></span></div>
+                                    <button type="button" id="PassportSide1Update">Update</button>
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="gear">
+                                    <div class="col-lg-4"><label>Passport side 2</label></div>
+                                    <div class="col-lg-4"><img src="@Model.PassportSide2" width="50"></div>
+                                    <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" id="PassportSide2" name="" required></span></div>
+                                    <button type="button" id="PassportSide2Update">Update</button>
+
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+                                <div class="gear">
+                                    <div class="col-lg-4"><label>Utility bill (not more then 3 months old)</label></div>
+                                    <div class="col-lg-4"><img src="@Model.UtilityBill" width="50"></div>
+                                    <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" id="UtilityBill" name="" required></span></div>
+                                    <button type="button" id="UtilityBillUpdate">Update</button>
+
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+                                <div class="gear">
+                                    <div class="col-lg-4"><label>Curiculum Vitae</label></div>
+                                    <div class="col-lg-4"><img src="@Model.CiriculamVitae" width="50"></div>
+                                    <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" id="CV" name="" required></span></div>
+                                    <button type="button" id="CVUpdate">Update</button>
+
+                                    <div class="clearfix"></div>
+
+
+                                </div>
+
+
+
+
+
+
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+<!--  -->
+@section scripts{
+    <script type="text/javascript">
+
+        function UpdateAddress(id) {
+            var Address = $('#Address-form').val();
+            window.location.href = "/StaffInformation/UpdateStaffAddress?Address=" + Address + "&id=" + id;
+
+        }
+        function UpdateTelephone(id) {
+            var phoneNumber = $('#Telephone-form').val();
+            window.location.href = "/StaffInformation/UpdateStaffTelephone?Telephone=" + phoneNumber + "&id=" + id;
+        }
+        function UpdateEmail(id) {
+            var EmailAddress = $('#pemail-form').val();
+            window.location.href = "/StaffInformation/UpdateStaffEmailAddress?Email=" + EmailAddress + "&id=" + id;
+        }
+        function UpdateKinFullName(id) {
+            var FullName = $('#fullnameq-form').val();
+            window.location.href = "/StaffInformation/UpdateKinFullName?FullName=" + FullName + "&id=" + id;
+
+
+        }
+        function UpdateKinTelephone(id) {
+            var Telephone = $('#TelephoneKin-form').val();
+            window.location.href = "/StaffInformation/UpdateKinTelephone?Telephone=" + Telephone + "&id=" + id;
+
+
+        }
+        function UpdateKinAddress(id) {
+            var Address = $('#AddressKin-form').val();
+            window.location.href = "/StaffInformation/UpdateKinAddress?Address=" + Address + "&id=" + id;
+
+
+        }
+
+        $(document).ready(function () {
+            document.getElementById('ResidencePermitUpdata').onclick = function () {
+                var StaffId = document.getElementById('StaffId').value;
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('ResidencePermit');
+                //Iterating through each files selected in fileInput
+               for (i = 0; i < fileInput.files.length; i++) {
+                   //Appending each file to FormData object
+                   formdata.append(fileInput.files[i].name, fileInput.files[i]);
+               }
+                $.ajax({
+                    url: '/StaffInformation/UpdateResidencePermit?id=' + StaffId,
+                    type: "POST",
+                    datatype: "json",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: formdata,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+
+            // update PassportSide 1 
+            document.getElementById('PassportSide1Update').onclick = function () {
+                var StaffId = document.getElementById('StaffId').value;
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('PassporSide1');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+                $.ajax({
+                    url: '/StaffInformation/UpdatePassportSide1?id=' + StaffId,
+                    type: "POST",
+                    datatype: "json",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: formdata,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+            // update PassportSide 2 
+            document.getElementById('PassportSide2Update').onclick = function () {
+                var StaffId = document.getElementById('StaffId').value;
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('PassportSide2');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+                $.ajax({
+                    url: '/StaffInformation/UpdatePassportSide2?id=' + StaffId,
+                    type: "POST",
+                    datatype: "json",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: formdata,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+            // update PassportSide 1 
+            document.getElementById('UtilityBillUpdate').onclick = function () {
+                var StaffId = document.getElementById('StaffId').value;
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('UtilityBill');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+                $.ajax({
+                    url: '/StaffInformation/UpdateUtilityBill?id=' + StaffId,
+                    type: "POST",
+                    datatype: "json",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: formdata,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+            // update PassportSide 1 
+            document.getElementById('CVUpdate').onclick = function () {
+                var StaffId = document.getElementById('StaffId').value;
+                var formdata = new FormData(); //FormData object
+                var fileInput = document.getElementById('CV');
+                //Iterating through each files selected in fileInput
+                for (i = 0; i < fileInput.files.length; i++) {
+                    //Appending each file to FormData object
+                    formdata.append(fileInput.files[i].name, fileInput.files[i]);
+                }
+                $.ajax({
+                    url: '/StaffInformation/UpdateCV?id=' + StaffId,
+                    type: "POST",
+                    datatype: "json",
+                    contentType: false, // Not to set any content header
+                    processData: false, // Not to process data
+                    data: formdata,
+                    success: function (result) {
+                        location.reload();
+                    },
+                    error: function (err) {
+
+                    }
+                });
+            }
+        });
+
+
+
+    </script>
+}

@@ -1,0 +1,348 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.StaffWithdrawalViewModel
+@{
+    ViewBag.Title = "CashWithdrawalByStaff";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    var imgUrl = "";
+}
+@if (Model != null)
+{
+    imgUrl = Model.StaffImageUrl == null ? "" : Model.StaffImageUrl;
+}
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(x => x.StaffId)
+    @Html.HiddenFor(x => x.StaffCode)
+
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h1>MoneyFex Staff  Withdrawal </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+
+
+
+
+                <div class="col-lg-12">
+
+                    <div class=" border_tbls">
+                        <div class="col-lg-4 pull-right">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" id="staffCode" placeholder="Enter Withdrawal  staff code" value="@ViewBag.StaffCode" />
+
+
+                                <span class="input-group-addon">
+
+                                    <span class="input-group-addon">
+                                        <button type="button" class="" onclick="searchStaffCode();">
+                                            <span class="glyphicon glyphicon-search"></span>
+                                        </button>
+                                    </span>
+
+                                </span>
+                            </div>
+                            @Html.ValidationMessageFor(model => model.StaffCode, "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="clearfix"></div>
+
+                    </div>
+                    <!-- start -->
+                    <div class=" border_tbls">
+                        <div class="col-lg-12">
+                            <h3 class="mt10">Staff Details</h3>
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="form-row ">
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Middle Name</label>
+                                        @Html.TextBoxFor(model => model.MiddleName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Family/Last Name</label>
+                                        @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>ID Type</label>
+                                        @Html.DropDownListFor(model => model.IDType, (IEnumerable<SelectListItem>)ViewBag.IDCardDropdown, "Choose ID Type", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IDType, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>ID Number</label>
+                                        @Html.TextBoxFor(model => model.IDNumber, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IDNumber, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>ID Exp. Date</label>
+                                        @Html.TextBoxFor(model => model.IDExpiryDate, new { @class = "form-control", @type = "date" })
+
+                                        @Html.ValidationMessageFor(model => model.IDExpiryDate, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Issuing Country</label>
+                                        @Html.DropDownListFor(model => model.IssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.IssuingCountry, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        @Html.TextBoxFor(model => model.Address, "", new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Staff MoneyFex Code</label>
+                                        @Html.TextBoxFor(model => model.StaffMoneyFexCode, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="image-user  ">
+                                <img src="@imgUrl">
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class=" border_tbls">
+                        <div class="col-lg-12">
+                            <h3 class="mt10">Agent Details</h3>
+
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <div class="col-lg-9">
+                            <div class="form-row ">
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Name</label>
+                                        @Html.TextBoxFor(model => model.AgentName, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Account No.</label>
+                                        @Html.TextBoxFor(model => model.AgentAccountNo, new { @class = "form-control", @readonly = "readonly" })
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Agent Staff Name</label>
+                                        @Html.TextBoxFor(model => model.AgentStaffName, new { @class = "form-control", @placeholder = "Enter Agent Staff Name" })
+                                        @Html.ValidationMessageFor(model => model.AgentStaffName, "", new { @class = "text-danger" })
+
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label>Enter Withdrawal Amount</label>
+                                        @Html.TextBoxFor(model => model.WithdrawalAmount, new { @class = "form-control", @placeholder = " Enter Withdrawal Amount" })
+                                        @Html.ValidationMessageFor(model => model.WithdrawalAmount, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+
+
+                                <div class="clearfix"></div>
+
+                                <div class="form-group  col-lg-12">
+                                    <div class="checkbox">
+                                        <label>
+                                            @*<input type="checkbox" name=" " value=" ">*@ @Html.CheckBoxFor(model => model.ConfirmVerification) I confirm that the information presented by this staff for withdrawal have been checked and confirmed and a payment has been issued to the staff.
+                                        </label>
+                                        @Html.ValidationMessageFor(x => x.ConfirmVerification, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-lg-12 text-right">
+                                    <button type="submit" class="btn btn-primary">Confirm Withdrawal</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                    <!-- end -->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+<div class="modal in" id="withdrawalcode" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+
+            <div class="modal-body  ">
+                <div class="form-group  pinside20 ">
+                    <h4> Enter Withdrawal  Code</h4>
+                    <input type="text" name="" class="form-control" placeholder="Withdrawal  Code Here " id="WithdrawalCode">
+                    @Html.ValidationMessage("InvalidCode", "", new { @class = "text-danger" })
+                </div>
+            
+                <hr>
+                <div class="form-group">
+                    <a class="btn btn-primary pull-left" onclick="searchStaffCode()">Submit</a>
+                    <a class="btn btn-default pull-right" data-dismiss="modal">Cancel</a>
+                </div>
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+                    @*@if (ViewBag.AgentResult.Data != null)
+                        {
+                            <a class="btn btn-success btn-sm" target="_blank" href="@Url.Action("PrintPDFNonCardReceive","PayAReceiver",new { MFCN=ViewBag.AgentResult.Data.MFCN})">Print Payment Receipt</a>
+                        }*@
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4 id="Message">@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-success btn-sm" onclick="PrintReceipt(@ViewBag.AgentResult.Data)">Print Payment Receipt</a>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+
+        function searchStaffCode() {
+            var staffCode = $("#staffCode").val();
+            var withdrawalCode = $("#WithdrawalCode").val();
+            window.location.href = "/Agent/CashWithdrawal/CashWithdrawalByStaff?staffCode=" + staffCode + "&WithdrawalCode=" + withdrawalCode;
+
+        };
+
+         if ('@ViewBag.WithdrawalCodeIsEntered' == '0' || '@ViewBag.WithdrawalCodeIsEntered' == '1') {
+
+             $("#withdrawalcode").modal('show');
+
+        }
+
+        //$("#onload").modal('show');
+
+         var result = '@ViewBag.TransactionSuccessul';
+        var transactionId = '@ViewBag.TransactionId';
+        var IsWithdrawalByAgent = '@ViewBag.IsWithdrawalByAgent';
+
+        if (result == 1) {
+      
+             var IsWithdrawalByAgent = '@ViewBag.IsWithdrawalByAgent';
+            window.open("/Agent/CashWithdrawal/PrintCashWithdrawalReceipt?transactionId=" + transactionId + "&IsWithdrawalByAgent=" + IsWithdrawalByAgent, '_blank');
+        }
+
+    </script>
+}

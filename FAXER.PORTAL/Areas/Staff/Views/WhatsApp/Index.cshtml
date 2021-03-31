@@ -1,0 +1,299 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div id="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">WhatsApp</h4>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class=" dashboard_body ">
+
+                                        <div class="row">
+                                            <div class="col-lg-3">
+                                                <div data-bind="with:$root.WhatsApp">
+
+                                                    <div>
+                                                        <label> select country</label>
+                                                        <br />
+                                                        <select data-bind="options:$root.Countries,
+                                                            optionsText: 'Name',
+                                                            optionsValue: 'Code',
+                                                            value: Country,
+                                                            optionsCaption: 'Select country',
+                                                            event:{'change' : $root.GetAllReceivers}"
+                                                                class="custom-select">
+                                                        </select>
+                                                    </div>
+                                                    <div>
+                                                        <br />
+                                                        <label>Select to send mesaage</label>
+
+                                                        <select data-bind="options:$root.AllReceivers,
+                                                            optionsText: 'ReceiverName',
+                                                            optionsValue: 'PhoneNumber',
+                                                            value: To,
+                                                            optionsCaption: 'Select Receiver',
+                                                            event:{'change' : $root.MessageAReceiver}"
+                                                                class="custom-select">
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <br />
+                                                    <table class="table table-bordered " cellspacing="0" width="100%" data-bind="foreach:$root.Receivers">
+
+                                                        <tr>
+                                                            <td>
+                                                                <a href="#" data-bind="text:ReceiverName,click:$root.GetMessages">
+                                                                </a>
+                                                            </td>
+
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-9">
+
+                                                <div class="card">
+
+                                                    <div class="card-header" data-bind="with:$root.Receiver">
+                                                        <a class="">
+                                                            <span data-bind="text:ReceiverName" style="color:#02b6ff;"></span>
+                                                        </a>
+                                                        <hr />
+                                                    </div>
+
+                                                    <div class="card-body" style="height:300px; overflow: auto;" id="chatbox">
+
+                                                        <table width="100%" data-bind="foreach:$root.Messages" id="messages">
+                                                            <tr>
+                                                                <td>
+                                                                    <span style="background-color:floralwhite;height:25px; border-radius: 25px;float:left; border:none" data-bind="text:ReceivedMessageWithTime"> </span>
+
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td >
+                                                                    <span style="background-color:lightblue;height:25px; border-radius: 25px;float:right; border:none" data-bind="text:SentMessageWithTime"> </span>
+                                                                    <span>
+                                                                        <!-- ko if: FileURL() != "" -->
+                                                                        <img style="width:140px;height:140px;float:right;line-height:15px" data-bind="attr: {src: FileURL()}">
+                                                                        <!-- /ko -->
+                                                                    </span>
+                                                                </td>
+                                                            <tr style="color:#02b6ff;float:right; border:none" data-bind="text:SenderName">
+                                                            </tr>
+                                                            </tr>
+
+                                                        </table>
+                                                    </div>
+                                                    <div class="card-footer" data-bind="with:$root.WhatsApp">
+                                                        <div class="right-icon-control">
+
+                                                            <input type="text" class="form-control" data-bind="value:Body, valueUpdate: 'afterkeydown', event: { 'keyup':$root.Submit }"
+                                                                   placeholder="Send a Message">
+                                                            <!-- ko if: FileURL()!="" -->
+                                                            <img class="img-rounded " style="cursor:pointer" width="120" height="120" data-bind="attr: {src: FileURL() ||  ''}">
+                                                            <!-- /ko -->
+
+
+                                                            <div class="form-icon">
+                                                                <a href="#">
+                                                                    <span class="fa fa-paperclip" onclick="Uploadfile();">
+                                                                    </span>
+                                                                    <input id="FileURL" data-bind="fileUpload: {value:FileURL}" type="file" style="display:none">
+                                                                </a>
+
+                                                                <a href="#" data-bind="click:$root.SendMessage">
+                                                                    <i class="feather icon-navigation"></i>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section scripts{
+
+    <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    <script src="~/Areas/Admin/css/toastr.js"></script>
+
+    <script type="text/javascript">
+
+        function Uploadfile() {
+            $("input[id='FileURL']").click();
+        }
+
+
+        function WhatsAppModel(item) {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.Body = ko.observable(item.Body || '');
+            self.Date = ko.observable(item.Date || '');
+            self.Direction = ko.observable(item.Direction || '');
+            self.From = ko.observable(item.From || '');
+            self.To = ko.observable(item.To || '');
+            self.MessageSId = ko.observable(item.MessageSId || '');
+            self.NumMedia = ko.observable(item.NumMedia || '');
+            self.SentDate = ko.observable(item.SentDate || '');
+            self.Status = ko.observable(item.Status || '');
+            self.Country = ko.observable(item.Country || '');
+            self.FileURL = ko.observable(item.FileURL || '');
+        }
+        function CountryDropDownModel(item) {
+            var self = this;
+            item = item || {};
+            self.Code = ko.observable(item.Code || 0);
+            self.Name = ko.observable(item.Name || '');
+        }
+        function ReceiverModel(item) {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.ReceiverName = ko.observable(item.ReceiverName || '');
+            self.PhoneNumber = ko.observable(item.PhoneNumber || '');
+        }
+        function MessageModel(item) {
+            var self = this;
+            item = item || {};
+            self.ReceivedMessageWithTime = ko.observable(item.ReceivedMessageWithTime || '');
+            self.SentMessageWithTime = ko.observable(item.SentMessageWithTime || '');
+            self.DateTime = ko.observable(item.DateTime || '');
+            self.ReceiverName = ko.observable(item.ReceiverName || '');
+            self.SenderName = ko.observable(item.SenderName || '');
+            self.FileURL = ko.observable(item.FileURL || '');
+        }
+        function WhatsAppController() {
+            var self = this;
+            var url = "/Staff/WhatsApp";
+            self.WhatsApp = ko.observable(new WhatsAppModel());
+            self.WhatsApps = ko.observableArray([]);
+            self.Countries = ko.observableArray([]);
+            self.Receiver = ko.observable(new ReceiverModel());
+            self.Receivers = ko.observableArray([]);
+            self.AllReceivers = ko.observableArray([]);
+            self.Messages = ko.observableArray([]);
+
+            GetCountries();
+            function GetCountries() {
+                Riddha.ajax.get(url + "/GetCountries").done(function (result) {
+                    var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), CountryDropDownModel);
+                    self.Countries(data);
+                })
+            }
+            GetReceivers();
+            function GetReceivers() {
+                Riddha.ajax.get(url + "/GetReceivers").done(function (result) {
+                    var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), ReceiverModel);
+                    self.Receivers(data);
+                })
+            }
+            self.GetAllReceivers = function (data) {
+                var countrycode = self.WhatsApp().Country();
+                Riddha.ajax.get(url + "/GetAllReceivers?countryCode=" + countrycode).done(function (result) {
+                    var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), ReceiverModel);
+                    self.AllReceivers(data);
+                })
+            }
+
+
+            self.GetMessages = function (data) {
+                Riddha.ajax.post(url + "/GetMessages", data).done(function (result) {
+                    var messageData = Riddha.ko.global.arrayMap(ko.toJS(result.Data), MessageModel);
+                    self.Messages(messageData);
+                    self.Receiver().ReceiverName(data.ReceiverName());
+                    self.WhatsApp().To(data.PhoneNumber());
+
+                    var n = $('#messages').height();
+                    $('#chatbox').animate({ scrollTop: n }, 50);
+
+                })
+            }
+
+            self.MessageAReceiver = function (data) {
+                self.Receiver().PhoneNumber(data.To());
+                var mapped = ko.utils.arrayFirst(self.AllReceivers(), function (item) {
+                    return item.PhoneNumber() == data.To();
+                });
+                if (mapped != null) {
+                    self.Receiver().ReceiverName(mapped.ReceiverName());
+                    self.GetMessages(self.Receiver());
+                }
+                else {
+                    self.Receiver().ReceiverName("");
+                }
+            }
+
+
+            self.Submit = function (data, event) {
+                if (event.keyCode == 13) {
+                    self.SendMessage();
+                }
+            }
+            self.SendMessage = function (result) {
+                if (self.WhatsApp().To() == "" || self.WhatsApp().To() == undefined) {
+                    self.WhatsApp(new WhatsAppModel());
+                    return;
+                }
+                if (self.WhatsApp().Body() == "" || self.WhatsApp().Body() == undefined) {
+
+                    if (self.WhatsApp().FileURL() != "") {
+                    }
+                    else {
+                        self.WhatsApp(new WhatsAppModel());
+                        return;
+
+                    }
+                }
+                Riddha.ajax.post(url + "/SendMessage", ko.toJS(self.WhatsApp))
+                    .done(function (result) {
+                        if (result.Status == 1) {
+                            self.Messages.push(result.Data);
+                            self.WhatsApp(new WhatsAppModel());
+                            self.WhatsApp().To(result.ReceiverPhoneNumber);
+                            self.MessageAReceiver(self.WhatsApp());
+                        }
+                        else {
+                            self.WhatsApp(new WhatsAppModel());
+                            self.WhatsApp().To(result.ReceiverPhoneNumber);
+                        }
+                    });
+            }
+        }
+
+        ko.cleanNode(document.getElementById("page-wrapper"));
+        var obj2 = new WhatsAppController();
+        ko.applyBindings(obj2, document.getElementById("page-wrapper"));
+    </script>
+
+}

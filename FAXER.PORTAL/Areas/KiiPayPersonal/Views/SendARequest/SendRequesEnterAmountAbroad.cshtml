@@ -1,0 +1,158 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.SendRequesEnterAmountAbroadViewModel
+@{
+    ViewBag.Title = "SendRequesEnterAmountAbroad";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+@using (Html.BeginForm())
+{
+
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="@Model.PhotoUrl" alt="">
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary">@Model.ReceiversName</span>
+                            </div>
+                        </div>
+
+                        <div class="amount-group mb5  row ">
+
+                            <div class="col-lg-5">
+                                <label>Local Currency</label>
+                                @Html.TextBoxFor(model => model.LocalAmount, new { @class = "amount", @placeholder = Model.LocalCurrencySymbol + "0.00", @id="LocalAmount", @onchange= "calculatePaymentDetails('local')" })
+                                @Html.ValidationMessageFor(model => model.LocalAmount, "", new { @class = "text-danger" })
+
+                                <div class="gbpusd">
+                                    @Model.LocalCurrency
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="text-primary font-20">OR</span>
+                            </div>
+                            <div class="col-lg-5">
+                                <label>Foreign Currency</label>
+                                @Html.TextBoxFor(model => model.ForeignAmount, new { @class = "amount", @placeholder = Model.ForeignCurrencySymbol + "0.00", @onchange = "calculatePaymentDetails('foreign')", @id="foreignAmount" })
+                                @Html.ValidationMessageFor(model => model.ForeignAmount, "", new { @class="text-danger"})
+                                <div class="gbpusd">
+                                    @Model.ForeignCurrency
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="exchange-rate-holder">
+                            Exchange rate
+                            <span data-outbound-currency="GBP">@Model.ForeignCurrency 1</span> = <span class="exchange-rate" data-inbound-currency="GHS">@Model.LocalCurrency @Model.ExchangeRate</span>
+                        </div>
+
+
+
+                        <div class="pinside20">
+
+                            <div class="amount-group  mb0">
+                                @Html.TextBoxFor(model => model.Note, new { @class = "reference", @placeholder = "Add Note (optional)" })
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    @Html.HiddenFor(x=>x.PhotoUrl)
+                    @Html.HiddenFor(x=>x.ReceiversName)
+                    @Html.HiddenFor(x=>x.ExchangeRate)
+                    @Html.HiddenFor(x=>x.LocalCurrency)
+                    @Html.HiddenFor(x=>x.ForeignCurrency)
+                    @Html.HiddenFor(x=>x.LocalCurrencySymbol)
+                    @Html.HiddenFor(x=>x.ForeignCurrencySymbol)
+                    @Html.HiddenFor(x=>x.Note)
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Request Now <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("SendARequestAbroad")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        function calculatePaymentDetails(from) {
+            debugger;
+            var exchangeRate = @Model.ExchangeRate;
+            var localAmount = $("#LocalAmount").val();
+            var foreignAmount = $("#foreignAmount").val();
+            var calculatingAmount = 0;
+            if (from == "foreign") {
+                calculatingAmount = foreignAmount * exchangeRate;
+                $("#LocalAmount").val(calculatingAmount);
+                return;
+            }
+            else {
+                calculatingAmount = localAmount / exchangeRate;
+                $("#foreignAmount").val(calculatingAmount);
+                return;
+            }
+
+        };
+
+
+
+
+    </script>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

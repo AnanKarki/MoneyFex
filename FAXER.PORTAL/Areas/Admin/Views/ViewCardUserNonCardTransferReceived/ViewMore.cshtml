@@ -1,0 +1,73 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewCardUserNonCardTransferReceivedAdditonalInformatinViewModel
+
+@{
+    ViewBag.Title = "ViewMoreInfo";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewMoreInfo</h2>
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Card User Non Card Transfer Withdrawal</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                @*<a href="/Admin/FormPortalNonCardFaxing" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Send Money to NonCard User</a>*@
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Card User Non Card Transfer Withdrawal</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="csv display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2"><strong>SN.</strong></td>
+                                    <td colspan="3"><strong>Paying Agent</strong></td>
+                                    <td rowspan="2"><strong>Status of Transaction</strong></td>
+                                    <td rowspan="2"><strong>Receiver's Receipt</strong></td>
+                                    <td rowspan="2"><strong>Payment Rejection</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Verifier</strong></td>
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>MFS Code</strong></td>
+                                    <!--  -->
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+
+                                <tr>
+                                    <td>1</td>
+                                    <td>@Model.PayingAgent</td>
+                                    <td>@Model.NameOfAgency</td>
+                                    <td>@Model.AgentMFCode</td>
+                                    <td>@Model.StatusOFTransaction</td>
+
+
+                                    <td><a href="@Url.Action("PrintCardUserNonCardWithdrawalReceipt", "PayAReceiver", new { Area ="Agent" ,  MFCN = Model.MFCN })" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a></td>
+
+                                    <td> &nbsp;</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

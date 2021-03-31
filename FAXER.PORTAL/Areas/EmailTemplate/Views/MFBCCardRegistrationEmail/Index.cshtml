@@ -1,0 +1,54 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.NameOfBusinessMerchant,
+    </p>
+    <p>
+        Good News!
+    </p>
+    <p>
+        You have successfully registered a MoneyFex Business card (MFBC) that you can use to withdraw money paid to your business by MoneyFex users.  Also, you can use this card to pay for goods and services in your own home country - @ViewBag.CardUserCountry
+    </p>
+    <br />
+    <p>
+        The details of the registered card are as follows:
+    </p>
+    <p>
+        <strong>MFBC Number:</strong> @ViewBag.MFBCCardNumber
+    </p>
+    <strong>Name on MFBC Card:</strong> @ViewBag.CardUserName
+    <p>
+        <strong>Date of Birth of Registered Card User:</strong> @ViewBag.CardUserDOB
+    </p>
+    <p>
+        <strong>Email address of Registered Card User:</strong> @ViewBag.CardUserEmailAddress
+    </p>
+    <p>
+        <strong>Country of Registered Card User:</strong> @ViewBag.CardUserCountry
+    </p>
+    <p>
+        <strong>City of Registered Card User:</strong> @ViewBag.CardUserCity
+    </p>
+    <br />
+    <p>
+        Please contact MoneyFex Service customer immediately if you think the information above is incorrect. You do not have do anything if no error(s) has/have been identified.
+    </p>
+    <br />
+    <p>
+        The registered bank-card-like shape will be securely sent as a physical and E-card by us to you.
+    </p>
+    <p>
+        To withdraw money, the registered MFBC card user can visit the office of MoneyFex Service main agent with his/her Government issued ID card or driving license or passport.
+    </p>
+    <p>
+        Please check the business opening hours of the main agent as it may vary with country and regions.
+    </p>
+    <p>
+        Do not hesitate to contact MoneyFex Service customer service should you have any questions.
+    </p>
+    <br />
+  
+</div>

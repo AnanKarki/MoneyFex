@@ -1,0 +1,137 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewMFTCCardToppingViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View - Virtual Account Deposit</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <a href="" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Deposit in Virtual Account on the Portal</a>
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View - Virtual Account Deposit</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="table-responsive">
+                        <table class="csv display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">SN.</th>
+                                    <th rowspan="2">Sender's Name</th>
+                                    <th rowspan="2">Virtual Account User's Name</th>
+                                    <th rowspan="2">Virtual Account No.</th>
+                                    <th colspan="3">Virtual Account Deposit</th>
+                                    <th rowspan="2">Amt on Virtual Account</th>
+                                    <th rowspan="2">Virtual Account Deposit Receipt</th>
+                                    <th rowspan="2">Virtual Account Deposit Method</th>
+                                    <th rowspan="2">Payment Method</th>
+                                    <th rowspan="2">Admin Virtual Account Depositor</th>
+                                    <th colspan="4">Limit on Usage</th>
+                                    <th colspan="5">Payment from Account Info</th>
+                                </tr>
+                                <tr>
+                                    <th>Amt</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <!--  -->
+                                    <th>Withdrawal</th>
+                                    <th>Limit Type</th>
+                                    <th>Purchases </th>
+                                    <th>Limit Type</th>
+
+                                    <th>Name on Credit/Debit Card</th>
+                                    <th>Card/Debit Card No.<br><small>(last 4 digits only)</small></th>
+                                    <th>Card Expiring Date</th>
+                                    <th>Credit/Debit Card Saved ?</th>
+                                    <th>Auto Recharge Activated ?</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                }
+
+                                @foreach (var item in Model.ViewMFTCCardTopUp)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.FaxerFirstName @item.FaxerMiddleName @item.FaxerLastName</td>
+                                        <td>@item.CardUserFirstName @item.CardUserMiddleName @item.CardUserLastName</td>
+                                        <td>@item.MFTCCardNumber</td>
+                                        <td>@item.MFTCCardTopUPAmount @item.Currency</td>
+                                        <td>@item.MFTCCardTopUPDate</td>
+                                        <td>@item.MFTCCardTopUPTime</td>
+                                        <td>@item.AmountOnMFTCCard @item.Currency</td>
+                                        <td><a href="@Url.Action("PrintPDFReceipt","ViewMFTCCardTopping",new { @id=item.Id })" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a></td>
+                                        <td>@item.MFTCCardTopUpMethod</td>
+                                        <td>@item.PaymentMethod</td>
+                                        <td>@item.MFTCCardTopUpper</td>
+                                        <td>@item.WithdrawalLimitAmount @item.Currency</td>
+                                        <td>@item.WithdrawalLimitType</td>
+                                        <td>@item.PurchaseLimitAmount @item.Currency</td>
+                                        <td>@item.PurchaseLimitType</td>
+                                        <td>@item.CardName</td>
+                                        <td>@item.CardNumber</td>
+                                        <td>@item.CardExpMonth / @item.CardExpYear</td>
+                                        <td>@item.IsCreditDebitSaved</td>
+                                        <td>@item.IsAutoRechargeActivated</td>
+
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--row -->
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMFTCCardTopping/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

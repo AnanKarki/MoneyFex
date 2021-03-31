@@ -1,0 +1,127 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<!DOCTYPE html>
+
+@*<div style="padding:20px;">
+
+
+        <p> Dear @ViewBag.NameOfContactPerson</p>
+
+        <p>
+            Thank you for accepting to join the growing network of MoneyFex Paying Agents.
+        </p>
+        <p>
+            Here are your account details.
+        </p>
+        <p>
+            Please keep this email for future reference.
+        </p>
+        <p>
+            You will need the Agent and staff codes to login to your account.
+        </p>
+        <p>
+            The staff code is your unique identifier and must not be shared.
+        </p>
+        <p>
+            The account number displayed on your dashboard is the agent unique account reference, this number identifies @ViewBag.NameOfBusiness  as an accredited agent of MoneyFex, this number must be quoted in all correspondence with the customer service team.
+        </p>
+
+        @if (ViewBag.IsAdmin == true)
+        {
+            <p>
+                Your Admin Login Details:
+            </p>
+        }
+        else
+        {
+            <p>
+                Your Transaction Login Details:
+            </p>
+
+        }
+
+
+
+        <p style="background-color:#e0ffff;">
+
+            <strong>Email address :</strong>@ViewBag.EmailAddress<br />
+
+            <strong>Agent Login Code :</strong>@ViewBag.AgencyLoginCode<br />
+
+            <strong>Staff Login Code :</strong>@ViewBag.LoginCode <br />
+
+            @if (ViewBag.IsAdmin == false)
+            {
+
+                <strong>Password :</strong>@ViewBag.Password
+            }
+
+
+        </p>
+
+
+
+        <p>
+            If you are still having problems login up please contact a member of our support staff at support@moneyFex.com.
+        </p>
+
+    </div>*@
+
+
+<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/ngeku-welcome.png" width="100%"></td>
+            <td valign="top">
+                <h1 style="font-size: 24px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b> @ViewBag.NameOfContactPerson</b>,</h1>
+                <h1 style="font-size: 24px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    Welcome to MoneyFex, the fast, easy and cheap way to transfer money
+                </h1>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <h3 style="color: #004468; margin-top: 0;">Your account details</h3>
+                <p style="line-height: 30px; font-size: 18px; color: #02b6ff;">
+
+                    Use your email address,
+                    @if (ViewBag.IsRegisteredByAdmin)
+                    {
+                        <span>  Password ,</span>
+                    }
+                    Agent and Staff login codes to login to your account
+                </p>
+                <p style="line-height: 30px; font-size: 18px; color: #02b6ff;">
+                    <br> <b>Email login</b>: @ViewBag.EmailAddress
+                    @if (ViewBag.IsRegisteredByAdmin)
+                    {
+                        <br><b>Password</b><span> :  @ViewBag.Password </span>
+                    }
+
+                    <br> <b>Agent login code</b>:  @ViewBag.AgencyLoginCode
+                    <br> <b>Staff  login code</b>:  @ViewBag.StaffLoginCode
+
+                </p>
+
+                <p style="line-height: 30px; font-size: 18px; color: #02b6ff;">
+                    The account number displayed on your dashboard is your agent unique account number,
+                    this number identifies @ViewBag.NameOfBusiness as an accredited agent of MoneyFex,
+                    this number must be quoted in all correspondence
+                    with the customer service team.
+                </p>
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    <br> Thank you
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>

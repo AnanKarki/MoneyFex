@@ -1,0 +1,631 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SourceOfFundDeclarationVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 25px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+<!--  -->
+@using (Html.BeginForm())
+{
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="forms-wrapper">
+
+
+                    <div class="form-main-title">
+                        CERTIFICATE FOR DECLARATION OF CUSTOMER’S SOURCE OF FUND & PURPOSE OF USE
+                    </div>
+                    <p>Required for all cash and Non-cash transactions in excess of £3000 Transactions and for all Third Party Transactions</p>
+                    <div class="forms">
+                        <div class="forms-header">
+                            SENDER'S DETAILS
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Sender Full Name or Business Name:  @Html.TextBoxFor(model => model.SenderFullName)
+                                                    @Html.ValidationMessageFor(model => model.SenderFullName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Date of Birth: @Html.EditorFor(model => model.SenderDateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.SenderDateOfBirth, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("InvalidAge", "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Country of  Birth: @Html.DropDownListFor(model => model.SenderCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select")
+                                                    @Html.ValidationMessageFor(model => model.SenderCountry, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Gender :  @Html.EnumDropDownListFor(model => model.SenderGender)
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Address:  @Html.TextBoxFor(model => model.SenderAddress)
+                                                    @Html.ValidationMessageFor(model => model.SenderAddress, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Telephone Number: @Html.TextBoxFor(model => model.SenderPhoneNo)
+                                                    @Html.ValidationMessageFor(model => model.SenderPhoneNo, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Email Address:  @Html.TextBoxFor(model => model.SenderEmailAddress)
+                                                    @Html.ValidationMessageFor(model => model.SenderEmailAddress, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    ID Type: @Html.TextBoxFor(model => model.SenderIdCardType)
+                                                    @Html.ValidationMessageFor(model => model.SenderIdCardType, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    ID Number:   @Html.TextBoxFor(model => model.SenderIdNumber)
+                                                    @Html.ValidationMessageFor(model => model.SenderIdNumber, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Expiration Date: @Html.EditorFor(model => model.SenderIdExpiryDate, new { htmlAttributes = new { @class = "form-control", @type = "date" } })
+                                                    @Html.ValidationMessageFor(model => model.SenderIdExpiryDate, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("SenderIdExpired", "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Issuing Country:   @Html.DropDownListFor(model => model.SenderIdIssuingCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select")
+                                                    @Html.ValidationMessageFor(model => model.SenderIdIssuingCountry, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Occupation:  @Html.TextBoxFor(model => model.SenderOccupation)
+                                                    @Html.ValidationMessageFor(model => model.SenderOccupation, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="forms-header">
+                            RECEIVER'S DETAILS
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Receiver Full Name: @Html.TextBoxFor(model => model.ReceiverName)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    City: @Html.TextBoxFor(model => model.ReceiverCity)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverCity, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Country:  @Html.DropDownListFor(model => model.ReceverCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select")
+                                                    @Html.ValidationMessageFor(model => model.ReceverCountry, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Telephone:  @Html.TextBoxFor(model => model.ReceiverTelephone)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverTelephone, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Email:  @Html.TextBoxFor(model => model.ReceiverEmail)
+                                                    @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Relationship to sender :  @Html.TextBoxFor(model => model.RelationShipToSender)
+                                                    @Html.ValidationMessageFor(model => model.RelationShipToSender, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+
+                        <div class="forms-header">
+                            AMOUNT / TYPE / PURPOSE
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    One Off Amount: @Html.TextBoxFor(model => model.OneOffAmount)
+                                                    @Html.ValidationMessageFor(model => model.OneOffAmount, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Linked Amount: @Html.TextBoxFor(model => model.LinkedAmount)
+                                                    @Html.ValidationMessageFor(model => model.LinkedAmount, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Transfer Type: @Html.EnumDropDownListFor(model => model.TransferType)
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Cash to Cash (bank deposit)  @Html.TextBoxFor(model => model.CashToCash)
+                                                    @Html.ValidationMessageFor(model => model.CashToCash, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Virtual Account @Html.TextBoxFor(model => model.VirtualAccount)
+                                                    @Html.ValidationMessageFor(model => model.VirtualAccount, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Business Virtual Account @Html.TextBoxFor(model => model.BusinessVirtualAccount)
+                                                    @Html.ValidationMessageFor(model => model.BusinessVirtualAccount, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                I hereby declare that I am not involved in any criminal or money laundering activity and the funds for the above transaction were obtained by me, are clear and are not derived from any illegal activities.
+                                                These funds are derived from the following source
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Business Virtual Account @Html.TextBoxFor(model => model.BusinessVirtualAccount)
+                                                    @Html.ValidationMessageFor(model => model.BusinessVirtualAccount, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Check this box to confirm @Html.CheckBoxFor(model => model.IsConfirm)
+                                                    @Html.ValidationMessageFor(model => model.IsConfirm, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!--  -->
+
+
+                        <div class="forms-header">
+                            AGENT / MONEYFEX ADMIN VERIFICATION
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+
+
+
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    ID Available? @Html.CheckBoxFor(model => model.IDAvailable)
+                                                    @Html.ValidationMessageFor(model => model.IDAvailable, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Proof of Source of Income? @Html.CheckBoxFor(model => model.ProofOfSourceOfIncome)
+                                                    @Html.ValidationMessageFor(model => model.ProofOfSourceOfIncome, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td><label>  Bank Statement  </label> </td>
+                                            <td>
+                                                <label>
+                                                    Legal Letter  @Html.TextBoxFor(model => model.BankStatementLegalLetter)
+                                                    @Html.ValidationMessageFor(model => model.BankStatementLegalLetter, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Others  @Html.TextBoxFor(model => model.Others)
+                                                    @Html.ValidationMessageFor(model => model.Others, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+
+                                        </tr>
+
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Proof of Purpose? @Html.TextBoxFor(model => model.ProofOfPurpose)
+                                                    @Html.ValidationMessageFor(model => model.ProofOfPurpose, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td colspan="2">
+                                                <label>
+                                                    Means of Verication: Phone @Html.TextBoxFor(model => model.MeansOfVerification)
+                                                    @Html.ValidationMessageFor(model => model.MeansOfVerification, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="2">
+                                                <label>
+                                                    Email: @Html.TextBoxFor(model => model.Email)
+                                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td colspan="2">
+                                                <label>
+                                                    Face to Face @Html.TextBoxFor(model => model.FaceToFace)
+                                                    @Html.ValidationMessageFor(model => model.FaceToFace, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+
+
+
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="forms-header">
+                            Agent
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Agent Name: @Html.TextBoxFor(model => model.AgentStaffName, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AgentStaffName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Country:   @Html.TextBoxFor(model => model.AgentCountry, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AgentCountry, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Agent Account No.: @Html.TextBoxFor(model => model.AgentStaffAccountNo, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AgentStaffAccountNo, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Agent Staff ID :  @Html.TextBoxFor(model => model.AgentLoginCode, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AgentLoginCode, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="forms-header">
+                            Admin
+                        </div>
+                        <!--  -->
+                        <div class="forms-body">
+                            <div class="form-block">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label>
+                                                    Admin Name: @Html.TextBoxFor(model => model.AdminStaffName, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AdminStaffName, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <label>
+                                                    Admin Staff ID:   @Html.TextBoxFor(model => model.AdminStaffLoginCode, new { @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(model => model.AdminStaffLoginCode, "", new { @class = "text-danger" })
+                                                </label>
+                                            </td>
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="forms-footer  ">
+                            <a href="@Url.Action("SourceOfFundDeclaration" , "AgentForms")" class="btn btn-danger">Cancel </a>
+
+                            <button type="submit" class="button button-Submit ">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<!--  -->
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" onclick="Refresh()">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" onclick="Refresh()">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        function Refresh() {
+
+            window.location.href = "/Agent/SourceOfFundDeclaration/Index";
+
+        }
+    </script>
+}

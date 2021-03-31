@@ -1,0 +1,811 @@
+﻿@model List<FAXER.PORTAL.Areas.Businesses.ViewModels.BusinessAlertsViewModel>
+@{
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+
+    bool UserIsLoggedIn = FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant == null ? false : true;
+    bool MerchanthasMFBCCard = FAXER.PORTAL.Common.BusinessSession.MerchantHasMFBCCard;
+
+    string MFTCCardNo = FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.MFBCCardNo;
+    string MFTCCardNoOnly = "";
+    int LastRemainingDigitLength = 0;
+    if (!string.IsNullOrEmpty(MFTCCardNo))
+    {
+        string[] MFTCCardNoSplit = MFTCCardNo.Split('-');
+        MFTCCardNoOnly = MFTCCardNoSplit[1];
+        LastRemainingDigitLength = MFTCCardNoOnly.Length - 6;
+    }
+    string BusinessName = FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.BusinessName;
+    string FullName = FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.FullName;
+    string CurrentBalanceOnCard = FAXER.PORTAL.Common.BusinessSession.LoggedBusinessMerchant.CurrentBalanceOnCard.ToString();
+
+    string[] CurrentBalanceOnCardSplit = CurrentBalanceOnCard.Split('.');
+    string balanceFirstPortion = "00";
+    string balanceSecondPortion = "00";
+
+    if (CurrentBalanceOnCard.Length > 1) {
+        balanceFirstPortion = CurrentBalanceOnCardSplit[0].ToString();
+        balanceSecondPortion = CurrentBalanceOnCardSplit[1].ToString();
+
+    }
+
+}
+
+
+@*New Design*@
+
+@*<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="kiipay-main-header">
+
+                <!--  -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  ">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@ViewBag.Currency @balanceFirstPortion.<small class="text-primary">@balanceSecondPortion</small></h1>
+                    </div>
+                    <div class="text-center   mt10">
+                        <button type="button" class="btn btn-primary  radius-20" data-toggle="modal" data-target="#ecard">KiiPay E-Card</button>
+                    </div>
+                </div>
+                <!--  -->
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+
+                <!--  -->
+                <div class=" ">
+
+                    <div class=" dashboard_body ">
+
+                        <div class="mobile_design text-center  ">
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="transfer-money-now.php">
+                                      
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/transfermoney.svg">
+                                        </div>
+                                        <h4>Transfer  Money  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="pay-for-goods-and-services.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/payforservices.svg">
+                                        </div>
+                                        <h4>Pay for Services   </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="pay-bills.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/paybills.svg">
+                                        </div>
+                                        <h4>Pay Bills  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="#withdrawal-code" data-toggle="modal" data-target="#withdrawal-code">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/get-withdrawal-code.svg">
+                                        </div>
+                                        <h4>Get Withdrawal Code</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="kiipay-invoicing.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/invoicing.svg">
+                                        </div>
+                                        <h4>KiiPay Invoicing</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="wallet-statement.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/statement.svg">
+                                        </div>
+                                        <h4>Wallet Statement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("RegisterBusinessCard", "RegisterMFBCCard")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/registerKiiPay.svg">
+                                        </div>
+                                        <h4>Register KiiPay E-Card User</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="details-on-moneyfax-business-card.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/e-card-details.svg">
+                                        </div>
+                                        <h4>KiiPay E-Card User Details</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="business-profile.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/profile.svg">
+                                        </div>
+                                        <h4> Business Wallet Profile</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="add-&-withdraw-money-from-wallet.php">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/svg/add-money-to-wallet.svg">
+                                        </div>
+                                        <h4>Add & Withdraw <br>Money from Wallet</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <!--  <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                               <div class="dashboard_thumb">
+                                 <a href="add-money-to-wallet.php">
+                                   <div class="das-icon">
+                                     <img src="/Areas/Businesses/images/icon/svg/add-money-to-wallet.svg">
+                                   </div>
+                                   <h4> Add Money to Wallet</h4>
+                                 </a>
+                               </div>
+                             </div> -->
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 hidden-sm hidden-xs">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/sud.png">
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 hidden-sm hidden-xs">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/sud.png">
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+
+
+
+
+
+
+
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>*@
+
+
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+
+
+            <div class="col-lg-12">
+                <div class="text-center header-action ">
+                    <button type="button" class="btn btn-primary hidden-xs" data-toggle="modal" data-target="#ecard">MoneyFex Business Withdrawal E-card</button>
+
+
+                </div>
+                <br>
+
+                <!--  -->
+                <div class="dashboard_body ">
+
+
+                    <div class=" ">
+                        <h3>
+
+                            <span class=" ">Account Balance :<strong class="  text-primary italic"> @ViewBag.CreditonCard </strong></span>
+                        </h3>
+
+                        <div class="clearfix"></div>
+                        <hr>
+                        <div class="mobile_design text-center">
+
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="newone  bgcolor4 ">
+                                    <a href="@Url.Action("RegisterBusinessCard", "RegisterMFBCCard")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/1.png">
+                                        </div>
+                                        <h4>Register a MoneyFex <br>Business Card</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="newone  bgcolor3 ">
+                                    <a onclick="ValidatePayGoodsAndServices()">
+
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/2.png">
+                                        </div>
+                                        <h4>Pay Another <br>Business</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="newone  bgcolor2 ">
+                                    @*<a href="@Url.Action("Index", "TransferMoneyNow")">*@
+
+                                    <a onclick="TransferMoneyNow()">
+
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/3.png">
+                                        </div>
+                                        <h4>Transfer<br> Money Now</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+
+                                    <a onclick="CountMFBCCardRegister()">
+
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/4.png">
+                                        </div>
+                                        <h4>myBusiness MFBC Card</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("MyBusinessMoneyFaxCreditSheet", "MyBusinessMoneyFaxCreditSheet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/5.png">
+                                        </div>
+                                        <h4>myBusiness Balance Sheet </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+
+                                    <a href="@Url.Action("SalesSheet" , "MyBusinessMoneyFaxSalesSheet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/6.png">
+                                        </div>
+                                        <h4>myBusiness Sales Sheet </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+
+                                    <a href="@Url.Action("ExpenditureSheet" , "MyBusinessMoneyFaxExpenditureSheet")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/7.png">
+                                        </div>
+                                        <h4>myBusiness Expenditure Sheet</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("CashWithdrawlSheet" , "MyBusinessMoneyFaxCashWithdrawl")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/8.png">
+                                        </div>
+                                        <h4>myBusiness Cash Withdrawal Sheet</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("BusinessProfile", "BusinessProfile")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/9.png">
+                                        </div>
+                                        <h4>MoneyFex Business Account Profile</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index", "BusinessMoneyTransferInProgress")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/10.png">
+                                        </div>
+                                        <h4>Money Transfers in Progress</h4>
+                                        <span class="numbervisible"><b>@ViewBag.TransactionOnProgressCount</b></span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index" , "BusinessMoneyTransferHistory")">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/11.png">
+                                        </div>
+                                        <h4>Money Transfer history</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a onclick="GetNewAccessCode()">
+                                        <div class="das-icon">
+                                            <img src="/Areas/Businesses/images/icon/12.png">
+                                        </div>
+                                        <h4>Get Withdrawal Code</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <!--  -->
+
+
+
+                        </div>
+
+
+
+
+
+                        <div class="clearfix">
+
+                        </div>
+
+
+                    </div>
+
+                    @RenderPage("~/Areas/Businesses/Views/Shared/mobile-menu-dashboard.cshtml")
+                </div>
+
+
+            </div>
+            <!--  -->
+
+        </div>
+    </div>
+    <input type="hidden" name="AlertPhoto" id="AlertPhoto" />
+
+    <input type="hidden" name="AlertHeading" id="AlertHeading" />
+
+    <input type="hidden" name="AlertFullMessage" id="AlertFullMessage" />
+    <input type="hidden" name="AlertCount" id="AlertCount" value="@ViewBag.AlertCount" />
+
+    <input type="hidden" value="@ViewBag.CardCount" id="MFBCCardID">
+
+    <!--  -->
+    <!--  -->
+</section>
+
+<div class="modal fade" tabindex="-1" id="withdrawal-code" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-card" role="document">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+                <h1>Your code is  <br> <span class="text-primary" id="AccessCode"> </span></h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- ecard -->
+@*<div class="modal fade" tabindex="-1" id="ecard" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                @*<img src="https://www.visa.ca/en_CA/pay-with-visa/cards/credit-cards/_jcr_content/par/cardstack/cardStackColumn2/image_1788800659.img.jpg/1529504445934.jpg">*@
+@*<img src="@ViewBag.CardPhoto" />
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<!-- ecard -->
+
+
+@if (ViewBag.FirstLogin != "" && ViewBag.AlertCount > 0)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false" style="display: none;">
+
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" style="font-size:70px;color:red">
+                                </i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+
+
+                            <h4>You have an alert message from MoneyFex Service, Please read this message before you can proceed!</h4>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-dismiss="modal" data-target="#alert">Read Alert</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+<div class="modal fade bs-example-modal-lg in" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="alert" data-backdrop="static" data-keyboard="false" style="display:none;">
+
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <table class="table table-hover table-striped">
+
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th></th>
+                            <th>Date</th>
+                            <th>Time</th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+
+                            <tr>
+                                <td>@item.AlertHeading</td>
+                                <td><a onclick="GetAlertDetials(@item.Id)" class="btn btn-danger btn-sm" id="@item.Id">Read Alert</a></td>
+                                <td>@item.Date</td>
+                                <td>@item.Time</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" id="CloseAlert" onclick="ClearAlert()" data-dismiss="modal" style="display:none;">Close alert window</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="alertDetails" data-backdrop="static" data-keyboard="false" style="display: none;">
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+
+                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                        <h3 id="Head"></h3>
+                        <p id="Message"></p>
+
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                        <img src="" class="img-thumbnail " alt="Alert Photo" id="my-image" style="height:150px;width:150px;">
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="RegisterMFBCCard" data-keyboard="false" style="display: none;">
+
+
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">MoneyFex</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size:60px;color:orange"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+
+                        <p>
+                            You do not have an MFBC card registered,
+                            do you want to register one now?
+                        </p>
+
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("RegisterBusinessCard" , "RegisterMFBCCard")" class="btn btn-primary btn-sm">Register Card</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal " id="RegisterMFBCCardModel" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                <h4 class="modal-title">MoneyFex E-card Registration Alert</h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size:80px;color:orange"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            Welcome! Please register a MoneyFex Business Card (MFBC) to start accepting payments from your customers around the world.
+                            Your customers will only be able to make payments to your business after MFBC Card registration.
+                        </p>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <a href="@Url.Action("RegisterBusinessCard", "RegisterMFBCCard")" class="btn btn-sm btn-primary">Register an MFBC Card <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <a data-dismiss="modal" class="btn btn-sm btn-danger">Not Now </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+
+        var array = [];
+
+        function GetAlertDetials(id) {
+            CountAlerts(id);
+            $.getJSON("/Businesses/BusinessHome/GetAlertsFullDetails/" + id, function (data) {
+
+                for (var item in data) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(data[item]);
+
+                }
+                var url = $("#AlertPhoto").val();
+                var heading = $("#AlertHeading").val();
+                var FullMessage = $("#AlertFullMessage").val();
+
+                $("#my-image").attr("src", url);
+                $("#alertDetails").modal('show');
+                $("#Head").html(heading);
+                $("#Message").html(FullMessage)
+
+            });
+
+
+        }
+
+        function CountAlerts(id) {
+            var itemcount = $("#AlertCount").val();
+
+            if (!array.includes(id)) {
+
+                array.push(id);
+                document.getElementById(id).style.backgroundColor = "#0000ff";
+            }
+            if (array.length.toString() == itemcount) {
+                $("#CloseAlert").show();
+            } else {
+                $("#CloseAlert").hide();
+            }
+        }
+        function ClearAlert() {
+            window.location.href = "/Businesses/BusinessHome/ClearAlert";
+        }
+
+        function CountMFBCCardRegister() {
+            var MFBCCardIDCount = $("#MFBCCardID").val();
+            if (MFBCCardIDCount < 1) {
+
+
+                $("#RegisterMFBCCard").modal('show');
+            }
+            else {
+                window.location.href = "/Businesses/MyBusinessMFBCCard/MyBusinessMFBCCardDetails";
+            }
+
+
+        }
+
+        function ValidatePayGoodsAndServices() {
+
+            var MFBCCardIDCount = $("#MFBCCardID").val();
+            if (MFBCCardIDCount < 1) {
+                $("#RegisterMFBCCard").modal('show');
+            }
+            else {
+
+                window.location.href = "/Businesses/PayForGoodsAndServices/Index";
+            }
+
+        }
+
+        function TransferMoneyNow() {
+            var MFBCCardIDCount = $("#MFBCCardID").val();
+            if (MFBCCardIDCount < 1) {
+                $("#RegisterMFBCCard").modal('show');
+            }
+            else {
+                @*href = "@Url.Action("Index", "TransferMoneyNow")";*@
+
+                window.location.href = "/Businesses/TransferMoneyNow/Index";
+            }
+
+
+        }
+
+            function GetNewAccessCode() {
+
+            $.getJSON("/Businesses/BusinessHome/GetWithdrawalCode", function (result) {
+
+                $("#AccessCode").text( result.AccessCode);
+
+                $("#withdrawal-code").modal('show');
+
+            });
+        }
+
+
+        var IsUserLoggedId = '@UserIsLoggedIn';
+        if (IsUserLoggedId == 'True') {
+
+            var MerchanthasCard = '@MerchanthasMFBCCard';
+            if (MerchanthasCard == 'False') {
+
+                $("#RegisterMFBCCardModel").modal('show');
+
+            }
+        }
+
+    </script>
+}
+
+
+
+
+
+

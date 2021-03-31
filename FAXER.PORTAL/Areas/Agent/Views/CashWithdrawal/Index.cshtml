@@ -1,0 +1,210 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.CashWithdrawalViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <h1>Cash Withdrawal</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+
+
+
+            <!-- start -->
+
+
+            <div class="col-lg-4">
+                <div class=" border_tbls">
+                    <!--  -->
+                    <div class="form-group  ">
+                        <label>Name of Agent</label>
+                        @Html.TextBoxFor(model => model.NameOfAgent, new { @class = "form-control", @readonly = "readonly" })
+
+
+
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="form-group  ">
+                        <label>Agent Account Number</label>
+                        @Html.TextBoxFor(model => model.AgentAccountNumber, new { @class = "form-control", @readonly = "readonly" })
+
+
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="form-group  ">
+
+                        <label>Agent Country</label>
+                        @Html.TextBoxFor(model => model.AgentCountry, new { @class = "form-control", @readonly = "readonly" })
+
+
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="form-group  ">
+                        <label>Agent City</label>
+                        @Html.TextBoxFor(model => model.AgentCity, new { @class = "form-control", @readonly = "readonly" })
+
+
+                    </div>
+                    <!--  -->
+                    <div class="form-group  ">
+                        <label>Account Balance</label>
+
+                        @Html.TextBoxFor(model => model.AccountBalance, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <!--  -->
+                    <hr>
+                    <h3>Withdrawal</h3>
+
+                    <!--  -->
+                    <div class="form-group  ">
+                        @Html.EnumDropDownListFor(model => model.Withdrawal, "Select Withdrawal Type", new { @class = "form-control", @id = "withDrawal", @onchange = "OpenWithdrawPage();" })
+                        @*<select class="form-control">
+                                <option value="">Select Withdrawal Type</option>
+                                <option>Withdrawal by Agent</option>
+                                <option>MoneyFex Staff Withdrawal </option>
+
+                            </select>*@
+
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+
+            <div class="col-lg-8">
+                <div class="clearfix">
+                    <h3>My Agent Withdrawal History</h3>
+                    <hr>
+                </div>
+                <div class="row mb40">
+
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(model => model.Month, "Select Month", new { @class = "form-control", @id="month", @onchange="filter();" })
+
+
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Year, (IEnumerable<SelectListItem>)ViewBag.Years, "Select Year", new { @class = "form-control", @id="year", @onchange = "filter();" })
+
+                        </div>
+                    </div>
+                    <!--  -->
+                    <!--  -->
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.EnumDropDownListFor(model => model.TransactionType, "Transaction Type", new { @class = "form-control", @id="transactionType", @onchange = "filter();" })
+
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+                <a href="" title="" class="btn btn-primary mb20 pull-left">Download Statement</a>
+
+                <div class="mb30 ">
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+                <div class="table-responsive">
+
+                    <table class="table table-bordered" id="DataTable">
+                        <thead>
+                            <tr>
+                                <th>SN</th>
+                                <th>Withdrawal type </th>
+                                <th>Amount</th>
+                                <th>Staff Name</th>
+                                <th>Staff Code</th>
+                                <th>Date & Time</th>
+                                <th>Status</th>
+                                <th>Receipt</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @{int i = 0; }
+                            <!--  -->
+
+                            @foreach (var item in Model.WithdrawalList)
+                            {
+                                i++;
+                                <tr>
+                                    
+                                    <td>@i</td>
+                                    <td>@item.WithdrawalType </td>
+                                    <td>@item.Amount</td>
+                                    <td>@item.StaffName</td>
+                                    <td>@item.StaffCode</td>
+                                    <td>@item.DateAndTime</td>
+                                    <td>@item.Status</td>
+                                    <td><a href="@item.ReceiptUrl" class="btn btn-warning btn-xs">Receipt</a></td>
+                                </tr>    }
+
+
+                        </tbody>
+
+
+
+
+
+                    </table>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+        <!-- end -->
+
+
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+        function OpenWithdrawPage() {
+            debugger;
+            var withDrawalType = $("#withDrawal").val();
+            if (withDrawalType == 1) {
+                window.location.href = "/Agent/CashWithdrawal/CashWithdrawalByAgent";
+            }
+            else if (withDrawalType == 2) {
+                window.location.href = "/Agent/CashWithdrawal/CashWithdrawalByStaff";
+            }
+        }
+
+        function filter() {
+            debugger;
+            var month = $("#month").val();
+            var year = $("#year").val();
+            var transactionType = $("#transactionType").val();
+            window.location.href = "/Agent/CashWithdrawal/Index?month=" + month + "&year=" + year + "&transactionType=" + transactionType;
+
+        }
+
+
+    </script>
+
+}

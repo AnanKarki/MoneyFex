@@ -1,0 +1,398 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.AdminDashboardViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<style>
+    #dashboard_content h2{
+        font-size:18px;
+    }
+    #dashboard_content ul li span h4 {
+        font-size: 25px;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-lg-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Dashboard</h4>
+
+                                </div>
+
+                                <div class="card-body" id="dashboard_content">
+
+                                    <div class=" dashboard_body ">
+
+                                        <div class="mobile_design text-center row ">
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+                                                        @Html.DropDownListFor(m => m.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "select country", new { @class = "form-control", id = "country", onchange = "filter();" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <div class="form-group">
+
+                                                        @Html.DropDownListFor(m => m.City, (IEnumerable<SelectListItem>)ViewBag.Cities, "select city", new { @class = "form-control", id = "city", onchange = "filter();" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        @Html.DropDownListFor(m => m.Year, (IEnumerable<SelectListItem>)ViewBag.Year, "select Year", new { @class = "form-control", id = "year", onchange = "filter();" })
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        @Html.EnumDropDownListFor(m => m.Month, new { @class = "form-control", id = "month", onchange = "filter();" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-2">
+                                                    <div class="form-group">
+                                                        <button class="btn btn-primary">Search</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewRegisteredAgents", new {@CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City })">
+                                                            <h2>Agents</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalAgents</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewRegisterBusiness", new {@CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City })">
+                                                            <h2>Business Merchants</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalBusinessMerchants</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewRegisteredFaxers", new {@CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City })">
+                                                            <h2>Number of Senders</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalSenders</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  --> <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewRegisteredMFTC", new {@CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City })">
+                                                            <h2>Number of Registered Virtual Account</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCardUsers</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  --> <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Non-Vritual Card Senders</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalNonCardUsers</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Amount not Withdrawn from  Virtual Account</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.AmountNotwithdrawnFromMFTC</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Amount not Withdrawn from Business Virtual Account</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.AmountNotwithdrawnfromMFBC</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewNonCardUserMoneyFaxed", new { @CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City})">
+                                                            <h2>Local Transactions</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalLocalTransaction</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Payment to Service Providers</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCompleteMerchantPayment</h4></span></li>
+                                                            </ul>
+                                                        </a>
+
+                                                    </div>
+                                                </div>
+                                                <!--  --> <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Payment to Service Providers</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCompleteMerchantPayment</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+
+                                                        <a href="@Url.Action("Index","ViewRegisteredStaffDetails", new { @CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City})">
+                                                            <h2>Staff</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalStaffs</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  --> <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Fees Paid</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalFeesPaid</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  --> <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Web Visitors</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalWebVisitors</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Refund Request</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalRefundRequest</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->   <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Completed Refunds</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCompletedRefund</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->   <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Uncompleted Refunds</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalUnCompleteRefund</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Update on Transfer info</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalUpdateonTransferInfo</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->  <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="@Url.Action("Index","ViewAgentCommissionPayment",new {@CountryCode= FAXER.PORTAL.Common.DashboardSession.CountryCode, @City= FAXER.PORTAL.Common.DashboardSession.City })">
+                                                            <h2>Commission Paid</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCommissionPaid</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Unpaid Commission</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalCommissionUnPaid</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>MoneyFex Liquidity</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>0</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Deleted Staff</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalDeletedStaffs</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Deleted Sender's</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalDeletedSenders</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Deleted Virtual Accounts</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalDeletedCardUsers</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Deleted Business Merchants</h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalDeletedBusinessMerchants</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="col-lg-3 col-md-4 col-xs-4 col-sm-4">
+                                                    <div class="dashboard_thumb">
+                                                        <a href="">
+                                                            <h2>Deleted Agents </h2>
+                                                            <ul class="list-inline  two-part">
+                                                                <li class="text-center"><span class="counter"><h4>@Model.TotalDeletedAgents</h4></span></li>
+                                                            </ul>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <!--  -->
+
+                                            </div>
+                                            </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var country = $("#country").val();
+            var city = $("#city").val();
+            var year = $("#year").val();
+            var month = $("#month").val();
+
+            window.location.href = "/Admin/AdminDashboard/Index?Country=" + country + "&City=" + city + "&Year=" + year + "&Month=" + month;
+
+        }
+
+    </script>
+}

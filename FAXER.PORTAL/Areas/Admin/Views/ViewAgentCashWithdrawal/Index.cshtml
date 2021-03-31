@@ -1,0 +1,277 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model FAXER.PORTAL.Areas.Admin.ViewModels.ViewAgentCashWithdrawalViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+}
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+<div id="messagePopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="text-center"> @ViewBag.Message</h3>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Agent Cash Withdrawal</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Agent Cash Withdrawal</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+                    <div class="row mb40">
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.Day, (IEnumerable<SelectListItem>)ViewBag.Days, "select Day", new { @class = "form-control", id = "day", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.EnumDropDownListFor(m => m.Month, new { @class = "form-control", id = "month", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.Year, (IEnumerable<SelectListItem>)ViewBag.Years, "select Year", new { @class = "form-control", id = "year", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                       
+
+                        <!--  -->
+
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <div class="hideoption" id="pop">
+                        <div class="btn-  pull-left">
+                            <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                            </button>
+                            <button data-toggle="modal" data-target="#emailpopup" href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                            </button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-striped  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th colspan="4">Agent</th>
+                                    <th colspan="11">Withdrawal</th>
+                                </tr>
+                                <tr>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+                                    <td><strong>Account No.</strong></td>
+                                    <td><strong>Withdrawal Type</strong></td>
+                                    <td><strong>Name of Staff/Agent</strong></td>
+                                    <td><strong>Staff Code</strong></td>
+                                    <td><strong>Amount</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Time</strong></td>
+                                    <td><strong>Status</strong></td>
+                                    <td><strong>Action</strong></td>
+                                    <td><strong>Account Balance</strong></td>
+                                    <td><strong>Receipt</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{ int i = 0;}
+                                @foreach (var item in Model.AgentCashWithdrawalIPagedList)
+                                {
+                                    ++i;
+                                    <tr>
+
+
+                                        <td>@i</td>
+                                        <td>@item.Name</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.AccountNo</td>
+                                        <td>@item.WithdrawalType</td>
+                                        <td>@item.NameOfStaffAgent</td>
+                                        <td>@item.StaffCode</td>
+                                        <td>@item.Amount</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Time</td>
+                                        <td>@item.Status</td>
+
+
+                                        <td>
+                                            <div class="btn-group m-r-10">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu action_drop">
+                                                    <li>
+                                                        <a onclick="showMoreDetails(@item.Id, @item.IsWithdrawalByAgent);" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> Details</a>
+                                                    </li>
+
+                                                    @if (item.Status == FAXER.PORTAL.Areas.Agent.Models.WithdrawalStatus.Confirmed)
+                                                    {
+                                                        <li><a class="btn btn-xs btn-primary waves-effect waves-light disabled "><span class="btn-label"><i class="  ti-check-box"></i></span>Confirm</a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a href="@Url.Action("ConfirmWithdrawal", "ViewAgentCashWithdrawal" , new  {id = item.Id, isWithdrawalByAgent = item.IsWithdrawalByAgent })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Confirm</a></li>
+                                                    }
+
+
+                                                </ul>
+                                            </div>
+                                        </td>
+                                        <td>@item.AccountBalance</td>
+                                        <td><button onclick="openReceipt(@item.Id, @item.IsWithdrawalByAgent);" class="btn btn-sm btn-danger">Receipt</button></td>
+                                    </tr>
+                                }
+                                <!--  -->
+                            </tbody>
+                        </table>
+
+                        Page @(Model.AgentCashWithdrawalIPagedList.PageCount < Model.AgentCashWithdrawalIPagedList.PageNumber ? 0 :
+                                                        Model.AgentCashWithdrawalIPagedList.PageNumber) of @Model.AgentCashWithdrawalIPagedList.PageCount
+
+                                                        @Html.PagedListPager(Model.AgentCashWithdrawalIPagedList ,page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                        <div class="clearfix mt100"></div>
+                                                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+
+<div id="moreDetailspopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 class="text-center"> Staff Details</h3>
+
+
+                <div class="modal-body text-center">
+                    <div class="col-lg-9 col-md-8">
+                        <table class="table table-bordered table-responsive">
+                            <thead>
+                                <tr>
+                                    <th>S.N.</th>
+                                    <th>ID Type</th>
+                                    <th>ID No.</th>
+                                    <th>Expiring Date</th>
+                                    <th>Issuing Country</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td id="idType">@Model.StaffDetails.IDType</td>
+                                    <td id="idNo">@Model.StaffDetails.IDNo</td>
+                                    <td id="ExpDate">@Model.StaffDetails.ExpiryDate</td>
+                                    <td id="issuingCountry">@Model.StaffDetails.IssuingCountry</td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            window.location.href = "/Admin/ViewAgentCashWithdrawal/Index?day=" + day + "&month=" + month + "&year=" + year;
+        }
+
+
+        function showMoreDetails(id, isWithdrawalByAgent) {
+            
+            $.ajax({
+                type: "POST",
+                url: "/Admin/ViewAgentCashWithdrawal/ShowMoreDetails",
+                data: {
+                    id: id,
+                    isWithdrawalByAgent: isWithdrawalByAgent
+                },
+                success: function (result) {
+                    $('#idType').text(result.IDType);
+                    $('#idNo').text(result.IDNo);
+                    $('#ExpDate').text(result.ExpiryDate);
+                    $('#issuingCountry').text(result.IssuingCountry);
+
+
+                }
+            })
+            $('#moreDetailspopup').modal('show');
+        };
+
+        function openReceipt(id, isWithdrawalByAgent) {
+            var withdrawalByAgent = false;
+            if (isWithdrawalByAgent == 1) {
+                withdrawalByAgent = true;
+            }
+            else {
+                withdrawalByAgent = false;
+            }
+
+            window.open('/Agent/CashWithdrawal/PrintCashWithdrawalReceipt?transactionId=' + id + '&IsWithdrawalByAgent=' + withdrawalByAgent, '_blank');
+        }
+        $('#messagePopup').modal('show');
+    </script>
+}

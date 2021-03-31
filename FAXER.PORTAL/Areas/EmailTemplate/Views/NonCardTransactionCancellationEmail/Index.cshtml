@@ -1,0 +1,32 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+
+
+    <p>
+        Dear @ViewBag.SenderName
+    </p>
+    <p>
+        A refund request has been issued for the transaction containing the following information:
+    </p>
+    <p>
+        Sender's Full name: @ViewBag.SenderName <br />
+        MoneyFex Control Number (MFCN): @ViewBag.MFCN <br />
+        Transferred Amount: @ViewBag.Amount <br />
+        Receiver's Name: @ViewBag.ReceiverName<br />
+        Receiver's Country: @ViewBag.Country<br />
+        Receiver's City: @ViewBag.City<br />
+        Transfered Date: @ViewBag.TransactionDate <br />
+    </p>
+    <p>
+        The transferred amount has been credited to your MoneyFex account.
+    </p>
+    <p>
+        As stipulated by our terms and conditions, we are unable to refund the Transfer fees.
+    </p>
+    <br />
+  </div>

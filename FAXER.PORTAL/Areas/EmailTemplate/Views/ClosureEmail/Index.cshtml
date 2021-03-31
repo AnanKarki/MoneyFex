@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+@*<table class="section" cellpadding="0" cellspacing="0">
+    <tr>
+        <td class="column ngeku-img" width="100" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td align="left">
+                            <img src="@baseUrl/Areas/EmailTemplate/images/announcement.png" width="100">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="20" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> &nbsp; </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+        <td class="column" width="480" valign="top">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFirstName, </h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 40px;">
+                                We are halting operation for the next three weeks to perform following upgrades:
+                            </h1>
+
+
+                            <ol type="1" style="font-size: 23px; font-weight: bold; color: #02b6ff; display: block;  display: block; margin:0 0 15px 0; line-height: 40px;">
+                                <li>Mobile App Integration</li>
+                                <li>Opening New Currencies</li>
+                            </ol>
+
+
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                There has been strong demand for Mobile App and also new currencies. We want to do both before the busy Christmas period where many of you will be sending money to your loved ones.
+                            </h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">Therefore we need to halt operation for the next three weeks in order to implement necessary upgrades.</h1>
+                            <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;"><mark style="background: #004468; color: #fff;">All outstanding transfers will be processed</mark> but we won't be accepting any new transfer.</h1>
+                            <h1 style="font-size: 20px; color: #004468;  line-height:30px; margin: 10px 0 0 0;">Sorry for any inconvenience caused. We'll be back soon.</h1>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                Thank You<br>
+                                <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                            </h1>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+</table>*@
+
+
+    <table width="100%">
+        <tbody>
+            <tr>
+                <td class="wrapper" width="600" align="center">
+               
+                    <!-- Two columns -->
+                    <table class="section" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td class="column ngeku-img" width="100" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td align="left">
+                                                <img src="@baseUrl/Areas/EmailTemplate/images/announcement.png">
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="20" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td> &nbsp; </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <td class="column" width="480" valign="top">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 30px; color: #004468;  line-height:14px; margin: 20px 0;"> Hi @ViewBag.SenderFirstName, </h1>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 28px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 40px;">
+                                                    We are halting operation for the next three weeks to perform following upgrades:
+                                                </h1>
+
+
+                                                <ol type="1" style="font-size: 23px; font-weight: bold; color: #02b6ff; display: block;  display: block; margin:0 0 15px 0; line-height: 40px;">
+                                                    <li>Mobile App Integration</li>
+                                                    <li>Opening New Currencies</li>
+                                                </ol>
+
+
+                                                <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">
+                                                    There has been strong demand for Mobile App and also new currencies. We want to do both before the busy Christmas period where many of you will be sending money to your loved ones.
+                                                </h1>
+                                                <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;">Therefore we need to halt operation for the next three weeks in order to implement necessary upgrades.</h1>
+                                                <h1 style="font-size: 20px; font-weight: bold; color: #02b6ff; display: block;  display: block; line-height: 35px;"><mark style="background: #004468; color: #fff;">All outstanding transfers will be processed</mark> but we won't be accepting any new transfer.</h1>
+                                                <h1 style="font-size: 20px; color: #004468;  line-height:30px; margin: 10px 0 0 0;">Sorry for any inconvenience caused. We'll be back soon.</h1>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <h1 style="font-size: 22px; color: #004468;  line-height:30px; margin: 35px 0;">
+                                                    Thank You<br>
+                                                    <span style="display: block; color:#02b6ff;">The MoneyFex Team</span>
+                                                </h1>
+                                            </td>
+                                        </tr>
+
+
+
+
+                                        <tr>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+
+
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>

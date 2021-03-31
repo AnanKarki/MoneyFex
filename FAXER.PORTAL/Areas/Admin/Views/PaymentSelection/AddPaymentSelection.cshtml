@@ -1,0 +1,173 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PaymentSelectionViewModel
+@{
+    ViewBag.Title = "AddPaymentSelection";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*@using (Html.BeginForm())
+{
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="card" style="">
+
+                            <div class="card-header border-bottom">
+                                <h2 class="f-left f-left m-t-5 m-b-0" style="float:left;"> Add Payment Selection</h2>
+                                <a href="@Url.Action("Index","PaymentSelection")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                    <i class="icofont icofont-eye m-r-5"></i> View Payment Selection
+                                </a>
+
+                            </div>
+
+                            <div class="card-body">
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <hr />
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                              
+                                            <div class="form-group">
+
+                                                <label> Sending Country</label>
+                                                @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control", @id = "SendingCountry" })
+                                                @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+
+                                            </div>
+                                              
+                                              
+                                            <div class="form-group">
+
+                                                <label> Receiving Country</label>
+                                                @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control", @id = "ReceivingCountry" })
+                                                @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                            </div>
+                                              
+                                              
+                                            <div class="form-group">
+                                                <label>Method</label>
+                                                @Html.EnumDropDownListFor(x => x.PaymentMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })
+
+                                            </div>
+                                              
+                                              
+
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer bg-light">
+                                <div class="row">
+                                    <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                        <a href="@Url.Action("Index","PaymentSelection")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                        <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+}*@
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set New Payment Method </h4>
+                                        <a href="@Url.Action("Index","PaymentSelection")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Payment Method
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label> Payment Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.PaymentMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Payment Method", @id = "DocumentType" })
+
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","PaymentSelection")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

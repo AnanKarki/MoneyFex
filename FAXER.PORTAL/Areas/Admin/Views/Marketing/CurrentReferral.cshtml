@@ -1,0 +1,152 @@
+﻿
+@{
+    ViewBag.Title = "CurrentReferral";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">
+                                        Set Referral  <label class="text-primary">Rohan </label>  <span>
+                                            Account No: 15484814
+                                            <br>Country: United Kingdom
+                                        </span>
+                                    </h4>
+                                    <a href="@Url.Action("SetReferral","Marketing" )" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set New Referral
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control   form-control-round form-control-bold">
+                                                    <option>Select Service</option>
+                                                    <option>All</option>
+                                                    <option>KiiPay Wallet</option>
+                                                    <option>Bank Deposit</option>
+                                                    <option>Cash Pickup</option>
+                                                    <option>Other Wallet</option>
+                                                    <option>Bill Payment</option>
+                                                    <option>Top-up</option>
+                                                    <option>Service Payment</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control   form-control-round form-control-bold">
+                                                    <option>Select Country</option>
+                                                    <option>United kingdom (GBP)</option>
+                                                    <option>Nigeria (NGN)</option>
+                                                    <option>Cameroon (XAF)</option>
+                                                    <option>Ghana (GHS)</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option value="">Select Month </option>
+                                                    <option value="January">January</option>
+                                                    <option value="February">February</option>
+                                                    <option value="March">March</option>
+                                                    <option value="April">April</option>
+                                                    <option value="May">May</option>
+                                                    <option value="June">June</option>
+                                                    <option value="July">July</option>
+                                                    <option value="August">August</option>
+                                                    <option value="September">September</option>
+                                                    <option value="October">October</option>
+                                                    <option value="November">November</option>
+                                                    <option value="December">December</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="js-example-data-array form-control form-control-round form-control-bold">
+                                                    <option value="">Select Year </option>
+                                                    <option value="2014">2014</option>
+                                                    <option value="2013">2013</option>
+                                                    <option value="2012">2012</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Campaing Name</th>
+                                                    <th>Country</th>
+                                                    <th>Services</th>
+                                                    <th>Cash Give Away</th>
+                                                    <th>Free Fee Transfer</th>
+                                                    <th>No. Referrals Sent</th>
+                                                    <th>Launch Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr>
+
+                                                    <td><a href="referral-details.php">Christmas</a></td>
+                                                    <td><i class="flag flag-icon flag-icon-np"></i> Nepal </td>
+                                                    <td>Cash Pickup</td>
+                                                    <td>$5</td>
+                                                    <td>3 Transfer</td>
+                                                    <td><a href="referrals-sent-list.php">500</a></td>
+
+                                                    <td>Jan-01-2020 : 11:59pm </td>
+                                                    <td class="action-icon">
+                                                        <a href="@Url.Action("SetPromotion","Marketing" ,new { @id =0})  " class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                        <a href="@Url.Action("DeletePromotiom","Marketing",new { @id =0})" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                    </td>
+                                                </tr>
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

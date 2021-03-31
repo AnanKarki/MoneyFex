@@ -1,0 +1,189 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentFundAccountViewModel
+
+@{
+    ViewBag.Title = "FundDetails";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0"><label class="text-primary">@Model.AgentName</label>  <span>Agent Account No:@Model.AgentCode</span></h4>
+                                    <a href="@Url.Action("Index","AUXAgentFundAccount")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                        <div class="dt-responsive table-responsive">
+
+                                            <table width="100%">
+
+                                                <tbody>
+                                                    <tr>
+                                                        <td>
+                                                            <div class="p-t-10 p-b-10">
+
+                                                                <h5>  Reference</h5>
+                                                                <span class="text-primary">@Model.PaymentReference</span>
+                                                            </div>
+                                                        </td>
+
+                                                        <td align="right">
+                                                            <div class="p-t-10 p-b-10">
+
+                                                                <h5>  Status </h5>
+                                                                <span class="text-success">@Model.StatusName</span>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <table class="table table-striped table-bordered nowrap">
+
+                                                <tbody>
+
+
+                                                    <tr>
+                                                        <td class="text-left">Country </td>
+                                                        <td class="text-left"> @Model.AgentCountry</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Agent Name </td>
+                                                        <td class="text-left"> @Model.AgentName</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Agent Account </td>
+                                                        <td class="text-left"> @Model.AgentAccountNo</td>
+                                                    </tr>
+
+                                                    <tr>
+                                                        <td class="text-left">Amount</td>
+                                                        <td class="text-left"> @Model.Amount @Model.AgentCountryCurrency</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Reference</td>
+                                                        <td class="text-left">@Model.PaymentReference</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Funding Mehtod</td>
+                                                        <td class="text-left">@Model.SenderPaymentModeName</td>
+                                                    </tr>
+                                                    @if (Model.SenderPaymentMode == FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard)
+                                                    {
+                                                        <tr>
+                                                            <td class="text-left">Card Details</td>
+                                                            <td class="text-left">@Model.SenderPaymentModeName @Model.FormattedCardNumber</td>
+                                                        </tr>
+                                                    }
+                                                    <tr>
+                                                        <td class="text-left">Transaction Reference</td>
+                                                        <td class="text-left"> @Model.Receipt</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left">Date</td>
+                                                        <td class="text-left">@Model.DateTime</td>
+                                                    </tr>
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3 text-center">
+
+                                            @if (Model.Status == FAXER.PORTAL.DB.AgentFundStatus.Processing)
+                                            {
+                                                if (Model.SenderPaymentMode != FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard)
+                                                {
+                                                    <a href="@Url.Action("SetFundAccount","AUXAgentFundAccount" , new { @id= Model.Id})" class="btn btn-sm btn-round btn-primary">Edit</a>
+                                                }
+                                                if (Model.SenderPaymentMode == FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard)
+                                                {
+                                                    <a onclick="CheckPaymentStatus('@Model.Receipt')" class="btn btn-sm btn-round btn-primary">Check Payment</a>
+                                                }
+                                                <a href="@Url.Action("Approved","AUXAgentFundAccount" , new { @Id =Model.Id })" class="btn btn-sm btn-round btn-success">Approve</a>
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal" id="TransactionStatus" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Card Payment</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div id="TransactionResult"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function TransactionStatusModel(item) {
+
+            var Transactionmodel = {
+                Status: item.Status,
+                Amount: item.Amount,
+                Reference: item.Reference,
+                Date: item.Date
+            }
+            return Transactionmodel;
+        };
+
+        function CheckPaymentStatus(identifier) {
+            $.getJSON("/Admin/AUXAgentFundAccount/CheckPaymentStatus?refno=" + identifier, function (result) {
+                $("#TransactionResult p").remove();
+                var Transactionmodel = TransactionStatusModel(result.Data);
+                for (var item in Transactionmodel) {
+
+                    $("#TransactionResult").append('<p>' + '<b> ' + item + '</b> :' + Transactionmodel[item] + '</p>');
+                }
+                $("#TransactionStatus").modal('show');
+            });
+
+        }
+
+    </script>
+}

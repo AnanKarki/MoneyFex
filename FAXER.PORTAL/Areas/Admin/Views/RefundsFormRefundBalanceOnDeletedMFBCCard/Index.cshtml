@@ -1,0 +1,389 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.RefundsFormRefundOnDeletedMFBCCardViewModel
+@{
+    ViewBag.Title = "RefundsFormRefundBalanceOnDeletedMFBCCard";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>RefundsFormRefundBalanceOnDeletedMFBCCard</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (ViewBag.Message == "Your operation was successful !")
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                Riddha.UI.Toast("@ViewBag.Message", 4);
+            };
+
+        </script>
+    }
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Admin Form-Refund Balance on Deleted MFBC Card</h4>
+                </div>
+                <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Admin Form-Refund Balance on Deleted MFBC Card</li>
+                    </ol>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <form>
+                            <div class="col-lg-4 pull-right">
+                                <div class="input-group">
+                                    <input type="text" id="mfbc" name="example-input1-group2" class="form-control  " placeholder="Search Business Card Number">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn waves-effect waves-light btn-info " onclick="GetDetails()"><i class="fa fa-search"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <br>
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class="col-lg-8">
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            @Html.ValidationMessageFor(model => model.EncryptedMFBCNumber, "", new { @class = "text-danger" })
+                                            <h3>Business Details</h3>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Business Name</label>
+                                                @Html.HiddenFor(model => model.KiiPayBusinessInformationId)
+                                                @Html.HiddenFor(model => model.EncryptedMFBCNumber)
+                                                @Html.HiddenFor(model => model.AdminRefunderId)
+                                                @Html.HiddenFor(model => model.MFBCCardStatus)
+                                                @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @placeholder = "Business Name", @readonly = "readonly" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Business License/Registration Number</label>
+                                                @Html.TextBoxFor(model => model.BusinessLicenseNumber, new { @class = "form-control", @placeholder = "Business License/Registration Number", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Address</label>
+                                                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", @placeholder = "Address", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>City</label>
+                                                @Html.TextBoxFor(model => model.City, new { @class = "form-control", @placeholder = "City", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Country</label>
+                                                @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @placeholder = "Country", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                <label>Telephone</label>
+                                                @Html.TextBoxFor(model => model.Telephone, new { @class = "form-control", @placeholder = "Telephone", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-3">
+                                    <br><br>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Business Card Status</td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                @if (Model != null)
+                                                {
+                                                    if (Model.MFBCCardStatus == "Active")
+                                                    {
+                                                        <td style="background-color:lawngreen">Active</td>
+                                                    }
+                                                    else if (Model.MFBCCardStatus == "InActive")
+                                                    {
+                                                        <td style="background-color:lightgray">InActive</td>
+                                                    }
+                                                    else if (Model.MFBCCardStatus == "IsDeleted")
+                                                    {
+                                                        <td style="background-color:red; color:white">Deleted</td>
+                                                    }
+                                                    else if (Model.MFBCCardStatus == "IsRefunded")
+                                                    {
+                                                        <td style="background-color:yellow">Refunded</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>...</td>
+                                                    }
+                                                }
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <br>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <td>Date</td>
+                                                <td>Time</td>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            <tr>
+                                                @if (Model != null)
+                                                {
+                                                    <td>@Model.CurrentDate</td>
+                                                    <td>@Model.AdminRefRequestTime</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>...</td>
+                                                    <td>...</td>
+                                                }
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+
+                                        <div class="col-lg-12">
+                                            <h3>MFBC Information</h3>
+
+
+                                        </div>
+
+
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Name on Business Card</label>
+                                                @Html.TextBoxFor(model => model.MFBCNameOnCard, new { @class = "form-control", @placeholder = "Name on Business Card", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Card Number</label>
+                                                @Html.TextBoxFor(model => model.MFBCCardNumber, new { @class = "form-control", @placeholder = "Card Number", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.MFBCCardNumber, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Credit on MFBC </label>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCCreditOnCard, new { @class = "form-control", @placeholder = "Credit on MFBC ", @readonly = "readonly", style = "font-weight:bold;" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label class="col-lg-12 no-left-padding">Amount on MFBC before Deletion</label>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCCurrencySymbol, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                                <div class="col-lg-6 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCAmountBeforeDeletion, new { @class = "form-control", @placeholder = "Amount on MFBC before Deletion", @readonly = "readonly", style = "font-weight:bold;" })
+                                                    @Html.ValidationMessageFor(model => model.MFBCAmountBeforeDeletion, "", new { @class = "text-danger" })
+                                                </div>
+                                                <div class="col-lg-3 no-padding">
+                                                    @Html.TextBoxFor(model => model.MFBCCurrency, new { @class = "form-control col-lg-4", @readonly = "readonly" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>MFBC Deleter </label>
+                                                @Html.TextBoxFor(model => model.MFBCDeleter, new { @class = "form-control", @placeholder = "MFBC Deleter ", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                        <div class="clearfix"></div>
+
+
+                                        <div class="col-lg-8">
+                                            <div class="form-group">
+                                                <label>Reason for MFBC Card Deletion</label>
+                                                @Html.TextAreaFor(model => model.MFBCReasonForDeletion, new { @class = "form-control", @placeholder = "Reason for MFBC Card Deletion" })
+                                                @Html.ValidationMessageFor(model => model.MFBCReasonForDeletion, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="clearfix"></div>
+
+
+
+
+
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+                                <div class=" col-lg-12">
+
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Admin Information</h3>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Name of Admin Refunder</label>
+                                                @Html.TextBoxFor(model => model.AdminRefunderName, new { @class = "form-control", @placeholder = "Name of Admin Refunder", @readonly = "readonly" })
+                                                @Html.ValidationMessageFor(model => model.AdminRefunderName, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Refund Request Date</label>
+                                                @Html.TextBoxFor(model => model.AdminRefRequestDate, new { @class = "form-control", @placeholder = "Refund Request Date", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-lg-4">
+                                            <div class="form-group">
+                                                <label>Refund Request Time</label>
+                                                @Html.TextBoxFor(model => model.AdminRefRequestTime, new { @class = "form-control", @placeholder = "Refund Request Time", @readonly = "readonly" })
+
+                                            </div>
+                                        </div>
+
+                                        <div class="clearfix"></div>
+
+
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="clearfix"></div>
+                            </div>
+                            <!-- end -->
+                            <!-- start -->
+                            <div class=" border_tbls">
+
+                                <div class="col-lg-12">
+                                    <div class="form-row ">
+                                        <div class="col-lg-12">
+                                            <h3>Confirm Refund Request </h3>
+
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <div class="radio radio-success">
+                                                @Html.RadioButtonFor(model => model.ConfirmRefund, true, new { id = "radio3" })
+                                                <label for="radio3"> Yes </label>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="col-lg-1">
+                                            <div class="radio radio-success">
+                                                @Html.RadioButtonFor(model => model.ConfirmRefund, false, new { id = "radio4" })
+                                                <label for="radio4"> No </label>
+                                                @Html.ValidationMessageFor(model => model.ConfirmRefund, "", new { @class = "text-danger" })
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+
+
+                            <!-- end -->
+                            <div class="col-lg-4 pull-right">
+                                <button class="btn btn-block btn-lg btn-info btn-rounded">Refund Balance on Deleted Card   </button>
+                            </div>
+                            <div class="clearfix"></div>
+                        </form>
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+        function GetDetails() {
+            var mfbc = $("#mfbc").val();
+            window.location.href = "/Admin/RefundsFormRefundBalanceOnDeletedMFBCCard/Index?MFBC=" + mfbc;
+        }
+
+
+
+    </script>
+
+
+
+}

@@ -1,0 +1,424 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentAMLTrainingRecordVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 1050px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 25px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+
+    .bordered-table {
+        border-collapse: collapse;
+    }
+
+        .bordered-table td {
+            border: solid 1px #00adef;
+            padding: 8px !important;
+            text-align: center;
+        }
+</style>
+<!--  -->
+<div class="real_form">
+    <div class="container">
+
+        <div class="row">
+            <div class="forms-wrapper">
+
+
+                <div class="form-main-title">
+                    Agent Anti-Money Laundering Compliance Training Record
+                </div>
+                <p>This Agent Training Record should be kept up to date and on file at the Agent location. Be sure to fill in all fields of the log when training is completed. Employee Initials: Next to the Employee Name, each employee is required to write his or her initials to signify that the indicated training has been received.</p>
+                <div class="forms">
+
+                    <!--  -->
+                    <div class="forms-body">
+                        <div class="form-block">
+
+                            <table>
+                                <tbody>
+
+
+                                    <tr>
+                                        <td><label>Agent Name and Address: @Html.TextBoxFor(model => model.AgentStaffNameAndAddress, new { @id = "AgentStaffNameAndAddress" , @readonly = "readonly" })</label></td>
+                                        <td><label>Agent Account No.:  @Html.TextBoxFor(model => model.AgentStaffAccountNo, new { @id = "AgentStaffAccountNo" , @readonly = "readonly" })</label></td>
+                                    </tr>
+
+
+                                </tbody>
+
+
+
+                            </table>
+
+                            <table class="bordered-table">
+                                <thead>
+                                    <tr>
+                                        <td rowspan="2"><label>Date of Training</label></td>
+                                        <td rowspan="2"><label>Employee Name</label></td>
+                                        <td rowspan="2"><label>Employee Initials</label></td>
+                                        <td colspan="2">
+                                            Type of Training
+                                            (Check appropriate box)
+                                        </td>
+                                        <td rowspan="2">Training Conducted by</td>
+                                        <td rowspan="2">Add Row</td>
+
+
+
+
+                                    </tr>
+                                </thead>
+                                <tbody id="TrainingDetails"></tbody>
+                                <tfoot>
+
+                                    <tr class="mycontainer" id="mainrow">
+
+                                        <td rowspan="2"><label><input type="date" name="DateOfTraining" id="DateOfTraining" class="form-control"></label></td>
+                                        <td rowspan="2"><label><input type="text" name="EmployeeName" id="EmployeeName"></label></td>
+                                        <td rowspan="2"><label><input type="text" name="EmployeeInitials" id="EmployeeInitials"></label></td>
+                                        <td> <input type="checkbox" name="IsInitial" id="IsInitial">  </td>
+                                        <td> <input type="checkbox" name="IsOnGoing" id="IsOnGoing">  </td>
+                                        <td rowspan="2"><label><input type="text" name="TrainingConductedBy" id="TrainingConductedBy"></label></td>
+                                        <td rowspan="2"><label><button type="button" class="button button-Submit" id="add">+</button></label></td>
+
+
+                                    </tr>
+                                </tfoot>
+                            </table>
+
+
+                        </div>
+
+                    </div>
+                    <!--  -->
+
+
+
+
+
+
+
+
+
+                    <div class="forms-footer  ">
+                        <a href="@Url.Action("AgentAMLTrainingRecord" ,"AgentForms")" class="btn btn-danger">Cancel </a>
+
+                        <button type="button" class="button button-Submit" id="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="SuccessFullModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4> Agent Training Record Added Successfully</h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-sm" onclick="Refresh();">Clear</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="ErrorModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4 id="ErrorMessage"></h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success btn-sm" data-dismiss="modal">Clear</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+@section Scripts{
+    <script type="text/javascript">
+        //$(function () {
+        //    $('#orderDate').datepicker({
+        //        dateFormat: 'mm-dd-yy'
+        //    })
+        //})
+
+
+        function Refresh() {
+
+            window.location.href = "/Agent/AgentAMLTrainingRecord/Index";
+        }
+
+        $(document).ready(function () {
+            //Add button click event
+            $('#add').click(function () {
+                //validation and add order items
+                var isAllValid = true;
+                if ($("#DateOfTraining").val() == "") {
+
+                    isAllValid = false;
+                    $("#ErrorMessage").text("Please enter the date");
+                    $("#ErrorModal").modal('show');
+
+                }
+
+                if ($("#EmployeeName").val() == "" ) {
+                    isAllValid = false;
+                    $("#ErrorMessage").text("Please enter the employee name");
+                    $("#ErrorModal").modal('show');
+                }
+                if ($("#EmployeeName").val() == "") {
+                    isAllValid = false;
+                    $("#ErrorMessage").text("Please enter the employee initials");
+                    $("#ErrorModal").modal('show');
+                }
+                if ($("#TrainingConductedBy").val() == "") {
+                    isAllValid = false;
+                    $("#ErrorMessage").text("Please the name of training conducted by");
+                    $("#ErrorModal").modal('show');
+                }
+                debugger;
+                if (isAllValid) {
+                    debugger;
+                    var $newRow = $('#mainrow').clone().removeAttr('id').add('<br / >');
+
+
+                    //Replace add button with remove button
+                    $('#add', $newRow).addClass('remove').text('Del').removeClass('button-Submit').addClass('button-cancel');
+
+                    //remove id attribute from new clone row
+                    $('#DateOfTraining,#EmployeeName,#EmployeeInitials,#IsOnGoing,#IsInitial, #TrainingConductedBy, #add', $newRow).removeAttr('id');
+                    //append clone row
+                    $('#TrainingDetails').append($newRow);
+
+                    //append clone row
+                    $('#DateOfTraining,#EmployeeName,#EmployeeInitials,#IsOnGoing,#IsInitial, #TrainingConductedBy, #add').val('');
+
+
+                }
+
+            })
+
+            //remove button click event
+            $('#TrainingDetails').on('click', '.remove', function () {
+                $(this).parents('tr').remove();
+            });
+
+            $('#submit').click(function () {
+                var isAllValid = true;
+
+                var list = [];
+                var errorItemCount = 0;
+                $('#TrainingDetails  tr').each(function (index, ele) {
+
+                    var TrainingDetail = {
+                        DateOfTraining: $("[name='DateOfTraining']", this).val(),
+                        EmployeeName: $("[name='EmployeeName']", this).val(),
+                        EmployeeInitials: $("[name='EmployeeInitials']", this).val(),
+                        IsInitial: $("[name='IsInitial']", this)[0].checked,
+                        IsOnGoing: $("[name='IsOnGoing']", this)[0].checked,
+                        TrainingConductedBy: $("[name='TrainingConductedBy']", this).val()
+                    }
+                    list.push(TrainingDetail);
+
+                })
+                if (list.length == 0) {
+
+                    isAllValid = false;
+                    $("#ErrorMessage").text("Please add details to submit");
+                    $("#ErrorModal").modal('show');
+                }
+
+                debugger;
+
+                if (isAllValid) {
+                    var data = {
+                        AgentStaffNameAndAddress: $('#AgentStaffNameAndAddress').val().trim(),
+                        AgentStaffAccountNo: $('#AgentStaffAccountNo').val().trim(),
+                        AgentAMLTrainingRecordDetails: list
+                    }
+
+                    $(this).val('Please wait...');
+
+                    $.ajax({
+                        type: 'POST',
+                        url: '/Agent/AgentAMLTrainingRecord/Index',
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: function (data) {
+                            if (data.status) {
+                                alert('Successfully saved');
+                                //here we will clear the form
+                                list = [];
+                                $('#orderNo,#orderDate,#description').val('');
+                                $('#TrainingDetails').empty();
+
+                                $("#SuccessFullModal").modal('show')
+                            }
+                            else {
+
+                                $("#SuccessFullModal").modal('show')
+                            }
+                            $('#submit').val('Save');
+                        },
+                        error: function (error) {
+
+                            $("#SuccessFullModal").modal('show')
+                            console.log(error);
+                            $('#submit').val('Save');
+                        }
+                    });
+                }
+
+            });
+
+        });
+
+    </script>
+}
+

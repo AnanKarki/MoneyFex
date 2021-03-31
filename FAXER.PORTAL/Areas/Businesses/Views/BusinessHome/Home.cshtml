@@ -1,0 +1,239 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!-- banner -->
+<div class="slider" id="slider">
+	<!-- slider -->
+	<div class="slider-img">
+		<img  src="~/Areas/Businesses/images/slider-1.jpg" alt=" " class="">
+		<div class="md-color-overlay dark-blue-overlay"></div>
+		<div class="container">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="slider-captions">
+					
+					<h1 class="slider-title  ">Innovating Money Transfer</h1>
+					<p class="slider-text hidden-xs">Send money and also pay for bills directly from abroad</p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	<!-- slider -->
+	<div class="slider-img">
+		<img  src="~/Areas/Businesses/images/slider-2.jpg" alt=" " class="">
+		<div class="md-color-overlay dark-blue-overlay"></div>
+		<div class="container">
+			<div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+				<div class="slider-captions">
+					
+					<h1 class="slider-title  ">A Payment without Border Platform</h1>
+					<p class="slider-text hidden-xs">Deposit money directly into your money receiver's virtual account </p>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	
+</div>
+<div class=" loginsignup-sec   hidden-lg  hidden-md text-center">
+    <div class="container">
+
+        <a href="@Url.Action("Login", "BusinessLogin")" class="btn btn-primary radius-20 ">
+            Login
+        </a>&nbsp;&nbsp;
+
+        <a href="@Url.Action("BusinessDetails" , "BusinessSignUp")" class="btn btn-default radius-20">Sign Up</a>
+
+    </div>
+	
+</div>
+
+
+<!-- banner -->
+
+
+<!-- about -->
+<section class="section-space60 bg-white">
+<div class="container">
+	<div class="row">
+		<div class="welcome-text-home text-center">
+			<div class="col-lg-12 "  >
+				<h2>Expanding your  <span class="color-light-brilliant-vermilion">Sales</span> </h2>
+			</div>
+			<div class="clearfix mb20"></div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="mobile_design home-service-design text-center clearfix">
+			
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="dashboard_thumb">
+					<a href="@Url.Action("SalesSheet" ,"MyBusinessMoneyFaxSalesSheet")">
+						<div class="das-icon">
+							<img  src="~/Areas/Businesses/images/icon/6.png">
+						</div>
+						<h4>My Sales Today </h4>
+					</a>
+				</div>
+			</div>
+			<!--  -->
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="dashboard_thumb">
+					<a href="@Url.Action("PayForGoodsAndServices" , "PayForGoodsAndServices")">
+						<div class="das-icon">
+							<img  src="~/Areas/Businesses/images/icon/2.png">
+						</div>
+						<h4>Pay a Business</h4>
+					</a>
+				</div>
+			</div>
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="dashboard_thumb">
+					<a href="@Url.Action("Index"  ,"TransferMoneyNow")">
+						<div class="das-icon">
+							<img  src="~/Areas/Businesses/images/icon/3.png">
+						</div>
+						<h4>Transfer <br>Money Now</h4>
+					</a>
+				</div>
+			</div>
+			<!--  -->
+			
+			
+			
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="dashboard_thumb">
+					<a href="#">
+						<div class="das-icon">
+							<a href="#" class="message  ">
+								<span class=""> <i class="fa fa-envelope-o" aria-hidden="true"></i>
+								</span>
+								@*<span class="badge">10+</span>*@
+							</a>
+						</div>
+						<h4>Message</h4>
+					</a>
+				</div>
+			</div>
+			<!--  -->
+			
+			
+			
+			
+			
+			<div class="clearfix"></div>
+		</div>
+		
+	</div>
+</div>
+</section>
+<!-- about -->
+<!-- services -->
+<section class="section-space60 bg-primary">
+<div class="container">
+	<div class="row">
+		<div class="multiple-service  ">
+			
+            <div class="col-lg-12">
+                <div class="main-header text-center">
+                    <h2>Your Business, Many benefits  </h2>
+                    <span></span>
+                </div>
+            </div>
+			
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="service-item">
+					<div class="icon-img">
+						<img  src="~/Areas/Businesses/images/icon/multiple/1.png" alt="">
+					</div>
+					<h3>Free Local Transfer</h3>
+					<p class="hidden-sm hidden-xs">Transfer money locally for free </p>
+				</div>
+			</div>
+			<!--  -->
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="service-item">
+					<div class="icon-img">
+						<img  src="~/Areas/Businesses/images/icon/multiple/3.png" alt="">
+					</div>
+					<h3>Free Local Payment</h3>
+					<p class="hidden-sm hidden-xs">Pay bills & other services locally for free</p>
+				</div>
+			</div>
+			<!--  -->
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="service-item">
+					<div class="icon-img">
+						<img  src="~/Areas/Businesses/images/icon/multiple/2.png" alt="">
+					</div>
+					<h3>Free Cash Withdrawal</h3>
+					<p class="hidden-sm hidden-xs">Withdraw cash from paying agent for free </p>
+				</div>
+			</div>
+			<!--  -->
+			<!--  -->
+			<div class="col-lg-3 col-md-6 col-xs-6 col-sm-6">
+				<div class="service-item">
+					<div class="icon-img">
+						<img  src="~/Areas/Businesses/images/icon/multiple/4.png" alt="">
+					</div>
+					<h3>Accept Payment</h3>
+					<p class="hidden-sm hidden-xs">Send money straight to bank account</p>
+				</div>
+			</div>
+			<!--  -->
+		</div>
+		
+		
+	</div>
+</div>
+</section>
+<!-- services -->
+
+
+<!-- Even better from our app -->
+<section class="mobile-app relative">
+<div class="md-color-overlay dark-blue-overlay"></div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-2 col-md-8 col-xs-12 ">
+			<div class="mb40 text-center section-title text-white">
+				<!-- section title start-->
+				<h1 class="text-white">Even Better from our App</h1>
+			</div>
+			<!-- /.section title start-->
+		</div>
+	</div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12">
+			<center>
+			<a href=" " class="btn_app">
+				<img class="icon"  src="~/Areas/Businesses/images/icon-googleplay.svg" alt="Google Play Store logo">
+				Get it on Google Play
+			</a>
+			&nbsp; &nbsp;
+			<a href=" " class="btn_app">
+				<img class="icon"  src="~/Areas/Businesses/images/icon-apple.svg" alt="Apple logo">
+				Get it on App Store
+			</a>
+			</center>
+		</div>
+	</div>
+</div>
+</section>
+<!-- Even better from our app -->

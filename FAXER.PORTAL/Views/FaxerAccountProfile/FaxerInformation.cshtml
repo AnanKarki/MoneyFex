@@ -1,0 +1,626 @@
+﻿@model FAXER.PORTAL.DB.FaxerInformation
+@{
+    ViewBag.Title = "FaxerInformation";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+
+    string Address1 = Model.Address1.Substring(0, 1) + "*******" + Model.Address1.Substring(Model.Address1.Length - 1, 1);
+    string City = Model.City.Substring(0, 1) + "***" + Model.City.Substring(Model.City.Length - 1, 1);
+    string State = Model.State.Substring(0, 1) + "****" + Model.State.Substring(Model.State.Length - 1, 1);
+    string PostalCode = Model.PostalCode.Substring(0, 1) + "****" + Model.PostalCode.Substring(Model.PostalCode.Length - 1, 1);
+
+    //string PhoneNo = Model.PhoneNumber.Substring(0, 1) + "*****" + Model.PhoneNumber.Substring(Model.PhoneNumber.Length - 1, 1);
+
+    string[] EmailToken = Model.Email.Split('@');
+    string EmailMasked = EmailToken[0].Substring(0, 1) + "*****" + EmailToken[0].Substring(EmailToken[0].Length - 1, 1) + '@' + EmailToken[1].Substring(0, 1)
+                                  + "*****" + EmailToken[1].Substring(EmailToken[1].Length - 1, 1);
+
+    string IdCardIssuingCountry = "*****";
+
+    string CountryPhoneCode = FAXER.PORTAL.Common.Common.GetCountryPhoneCode(Model.Country);
+}
+
+<style>
+
+    .Custombtn {
+        position: absolute;
+        right: 0;
+        top: 0px;
+        padding: 2px 8px;
+        background: #5972a8;
+        font-size: 1.2em;
+        cursor: pointer;
+        border: 1px solid #1a356e;
+        color: #fff;
+        -webkit-box-shadow: inset 0 1px 0 #8a9cc2;
+        -moz-box-shadow: inset 0 1px 0 #8a9cc2;
+        box-shadow: inset 0 1px 0 #8a9cc2;
+        margin-bottom: 5px;
+        margin-top: -5px;
+        display: none;
+    }
+
+    [type=file] {
+        position: absolute;
+        filter: alpha(opacity=0);
+        opacity: 0;
+    }
+
+
+        input, [type=file] + label {
+            border: 1px solid #CCC;
+            border-radius: 3px;
+            text-align: left;
+            padding: 10px;
+            width: 150px;
+            margin: 0;
+            left: 0;
+            position: relative;
+        }
+
+        [type=file] + label {
+            text-align: center;
+            left: 0.5em;
+            top: 0.5em;
+            background: #4267b2;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+            [type=file] + label:hover {
+                background: #3399ff;
+            }
+</style>
+
+@using (Html.BeginForm("UpdateImageUpload", "FaxerAccountProfile", null, FormMethod.Post, new { enctype = "multipart/form-data", id = "UpdateImageUpload" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <section class="dashboard">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="dashboard_body">
+                        @Html.Hidden("Id", null, new { @id = "Id" })
+                        <div class="  ">
+                            <h3>Sender's Information</h3>
+                            <hr>
+                            <div = class="profileinfo">
+                                <div class="gear">
+                                    <label>Full Name:</label>
+                                    <span id="fullname" class="datainfo">@Model.FirstName @Model.MiddleName  @Model.LastName</span>
+                                </div>
+                                <div class="profileinfo">
+                                    <div class="gear">
+                                        <label style="color:gray">My Address </label>
+
+                                        <a class="pull-right btn btn-primary btn-sm" onclick="UpdateAdress()">Update</a>
+                                    </div>
+                                    <div class="gear">
+                                        <label>Address 1 :  </label>
+                                        <span class="datainfo">@Address1 </span>
+
+                                    </div>
+                                    <div class="gear">
+                                        <label>City     :  </label>
+                                        <span class="datainfo">@City </span>
+
+                                    </div>
+                                    <div class="gear">
+                                        <label>State    :  </label>
+                                        <span class="datainfo">@State </span>
+
+                                    </div>
+                                    <div class="gear">
+                                        <label>Postal Code :</label>
+                                        <span class="datainfo">@PostalCode </span>
+
+                                    </div>
+                                    <div class="gear">
+                                        <label>Country :</label>
+                                        <span class="datainfo">@Model.Country </span>
+
+                                    </div>
+                                </div>
+
+                                <div class="gear">
+                                    <label>Telephone:<label id="InvalidPhoneNo" class="text-danger"></label> </label>
+                                    &nbsp; @CountryPhoneCode  <span id="Telephone" class="datainfo">@Model.PhoneNumber</span>
+                                    <a href="#" class="editlink">Update</a>
+                                    <a class="savebtn" onclick="UpdatePhone(@Model.Id)">Save</a>
+                                </div>
+                                <div class="gear">
+                                    <label>Email Address: <label id="InvalidEmail" class="text-danger"></label></label>
+                                    <span id="pemail" class="datainfo">@EmailMasked</span>
+                                    <a href="#" class="editlink">Update</a>
+                                    <a class="savebtn" onclick="UpdateEmail(@Model.Id)">Save</a>
+                                </div>
+                                <div class="gear">
+                                    <label>Password:</label>
+                                    <span id="Password" class="datainfo">********</span>
+                                    <a href="/faxeraccount/ResetPassword" class=" pull-right">Reset Password</a>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="">
+                            <h3>Identification Detials</h3>
+                            <hr>
+                            <div class="profileinfo">
+                                <div class="gear">
+                                    <label>ID Type : </label><br />
+
+                                    <span id="IDCardType" class="">@Model.IdCardType</span>
+
+                                    @Html.DropDownList("IdCardType", (IEnumerable<SelectListItem>)ViewBag.IdCardType, "select ID Card Type", new { @class = "", @id = "IdCardType", @style = "display:none;" })
+
+                                    <label id="InvalidCardType" style="display:none;color:red;"> Please select your Card Type</label><br />
+                                    <a href="#" class="pull-right" onclick="UpdateIdCardTypeChange()" id="UpdateIdCardTypeChange">Update</a>
+
+                                    <a class="Custombtn" id="savebtnIdCardType" onclick="UpdateIDCardType(@Model.Id)">Save</a>
+
+
+                                    <div class="clearfix"></div>
+                                </div>
+
+                                <div class="gear">
+                                    <label>ID Number:</label><br />
+                                    <label id="InvalidCardNumber" style="color:red;display:none;">Please enter a ID card Number </label>
+                                    <span id="IdCardNum" class="datainfo">@Model.IdCardNumber</span>
+                                    <a href="#" class="editlink">Update</a>
+                                    <a class="savebtn" onclick="UpdateIdCardNumber(@Model.Id)">Save</a>
+                                </div>
+                                <div class="gear">
+                                    <label>ID Expiring Date : </label><br />
+                                    <span id="IDExpiryDate" class="">@Model.IdCardExpiringDate.ToString("**/**/**yy")</span>
+
+                                    <input type="date" class="" id="IdCardExpiryDate" style="display:none;"><br />
+
+                                    <a href="#" class="pull-right" onclick="IDExpiryDateChange()" id="IDExpiryDateChange">Update</a>
+                                    <a class="Custombtn" id="savebtnIDExpirydate" onclick="UpdateIdCardExpiringDate(@Model.Id)">Save</a>
+
+                                    <label id="invaliddate" style="color:red;display:none;"> Please enter a valid date</label>
+
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="gear">
+                                    <label>ID Issuing Country : </label><br />
+
+                                    @Html.DropDownList("IssuingCountry", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "", @id = "Issuingcountry2", @style = "display:none;" })
+
+                                    <span id="Issuingcountry" class="">@IdCardIssuingCountry</span><br />
+                                    <label id="InvalidCountry" style="display:none;color:red;"> Please select your country</label>
+                                    <a href="#" class="pull-right" onclick="IssuingCountryChaneg()" id="IssuingCountryChaneg">Update</a>
+                                    <a class="Custombtn" id="IssuingcountrySavebtn" onclick="UpdateIssuingCountry(@Model.Id)">Save</a>
+
+                                    <br />
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="gear">
+                                    <label>Photo ID:</label>
+
+                                    <div id="" class="datainfo">
+
+                                        <br />
+                                        <br />
+                                        <input type="file" id="dataFile" name="file" class="form-control" placeholder="Add profile picture" onchange="UploadPhotoIDCard()" />
+
+                                        @if (string.IsNullOrEmpty(Model.CardUrl))
+                                        {
+                                            <label for="dataFile">Upload ID Card </label>
+                                        }
+                                        else
+                                        {
+                                            <label for="dataFile">Update ID Card</label>
+                                        }
+
+
+
+                                        @if (@TempData["ChooseCard"] != null)
+                                        {
+
+                                            <label style="color:red"> @TempData["ChooseCard"]</label>
+                                        }
+
+
+                                        <br />
+                                        <br />
+                                    </div>
+                                </div>
+
+
+
+
+                            </div>
+
+                        </div>
+                        <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="btn btn-sm btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back to DashBoard</a>
+
+                        <!--  -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+
+@using (Html.BeginForm("VerifyAccountToEdit", "FaxerAccountProfile", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div class="modal fade" id="Verification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">MoneyFex Account Verification</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <h4>Verify your account</h4>
+                            <p>
+                                Before you can edit your address, we need to verify your account .This Will help to keep your information safe
+                            </p>
+                            <p>Please enter the verificaton code sent as SMS to your registered phone number!</p>
+                            @*<p>Please enter the verificaton code sent to your email address</p>*@
+                            <br />
+                            <label class="text-danger" id="InvalidVerificationCode"></label>
+                            <input type="text" class="form-control" id="verificationCode" name="verificationCode">
+                            <button type="button" class="btn btn-success btn-sm btn-ok" onclick="Verfiy()">Verify</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    @*<button type="submit" class="btn btn-success btn-sm btn-ok">Verify</button>*@
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@using (Html.BeginForm("FaxerInformation", "FaxerAccountProfile", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <!-- fax-cancellation popup -->
+    <div class="modal fade" id="UpdateAddress" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>Update Address</h4>
+                </div>
+                <div class="modal-body">
+                    @*@Html.Hidden("ID", null, new { @id = "id" })*@
+                    <div class="row">
+
+                        @Html.ValidationMessage("VerificationError", "", new { @class = "text-danger" })
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 1 <span class="required">*</span></label>
+                        </div>
+                        @Html.HiddenFor(model => model.Id)
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.Address1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address1, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Address 2</label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.Address2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Address2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>City <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>State/Province/Region <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.State, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Zip/Postal Code <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+
+                                @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PostalCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.DropDownListFor(model => model.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        @*<div class="col-lg-5">
+                                <label>Phone Number <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group">
+                                    <input type="text" name="" class="form-control" placeholder="">
+
+                                </div>
+                            </div>*@
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+
+
+
+
+
+                    </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok"> Update </button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script src="~/JS/bootstrap-filestyle.js"></script>
+    <script src="~/JS/bootstrap-filestyle.min.js"></script>
+
+    <script type="text/javascript">
+
+
+        //$("[type=file]").on("change", function () {
+        //    // Name of file and placeholder
+        //    var file = this.files[1].name;
+        //    var dflt = $(this).attr("placeholder");
+        //    if ($(this).val() != "") {
+        //        $(this).next().text(file);
+        //    } else {
+        //        $(this).next().text(dflt);
+        //    }
+        //});
+
+        function UpdatePhone(Id) {
+            var phone = $('#Telephone-form').val();
+            if (phone.includes("*")) {
+                $("#InvalidPhoneNo").text("Please enter the valid Phone no");
+            }
+            else {
+                $("#InvalidPhoneNo").text(" ");
+                window.location.href = "/FaxerAccountProfile/UpdateFaxerPhone?PhoneNumber=" + phone + "&Id=" + Id;
+            }
+
+        };
+
+        function UpdateEmail(Id) {
+            
+            var email = $('#pemail-form').val();
+            if (email.includes("*")) {
+                $("#InvalidEmail").text("Please enter the valid email");
+            } else {
+                $("#InvalidEmail").text(" ");
+                window.location.href = "/FaxerAccountProfile/UpdateFaxerEmail?Email=" + email + "&Id=" + Id;
+            }
+        };
+
+        function UpdateIdCardNumber(Id) {
+
+            var IdCardNumber = $("#IdCardNum-form").val();
+            if (IdCardNumber == "") {
+
+                $("#InvalidCardNumber").show();
+            } else {
+
+                window.location.href = "/FaxerAccountProfile/UpdateIDCardNumber?IdCardNumber=" + IdCardNumber + "&Id=" + Id;
+            }
+
+        };
+
+
+
+        function UpdateIdCardTypeChange() {
+
+            $("#IDCardType").hide();
+            $("#IdCardType").show();
+            $("#UpdateIdCardTypeChange").hide();
+            $("#savebtnIdCardType").show();
+        }
+        function UpdateIDCardType(Id) {
+
+
+            var IDCardType = $("#IdCardType").val();
+            if (IDCardType == "") {
+                $("#InvalidCardType").show();
+                $("#savebtnIdCardType").show();
+            } else {
+                window.location.href = "/FaxerAccountProfile/UpdateIDCardType?IDCardType=" + IDCardType + "&Id=" + Id;
+            }
+
+        }
+
+
+        function IDExpiryDateChange() {
+
+            $("#IdCardExpiryDate").show();
+            $("#IDExpiryDate").hide();
+            $("#IDExpiryDateChange").hide();
+            $("#savebtnIDExpirydate").show();
+
+        }
+
+        function UpdateIdCardExpiringDate(Id) {
+
+            var IdCardExpiryDate = $("#IdCardExpiryDate").val();
+
+
+            var parts = IdCardExpiryDate.split('-');
+            var month = parts[1] - 1;
+            if (parts[0] == "" || parts[1] == "" || parts[2] == "") {
+
+                $("#invaliddate").show();
+                $("#savebtnIDExpirydate").show();
+            }
+            else {
+                var date = new Date(parts[0], parts[1] - 1, parts[2]);
+                if (date.getFullYear().toString().length > 4) {
+                    $("#invaliddate").show();
+                    $("#savebtnIDExpirydate").show();
+                }
+                else {
+                    window.location.href = "/FaxerAccountProfile/UpdateIdCardExpiryDate?IdCardExpiryDate=" + IdCardExpiryDate + "&Id=" + Id;
+                }
+            }
+
+        }
+
+
+
+
+        function IssuingCountryChaneg() {
+
+            $("#Issuingcountry").hide();
+            $("#Issuingcountry2").show();
+            $("#IssuingCountryChaneg").hide();
+            $("#IssuingcountrySavebtn").show();
+
+
+        }
+        function UpdateIssuingCountry(Id) {
+
+            var IssuingCountry = $("#Issuingcountry2").val();
+
+            if (IssuingCountry == "") {
+
+                $("#IssuingcountrySavebtn").show();
+                $("#InvalidCountry").show();
+                $("#Issuingcountry2").show();
+
+            } else {
+
+                window.location.href = "/FaxerAccountProfile/UpdateIDCardIssuingCountry?IssuingCountry=" + IssuingCountry + "&Id=" + Id;
+            }
+        }
+
+        function UpdateAdress() {
+
+            $.getJSON("/FaxerAccountProfile/SendVerificationCode", function (data) {
+
+            });
+
+            $("#Verification").modal("show");
+        //$("#UpdateAddress").modal("show");
+
+        };
+
+        function UploadPhotoIDCard() {
+
+            debugger;
+            if ($("#dataFile").val() != "" && $("#dataFile").val() != null) {
+
+
+
+                $("#UpdateImageUpload").submit();
+            }
+
+        }
+
+
+        function Verfiy() {
+
+            var verificationCode = $("#verificationCode").val();
+            $.getJSON("/FaxerAccountProfile/VerifyAccountToEdit?verificationCode=" + verificationCode, function (data) {
+
+                if (data.AccountVerified == true) {
+
+                    $("#Verification").modal("hide");
+                    $("#UpdateAddress").modal("show");
+                }
+
+                else {
+                    $("#InvalidVerificationCode").text("Please enter the verification code sent to your email address!");
+
+                    $("#Verification").modal("show");
+                }
+
+            });
+
+        }
+
+
+        window.onload = function() {
+            var InvalidAddress = '@TempData["InvalidInformation"]';
+            if (InvalidAddress == "True") {
+
+                $("#UpdateAddress").modal("show");
+
+            }
+
+        }
+
+    </script>
+
+}
+

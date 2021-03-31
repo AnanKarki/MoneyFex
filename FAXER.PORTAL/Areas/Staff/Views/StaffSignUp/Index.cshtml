@@ -1,0 +1,170 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffDetailsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1>Staff's Details</h1>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<form method="post">
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label> First Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.StaffFirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StaffFirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Middle Name </label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.StaffMiddleName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StaffMiddleName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Last Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @Html.TextBoxFor(model => model.StaffLastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StaffLastName, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Date of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.EditorFor(model => model.StaffDateOfBirth, new { htmlAttributes = new { @class = "form-control", type = "date" } })
+                                @Html.ValidationMessageFor(model => model.StaffDateOfBirth, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Country of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.StaffBirthCountry, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StaffBirthCountry, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Gender <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-3 ">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    @Html.RadioButtonFor(m => m.StaffGender, true, new { @class = "radio radio-success ", id = "radio1", @checked = "checked" }) &nbsp <label for="radio1"> Male </label>  &nbsp
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 ">
+                            <div class="form-group">
+                                <div class="checkbox">
+                                    @Html.RadioButtonFor(m => m.StaffGender, false, new { @class = "radio radio-success ", id = "radio2" }) &nbsp <label for="radio2">Female</label>  &nbsp
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Email Address <span class="required">*</span></label>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.StaffEmailAddress, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.StaffEmailAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-5">
+                            <label>Confirm Email <span class="required">*</span></label>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.CofirmStaffEmailAddress, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CofirmStaffEmailAddress, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--  -->

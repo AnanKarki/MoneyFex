@@ -1,0 +1,423 @@
+﻿@model FAXER.PORTAL.Models.PaymentMethodViewModel
+@{
+    ViewBag.Title = "InternationalPayNow";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    string[] amountSplited = Model.TotalAmount.ToString("0.00").Split('.');
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+
+                <div class="col-lg-4">
+                    <div class="login_signup mb20">
+
+                        <ul class="wiz">
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="flag-icon flag-icon-ng"></i> @ViewBag.ReceivingCountryCurrency @ViewBag.TransferMethod </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="fa fa-money"></i> Amount @ViewBag.SendingCountryCurrency @ViewBag.SendingAmount </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="fa fa-user"></i> @ViewBag.ReceiverName </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderCashPickUp")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+
+
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon last">
+                                            <i class="fa fa-credit-card"></i>
+                                        </div>
+                                    </div>
+
+                                    <!--  <div class="col-xs-8">
+                                       <span class=" "><i class="fa fa-money"></i> Amount GBP 458445 </span>
+                                     </div>
+
+                                    <div class="col-xs-2">
+                                        <a href=""  >Edit</a>
+                                     </div> -->
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6  ">
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <!-- Available balance -->
+                        <div class=" text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary">@Model.SendingCurrencySymbol<span class="amountheader">@amountSplited[0]</span>.<small class="text-primary">@amountSplited[1]</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+
+                        </div>
+
+                        @Html.HiddenFor(model => model.TotalAmount)
+                        @Html.HiddenFor(model => model.SendingCurrencySymbol)
+                        @Html.HiddenFor(model => model.HasKiiPayWallet)
+
+                        <ul class="paymentmethod-list mt20 mb20">
+                            <h4 class="text-left">
+                                @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                                @Html.ValidationMessage("", "", new { @class = "text-danger" })
+                                <span id="ErrorMesage" style="color:red;"></span>
+                            </h4>
+                            <h4 class="text-left">How do you want to pay ?</h4>
+
+                            @{
+                                int index = 0;
+                            }
+                            @foreach (var item in Model.CardDetails)
+                            {
+                                <li>
+                                    <label>
+
+                                        @Html.RadioButtonFor(model => Model.CardDetails[index].IsChecked, true, new { @type = "radio", @id = item.CardId, @onchange = "RadioChange();" })
+                                        <span class="cardsaved">
+                                            @if (item.CreditDebitCardType == FAXER.PORTAL.Models.CreditDebitCardType.VisaCard)
+                                            {
+                                                <img src="~/Content/images/icon/card/visa.png">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/Content/images/icon/card/master-card.png">
+                                            }
+
+                                        </span>
+
+
+                                        <div class="details_method">
+                                            <span class="title">Saved Credit/Debit Card</span> <span class="subtitle"> @item.CardNumber</span>
+                                            <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.CreditDebitFee </a> </span>
+
+                                        </div>
+
+
+                                    </label>
+                                    @Html.HiddenFor(model => Model.CardDetails[index].CardId, new { @id = "CardId" })
+                                    @Html.HiddenFor(model => Model.CardDetails[index].CreditDebitCardType)
+
+                                    @Html.HiddenFor(model => Model.CardDetails[index].CardNumber)
+
+                                    <div class="row" id="CVVDiv" style="display:none;">
+                                        <div class="col-md-offset-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.PasswordFor(Model => Model.CardDetails[index].SecurityCode,
+                                      new { @class = "form-control form-control-md", @placeholder = "Enter CVV", @id = "SecurityCode" })
+
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="col-md-offset-3 col-md-6">
+                                            <div class="form-group">
+                                                <a class="btn btn-primary btn-md mb30" onclick="submitAndGoToSecureTradingpage()">Confirm and Pay Now <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @{
+                                        index++;
+                                    }
+                                </li>
+                            }
+                            <li>
+                                <label>
+                                    @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard, new { @onchange = "RadioChange();", id = "CreditDebitCard" })
+                                    <span class="cardsaved ">
+                                        <img src="~/Content/images/credit-debit.jpg">
+                                    </span>
+                                    <div class="details_method">
+                                        <span class="title"> Credit/Debit</span> <span class="subtitle"> Card details required </span>
+                                        <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.CreditDebitFee </a> </span>
+
+                                    </div>
+
+                                </label>
+                            </li>
+                            @if (Model.HasEnableMoneyFexBankAccount == true)
+                            {
+                                <li>
+                                    <label class="clearfix">
+                                        @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.MoneyFexBankAccount, new { @onchange = "RadioChange();", id = "MoneyFexBankAccount" })
+                                        <span class="cardsaved "><img src="~/Content/images/icon/svg/bank.svg"></span>
+                                        <div class="details_method">
+                                            <span class="title"> MoneyFex Bank Account  </span> <span class="subtitle"><a href="#"> Manually transfer from your bank account to ours</a></span>
+                                            @*<span class="fee">Fee : GBP 0.95</span>*@
+                                            <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency  @ViewBag.ManualBankDepositFee </a> </span>
+
+                                        </div>
+                                    </label>
+                                </li>
+                            }
+
+                            @if (Model.HasKiiPayWallet)
+                            {
+                                <li>
+                                    <label>
+                                        @Html.RadioButtonFor(model => model.SenderPaymentMode, FAXER.PORTAL.Models.SenderPaymentMode.KiiPayWallet, new { @onchange = "RadioChange();" })
+
+                                        <span class="cardsaved"><img src="~/Content/images/icon/svg/kiipay.svg"></span> <span class="title"> KiiPay Wallet Balance   </span> <span class="subtitle">Balance @Model.SendingCurrencySymbol@Model.KiipayWalletBalance </span>
+                                        <span class="subtitle"><a href="#">Fee: @ViewBag.SendingCountryCurrency @ViewBag.Fee</a> </span>
+
+                                        @Html.HiddenFor(model => model.KiipayWalletBalance)
+                                    </label>
+                                </li>
+                            }
+                            @*<li>
+                                    <label class="text-left">
+                                        <a href="@Url.Action("DebitCreditCardDetails", new { @IsAddDebitCreditCard = true})"><i class="fa fa-plus"></i> Add New Card</a>
+                                    </label>
+                                </li>*@
+
+                        </ul>
+
+
+                        <div class="clearfix">  </div>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+
+                        <a class="btn btn-primary btn-lg mb30" id="PayNow" onclick="submit()">  Pay Now <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+                        <a class="btn btn-primary btn-lg mb30" id="Continue" onclick="submit()"> Continue <i class="fa fa-chevron-right" aria-hidden="true"></i> </a>
+
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="@Url.Action("CashPickUpSummary")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+<form name="form" id="acsurl" method="post">
+    <div>
+        <input type="hidden" name="PaReq" id="pareq" />
+        <input type="hidden" name="TermUrl" id="termurl" />
+        <input type="hidden" name="MD" id="md" />
+    </div>
+</form>
+@section scripts{
+    <script type="text/javascript">
+
+
+        $("#PayNow").hide();
+        $("#Continue").show();
+
+          SavedDebitCreditCard();
+        function SavedDebitCreditCard() {
+            if ('@ViewBag.IsSavedCreditDebitCard' == 'True') {
+                $("#CVVDiv").show();
+            }
+            else {
+                $("#CVVDiv").hide();
+            }
+        }
+
+        function RadioChange() {
+            $("input[type=radio]").prop('checked', false)
+            event.target.checked = true;
+            //event.target.value = true;
+            if (event.target.id > 0) {
+
+                $("02").show();
+                $("01").hide();
+
+                $("#PayNow").show();
+                $("#CVVDiv").show();
+                $("#Continue").hide();
+                //$("form").submit();
+
+            } else {
+
+
+                $("01").show();
+                $("02").hide();
+                $("#PayNow").hide();
+                $("#Continue").show();
+                $("#CVVDiv").hide();
+                //window.location.href = "AddMoneyToWalletEnterCardInformation";
+            }
+        }
+
+
+        function submitAndGoToSecureTradingpage() {
+            debugger;
+            $("#loader").show();
+            var SecurityCode = $("#SecurityCode").val();
+            if (SecurityCode == "" || SecurityCode == "undefined" || SecurityCode == null) {
+                $("#ErrorMesage").text("Enter CVV");
+                $("#loader").hide();
+                return;
+            }
+            var CardId = $("#CardId").val();
+            $.getJSON("/SenderCashPickUp/IsCVVCodeValid?securityCode=" + SecurityCode + "&cardId=" + CardId, function (result) {
+                if (result.Status == 3) {
+                    $("#loader").hide();
+                    $("#ErrorMesage").text(result.Message);
+                    return;
+                }
+                else {
+                    $.post
+                    var data = result.Data;
+                    $.post("ThreeDQuery",
+                        data,
+                        function (result) {
+                            console.log(result.Data);
+                            $("#loader").hide();
+                            if (result.Status == 1) {
+                                if (result.IsGetType3dAuth == true) {
+
+                                    window.location.href = result.Data.redirect_url;
+
+                                } else {
+                                    $("#pareq").val(result.Data.PaReq);
+                                    $("#termurl").val(result.Data.termurl);
+                                    $("#md").val(result.Data.MD);
+                                    $("#acsurl").attr("action", result.Data.acsurl);
+                                    $("#acsurl").submit();
+                                }
+
+
+                            }
+                            else {
+                                if (result.IsCardUsageMsg) {
+                                    $("#ErrorMsgH").text(result.Message);
+                                    $("#CardUsageMsg")[0].innerHTML = result.CardUsageMessage;
+                                    $("#PaymentAttempt2").modal('show');
+                                } else {
+                                    $("#ErrorMesage").text(result.Message);
+                                }
+                            }
+
+                        });
+                }
+            })
+
+        }
+
+
+
+        function submit() {
+
+            var id = "";
+            $("input[type=radio]").each(function () {
+                if ($(this)[0].checked == true) {
+                    id = $(this)[0].id;
+                    return;
+                };
+            });
+            switch (id) {
+                case "CreditDebitCard":
+                    $("[name=SenderPaymentMode]").val(0);
+                    break;
+                case "MoneyFexBankAccount":
+                    $("[name=SenderPaymentMode]").val(3);
+                    break;
+                default:
+            }
+
+            $("#loader").show();
+            $("form")[0].submit();
+
+            //if (id > 0) {
+
+            //    //$("02").show();
+            //    //$("01").hide();
+            //    $("#loader").show();
+            //    $("form").submit();
+
+            //} else  {
+
+
+            //    //$("01").show();
+            //    //$("02").hide();
+            //    $("#loader").show();
+            //    window.location.href = "DebitCreditCardDetails";
+            //}
+        }
+
+
+        var IsCreditDebitCard = '@Model.SenderPaymentMode';
+        if (IsCreditDebitCard == 'CreditDebitCard') {
+            $("#CreditDebitCard").attr("checked", true);
+        }
+
+    </script>
+}

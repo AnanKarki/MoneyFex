@@ -1,0 +1,496 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewRegisteredAgentsViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+    string[] Alpha = { "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "X", "Y", "Z" };
+    bool IsFromActivity = ViewBag.IsFromAgentActivity;
+    bool IsFromManualBankAccount = ViewBag.IsFromManualBankAccount;
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+    window.onload = function () {
+        Riddha.UI.Toast("@ViewBag.Message", 4);
+    };
+    </script>
+}
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Registered Agents</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                    <button type="button" id="registration_agentid" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Register an Agent</button>
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Registered Agents</li>
+                    </ol>
+                </div>
+                 /.col-lg-12
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="hideoption" id="pop">
+                            <div class="btn-  pull-left">
+                                <button href="" class="btn btn-success btn-sm  waves-effect waves-light">
+                                    <span class="btn-label"><i class="fa fa-envelope"></i></span> </span> SMS
+                                </button>
+                                <button data-toggle="modal" data-target="#emailpopup" href="" class="btn btn-warning btn-sm  waves-effect waves-light">
+                                    <span class="btn-label"><i class="fa fa-envelope"></i></span> Email
+                                </button>
+                            </div>
+                        </div>
+                        @if (TempData["Message2"] != null)
+                        {
+                            <label style="color:red">@TempData["Message2"]</label>
+                            <br />
+                        }
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="form-group">
+                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+                                @Html.TextBox("City", null, new { @class = "form-control", id = "city", @placeholder = "Filter By City", onchange = "Fliter();" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td align="center">
+                                            <div class="checkbox checkbox-success ">
+                                                <input id="checkAll" type="checkbox" class="check_boxa">
+                                                <label for="checkAll" name="name" class="check_boxa"> </label>
+                                            </div>
+                                            Select All
+                                        </td>
+                                        <td><strong>SN.</strong></td>
+                                        <td><strong>Agent's Name</strong></td>
+                                        <td><strong>Account No.</strong></td>
+                                        <td><strong>Business Type</strong></td>
+                                        <td><strong>Agent Type</strong></td>
+                                        <td><strong>Login Code</strong></td>
+                                        <td><strong>Address</strong></td>
+                                        <td><strong>Country</strong></td>
+                                        <td><strong>City</strong></td>
+                                        <td><strong>Telephone</strong></td>
+                                        <td><strong>Fax</strong></td>
+                                        <td><strong>Email</strong></td>
+                                        <td><strong>Status</strong></td>
+                                        <td><strong>Transaction Statement</strong></td>
+                                        <td><strong>Action on Agent</strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody style="margin-bottom: 30px !important;">
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        ++i;
+                                        <tr>
+                                            <td align="center">
+                                                <div class="checkbox checkbox-success">
+                                                    <input type="checkbox" name="" class="check_boxa" onclick="return pushId('@item.Email',this);">
+                                                    <label name="name" class="check_boxa"> </label>
+                                                </div>
+                                            </td>
+
+                                            <td>@i</td>
+                                            <td><a href="@Url.Action("ViewRegisteredAgentsMore", "ViewRegisteredAgents", new { RegistrationNumber = item.RegistrationNumber })">@item.Name</a></td>
+                                            <td>@item.AccountNo</td>
+                                            <td>@item.BusinessType</td>
+                                            <td>@item.AgentType</td>
+                                            <td>@item.Logincode</td>
+                                            <td>
+                                                @item.Address1
+                                                <br>@item.Address2
+                                            </td>
+                                            <td>@item.Country</td>
+                                            <td>@item.City</td>
+                                            <td>@item.PhoneNumber</td>
+                                            <td>@item.FaxNumber</td>
+                                            <td>@item.Email</td>
+                                            @if (item.AgentStatus == true)
+                                            {
+                                                <td>
+                                                    Active
+
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td>InActive</td>
+                                            }
+
+                                            <td>
+                                                <a href="@Url.Action("Index","AgentTransansactionActivity",new { AgentId = @item.Id})" class="btn btn-xs btn-success waves-effect waves-light ">
+                                                    <span class="btn-label"><i class=" ti-pencil-alt"></i></span>
+                                                    View
+                                                </a>
+
+                                            </td>
+
+                                            <td>
+                                                <div class="btn-group m-r-10">
+                                                    <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle btn-rounded waves-effect waves-light" type="button">Action <span class="caret"></span></button>
+                                                    <ul role="menu" class="dropdown-menu action_drop">
+                                                        <li>
+                                                            <a href="@Url.Action("ViewRegisteredAgentsMore", "ViewRegisteredAgents", new { RegistrationNumber = item.RegistrationNumber })" class="btn btn-xs btn-info waves-effect waves-light "> <span class="btn-label"><i class="fa fa-info"></i></span> More Details</a>
+                                                        </li>
+                                                        <li><a href="@Url.Action("UpdateAgent", "ViewRegisteredAgents", new { RegistrationNo = item.RegistrationNumber })" class="btn btn-xs btn-success waves-effect waves-light "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a></li>
+                                                        @if (item.AgentStatus == true)
+                                                        {
+                                                            <li><a href="@Url.Action("AgentStatus", "ViewRegisteredAgents" , new  {id = item.Id })" class="btn btn-xs btn-primary waves-effect waves-light disabled "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a href="@Url.Action("AgentStatus", "ViewRegisteredAgents" , new  {id = item.Id })" class="btn btn-xs btn-primary waves-effect waves-light "><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                        }
+                                                        @if (item.AgentStatus == false)
+                                                        {
+                                                            <li><a href="@Url.Action("AgentStatus", "ViewRegisteredAgents", new { id = item.Id})" class="btn btn-xs btn-warning waves-effect waves-light disabled"><span class="btn-label"><i class=" ti-na"></i></span>Deactivated</a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a href="@Url.Action("AgentStatus", "ViewRegisteredAgents", new { id = item.Id })" class="btn btn-xs btn-warning waves-effect waves-light "><span class="btn-label"><i class=" ti-na"></i></span>Deactivated</a></li>
+
+                                                        }
+                                                        <li><a href="@Url.Action("DeleteAgent", "ViewRegisteredAgents", new { id = item.Id })" class="btn btn-xs btn-danger waves-effect waves-light "><span class="btn-label"><i class=" ti-trash"></i></span> Delete</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="clearfix mt100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             .row
+            /.row
+            row
+        </div>
+    </div>
+
+
+    <div id="emailpopup" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                    <div class="modal-body">
+                        <div class="col-lg-9 col-md-8">
+
+                            <div class="dashboard_header">
+                                <h1>Compose</h1>
+                            </div>
+
+                            <div class="dashboard_body">
+                                <div class=" ">
+                                    <div class=" ">
+
+
+                                        <div class="col-lg-3">
+                                            <label>From</label>
+                                        </div>
+
+                                        <div class="col-lg-8 ">
+                                            <div class="form-group">
+                                                customerservice@gmail.com
+                                                @Html.TextBox("customerservice@gmail.com", new { @value = "customerservice@gmail.com", @readonly = "readonly" })
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+
+
+
+                                        <div class="col-lg-3">
+                                            <label>Subject</label>
+                                        </div>
+
+                                        <div class="col-lg-8 ">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.Subject, new { @class = "form-control", @placeholder = "Message Subject" })
+                                                <input type="text" name="subject" />
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+
+                                        <div class="clearfix"></div>
+
+
+
+
+                                        <div class="col-lg-12 ">
+                                            <div class="form-group">
+                                                <label>Body</label>
+                                                <textarea rows="5" class="form-control" name="body"></textarea>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12 ">
+
+
+                                <button class="fbtn btn-next" type="submit" name="Draft" onclick="sendEmail();">&nbsp &nbsp &nbsp &nbsp Send > &nbsp &nbsp &nbsp &nbsp &nbsp <i class="" aria-hidden="true"></i></button>
+
+                                <br>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-header">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="page-header-title">
+                                <div class="d-inline">
+                                    <h4>Registered Agent</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="page-header-breadcrumb">
+                                <ul class="breadcrumb-title">
+                                    <li class="breadcrumb-item">
+                                        <a href="index.php"> <i class="feather icon-home"></i> </a>
+                                    </li>
+
+                                    <li class="breadcrumb-item">
+                                        <a href="#!">Registered Agent</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="page-body">
+                    <div class="row">
+                        <!--  -->
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-yellow text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Registered Agents</b></p>
+                                            <h4 class="m-b-0">
+                                                @ViewBag.RegisterdAgents
+                                            </h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="fa fa-users f-40 text-c-yellow"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-green text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Active Agents</b></p>
+                                            <h4 class="m-b-0">@ViewBag.ActiveAgents </h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-credit-card f-40 text-c-green"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-md-6">
+                            <div class="card bg-c-pink text-white">
+                                <div class="card-block">
+                                    <div class="row align-items-center">
+                                        <div class="col">
+                                            <p class="m-b-5"><b>Total Inactive Agents</b></p>
+                                            <h4 class="m-b-0"> @ViewBag.InActiveAgents</h4>
+                                        </div>
+                                        <div class="col col-auto text-right">
+                                            <i class="feather icon-book f-40 text-c-pink"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--  -->
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-block">
+                                    <div class="row ">
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Select City", new { @class = "form-control  form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+
+                                                <input name="" class="form-control form-control-round form-control-bold" id="searchAgent" placeholder="Search Agent" onkeyup="Fliter();">
+                                            </div>
+                                            <!--  -->
+                                        </div>
+                                    </div>
+
+                                    <div class="m-b-15">
+
+
+                                        <button class="btn btn-primary btn-round" data-toggle="modal" data-target="#email">Send Email</button>
+
+
+                                        <button class="btn btn-secondary btn-round" data-toggle="modal" data-target="#SMS">Send SMS</button>
+
+
+
+                                    </div>
+                                    <div class="  row row-eq-height>.alpha-box" id="search-result">
+                                        <!--  -->
+                                        @foreach (var item in Alpha)
+                                        {
+
+                                            <div class=" col-lg-4">
+                                                <div class="list-tag alpha-box p-20 m-b-30">
+
+
+                                                    <h2 class="text-bold"> @item  </h2>
+                                                    <ul class="scroll-list">
+                                                        @foreach (var data in Model)
+                                                        {
+                                                            if (data.Name.StartsWith(item))
+                                                            {
+                                                                if (IsFromActivity == true)
+                                                                {
+                                                                    <li><a href="@Url.Action("Index", "AgentTransansactionActivity", new { AgentId = data.Id })">@data.Name</a></li>
+                                                                }
+                                                                else if (IsFromManualBankAccount == true)
+                                                                {
+                                                                    <li><a href="@Url.Action("Index", "ManualBankDeposit", new { AgentId = data.Id })">@data.Name</a></li>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <li><a href="@Url.Action("Index", "AgentDashboard", new { @Id = data.Id })">@data.Name</a></li>
+
+                                                                }
+
+                                                            }
+
+                                                        }
+
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                        }
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="styleSelector">
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var searchAgent = document.getElementById("searchAgent").value;
+            window.location.href = "/Admin/ViewRegisteredAgents/Index?CountryCode=" + country + "&City=" + city + "&searchAgent=" + searchAgent;
+        }
+
+
+        var idArray = [];
+        function pushId(Id, control) {
+
+            $("#pop").show();
+            var checkbox = $(control);
+            setTimeout(function () { checkbox.prop('checked', !checkbox.prop('checked')); }, 10);
+            if (idArray.includes(Id)) {
+                var a = idArray.indexOf(Id);
+                idArray.splice(a, 1);
+            }
+            else {
+                idArray.push(Id);
+            }
+            return false;
+        }
+
+        function sendEmail() {
+
+            var subject = document.getElementsByName("subject")[0].value;
+            var body = document.getElementsByName("body")[0].value;
+            window.location.href = "/Admin/ViewRegisteredAgents/sendEmails?emails=" + idArray + "&subject=" + subject + "&body=" + body;
+        }
+
+
+        $("#registration_agentid").on('click', function () {
+
+            $("#registration_agent").modal('show');
+        });
+    </script>
+}

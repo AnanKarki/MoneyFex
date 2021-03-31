@@ -1,0 +1,258 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.CustomerPaymentFeeViewModel
+@{
+    ViewBag.Title = "SetNewPayment";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@*@using (Html.BeginForm())
+{
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+             /.row 
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+                        <div class="pcoded-content">
+                            <div class="pcoded-inner-content">
+
+                                <div class="main-body">
+                                    <div class="page-wrapper">
+
+                                        <div class="page-body">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+
+                                                    <div class="card">
+
+                                                        <div class="card-header border-bottom">
+                                                            <h4 class="f-left f-left m-t-5 m-b-0">Payment Setup </h4>
+
+                                                            <a href="@Url.Action("Index", "CustomerPaymentFee")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                                                <i class="icofont icofont-plus m-r-5"></i>  View
+                                                            </a>
+
+                                                        </div>
+
+                                                        <div class="card-body">
+
+                                                            @Html.HiddenFor(x => x.Id)
+                                                            <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                                                <div class="row">
+                                                                    <hr />
+                                                                    <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                                          
+
+                                                                        <div class="form-group">
+                                                                            <label>Country</label>
+                                                                            @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "filter();" })
+                                                                            @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+                                                                        </div>
+
+                                                                          
+                                                                          
+
+                                                                        <div class="form-group">
+                                                                            <label>Bank Transfer</label>
+                                                                            <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount">
+                                                                            @Html.TextBoxFor(x => x.BankTransfer, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                                            @Html.ValidationMessageFor(x => x.BankTransfer, "", new { @class = "text-danger" })
+
+                                                                        </div>
+
+                                                                          
+                                                                          
+
+                                                                        <div class="form-group">
+                                                                            <label>Debit Card</label>
+                                                                            <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount">
+                                                                            @Html.TextBoxFor(x => x.DebitCard, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                                            @Html.ValidationMessageFor(x => x.DebitCard, "", new { @class = "text-danger" })
+
+                                                                        </div>
+
+                                                                          
+                                                                          
+
+                                                                        <div class="form-group">
+                                                                            <label>Credit Card</label>
+                                                                            <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount">
+                                                                            @Html.TextBoxFor(x => x.CreditCard, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                                            @Html.ValidationMessageFor(x => x.CreditCard, "", new { @class = "text-danger" })
+
+                                                                        </div>
+
+                                                                          
+                                                                          
+
+                                                                        <div class="form-group">
+                                                                            <label>KiiPay Wallet</label>
+                                                                            <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="Enter Amount">
+                                                                            @Html.TextBoxFor(x => x.KiiPayWallet, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                                            @Html.ValidationMessageFor(x => x.KiiPayWallet, "", new { @class = "text-danger" })
+
+                                                                        </div>
+
+                                                                          
+
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </form>
+                                                        </div>
+
+                                                        <div class="card-footer bg-light">
+                                                            <div class="row">
+                                                                <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                                    <a href="@Url.Action("Index","CustomerPaymentFee")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                                    <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}*@
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Payment Setup </h4>
+                                        <a href="@Url.Action("Index", "CustomerPaymentFee")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(x => x.Id)
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.Country, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+                                                    @Html.ValidationMessageFor(x => x.Country, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Bank Transfer</label>
+                                                    @Html.TextBoxFor(x => x.BankTransfer, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                    @Html.ValidationMessageFor(x => x.BankTransfer, "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Debit Card</label>
+                                                    @Html.TextBoxFor(x => x.DebitCard, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                    @Html.ValidationMessageFor(x => x.DebitCard, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Credit Card</label>
+                                                    @Html.TextBoxFor(x => x.CreditCard, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                    @Html.ValidationMessageFor(x => x.CreditCard, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>KiiPay Wallet</label>
+                                                     @Html.TextBoxFor(x => x.KiiPayWallet, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "Enter Amount" })
+                                                    @Html.ValidationMessageFor(x => x.KiiPayWallet, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+
+
+                                            </div>
+
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","CustomerPaymentFee")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var country = $("#Country").val();
+            window.location.href = "/Admin/CustomerPaymentFee/SetNewPayment?Country=" + country;
+        }
+    </script>
+}

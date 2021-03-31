@@ -1,0 +1,138 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.CareerViewModel
+@{
+    ViewBag.Title = "EditJob";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>EditJob</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Add New Career</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("Index", "Career")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">View all Jobs</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Add New Career</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="col-lg-8">
+
+                            <div class="form-body">
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Country </label>
+                                            @Html.TextBoxFor(model=>model.Country, new { @class="form-control", @readonly="readonly"})
+                                        </div>
+                                        <!--  -->
+                                    </div>
+
+
+                                    <div class="col-lg-6">
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>City </label>
+                                            @Html.TextBoxFor(model=>model.City, new { @class="form-control", @readonly="readonly"})
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Job Title     </label>
+                                    @Html.TextBoxFor(model => model.JobTitle, new { @class = "form-control" })
+                                </div>
+                                <!--  -->
+                                <!--  -->
+                                <div class="form-group">
+                                    <label>Description   </label>
+                                    @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Contract Type   </label>
+
+                                            @Html.TextBoxFor(model => model.ContractType, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.ContractType, "", new { @class = "text-danger" })
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                                                                <div class="row">
+                                    <div class="col-lg-6">
+                                        <!--  -->
+                                        <div class="form-group">
+                                            <label>Salary  </label>
+                                            @Html.TextBoxFor(model => model.SalaryRange, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SalaryRange, "", new { @class = "text-danger" })
+                                        </div>
+                                        <!--  -->
+                                    </div>
+                                    <div class=" row"> 
+
+
+                                        <div class="col-lg-6">
+                                            <!--  -->
+                                            <div class="form-group">
+                                                <label>Closing Date   </label>
+                                                @Html.TextBoxFor(model => model.ClosingDate, new { @class = "form-control "  , @type="date"})
+                                                @Html.ValidationMessageFor(model => model.ClosingDate, "", new { @class = "text-danger" })
+                                            </div>
+                                            <!--  -->
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <!--  -->
+                                            <div class="form-group">
+                                                <label>Closing Time   </label>
+                                                @Html.EditorFor(model => model.ClosingTime, new { @class = "form-control " })
+                                                @Html.ValidationMessageFor(model => model.ClosingTime, "", new { @class = "text-danger" })
+                                            </div>
+                                            <!--  -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <hr>
+                                <!--  -->
+                                <div class="form-group">
+                                    <button class="btn btn-success btn-lg  btn-rounded pull-right">Update </button>
+                                </div>
+                                <!--  -->
+
+                            </div>
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

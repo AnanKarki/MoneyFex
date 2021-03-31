@@ -1,0 +1,191 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.RegisteredAUXAgentViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Registered AUX Agent</h4>
+                                    <a href="@Url.Action("Index", "AUXAgentDashBoard")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" id="Date" placeholder="From to Date" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("SendingCountry", (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Country", new { @class = "form-control  form-control-round form-control-bold", @id = "SendingCountry", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control  form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Agent Name " class="form-control form-control-round form-control-bold" name="AgentName" id="AgentName" value="@ViewBag.AgentName" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Account No " class="form-control form-control-round form-control-bold" name="AccountNo" id="AccountNo" value="@ViewBag.AccountNo" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By LoginCode  " class="form-control form-control-round form-control-bold" name="LoginCode" id="LoginCode" value="@ViewBag.LoginCode" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Telephone  " class="form-control form-control-round form-control-bold" name="Telephone" id="Telephone" value="@ViewBag.Telephone" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Email  " class="form-control form-control-round form-control-bold" name="Email" id="Email" value="@ViewBag.Email" onchange="filter();">
+                                            </div>
+                                        </div>
+
+
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Agent's Name</th>
+                                                    <th>Account No.</th>
+                                                    <th>Business Type</th>
+                                                    <th>Login Code</th>
+                                                    <th>Address</th>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+
+                                                    <th>Telephone</th>
+                                                    <th>Email</th>
+                                                    <th>Status</th>
+                                                    <th>Contact Person</th>
+                                                    <th>Transaction Statement</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+
+                                            </thead>
+                                            <tbody>
+                                                @{int i = 1; }
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td><a href="">@item.AgentName</a></td>
+                                                        <td>@item.AccountNo</td>
+                                                        <td>@item.BusinessType</td>
+                                                        <td>@item.LoginCode</td>
+                                                        <td>@item.Address</td>
+                                                        <td>@item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td>@item.Telephone</td>
+                                                        <td>@item.Email</td>
+                                                        <td>@item.StatusName</td>
+                                                        <td><a href="@Url.Action("AuxAgentContactPersonDetails","RegisteredAUXAgent",new {@AgentId=item.Id })" class="btn btn-primary btn-round">Contact person</a></td>
+                                                        <td><a href="@Url.Action("Index","AUXAgentRecentTransaction",new {@AgentId=item.Id })" class="btn btn-primary btn-round">View</a></td>
+                                                        <td>
+                                                            <a href="@Url.Action("UpdateAUXAgent", "RegisteredAUXAgent", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            @*  <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>*@
+                                                        </td>
+                                                        @{i++;}
+                                                    </tr>
+
+
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) of @Model.PageNumber
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { @page = page }))
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var date = $("#Date").val();
+            var sendingCountry = $("#SendingCountry").val();
+            var city = $("#City").val();
+            var AgentName = $("#AgentName").val();
+            var AccountNo = $("#AccountNo").val();
+            var LoginCode = $("#LoginCode").val();
+            var Telephone = $("#Telephone").val();
+            var Email = $("#Email").val();
+            window.location.href = "/Admin/RegisteredAUXAgent/Index?SendingCountry=" + sendingCountry + "&City=" + city + "&Date=" + date +
+                "&AgentName=" + AgentName + "&AccountNo=" + AccountNo + "&LoginCode=" + LoginCode + "&Telephone=" + Telephone + "&Email=" + Email;
+
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/RegisteredAUXAgent/DeleteAUXAgent?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+
+    </script>
+}
+
+

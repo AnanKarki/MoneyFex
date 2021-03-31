@@ -1,0 +1,95 @@
+﻿@model List<FAXER.PORTAL.Models.TrackAFaxViewModel>
+@{
+    ViewBag.Title = "TrackFaxFromDashboard";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Track a Transfer</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form method="post">
+                    <div class="row">
+                        <div class="col-lg-4 pull-right">
+                            <div class="input-group stylish-input-group">
+                                <input type="text" class="form-control" placeholder="Search Receiver's Name/MFCN " name="searchText">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Receiver's Name</th>
+                                    <th>Receiver's City</th>
+                                    <th>Country</th>
+                                    <th>Sent Amount</th>
+                                    <th>Sent Date</th>
+                                    <th>Sent Time</th>
+                                    <th>MFCN</th>
+                                    <th>Status of Transfer</th>
+                                    <th>Action on Transfer</th>
+                                    <th>Sent Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                    <tr>
+                                        <td>@index</td>
+                                        <td>@item.ReceiverName</td>
+                                        <td>@item.ReceiverCity </td>
+                                        <td>@item.ReceiverCountry </td>
+                                        <td>@item.FaxedAmount </td>
+                                        <td>@item.FaxedDate</td>
+                                        <td>@item.FaxedTime</td>
+                                        <td>@item.MoneyFaxControlNumber</td>
+                                        <td>@item.StatusOfFax</td>
+                                        <td><a href="" class="btn btn-danger btn-xs">Cancel Transfer</a></td>
+                                        <td><a href="@Url.Action("PrintNonCardUserReceipt" , "PayAReceiver" , new {area= "Agent" ,MFCN = item.MoneyFaxControlNumber })"  target="_blank" class="btn btn-warning btn-xs"> Transfer Receipt</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="@Url.Action("FaxDetails","TrackFax")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <br>
+                <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->

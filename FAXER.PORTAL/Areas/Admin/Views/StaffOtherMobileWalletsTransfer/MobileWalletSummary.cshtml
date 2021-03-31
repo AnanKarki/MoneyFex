@@ -1,0 +1,174 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.CommonTransactionSummaryViewModel
+@{
+    ViewBag.Title = "MobileWalletSummary";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Sender <label class="text-primary">@ViewBag.SenderName</label> <span>Account Number: @ViewBag.SenderAccountNo<br>Country: @ViewBag.SenderCountry</span></h4>
+                                        <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </button>
+                                    </div>
+
+                                    <div class="card-body p-t-30 b-b-30">
+
+                                        <div class="row">
+                                            <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h5>Payment Summary</h5>
+                                                        <hr>
+                                                    </div>
+                                                    <div class="card-block">
+                                                        <div class=" row">
+
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> Amount </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @Model.SendingCurrencySymbol @Model.SendingAmount @Model.SendingCurrencyCode
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> Fee </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @Model.SendingCurrencySymbol @Model.Fee @Model.SendingCurrencyCode
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> You'll Pay </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @Model.SendingCurrencySymbol @Model.TotalAmount @Model.SendingCurrencyCode
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label> @Model.ReceiverFirstName will Receive </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        @Model.ReceivingCurrencySymbol @Model.ReceivingAmount @Model.ReceivingCurrecyCode
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+                                                            <!--  -->
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <label>Payment Reference </label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-6">
+                                                                <div class="form-group">
+                                                                    <div class="form-text">
+                                                                        Payment from @Model.ReceiverFirstName
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="clearfix"></div>
+                                                            <!--  -->
+
+                                                            <div class="col-lg-12 text-center">
+                                                                <hr>
+                                                                <p><b> Has this transaction been paid for already by the sender ?</b></p>
+                                                                <div class="form-radio">
+                                                                    <div class="radio radio-inline">
+                                                                        <label>
+                                                                            @Html.RadioButtonFor(m => m.HasPaid, true)
+                                                                            <i class="helper"></i>Yes
+                                                                        </label>
+                                                                    </div>
+                                                                    <div class="radio radio-inline">
+                                                                        <label>
+                                                                            @Html.RadioButtonFor(m => m.HasPaid, false)
+                                                                            <i class="helper"></i>No
+                                                                        </label>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light p-40">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <button type="submit" class="btn btn-lg btn-block btn-primary btn-round "> Continue <i class="fa fa-angle-right"></i></button>
+
+                                                <a onclick="window.history.go(-1);" class="btn btn-lg  btn-block btn-link btn-round pull-left">
+                                                    <i class="fa fa-angle-left m-r-5"></i> Back
+                                                </a>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}

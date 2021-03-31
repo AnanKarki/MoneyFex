@@ -1,0 +1,231 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.CustomerPaymentFeeViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+                        <div class="pcoded-content">
+                            <div class="pcoded-inner-content">
+
+                                <div class="main-body">
+                                    <div class="page-wrapper">
+
+                                        <div class="page-body">
+                                            <div class="row">
+
+                                                <div class="col-sm-12">
+
+                                                    <div class="card">
+
+                                                        <div class="card-header border-bottom">
+                                                            <h4 class="f-left m-t-5 m-b-0">Payment Fee</h4>
+                                                            <a href="@Url.Action("SetNewPayment", "CustomerPaymentFee")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                                                <i class="icofont icofont-plus m-r-5"></i>  Set new payment
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="card-body">
+                                                            <div class="row m-t-20 m-b-20">
+                                                                <hr />
+
+
+                                                                <div class="col-xl-4 col-md-6">
+                                                                    <div class="form-group">
+
+                                                                        @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", @id = "Country", @onchange = "filter();" })
+
+                                                                    </div>
+                                                                </div>
+
+
+
+
+
+                                                            </div>
+
+                                                            <div class="dt-responsive table-responsive">
+                                                                <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>SN.</th>
+                                                                            <th>Country</th>
+                                                                            <th>Bank Transfer</th>
+                                                                            <th>Debit Card</th>
+                                                                            <th>Credit Card</th>
+                                                                            <th>KiiPay Wallet</th>
+                                                                            <th>Action</th>
+                                                                        </tr>
+                                                                    </thead>
+                                                                    <tbody>
+
+                                                                        @{ int i = 0;}
+                                                                        @foreach (var item in Model)
+                                                                        {
+                                                                            ++i;
+                                                                            <tr>
+                                                                                <td>@i</td>
+                                                                                <td>@item.Country</td>
+                                                                                <td>@item.BankTransfer</td>
+                                                                                <td>@item.DebitCard</td>
+                                                                                <td>@item.CreditCard</td>
+                                                                                <td>@item.KiiPayWallet</td>
+                                                                                <td class="action-icon">
+                                                                                    <a href="@Url.Action("SetNewPayment", "CustomerPaymentFee", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                                                    <a href="@Url.Action("Delete", "CustomerPaymentFee", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="fa fa-remove"></i></a>
+                                                                                </td>
+                                                                            </tr>
+                                                                        }
+
+                                                                    </tbody>
+
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Payment Fee</h4>
+                                    <a href="@Url.Action("SetNewPayment", "CustomerPaymentFee")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set New Payment
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control   form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap ">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN.</th>
+                                                    <th>Country</th>
+                                                    <th>Bank Transfer</th>
+                                                    <th>Debit Card</th>
+                                                    <th>Credit Card</th>
+                                                    <th>KiiPay Wallet</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    ++i;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td><i class="flag flag-icon flag-icon-@item.CountryFlag"></i>@item.Country</td>
+                                                        <td>@item.BankTransfer</td>
+                                                        <td>@item.DebitCard</td>
+                                                        <td>@item.CreditCard</td>
+                                                        <td>@item.KiiPayWallet</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetNewPayment", "CustomerPaymentFee", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var country = $("#Country").val();
+            window.location.href = "/Admin/CustomerPaymentFee/Index?Country=" + country;
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/CustomerPaymentFee/Delete?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Deleted Successfully!", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Something went wrong. Please try again!", 0);
+                        }
+                    });
+            });
+        }
+
+
+    </script>
+}

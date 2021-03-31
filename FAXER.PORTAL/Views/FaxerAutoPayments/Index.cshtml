@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+                <!--  -->
+                <div class="dashboard_body">
+                    <div class="clearfix">
+                        <h3>My Standing Order Payments</h3>
+                        <hr>
+                        <div class="mobile_design text-center">
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    @*<a href="@Url.Action("MerchantAutoPayments","FaxerAutoPayments")" onclick="MerchantAutoPayment()">*@
+                                    <a onclick="MerchantAutoPayment()">
+
+                                        <div class="das-icon">
+                                            <img src="images/icon/auto-payment1.png">
+                                        </div>
+                                        <h4>Service Provider Standing Order Payments  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    @*<a href="@Url.Action("MoneyFaxCardAutoTopUp","FaxerAutoPayments")">*@
+                                    <a onclick="MFTCAutoTopUp()">
+                                        <div class="das-icon">
+                                            <img src="images/icon/auto-payment2.png">
+                                        </div>
+                                        <h4>Receiver Virtual Account Auto Deposit</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    @*<a href="@Url.Action("SomeoneElseMoneyFaxCardAutoTopUp", "FaxerAutoPayments")">*@
+                                    <a onclick="OtherMFTCAutoPayment()">
+                                        <div class="das-icon">
+                                            <img src="images/icon/auto-payment3.png">
+                                        </div>
+                                        <h4>Others Receiver Virtual Account Auto Deposit</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="clearfix"></div>
+                            <a href="@Url.Action("Index", "DashBoard")" class="btn  btn-primary"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back to Dashboard</a>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                    @RenderPage("~/Views/Shared/_mobile-menu-dashboard.cshtml")
+                </div>
+                <!--  -->
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+</section>
+
+
+<div class="modal" id="NoMerchantAutoPayment" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex </h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            You do not have an auto payment set up to any Service Provider, do you want to set up one now? <br />
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("MerchantAutoPayments","FaxerAutoPayments")" class="btn btn-primary btn-sm"> Set Auto Payment</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="NoMFTCAutoTopUp" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex </h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            You do not have an auto deposit set up to a Receiver Virtual Account, do you want to set up one now?<br />
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("MoneyFaxCardAutoTopUp","FaxerAutoPayments")" class="btn btn-primary btn-sm"> Set Auto Deposit</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="NoOtherMFTCCardAutoTopUp" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">MoneyFex </h4>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            You do not have an auto deposit set up to a other's Virtual Account, do you want to set up one now?  <br />
+                        </p>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+
+                <a href="@Url.Action("SomeoneElseMoneyFaxCardAutoTopUp","FaxerAutoPayments")" class="btn btn-primary btn-sm"> Set Auto Deposit</a>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+            function MerchantAutoPayment() {
+                var MerchantAutoPaymentcount = '@ViewBag.MerchantAutoPayment';
+                if (MerchantAutoPaymentcount != "" || MerchantAutoPaymentcount != null) {
+                    var MerchantAutoPaymentcountToNum = parseInt(MerchantAutoPaymentcount);
+                    if (MerchantAutoPaymentcountToNum == 0) {
+
+                        $("#NoMerchantAutoPayment").modal("show");
+                    } else {
+
+                        $("#NoMerchantAutoPayment").modal("hide");
+
+                        window.location.href = "/FaxerAutoPayments/MerchantAutoPayments";
+                    }
+
+                }
+            }
+            function MFTCAutoTopUp() {
+                var MFTCCardAutoTopUpCount = '@ViewBag.MFTCAutoTopupCount';
+                if (MFTCCardAutoTopUpCount != "" || MFTCCardAutoTopUpCount != null) {
+                    var MFTCCardAutoTopUpCountToNum = parseInt(MFTCCardAutoTopUpCount);
+                    if (MFTCCardAutoTopUpCountToNum == 0) {
+
+                        $("#NoMFTCAutoTopUp").modal("show");
+                    } else {
+
+                        $("#NoMFTCAutoTopUp").modal("hide");
+                        window.location.href = "/FaxerAutoPayments/MoneyFaxCardAutoTopUp";
+
+                    }
+
+                }
+            }
+            function OtherMFTCAutoPayment() {
+                var OtherMFTCCardAutoTopUpCount = '@ViewBag.OtherMFTCCardPayment';
+                if (OtherMFTCCardAutoTopUpCount != "" || OtherMFTCCardAutoTopUpCount != null) {
+                    var OtherMFTCCardAutoTopUpCountToNum = parseInt(OtherMFTCCardAutoTopUpCount);
+                    if (OtherMFTCCardAutoTopUpCountToNum == 0) {
+
+                        $("#NoOtherMFTCCardAutoTopUp").modal("show");
+                    } else {
+
+                        $("#NoOtherMFTCCardAutoTopUp").modal("hide");
+                        window.location.href = "/FaxerAutoPayments/SomeoneElseMoneyFaxCardAutoTopUp";
+                    }
+
+                }
+            }
+
+    </script>
+}

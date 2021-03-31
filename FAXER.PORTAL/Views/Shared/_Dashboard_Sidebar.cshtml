@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "_Dashboard_Sidebar";
+    Layout = null;
+}
+
+<div class="dashboard_sidebar">
+    <ul>
+        <li><a href="@Url.Action("index", "FaxerAccountProfile")">My Account Profile</a></li>
+        <li><a href="@Url.Action("index","FaxerMoneyFaxMerchantPayments")">My MoneyFex Merchant Payments</a></li>
+
+        <li><a href="@Url.Action("GetTopUpSomeoneElseCardPaymentsDetails","TopUpSomeoneElseMFTCCard")"> Other MFTC Card Payments</a></li>
+        <li><a href="@Url.Action("index","FaxerAutoPayments")">My Auto Payments</a></li>
+        <li><a href="@Url.Action("index","EstimateFee")">Estimate Sending Fees</a></li>
+        <li><a href="@Url.Action("index","FaxerMoneyFaxTopUpCard")">My MoneyFex Top-up Card</a></li>
+        <li><a href="@Url.Action("index","StartFaxingMoney")"> Top-up MoneyFex Card</a></li>
+        <li><a href="@Url.Action("index","TransferMoneyBetweenMoneyFaxTopUpCard")">Transfer Money Between MoneyFex Top-Up Cards</a></li>
+        <li><a href="@Url.Action("index","FaxingHistory")">Sending History</a></li>
+        <li><a href="@Url.Action("index","FaxInProgress")">Send  in Progress..</a></li>
+        <li><a href="@Url.Action("index","TrackAFax")">Track a Transfer</a></li>
+
+        <div class="dropdown-divider">Learn More</div>
+        <li><a href="@Url.Action("index","HowToFaxMoney")">How to Send Money</a></li>
+        <li><a href="@Url.Action("index","HowToReceiveMoney")">How to Receive Money</a></li>
+        <li><a href="">How to Pay for goods & services</a></li>
+
+        <div class="dropdown-divider">Contact Support</div>
+        <li><a href="@Url.Action("index","Contact")">Contact Us</a></li>
+        <li><a href="@Url.Action("index","Faq")">Faq</a></li>
+        <li><a href="@Url.Action("index","ReportAFund")">Report a Fraud</a></li>
+    </ul>
+</div>
+

@@ -1,0 +1,254 @@
+﻿@model FAXER.PORTAL.Models.SenderMobileMoneyTransferVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    @Html.HiddenFor(model => model.CountryPhoneCode)
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="login_signup mb20">
+
+                        <ul class="wiz">
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="flag-icon flag-icon-@ViewBag.ReceivingCountry"></i> @ViewBag.ReceivingCountryCurrency @ViewBag.TransferMethod </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon active">
+                                            <i class="fa fa-check"></i>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xs-8">
+                                        <span class=" "><i class="fa fa-money"></i> Amount @ViewBag.SendingCountryCurrency @ViewBag.SendingAmount </span>
+                                    </div>
+
+                                    <div class="col-xs-2">
+                                        <a href="@Url.Action("Index","SenderTransferMoneyNow")">Edit</a>
+
+                                    </div>
+
+                                </div>
+
+                            </li>
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon">
+                                            <i class="fa fa-user"></i>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+
+
+                            </li>
+
+
+
+                            <li>
+                                <div class="wiz-list row">
+                                    <div class="col-xs-2">
+                                        <div class="icon last">
+                                            <i class="fa fa-credit-card"></i>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Send Money to a Mobile</h3>
+                        <hr>
+                        <h5> @Html.ValidationMessage("InvalidReceiver", new { @class = "text-danger" })</h5>
+                        <h5>@Html.ValidationMessage("", "", new { @class = "text-danger" })</h5>
+
+                        <div class="form-group mb30" id="Country">
+                            @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-blue  contact-no-lg", @onchange = "GetDetails()" })
+                            @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group mb30">
+                            @Html.DropDownListFor(model => model.WalletId, (IEnumerable<SelectListItem>)ViewBag.Wallets, "Select Mobile Money", new { @class = "form-blue  contact-no-lg", @onchange = "GetDetails()" })
+                            @Html.ValidationMessageFor(model => model.WalletId, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group mb20">
+
+                            @Html.DropDownListFor(model => model.RecentlyPaidMobile, (IEnumerable<SelectListItem>)ViewBag.RecentlyPaidNumbers, "Select Recently  Paid Mobile Number", new { @class = "form-blue", @onchange = "GetRecentlyPaidMobile()" })
+                            @Html.ValidationMessageFor(model => model.RecentlyPaidMobile, "", new { @class = "text-danger" })
+                        </div>
+
+                        @*<div class="form-group mb20">
+                                <h2 class="text-primary text-center">OR</h2>
+                            </div>*@
+
+                        <div class="form-group contact-no-group">
+                            <div class="countr-code-lg">
+                                <span id="countryPhoneCode" name="countryPhoneCode">
+
+                                </span>
+                                @Model.CountryPhoneCode
+                            </div>
+                            @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-blue  contact-no-lg", @placeholder = "Enter Mobile Number", @type = "number" })
+                            @Html.ValidationMessageFor(model => model.MobileNumber, "", new { @class = "text-danger" })
+                            @Html.ValidationMessage("InvalidNumber", "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group  mb30">
+                            @Html.TextBoxFor(model => model.ReceiverName, new { @class = "form-blue", @placeholder = "Receiver name", name = "ReceiverName" })
+                            @Html.ValidationMessageFor(model => model.ReceiverName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group  mb30" id="emailDiv">
+                            @Html.TextBoxFor(model => model.ReceiverEmail, new { @class = "form-blue", @placeholder = "Enter Email ", name = "ReceiverName" })
+                            @Html.ValidationMessageFor(model => model.ReceiverEmail, "", new { @class = "text-danger" })
+                        </div>
+                        @*<h4 class="text-center mb30">Paying a local wallet?   <a href="@Url.Action("SendingMoneyLocal","SenderMobileMoneyTransfer")">Change</a></h4>*@
+
+                        @Html.ValidationMessage("ServiceNotAvialable", "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button class="btn btn-primary btn-lg  mb30 " onclick="Submit()">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                @*<a href="@Url.Action("Index","SenderDashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>*@
+                                <a href="@Url.Action("Index","SenderTransferMoneyNow") " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+}
+
+@section Scripts{
+    <script type="text/javascript">
+
+
+        var PhoneCode = '@Model.CountryPhoneCode';
+        function Submit() {
+
+            //$("#MobileNumber").val(PhoneCode.split('+')[1] + $("#MobileNumber").val());
+            $("#loader").show();
+            $("form").submit();
+        };
+
+        function GetRecentlyPaidMobile() {
+
+
+            var mobileNumber = $("#RecentlyPaidMobile").val();
+
+
+            $.getJSON("/SenderMobileMoneyTransfer/GetRecentlyPaidNumberInfo?mobileNumber=" + mobileNumber, function (result) {
+
+                for (var item in result) {
+
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+                }
+            })
+        }
+
+        $("#Country").hide();
+
+        function GetDetails() {
+
+            var countryCode = $("#CountryCode").val();
+            var WalletId = $("#WalletId").val();
+            window.location.href = "/SenderMobileMoneyTransfer/Index?CountryCode=" + countryCode + "&WalletId=" + WalletId;
+        }
+
+        function GetCountryPhoneCode() {
+
+
+            var countryCode = $("#CountryCode").val();
+
+
+            $.getJSON("/SenderMobileMoneyTransfer/GetCountryPhone?countryCode=" + countryCode, function (result) {
+                debugger;
+                for (var item in result) {
+                    var selector = '[name="' + item + '"]';
+                    $(selector).val(result[item]);
+                    $(selector).text(result[item]);
+
+                }
+            })
+        }
+
+        var IsTransferFromHomePage = '@FAXER.PORTAL.Common.FaxerSession.IsTransferFromHomePage';
+        if (IsTransferFromHomePage == "True") {
+            //debugger;
+           // $("#CountryCode").attr('disabled', "disabled");
+
+        }
+        IsCommonEstimationPage = '@FAXER.PORTAL.Common.FaxerSession.IsCommonEstimationPage';
+        if (IsCommonEstimationPage == "True") {
+            //debugger;
+            //$("#CountryCode").attr('disabled', "disabled");
+        }
+
+        checkifFlutterWaveApi();
+        function checkifFlutterWaveApi() {
+            var countryCode = $("#CountryCode").val();
+            $.getJSON("/SenderMobileMoneyTransfer/CheckifFlutterWaveApi?CountryCode=" + countryCode, function (result) {
+                if (result == true) {
+                    $("#emailDiv").show();
+                }
+                else {
+                    $("#emailDiv").hide();
+                }
+            })
+
+        }
+
+    </script>
+}

@@ -1,0 +1,151 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PayoutProviderRateViewModel
+@{
+    ViewBag.Title = "SetPayoutProviderRate";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Payout Provider Rate</h4>
+                                        <a href="@Url.Action("Index","PayoutProviderRate")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Payout Provider Rate
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+                                                @Html.HiddenFor(x => x.Id)
+
+                                                <div class="form-group">
+                                                    <label>Sending Currency</label>
+                                                    @Html.DropDownListFor(x => x.SendingCurrency, (IEnumerable<SelectListItem>)ViewBag.SendingCurrencies, "Select Sending Currency", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCurrency", @onchange = "GetSendingCountryByCurrency()" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCurrency, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Currency</label>
+                                                    @Html.DropDownListFor(x => x.RecevingCurrency, (IEnumerable<SelectListItem>)ViewBag.RecevingCurrencies, "Select Receving Currency", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "RecevingCurrency", @onchange = "GetReceivingCountryByCurrency()" })
+                                                    @Html.ValidationMessageFor(x => x.RecevingCurrency, "", new { @class = "text-danger" })
+                                                </div>
+
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.SendingCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.RecevingCountry, (IEnumerable<SelectListItem>)ViewBag.RecevingCountries, "Select Receiving Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "RecevingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.RecevingCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Payout Provider</label>
+                                                    @Html.EnumDropDownListFor(x => x.PayoutProvider, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "PayoutProvider" })
+                                                    @Html.ValidationMessageFor(x => x.PayoutProvider, "", new { @class = "text-danger" })
+                                                    @Html.ValidationMessage("", "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Rate</label>
+                                                    @Html.TextBoxFor(x => x.Rate, new { @class = "form-control  form-control-lg form-control-round", @placeholder = "Enter Rate", @id = "Rate" })
+                                                    @Html.ValidationMessageFor(x => x.Rate, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "PayoutProviderRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+}
+@section scripts
+{
+    <script type="text/javascript">
+
+
+        function GetSendingCountryByCurrency() {
+            var sendingCurrency = $("#SendingCurrency").val();
+            $.getJSON("/Admin/AdminCommon/GetCountryByCurrency?currency=" + sendingCurrency, function (result) {
+                var sendingCountrySelector = $("#SendingCountry");
+                $("#SendingCountry option").remove();
+                sendingCountrySelector.append('<option value="All">All</option>');
+                for (var i = 0; i < result.Data.length; i++) {
+                    sendingCountrySelector.append('<option value="' + result.Data[i].Code + ' "> ' + result.Data[i].Name + '</option>');
+                }
+            });
+        }
+        function GetReceivingCountryByCurrency() {
+            var receivingCurrency = $("#RecevingCurrency").val();
+            $.getJSON("/Admin/AdminCommon/GetCountryByCurrency?currency=" + receivingCurrency, function (result) {
+                var receivingCountrySelector = $("#RecevingCountry");
+                $("#RecevingCountry option").remove();
+                receivingCountrySelector.append('<option value="All">All</option>');
+                for (var i = 0; i < result.Data.length; i++) {
+                    receivingCountrySelector.append('<option value="' + result.Data[i].Code + ' "> ' + result.Data[i].Name + '</option>');
+                }
+            });
+        }
+    </script>
+}
+

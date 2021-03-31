@@ -1,0 +1,210 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.MasterViewAlertsViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<h2>Index</h2>
+@if (ViewBag.Message == "Alert added successfully !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message",4);
+        }
+    </script>
+}
+
+@if (ViewBag.Message == "Alert update successfully !")
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message",4);
+        }
+    </script>
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Staff Alerts</h4>
+                                    <a href="@Url.Action("AddNewAlert","StaffAlerts")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Add New Alert
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "Country", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "city", onchange = "Fliter();" })
+
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                @Html.DropDownList("Staff", (IEnumerable<SelectListItem>)ViewBag.Staffs, "All Staff", new { @class = "js-example-data-array form-control form-control-round form-control-bold", id = "StaffId", onchange = "Fliter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <input type="text" name="datefilter" class="form-control   form-control-round form-control-bold" value="" placeholder="Select Day/Month/Year" id="Date" onchange="Fliter()" />
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+                                                    <th>City</th>
+                                                    <th>Staff</th>
+                                                    <th>Alert Heading</th>
+                                                    <th>Start Date</th>
+                                                    <th>End Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><i class="flag flag-icon flag-icon-@item.CountryFlag"></i> @item.Country</td>
+                                                        <td>@item.City</td>
+                                                        <td><a href="">@item.Agent</a></td>
+                                                        <td><a href="#" onclick="GetPreview(@item.Id)">@item.Heading </a></td>
+                                                        <td>@item.StartDate </td>
+                                                        <td>@item.EndDate</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("AddNewAlert","StaffAlerts",new {Id=item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!-- popup -->
+<div class="modal fade" id="viewpopup" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+
+
+            <div class="modal-body text-justify">
+                <img src="" alt=" " id="ImageUrl" style="float: left; margin-right: 15px; width: 300px;">
+                <h5 id="HeadingId"></h5>
+
+
+                <p id="MessageId"></p>
+                <text type="text" id="EditId" style="display:none"></text>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                <a href="#" onclick="Edit()" class="btn btn-primary btn-round"><i class="icofont icofont-ui-edit"></i> Edit</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- popup -->
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            var staff = document.getElementById("StaffId").value;
+            var date = document.getElementById("Date").value;
+            window.location.href = "/Admin/StaffAlerts/Index?CountryCode=" + country + "&City=" + city + "&staffId=" + staff + "&Date=" + date;
+        }
+
+        function GetPreview(id) {
+            $.getJSON("/Admin/StaffAlerts/GetPreView?Id=" + id, function (result) {
+                var Message = result.FullMessage;
+                $("#MessageId").text(Message);
+                var photo = result.Photo;
+                $('#ImageUrl').attr('src', photo);
+                var heading = result.Heading;
+                $("#HeadingId").text(heading);
+                var Id = result.Id;
+                $("#EditId").text(Id);
+                $("#viewpopup").modal("show");
+            });
+        }
+
+        function Edit() {
+
+            var id = $("#EditId").text();
+            window.location.href = "/Admin/StaffAlerts/AddNewAlert?Id=" + id;
+        }
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/StaffAlerts/DeleteAlert?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+    </script>
+}

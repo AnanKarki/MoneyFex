@@ -1,0 +1,75 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="dashboard_header" style="background-color:red">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h1 style="color:white">For Your Protection</h1>
+                <h4 style="color:white">
+                    MoneyFex is working to protect you and your family from fraud.
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <p>Before you send your transaction, please be aware that someone may be trying to steal your money.</p>
+                <br />
+                <p>
+                    If any of the below apply, DO NOT SEND the money transfer. Once the money is picked up – which can happen quickly – you cannot get a refund, even if you were a victim of fraud.
+                </p>
+                <br />
+                <p>
+                    <b>
+                        NEVER SEND MONEY:
+                    </b>
+                </p>
+                <br />
+                <ul>
+                    <li>
+                        To a utilities company (for example: phone, internet or electricity suppliers) to settle bills or outstanding payments, or for any other reason.
+                    </li>
+                    <li>
+                        To someone you don’t know personally, or whose identity you cannot verify.
+                    </li>
+                    <li>
+                        For an internet purchase of any kind, to receive an inheritance or to claim lottery or prize winnings.
+                    </li>
+                    <li>
+                        To prove to someone that you have available funds to buy a car or other goods, rent a property, or obtain a loan or credit of any kind.
+                    </li>
+                    <li>
+                        Finally, NEVER provide any details about this transaction to anyone other than your intended receiver.
+                    </li>
+                </ul>
+
+                <p><b>Victim of fraud?</b> Call us 0124578457</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="dynamic_footer">
+
+    <div class="container">
+
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <a href="@ViewBag.BackUrl" class="fbtn btn-back hidden-sm hidden-xs"> <i class="fa fa-chevron-left" aria-hidden="true"></i> Back </a>
+                <a href="@ViewBag.Url" class="fbtn btn-next">Proceed to Payment <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br>
+                <a href="@ViewBag.BackUrl" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back </a>
+                
+            </div>
+        </div>
+    </div>
+</div>
+

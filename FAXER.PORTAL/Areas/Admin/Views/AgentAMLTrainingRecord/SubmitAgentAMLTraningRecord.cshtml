@@ -1,0 +1,266 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.AgentAMLTrainingRecordVM
+@{
+    ViewBag.Title = "SubmitAgentAMLTraningRecord";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5);
+        /* IE */
+        -moz-transform: scale(1.5);
+        /* FF */
+        -webkit-transform: scale(1.5);
+        /* Safari and Chrome */
+        -o-transform: scale(1.5);
+        /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 1050px;
+        margin: 0 auto;
+        width: 100%;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table,
+        .forms .forms-body table tr,
+        td,
+        th {
+            border: 0;
+            text-align: left;
+        }
+
+
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button,
+    input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-left btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+
+                                <div class="card-body">
+
+                                    <!--  -->
+                                    <div class="forms-wrapper">
+
+
+                                        <div class="form-main-title">
+                                            Agent Anti-Money Laundering Compliance Training Record
+                                        </div>
+                                        <p>This Agent Training Record should be kept up to date and on file at the Agent location. Be sure to fill in all fields of the log when training is completed. Employee Initials: Next to the Employee Name, each employee is required to write his or her initials to signify that the indicated training has been received.</p>
+                                        <div class="forms">
+
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+
+                                                            <tr>
+                                                                <td><label>Agent Name and Address:  <input type="text" name=""></label></td>
+                                                                <td><label>Agent Account No.:  <input type="text" name=""></label></td>
+                                                            </tr>
+
+
+                                                        </tbody>
+
+
+
+                                                    </table>
+
+
+
+                                                    <table class="bordered-table">
+                                                        <thead>
+                                                            <tr>
+                                                                <td rowspan="2"><label>Date of Training</label></td>
+                                                                <td rowspan="2"><label>Employee Name</label></td>
+                                                                <td rowspan="2"><label>Employee Initials</label></td>
+                                                                <td colspan="2">
+                                                                    Type of Training
+                                                                    (Check appropriate box)
+                                                                </td>
+                                                                <td rowspan="2">Training Conducted by</td>
+                                                                <td rowspan="2">Add Row</td>
+
+
+
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Initial </td>
+                                                                <td>On-going</td>
+                                                            </tr>
+
+
+                                                        </thead>
+                                                        <tbody>
+
+
+                                                            <tr>
+                                                                <td><label><input type="date"></label></td>
+                                                                <td><label><input type="text"></label></td>
+                                                                <td><label><input type="text"></label></td>
+                                                                <td> <input type="checkbox">  </td>
+                                                                <td> <input type="checkbox">  </td>
+                                                                <td><label><input type="text"></label></td>
+
+                                                                <td><label><button type="" class="button button-Submit">+</button></label></td>
+
+                                                            </tr>
+
+
+
+                                                        </tbody>
+                                                    </table>
+
+
+
+
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+
+
+
+
+
+
+
+
+                                            <div class="forms-footer  ">
+                                                <button type="" class="button button-cancel  ">Cancel </button>
+
+                                                <button type="" class="button button-Submit  ">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    <!--  -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+

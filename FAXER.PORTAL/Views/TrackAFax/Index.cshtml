@@ -1,0 +1,153 @@
+﻿@model List<FAXER.PORTAL.Models.TrackAFaxViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Track a Transfer</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <form>
+                    <div class="row">
+                        <div class="col-lg-4 pull-right">
+
+                            <div class="input-group stylish-input-group">
+
+                                <input type="text" class="form-control" placeholder="Search Receiver's Name/MFCN " name="searchText">
+                                <span class="input-group-addon">
+                                    <button type="submit" class="">
+                                        <span class="glyphicon glyphicon-search"></span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>SN.</th>
+                                    <th>Receiver's Name</th>
+                                    <th>Receiver's City</th>
+                                    <th>Country</th>
+                                    <th>Sent Amount</th>
+                                    <th>Sent Date</th>
+                                    <th>Sent Time</th>
+                                    <th>MFCN</th>
+                                    <th>Status of Send</th>
+                                    <th>Action on Send</th>
+                                    <th>Sent Receipt</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int index = 0;
+
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    index++;
+                                <tr>
+                                    <td>@index</td>
+                                    <td>@item.ReceiverName</td>
+                                    <td>@item.ReceiverCity </td>
+                                    <td>@item.ReceiverCountry </td>
+                                    <td>@item.FaxedAmount </td>
+                                    <td>@item.FaxedDate</td>
+                                    <td>@item.FaxedTime</td>
+                                    <td>@item.MoneyFaxControlNumber</td>
+                                    <td>@item.StatusOfFax</td>
+
+                                    @if (item.StatusOfFax == FAXER.PORTAL.DB.FaxingStatus.Cancel || item.StatusOfFax == FAXER.PORTAL.DB.FaxingStatus.Received || item.StatusOfFax == FAXER.PORTAL.DB.FaxingStatus.Refund)
+                                    {
+                                        <td>
+                                            <button class="btn btn-danger btn-xs" data-toggle="modal" disabled>Cancel Transfer</button>
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td><a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#fax-cancellation" onclick="GetId(@item.Id);">Cancel Transfer</a></td>
+                                    }
+
+                                    <td><a href="@Url.Action("printReceipt" ,"RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", MFCN = item.MoneyFaxControlNumber })" target="_blank" class="btn btn-warning btn-xs"> Sent Receipt</a></td>
+
+                                </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="@Url.Action("index","dashboard")" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                <!-- <a href="trackfax.php" class="fbtn btn-next">Track a Fax <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                 -->
+                <br>
+                <a href="@Url.Action("index","dashboard")" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+@using (Html.BeginForm("CancelFax", "TrackAFax", FormMethod.Post))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+    <!-- fax-cancellation popup -->
+    <div class="modal fade" id="fax-cancellation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>MoneyFex Service - Transfer Cancellation</h4>
+                </div>
+                <div class="modal-body">
+                    @Html.Hidden("Id", null, new { @id = "Id" })
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>Are you sure you want to cancel this Send?</h4>
+                            <p>
+                                Please note that after cancellation, you only be refunded the Sent Amount NOT the Sending fee!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger btn-sm btn-ok">Yes Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    function GetId(val) {
+        document.getElementById("Id").value = val;
+    };
+</script>
+<!--  -->

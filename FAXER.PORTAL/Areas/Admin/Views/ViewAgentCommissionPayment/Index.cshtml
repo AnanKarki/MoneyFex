@@ -1,0 +1,134 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewAgentCommissionPaymentViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Master View - Agent Commission Payment</h4>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Master View - Agent Commission Payment</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "All Countries", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+
+                            <thead>
+
+
+                                <tr>
+                                    <td>SN</td>
+                                    <td>Month</td>
+                                    <td>Year</td>
+                                    <td>Country</td>
+                                    <td>City</td>
+                                    <td>Agent Name</td>
+                                    <td>Agent MF Code</td>
+                                    <td>Status</td>
+                                    <td>Total Sent Pay't</td>
+                                    <td>Sent Comm Rate</td>
+                                    <td>Total Sent Comm</td>
+                                    <td>Total RCVed Pay't</td>
+                                    <td>RCVer Comm Rate</td>
+                                    <td>Total RCVed Comm</td>
+
+                                    <!--  -->
+
+                                    <td>Sent+RcVed Comm</td>
+                                    <td>Name of Admin Verifier</td>
+                                    <td>Date</td>
+                                    <td>Time</td>
+                                    <td>Payment Receipt</td>
+
+                                    <td>Action</td>
+                                </tr>
+
+                            </thead>
+                            <tbody>
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.Month </td>
+                                        <td>@item.Year </td>
+                                        <td>@item.Country </td>
+                                        <td>@item.City  </td>
+                                        <td>@item.AgentName    </td>
+                                        <td>@item.AgentMFSCode</td>
+                                        <td>@item.Status</td>
+                                        <td>@item.AgentCurrencySymbol @item.TotalSentPayment</td>
+                                        <td>@item.SentCommissionRate</td>
+                                        <td>@item.AgentCurrencySymbol @item.TotalSentCommission</td>
+                                        <td>@item.AgentCurrencySymbol @item.TotalReceivedPayment</td>
+                                        <td>@item.ReceivedCommissionRate</td>
+                                        <td>@item.AgentCurrencySymbol @item.TotalReceivedCommission</td>
+                                        <td align="center">@item.AgentCurrencySymbol @item.TotalCommission</td>
+                                        <td>@item.NameOfVerifier</td>
+                                        <td>@item.Date</td>
+                                        <td>@item.Time</td>
+
+                                        <td><a href="@Url.Action("PrinCommisionReceipt","ViewAgentCommissionPayment",new { @Id=item.Id})" target="_blank" class="btn btn-sm btn-warning">PDF Receipt</a></td>
+
+                                        <td><a href="@Url.Action("deletePayment","ViewAgentCommissionPayment", new {@id = item.Id })" class="btn btn-sm btn-danger">Delete</a></td>
+                                    </tr>
+
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewAgentCommissionPayment/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+    </script>
+}

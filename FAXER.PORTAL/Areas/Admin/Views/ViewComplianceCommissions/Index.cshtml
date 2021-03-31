@@ -1,0 +1,138 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.complianceCommissionVm
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View Compliance Commissions</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View Compliance Commissions</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <div class="row mb40">
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.FilterStaffId, (IEnumerable<SelectListItem>)ViewBag.AgentStaffs, "Select Staff", new { @class = "form-control", id = "staffId", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.FilterYear, (IEnumerable<SelectListItem>)ViewBag.Years, "Select Year", new { @class = "form-control", id = "year", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.EnumDropDownListFor(m => m.FilterMonth, new { @class = "form-control", id = "month", onchange = "filter();" })
+
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+                                @Html.DropDownListFor(m => m.FilterDay, (IEnumerable<SelectListItem>)ViewBag.Days, "Select Day", new { @class = "form-control", id = "day", onchange = "filter();" })
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+
+
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+
+                                <tr>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Staff Name</strong></td>
+                                    <td><strong>Staff Type</strong></td>
+                                    <td><strong>Appointment Date</strong></td>
+                                    <td><strong>End Time</strong></td>
+                                    <td><strong>Status</strong></td>
+                                    <td><strong>Action</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody style="margin-bottom: 30px !important;">
+                                @{ int i = 0;}
+                                @foreach (var item in Model.complianceCommissionsList)
+                                {
+                                    ++i;
+                                    <tr>
+
+
+                                        <td>@i</td>
+                                        <td>@item.StaffName</td>
+                                        <td>@item.StaffType</td>
+                                        <td>@item.AppointmentDate</td>
+                                        <td>@item.EndTime</td>
+                                        <td>@item.Status</td>
+                                        @if (item.Status == "Active")
+                                        {
+                                            <td><a class="btn   btn-warning " href="@Url.Action("DeActivateComplianceCommission","ViewComplianceCommissions", new { @id=item.Id})">Deactivate</a></td>
+                                        }
+                                        else
+                                        {
+                                            <td><a class="btn   btn-warning disabled">Deactivate</a></td>
+                                        }
+
+
+                                    </tr>
+                                }
+                                <!--  -->
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+
+
+                </div>
+
+
+
+
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        function filter() {
+            var staffId = $("#staffId").val();
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            window.location.href = "/Admin/ViewComplianceCommissions/Index?day=" + day + "&month=" + month + "&year=" + year + "&staffId=" + staffId;
+        }
+
+    </script>
+    }

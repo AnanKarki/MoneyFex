@@ -1,0 +1,103 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.UploadMFBCardPhotoViewModel
+@{
+    ViewBag.Title = "UploadMFBCCardPhoto";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@using (Html.BeginForm("UploadMFBCCardPhoto", "ViewRegisteredMFBCCards", null, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">MFBC Card Photo Upload</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">MFBC Card Photo Upload</li>
+                    </ol>
+
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="white-box">
+
+
+                        <div class="form-body">
+                            <h3 class="box-title">Card Details</h3>
+                            <hr />
+
+                            @Html.HiddenFor(model => model.Id)
+                            <!--  -->
+                            <div class="col-lg-3 control-label">
+                                <label> Card User Name </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-3 control-label">
+                                <label>Business Name </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.BusinessName, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <div class="col-lg-3 control-label">
+                                <label>MFBC Card Number </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.CardNum, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  --><div class="clearfix"></div>
+                            <div class="col-lg-3 control-label">
+                                <label>Card Photo </label>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group   ">
+                                    <input type="file" name="CardImage" class="form-control" value="Choose Image" />
+                                    @Html.ValidationMessageFor(model => model.PhotoURL)
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="clearfix"></div>
+                            <div class="col-lg-3"></div>
+                            <div class="col-lg-4">
+                                <div class="form-actions text-center">
+                                    <button type="submit" class="btn btn-success btn-lg btn-block btn-rounded">   Upload </button>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+
+                        </div>   <div class="col-lg-3"></div>
+
+
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,260 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.AgentCommissionSettingViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+                <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                    <h4 class="page-title">Agent Commission Setting</h4>
+                </div>
+                <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+                    <a href="@Url.Action("AddAgentCommission","AgentCommissionSetting")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded">Add Agent Country Commission</a>
+
+                    <ol class="breadcrumb">
+                        <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                        <li class="active">Agent Commission Setting</li>
+                    </ol>
+
+                </div>
+                 /.col-lg-12
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="white-box">
+                        <div class="table-responsive">
+                            <table class="csvprint display nowrap" cellspacing="0" width="100%">
+                                <thead>
+
+
+                                    <tr>
+                                        <th>SN</th>
+                                        <th>Agent name</th>
+
+                                        <th>Service</th>
+
+                                        <th>Type</th>
+                                        <th>Sending Commission (in %)</th>
+                                        <th>Receiving Commission (in %)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @{
+                                        int index = 0;
+                                    }
+                                    @foreach (var item in Model)
+                                    {
+                                        index++;
+                                        <tr>
+                                            <td>@index</td>
+                                            <td>@item.AgentName</td>
+
+                                            <td>@item.TransferSevice</td>
+                                            <td>@item.CommissionType</td>
+
+                                            <td>@item.SendingCommission</td>
+                                            <td>@item.ReceivingCommission</td>
+                                            <td>
+                                                <a href="/Admin/AgentCommissionSetting/AddAgentCommission?Country=@item.Code" class="btn btn-success btn-outline btn-circle btn-xs m-r-5"><i class="ti-pencil-alt"></i></a>
+
+                                                <a href="/Admin/AgentCommissionSetting/UpdateAgentCommission?id=@item.Id" class="btn btn-success btn-outline btn-circle btn-xs m-r-5"><i class="ti-pencil-alt"></i></a>
+
+                                                <a href="/Admin/AgentCommissionSetting/DeleteAgentCommission?id=@item.Id" class="btn btn-danger btn-outline btn-circle btn-xs m-r-5"><i class="ti-trash"></i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+
+
+<!-- .row -->
+<!--/.row -->
+<!--row -->
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Agent Commission Setting</h4>
+                                    <a href="@Url.Action("AddAgentCommission","AgentCommissionSetting")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set Commission
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row m-t-20 m-b-20">
+
+
+
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Sending Country", new { @class = "form-control   form-control-round form-control-bold", @id = "country", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.Cities, "Select City", new { @class = "form-control   form-control-round form-control-bold", @id = "City", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Agent", (IEnumerable<SelectListItem>)ViewBag.Agents, "select Agent", new { @class = "form-control   form-control-round form-control-bold", @id = "Agent", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <select class="js-example-data-array form-control form-control-round form-control-bold" name="Service" id="Service" onchange="filter()">
+                                                    <option value="0">Select </option>
+                                                    <option value="6">All</option>
+                                                    <option value="1">KiiPayWallet</option>
+                                                    <option value="2">Bank Deposit</option>
+                                                    <option value="3">Cash PickUp</option>
+                                                    <option value="4">Other Wallet</option>
+                                                    <option value="5">Pay Bills</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="js-example-data-array form-control form-control-round form-control-bold" name="Type" id="Type" onchange="filter()">
+                                                    <option value="0">Select Type</option>
+                                                    <option value="1">CommissionOnFee</option>
+                                                    <option value="2">CommissionOnAmount</option>
+                                                    <option value="3">FlatFee</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Agent Name</th>
+                                                    <th>Service</th>
+                                                    <th>Type</th>
+                                                    <th>Sending</th>
+                                                    <th>Receiving</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@item.AgentName</td>
+
+                                                        <td>@item.TransferSevice</td>
+                                                        <td>@item.CommissionType</td>
+
+                                                        <td>@item.SendingCommission</td>
+                                                        <td>@item.ReceivingCommission</td>
+                                                        <td>
+                                                            <a href="/Admin/AgentCommissionSetting/UpdateAgentCommission?id=@item.Id" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                        Model.PageNumber) of @Model.PageCount
+
+                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                        new { @page = page }))
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function filter() {
+            var country = $('#country').val();
+            var city = $('#City').val();
+            var agent = $('#Agent').val();
+            var Service = $('#Service').val();
+            var Type = $('#Type').val();
+            window.location.href = "/Admin/AgentCommissionSetting/Index?Country=" + country + "&City=" + city + "&Agent=" + agent
+                + "&TransferSevice=" + Service + "&CommissionType=" + Type;
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/AgentCommissionSetting/DeleteAgentCommission?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+
+    </script>
+}

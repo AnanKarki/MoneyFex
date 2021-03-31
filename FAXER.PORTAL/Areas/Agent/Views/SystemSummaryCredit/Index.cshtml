@@ -1,0 +1,190 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SystemSummaryCreditViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="dynamic_bg_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <h1>System summary/credit</h1>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+
+
+                    <div class=" border_tbls">
+                        <!--  -->
+                        <div class="col-lg-4 text-center">
+                            <div class="form-group">
+                                <label>Pre-funding update</label>
+                                @Html.TextBoxFor(x => x.PrefundingAmount, new { @class = "form-control", @placeholder = "Enter Name" })
+                                @Html.ValidationMessage("PrefundingAmount", "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Update</button>
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-8">
+                            <h3 class="text-center mb-20">Monthly Account Summary</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Customer Deposit</th>
+                                        <th>Customer Payment</th>
+                                        <th>Fee</th>
+                                        <th>Commission</th>
+                                        <th>Bank Deposit</th>
+                                        <th>MoneyFex Withdrawal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+
+                                    <tr>
+
+                                        <td>@Model.MonthlyAccountSummary.CustomerDeposit</td>
+                                        <td>@Model.MonthlyAccountSummary.CustomerPayment</td>
+                                        <td>@Model.MonthlyAccountSummary.Fee</td>
+                                        <td>@Model.MonthlyAccountSummary.Commission</td>
+                                        <td>@Model.MonthlyAccountSummary.BankDeposit</td>
+                                        <td>@Model.MonthlyAccountSummary.MoneyFexWithdrawal</td>
+
+                                    </tr>
+                                    <tr>
+                                        <td>Total</td>
+                                        <td colspan="5">@Model.MonthlyAccountSummary.Total</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!--  -->
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+                    <div class=" border_tbls">
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <a href="" title="" class="btn btn-primary mb20 pull-left">Download Statement</a>
+                            <div id="DataTable_wrapper" class="dataTables_wrapper no-footer">
+                                <div class="dataTables_length" id="DataTable_length">
+                                    <table class="table table-bordered dataTable no-footer" id="DataTable" role="grid" aria-describedby="DataTable_info">
+                                        <thead>
+                                            <tr role="row">
+                                                <th class="sorting_asc" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-sort="ascending" aria-label="#SN: activate to sort column descending" style="width: 63px;">#SN</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Type: activate to sort column ascending" style="width: 222px;">Type</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Amount: activate to sort column ascending" style="width: 95px;">Amount</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Fee: activate to sort column ascending" style="width: 52px;">Fee</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Identifier: activate to sort column ascending" style="width: 131px;">Identifier</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Date &amp;amp; Time: activate to sort column ascending" style="width: 144px;">Date &amp; Time</th>
+                                                <th class="sorting" tabindex="0" aria-controls="DataTable" rowspan="1" colspan="1" aria-label="Staff Name: activate to sort column ascending" style="width: 156px;">Staff Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            @{ int i = 0;}
+                                            @foreach (var item in Model.TransactionHisotry)
+                                            {
+                                                ++i;
+
+
+                                                <tr @*role="row" class="odd"*@>
+                                                    <td class="sorting_1"> @i </td>
+                                                    <td>
+                                                        <a href="@Url.Action("PrefundingDetails","SystemSummaryCredit", new { @id = item.Id })">  @item.CustomerTypeName</a>
+
+
+                                                    </td>
+
+                                                    <td>@item.AmountPaid</td>
+                                                    <td>@item.Fee</td>
+                                                    <td>
+                                                        @if (item.CustomerType == FAXER.PORTAL.Areas.Agent.Models.SystemCustomerType.CustomerDeposit || item.CustomerType == FAXER.PORTAL.Areas.Agent.Models.SystemCustomerType.CustomerPayment)
+                                                        {
+
+                                                            <a href="@Url.Action("AgentTransactionDetail","AgentDashboard", new { @id = item.Id , @transactionService = item.TransactionType,@Type=item.Type ,@isSystemSummary = true})">@item.ReceiptNumber</a>
+
+                                                        }
+                                                        @if (item.CustomerType == FAXER.PORTAL.Areas.Agent.Models.SystemCustomerType.Prefunding)
+                                                        {
+
+                                                            <a href="@Url.Action("PrefundingDetails","SystemSummaryCredit", new { @id = item.Id , @ReceiptNo = item.ReceiptNumber })">@item.ReceiptNumber</a>
+
+                                                        }
+                                                        @if (item.CustomerType == FAXER.PORTAL.Areas.Agent.Models.SystemCustomerType.MOneyFexWithdrawal)
+                                                        {
+
+                                                            <a href="@Url.Action("MoneyfexWithdrawalDetails","SystemSummaryCredit", new { @id = item.Id , @ReceiptNo = item.ReceiptNumber })">@item.ReceiptNumber</a>
+
+                                                        }
+
+                                                    </td>
+                                                    <td>@item.TransactionDate</td>
+                                                    <td>@item.AgentName</td>
+                                                </tr>
+
+                                            }
+
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                            </div>
+                            <!--  -->
+
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6  col-sm-12 col-xs-12 col-lg-offset-3 text-center">
+
+                    <a type="button" class="btn btn-primary" href="javascript:history.back()"><i class="fa fa-chevron-left" aria-hidden="true"></i>  Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+    <!--  -->
+}

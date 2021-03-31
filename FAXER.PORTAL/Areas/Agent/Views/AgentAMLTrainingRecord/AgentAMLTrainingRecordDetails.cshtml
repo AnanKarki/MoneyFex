@@ -1,0 +1,16 @@
+﻿
+@model FAXER.PORTAL.Areas.Agent.Models.AgentAMLTrainingRecordDetails
+
+@{
+    int i = ViewBag.i == null ? 0 : ViewBag.i;
+}
+
+
+<td><label>@Html.EditorFor(model => model.DateOfTraining, null, new { @Name = "[" + i + "].DateOfTraining", @type = "date" })</label></td>
+<td><label>@Html.TextBoxFor(model => model.EmployeeName, null, new { @Name = "[" + i + "].EmployeeName" })</label></td>
+<td><label>@Html.TextBoxFor(model => model.EmployeeInitials, null, new { @Name = "[" + i + "].EmployeeInitials" })</label></td>
+<td> @Html.CheckBoxFor(model => model.IsInitial, new { @Name = "[" + i + "].IsInitial" }) </td>
+<td>@Html.CheckBoxFor(model => model.IsOnGoing, new { @Name = "[" + i + "].IsOnGoing" })    </td>
+<td><label>@Html.TextBoxFor(model => model.TrainingConductedBy, new { @Name = "[" + i + "].TrainingConductedBy" })</label></td>
+
+<td><label><button type="button" class="button button-Submit" id="Add">+</button></label></td>

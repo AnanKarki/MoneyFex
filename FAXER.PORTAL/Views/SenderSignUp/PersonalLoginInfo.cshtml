@@ -1,0 +1,141 @@
+﻿@model FAXER.PORTAL.Models.SignUp.SenderPersonalLoginInformationVM
+@{
+    ViewBag.Title = "PersonalLoginInfo";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3">
+                    <div class="login_signup text-center">
+                        <div class="text-center">
+                            <h3>Personal Login Information</h3>
+                        </div>
+                        <hr>
+
+                        @Html.HiddenFor(model => model.CountryPhoneCode , new { id = "CountryPhoneCode" })
+                        <div class="pinside20">
+                            <!--  -->
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control", id = "Country", onChange = "getPhoneCode()" })
+                                @Html.ValidationMessageFor(model => model.CountryCode, "", new { @class = "text-danger" })
+
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group contact-no-group">
+                                <div class="countr-code">
+                                    @Model.CountryPhoneCode
+                                </div>
+                                @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-control", @type = "number", @placeholder = "Enter Mobile Number ", @maxlength = "10", @minlength = "10" , id="MobileNo" })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control", @placeholder = "Enter Email Address" , @type="email" })
+                                @Html.ValidationMessageFor(model => model.EmailAddress, "", new { @class = "text-danger" })
+
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.PasswordFor(model => model.Password, new { @class = "form-control", @id = "show_password", @placeholder = "Password", })
+                                    @*<input type="text" class="form-control" id="show_password" placeholder="Password">*@
+                                    <div class="input-group-addon" id="passwoed_show" onclick="togglePassword()"><i class="fa fa-eye"></i></div>
+
+                                </div>
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="form-group">
+                                <div class="input-group">
+                                    @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control", @id = "show_Confirmpassword", @placeholder = "Confirm Password" })
+                                    @*<input type="text" class="form-control" id="show_password" placeholder="Confirm Password">*@
+                                    <div class="input-group-addon" id="passwoed_show" onclick="toggleConfirmPassword()"><i class="fa fa-eye"></i></div>
+
+                                </div>
+
+                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="clearfix">
+                                <br />
+                            </div>
+                            <div class="form-group">
+                                Password should be atleast 8 characters and contain a number
+                            </div>
+                        </div>
+                        <div class="clearfix">
+                            <hr>
+                        </div>
+                        <!--  -->
+
+                        <div class="col-lg-12 mb20 ">
+                            <button type="submit" class="btn btn-primary radius-20">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        </div>
+                        <!--  -->
+
+                        <div class="clearfix">
+
+                        </div>
+
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+<!--  -->
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function getPhoneCode() {
+
+            var country = $("#Country").val();
+            $.getJSON("/SenderSignUp/GetCountryPhoneCode?CountryCode=" + country, function (result) {
+
+                $(".countr-code").text(result.PhoneCode);
+                $("#CountryPhoneCode").val(result.PhoneCode);
+            })
+            $("#MobileNo").addClass("contact-no");
+        }
+        if ($("#CountryPhoneCode").val() != "") {
+
+            $("#MobileNo").addClass("contact-no");
+        }
+        $(".countr-code").text($("#CountryPhoneCode").val());
+
+        function togglePassword() {
+            var x = document.getElementById("show_password");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+        function toggleConfirmPassword() {
+            var x = document.getElementById("show_Confirmpassword");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+}

@@ -1,0 +1,52 @@
+﻿ @model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.WithdrawMoneyFromWalletSuccessVM
+@{
+    ViewBag.Title = "WithdrawMoneyFromWalletSuccess";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                <div class="login_signup mb50 clearfix text-center">
+
+                    <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                    <h2 class=" ">Withdrawal <span class="text-primary">Completed !</span> </h2>
+                    <hr>
+                    <div class="text-right wallet-balance  mb15">
+
+                        <h1 class="text-primary mb15">@Model.Amount<small class="text-primary">86</small></h1>
+                        <h5>Sent to your @Model.BankName Account</h5>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                    <p>This amount will be in your account shortly</p>
+
+
+
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <a href="@Url.Action("WithdrawMoneyFromWalletChooseBanckAccount")" class="btn btn-primary btn-lg   ">Make another Withdrawal <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="clearfix mb30"> </div>
+                    <a href="@Url.Action("DashBoard","KiiPayBusinessHome")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard   </a>
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>

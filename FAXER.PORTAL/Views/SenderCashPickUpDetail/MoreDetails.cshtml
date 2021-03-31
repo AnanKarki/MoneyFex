@@ -1,0 +1,391 @@
+﻿@model FAXER.PORTAL.Models.SenderTransactionHistoryViewModel
+@{
+    ViewBag.Title = "MoreDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="kiipay-main-header">
+
+
+                <div class="clearfix">
+
+                </div>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+
+
+                <div class=" login_signup ">
+                    <h3> Transaction in Progress</h3>
+                    <hr>
+                    <div class="clearfix">
+                        <div class="transfer-progress clearfix">
+                            @{ int i = 0;}
+
+                            @foreach (var item in Model.TransactionHistoryList)
+                            {
+                                i++;
+
+                                if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.CashPickUp)
+                                {
+
+
+                                    <div class="col-lg-6 col-md-6 col-xs-6">
+                                        <div class="details-progress">
+                                            <h4><b>1.</b> @item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-6">
+                                        <div class="details-progress text-right">
+                                            <h4>MFCN: @item.Reference<br><span class="text-primary">@item.SendingCurrencySymbol<span class="SentAmount">@item.GrossAmount </span> @item.SendingCurrency</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="progress-circle-text-wraper">
+
+
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active">
+
+                                            </div>
+                                            <h4>Payment Made</h4>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle  active">
+
+                                            </div>
+                                            <h4>Awaiting Pickup</h4>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle last">
+
+                                            </div>
+                                            <h4>Not Received</h4>
+                                        </div>
+                                        <!--  -->
+                                        <div class="clearfix"> </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="table-responsive ">
+                                        <table class="table table-bordered">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">Name</td>
+                                                    <td class="text-left"> @item.ReceiverName</td>
+                                                </tr>
+                                                @*<tr>
+
+            <td class="text-left">City</td>
+            <td class="text-left"> @Model.ReceiverCity</td>
+
+        </tr>*@
+                                                <tr>
+                                                    <td class="text-left">Country</td>
+                                                    <td class="text-left"> @item.ReceiverCountry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Sending Amount</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="GrossAmount">@item.GrossAmount</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Fee</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="Fee">@item.Fee </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Amount Paid</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="TotalAmount">@item.TotalAmount </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Exchange Rate</td>
+                                                    <td class="text-left"> 1 @item.SendingCurrency = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">@item.ReceiverName will Receive</td>
+                                                    <td class="text-left"><span class="ReceiveAmount">@item.ReceivingAmount </span> @item.ReceivingCurrrency </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left">Payment Method</td>
+                                                    <td class="text-left">@item.PaymentMethod</td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td class="text-left">Date</td>
+                                                    <td class="text-left">@item.TransactionDate</td>
+                                                </tr>
+                                                <tr></tr>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <a href="@Url.Action("printReceipt", "RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", MFCN = item.Reference })" class="btn btn-warning radius-20" target="_blank">Receipt</a>
+                                    @*<a href="@Url.Action("CancelFax" , new { @Id  = Model.Id })" class="btn btn-danger radius-20">Cancel Transfer</a>*@
+                                    <a class="btn btn-danger radius-20" data-toggle="modal" data-target="#fax-cancellation" onclick="GetValue(@item.Id);">Cancel Transfer</a>
+
+                                    <div class="clearfix">
+                                    </div>
+
+
+                                    <div class="clearfix"> </div>
+
+
+
+
+
+                                    <!--  btn -->
+                                    <div class="clearfix ">
+                                        <hr>
+                                        <center>
+                                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                        </center>
+                                    </div>
+
+                                    using (Html.BeginForm("CancelFax", "SenderCashPickUpDetail", FormMethod.Post))
+                                    {
+                                        @Html.ValidationSummary(true)
+                                        @Html.AntiForgeryToken()
+                                        <!-- fax-cancellation popup -->
+                                        <div class="modal fade" id="fax-cancellation" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4>MoneyFex - Transaction Cancellation</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        @Html.Hidden("ID", null, new { @id = "id" })
+                                                        <div class="row">
+                                                            <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4 ">
+                                                                <div class="icon_al">
+                                                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                                                                <h4>Are you sure you want to cancel this Transaction?</h4>
+
+                                                                <p>
+                                                                    Please note that after cancellation, you will only be refunded the transferred amount <b>NOT</b> the  fee!
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+
+
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm btn-ok">Yes Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+
+
+                                    <!--  -->
+                                    <!--  -->
+
+
+
+
+                                }
+                                else
+                                {
+
+                                    <div class="col-lg-6 col-md-6 col-xs-6">
+                                        <div class="details-progress">
+                                            <h4><b>1.</b> @item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 col-xs-6">
+                                        <div class="details-progress text-right">
+                                            <h4>Bank Deposit: @item.TransactionIdentifier<br><span class="text-primary">@item.SendingCurrencySymbol<span class="SentAmount">@item.GrossAmount </span> @item.SendingCurrency</span></h4>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="progress-circle-text-wraper">
+
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle active">
+
+                                            </div>
+                                            <h4>Payment Made</h4>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+
+                                        @if (item.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.Incomplete)
+                                        {
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+
+                                                </div>
+                                                <h4>In Progress</h4>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+
+                                                </div>
+                                                <h4>On Hold</h4>
+                                            </div>
+                                        }<!--  -->
+                                        <!--  -->
+                                        <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                            <div class="progress-circle last">
+
+                                            </div>
+                                            <h4>Not Received</h4>
+                                        </div>
+                                        <!--  -->
+                                        <div class="clearfix">
+
+                                        </div>
+
+
+
+                                    </div>
+
+
+
+
+                                    <div class="table-responsive ">
+                                        <table class="table table-bordered">
+
+                                            <tbody>
+                                                <tr>
+                                                    <td class="text-left">Name</td>
+                                                    <td class="text-left"> @item.ReceiverName</td>
+                                                </tr>
+                                                @*<tr>
+
+            <td class="text-left">City</td>
+            <td class="text-left"> @Model.ReceiverCity</td>
+
+        </tr>*@
+                                                <tr>
+                                                    <td class="text-left">Country</td>
+                                                    <td class="text-left"> @item.ReceiverCountry</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Sending Amount</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="GrossAmount">@item.GrossAmount</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Fee</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="Fee">@item.Fee </span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Amount Paid</td>
+                                                    <td class="text-left"> @item.SendingCurrencySymbol<span class="TotalAmount">@item.TotalAmount </span> </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Exchange Rate</td>
+                                                    <td class="text-left"> 1 @item.SendingCurrency = @item.ExchangeRate @item.ReceivingCurrrency</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">@item.ReceiverName will Receive</td>
+                                                    <td class="text-left"><span class="ReceiveAmount">@item.ReceivingAmount </span> @item.ReceivingCurrrency </td>
+                                                </tr>
+                                                
+                                                <tr>
+                                                    <td class="text-left">Account Number</td>
+                                                    <td class="text-left">@item.AccountNumber</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Bank Name</td>
+                                                    <td class="text-left"> @item.BankName</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Branch Code</td>
+                                                    <td class="text-left"> @item.BankCode</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Payment Method</td>
+                                                    <td class="text-left">@item.PaymentMethod</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left">Date</td>
+                                                    <td class="text-left">@item.TransactionDate</td>
+                                                </tr>
+
+                                                <tr></tr>
+                                                <tr></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+
+                                    <a href="@Url.Action("printReceiptOfManualDeposit", "RefundsFormNonCardFaxingRefundRequest", new { area = "Admin", @AccountNo = item.AccountNumber , @Id = item.Id})" class="btn btn-warning radius-20" target="_blank">Receipt</a>
+
+                                    <div class="clearfix">
+                                    </div>
+
+
+
+                                    <div class="clearfix"> </div>
+
+
+
+
+                                    <!--  btn -->
+                                    <div class="clearfix ">
+                                        <hr>
+                                        <center>
+                                            <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                        </center>
+                                    </div>
+
+
+
+                                    <!--  -->
+                                    <!--  -->
+
+
+                                }
+                            }
+                        </div>
+                        <!--  btn end-->
+                        @RenderPage("~/Views/Shared/_mobile-menu-dashboard.cshtml")
+                    </div>
+
+                </div>
+                <!--  -->
+            </div>
+        </div>
+        <!--  -->
+        <!--  -->
+</section>
+
+
+@section Scripts{
+    <script type="text/javascript">
+        function GetValue(val) {
+            document.getElementById("id").value = val;
+        };
+
+        $('.SentAmount').text(GetFormattedAmount($('.SentAmount').text()));
+        $('.GrossAmount').text(GetFormattedAmount($('.GrossAmount').text()));
+        $('.Fee').text(GetFormattedAmount($('.Fee').text()));
+        $('.TotalAmount').text(GetFormattedAmount($('.TotalAmount').text()));
+        $('.ReceiveAmount').text(GetFormattedAmount($('.ReceiveAmount').text()));
+    </script>
+}

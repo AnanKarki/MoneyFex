@@ -1,0 +1,501 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.PayoutProviderViewModel
+
+@{
+    ViewBag.Title = "AddPayoutProviders";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+@*@using (Html.BeginForm())
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h2 class="f-left f-left m-t-5 m-b-0" style="float:left;"> Add Provider</h2>
+                                    <a href="@Url.Action("Index","PayoutProvider")" class=" btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Provider
+                                    </a>
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    @Html.HiddenFor(x => x.Master.Id)
+                                    <div class="row" data-bind="with:$root.Master">
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+                                                <div class="form-group">
+
+                                                    <label> Sending Country</label>
+                                                    <select data-bind="options: $root.Countries,
+                           optionsText: 'Name',
+                           optionsValue: 'Code',
+                           value: SendingCountry,
+                           optionsCaption: 'Select Sending Country'" class="form-control"></select>
+                                                    @Html.DropDownListFor(x => x.Master.SendingCountry, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country", new { @class = "form-control", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.Master.SendingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+
+                                                    <label> Receiving Country</label>
+                                                    <select data-bind="options: $root.Countries,
+                           optionsText: 'Name',
+                           optionsValue: 'Code',
+                           value: ReceivingCountry,
+                           optionsCaption: 'Select Receiving Country'" class="form-control"></select>
+                                                    @Html.DropDownListFor(x => x.Master.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Receiving Country", new { @class = "form-control", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.Master.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    <select data-bind="options: $root.TransferMethods,
+                           optionsText: 'Name',
+                           optionsValue: 'Id',
+                           value: TransferMethod" class="form-control"></select>
+                                                    @Html.EnumDropDownListFor(x => x.Master.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+                                                <div class="form-group">
+                                                    <label> Payout Provider Name </label>
+                                                    <input type="text" class="form-control" data-bind="value:Name" placeholder="Enter Name" />
+                                                    @Html.TextBoxFor(x => x.Master.Name, new { @class = "form-control", @placeholder = "Enter  Name" })
+                                                    @Html.ValidationMessageFor(x => x.Master.Name, "", new { @class = "text-danger" })
+                                                </div>
+
+
+
+                                                <div class="form-group">
+                                                        <label>Branch name</label>
+                                                        @Html.TextBoxFor(x => x.BranchName, new { @class = "form-control", @placeholder = "Enter Branch Name(optional)" })
+                                                        @Html.ValidationMessageFor(x => x.BranchName, "", new { @class = "text-danger" })
+                                                    </div>
+
+
+                                                <div class="form-group">
+                                                    <label>Payout Provider Code  </label>
+                                                    <input type="text" class="form-control" data-bind="value:Code" placeholder="Enter Code(optional)" />
+                                                    @Html.TextBoxFor(x => x.Master.Code, new {@class = "form-control", @placeholder = "Enter  Code(optional)" })
+                                                    @Html.ValidationMessageFor(x => x.Master.Code, "", new { @class = "text-danger" })
+                                                </div>
+
+
+
+                                                <table class="table table-bordered table-striped  " cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+
+
+                                                            <td><strong>Code</strong></td>
+                                                            <td><strong>Name </strong></td>
+                                                            <td><strong>Action</strong></td>
+                                                        </tr>
+                                                    </thead>
+
+
+                                                    <tbody data-bind="foreach:$root.Details">
+                                                        <tr>
+                                                            <td class="WrodWrapper" data-bind="text:Code"></td>
+                                                            <td class="WrodWrapper" data-bind="text:Name"></td>
+
+                                                            <td class="WrodWrapper" data-bind="text:BranchName"></td>
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-primary" data-bind="click:$root.RemoveDetail"><i class="fa fa-remove"></i></button>
+                                                            </td>
+
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                    <tfoot data-bind="with:$root.Detail">
+                                                        <tr>
+
+                                                            <td> <input type="text" id="Code" class="form-control" data-bind="value:Code" /></td>
+                                                            <td><input type="text" id="Name" class="form-control" data-bind="value:Name" /></td>
+
+                                                            <td> <input type="text" id="BranchName" class="form-control" data-bind="value:BranchName" /></td>
+                                                            <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddDetails">Add </button> </td>
+                                                        </tr>
+                                                    </tfoot>
+
+
+                                                </table>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","PayoutProvider")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                            <button type="button" class="btn btn-primary btn-round pull-right" data-bind="click:$root.CreateORUpdate"><i class="fa fa-save"></i> Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    }*@
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div id="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card" id="partial-render">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Add Providers  </h4>
+                                        <a href="@Url.Action("Index","PayoutProvider")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Provider
+                                        </a>
+                                    </div>
+
+                                    <div class="card-body">
+                                        @Html.HiddenFor(x => x.Master.Id)
+                                        <div class="row" data-bind="with:$root.Master">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @*<select data-bind="options: $root.Countries,
+                                                                       optionsText: 'Name',
+                                                                       optionsValue: 'Code',
+                                                                       value: SendingCountry,
+                                                                       optionsCaption: 'Select Sending Country'" 
+                                                    class="form-control form-control-lg form-control-round form-control-bold"></select>*@
+                                                    @Html.DropDownListFor(x => x.Master.SendingCountry, 
+                                                   (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Sending Country",
+                                                   new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "SendingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.Master.SendingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    <select data-bind="options: $root.Countries,
+                       optionsText: 'Name',
+                       optionsValue: 'Code',
+                       value: ReceivingCountry,
+                       optionsCaption: 'Select Receiving Country'" class="form-control form-control-lg form-control-round form-control-bold"></select>
+                                                    @*@Html.DropDownListFor(x => x.Master.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, 
+                                                   "Select Receiving Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })*@
+                                                    @Html.ValidationMessageFor(x => x.Master.ReceivingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    <select data-bind="options: $root.TransferMethods,
+                       optionsText: 'Name',
+                       optionsValue: 'Id',
+                       value: TransferMethod" class="form-control"></select>
+                                                    @*@Html.EnumDropDownListFor(x => x.Master.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @placeholder = "select Document Type", @id = "DocumentType" })*@
+                                                    @Html.ValidationMessage("TransferMethod", "", new { @class = "text-danger" })
+
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  --> <label>Payout Provider Name</label>
+                                                <div class="form-group ">
+
+
+
+                                                    <input type="text" class="form-control form-control-lg form-control-round form-control-bold" data-bind="value:Name" placeholder="Enter Name" />
+                                                    @*@Html.TextBoxFor(x => x.Master.Name, new { @class = "form-control", @placeholder = "Enter  Name" })*@
+                                                    @Html.ValidationMessageFor(x => x.Master.Name, "", new { @class = "text-danger" })
+
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Payout Provider Code  </label>
+                                                    <input type="text" class="form-control form-control-lg form-control-round form-control-bold" data-bind="value:Code" placeholder="Enter Code(optional)" />
+                                                    @*@Html.TextBoxFor(x => x.Master.Code, new {@class = "form-control", @placeholder = "Enter  Code(optional)" })*@
+                                                    @Html.ValidationMessageFor(x => x.Master.Code, "", new { @class = "text-danger" })
+                                                </div>
+
+
+
+                                                <table class="table table-bordered table-striped  " cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+
+
+                                                            <td><strong>Code</strong></td>
+                                                            <td><strong>Name </strong></td>
+                                                            <td><strong>Action</strong></td>
+                                                        </tr>
+                                                    </thead>
+
+
+                                                    <tbody data-bind="foreach:$root.Details">
+                                                        <tr>
+                                                            <td class="WrodWrapper" data-bind="text:Code"></td>
+                                                            <td class="WrodWrapper" data-bind="text:Name"></td>
+
+                                                            @*<td class="WrodWrapper" data-bind="text:BranchName"></td>*@
+                                                            <td class="text-center">
+                                                                <button type="button" class="btn btn-primary" data-bind="click:$root.RemoveDetail"><i class="fa fa-remove"></i></button>
+                                                            </td>
+
+                                                            <td></td>
+                                                        </tr>
+                                                    </tbody>
+
+                                                    <tfoot data-bind="with:$root.Detail">
+                                                        <tr>
+
+                                                            <td> <input type="text" id="Code" class="form-control" data-bind="value:Code" /></td>
+                                                            <td><input type="text" id="Name" class="form-control" data-bind="value:Name" /></td>
+
+                                                            @*<td> <input type="text" id="BranchName" class="form-control" data-bind="value:BranchName" /></td>*@
+                                                            <td class="text-center"><button class="btn btn-primary" data-bind="click:$root.AddDetails">Add </button> </td>
+                                                        </tr>
+                                                    </tfoot>
+
+
+                                                </table>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","PayoutProvider")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                @*<button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>*@
+                                                <button type="button" class="btn btn-primary btn-round pull-right" data-bind="click:$root.CreateORUpdate"><i class="fa fa-save"></i> Save</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>}
+@section Scripts{
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    @*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>*@
+
+    
+
+    <script type="text/javascript">
+
+        function MasterModel(item) {
+
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.SendingCountry = ko.observable(item.SendingCountry || $("#SendingCountry").val());
+            self.ReceivingCountry = ko.observable(item.ReceivingCountry || $("#RecevingCountry").val());
+            self.TransferMethod = ko.observable(item.TransferMethod || $("#RecevingCountry").val());
+            self.TransferMethodName = ko.observable(item.TransferMethodName || '');
+            self.CreatedBy = ko.observable(item.CreatedBy || '');
+            self.CreatedDate = ko.observable(item.CreatedDate || '');
+            self.Name = ko.observable(item.Name || '');
+            self.Code = ko.observable(item.Code || '');
+        }
+
+        function DetailsModel(item) {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.PayoutProviderId = ko.observable(item.PayoutProviderId || 0);
+            self.Name = ko.observable(item.Name || '');
+            self.Code = ko.observable(item.Code || '');
+            self.BranchName = ko.observable(item.BranchName || '');
+        }
+
+        function CountryDropDownModel(item)
+        {
+            var self = this;
+            item = item || {};
+            self.Id = ko.observable(item.Id || 0);
+            self.Code = ko.observable(item.Code || 0);
+            self.Name = ko.observable(item.Name || 0);
+        }
+
+        function payOutProvider(Id) {
+            var self = this;
+            var url = "/Admin/PayoutProvider";
+            self.Master = ko.observable(new MasterModel());
+            self.Detail = ko.observable(new DetailsModel());
+            self.Details = ko.observableArray([]);
+            self.Countries = ko.observableArray([]);
+            self.TransferMethods = ko.observableArray([
+                { Name: 'Select Transfer Method', Id: 0 },
+                { Name: 'All', Id: 7 },
+                { Name: 'Cash PickUp', Id: 1 },
+                { Name: 'KiiPay Wallet', Id: 2 },
+                { Name: 'Other Wallet', Id: 3 },
+                { Name: 'Bank Deposit', Id: 4 },
+                { Name: 'Bill Payment', Id: 5 },
+                { Name: 'Service Payment', Id: 6 },
+            ]);
+
+
+            GetCountries();
+            function GetCountries() {
+
+                Riddha.ajax.get(url + "/GetCountries").done(function (result) {
+                    debugger
+                    if (result.Status == 1) {
+                        var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data), CountryDropDownModel);
+                        self.Countries(data);
+                    }
+                })
+            }
+
+            self.RemoveDetail = function (model) {
+                self.Details.remove(model);
+            }
+            GetPayoutProviderDetails(Id);
+            function GetPayoutProviderDetails(PayoutProviderId) {
+                if (PayoutProviderId > 0) {
+                    Riddha.ajax.get(url + "/GetDetails?PayoutProviderId=" + PayoutProviderId)
+                        .done(function (result) {
+                            if (result.Status == 1) {
+                                self.Master(new MasterModel(result.Data.Master));
+                                var data = Riddha.ko.global.arrayMap(ko.toJS(result.Data.Details), DetailsModel);
+                                self.Details(data);
+                            }
+                        });
+                }
+            }
+
+
+            self.AddDetails = function (model) {
+                debugger;
+
+
+                self.Detail(model);
+                self.Details.push(self.Detail());
+
+                self.Detail(new DetailsModel());
+
+            }
+
+            self.CreateORUpdate = function (result) {
+
+                if (self.Master().SendingCountry() == "" || self.Master().SendingCountry() == undefined) {
+                    Riddha.UI.Toast('Select sending country', 0);
+                    return;
+                }
+                if (self.Master().ReceivingCountry() == "" || self.Master().ReceivingCountry() == undefined) {
+                    Riddha.UI.Toast('Select receiving country', 0);
+                    return;
+                }
+                if (self.Master().TransferMethod() == 0) {
+                    Riddha.UI.Toast('Select transfer method', 0);
+                    return;
+                }
+                if (self.Master().Name() == "") {
+                    Riddha.UI.Toast('Enter provide name', 0);
+                    return;
+
+                }
+
+                if (self.Details().length == 0) {
+                    Riddha.UI.Toast('Enter Details', 0);
+                    return;
+                }
+                var data = {
+
+                    Master: self.Master(),
+                    Details: self.Details()
+                };
+
+                debugger;
+                Riddha.ajax.post(url + "/SaveProviders", data)
+                    .done(function (result) {
+                        if (result.Status == 1) {
+                            Riddha.UI.Toast(result.Message, 4);
+                            self.ResetModel();
+                        }
+
+                    });
+                window.location.href = "/Admin/PayoutProvider/Index";
+
+
+
+            }
+            self.ResetModel = function () {
+
+                self.Master(new MasterModel());
+                self.Details([]);
+
+            }
+
+        }
+
+
+        ko.cleanNode(document.getElementById("partial-render"));
+        var obj1 = new payOutProvider('@ViewBag.Id');
+        ko.applyBindings(obj1, document.getElementById("partial-render"));
+
+
+    </script>
+}
+
+

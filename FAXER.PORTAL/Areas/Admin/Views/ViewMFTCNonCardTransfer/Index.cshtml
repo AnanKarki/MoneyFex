@@ -1,0 +1,314 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewMFTCNonCardTransferViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    ViewBag.AdminResult = null;
+    if (TempData["AdminResult"] != null) {
+
+        ViewBag.AdminResult = TempData["AdminResult"];
+    }
+}
+
+
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View-MFBC Card Withdrawal Usage</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View-MFBC Card Withdrawal Usage</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Filter By Country", new { @class = "form-control", id = "Country", onchange = "Fliter();" })
+
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="form-group">
+                @Html.DropDownList("City", (IEnumerable<SelectListItem>)ViewBag.SCities, "Choose City", new { @class = "form-control", id = "city", onchange = "Fliter();" })
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+
+
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+
+
+                    <div class="table-responsive">
+                        <table class="csv  display nowrap" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">SN<strong></strong></td>
+                                    <td colspan="4"><strong>Transfer Virtual Account</strong></td>
+                                    <td colspan="3"><strong>Transfer</strong></td>
+                                    <td colspan="5"><strong>Receiver Information</strong></td>
+                                    <td rowspan="2"><strong>Date</strong></td>
+                                    <td rowspan="2"><strong>Time</strong></td>
+                                    <td rowspan="2"><strong>Updated?</strong></td>
+                                    <td rowspan="2"><strong>Status</strong></td>
+                                    <td rowspan="2"><strong>Receipt  </strong></td>
+
+                                    <td rowspan="2"><strong>Hold/Unhold Transaction </strong></td>
+
+                                </tr>
+
+
+                                <tr>
+                                    <td><strong>Virtual Account Name</strong></td>
+                                    <td><strong>Virtual Account Number</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+
+
+
+                                    <td><strong>Amount</strong></td>
+                                    <td><strong>Fee</strong></td>
+                                    <td><strong>MFCN</strong></td>
+
+
+
+                                    <td><strong>Name</strong></td>
+                                    <td><strong> Country</strong></td>
+                                    <td><strong> City</strong></td>
+                                    <td><strong> Tel</strong></td>
+                                    <td><strong> Email</strong></td>
+                                </tr>
+
+
+                            </thead>
+
+
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                }
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.CardUserName</td>
+                                        <td>@item.MFTCCardNumber</td>
+                                        <td>@item.CardUserCountry</td>
+                                        <td>@item.CardUserCity</td>
+                                        <td>@item.TrasactionAmount</td>
+                                        <td>@item.Fee</td>
+                                        <td>@item.MFCN</td>
+
+                                        <td>@item.ReceiverName</td>
+                                        <td>@item.ReceiverCountry</td>
+
+                                        <td>@item.ReceiverCity</td>
+                                        <td>@item.ReceiverTelephone</td>
+                                        <td>@item.ReceiverEmail</td>
+
+
+
+                                        <td>@item.TransactionDate </td>
+                                        <td>@item.TransactionTime</td>
+                                        <td>@item.TransactionIsUpdated</td>
+                                        <td>@item.Status</td>
+                                        <td><a href="@Url.Action("PrintReceipt" ,"ViewMFTCNonCardTransfer", new { @TransactionId = item.TransactionId} )" target="_blank" class="btn btn-sm btn-warning btn-rounded">PDF Receipt</a></td>
+
+                                        @if (item.FaxingStatus == FAXER.PORTAL.DB.FaxingStatus.NotReceived)
+                                        {
+
+
+                                            <td><a class="btn btn-sm btn-primary" onclick="HoldAndUnholdTransactionModal('@item.TransactionId' , true)">Hold</a></td>
+
+
+                                        }
+                                        else if (item.FaxingStatus == FAXER.PORTAL.DB.FaxingStatus.Hold)
+                                        {
+
+
+                                            <td><a class="btn btn-sm btn-success" onclick="HoldAndUnholdTransactionModal('@item.TransactionId' , false)">UnHold</a></td>
+
+                                        }
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- .row -->
+        <!--/.row -->
+        <!--row -->
+    </div>
+</div>
+
+
+<div class="modal" id="fax-hold" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>MoneyFex - Transaction Hold</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Hidden("ID", null, new { @id = "id" })
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;font-size:100px"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4 id="HoldTitle">Are you sure you want to hold this Transaction?</h4>
+
+                        <p id="HoldAdditionalInformation">
+                            Please note that after hold, the sender and receiver will  be able to make cancellation and withdrawal  respectively!
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm">Close</button>
+                <button type="button" class="btn btn-danger btn-sm btn-ok" onclick="HoldUnHoldTrans()" id="HoldBtn">Yes Hold</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (TempData["AdminResult"] != null)
+{
+    if (ViewBag.AdminResult.Status == FAXER.PORTAL.Areas.Admin.ViewModels.AdminResultStatus.Warning)
+    {
+
+
+        <div class="modal" id="onload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>MoneyFex - Transaction Hold</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="fa fa-exclamation-triangle" aria-hidden="true" style="color:red;font-size:100px"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <p>@ViewBag.AdminResult.Message</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" data-dismiss="modal" class="btn btn-primary btn-sm" >Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    if (ViewBag.AdminResult.Status == FAXER.PORTAL.Areas.Admin.ViewModels.AdminResultStatus.OK)
+    {
+
+
+        <div class="modal" id="onload" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4>MoneyFex - Transaction UnHold</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="fa fa-check-circle" aria-hidden="true" style="color:forestgreen;font-size:100px"></i>
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+
+                                <p>@ViewBag.AdminResult.Message</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button"  data-dismiss="modal" class="btn btn-primary btn-sm" >Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section scripts{
+    <script type="text/javascript">
+
+        function Fliter() {
+            var country = document.getElementById("Country").value;
+            var city = document.getElementById("city").value;
+            window.location.href = "/Admin/ViewMFTCNonCardTransfer/Index?CountryCode=" + country + "&City=" + city;
+        }
+
+
+        var Hold = true;
+        function HoldAndUnholdTransactionModal(id, hold) {
+
+            $("#id").val(id);
+            Hold = hold;
+            if (Hold == false) {
+
+                $("#HoldTitle").text("Are you sure you want to Unhold this Transaction?");
+                $("#HoldAdditionalInformation").text("Please note that after Unhold, the sender and receiver will be able to make cancellation and withdrawal respectively!");
+                $("#HoldBtn").text("Yes Unhold");
+            } else {
+
+                $("#HoldTitle").text("Are you sure you want to hold this Transaction?");
+                $("#HoldAdditionalInformation").text("Please note that after hold, the sender and receiver will not be able to make cancellation and withdrawal respectively!");
+                $("#HoldBtn").text("Yes Hold");
+            }
+            $("#fax-hold").modal("show");
+
+
+        }
+        function HoldUnHoldTrans() {
+            debugger;
+            var Id = $("#id").val();
+
+            window.location.href = "/Admin/ViewMFTCNonCardTransfer/HoldOrUnhold?TransactionId=" + Id + "&hold=" + Hold;
+
+        }
+
+        function CloseModal() {
+
+            $("#OkPopUp").modal('hide');
+
+            $("#WarningPopUp").modal('hide');
+
+            $("#WarningPopUp").css("Style : display:none");
+        }
+
+    </script>
+}

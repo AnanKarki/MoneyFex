@@ -1,0 +1,219 @@
+﻿@model List<FAXER.PORTAL.Models.ManualBankDepositViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <h1>Manual Bank Deposit </h1>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="clearfix">
+                    <hr>
+                </div>
+
+
+                <div class="row mb40">
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownList("Year", (IEnumerable<SelectListItem>)ViewBag.Year, "Select Year", new { @class = "form-control", @id = "Year", @onchange = "filter();" })
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <select class="form-control" id="Month" name="Month" onchange="filter();">
+                                <option value="0">Select Month </option>
+                                <option value="1">January</option>
+                                <option value="2">February</option>
+                                <option value="3">March</option>
+                                <option value="4">April</option>
+                                <option value="5">May</option>
+                                <option value="6">June</option>
+                                <option value="7">July</option>
+                                <option value="8">August</option>
+                                <option value="9">September</option>
+                                <option value="10">October</option>
+                                <option value="11">November</option>
+                                <option value="12">December</option>
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <select class="form-control" id="Day" name="Day" onchange="filter();">
+                                <option value="0">Select Day </option>
+                                <option value="1">1 </option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                                <option value="6">6</option>
+                                <option value="7">7</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="13">13</option>
+                                <option value="14">14</option>
+                                <option value="15">15</option>
+                                <option value="16">16</option>
+                                <option value="17">17</option>
+                                <option value="18">18</option>
+                                <option value="19">19</option>
+                                <option value="20">20</option>
+                                <option value="21">21</option>
+                                <option value="22">22</option>
+                                <option value="23">23</option>
+                                <option value="24">24</option>
+                                <option value="25">25</option>
+                                <option value="26">26</option>
+                                <option value="27">27</option>
+                                <option value="28">28</option>
+                                <option value="29">29</option>
+                                <option value="30">30</option>
+                                <option value="31">31</option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a id="downloadButton" title="" class="btn btn-primary mb20 pull-left" onclick="downloadStatement();">Download Statement</a>
+
+                <div class="mb30 ">
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+                <div class="table-responsive">
+
+                    <table class="table table-bordered" id="DataTable">
+                        <thead>
+                            <tr>
+                                <td><b>SN</b></td>
+                                <td><b>Sending Country</b></td>
+                                <td><b>Receiver</b></td>
+                                <td><b>Amount</b></td>
+                                <td><b>Reference </b></td>
+                                <td><b>Date</b></td>
+                                <td><b>Status </b></td>
+                                <td><b>Action</b></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @{int i = 0; }
+                            @foreach (var item in Model)
+                            {
+                                i++;
+                                <tr>
+
+                                    <td> @i</td>
+                                    <td>@item.SendingCountry</td>
+                                    <td>@item.ReceiverName</td>
+                                    <td>@item.Amount</td>
+                                    <td>
+                                        <a href="@Url.Action("AgentManualBankdepositDetails","AgentManualDeposit", new { @id = item.Id , @transactionService =  FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit })"> @item.ReferenceNo</a>
+                                    </td>
+                                    <td>@item.TransactionDate</td>
+                                    <td>
+
+                                        @if (item.Status == FAXER.PORTAL.DB.BankDepositStatus.Held || @item.Status == FAXER.PORTAL.DB.BankDepositStatus.Cancel || @item.Status == FAXER.PORTAL.DB.BankDepositStatus.Incomplete || @item.Status == FAXER.PORTAL.DB.BankDepositStatus.UnHold)
+                                        {
+
+                                            <p style="color: red;"> @item.StatusName</p>
+                                        }
+                                        else
+                                        {
+                                            <p style="color: green;"> @item.StatusName</p>
+                                        }
+
+                                    </td>
+                                    <td class="action-icon">
+                                        @if (@item.Status == FAXER.PORTAL.DB.BankDepositStatus.UnHold || @item.Status == FAXER.PORTAL.DB.BankDepositStatus.Incomplete)
+                                        {
+                                            <button onclick="Confirm('@item.Id');" class="btn btn-success">
+                                                confirm
+                                            </button>
+                                        }
+                                        else if (item.Status == FAXER.PORTAL.DB.BankDepositStatus.Confirm)
+                                        {
+                                            <a href="@Url.Action("AgentManualBankdepositDetails","AgentManualDeposit", new { @id = item.Id , @transactionService =  FAXER.PORTAL.Areas.Agent.Models.TransactionType.BankAccountDeposit })"> Details</a>
+
+                                        }
+
+
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+            debugger;
+            var agent = $("#Agent").val();
+            var year = $("#Year").val();
+            var month = $("#Month").val();
+            var day = $("#Day").val();
+            window.location.href = "/Agent/AgentManualDeposit/Index?Year=" + year + "&Month=" + month + "&Day=" + day ;
+        }
+
+        $("#Month").val('@ViewBag.Month');
+
+        $("#Day").val('@ViewBag.Day');
+
+
+        function Confirm(id) {
+            window.location.href = "/Agent/AgentManualDeposit/Confirm?id=" + id;
+        }
+
+
+        function downloadStatement() {
+
+            var referenceNo = "";
+            var year = $("#year").val();
+            var month = $("#month").val();
+            var day = $("#day").val();
+            var transactionType = 4;
+            $("#refNo").text("");
+            $("#downloadButton").hide();
+            window.location.href = "/Agent/AgentDashboard/DownloadStatement?referenceNumber=" + referenceNo + "&day=" + day + "&month=" + month + "&year=" + year + "&transactionType=" + transactionType;
+        }
+
+    </script>
+}
+
+

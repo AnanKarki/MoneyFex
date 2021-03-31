@@ -1,0 +1,195 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.ExchangeRateSettingViewModel
+@{
+    /**/
+
+    ViewBag.Title = "SetTransferExchangeRate";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+
+}
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Set Exchange Rate  </h4>
+                                        <a href="@Url.Action("Index","TransferExchangeRate")" class=" btn btn-primary f-right btn-round">
+                                            <i class="icofont icofont-eye m-r-5"></i> View Exchange Rate
+                                        </a>
+                                    </div>
+                                    @Html.HiddenFor(x => x.Id)
+                                    @Html.HiddenFor(x => x.TransferFeeByCurrencyId)
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Sending Currency</label>
+                                                    @Html.DropDownListFor(x => x.SourceCurrencyCode, (IEnumerable<SelectListItem>)ViewBag.SendingCurrency, "Select Currency", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCurrency" })
+                                                    @Html.ValidationMessageFor(x => x.SourceCurrencyCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Sending Country</label>
+                                                    @Html.DropDownListFor(x => x.SourceCountryCode, (IEnumerable<SelectListItem>)ViewBag.SendingCountries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry", @onchange = "search();" })
+                                                    @Html.ValidationMessageFor(x => x.SourceCountryCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Receiving Currency</label>
+                                                    @Html.DropDownListFor(x => x.DestinationCurrencyCode, (IEnumerable<SelectListItem>)ViewBag.ReceivingCurrency, "Select Currency", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCurrency" })
+                                                    @Html.ValidationMessageFor(x => x.DestinationCurrencyCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Receiving Country</label>
+                                                    @Html.DropDownListFor(x => x.DestinationCountryCode, (IEnumerable<SelectListItem>)ViewBag.ReceivingCountries, "Select Country", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "ReceivingCountry" })
+                                                    @Html.ValidationMessageFor(x => x.DestinationCountryCode, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Transfer Type</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferType, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferType", @onchange = "GetTransferType();" })
+                                                    @Html.ValidationMessageFor(x => x.TransferType, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Method</label>
+                                                    @Html.EnumDropDownListFor(x => x.TransferMethod, new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "TransferMethod" })
+                                                    @Html.ValidationMessageFor(x => x.TransferMethod, "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group" id="AgentDiv">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.AgentId, (IEnumerable<SelectListItem>)ViewBag.Agent, "Select Agent", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "AgentId" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Range</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold" name="Range" id="Range" onchange="getExchangeRate();">
+                                                        <option value="">Select Range</option>
+                                                        <option value="0-0">All</option>
+                                                        <option>1-100</option>
+                                                        <option>101-500</option>
+                                                        <option>501-1000</option>
+                                                        <option>1001-1500</option>
+                                                        <option>1501-2000</option>
+                                                        <option>2001-3000</option>
+                                                        <option>3001-5000</option>
+                                                        <option>5001-10000</option>
+                                                        <option>11000+</option>
+                                                    </select>
+                                                    @Html.ValidationMessage("", "", new { @class = "text-danger" })
+                                                </div>
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Exchange Rate</label>
+                                                    @Html.TextBoxFor(x => x.ExchangeRate, new { @class = "form-control form-control-lg form-control-round", @placeholder = "Exchange Rate", @name = "ExchangeRate ", @id = "ExchangeRate" })
+                                                    @Html.ValidationMessage("Invalid", "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <!--  -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index","TransferExchangeRate")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+    <script type="text/javascript">
+         $("#Range").val('@Model.Range');
+        if ("@Model.Range" == "All") {
+             $("#Range").val('0-0');
+        }
+        var isAuxAgent = false;
+
+        GetTransferType();
+        function GetTransferType() {
+            var transferType = $("#TransferType").val();
+            if (transferType == 2 || transferType == 4) {
+                $("#AgentDiv").show();
+                isAuxAgent = false;
+                if (transferType == 4) {
+                    isAuxAgent = true;
+                    $("#AgentDiv").show();
+                }
+
+            }
+            else {
+                $("#AgentDiv").hide();
+            }
+            search();
+        }
+        search();
+        function search() {
+            var data = {
+                id: $("#AgentId"),
+                country: $("#SendingCountry").val(),
+                Currecny: $("#SendingCurrency").val(),
+                isBusiness: false,
+                isAuxAgent: isAuxAgent,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "AgentId",
+                placeholder: "All"
+            }
+            SelectSearch(data);
+        }
+        function getExchangeRate() {
+            var transferType = $("#TransferType").val();
+            var sendingCurrency = $("#SendingCurrency").val();
+            var receivingCurrency = $("#ReceivingCurrency").val();
+            var sendingCountry = $("#SendingCountry").val();
+            var receivingCountry = $("#ReceivingCountry").val();
+            var agent = $("#AgentId").val();
+            var transferMethod = $("#TransferMethod").val();
+            var range = $("#Range").val();
+            $.getJSON("/Admin/TransferExchangeRate/GetRates?sendingCurency=" + sendingCurrency + "&receivingCurrency=" + receivingCurrency
+                + "&sendingCountry=" + sendingCountry +
+                "&receivingCounrty=" + receivingCountry + "&transferType=" + transferType + "&method=" +
+                transferMethod + "&agent=" + agent + "&range=" + range, function (result) {
+                    if (result.Rate != null) {
+                        for (var item in result.Rate) {
+                            var selector = '[name="' + item + '"]';
+                            $(selector).val(result.Rate[item]);
+                        }
+                    }
+                    else {
+                        $("#ExchangeRate").val(0);
+                    }
+                })
+        }
+
+    </script>
+}

@@ -1,0 +1,135 @@
+﻿@model List<FAXER.PORTAL.Areas.Agent.Models.AgentNewDocumentViewModel>
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    var baseurl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+
+                <h1>Upload Documents</h1>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="text-right   pull-right ">
+                    <a href="@Url.Action("UploadNewDocument","AgentUploadDocuments")" class="btn btn-primary">Upload Document</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+
+
+            <div class="col-lg-12">
+
+                <div class="table-responsive">
+
+                    <table id="example" class="table table-bordered pdf-print ">
+                        <thead>
+                            <tr>
+
+                                <th>Agent Acc No.</th>
+                                <th>Document Name</th>
+                                @*<th>Expiry Date</th>*@
+                                <th>Staff (Upload)</th>
+                                <th>Date/Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+
+                                    <td> <a href="">@item.AgentStaffAccountNo</a></td>
+                                    
+                                    <td><a onclick="OpenDoc('@item.DocumentPhotoUrl')">@item.DocumentTitleName</a></td>
+                                    @*<td>@item.ExpiryDate</td>*@
+                                    <td><a href="">@item.AgentStaffName</a></td>
+                                    <td> @item.UploadDateTime</td>
+                                    <td class="action-icon">
+                                        <a href="@Url.Action("UpdateUploadDocument", "AgentUploadDocuments", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+
+                                    </td>
+                                </tr>
+                            }
+
+
+                        </tbody>
+
+                    </table>
+
+
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <a href="@Url.Action("GoToDashboard","AgentDashboard")" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--  -->
+<!-- document popup -->
+<div id="document" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <button type="button" class="close-button" data-dismiss="modal">&times;</button>
+
+        <img src="https://placehold.it/1000x600" class="img-responsive" id="docSrc">
+    </div>
+</div>
+<!-- document popup end -->
+
+@section scripts{
+
+    <script type="text/javascript">
+
+        function OpenDoc(src) {
+
+            $("#docSrc").attr('src', src);
+            //$('#document').modal('show');
+            window.open('@baseurl' + '/' + src, "_blank");
+        }
+        $("title")[0].innerText = "Agent Document"; 
+            //$('#example').DataTable({
+            //    dom: 'Bfrtip',
+            //    buttons: [
+            //        {
+            //            extend: 'print',
+            //            text: 'ButtonLabelHere',
+            //            title: 'Hello',
+
+            //        }
+            //    ],
+            //    destroy: true,
+            //    searching: true,
+            //});
+
+
+    </script>
+}

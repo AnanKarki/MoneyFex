@@ -1,0 +1,76 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessEnterPaymentReferenceVM
+@{
+    ViewBag.Title = "InternationalPayBillsReferenceSuccess";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                <div class="login_signup mb50 clearfix text-center">
+                    <div class="flex-container amount-group flex-middle">
+                        <div>
+                            <div class="userimage  ">
+                                <img src="~/Areas/KiiPayBusiness/images/icon/svg/buldings.svg" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-30 text-primary"> Eneo</span>
+                        </div>
+                    </div>
+                    <div class="pinside20">
+                        <div class="referencecode ">
+                            <div class="col-lg-5">
+                                <img src="~/Areas/KiiPayBusiness/images/kiipay.png" width="80"> <b>Ref:</b>
+                            </div>
+
+                            <div class="col-lg-7">
+                                HV8 @Model.ReferenceNo0@Model.ReferenceNo1@Model.ReferenceNo2
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+                    </div>
+
+                    <i class="fa fa-check-circle  fa-xlg text-primary mb30"></i>
+                    <h2 class=" ">Done !<br><small>Thank you</small></h2>
+
+
+
+
+
+
+                </div>
+                <div class="clearfix"></div>
+
+
+                <div class="text-center   clearfix">
+                    <hr>
+
+                    <a href="@Url.Action("LocalPayMonthlyBill")" class="btn btn-primary btn-lg   ">Pay another Bill <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <div class="clearfix mb30"> </div>
+                    <a href="@Url.Action("DashBoard","KiiPayBusinessHome")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go to Dashboard   </a>
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+

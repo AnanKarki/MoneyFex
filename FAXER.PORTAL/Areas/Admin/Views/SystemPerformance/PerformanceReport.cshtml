@@ -1,0 +1,130 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.PerformanceReportViewModel>
+@{
+    ViewBag.Title = "PerformanceReport";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Performance Report </h4>
+
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group  ">
+                                                <input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="Date From to" autocomplete="off" id="dates">
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="form-control form-control-round form-control-bold" id="type" onchange="filter()">
+                                                    <option value="">Select Type</option>
+                                                    <option value="0">All</option>
+                                                    <option value="1">Web </option>
+                                                    <option value="2">App</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+
+                                                <select name="" class="form-control form-control-round form-control-bold" id="platform" onchange="filter();">
+                                                    <option value="">Select Platform</option>
+                                                    <option value="0">Sender</option>
+                                                    <option value="1">Agent</option>
+                                                    <option value="2">Admin</option>
+
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+
+
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap print">
+                                            <thead>
+                                                <tr>
+                                                    <th>Date</th>
+                                                    <th>Platform</th>
+                                                    <th>Type</th>
+                                                    <th>No. of Error</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model)
+                                                {
+
+                                                    <tr>
+                                                        <td>@item.Date</td>
+                                                        <td>@item.Platform</td>
+                                                        <td>@item.Type</td>
+                                                        <td>
+                                                            <a href="">@item.NoOfErrors</a><br>
+                                                            <a href="">www.moneyfex.com/sender.......</a>
+                                                        </td>
+                                                        <td><span class="text-success">@item.Status</span></td>
+
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        function filter() {
+            var type = document.getElementById("type").value;
+            var platform = document.getElementById("platform").value;
+           
+            var date = document.getElementById("dates").value;
+            window.location.href = "/Admin/SystemPerformance/PerformanceReport?Date=" + date + "&Type=" + type + "&Platform=" + platform;
+        }
+
+        $(".applyBtn").click(function () {
+            filter();
+        });
+    </script>
+}

@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewBag.Title = "ManualbankDepositSuccessEmail";
+    Layout = "~/Areas/EmailTemplate/Views/Shared/New_Layout_Email.cshtml";
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+
+<table>
+    <thead>
+    </thead>
+    <tbody style="padding: 30px 0 !important; display: block;">
+        <tr>
+            <td width="25%;"><img src="@baseUrl/Areas/EmailTemplate/images/ngeku.png" width="100%"></td>
+            <td valign="top">
+                <h1 style="font-size: 22px; color: #004468; margin-bottom: 20px; line-height: 35px;">Hi <b> @ViewBag.FirstName</b>,</h1>
+                <h1 style="font-size: 22px; color: #02b6ff; margin-bottom: 8px; line-height: 35px;">
+                    Money transferred to <b> @ViewBag.receiverFullName</b> has been paid into their bank account
+                </h1>
+            </td>
+        </tr>
+
+        <tr>
+            <td></td>
+            <td>
+                <h3 style="color: #004468; margin-top: 0;">Below are the full details of your transaction:</h3>
+                <p style="line-height: 30px; font-size: 18px; color: #02b6ff;">
+                    <br> <b> Transaction number</b>: @ViewBag.transactionNo
+                    <br> <b>You sent</b>: @ViewBag.sendingCurrency  @ViewBag.SendingAmount  to  @ViewBag.receivingCountry
+                    <br> <b>Fee</b>:  @ViewBag.sendingCurrency @ViewBag.fee
+                    <br> <b>@ViewBag.receiverFirstName  received</b> :     @ViewBag.ReceiveingCurrency  @ViewBag.ReceivingAmount
+                    <br> <b>Bank Name</b>:   @ViewBag.BankName @ViewBag.receivingCountry
+                    <br> <b>Bank account</b>:   @ViewBag.bankAccount
+                    <br> <b>Branch Code</b>: @ViewBag.bankCode
+                </p>
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <p style="margin:20px 0; color: #004468; font-size: 20px; line-height: 30px; font-weight: bold;">
+                    We look forward to facilitate your next money transfer
+                    <br><br> Thank you
+                </p>
+            </td>
+        </tr>
+
+    </tbody>
+</table>
+
+
+
+
+

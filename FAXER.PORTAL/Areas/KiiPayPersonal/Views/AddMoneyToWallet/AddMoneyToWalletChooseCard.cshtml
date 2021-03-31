@@ -1,0 +1,175 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayPersonal.ViewModels.KiiPayPersonalSavedDebitCreditCard
+@{
+    /**/
+
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+
+    string CurrencySymbol = FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol;
+    string Amount = "00";
+    string Cent = "00";
+    string DepositingAmount = Model.DepositingAmount.ToString();
+    string[] DepositingAmountSplit = DepositingAmount.Split('.');
+    Amount = DepositingAmountSplit[0];
+    if (DepositingAmountSplit.Length > 1)
+    {
+
+        Cent = DepositingAmountSplit[1];
+
+    }
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken();
+    @Html.ValidationSummary();
+
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    @*<div class="text-right wallet-balance  mb15">
+                             <h5>Available balance</h5>
+                            <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                        </div>*@
+                    <div class="text-right wallet-balance ">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">@FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.CardUserCurrencySymbol @FAXER.PORTAL.Common.CardUserSession.LoggedCardUserViewModel.BalanceOnCard  </h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount</h5>
+                                @Html.HiddenFor(model => model.DepositingAmount)
+                                <h1 class="text-primary">@CurrencySymbol @Amount.<small class="text-primary">@Cent</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+
+                        </div>
+
+
+
+                        <ul class="paymentmethod-list mt20 mb20">
+                            <h4 class="text-left">How do you want to add ?</h4>
+                            <li>
+                                @{
+                                    int index = 0;
+                                }
+                                @foreach (var item in Model.KiiPayPersonalSavedDebitCreditCardVM)
+                                {
+
+
+                                    <label>
+                                        @Html.RadioButtonFor(model => Model.KiiPayPersonalSavedDebitCreditCardVM[index].IsChecked, true, new { @type = "radio", @id = item.CardId, @onchange = "RadioChange();" })
+
+
+                                        @*@Html.RadioButtonFor(model => model.KiiPayBusinessSavedDebitCreditCardVM[index].IsChecked , new { @type = "radio" , @id = Model.KiiPayBusinessSavedDebitCreditCardVM[index].CardId , @onchange = "RadioChange()" })*@
+                                        @*<input type="radio" name="@Model.KiiPayBusinessSavedDebitCreditCardVM[index].CardNumber" id="@item.CardId" onchange="RadioChange()">*@ <span class="cardsaved hidden-xs"><img src="/Areas/KiiPayPersonal/images/icon/card/visa.png"></span>
+                                        <span class="title">Saved Credit/Debit Card</span> <span class="subtitle"> @item.CardNumber</span>
+                                    </label>
+                                    @Html.HiddenFor(model => Model.KiiPayPersonalSavedDebitCreditCardVM[index].CardId)
+
+                                    @Html.HiddenFor(model => Model.KiiPayPersonalSavedDebitCreditCardVM[index].CardNumber)
+                                    index++;
+
+                                }
+                            </li>
+                            <li>
+                                <label><input type="radio" name="radio" id="0" checked="checked" onchange="RadioChange()"> <span class="cardsaved hidden-xs"> </span> <span class="title"> Credit/Debit  </span> <span class="subtitle"><a href="@Url.Action("AddMoneyToWalletEnterCardInformation")">Card details required</a></span></label>
+                            </li>
+                            <p class="text-left"><small>Card processing fees may apply</small></p>
+
+                            @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                            <div class="text-left">
+                                <a href="@Url.Action("AddMoneyToWalletAddNewCard")"><i class="fa fa-plus"></i> Add New Card</a>
+                            </div>
+
+                        </ul>
+
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="text-center  clearfix">
+                        <hr>
+
+                        <a onclick="submit()" class="btn btn-primary btn-lg mb30" id="01">Add Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+
+    <script type="text/javascript">
+
+
+        function RadioChange() {
+            debugger;
+            $("input[type=radio]").prop('checked', false)
+            event.target.checked = true;
+            event.target.value = true;
+            if (event.target.id > 0) {
+
+                $("02").show();
+                $("01").hide();
+                //$("form").submit();
+
+            } else {
+
+
+                $("01").show();
+                $("02").hide();
+                //window.location.href = "AddMoneyToWalletEnterCardInformation";
+            }
+        }
+
+        function submit() {
+
+            var id = "";
+            $("input[type=radio]").each(function () {
+                debugger;
+                if ($(this)[0].checked == true) {
+                    id = $(this)[0].id;
+                    return;
+                };
+
+            });
+            if (id > 0) {
+
+                //$("02").show();
+                //$("01").hide();
+                $("form").submit();
+
+            } else {
+
+
+                //$("01").show();
+                //$("02").hide();
+                window.location.href = "AddMoneyToWalletEnterCardInformation";
+            }
+        }
+
+    </script>
+}

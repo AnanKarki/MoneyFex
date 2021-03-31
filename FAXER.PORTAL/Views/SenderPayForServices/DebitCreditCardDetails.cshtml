@@ -1,0 +1,137 @@
+﻿@model FAXER.PORTAL.Models.CreditDebitCardViewModel
+@{
+    ViewBag.Title = "DebitCreditCardDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+    string[] SendingAmount = Model.FaxingAmount.ToString().Split('.');
+    string Amount1 = SendingAmount[0];
+    string Amount2 = "00";
+    if (SendingAmount.Length > 1)
+    {
+
+        Amount2 = SendingAmount[1];
+    }
+}
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Content/images/user.svg" alt="">
+                                </div>
+                                @Html.HiddenFor(model => model.NameOnCard)
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary">@Model.NameOnCard</span>
+                            </div>
+                        </div>
+                        <hr>
+                        <!-- Available balance -->
+                        <div class="col-lg-6 col-lg-offset-3 text-center mb30 mt20 ">
+                            <div class="text-right wallet-balance  card-body">
+                                <h5>Amount including fee</h5>
+                                <h1 class="text-primary">@Model.FaxingCurrencySymbol @Amount1.<small class="text-primary">@Amount2</small></h1>
+                            </div>
+                        </div>
+                        <!-- Available balance -->
+                        <div class="clearfix">
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <img src="~/Content/images/icon/card/visa.png" alt="" width="35"> &nbsp;&nbsp; <img src="~/Content/images/icon/card/master-card.png" alt="" width="35">
+                                @*&nbsp;&nbsp; <img src="~/Content/images/icon/card/ae.png" alt="" width="35">
+                                &nbsp;&nbsp;<img src="~/Content/images/icon/card/maestro.png" alt="" width="35">*@
+                            </div>
+                            <div class="panel-body text-left mt20">
+                                <div class="row">
+                                    @Html.ValidationMessage("TransactionError", "", new { @class = "text-danger" })
+                                    @Html.ValidationMessage("StripeError", "", new { @class = "text-danger" })
+                                    @Html.HiddenFor(model => model.FaxingAmount)
+                                    @Html.HiddenFor(model => model.FaxingCurrency)
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.EnumDropDownListFor(model => model.CreditDebitCardType, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.CreditDebitCardType, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control", @type = "number", @placeholder = "Card Number" })
+                                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.EndMM, new { @class = "form-control", @placeholder = "MM" })
+                                            @Html.ValidationMessageFor(model => model.EndMM, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.EndYY, new { @class = "form-control", @placeholder = "YY" })
+                                            @Html.ValidationMessageFor(model => model.EndYY, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.TextBoxFor(model => model.SecurityCode, new { @class = "form-control", @placeholder = "Security Code" })
+                                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.TextBoxFor(model => model.AddressLineOne, new { @class = "form-control", @placeholder = "Address" })
+                                            @Html.ValidationMessageFor(model => model.AddressLineOne, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-8"><label>Save this card for future use ?</label></div>
+                                    <div class="col-lg-2">
+                                        <label> @Html.RadioButtonFor(model => model.SaveCard, true) Yes </label>
+                                    </div>
+                                    <div class="col-lg-2"><label> @Html.RadioButtonFor(model => model.SaveCard, false) No </label></div>
+                                    <!--  -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <hr>
+                            <button type="submit" class="btn btn-primary btn-lg mb30">Confirm & Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

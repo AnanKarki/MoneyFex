@@ -1,0 +1,68 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+    </p>
+    <p>
+        MoneyFex Virtual Account - Usage Alert!
+    </p>
+    <br />
+    <p>
+        A MoneyFex virtual account  registered with the following details:
+    </p>
+    <p>
+        <strong>Account No:</strong> @ViewBag.MFTCCardNumber
+    </p>
+    <p>
+        <strong>Name on Account:</strong> @ViewBag.CardUserName
+    </p>
+    <p>
+        <strong>Country of Registered Account User:</strong> @ViewBag.CardUserCountry
+    </p>
+    <p>
+        <strong>City of Registered Account User:</strong> @ViewBag.CardUserCity
+    </p>
+    <br />
+    <p>
+        Has been used to withdraw money or pay for goods and/or Services in the City of @ViewBag.CityOfPayingAgentOrRegisteredMerchant
+        .
+    </p>
+    <p>
+        The balance amount on this acccount is @ViewBag.BalanceOnCard
+    </p>
+    <br />
+    <p>
+        You can stop this alert by clicking on
+        <a href="@ViewBag.StopAlert">
+            <button type="" style="background: #333;
+               border-radius: 30px;
+               border: 0;
+               color: #fff;
+               padding: 8px 15px; cursor: pointer;">
+                Stop Alerts
+            </button>
+        </a>
+    </p>
+    <br />
+    
+
+    <table style="width:50%;margin-left: 150px;  ">
+        <tbody>
+            <tr>
+               
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="~/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

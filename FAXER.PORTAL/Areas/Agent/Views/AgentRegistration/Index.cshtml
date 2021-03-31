@@ -1,0 +1,435 @@
+﻿
+@model FAXER.PORTAL.Areas.Agent.Models.AgentInformtionViewModel
+@{
+    ViewBag.Title = "Index";
+
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+
+}
+
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Agent Information </h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(model => model.PhoneCode)
+
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+
+                        <h3 class="">Do you want to attract new customers and also increase your revenue through commissions?</h3>
+                        <hr>
+
+                        <div class="form-group mb40 ">
+                            <p>If the answer to this question is YES, then become a MoneyFex paying agent!</p>
+
+                            <p>To do so, simply fill the form below and we will contact you directly to complete the process.</p>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Business Name <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.AgentName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.AgentName, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Business Registration Number/License<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.BusinessRegistrationNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.BusinessRegistrationNumber, "", new { @class = "text-danger" })
+                            </div>	<div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Business/Company Type<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+
+                                @Html.EnumDropDownListFor(x => x.BusinessType, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.BusinessType, "", new { @class = "text-danger" })
+                            </div><div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label> Address Line 1<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.AddressLine1, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.AddressLine1, "", new { @class = "text-danger" })
+                            </div><div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label> Address Line 2</label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.AddressLine2, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.AddressLine2, "", new { @class = "text-danger" })
+                            </div><div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>City <span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.City, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.City, "", new { @class = "text-danger" })
+                            </div>	<div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Province / Region / State<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.State, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.State, "", new { @class = "text-danger" })
+                            </div>	<div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Post Code / Zipcode<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.ZipCode, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.ZipCode, "", new { @class = "text-danger" })
+                            </div>	<div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Country<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+
+
+                                @Html.DropDownListFor(model => model.CountryCode, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @placeholder = "", id = "Country", onchange = "getPhoneCode()" })
+                                @Html.ValidationMessageFor(Model => Model.CountryCode, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="clearfix"></div>
+                        </div>
+
+
+
+                        <div class="form-group">
+
+
+                            <div class="col-lg-5">
+                                <label>Mobile No.<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group contact-no-group">
+                                    <div class="countr-code" name="PhoneCode">
+
+                                    </div>
+                                    @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-control contact-no ", @type = "number", @autocomplete = "off" })
+
+                                </div>
+                                @*<div class="input-group">
+
+                                        <span class="input-group-addon" name="PhoneCode"></span>
+                                        @Html.TextBoxFor(x => x.MobileNumber, new { @class = "form-control ", @maxlength = "10", @minlength = "10", @autocomplete = "off" })
+                                        @Html.ValidationMessageFor(Model => Model.MobileNumber, "", new { @class = "text-danger" })
+
+
+                                    </div>*@
+                            </div>
+                            @Html.ValidationMessageFor(Model => Model.MobileNumber, "", new { @class = "text-danger" })
+
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Office No. </label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.OfficeNumber, new { @class = "form-control ", @autocomplete = "off" })
+                                @Html.ValidationMessageFor(Model => Model.OfficeNumber, "", new { @class = "text-danger" })
+                            </div><div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+
+
+                        <h3>Main Contact Person Information</h3>
+                        <hr>
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Contact Person Name<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                @Html.TextBoxFor(x => x.ContactPersonName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.ContactPersonName, "", new { @class = "text-danger" })
+
+                            </div><div class="clearfix"></div>
+                        </div>
+
+                        <!--  -->
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-5">
+                                <label>Contact No.<span class="required">*</span></label>
+                            </div>
+
+                            <div class="col-lg-6 ">
+                                <div class="form-group contact-no-group">
+                                    <div class="countr-code" name="PhoneCode">
+
+                                    </div>
+                                    <div>
+                                        @Html.TextBoxFor(x => x.ContactNumber, new { @class = "form-control contact-no", @autocomplete = "off" })
+                                    </div>
+                                </div>
+
+
+
+                                @Html.ValidationMessageFor(Model => Model.ContactNumber, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    @*<a href="staffs-details.php" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mylargemodallabel" aria-hidden="false" id="agentTypeModal">
+
+    <div class="modal-dialog">
+
+        modal content
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">Agent Type</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+                        <h4> Choose Agent type</h4>
+                        <select id="AgentType" onchange="AgentType('@ViewBag.AgentType');" class="form-control">
+                            <option value="0">Select</option>
+                            <option value="1">Agent</option>
+                            <option value="2"> Aux Agent</option>
+                        </select>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-dismiss="modal" data-target="#alert">close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+@*<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mylargemodallabel" aria-hidden="true" id="onload">
+
+        <div class="modal-dialog">
+
+             modal content
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">moneyfex-alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>you have an alert message from moneyfex , please read this message before you can proceed!</h4>
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning btn-sm" data-toggle="modal" data-dismiss="modal" data-target="#alert">read alert</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="mylargemodallabel" aria-hidden="true" id="alert">
+
+        <div class="modal-dialog modal-lg">
+
+             modal content
+            <div class="modal-content">
+
+                <div class="modal-body">
+
+                    <table class="table table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>title</th>
+                                <th>date</th>
+                                <th>time</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <td><a href="">alert 1</a></td>
+                                <td>01/05/2018</td>
+                                <td>08:00 am</td>
+                            </tr>
+
+                            <tr>
+                                <td><a href="">alert 1</a></td>
+                                <td>01/05/2018</td>
+                                <td>08:00 am</td>
+                            </tr>
+
+
+                            <tr>
+                                <td><a href="">alert 1</a></td>
+                                <td>01/05/2018</td>
+                                <td>08:00 am</td>
+                            </tr>
+
+
+                            <tr>
+                                <td><a href="">alert 1</a></td>
+                                <td>01/05/2018</td>
+                                <td>08:00 am</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">close alert window</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>*@
+
+@section scripts{
+    <script type="text/javascript">
+
+        function getPhoneCode() {
+
+            var country = $("#Country").val();
+            $.getJSON("/Agent/AgentRegistration/GetCountryPhoneCode?CountryCode=" + country, function (result) {
+
+                $(".countr-code-lg").text(result.PhoneCode);
+                $("#PhoneCode").val(result.PhoneCode);
+                $('[name="PhoneCode"]').text(result.PhoneCode);
+            })
+        }
+        $(".countr-code-lg").text($("#PhoneCode").val());
+
+        @*var agent = '@ViewBag.AgentType';
+
+        function AgentType(agentType) {
+                agentType = $("#AgentType").val();
+                if (agentType == 1) {
+                    $('#agentTypeModal').modal('hide');
+                }
+                else if (agentType == 2) {
+                    $('#agentTypeModal').modal('hide');
+                    window.location.href = "/Agent/AgentRegistration/BecomeAuxAgent?agentType=" + agentType;
+                }
+        }
+
+        if (agent == 0) {
+            $('#agentTypeModal').modal('show');
+        }*@
+
+    </script>
+}

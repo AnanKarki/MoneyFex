@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Complete";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class=" ">
+
+
+
+                                <div class="  p-t-50 b-b-50">
+
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+                                            <div class="card">
+
+                                                <div class="card-block text-center p-50">
+
+                                                    <!-- success -->
+                                                    <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                                                        <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                                                        <span class="swal2-success-line-tip"></span>
+                                                        <span class="swal2-success-line-long"></span>
+                                                        <div class="swal2-success-ring"></div>
+                                                        <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                                                        <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                                                    </div>
+                                                    <!-- success -->
+                                                    <!-- error -->
+                                                    <!--
+                                                    <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: flex;"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div> -->
+                                                    <!-- error -->
+
+                                                    <h2 class=" ">You've sent <span class="text-primary">@ViewBag.SendingCurrencySymbol @ViewBag.SendingAmount </span> to @ViewBag.ReceiverName</h2>
+                                                    <hr>
+
+                                                    <button type="button" class="btn btn-primary   btn-round">
+                                                        <i class="fa fa-print m-r-5"></i> Print Receipt
+                                                    </button>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+

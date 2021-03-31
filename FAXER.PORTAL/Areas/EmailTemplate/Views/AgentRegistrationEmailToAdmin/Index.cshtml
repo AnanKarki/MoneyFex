@@ -1,0 +1,28 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+
+<div style="padding:20px">
+    <p>
+        Dear Agent Registrar,
+    </p>
+    <p>
+        An agent with the name @ViewBag.AgentName, telephone number @ViewBag.AgentTelephone and email address @ViewBag.AgentEmail has just registered on MoneyFex Platform,
+        please verify, accredit the Agent and activate their account accordingly.
+    </p>
+    <p>
+        Agent Registration Code: @ViewBag.RegistrationCode
+    </p>
+
+    <p>
+        Please CARRY OUT ALL DUE DILIGENCE PROCESSES BEFORE REGISTRATION.
+    </p>
+
+    <p>
+        Use Agent registration Due Diligence Check list.
+    </p>
+
+
+</div>

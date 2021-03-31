@@ -1,0 +1,260 @@
+﻿@model FAXER.PORTAL.Models.SenderTransactionHistoryViewModel
+@{
+    ViewBag.Title = "ViewAllDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="kiipay-main-header">
+
+
+                <div class="clearfix">
+
+                </div>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <!--  -->
+
+
+                <div class=" login_signup ">
+                    <h3> Transaction in Progress</h3>
+                    <hr>
+                    <div class="clearfix">
+                        @{ int i = 0;}
+                        @foreach (var item in Model.TransactionHistoryList)
+                        {
+                            i++;
+
+                            if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.CashPickUp)
+                            {
+                                if (item.Status == FAXER.PORTAL.DB.FaxingStatus.NotReceived)
+                                {
+                                    <div class="transfer-progress clearfix">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress">
+                                                <h4><b>@i.</b>@item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress text-right">
+                                                <h4>MFCN: @item.Reference<br><span class="text-primary">@item.SendingCurrencySymbol @item.GrossAmount @item.SendingCurrency</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="progress-circle-text-wraper">
+
+
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle active">
+
+                                                </div>
+                                                <h4>Payment Made</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+
+                                                </div>
+                                                <h4>Awaiting Pickup</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle last">
+
+                                                </div>
+                                                <h4>Not Received</h4>
+                                            </div>
+                                            <!--  -->
+                                            <div class="clearfix"> </div>
+                                            <div class="col-lg-12 text-right">
+                                                <a href="@Url.Action("MoreDetails" , new { @TransactionId = item.Id})" class="btn btn-primary radius-20">More Details</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                }
+                                else
+                                {
+
+                                    <div class="transfer-progress clearfix">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress">
+                                                <h4><b>@i.</b> @item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress text-right">
+                                                <h4>MFCN: @item.Reference<br><span class="text-primary">@item.SendingCurrencySymbol @item.GrossAmount @item.SendingCurrency</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="progress-circle-text-wraper">
+
+
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle active">
+
+                                                </div>
+                                                <h4>Payment Made</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+                                                    <i class="fa fa-question" aria-hidden="true"></i>
+                                                </div>
+                                                <h4>On Hold</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle last">
+
+                                                </div>
+                                                <h4>Not Received</h4>
+                                            </div>
+                                            <!--  -->
+                                            <div class="clearfix"> </div>
+                                            <div class="col-lg-12 text-right">
+                                                <a href="@Url.Action("MoreDetails" , new { @TransactionId = item.Id})" class="btn btn-primary radius-20">More Details</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                }
+                            }
+
+                            if (item.TransactionServiceType == FAXER.PORTAL.Models.TransactionServiceType.BankDeposit)
+                            {
+                                if (item.StatusOfBankDepoist == FAXER.PORTAL.DB.BankDepositStatus.Incomplete)
+                                {
+                                    <div class="transfer-progress clearfix">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress">
+                                                <h4><b>@i.</b>@item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress text-right">
+                                                <h4>Bank Deposit: @item.TransactionIdentifier<br><span class="text-primary">@item.SendingCurrencySymbol<span class="amountspan">@item.GrossAmount</span> @item.SendingCurrency</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="progress-circle-text-wraper">
+
+
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle active">
+
+                                                </div>
+                                                <h4>Payment Made</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+
+                                                </div>
+                                                <h4>In Progress</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle last">
+
+                                                </div>
+                                                <h4>Not Received</h4>
+                                            </div>
+                                            <!--  -->
+                                            <div class="clearfix"> </div>
+                                            <div class="col-lg-12 text-right">
+                                                <a href="@Url.Action("MoreDetails" , new { @TransactionId = item.Id})" class="btn btn-primary radius-20">More Details</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                }
+                                else
+                                {
+
+                                    <div class="transfer-progress clearfix">
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress">
+                                                <h4><b>@i.</b>@item.ReceiverName<br><span class="text-primary">@item.Date</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6 col-md-6 col-xs-6">
+                                            <div class="details-progress text-right">
+                                                <h4>Bank Deposit: @item.TransactionIdentifier<br><span class="text-primary">@item.SendingCurrencySymbol<span class="amountspan">@item.GrossAmount</span>  @item.SendingCurrency</span></h4>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="progress-circle-text-wraper">
+
+
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle active">
+
+                                                </div>
+                                                <h4>Payment Made</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle  active">
+                                                    <i class="fa fa-question" aria-hidden="true"></i>
+                                                </div>
+                                                <h4>On Hold</h4>
+                                            </div>
+                                            <!--  -->
+                                            <!--  -->
+                                            <div class="col-lg-4 col-md-4 col-xs-4 text-center">
+                                                <div class="progress-circle last">
+
+                                                </div>
+                                                <h4>Not Received</h4>
+                                            </div>
+                                            <!--  -->
+                                            <div class="clearfix"> </div>
+                                            <div class="col-lg-12 text-right">
+                                                <a href="@Url.Action("MoreDetails" , new { @TransactionId = item.Id})" class="btn btn-primary radius-20">More Details</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                }
+                            }
+                        }
+
+                    </div>
+                    <!--  btn -->
+                    <div class="clearfix ">
+                        <hr>
+                        @*<center>
+                                <a href=" " class=" "> View All <i class="fa fa-eye" aria-hidden="true"></i></a>
+                            </center>*@
+                    </div>
+                    <!--  btn end-->
+                    @RenderPage("~/Views/Shared/_mobile-menu-dashboard.cshtml")
+                </div>
+
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+
+</section>

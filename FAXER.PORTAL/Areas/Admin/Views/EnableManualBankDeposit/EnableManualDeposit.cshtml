@@ -1,0 +1,277 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.EnableManualBankDepositViewModel
+@{
+    ViewBag.Title = "EnableManualDeposit";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+
+@*@using (Html.BeginForm())
+    {
+        <div id="page-wrapper">
+            <div class="container-fluid">
+                <div class="row bg-title">
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <div class="card" style="">
+
+                                <div class="card-header border-bottom">
+                                    <div style="float:left;">
+                                        <h2 class="f-left f-left m-t-5 m-b-0">Transfer Services </h2>
+                                    </div>
+                                    <div style="float:right;">
+
+                                        <a href="@Url.Action("Index","EnableManualBankDeposit")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">
+                                            <i class="icofont icofont-eye m-r-5"></i> View
+                                        </a>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body">
+
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <hr />
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+                                                <div class="form-group">
+
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.PayingCountry, (IEnumerable<SelectListItem>)ViewBag.PayingCountries, "Paying Country", new { @class = "form-control", @id = "SendingCountry", @Onchange = "getAgent();" })
+                                                    @Html.ValidationMessageFor(x => x.PayingCountry, "", new { @class = "text-danger" })
+
+                                                </div>
+
+
+
+
+                                                <div class="form-group">
+
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.Agent, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @class = "form-control", @id = "Agents", @onchange = "getAgent();" })
+                                                    @Html.ValidationMessageFor(x => x.Agent, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Agent Account No.  </label>
+                                                    @Html.TextBoxFor(x => x.AgentAccountNo, new { @class = "form-control", @placeholder = "Agent Account Number", @id = "AgentAccNo", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.AgentAccountNo, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Agent Address</label>
+                                                    @Html.TextAreaFor(x => x.AgentAddress, new { @class = "form-control", @placeholder = "Agent address", @id = "AgentAddress", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.AgentAddress, "", new { @class = "text-danger" })
+
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>SMS Alert Mobile No.</label>
+                                                    <div class="input-group input-group-round input-group-lg">
+                                                        <span class="input-group-addon" id="MobileCode"> @Model.MobileCode</span>
+
+                                                        @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control form-control-lg form-control-round ", @placeholder = "Enter Mobile Number", @id = "MobileNo" })
+
+
+                                                    </div>
+                                                    @Html.ValidationMessageFor(x => x.MobileNo, "", new { @class = "text-danger" })
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-footer bg-light">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <a href="@Url.Action("Index", "EnableManualBankDeposit")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                                <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }*@
+
+
+@using (Html.BeginForm())
+{
+    <div class="pcoded-content">
+        <div class="pcoded-inner-content">
+
+            <div class="main-body">
+                <div class="page-wrapper">
+
+                    <div class="page-body">
+                        <div class="row">
+
+                            <div class="col-sm-12">
+
+                                <div class="card">
+
+                                    <div class="card-header border-bottom">
+                                        <h4 class="f-left f-left m-t-5 m-b-0">Enable Agent Payments  </h4>
+                                        <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                            <i class="fa fa-angle-left m-r-5"></i> Back
+                                        </button>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+
+
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Country</label>
+                                                    @Html.DropDownListFor(x => x.PayingCountry, (IEnumerable<SelectListItem>)ViewBag.PayingCountries, "Paying Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "SendingCountry", @Onchange = "getAgent();" })
+                                                    @Html.ValidationMessageFor(x => x.PayingCountry, "", new { @class = "text-danger" })
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Agent</label>
+                                                    @Html.DropDownListFor(x => x.Agent, (IEnumerable<SelectListItem>)ViewBag.Agents, "Select Agent", new { @class = "form-control form-control-lg form-control-round form-control-bold", @id = "Agents", @onchange = "GetAgentDetails();" })
+                                                    @Html.ValidationMessageFor(x => x.Agent, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Agent Account No. </label>
+                                                    @Html.TextBoxFor(x => x.AgentAccountNo, new { @class = "form-control  form-control-lg form-control-round form-control-bold", @placeholder = "Agent Account Number", @id = "AgentAccNo", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.AgentAccountNo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+                                                <div class="form-group">
+                                                    <label>Agent Address </label>
+                                                    @Html.TextAreaFor(x => x.AgentAddress, new { @class = "form-control", @placeholder = "Agent address", @row = "4", @id = "AgentAddress", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => x.AgentAddress, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+
+                                                <div class="form-group  ">
+                                                    <label>SMS Alert Mobile No.</label>
+                                                    <div class="input-group input-group-round input-group-lg">
+                                                        <span class="input-group-addon" id="CountryPhoneCodeSpan"> @Model.MobileCode </span>
+                                                        @Html.TextBoxFor(x => x.MobileNo, new { @class = "form-control form-control-lg form-control-round ", @placeholder = "Enter Mobile Number", @id = "MobileNo" })
+
+                                                    </div>
+                                                    @Html.ValidationMessageFor(x => x.MobileNo, "", new { @class = "text-danger" })
+
+                                                </div>
+
+                                            </div>
+
+
+                                            <!--  -->
+
+
+
+
+
+
+
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index", "EnableManualBankDeposit")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-save"></i> Save</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+@section scripts{
+
+    <script type="text/javascript">
+
+        function getAgent() {
+            debugger;
+            var countrycode = $("#SendingCountry").val();
+            $.getJSON("/Admin/AdminCommon/GetCountryPhoneCountry?countrycode=" + countrycode, function (result) {
+                $("#CountryPhoneCodeSpan").text(result.PhoneCode);
+            })
+            search();
+            $("#Agents").val(0);
+            GetAgentDetails();
+        }
+
+        function GetAgentDetails() {
+            var Agent = $("#Agents").val();
+            $.getJSON("/Admin/EnableManualBankDeposit/GetAgentDetails?AgentId=" + Agent, function (result) {
+                $("#AgentAccNo").val(result.agentAccountNo);
+                $("#AgentAddress").val(result.agentAddress);
+            })
+        }
+        search();
+        function search() {
+            var data = {
+                id: $("#Agents"),
+                country: $("#SendingCountry").val(),
+                Currecny: "",
+                isBusiness: false,
+                isAuxAgent: false,
+                url: '/Admin/AdminCommon/GetAgents',
+                identifier: "Agents",
+                placeholder: "Select"
+            }
+            SelectSearch(data);
+        }
+    </script>
+
+}
+

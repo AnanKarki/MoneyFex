@@ -1,0 +1,1636 @@
+﻿@{
+    /**/
+
+    var currentUser = FAXER.PORTAL.Common.StaffSession.LoggedStaff;
+}
+
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="~/Areas/Admin/plugins/images/favicon.png" type="image/x-icon">
+    <title> MoneyFex Admin </title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Areas/Admin/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/bootstrap/dist/css/bootstrap-select.min.css" rel="stylesheet" />
+    <!-- Menu CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- toast CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/toast-master/css/jquery.toast.css" rel="stylesheet">
+    <!-- morris CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/morrisjs/morris.css" rel="stylesheet">
+    <link href="~/Areas/Admin/plugins/bower_components/summernote/dist/summernote.css" rel="stylesheet" />
+    <!-- chartist CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/chartist-js/dist/chartist.min.css" rel="stylesheet">
+    <link href="~/Areas/Admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css" rel="stylesheet">
+    <!-- Calendar CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/calendar/dist/fullcalendar.css" rel="stylesheet" />
+    <!--alerts CSS -->
+    <link href="~/Areas/Admin/plugins/bower_components/sweetalert/sweetalert.css" rel="stylesheet" type="text/css">
+    <!-- animation CSS -->
+    <link href="~/Areas/Admin/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+
+    <link href="~/Areas/Admin/css/style.css" rel="stylesheet">
+
+
+    <!-- CSS files added by Shiwa -->
+
+    <link href="~/Areas/Admin/css/toastr.css" rel="stylesheet" />
+    <!-- files added by Shiwa end here-->
+    <!-- color CSS -->
+    <link href="~/Areas/Admin/css/colors/default.css" id="theme" rel="stylesheet">
+    <link href="~/Areas/Admin/plugins/bower_components/multiselect/css/multi-select.css" rel="stylesheet" type="text/css" />
+
+
+    <link href="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.~/Areas/Admin/js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link href="~/Areas/Admin/flag/flags.css" rel="stylesheet">
+    <link href="~/Areas/Admin/flag/flags.min.css" rel="stylesheet">
+    <link href="~/plugins/datepicker/datepicker3.css" rel="stylesheet" />
+</head>
+<body class="fix-header">
+    <div id="loader">
+        <div class="loader">
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Wrapper -->
+    <!-- ============================================================== -->
+    <div id="wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <nav class="navbar navbar-default navbar-static-top m-b-0">
+            <div class="navbar-header">
+                <div class="top-left-part">
+                    <!-- Logo -->
+                    <a class="logo" href="/Admin/AdminDashboard">
+                        <!-- Logo icon image, you can use font-icon also -->
+                        <b>
+                            <!--This is dark logo icon--><img src="~/Areas/Admin/plugins/images/admin-logo.png" alt="home" class="dark-logo" /><!--This is light logo icon--><img src="~/Areas/Admin/plugins/images/admin-logo-dark.png" alt="home" class="light-logo" />
+                        </b>
+                        <!-- Logo text image you can use text also -->
+                        <span class="hidden-xs">
+                            <!--This is dark logo text--><img src="~/Areas/Admin/plugins/images/admin-text.png" alt="home" class="dark-logo" /><!--This is light logo text--><img src="~/Areas/Admin/plugins/images/admin-text-dark.png" alt="home" class="light-logo" />
+                        </span>
+                    </a>
+                </div>
+                <!-- /Logo -->
+                <!-- Search input and Toggle icon -->
+                <ul class="nav navbar-top-links navbar-left">
+                    <li><a href="javascript:void(0)" class="open-close waves-effect waves-light"><i class="ti-menu"></i></a></li>
+                    <!--
+                    <li class="dropdown">
+                                            <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="#" aria-expanded="false"> <i class="fa fa-envelope"></i>
+                                                <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
+                                            </a>
+                                            <ul class="dropdown-menu mailbox animated bounceInDown">
+                                                <li>
+                                                    <div class="drop-title">Notifications</div>
+                                                </li>
+                                                <li>
+                                                    <div class="message-center">
+
+                                                        <a href="#">
+
+                                                            <div class="mail-contnet">
+                                                                <h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                        </a>
+                                                           <a href="#">
+
+                                                            <div class="mail-contnet">
+                                                                <h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                        </a>
+                                                           <a href="#">
+
+                                                            <div class="mail-contnet">
+                                                                <h5>Lorem ipsum dolor sit amet, consectetuer adipiscing elit</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                        </a>
+
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
+                                                </li>
+                                            </ul>
+
+                                        </li> -->
+                </ul>
+
+                <ul class="nav navbar-top-links navbar-right pull-right">
+
+                    <li class="dropdown">
+                        @if (currentUser != null)
+                        {
+                            <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="#"> <b class="hidden-xs">Welcome @currentUser.FirstName</b><span class="caret"></span> </a>
+                        }
+
+                        <ul class="dropdown-menu dropdown-user animated flipInY">
+                            <li><a href="/Staff/StaffLogin/RequestSecurityCode"><i class="fa fa-gear "></i> Change Password</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/Admin/Login/AdminLogOut"><i class="fa fa-power-off"></i> Logout</a></li>
+                        </ul>
+                        <!-- /.dropdown-user -->
+                    </li>
+                    <!-- /.dropdown -->
+
+
+
+
+                </ul>
+
+                <div id="navigation" class="hidden-xs">
+                    <!-- navigation start-->
+                    <ul>
+                        <li class="dropdown  hidden-xs" id="notificationList">
+                            <a href="#" class="dropdown-toggle notification  " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class=""> <i class="fa fa-bell fa-stack-1x fa-inverse " style="padding:10px"></i></span>
+
+                                <span class="badge" data-bind="text:NotificationCount()">0</span>
+                            </a>
+                            <ul class="dropdown-menu notify-drop  dropdown ">
+                                <div class="notify-drop-title">
+                                    <div class="row">
+                                        <div class="col-md-6 col-sm-6 col-xs-6" id="count">Notification  (<strong data-bind="text:Notifications().length"></strong>)</div>
+                                        <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                    </div>
+                                </div>
+                                <!-- end notify title -->
+                                <!-- notify content -->
+                                <div class="drop-content">
+
+                                    <!-- ko foreach: Notifications() -->
+                                    <li>
+                                        <div class=" pd-l0">
+
+                                            <a href="#" onclick="removeNotification(this)">
+                                                <h5><span class="text-black" data-bind="text:Message"> </span></h5>
+                                                @*Payment from <span class="text-black" data-bind="text:ReceiverName"> </span>
+                                                    , Amount: <span data-bind="text:Amount">$1000</span>*@
+                                                <p data-bind="text:Time">01/02/2019 08:35 AM</p>
+                                                <p class="time" data-bind="text:HourAgo">2 hours ago</p>
+                                            </a>
+                                        </div>
+                                    </li>
+
+                                    <!-- /ko -->
+
+
+                                </div>
+                                <div class="notify-drop-footer text-center">
+                                    <a href="/Admin/AdminNotification/Notification"><i class="fa fa-eye"></i> See All  </a>
+                                </div>
+                            </ul>
+                        </li>
+
+
+                    </ul>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+            </div>
+            <!-- /.navbar-header -->
+            <!-- /.navbar-top-links -->
+            <!-- /.navbar-static-side -->
+        </nav>
+        <!-- End Top Navigation -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav slimscrollsidebar">
+                <div class="sidebar-head">
+                    <h3><span class="fa-fw open-close"><i class="ti-close ti-menu"></i></span> <span class="hide-menu">Navigation</span></h3>
+                </div>
+                <div class="user-profile">
+                </div>
+                <ul class="nav" id="side-menu">
+                    <li> <a href="/Admin/AdminDashboard"><span class="hide-menu">Dashboard</span></a> </li>
+                    <!--  -->
+
+                    @{
+
+                        if (FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level3 ||
+                            FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level4)
+                        {
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Sender<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/ViewRegisteredFaxers"> <span class="hide-menu">View - Registered Senders</span>  </a> </li>
+                                    <li> <a href="/Admin/TransactionHistoryOfAllSender"> <span class="hide-menu"> Recent Transactions </span>  </a> </li>
+                                    <li> <a href="/Admin/SenderDocumentation"> <span class="hide-menu"> Sender Documentation</span>  </a> </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+
+                            if (FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == FAXER.PORTAL.DB.SystemLoginLevel.Level1)
+                            {
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect"><i class="ti-money" data-icon="v"></i>  <span class="hide-menu">Rates<span class="fa arrow"></span> </span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li> <a href="/Admin/ExchangeRateSetting"> <span class="hide-menu">Exchange Rate Setting</span>  </a> </li>
+                                        <li> <a href="/Admin/FaxingCommissionSetting"> <span class="hide-menu">Sending Commission Setting</span>  </a> </li>
+                                        <li> <a href="/Admin/AgentCommissionSetting"> <span class="hide-menu">Agent Commission Setting</span>  </a> </li>
+                                        <li><a href="/Admin/FaxingAndPayFeeCalculations"><span class="hide-menu">Sending & Pay Fee Calculations</span></a></li>
+                                        <li> <a href="/Admin/BankAccount"> <span class="hide-menu">Bank Account Setup</span>  </a> </li>
+                                        <li> <a href="/Admin/SmsFeeSetUp"> <span class="hide-menu">Sms Fee Setup</span>  </a> </li>
+                                    </ul>
+                                </li>
+                            }
+                            <!--  -->
+
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-dollar" data-icon="v"></i>  <span class="hide-menu">Service Settings<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    @*<li> <a href="/Admin/ServiceSettings"> <span class="hide-menu">View Setttings</span>  </a></li>*@
+                                    <li> <a href="/Admin/ServiceSettings/CurrentSetting"> <span class="hide-menu">Current Setttings</span>  </a></li>
+                                    <li>
+                                        <a href="/Admin/ServiceSettings/CurrentSetting"> <span class="hide-menu">Service Provider Logos</span> </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li> <a href="/Admin/LogosUpload/Index"> <span class="hide-menu">Current Logos</span>  </a></li>
+                                            <li> <a href="/Admin/LogoAssign/LogoAssign"> <span class="hide-menu">Assign logos to services</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-dollar" data-icon="v"></i>  <span class="hide-menu">Account <span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="/Admin/BankAccount"> <span class="hide-menu">Bank Account </span>  </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/BankBranch"> <span class="hide-menu">Bank Branch </span>  </a>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="pcoded-hasmenu">
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-file" data-icon="v"></i>  <span class="hide-menu">Threshold Management <span class="fa arrow"></span> </span></a>
+
+                                <ul class="nav nav-second-level collapse">
+
+                                    <li>
+                                        <a href="/Admin/CreditCardAttemptLimit"> <span class="hide-menu">Daily Card Payment Attempts</span> </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/RecipientTransactionCount"> <span class="hide-menu">Daily Recipent Transactions </span> </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/SenderTransactionCount"> <span class="hide-menu">Daily Sender Transaction Count</span> </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/TransactionAmountLimit/Index"> <span class="hide-menu">Payout Approval Amount</span> </a>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/TransactionAmountLimit/StaffTransactionApprovalLimit"> <span class="hide-menu">Staff Transaction Approval Limit</span> </a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-dollar" data-icon="v"></i>  <span class="hide-menu">Social Media Tracking<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/SocialMediaTracking/AddTrackingPage"> <span class="hide-menu">Add Tracking to Page</span>  </a></li>
+                                    <li> <a href="/Admin/SocialMediaTracking/Index"> <span class="hide-menu">Current Tracking</span> </a> </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-dollar" data-icon="v"></i>  <span class="hide-menu">API Provider<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/APIProvider/Index"> <span class="hide-menu">Current API Providers</span>  </a></li>
+                                    <li> <a href="/Admin/APIProviderSelection/Index"> <span class="hide-menu">Provider Payment Selection</span> </a> </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-money" data-icon="v"></i>  <span class="hide-menu">Payout Provider<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/PayoutProvider/Index"> <span class="hide-menu">Current Providers</span>  </a></li>
+                                    <li> <a href="/Admin/PayoutProvider/AddPayoutProviders"> <span class="hide-menu">Add Provider</span> </a> </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Admin/PayoutFlowControl" class="waves-effect"><i class="ti-money" data-icon="v"></i>  <span class="hide-menu">Payout Flow Control </span></a>
+
+                            </li>
+                            <li>
+                                <a href="/Admin/CustomerPaymentFee" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Customer Payment Fees</span></a>
+
+                            </li>
+                            <li>
+                                <a href="/Admin/CreditDebitCardUsage" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Credit/Debit Card Usage Log </span></a>
+
+                            </li>
+
+                            @*<li> <a href="/Admin/TransferCalculator"><span class="hide-menu">Transfer Calculator</span></a> </li>*@
+
+
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-money" data-icon="v"></i>  <span class="hide-menu">Rate<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="/Admin/SystemExchangeRate"> <span class="hide-menu">System Exchange Rate<span class="fa arrow"></span></span>  </a>
+
+
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/TransferExchangeRate"> <span class="hide-menu">Transfer Exchange Rate<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>  <a href="/Admin/TransferExchangeRate"> <span class="hide-menu">Current Exchange Rate </span>  </a></li>
+                                            <li> <a href="/Admin/TransferExchangeRate/SetTransferExchangeRate"> <span class="hide-menu">Set Rate</span>  </a></li>
+                                            <li> <a href="/Admin/TransferExchangeRate/TransferExchangeRateHistory"> <span class="hide-menu">Rate History</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/TransferExchangeRate"> <span class="hide-menu">Introductory Rate <span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>  <a href="/Admin/IntroductoryRate"> <span class="hide-menu">Current Rate </span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryRate/SetRate"> <span class="hide-menu">Set Rate</span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryRate/RateHistory"> <span class="hide-menu">Rate History</span>  </a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Admin/SpreadRate"> <span class="hide-menu">spread<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+
+                                            <li> <a href="/Admin/SpreadRate"> <span class="hide-menu">Current Spread Rate </span>  </a></li>
+                                            <li> <a href="/Admin/SpreadRate/SetSpreadRate"> <span class="hide-menu">Set Spread Rate</span>  </a></li>
+                                            <li> <a href="/Admin/SpreadRate/SpreadRateHistory"> <span class="hide-menu">Spread History</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/TransferFeePercentage"> <span class="hide-menu">Transfer Fee<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+
+                                            <li> <a href="/Admin/TransferFeePercentage"> <span class="hide-menu">Current Transfer Fee</span>  </a></li>
+                                            <li> <a href="/Admin/TransferFeePercentage/SetTransferfee"> <span class="hide-menu">Set Transfer Fees</span>  </a></li>
+                                            <li> <a href="/Admin/TransferFeePercentage/TransferFeeHistory"> <span class="hide-menu">Transfer Fees History</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/IntroductoryFee"> <span class="hide-menu">Introductory Fees<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+
+                                            <li> <a href="/Admin/IntroductoryFee"> <span class="hide-menu">Current Fees</span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryFee/SetIntroductoryfee"> <span class="hide-menu">Set Fees</span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryFee/IntroductoryFeeHistory"> <span class="hide-menu">Fees History</span>  </a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-money" data-icon="v"></i>  <span class="hide-menu">Rate By Currency<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>
+                                        <a href="/Admin/TransferExchangeRateByCurrency"> <span class="hide-menu">Transfer Exchange Rate<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>  <a href="/Admin/TransferExchangeRateByCurrency"> <span class="hide-menu">Current Exchange Rate </span>  </a></li>
+                                            <li> <a href="/Admin/TransferExchangeRateByCurrency/SetTransferExchangeRate"> <span class="hide-menu">Set Rate</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/IntroductoryRateByCurency"> <span class="hide-menu">Introductory Rate <span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>  <a href="/Admin/IntroductoryRateByCurency"> <span class="hide-menu">Current Rate </span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryRateByCurency/SetRate"> <span class="hide-menu">Set Rate</span>  </a></li>
+                                        </ul>
+                                    </li>
+
+                                    <li>
+                                        <a href="/Admin/IntroductoryFeeByCurrency"> <span class="hide-menu">Transfer Fee<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+
+                                            <li> <a href="/Admin/TransferFeePercentageByCurrency"> <span class="hide-menu">Current Transfer Fee</span>  </a></li>
+                                            <li> <a href="/Admin/TransferFeePercentageByCurrency/AddTransferFeePercentageByCurrency"> <span class="hide-menu">Set Transfer Fees</span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="/Admin/IntroductoryFeeByCurrency"> <span class="hide-menu">Introductory Fees<span class="fa arrow"></span></span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+
+                                            <li> <a href="/Admin/IntroductoryFeeByCurrency"> <span class="hide-menu">Current Fees</span>  </a></li>
+                                            <li> <a href="/Admin/IntroductoryFeeByCurrency/SetIntroductoryFeeByCurrency"> <span class="hide-menu">Set Fees</span>  </a></li>
+                                        </ul>
+                                    </li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Staff Transactions<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li>  <a href="/Admin/BankAccountPaymentConfirmation"> <span class="hide-menu">Bank Payment Confirmation</span>  </a></li>
+                                </ul>
+                            </li>
+
+                            <!--  -->
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="icon-people" data-icon="v"></i>  <span class="hide-menu">Agent<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/ViewRegisteredAgents"> <span class="hide-menu"> Registered Agents</span>  </a> </li>
+                                    <li> <a href="/Admin/AdminRegisteredAgentStaff"> <span class="hide-menu">Agent Staff</span>  </a> </li>
+
+                                    <li>
+                                        <a href="/Admin/ManualBankDeposit/ViewAgents"> <span class="hide-menu">Manaul Bank Account</span>  </a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>
+                                                <a href="/Admin/ManualBankDeposit/ViewAgents"> <span class="hide-menu">Manaul Bank Account Payment</span>  </a>
+                                                <a href="/Admin/EnableManualBankDeposit/Index"> <span class="hide-menu">Enable Manaul Bank Deposit</span>  </a>
+                                            </li>
+                                        </ul>
+
+                                    </li>
+                                    <li> <a href="/Admin/ViewAgentCashWithdrawal"> <span class="hide-menu">View Agent Cash Withdrawal</span>  </a> </li>
+                                    <li><a href="/Admin/ViewComplianceCommissions"><span class="hide-menu">View Compliance Commissions</span></a></li>
+                                    <li>
+                                        <a href="/Admin/AgentCommissionSetting"><span class="hide-menu">Commission<span class="fa arrow"></span></span></a>
+                                        <ul class="nav nav-third-level collapse">
+                                            <li>  <a href="/Admin/AgentCommissionSetting/AddAgentCommission"> <span class="hide-menu">Commission Setting </span>  </a></li>
+                                            <li>
+                                                <a href="/Admin/AgentCommissionSetting"> <span class="hide-menu">Commission History<span class="fa arrow"></span> </span>  </a>
+
+                                                <ul class="nav nav-third-level collapse">
+
+                                                    <li> <a href="/Admin/AgentCommissionSetting/AgentCommissionHistoryOnTransferFee"> <span class="hide-menu">On Transfer Fees </span>  </a></li>
+                                                    <li> <a href="/Admin/AgentCommissionSetting/AgentCommissionHistoryOnAmount"> <span class="hide-menu">On Amount</span>  </a></li>
+                                                    <li> <a href="/Admin/AgentCommissionSetting/AgentCommissionHistoryOnFlatFee"> <span class="hide-menu">On Flat Fee</span>  </a></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+
+                            </li>
+                            <!--  -->
+                            <!--  -->
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Business<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/RegisteredBusinessSender"> <span class="hide-menu">Registered Business</span>  </a> </li>
+                                    <li> <a href="/Admin/RegisteredBusinessSender/TransactionStatementOfSenderBusiness"> <span class="hide-menu"> Transaction Statement </span>  </a> </li>
+                                    <li>
+                                        <a href="/Admin/BusinessTransferLimit"> <span class="hide-menu"> Transfer Limit</span>  </a>
+                                        <ul class="nav nav-second-level collapse">
+                                            <li><a href="/Admin/BusinessTransferLimit"> <span class="hide-menu">Current Limit</span>  </a></li>
+                                            <li><a href="/Admin/BusinessTransferLimit/BusinessTransferLimitHisotry"> <span class="hide-menu"> History  </span>  </a></li>
+                                        </ul>
+                                    </li>
+                                    <li> <a href="/Admin/BusinessDocumentation"> <span class="hide-menu"> Business Documentation</span>  </a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Sender<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/ViewRegisteredFaxers"> <span class="hide-menu">View - Registered Senders</span>  </a> </li>
+                                    <li> <a href="/Admin/TransactionHistoryOfAllSender"> <span class="hide-menu"> Recent Transactions </span>  </a> </li>
+                                    <li> <a href="/Admin/SenderDocumentation"> <span class="hide-menu"> Sender Documentation</span>  </a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Receiver<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/Receiver/Index"> <span class="hide-menu">Registered Receiver</span>  </a> </li>
+                                    <li> <a href="/Admin/BanReceiver/Index"> <span class="hide-menu">Black Listed Recever</span>  </a> </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect"><i class="ti-user" data-icon="v"></i>  <span class="hide-menu">Other<span class="fa arrow"></span> </span></a>
+                                <ul class="nav nav-second-level collapse">
+                                    <li> <a href="/Admin/FeedBack"> <span class="hide-menu">Feedback</span>  </a> </li>
+
+                                </ul>
+                            </li>
+                            <!--  -->
+                            <!--  -->
+                            <!--  -->
+
+
+
+                            <li>
+                                <a href="javascript:void(0);" class="waves-effect">
+                                    <i class=" icon-user-follow" data-icon="v"></i>  <span class="hide-menu">Staff<span class="fa arrow"></span> </span>
+                                </a>
+                                <ul class="nav nav-second-level collapse">
+                                    @if ((int)FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == 2)
+                                    {
+                                        <li> <a href="/Admin/ViewRegisteredStaffDetails"> <span class="hide-menu">View-Registered Staff Details</span>  </a> </li>
+                                        <li> <a href="/Admin/ViewStaffLog"> <span class="hide-menu">View Staff Log</span>  </a> </li>
+                                        <li> <a href="/Admin/CashWithdrawalCodeFromStaffOrAgent"> <span class="hide-menu">Withdrawal Code Generator</span>  </a> </li>
+
+                                    }
+                                    @if ((int)FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == 2 || (int)FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == 1)
+                                    {
+
+                                        <li> <a href="/Admin/StaffNoticeBoard"> <span class="hide-menu">Staff Notice Board</span>  </a> </li>
+                                        <li> <a href="/Admin/ViewStaffTraining"> <span class="hide-menu">Staff Training</span>  </a> </li>
+                                        <li> <a href="/Admin/StaffHolidays"> <span class="hide-menu">Staff Holidays</span>  </a> </li>
+                                        <li><a href="/Admin/SetPublicHolidays"><span class="hide-menu">View Staff Public Holidays</span></a></li>
+                                    }
+                                </ul>
+
+
+                            </li>
+                            <!--  -->
+                            <!--  -->
+
+                            if ((int)FAXER.PORTAL.Common.AdminSession.StaffLoginLevel == 2)
+                            {
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect">
+                                        <i class="icon-folder-alt" data-icon="v"></i>  <span class="hide-menu">Master<span class="fa arrow"></span> </span>
+                                    </a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li> <a href="/Admin/ViewSystemSummary"> <span class="hide-menu">View-System Summary</span>  </a> </li>
+                                        <li> <a href="/Admin/FormAgentCommissionPayment"> <span class="hide-menu">Form - Agent Commission Payment</span>  </a> </li>
+                                        <li> <a href="/Admin/ViewAgentCommissionPayment"> <span class="hide-menu">View -Agent Commission Payment</span>  </a> </li>
+
+                                        <li> <a href="/Admin/FormStaffPayslip"> <span class="hide-menu">Form - Staff Payslip</span>  </a> </li>
+                                        <li> <a href="/Admin/ViewStaffPayslip"> <span class="hide-menu">View -Staff Payslip</span>  </a> </li>
+
+
+                                        <li> <a href="/Admin/ViewAlerts"> <span class="hide-menu">Master View-Agents Alerts</span>  </a> </li>
+                                        <li> <a href="/Admin/ViewBusinessAlerts"> <span class="hide-menu">Master View-Business Merchants Alerts</span>  </a> </li>
+
+                                        <li> <a href="/Admin/Career"> <span class="hide-menu">Career</span>  </a> </li>
+                                        <li> <a href="/Admin/News"> <span class="hide-menu">News</span>  </a> </li>
+                                        <li> <a href="/Admin/Location"> <span class="hide-menu">Location</span>  </a> </li>
+                                        <li> <a href="/Admin/BackDoorLogin"> <span class="hide-menu">Back Door Login</span>  </a> </li>
+                                        <li> <a href="/Admin/RecoveryFolder"> <span class="hide-menu">Folder-Recovery Folder</span>  </a> </li>
+
+                                    </ul>
+                                </li>
+                                <!--  -->
+                                <li>
+                                    <a href="javascript:void(0);" class="waves-effect"><i class="icon-pin" data-icon="v"></i>  <span class="hide-menu">Partners<span class="fa arrow"></span> </span></a>
+                                    <ul class="nav nav-second-level collapse">
+                                        <li> <a href="/Admin/ViewRegisteredPartners"> <span class="hide-menu"> Registered Partners</span>  </a> </li>
+                                    </ul>
+                                </li>
+                            }
+
+                            <li>
+                                <a href="/Admin/Login/AdminLogOut" class="waves-effect">
+                                    <i class="fa fa-circle-o text-danger"></i>
+                                    <span class="hide-menu">Log out</span>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar -->
+        <!-- ============================================================== -->
+
+        @RenderBody();
+
+        <!-- /.container-fluid -->
+        <footer class="footer text-center"> 2017 &copy; MoneyFex Service </footer>
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Page Content -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+    <!-- add agent -->
+    <!-- add agent -->
+    <!-- add business -->
+    <!-- add business -->
+    <!-- add note ad -->
+    @*<div id="registration_agent" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="modal-title">MoneyFex Servic-Register an Agent</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="ti-user icon_x3 text-warning" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <h4>Place a call to Agent, only continue with registration after verifying agent's details!!</h4>
+                                <div class="col-lg-8">
+                                    <label>Enter Agent Registration Code</label>
+                                    <input type="text" name="RegistrationNumber" id="RegistrationNumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning waves-effect waves-light btn-rounded" onclick="getAgentRegistrationCode();">Register an Agent </button>
+                        @*<a href="@Url.Action("RegisterAnAgent","ViewRegisteredAgents")"  class="btn btn-warning waves-effect waves-light btn-rounded">Register an Agent</a>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    <div id="registration_agent" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Register an Agent</h4>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <div class="icon_al">
+                                    <i class="ti-user icon_x3 text-warning" aria-hidden="true"></i>
+
+                                </div>
+                            </div>
+                            <div class="col-lg-9">
+                                <h4>Place a call to Agent, only continue with registration after verifying agent's details!!</h4>
+                                <div class="col-lg-8">
+                                    <label>Enter Agent Registration Code</label>
+                                    <input type="text" name="RegistrationNumber" id="RegistrationNumber">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning waves-effect waves-light btn-rounded" onclick="getAgentRegistrationCode();">Register an Agent </button>
+                        @*<a href="@Url.Action("RegisterAMerchant","ViewRegisterBusiness")" class="btn btn-warning waves-effect waves-light btn-rounded">Register a Merchant</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="registration_business" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Merchant Registration</h4>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="col-lg-3">
+                                    <div class="icon_al">
+                                        <i class="ti-user icon_x3 text-warning" aria-hidden="true"></i>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4>Place a call to the Business Merchant, only continue with registration after verifying the merchant's details!!</h4>
+                                    <div class="col-lg-12">
+                                        <label>Enter Business Merchant Registration Code</label>
+                                        <input type="text" name="RegNum" id="RegNum">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-warning waves-effect waves-light btn-rounded" onclick="getMerchantRegistrationCode();">Register a Merchant </button>
+                        @*<a href="@Url.Action("RegisterAMerchant","ViewRegisterBusiness")" class="btn btn-warning waves-effect waves-light btn-rounded">Register a Merchant</a>*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="RegisteredAgentsnotepopup" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <a href="" data-toggle="modal" data-target="#addnewnote" class="btn btn-sm btn-primary">Add New Note</a>
+                                <div class="clearfix"> <br></div>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Notes</th>
+                                            <th>Date</th>
+                                            <th>Time</th>
+                                            <th>Staff</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.  </p>
+                                            </td>
+                                            <td>08:00:00 </td>
+                                            <td>02-04-2018</td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.  </p>
+                                            </td>
+                                            <td>08:00:00 </td>
+                                            <td>02-04-2018</td>
+                                            <td> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.  </p>
+                                            </td>
+                                            <td>08:00:00 </td>
+                                            <td>02-04-2018</td>
+                                            <td> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- add note ad -->
+    <!-- add note ad -->
+    <div id="addnewnote" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Date:</th>
+                                            <th>Time:</th>
+                                            <th>Staff:</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td colspan="3">
+                                                <textarea rows="8" class="form-control"></textarea>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="" class="btn btn-primary btn-sm">Save</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- add note ad -->
+
+    </div>
+
+    <div class="modal in" id="errormodal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">×</a>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size:70px;color:orangered"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4 id="errormsg"></h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-danger btn-sm" data-dismiss="modal">Close</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal in" id="SuccessModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex </h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true" style="font-size:70px;color:forestgreen"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4 id="successmsg"></h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary btn-sm" data-dismiss="modal">Close</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @try
+    {
+        if (ViewBag.AdminResult.Status == @FAXER.PORTAL.Areas.Admin.ViewModels.AdminResultStatus.Warning)
+        {
+
+            <div class="modal in" id="errorload" role="dialog" data-backdrop="static">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a class="close" data-dismiss="modal">×</a>
+                            <h4 class="modal-title">MoneyFex Alert</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="icon_al">
+                                        <i class="fa fa-exclamation-triangle" aria-hidden="true" style="font-size:70px;color:orangered"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4>@ViewBag.AdminResult.Message</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+        if (ViewBag.AdminResult.Status == @FAXER.PORTAL.Areas.Admin.ViewModels.AdminResultStatus.OK)
+        {
+
+            <div class="modal in" id="onload" role="dialog" data-backdrop="static">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" id="closebtn">×</button>
+                            <h4 class="modal-title">MoneyFex Alert</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <div class="row">
+                                <div class="col-lg-3">
+                                    <div class="icon_al">
+                                        <i class="fa fa-check-circle" aria-hidden="true" style="font-size:70px;color:forestgreen"></i>
+                                    </div>
+                                </div>
+                                <div class="col-lg-9">
+                                    <h4>@ViewBag.AdminResult.Message</h4>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-primary btn-sm" id="closebtn2">Close</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    catch (Exception ex)
+    {
+
+    }
+
+
+    @*<script src="~/Areas/Admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="~/Areas/Admin/bootstrap/dist/js/bootstrap.min.js"></script>
+        <!-- Menu Plugin JavaScript -->
+        <script src="~/Areas/Admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+        <!--slimscroll JavaScript -->
+        <script src="~/Areas/Admin/js/jquery.slimscroll.js"></script>
+        <!--Wave Effects -->
+        <script src="~/Areas/Admin/js/waves.js"></script>
+        <!--Counter js -->
+        <script src="~/Areas/Admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+        <script src="~/Areas/Admin/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+        <!-- chartist chart -->
+        <script src="~/Areas/Admin/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+        <script src="~/Areas/Admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+        <!-- Sparkline chart JavaScript -->
+        <script src="~/Areas/Admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <!-- Custom Theme JavaScript -->
+        <script src="~/Areas/Admin/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+        <script src="~/Areas/Admin/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+
+        <script src="~/Areas/Admin/js/custom.min.js"></script>
+        <script src="~/Areas/Admin/js/dashboard1.js"></script>
+        <script src="~/Areas/Admin/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+        <script src="~/Areas/Admin/plugins/bower_components/summernote/dist/summernote.min.js"></script>
+        <script src="~/plugins/input-mask/jquery.inputmask.js"></script>
+        <script src="~/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+        <script src="~/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+        <script src="~/plugins/input-mask/jquery.inputmask.phone.extensions.js"></*@script>
+    @*<script src="~/Areas/Admin/plugins/datepicker/bootstrap-datepicker.js"></script>*@
+
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/jquery/js/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/jquery-ui/js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/popper.js/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/Content/bower_components/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="~/Areas/Admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/Areas/Admin/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- Menu Plugin JavaScript -->
+    <script src="~/Areas/Admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+    <!--slimscroll JavaScript -->
+    <script src="~/Areas/Admin/js/jquery.slimscroll.js"></script>
+    <!--Wave Effects -->
+    <script src="~/Areas/Admin/js/waves.js"></script>
+    <!--Counter js -->
+    <script src="~/Areas/Admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/counterup/jquery.counterup.min.js"></script>
+    <!-- chartist chart -->
+    <script src="~/Areas/Admin/plugins/bower_components/chartist-js/dist/chartist.min.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js"></script>
+    <!-- Sparkline chart JavaScript -->
+    <script src="~/Areas/Admin/plugins/bower_components/jquery-sparkline/jquery.sparkline.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/Areas/Admin/plugins/bower_components/sweetalert/sweetalert.min.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/sweetalert/jquery.sweet-alert.custom.js"></script>
+
+    <script src="~/Areas/Admin/js/custom.min.js"></script>
+    <script src="~/Areas/Admin/js/dashboard1.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/toast-master/js/jquery.toast.js"></script>
+    <!-- CKEditor script -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/11.1.1/classic/ckeditor.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/summernote/dist/summernote.min.js"></script>
+    <script>
+        jQuery(document).ready(function () {
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+        });
+        window.edit = function () {
+            $(".click2edit").summernote()
+        }, window.save = function () {
+            $(".click2edit").destroy()
+        }
+
+
+        //window.onload = function () {
+
+        //    $("#onload").modal("show");
+        //    //$("onloadSuccess").modal('show');
+
+        //}
+
+        window.onload = function () {
+            $("#onload").modal("show");
+            $("#errorload").modal('show');
+        }
+
+        $("#closebtn").bind('click', function () {
+
+            window.location.href = window.location.href.split("?")[0];
+
+        });
+        $("#closebtn2").bind('click', function () {
+
+            window.location.href = window.location.href.split("?")[0];
+
+        });
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+
+        $("#onload").on('hidden.bs.modal', function () {
+
+            window.location.href = window.location.href.split("?")[0];
+        });
+        //$(function () {
+        //    $(document).keydown(function (e) {
+        //        return (e.which || e.keyCode) == 116;
+        //        if (e.keyCode == 116) {
+
+        //            window.location.href = window.location.href;
+
+        //        }
+        //    });
+        //});
+        // For select 2
+        //$(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+
+
+
+
+    </script>
+
+    <script>
+        function getMerchantRegistrationCode() {
+            var code = document.getElementById("RegNum").value;
+
+            window.location.href = "/Admin/ViewRegisterBusiness/RegisterAMerchant?RegNumber=" + code;
+        }
+
+        function getAgentRegistrationCode() {
+            var code = document.getElementById("RegistrationNumber").value;
+
+            window.location.href = "/Admin/ViewRegisteredAgents/RegisterAnAgent?RegistrationNumber=" + code;
+        }
+    </script>
+    @*<script>
+            jQuery(document).ready(function () {
+                $('.summernote').summernote({
+                    height: 350, // set editor height
+                    minHeight: null, // set minimum height of editor
+                    maxHeight: null, // set maximum height of editor
+                    focus: false // set focus to editable area after initializing summernote
+                });
+                $('.inline-editor').summernote({
+                    airMode: true
+                });
+            });
+            window.edit = function () {
+                $(".click2edit").summernote()
+            }, window.save = function () {
+                $(".click2edit").destroy()
+            }
+
+
+            $(window).load(function () {
+                $('#onload').modal('show');
+            });
+
+            // For select 2
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+            //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true,
+                verticalupclass: 'ti-plus',
+                verticaldownclass: 'ti-minus'
+            });
+        </script>*@
+
+    <script src="~/Areas/Admin/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="~/Areas/Admin/bootstrap/dist/js/bootstrap-select.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Admin/plugins/bower_components/multiselect/js/jquery.multi-select.js"></script>
+
+
+    <script src="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+    <!-- start - This is for export functionality only -->
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <!--<script type="text/javascript" src="~/Areas/Admin/plugins/bower_components/multiselect/js/jquery.multi-select.js"></script>
+
+
+    <script src="~/Areas/Admin/plugins/bower_components/datatables/jquery.dataTables.min.js"></script>
+
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="~/Areas/Admin/cdns.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>*
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="~/Areas/Admin/cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="~/Areas/Admin/cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    -->
+
+    <script src="~/Areas/Admin/css/knockout-3.4.2.js"></script>
+    <script src="~/Areas/Admin/css/Riddha.Globals.ko.js"></script>
+    <script src="~/Areas/Admin/css/toastr.js"></script>
+
+    @*<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+        <script src="~/Scripts/jquery.signalR-2.4.1.min.js"></script>
+        <script src="/signalr/hubs"></script>*@
+
+    <!-- end - This is for export functionality only -->
+
+
+    <script type="text/javascript">
+        $.fn.extend({
+            treed: function (o) {
+
+                var openedClass = 'glyphicon-minus-sign';
+                var closedClass = 'glyphicon-plus-sign';
+
+                if (typeof o != 'undefined') {
+                    if (typeof o.openedClass != 'undefined') {
+                        openedClass = o.openedClass;
+                    }
+                    if (typeof o.closedClass != 'undefined') {
+                        closedClass = o.closedClass;
+                    }
+                };
+
+                //initialize each of the top levels
+                var tree = $(this);
+                tree.addClass("tree");
+                tree.find('li').has("ul").each(function () {
+                    var branch = $(this); //li with children ul
+                    branch.prepend("<i class='indicator glyphicon " + closedClass + "'></i>");
+                    branch.addClass('branch');
+                    branch.on('click', function (e) {
+                        if (this == e.target) {
+                            var icon = $(this).children('i:first');
+                            icon.toggleClass(openedClass + " " + closedClass);
+                            $(this).children().children().toggle();
+                        }
+                    })
+                    branch.children().children().toggle();
+                });
+                //fire event from the dynamically added icon
+                tree.find('.branch .indicator').each(function () {
+                    $(this).on('click', function () {
+                        $(this).closest('li').click();
+                    });
+                });
+                //fire event to open branch if the li contains an anchor instead of text
+                tree.find('.branch>a').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+                //fire event to open branch if the li contains a button instead of text
+                tree.find('.branch>button').each(function () {
+                    $(this).on('click', function (e) {
+                        $(this).closest('li').click();
+                        e.preventDefault();
+                    });
+                });
+            }
+        });
+
+        //Initialization of treeviews
+
+
+
+        $('#tree2').treed({ openedClass: 'glyphicon-folder-open', closedClass: 'glyphicon-folder-close' });
+
+    </script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable();
+            $(document).ready(function () {
+                var table = $('#example').DataTable({
+                    "columnDefs": [{
+                        "visible": false,
+                        "targets": 2
+                    }],
+                    "order": [
+                        [2, 'asc']
+                    ],
+                    "displayLength": 25,
+                    "drawCallback": function (settings) {
+                        var api = this.api();
+                        var rows = api.rows({
+                            page: 'current'
+                        }).nodes();
+                        var last = null;
+                        api.column(2, {
+                            page: 'current'
+                        }).data().each(function (group, i) {
+                            if (last !== group) {
+                                $(rows).eq(i).before('<tr class="group"><td colspan="5">' + group + '</td></tr>');
+                                last = group;
+                            }
+                        });
+                    }
+                });
+                // Order by the grouping
+                $('#example tbody').on('click', 'tr.group', function () {
+                    var currentOrder = table.order()[0];
+                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                        table.order([2, 'desc']).draw();
+                    } else {
+                        table.order([2, 'asc']).draw();
+                    }
+                });
+            });
+        });
+
+
+
+
+        $('.print, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'pdf'
+            ],
+            "order": [
+                [2, 'asc']
+            ],
+        });
+
+
+        $('.csv, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'csv'
+            ],
+            "order": [
+                [2, 'asc']
+            ],
+        });
+
+
+        $('.csvprint, .data_table_csv').DataTable({
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [
+                //  'copy', 'csv', 'excel',
+                // 'pdf', 'print'
+                'csv', 'pdf'
+            ]
+            "order": [
+                [2, 'asc']
+            ],
+        });
+
+
+
+        $(document).ready(function () {
+            $('.check_boxa').change(function () {
+                if (this.checked)
+                    $('.hideoption').fadeIn('slow');
+                else
+                    $('.hideoption').fadeOut('hide');
+
+            });
+        });
+
+        $("#checkAll").change(function () {
+            $("input:checkbox").prop('checked', $(this).prop("checked"));
+        });
+        $('.number').on('keypress', function (e) {
+            debugger;
+            if ((e.keyCode >= 48 && e.keyCode <= 57)) {//|| (e.keyCode >= 96 && e.keyCode <= 105)) {
+                return true;
+            }
+            else {
+                e.preventDefault();
+
+            }
+        });
+
+        $('.date').inputmask("99/99/9999").attr('placeholder', "dd/mm/yyyy");
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+
+        $('.datepicker').datepicker();
+        $('.date').datepicker()
+            .on('changeDate', function (e) {
+                // `e` here contains the extra attributes
+                //debugger;
+                var callBack = window[$(this).data('dateChange')];
+
+
+
+                if (callBack) {
+                    callBack(ConvertDPDateToGBDate($(this).val()));
+                }
+
+                function ConvertDPDateToGBDate(date) {
+                    var dates = date.split('/');
+
+                    return dates[1] + '/' + dates[0] + '/' + dates[2];
+                }
+                //$(this).data('')
+
+            });
+
+        $(document).ready(function ($) {
+
+            // Disable scroll when focused on a number input.
+            $('form').on('focus', 'input[type=number]', function (e) {
+                $(this).on('wheel', function (e) {
+                    e.preventDefault();
+                });
+            });
+
+            // Restore scroll on number inputs.
+            $('form').on('blur', 'input[type=number]', function (e) {
+                $(this).off('wheel');
+            });
+
+            // Disable up and down keys.
+            $('form').on('keydown', 'input[type=number]', function (e) {
+                if (e.which == 38 || e.which == 40)
+                    e.preventDefault();
+            });
+
+        });
+
+        $('.creditcardNumber').keyup(function () {
+
+            //var totallength = this.val().length;
+            //var parts = totallength / 4;
+            //if (parts < 0)
+            //{
+
+            //}
+
+            ////debugger
+            var reg = new RegExp(/^(?=.*\d)[\d ]+$/);
+            console.log(reg.test(this.value));
+            //debugger;
+            if (!reg.test(this.value) && this.value.length < 2) {
+
+                $(".creditcardNumber").val('');
+                return 0;
+            }
+
+
+
+            var v = this.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
+            var matches = v.match(/\d{4,16}/g);
+            var match = matches && matches[0] || ''
+            var parts = [];
+
+            for (i = 0, len = match.length; i < len; i += 4) {
+                parts.push(match.substring(i, i + 4))
+            }
+
+            if (parts.length) {
+
+                var number = parts.join(' ');
+                $(".creditcardNumber").val(number);
+            }
+
+
+        })
+
+
+    </script>
+    @*<script>
+
+            var dashBoardHub = $.connection.dashBoardHub;
+            var AdminHub = $.connection.adminHub;
+
+
+
+            $.connection.hub.start().done(function () {
+                console.log('connection started!');
+                var senderId = "Ad";
+                dashBoardHub.server.addCompanyGroup(senderId);
+                //kitchenHub.server.addKitchenGroup(kitchenGroupId);
+                AdminHub.server.addAdmin(senderId);
+            });
+            // Create a function that the hub can call to broadcast messages.\
+
+            //var broadcastMessageFunc = [];
+            //dashBoardHub.client.broadcastMessage = function (name, message, amount , Time , hourago ,  data) {
+            //    $.each(broadcastMessageFunc, function (i) {
+            //        broadcastMessageFunc[i](name, message, amount, Time, hourago, data);
+            //    });
+            //};
+
+            var broadcastMessageFunc = [];
+            AdminHub.client.broadcastMessage = function (notificationid,  name, message, amount, Time, hourago, data) {
+                $.each(broadcastMessageFunc, function (i) {
+                    broadcastMessageFunc[i](notificationid ,name, message, amount, Time, hourago, data);
+                });
+            };
+            var addSenderItemfunc = [];
+            AdminHub.client.addItem = function (senderId, message) {
+                $.each(addSenderItemfunc, function (i) {
+                    addSenderItemfunc[i](senderId, message);
+                });
+            }
+            //var addCounterOrderFunc = [];
+            //counterHub.client.addOrder = function (OrderNo, TableNo, id, CompanyId) {
+            //    $.each(addCounterOrderFunc, function (i) {
+            //        addCounterOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+            //    })
+            //};
+            //var deliveredOrderFunc = [];
+            //counterHub.client.orderDelivered = function (OrderNo, TableNo, id, CompanyId) {
+            //    $.each(deliveredOrderFunc, function (i) {
+            //        deliveredOrderFunc[i](OrderNo, TableNo, id, CompanyId);
+            //    })
+            //};
+            //chat.server.send()
+
+
+        </script>*@
+    <script>
+        function NotificationController() {
+
+            self.NotificationCount = ko.observable(0);
+            var url = "/Notification";
+            self.Notifications = ko.observableArray([]);
+            //self.NotificationFor = ko.observableArray([
+
+            //    { Id: 0, Name: 'KiiPayBusiness' },
+            //    { Id: 1, Name: 'kiiPayPersonal' },
+            //    { Id: 2, Name: 'Sender' },
+            //    { Id: 3, Name: 'Agent' },
+            //    { Id: 4, Name: 'Admin' },
+            //    { Id: 5, Name: 'Staff' },
+
+            //]);
+
+
+            Riddha.ajax.get("/Admin/AdminNotification" + "/GetAllNotification?ReceiverId=" + 0 + "&notificationFor=" + 4)
+                .done(function (result) {
+                    self.Notifications(ko.toJS(result.Data));
+                    self.NotificationCount(result.Count);
+                });
+
+
+            //self.sendRealtimeMessage = function (message) {
+            //  ////debugger
+            //    $(".badge").text("1")
+
+            //    //var message = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ultricies eros at magna convallis, at maximus velit hendrerit."
+            //    //$("#message").append("<br/>")
+            //    //var dt = new Date();
+            //    //var time = dt.getHours() + ":" + dt.getMinutes();
+            //    //this.alert(message);
+            //    // self.showText("#message", time + "  -  " + message, 0, 1);
+            //}
+
+            //self.showText = function (target, message, index, interval) {
+            //    if (index < message.length) {
+            //        $(target).append(message[index++]);
+            //        this.alert(message);
+            //        setTimeout(function () { self.showText(target, message, index, interval); }, interval);
+            //    }
+            //    $("#message").parent().parent().scrollTop($("#message").parent().parent().height());
+            //}
+
+
+            // Declare a proxy to reference the hub.
+
+            // Create a function that the hub can call to broadcast messages.
+            broadcastMessageFunc.push(function (notificationid, name, message, amount, Time, hourago, data) {
+
+                //self.sendRealtimeMessage(message);
+
+                // Html encode display name and message.
+                //Riddha.UI.Toast(message, 4, name);
+                var url = "#";
+                //switch (notificationType) {
+                //    case 0:
+                //        url = "/ordermanagement/orderconfirm";
+                //        break;
+                //    case 1:
+                //        url = "/ordermanagement/orderDelivery";
+                //        break;
+                //    case 2:
+                //        url = "/ordermanagement/orderBill";
+                //        break;
+                //    default:
+                //        url = "#";
+
+                //}
+
+                var note = {
+                    NotificationId: notificationid,
+                    ReceiverName: name,
+                    Message: message,
+                    Amount: amount,
+                    Time: Time,
+                    HourAgo: hourago
+
+                };
+                //add notification to ui
+                self.Notifications.push(note);
+                self.NotificationCount(parseInt(self.NotificationCount() + 1));
+
+            });
+            //addKiiPayBusinessItemfunc.push(function (name, message, amount, Time, hourago, data) {
+
+            //    //self.sendRealtimeMessage(message);
+
+            //    // Html encode display name and message.
+            //    //Riddha.UI.Toast(message, 4, name);
+            //    var url = "#";
+            //    //switch (notificationType) {
+            //    //    case 0:
+            //    //        url = "/ordermanagement/orderconfirm";
+            //    //        break;
+            //    //    case 1:
+            //    //        url = "/ordermanagement/orderDelivery";
+            //    //        break;
+            //    //    case 2:
+            //    //        url = "/ordermanagement/orderBill";
+            //    //        break;
+            //    //    default:
+            //    //        url = "#";
+
+            //    //}
+
+            //    var note = {
+
+            //        ReceiverName: name,
+            //        Message: message,
+            //        Amount: amount,
+            //        Time: Time,
+            //        HourAgo: hourago
+
+            //    };
+            //    //add notification to ui
+            //    self.Notifications.push(note);
+
+            //});
+
+        }
+        function removeNotification(control) {
+
+            var context = ko.contextFor(control);
+            var data = ko.dataFor(control);
+            //Notifications.remove(data);
+            $.get("/Notification/NoticationSeen?NotificationId=" + data.NotificationId, function (result) {
+                if (result == true)
+                    self.NotificationCount(parseInt(self.NotificationCount()) - 1);
+            })
+
+            console.log(context);
+        }
+
+
+    </script>
+    <script type="text/javascript">
+
+        ko.cleanNode(document.getElementById("notificationList"));
+        var obj = new NotificationController();
+        ko.applyBindings(obj, document.getElementById("notificationList"));
+    </script>
+    @RenderSection("Scripts", false);
+</body>
+
+
+</html>

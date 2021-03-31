@@ -1,0 +1,90 @@
+﻿@model FAXER.PORTAL.Models.DailyRatesViewModel
+@{
+    ViewBag.Title = "DailyRateDetails";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+
+<div class="page-header" style="background:  url(/Content/images/page-header.jpg) no-repeat center;  background-size: cover;">
+    <div class="bredcum_newmenu">
+        <div class=" ">
+            <div class="container">
+
+                <ol class="breadcrumb ">
+                    <li> <a href="index.php">Home</a></li>
+                    <li class="active">Daily Rates </li>
+                </ol>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="bg-white">
+    <!-- content start -->
+    <div class="container">
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="pinside20 mb80 mt20">
+
+
+                    <div class="col-lg-6 ">
+                        <div class="daily-rates-details">
+                            <h1 class="page-new">Daily Exchange Rate</h1>
+
+
+                            <div>
+                                @Model.ShrotDate
+                            </div>
+
+                            <div class="text-primary">
+                                <i class="flag-icon flag-icon-gb"></i> @Model.SendingCurrency 1
+                            </div>
+
+                            <div class="text-primary">
+                                <i class="flag-icon flag-icon-ng"></i> @Model.ReceivingCurrency @Model.ReceivingAmount
+                            </div>
+
+                            <div>
+                                <a href="@Url.Action("Login","FaxerAccount")" class="btn btn-primary">Transfer Money</a>
+                            </div>
+                            <hr>
+                            <h3>Share this page</h3>
+                            <div class="sharethis-inline-share-buttons"></div>
+                            <div class="sharethis-inline-share-buttons st-left  st-inline-share-buttons st-animated" id="st-1">
+                                <div class="st-total ">
+                                    <span class="st-label">29</span>
+                                    <span class="st-shares">
+                                        Shares
+                                    </span>
+                                </div><div class="st-btn st-first" data-network="facebook" style="display: inline-block;">
+                                    <img alt="facebook sharing button" src="https://platform-cdn.sharethis.com/img/facebook.svg">
+
+                                </div><div class="st-btn" data-network="twitter" style="display: inline-block;">
+                                    <img alt="twitter sharing button" src="https://platform-cdn.sharethis.com/img/twitter.svg">
+
+                                </div><div class="st-btn" data-network="messenger" style="display: inline-block;">
+                                    <img alt="messenger sharing button" src="https://platform-cdn.sharethis.com/img/messenger.svg">
+
+                                </div><div class="st-btn" data-network="whatsapp" style="display: inline-block;">
+                                    <img alt="whatsapp sharing button" src="https://platform-cdn.sharethis.com/img/whatsapp.svg">
+
+                                </div><div class="st-btn st-last" data-network="skype" style="display: inline-block;">
+                                    <img alt="skype sharing button" src="https://platform-cdn.sharethis.com/img/skype.svg">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

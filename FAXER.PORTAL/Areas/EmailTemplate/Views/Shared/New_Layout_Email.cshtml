@@ -1,0 +1,224 @@
+﻿@{
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MoneyFex</title>
+    <style>
+        @@font-face {
+            font-family: "AndreasBecker";
+            src: url("/Areas/EmailTemplate/font//AndreasBecker.ttf");
+            src: url("/Areas/EmailTemplate/font/AndreasBecker.ttf.eot?#iefix") format("embedded-opentype"), url("/Areas/EmailTemplate/font/AndreasBecker.ttf") format("truetype");
+            font-weight: 600;
+            font-style: normal;
+        }
+
+        /* A simple css reset */
+        body, table, thead, tbody, tr, td, img {
+            padding: 0;
+            margin: 0;
+            border: none;
+            border-spacing: 0px;
+            border-collapse: collapse;
+            vertical-align: top;
+            font-family: AndreasBecker;
+        }
+        /* Add some padding for small screens */
+        .wrapper {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        h1, h2, h3, h4, h5, h6, p {
+            margin: 0;
+            padding: 0;
+            padding-bottom: 20px;
+            line-height: 1.6;
+            font-family: AndreasBecker;
+        }
+
+        p, a, li {
+            font-family: AndreasBecker;
+        }
+
+        img {
+            width: 100%;
+            display: block;
+        }
+
+        @@media only screen and (max-width: 620px) {
+            .wrapper .section {
+                width: 100%;
+            }
+
+            .wrapper .column {
+                width: 100%;
+                display: block;
+            }
+
+            .ngeku-img table {
+                width: 100%;
+            }
+
+            .ngeku-img img {
+                width: 110px;
+                margin: 0 auto;
+            }
+        }
+    </style>
+
+
+    @*<style>
+        table {
+            width: 100%;
+        }
+
+            table td,
+            th {
+                padding: 10px;
+            }
+    </style>*@
+
+</head>
+
+
+
+<body style="font-family: 'Poppins', sans-serif; font-weight: 300;">
+    <div style="    margin: 0 auto;
+    max-width: 700px;
+    width: 100%;
+    border: solid 1px #eee;
+    border-radius: 8px;
+         ">
+
+        <table width="100%">
+
+            <tbody>
+                <tr>
+                    <td class="wrapper" width="600" align="center">
+                        <header>
+                            <table class="section header" cellpadding="0" cellspacing="0" width="600" style="margin-top: 10px;">
+                                <tr>
+                                    <td class="column">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="33%">&nbsp;</td>
+                                                    <td align="center">
+                                                        <center>
+                                                            <img src="@baseUrl/Areas/EmailTemplate/images/logo.png" width="100">
+                                                        </center>
+                                                    </td>
+                                                    <td width="33%">&nbsp;</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </header>
+                        <div>
+                            <br>
+                            <br>
+                            @RenderBody()
+                        </div>
+                </tr>
+            </tbody>
+        </table>
+        <footer>
+
+            <table style="background-color: #02b6ff; color: #fff; width: 100%">
+
+                <tbody>
+                    @*<tr>
+                            <td align="center">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/phone.png" width="24" style="float: left; margin-right: 8px;">
+                                <a style="margin-top: 5px; display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="tel:02081445215">02081445215</a>
+                            </td>
+                            <td align="center">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/email.png" width="24" style="float: left; margin-right: 8px;">
+
+                                <a style="margin-top: 5px; display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="mailto:info@moneyfex.com">info@moneyfex.com</a>
+                            </td>
+                            <td align="center">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/website.png" width="24" style="float: left; margin-right: 8px;">
+
+                                <a style="margin-top: 5px; display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="http://moneyfex.com">www.moneyfex.com</a>
+                            </td>
+
+                        </tr>*@
+                    <tr>
+                        <td class=" " width="100%" align="center" colspan="3" style="background-color:#02b6ff; color: #fff; padding: 5px; border-radius: 4px;">
+
+                            <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/phone.png" style="width:24px; float: left; margin-right: 8px;">
+                                <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="tel:02081445215">02081445215</a>
+                            </div>
+
+
+
+                            <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/email.png" style=" width:24px; float: left; margin-right: 8px;">
+
+                                <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="mailto:info@moneyfex.com">info@moneyfex.com</a>
+                            </div>
+
+                            <div style="width: 32%;
+    display: flex;
+    float: left;
+    align-items: center;
+    justify-content: center;">
+                                <img src="@baseUrl/Areas/EmailTemplate/images/website.png" style="width:24px; float: left; margin-right: 8px;">
+
+                                <a style="display: inline-block; color:#fff; text-decoration: none;" target="_blank" href="http://moneyfex.com">www.moneyfex.com</a>
+                            </div>
+
+
+
+
+
+
+
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td width="100%" align="left" colspan="3">
+                                <br>
+                                <p style="font-size: 13px; color:#a5a2a2;">MoneyFex Ltd is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment services. Registration number: 745989</p>
+                                <p style="font-size: 13px; color:#a5a2a2;">
+                                    MoneyFex Ltd is registered in England and Wales, Company Registration Number: 10105032
+                                    The content of this email is confidential and intended for the recipient specified in message only. It is strictly forbidden to share any part of this message with any third party without a written consent of the sender. If you received this message by mistake, please reply to this message and follow with its deletion, so that we can ensure such a mistake does not occur in the future.
+                                </p>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </footer>
+
+    </div>
+</body>
+
+
+</html>
+

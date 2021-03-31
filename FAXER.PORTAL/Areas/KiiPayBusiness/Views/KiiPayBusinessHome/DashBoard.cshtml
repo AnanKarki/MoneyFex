@@ -1,0 +1,263 @@
+﻿
+@{
+    /**/
+
+    ViewBag.Title = "DashBoard";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+<section class="dashboard">
+    <div class="container">
+        <div class="row">
+
+            <div class="kiipay-main-header">
+
+                <!--  -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  ">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175. <small class="text-primary">86</small></h1>
+                    </div>
+                    <div class="text-center   mt10">
+                        <button type="button" class="btn btn-primary  radius-20" data-toggle="modal" data-target="#ecard">KiiPay</button>
+
+                    </div>
+
+
+                </div>
+                <!--  -->
+                <div class="clearfix">
+
+                </div>
+            </div>
+
+            <div class="col-lg-12">
+
+                <!--  -->
+                <div class=" ">
+
+                    <div class=" dashboard_body ">
+
+                        <div class="mobile_design text-center  ">
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("TransferMoney" , "KiipayBusinessTransferMoney")">
+                                        <!--                   <a href="start-sending.php">
+                                         -->
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/transfermoney.svg" />
+                                        </div>
+                                        <h4>Transfer  Money  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("LocalSearchBusinessProvider" , "KiiPayBusinessPayForServices")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/payforservices.svg" />
+                                        </div>
+                                        <h4>Pay for Services   </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb    ">
+                                    <a href="@Url.Action("PayBills" , "KiiPayBusinessPayBills")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/paybills.svg" />
+                                        </div>
+                                        <h4>Pay Bills  </h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a onclick="SelectUser()">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/get-withdrawal-code.svg" />
+                                        </div>
+                                        <h4>Get Withdrawal Code</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index" , "KiiPayBusinessInvoicing")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/invoicing.svg" />
+                                        </div>
+                                        <h4>KiiPay Invoicing</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("Index", "KiiPayBusinessWalletStatement")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/statement.svg" />
+                                        </div>
+                                        <h4>Wallet Statement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("PersonalDetail" , "KiiPayBusinessRegisterECardUser")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/registerKiiPay.svg" />
+                                        </div>
+                                        <h4>Register KiiPay User</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("EcardUserDetails" , "KiiPayBusinessECardUserDetails")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/e-card-details.svg" />
+                                        </div>
+                                        <h4>KiiPay User Details</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("ViewProfile" , "KiiPayBusinessBusinessWalletProfile")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/profile.svg" />
+                                        </div>
+                                        <h4> Business Wallet Profile</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                                <div class="dashboard_thumb">
+                                    <a href="@Url.Action("AddAndWithdrawMoneyFromWallet","KiiPayBusinessAddAndWithdrawMoneyFromWallet")">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/svg/kiipay.svg" />
+                                        </div>
+                                        <h4>Add & Withdraw <br>Money from Wallet</h4>
+                                    </a>
+                                </div>
+                            </div>
+
+
+                            <!--  <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6">
+                               <div class="dashboard_thumb">
+                                 <a href="add-money-to-wallet.php">
+                                   <div class="das-icon">
+                                     <img src="images/icon/svg/add-money-to-wallet.svg">
+                                   </div>
+                                   <h4> Add Money to Wallet</h4>
+                                 </a>
+                               </div>
+                             </div> -->
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 hidden-sm hidden-xs">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/sud.png" />
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-4 col-md-6 col-xs-6 col-sm-6 hidden-sm hidden-xs">
+                                <div class="dashboard_thumb">
+                                    <a href="">
+                                        <div class="das-icon">
+                                            <img src="~/Areas/KiiPayBusiness/images/icon/sud.png" />
+                                        </div>
+                                        <h4>Service Under Developement</h4>
+                                    </a>
+                                </div>
+                            </div>
+                            <!--  -->
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--  -->
+        </div>
+    </div>
+    <!--  -->
+</section>
+<!-- withdrawal-code -->
+<div class="modal fade" id="withdrawal-code">
+    <div class="modal-dialog model_md">
+        <div class="modal-content">
+            <div class="modal-body text-center">
+
+                <div class="row">
+                    <div class="col-lg-offset-3 col-lg-6">
+                        <span id="usersList">
+                            @Html.DropDownList("UserId", (IEnumerable<SelectListItem>)ViewBag.KiiBusinessUsers, "Select User", new { @class = "form-control", @OnChange = "GetNewAccessCode()", id = "userId" })
+                        </span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="col-lg-offset-3 col-lg-6">
+                        <div id="message">
+                            <h1>  <span>Your code is  <br> <span class="text-primary" id="AccessCode"> </span></span></h1>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!-- withdrawal-code -->
+
+
+@section Scripts{
+
+    <script type="text/javascript">
+
+        function SelectUser() {
+            $("message").hide();
+            $("#withdrawal-code").modal('show');
+        };
+
+
+        function GetNewAccessCode() {
+            var kiiPayUSerId = $("#userId").val();
+            if (kiiPayUSerId == 0 || kiiPayUSerId == undefined) {
+                $("#AccessCode").text("");
+            }
+            $.getJSON("/KiiPayBusiness/KiiPayBusinessHome/GetWithdrawalCode?kiiPayUSerId=" + kiiPayUSerId, function (result) {
+
+                $("#AccessCode").text(result.AccessCode);
+
+                $("#withdrawal-code").modal('show');
+
+            });
+        }
+    </script>
+}

@@ -1,0 +1,243 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<FAXER.PORTAL.Areas.Admin.ViewModels.ReceiverDetailsInfoViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+@*<div id="page-wrapper">
+        <div class="container-fluid">
+            <div class="row bg-title">
+
+            </div>
+             /.row
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="white-box">
+
+
+                        <div class="card-header border-bottom">
+                            <h2 class="f-left m-t-5 m-b-0" style="float:left;">Banned Receivers</h2>
+
+                            <a href="@Url.Action("BanAReceiver", "BanReceiver")" class="btn btn-info pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light btn-rounded" style="float:right;">
+                                <i class="icofont icofont-plus m-r-5"></i>  Ban a receiver
+                            </a>
+
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr />
+                            <div class="col-lg-4">
+
+                                <div class="form-group">
+                                    <select class="form-control" id="TransferMethod" name="TransferMethod" onchange="filter();">
+                                        <option value="0">Select Transfer Method</option>
+                                        <option value="1">  Cash PickUp </option>
+                                        <option value="2">  KiiPay Wallet </option>
+                                        <option value="3">  Other Wallet</option>
+                                        <option value="4">  Bank Deposit</option>
+                                        <option value="5">  Bill Payment</option>
+                                        <option value="6">  Service Payment</option>
+
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <div class="table-responsive">
+
+                            <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <td><strong>SN.</strong></td>
+                                        <td><strong>Receiver Name</strong></td>
+                                        <td><strong>Country</strong></td>
+                                        <td><strong>Account No.</strong></td>
+                                        <td><strong>Transfer Method</strong></td>
+                                        <td><strong>Action </strong></td>
+                                    </tr>
+                                </thead>
+                                <tbody style="margin-bottom: 30px !important;">
+                                    @{ int i = 0;}
+                                    @foreach (var item in Model)
+                                    {
+                                        ++i;
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.ReceiverName</td>
+                                            <td>@item.ReceiverCountry</td>
+                                            <td>@item.ReceiverAccountNo</td>
+                                            <td>@item.TransferMethod</td>
+                                            <td>
+                                                <a href="@Url.Action("BanAReceiver", "BanReceiver", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" data-original-title="Edit"><i class="fa fa-edit"></i></a>
+                                                <a href="@Url.Action("Delete", "BanReceiver", new { @id = item.Id })" data-toggle="tooltip" data-placement="top" data-original-title="Delete"><i class="fa fa-remove"></i></a>
+
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                            <div class="clearfix mt100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+             .row
+            /.row
+            row
+        </div>
+    </div>*@
+
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Banned Receiver</h4>
+                                    <a href="@Url.Action("BanAReceiver", "BanReceiver")" class="btn btn-primary f-right btn-round">
+                                        <i class="fa fa-ban"></i> Ban a Receiver
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+
+
+
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Countries, "Select Country", new { @class = "form-control  form-control-lg form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+
+                                                <select class="form-control   form-control-round form-control-bold" id="service" onchange="filter();">
+                                                    <option value="">Select Transfer Method</option>
+                                                    <option value="0">Bank Deposit</option>
+                                                    <option value="1">Other Wallet</option>
+                                                    <option value="2"> Cash Pickup</option>
+                                                    <option value="3">KiiPay Wallet</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Receiver Name" class="form-control form-control-round form-control-bold" name="ReceiverName" id="ReceiverName" value="@ViewBag.ReceiverName" onchange="filter();">
+                                            </div>
+                                        </div> 
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Bank Or Provider Name" class="form-control form-control-round form-control-bold" name="BankOrProviderName" id="BankOrProviderName" value="@ViewBag.BankOrProviderName" onchange="filter();">
+                                            </div>
+                                        </div>  
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Account Number" class="form-control form-control-round form-control-bold" name="AccountNumber" id="AccountNumber" value="@ViewBag.AccountNumber" onchange="filter();">
+                                            </div>
+                                        </div>
+                                        <div class="col-xl-3 col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Mobile No" class="form-control form-control-round form-control-bold" name="MobileNo" id="MobileNo" value="@ViewBag.MobileNo" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>Country</th>
+
+                                                    <th>Receiver Name</th>
+                                                    <th>Service Type</th>
+                                                    <th>Bank/Provider Name</th>
+                                                    <th>Account Mobile Number</th>
+                                                    <th>Telephone no.</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td><i class="flag flag-icon flag-icon-@item.ReceiverCountryFlag"></i>@item.ReceiverCountry</td>
+                                                        <td>@item.ReceiverName</td>
+                                                        <td>@item.ServiceName</td>
+                                                        <td>@item.BankMobileName</td>
+                                                        <td>@item.ReceiverAccountNo</td>
+                                                        <td>@item.ReceiverPhoneNo</td>
+                                                        <td>
+                                                            <a href="@Url.Action("BanAReceiver", "BanReceiver", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="@Url.Action("Delete", "BanReceiver", new { @id = item.Id })" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.PageCount < Model.PageNumber ? 0 :
+                                                        Model.PageNumber) of @Model.PageCount
+
+                                                        @Html.PagedListPager(Model, page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                @section Scripts{
+                    <script type="text/javascript">
+
+        function filter() {
+
+            var Country = $("#Country").val();
+            var service = $("#service").val();
+            var ReceiverName = $("#ReceiverName").val();
+            var BankOrProviderName = $("#BankOrProviderName").val();
+            var AccountNumber = $("#AccountNumber").val();
+            var MobileNo = $("#MobileNo").val();
+
+            window.location.href = "/Admin/BanReceiver/Index?Country=" + Country + "&Service=" + service + "&ReceiverName=" + ReceiverName +
+                "&BankOrProviderName=" + BankOrProviderName + "&AccountNumber=" + AccountNumber + "&MobileNo=" + MobileNo;
+
+        }
+
+        $("#service").val('@ViewBag.Service');
+
+                    </script>
+                }

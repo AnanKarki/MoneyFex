@@ -1,0 +1,52 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+
+    var baseUrl = Request.Url.GetLeftPart(UriPartial.Authority);
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName
+        ,
+    </p>
+
+    <p>
+        You have successfully setup an auto deposit of @ViewBag.AutoTopUpAmount
+        @ViewBag.CountryCurrencySymbol
+        on Virtual Account  - @ViewBag.MFTCCardNumber
+        , @ViewBag.CardUserName
+        .
+    </p>
+    <p>
+        This account will be deposited as soon as the amount available to be withdrawn by the account user reaches zero (0). Additionally, the exchange rates and fees at the time will be applied.
+    </p>
+    <br />
+    <p>
+        You can amend this auto payment on the <strong>Standing Orders</strong> section of your dashboard.
+    </p>
+ 
+
+    <table style="width:100%; ">
+        <tbody>
+            <tr>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.TopUpMoneyfaxCard"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/20.png" alt=""></a>
+                </td>
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.SetAutoTopUp"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/21.png" alt=""></a>
+                </td>
+
+                <td style="border-color: #fff;
+                        padding: 5px; text-align: center;">
+                    <a href="@ViewBag.PayForGoodsAbroad"><img src="@baseUrl/Areas/EmailTemplate/Images/EmailImg/23.png" alt=""></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+
+</div>

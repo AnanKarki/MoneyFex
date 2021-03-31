@@ -1,0 +1,207 @@
+﻿@model FAXER.PORTAL.Areas.Staff.ViewModels.StaffInformationViewModel
+@{
+    ViewBag.Title = "StaffInformation";
+    Layout = "~/Areas/Staff/Views/Shared/_staff_layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Staff's Information</h1>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class=" ">
+
+                    <form>
+                        <div class="profileinfo">
+
+                            <div class="gear">
+                                <label>Full Name:</label>
+                                <span id="fullname" class="datainfo">Johnny Appleseed</span>
+
+                            </div>
+
+
+                            <div class="gear">
+                                <label>Address:</label>
+                                <span id="Address" class="datainfo">Pako, New Road, Kathmandu, Nepal</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+
+                            <div class="gear">
+                                <label>Telephone:</label>
+                                <span id="Telephone" class="datainfo">+977 3485974</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+
+
+
+                            <div class="gear">
+                                <label>Email Address:</label>
+                                <span id="pemail" class="datainfo">myaddress@googlemail.com</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+
+
+                            <!-- <div class="gear">
+                                <label>Password:</label>
+                                <span id="Password" class="datainfo">Pako, New Road, Kathmandu, Nepal</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div> -->
+                            <h4>Staff's Next of Kin</h4>
+                            <hr>
+                            <div class="gear">
+                                <label>Full Name:</label>
+                                <span id="fullnameq" class="datainfo">Johnny Appleseed</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+
+                            </div>
+
+
+                            <div class="gear">
+                                <label>Address:</label>
+                                <span id="Addresss" class="datainfo">Pako, New Road, Kathmandu, Nepal</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+
+                            <div class="gear">
+                                <label>Telephone:</label>
+                                <span id="Telephones" class="datainfo">+977 3485974</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+                            <h4>Staff's Identification</h4>
+                            <hr>
+                            <div class="gear">
+                                <div class="col-lg-4">
+                                    <label>Id Card Type</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.DropDownListFor(x => x.IdCardType , (IEnumerable<SelectListItem>)ViewBag.IdCardType ,"Select IDCardType" , new { @class = "form-control"}  )
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <div class="gear">
+                                <label>Id Card Number:</label>
+                                <span id="cardnumber" class="datainfo">0000</span>
+                                <a href="#" class="editlink">Edit Info</a>
+                                <a class="savebtn">Save</a>
+                            </div>
+
+
+                            <div class="gear">
+                                <div class="col-lg-4">
+                                    <label>Id Card Expiring Date</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    <input type="date" name="" class="form-control">
+
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+
+
+                            <div class="gear">
+                                <div class="col-lg-4">
+                                    <label>Issuing Country</label>
+                                </div>
+                                <div class="col-lg-4">
+                                    @Html.DropDownListFor(x => x.IdCardIssuingCountry , (IEnumerable<SelectListItem>)ViewBag.Countries ,"Select Issuing Country" , new { @class ="form-control" })
+                                    @Html.ValidationMessageFor(x => x.IdCardIssuingCountry, "")
+                                </div>
+                                <div class="clearfix"></div>
+
+                            </div>
+
+                            <h4>Compliance Documents</h4>
+                            <hr>
+                            <div class="gear">
+                                <div class="col-lg-4"><label>Residence Permit</label></div>
+                                <div class="col-lg-4"><img src="~/Areas/Staff/images/logo.png" width="50"></div>
+                                <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" name=""></span></div>
+
+
+                                <div class="clearfix"></div>
+
+
+                            </div>
+
+                            <div class="gear">
+                                <div class="col-lg-4"><label>Passport side 1</label></div>
+                                <div class="col-lg-4"><img src="~/Areas/Staff/images/logo.png" width="50"></div>
+                                <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" name=""></span></div>
+
+
+                                <div class="clearfix"></div>
+                            </div>
+
+                            <div class="gear">
+                                <div class="col-lg-4"><label>Passport side 2</label></div>
+                                <div class="col-lg-4"><img src="~/Areas/Staff/images/logo.png" width="50"></div>
+                                <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" name=""></span></div>
+
+
+                                <div class="clearfix"></div>
+
+
+                            </div>
+
+                            <div class="gear">
+                                <div class="col-lg-4"><label>Utility bill (not more then 3 months old)</label></div>
+                                <div class="col-lg-4"><img src="~/Areas/Staff/images/logo.png" width="50"></div>
+                                <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" name=""></span></div>
+
+
+                                <div class="clearfix"></div>
+
+
+                            </div>
+
+                            <div class="gear">
+                                <div class="col-lg-4"><label>Curiculum Vitae</label></div>
+                                <div class="col-lg-4"><img src="~/Areas/Staff/images/logo.png" width="50"></div>
+                                <div class="col-lg-4"><span id=" " class="datainfo"><input type="file" name=""></span></div>
+
+
+                                <div class="clearfix"></div>
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!--  -->

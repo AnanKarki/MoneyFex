@@ -1,0 +1,97 @@
+﻿@model FAXER.PORTAL.Models.TrackFax
+@{
+    ViewBag.Title = "SenderTrackATransfer";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Track a Transfer</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+@using (Html.BeginForm("SenderTrackTransferDetails", "QuickLink", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="row ">
+
+                        <!--  -->
+                        <div class="col-lg-12">
+                            <div class="mb20">
+
+
+                                <h4>Look up a Transfer:</h4>
+                                <p>Find the status of your transfer by entering the MoneyFex Control Number (MFCN) and your Surname</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 ">
+                            <div class="form-group">
+
+                                @*<input type="text" name="" class="form-control" placeholder="Sender's Surname">*@
+                                @Html.EditorFor(model => model.FaxerSurNam, new { htmlAttributes = new { @class = "form-control", placeholder = "Sender's Surname" } })
+                                @Html.ValidationMessageFor(model => model.FaxerSurNam, "", new { @class = "text-danger" })
+
+
+                            </div>
+                            <br>
+
+                            <div class="form-group">
+                                @*<input type="text" name="" class="form-control" placeholder="MoneyFex Control No. (MFCN)">*@
+                                @Html.EditorFor(model => model.MoneyFaxControlNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "MoneyFex Control No. (MFCN)" } })
+                                @Html.ValidationMessageFor(model => model.MoneyFaxControlNumber, "", new { @class = "text-danger" })
+                                @if (TempData["ValidData"] != null)
+                                {
+                                    <label style="color:red;">@TempData["ValidData"]</label>
+                                }
+
+                            </div>
+                        </div>
+
+                        <!--  -->
+
+
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <a href="" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                  
+                    <button type="submit" class="fbtn btn-next"  value="Track a Transfer">Track a Transfer <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                    <br>
+                    <a href=" " class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!--  -->

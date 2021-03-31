@@ -1,0 +1,440 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessSendAnInvoicevm
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Create Invoice</h1>
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <div class="invoice " data-bind="with:Invoice">
+                    <!-- start -->
+                    <div class="row">
+                        <div class="col-lg-5 mb20">
+                            <div class="invoice-box">
+                                <h5>Invoice From</h5>
+                                <h3 class="text-primary">@Model.InvoiceMaster.FromBusinessName</h3>
+                                <p>@Model.InvoiceMaster.FromInvoiceMobileNumber</p>
+                            </div>
+                        </div>
+                        <div class="clearfix">
+
+                        </div>
+                        <div class="col-lg-6 col-md-12 col-sm-12 pull-right">
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 text-right">
+                                <label>Invoice Number</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+
+                                <input type="text" class="form-control" data-bind="value:InvoiceNo">
+                            </div>
+                            <!--  -->
+                            <div class="clearfix ">
+                                <div class="mt20">
+
+                                </div>
+                            </div>
+                            <!--  -->
+                            <div class="col-lg-6 col-md-6 col-sm-4 col-xs-4 text-right">
+                                <label>Date</label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                                <input type="date" class="form-control" data-bind="value:InvoiceDate">
+                            </div>
+                            <!--  -->
+
+                        </div>
+                    </div>
+                    <!-- end -->
+                    <hr>
+                    <!-- start -->
+                    <div class="row mt20">
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right">
+                                <label><b>Invoice to: </b></label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                                <input type="number" class="form-control" placeholder="Enter Mobile Number" data-bind="value:ToInvoiceMobileNumber,event:{'change':$root.IsValidToInvoiceReceiverMobileNo}">
+                            </div>
+                        </div>
+                        <!--  -->
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <div class="form-group">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-4 text-right">
+                                <label><b>Cc: </b></label>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-8">
+                                <input type="number" class="form-control" placeholder="Enter Mobile Number" data-bind="value:ToCCInvoiceMobileNumber, event:{'change':$root.IsValidToInvoiceCCMobileNo}">
+                            </div>
+                        </div>
+                        <!--  -->
+
+                    </div>
+                    <!-- end -->
+                    <!-- start -->
+                    <div class="table-responsive mt10">
+
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="foreach:$root.InvoiceDetails">
+
+                                <tr>
+                                    <td data-bind="text:ItemName"> </td>
+                                    <td data-bind="text:Quantity"> </td>
+                                    <td data-bind="text:Price"> </td>
+                                    <td data-bind="text:Amount"> </td>
+                                </tr>
+                            </tbody>
+                            <tfoot data-bind="with:$root.InvoiceDetail">
+                                <tr>
+                                    
+                                    <td>
+                                        <input type="text" class="form-control" data-bind="value:ItemName" placeholder="Enter item Name & Description" />
+
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" data-bind="value:Quantity,event:{'change':$root.GetAmount}" placeholder="Quantity" />
+
+
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" data-bind="value:Price,event:{'change':$root.GetAmount}" placeholder="Price" />
+
+
+                                    </td>
+                                    <td>
+                                        <input type="text" class="form-control" data-bind="value:Amount" placeholder="Amount" />
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                    <!-- end -->
+                    <!--  -->
+                    <div class="add-lineitem mb30 ">
+                        <a data-bind="click:$root.CreateUpdateDetail">
+                            <span><i class="fa fa-plus" data-bind="click:$root.CreateUpdateDetail"></i></span> Add another line item
+                        </a>
+
+                    </div>
+                    <!--  -->
+                    <!-- start -->
+                    <div class="table-responsive">
+
+                        <table class="table table-striped">
+                            <tbody>
+
+                                <tr>
+                                    <th>Note to Receipient</th>
+                                    <th colspan="3" class="text-right">Subtotal</th>
+                                    <td data-bind="text:Subtotal">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <td rowspan="4">
+                                        <textarea class="form-control" rows="5" data-bind="value:NoteToReceipient"></textarea>
+                                    </td>
+
+                                    <th><span class="">Discount</span> </th>
+                                    <td>
+                                        <input type="text" class="form-control" placeholder="0" data-bind="value:Discount" value="">
+                                    </td>
+                                    <td>
+                                        <select class="form-control" data-bind="options:$root.DiscountMethods, optionsValue:'Id',optionsText:'Name',value:DiscountMethodId,optionsCaption:Riddha.UI.getOptionCaption()"></select>
+                                    </td>
+                                    <td data-bind="text:DiscountAmount">&nbsp;</td>
+                                </tr>
+                                <tr>
+                                    <th>Shipping</th>
+                                    <td colspan="2">
+                                        <input type="text" size="6" maxlength="15" class="  form-control  text-right" data-bind="value:Shipping" value="">
+                                    </td>
+                                    <td valign="top" data-bind="text:Shipping">&nbsp;</td>
+                                </tr>
+
+                                <tr>
+                                    <th colspan="3" class="text-right">Total</th>
+                                    <td data-bind="text:TotalAmount() + ' ' +CountryCode()">&nbsp;</td>
+                                    <input type="hidden" value="21.6">
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- end -->
+
+                    <p class="text-center">
+                        It is the user's responsibility to create an invoice that is compliant with local laws and regulations
+                    </p>
+                </div>
+                <div class="pull-right mt20">
+                    
+                    
+                    <a id="InvoicePreview" data-bind="click:$root.ShowInvoicePreviewModel" class="btn btn-preview radius-20">Preview</a>
+                    <a id="SendInvoice" data-bind="click:$root.SendInvoice" class="btn btn-primary radius-20">Send</a>
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="validationModel" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">KiiPay Business</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <h4 data-bind="text:$root.ErrorMessage"></h4>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal" id="InvoicePreviewModel" data-backdrop="static" data-keyboard="false" style="">
+    <!--  -->
+    <!--  -->
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div class="col-lg-4 col-lg-offset-4 ">
+                        <div class="text-right wallet-balance mb20 ">
+                            <h5>Available balance</h5>
+                            <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                        </div>
+
+
+
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                    <div class="invoice " data-bind="with:Invoice">
+                        <!-- start -->
+                        <div class="row">
+                            <h1 class="text-right">Invoice</h1>
+                            <div class="col-lg-5">
+                                <div class="invoice-box">
+                                    <h5>Invoice From</h5>
+                                    <h3 class="text-primary">@Model.InvoiceMaster.FromBusinessName</h3>
+                                    <p>@Model.InvoiceMaster.FromInvoiceMobileNumber</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 pull-right">
+                                <!--  -->
+                                <div class="col-lg-5 text-right">
+                                    <label>Invoice Number</label>
+                                </div>
+                                <div class="col-lg-7">
+                                    <div class="form-control form-text">
+                                        <span data-bind="text:InvoiceNo"></span>
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="clearfix ">
+                                    <div class="mt20">
+
+                                    </div>
+                                </div>
+                                <!--  -->
+                                <div class="col-lg-5 text-right">
+                                    <label>Date</label>
+                                </div>
+                                <div class="col-lg-7">
+
+                                    <div class="form-control form-text">
+                                        <span data-bind="text:InvoiceDate"></span>
+                                    </div>
+                                </div>
+                                <!--  -->
+
+                            </div>
+                        </div>
+                        <!-- end -->
+                        <hr>
+                        <!-- start -->
+                        <div class="row mt20">
+                            <div class="col-lg-6">
+
+
+                                <!--  -->
+                                <div class="form-group">
+                                    <div class="col-lg-3 text-right">
+                                        <label><b>Invoice to: </b></label>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-control form-text">
+                                            <span data-bind="text:ReciverBusinessName"></span>
+                                            <br>
+                                            <span data-bind="text:ToInvoiceMobileNumber"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--  -->
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="pull-right wallet-balance mb20 ">
+                                    <h5>Amount Due:</h5>
+                                    <h1 class="text-primary" data-bind="value:AmountDue"><small class="text-primary"></small></h1>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class="table-responsive mt10">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Description</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody data-bind="foreach:$root.InvoiceDetails">
+
+                                    <tr>
+                                        <td data-bind="text:ItemName"> </td>
+                                        <td data-bind="text:Quantity"> </td>
+                                        <td data-bind="text:Price"> </td>
+                                        <td data-bind="text:Amount"> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end -->
+                        <!-- start -->
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <tbody>
+                                    @*<tr>
+                                        <td rowspan="5" class="text-left" width="30%">
+                                            <textarea class="form-control" style="padding:0%;" rows="5" data-bind="value:NoteToReceipient" readonly></textarea>
+                                        </td>
+
+                                    </tr>*@
+                                    <tr>
+                                        <td rowspan="5" class="text-left   " width="30%">
+                                            <p style="width:100%" data-bind="value:NoteToReceipient">   </p>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">Subtotal</td>
+                                        <td class="text-right" data-bind="text:Subtotal"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">Discount</td>
+                                        <td class="text-right" data-bind="text:DiscountAmount"></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right">Shipping</td>
+                                        <td class="text-right" data-bind="text:Shipping">$75.00</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-right"><b>Total</b></td>
+                                        <td class="text-right" data-bind="text:TotalAmount">$75.00</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- end -->
+
+                    </div>
+
+                    <div class="pull-right mt20">
+                        <a  data-bind="click:$root.CloseInvoicePreviewModel" class="btn btn-primary radius-20" >Back</a>
+                        <a  data-bind="click:$root.SendInvoice" class="btn btn-primary radius-20" >Send</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+</div>
+
+
+@if (Request.IsAjaxRequest())
+{
+    <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+    <script src="~/Areas/KiiPayBusiness/Scripts/Riddha.Script.SendAnInvoice.Controller.js"></script>
+    <script src="~/Areas/KiiPayBusiness/Scripts/Riddha.Script.SendAnInvoice.Model.js"></script>
+
+    <script type="text/javascript">
+        var obj = {};
+        ko.cleanNode(document.getElementById("partial-render"));
+        obj = new sendAnInvoiceController(@ViewBag.Id);
+        ko.applyBindings(obj, document.getElementById("partial-render"));
+    </script>
+}
+else
+{
+    @section scripts
+    {
+        <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+        <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+        <script src="~/Areas/KiiPayBusiness/Scripts/Riddha.Script.SendAnInvoice.Controller.js"></script>
+        <script src="~/Areas/KiiPayBusiness/Scripts/Riddha.Script.SendAnInvoice.Model.js"></script>
+
+        <script type="text/javascript">
+            var obj = {};
+            ko.cleanNode(document.getElementById("partial-render"));
+            obj = new sendAnInvoiceController(@ViewBag.Id);
+            ko.applyBindings(obj, document.getElementById("partial-render"));
+        </script>
+    }
+}
+<!--  -->
+<!--  -->

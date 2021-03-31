@@ -1,0 +1,220 @@
+﻿@model FAXER.PORTAL.Areas.Admin.ViewModels.FaxingAndPayFeeCalculationsViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<!-- ============================================================== -->
+<!-- Page Content -->
+<!-- ============================================================== -->
+
+
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">Sending & Pay Fee Calculations</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">Sending & Pay Fee Calculations</li>
+                </ol>
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="white-box">
+                    <form action="/Admin/FaxingAndPayFeeCalculations" method="post">
+                        <div class="form-body">
+
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label> Select Sending Country</label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.HiddenFor(model => model.FaxingCurrency)
+                                    @Html.HiddenFor(model => model.ReceivingCurrency)
+                                    @Html.DropDownListFor(model => model.FaxingCountry, (IEnumerable<SelectListItem>)ViewBag.SourceCountries, new { @class = "form-control" })
+
+
+
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label> Select Receiving Country</label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.ReceivingCountry, (IEnumerable<SelectListItem>)ViewBag.SourceCountries, new { @class = "form-control" })
+                                </div>
+                            </div>
+
+
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            @*<div class="col-lg-2">
+                                    <label> Select User Type</label>
+                                </div>
+                                <div class="col-lg-4 ">
+                                    <div class="form-group">
+                                        @Html.EnumDropDownListFor(model => model.TypeOfUser,  new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.TypeOfUser, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>*@
+
+
+                            @*<div class="clearfix"></div>*@
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label> Sending Amount</label>
+                            </div>
+                            <div class="col-lg-1 no-right-padding">
+                                <div class="form-group no-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrencySymbol" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2 no-padding">
+                                <div class="form-group no-padding">
+                                    @Html.TextBoxFor(model => model.FaxingAmount, new { @class = "form-control", @placeholder = "Enter Amount in Local Currency" })
+                                </div>
+                            </div>
+                            <div class="col-lg-1 no-left-padding">
+                                <div class="form-group no-left-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrency" />
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label>Sending Fee</label>
+                            </div>
+                            <div class="col-lg-1 no-right-padding">
+                                <div class="form-group no-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrencySymbol" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2 no-padding">
+                                <div class="form-group no-padding">
+                                    @Html.TextBoxFor(model => model.FaxingFee, new { @class = "form-control", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-lg-1 no-left-padding">
+                                <div class="form-group no-left-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrency" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label>Total Amount including Fee</label>
+                            </div>
+                            <div class="col-lg-1 no-right-padding">
+                                <div class="form-group no-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrencySymbol" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2 no-padding">
+                                <div class="form-group no-padding">
+                                    @Html.TextBoxFor(model => model.TotalAmount, new { @class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-lg-1 no-left-padding">
+                                <div class="form-group no-left-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.FaxingCurrency" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label>Current Exchange Rate</label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.CurExchangeRate, "{0:n2}", new { @class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+                            <!--  -->
+                            <div class="col-lg-2">
+                                <label>Amount to be Received</label>
+                            </div>
+                            <div class="col-lg-1 no-right-padding">
+                                <div class="form-group no-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.ReceivingCurrencySymbol" />
+                                </div>
+                            </div>
+                            <div class="col-lg-2 no-padding">
+                                <div class="form-group no-padding">
+                                    @Html.TextBoxFor(model => model.AmountToBeReceived, "{0:n2}", new { @class = "form-control", disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-lg-1 no-left-padding">
+                                <div class="form-group no-left-padding">
+                                    <input type="text" name="name" class="form-control" readonly value="@Model.ReceivingCurrency" />
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <!--  -->
+
+                            <div class="form-group" >
+                                @Html.LabelFor(m => m.IncludeFaxingFee, htmlAttributes: new { @class = "col-lg-4" })
+                                <div class="form-group">
+                                    <div class="form-check">@Html.RadioButtonFor(m => m.IncludeFaxingFee, true, new { @checked = true })Yes</div>
+                                    <div class="form-check">
+                                        @Html.RadioButtonFor(m => m.IncludeFaxingFee, false, new { @checked = true })No
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            @*<div class="col-lg-12">
+                                    @Html.ValidationMessage("CardURLError", "", new { @class = "text-danger" })
+                                    <br />
+                                    @if (ViewBag.ToUrl != null)
+                                    {
+
+                                        <a href="@Url.Action("Index","UploadIdentificationDocument" , new { ToURL = ViewBag.ToUrl})" class="" style="color:blue">Upload Identication Document here</a>
+                                    }
+                                </div>*@
+                            <div class="col-lg-8">
+                                @if (TempData["ExchangeRate"] != null)
+                                {
+                                    <label style="color:red">@TempData["ExchangeRate"]</label>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-lg-offset-2">
+                            <div class="form-group txt-center">
+
+                                <input type="submit" class="btn btn-sm btn-primary btn-rounded" value="Perform Calculation Now" />
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- .row -->
+    <!--/.row -->
+    <!--row -->
+</div>
+

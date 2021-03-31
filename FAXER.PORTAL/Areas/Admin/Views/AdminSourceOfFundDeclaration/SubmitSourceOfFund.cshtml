@@ -1,0 +1,607 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.SourceOfFundDeclarationVM
+@{
+    ViewBag.Title = "SubmitSourceOfFund";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<style type="text/css" media="screen">
+    input[type=checkbox] {
+        /* Double-sized Checkboxes */
+        -ms-transform: scale(1.5); /* IE */
+        -moz-transform: scale(1.5); /* FF */
+        -webkit-transform: scale(1.5); /* Safari and Chrome */
+        -o-transform: scale(1.5); /* Opera */
+        transform: scale(1.5);
+        padding: 10px;
+        margin-right: 5px;
+        margin-left: 5px;
+    }
+
+    b, strong {
+        font-weight: 500;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    .text-left {
+        text-align: left;
+    }
+
+    .text-left {
+        text-align: right;
+    }
+
+    .forms-wrapper {
+        max-width: 900px;
+        margin: 0 auto;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .forms {
+        border: solid 1px #00adef;
+        border-radius: 15px;
+        overflow: hidden;
+    }
+
+        .forms .forms-header {
+            background: #00adef;
+            color: #fff;
+            padding: 8px;
+        }
+
+    .form-main-title {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #003d55;
+        font-weight: 600;
+    }
+
+    .forms .forms-body {
+        padding: 20px;
+        background: #dcf0f7;
+        border-bottom: solid 1px #00adef;
+        margin-bottom: 20px;
+    }
+
+        .forms .forms-body table {
+            width: 100%;
+        }
+
+        .forms .forms-body td {
+            padding: 5px;
+        }
+
+        .forms .forms-body table, .forms .forms-body table tr, td, th {
+            border: 0;
+            text-align: left;
+            /*     white-space: pre-wrap;
+    */
+        }
+
+        .forms .forms-body input, select {
+            background: #fff;
+            border: solid 1px #00adef;
+            border-radius: 15px;
+        }
+
+    input[type='number'] {
+        -moz-appearance: textfield;
+    }
+
+    ::-webkit-calendar-picker-indicator {
+        display: none;
+    }
+
+    input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+
+
+    .forms-footer {
+        background: #eee;
+        padding: 30px;
+    }
+
+    .button {
+        padding: 10px 35px;
+        color: #fff;
+        outline: 0;
+        border: 0;
+        border-radius: 30px;
+    }
+
+    button.button.button-cancel {
+        background: red;
+    }
+
+    button.button.button-Submit {
+        background: #00adef;
+        float: right;
+    }
+</style>
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+                                <div class="card-header border-bottom">
+
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-left btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+
+                                <div class="card-body">
+
+                                    <!--  -->
+                                    <div class="forms-wrapper">
+
+                                        <div class="form-main-title">
+                                            CERTIFICATE FOR DECLARATION OF CUSTOMER’S SOURCE OF FUND & PURPOSE OF USE
+                                        </div>
+                                        <p>Required for all cash and Non-cash transactions in excess of £3000 Transactions and for all Third Party Transactions</p>
+                                        <div class="forms">
+                                            <div class="forms-header">
+                                                SENDER'S DETAILS
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Sender Full Name or Business Name:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Date of Birth:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Country of Birth:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Gender :
+                                                                        <select>
+                                                                            <option></option>
+                                                                            <option>Male</option>
+                                                                            <option>Female</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Address:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Telephone Number:
+                                                                        <input type="number" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Email Address:
+                                                                        <input type="email" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        ID Type:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        ID Number:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Expiring Date:
+                                                                        <input type="date" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Issuing Country:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Occupation:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+                                            <div class="forms-header">
+                                                RECEIVER'S DETAILS
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Receiver Full Name:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        City:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Country:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Telephone:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Email:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Relationship to sender :
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+                                            <div class="forms-header">
+                                                AMOUNT / TYPE / PURPOSE
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        One Off Amount:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Linked Amount:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Transfer Type:
+                                                                        <select name="">
+                                                                            <option>Select</option>
+                                                                            <option value="">KiiPay Wallet</option>
+                                                                            <option value="">Bank Deposit</option>
+                                                                            <option value="">Cash Pickup</option>
+                                                                            <option value=""> Other Mobile Wallet</option>
+                                                                        </select>
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                </td>
+
+                                                            </tr>
+
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    I hereby declare that I am not involved in any criminal or money laundering activity and the funds for the above transaction were obtained by me, are clear and are not derived from any illegal activities. These funds are derived from the following source
+                                                                    <br><br>
+                                                                    <input type="text" name="" style="width: 50%;">
+
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+
+                                                                <td>
+                                                                    <label>
+                                                                        Check this box to confirm
+                                                                        <input type="checkbox" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+
+                                            <div class="forms-header">
+                                                AGENT / MONEYFEX ADMIN VERIFICATION
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        ID Available?
+                                                                        <input type="checkbox" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Proof of Source of Income?
+                                                                        <input type="checkbox" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label> Bank Statement   <input type="checkbox" name="">
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Legal Letter
+                                                                        <input type="checkbox" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Others
+                                                                        <input type="checkbox" name="" data-toggle="collapse" data-target="#other">
+                                                                        <div class="collapse" id="other">
+                                                                            <input type="text" name="">
+                                                                        </div>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <label>
+                                                                        Purpose of Transfer ?<br>
+                                                                        <textarea name="" placeholder="Enter Purpose of Transfer " rows="4"></textarea>
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+
+                                                                <td colspan="3">
+                                                                    <label>
+                                                                        Means of Verication: Phone
+                                                                    </label>
+                                                                </td>
+
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" name="" data-toggle="collapse" data-target="#phone"> Phone:
+                                                                        <div class="collapse" id="phone">
+                                                                            <input type="text" name="" placeholder="Enter Phone Number">
+                                                                        </div>
+                                                                    </label>
+
+
+                                                                </td>
+
+
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" name="" data-toggle="collapse" data-target="#email"> Email:
+                                                                        <div class="collapse" id="email">
+                                                                            <input type="text" name="" placeholder="Enter Email">
+                                                                        </div>
+                                                                    </label>
+
+
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        <input type="checkbox" name="" data-toggle="collapse" data-target="#facetoface"> Face to Face
+                                                                        <div class="collapse" id="facetoface">
+                                                                            <input type="text" name="">
+                                                                        </div>
+                                                                    </label>
+
+
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-header">
+                                                Agent
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Agent Name:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Country:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Agent Account No.:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Agent Staff ID :
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="forms-header">
+                                                Admin Compliance
+                                            </div>
+                                            <!--  -->
+                                            <div class="forms-body">
+                                                <div class="form-block">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    <label>
+                                                                        Admin Name:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                                <td>
+                                                                    <label>
+                                                                        Admin Staff ID:
+                                                                        <input type="text" name="">
+                                                                    </label>
+                                                                </td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                            <div class="forms-footer  ">
+                                                <button type="" class="button button-cancel  ">Cancel </button>
+
+                                                <button type="" class="button button-Submit  ">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>

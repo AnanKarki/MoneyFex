@@ -1,0 +1,598 @@
+﻿<!DOCTYPE html>
+<html>
+@{
+
+    var agentModel = FAXER.PORTAL.Common.AgentSession.LoggedUser ?? new FAXER.PORTAL.Areas.Agent.Models.LoggedUserVm();
+    var agentInfomation = FAXER.PORTAL.Common.AgentSession.AgentInformation ?? new FAXER.PORTAL.DB.AgentInformation();
+}
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="MoneyFax Service">
+    <meta name="keywords" content="MoneyFax Service ">
+    <title>MoneyFex - Money Transfer, You're in Control </title>
+
+    <link rel="icon" type="image/x-icon" href="~/Areas/Agent/Content/Images/favicon.ico">
+    <!-- Bootstrap -->
+
+    <link href="~/Areas/Agent/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Areas/Agent/Content/css/style.css" rel="stylesheet">
+    <link href="~/Areas/Agent/Content/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Areas/Agent/Content/css/fontello.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Agent/Content/css/animsition.min.css">
+
+    <link rel="stylesheet" href="~/Content/css/currency.css" />
+    <link rel="stylesheet" href="~/Content/css/niceCountryInput.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Merriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+    <!-- owl Carousel Css -->
+    <link href="~/Areas/Agent/Content/css/owl.carousel.css" rel="stylesheet">
+    <link href="~/Areas/Agent/Content/css/owl.theme.css" rel="stylesheet">
+    <link href="~/Areas/Agent/Content/css/bootstrap-select.min.css" rel="stylesheet" />
+
+    <link href="~/Content/css/home-page.css" rel="stylesheet" />
+    <script type="text/javascript" src="//platform-api.sharethis.com/js/sharethis.js#property=59b8ed860a46e80012bb442f&product=inline-share-buttons"></script>
+    <link href="~/Areas/Agent/Content/css/progress.css" rel="stylesheet" />
+
+    <!-- flag -->
+    <link rel="stylesheet" href="~/Content/flag-icons/css/flag-icon.css" />
+    <!-- flag end -->
+    <!-- select -->
+    <link href="~/Content/css/bootstrap-select.min.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/bootstrap-multiselect.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/multi-select.css" rel="stylesheet" />
+    <link href="~/Content/select2/css/select2.min.css" rel="stylesheet" />
+    <link href="~/Areas/Agent/Content/daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Areas/Admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css" rel="stylesheet" />
+
+</head>
+
+
+<body class="animsition">
+
+    <div class="header">
+        <div class="container">
+            @if (FAXER.PORTAL.Common.AgentSession.AgentStaffLogin == null)
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-md-2 col-sm-12 col-xs-6  ">
+                        <!-- logo -->
+                        <div class="logo text-center">
+
+                            <a href="@Url.Action("GoToDashboard","AgentDashboard")">
+                                <center>
+                                    <img src="~/Areas/Agent/Content/Images/logo.png" alt="MoneyFex Service">
+                                </center>
+                            </a>
+
+                        </div>
+                    </div>
+                    <!-- logo -->
+                    <div class="col-lg-6 col-md-7 col-xs-12 ">
+
+                        <!-- /.navigation start-->
+                    </div>
+                    @*<div class="col-lg-3 col-md-3 hidden-xs hidden-sm">
+
+                            <div class="header-action   pull-right ">
+
+
+                                <a href="@Url.Action("Login" , "AgentLogin")" class="btn btn-primary btn-sm">Login</a>
+
+                            </div>
+                        </div>*@
+
+                </div>
+            }
+            else
+            {
+                <div class="row">
+                    <div class="col-lg-3 col-md-2 col-sm-6 col-xs-5  ">
+                        <!-- logo -->
+                        <div class="logo text-center">
+
+                            <a href="@Url.Action("GoToDashboard", "AgentDashboard")">
+                                <img src="~/Areas/Agent/Content/Images/logo.png" alt="MoneyFex Service">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-7   hidden-md  hidden-lg">
+                        <!-- search start-->
+                        <div class=" ">
+
+                            <ul class="after-login-menu">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        @if (FAXER.PORTAL.Common.AgentSession.LoggedUser.IsAUXAgent == false)
+                                        {
+                                            <div class="user_image  ">
+                                                <img src="~/Areas/Agent/Content/Images/icon/svg/user.svg" alt="">
+                                            </div>
+                                            <span class="name">@agentModel.PayingAgentStaffName </span>
+                                            <p>Account No. @agentModel.PayingAgentAccountNumber </p>
+                                            <span class="fa fa caret"></span>
+
+                                        }
+                                        else
+                                        {
+                                            <div class="user_image  ">
+                                                <img src="~/Areas/Agent/Content/Images/icon/svg/buldings.svg" alt="">
+                                            </div>
+                                            <span class="name">@agentInfomation.Name </span>
+                                            <span class="fa fa caret"></span>
+                                        }
+                                    </a>
+
+
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("GoToDashboard", "AgentDashboard")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("Index","AgentProfile")">Profile</a></li>
+                                        <li><a href="@Url.Action("Logout","AgentLogin")">Logout</a></li>
+                                    </ul>
+
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- logo -->
+                    @*<div class="col-lg-6 col-md-7 col-xs-12  ">
+
+                        <div id="navigation" class="pull-right  hidden-xs">
+                             navigation start
+                            <ul>
+
+                                <li class="dropdown  hidden-xs">
+                                    <a href="#" class="dropdown-toggle notification  " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                        <span class=""> <i class="fa fa-envelope fa-stack-1x fa-inverse"></i></span>
+                                        <span class="badge"> 0</span>
+                                    </a>
+
+                                    <ul class="dropdown-menu notify-drop   ">
+                                        <div class="notify-drop-title">
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-6">Message  (<b>0</b>)</div>
+                                                <div class="col-md-6 col-sm-6 col-xs-6 text-right"><a href="" class="rIcon allRead" data-tooltip="tooltip" data-placement="bottom" title=""><i class="fa fa-close"></i></a></div>
+                                            </div>
+                                        </div>
+                                         end notify title 
+                                         notify content 
+                                        <div class="drop-content">
+
+
+                                              
+                                            <li>
+                                                    <div class=" pd-l0">
+                                                        <a href="">
+                                                            <h5>MESSAGE</h5>Message from  <span class="text-black">Gaurav   </span>  <p>01/02/2019 08:35 AM</p>
+                                                            <p class="time">2 hours ago</p>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                              
+                                        </div>
+                                        <div class="notify-drop-footer text-center">
+                                            <a href="notification.php"><i class="fa fa-eye"></i> See All  </a>
+                                        </div>
+                                    </ul>
+                                </li>
+
+                            </ul>
+                            <div class="clearfix">
+
+                            </div>
+                        </div>
+                         /.navigation end
+
+
+                    </div>*@
+                    <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6   pull-right hidden-sm hidden-xs">
+                        <!-- search start-->
+                        <div class=" ">
+
+                            <ul class="after-login-menu">
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                        @if (FAXER.PORTAL.Common.AgentSession.LoggedUser.IsAUXAgent == false)
+                                        {
+                                            <div class="user_image  ">
+                                                <img src="~/Areas/Agent/Content/Images/icon/svg/user.svg" alt="">
+                                            </div>
+                                            <span class="name">@agentModel.PayingAgentStaffName </span>
+                                            <p>Account No. @agentModel.PayingAgentAccountNumber </p>
+                                            <span class="fa fa caret"></span>
+
+                                        }
+                                        else
+                                        {
+
+                                            <div class="user_image  ">
+                                                <img src="~/Areas/Agent/Content/Images/icon/svg/buldings.svg" alt="">
+                                            </div>
+                                            <span class="name">@agentInfomation.Name </span>
+                                            <span class="fa fa caret"></span>
+                                        }
+
+
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a href="@Url.Action("GoToDashboard", "AgentDashboard")">Dashboard</a></li>
+                                        <li><a href="@Url.Action("Index","AgentProfile")">Profile</a></li>
+                                        <li><a href="@Url.Action("Logout","AgentLogin")">Logout</a></li>
+                                    </ul>
+                                </li>
+
+                            </ul>
+
+                        </div>
+                    </div>
+                    <!-- /.search start-->
+                </div>
+            }
+        </div>
+    </div>
+    <div id="loader">
+        <div class="loader">
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <div class="footer">
+        <!-- footer -->
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-3 col-sm-6  ">
+                    <div class="widget-footer mt40">
+                        <!-- widget footer -->
+                        <h4>Quick Link</h4>
+                        <ul class="listnone">
+                            <li><a href="" disabled>Receive Form PDF</a></li>
+                            <li><a href="" disabled>Transfer Money Form PDF</a></li>
+                            <li><a href="" disabled>Refund Form PDF</a></li>
+                            <li><a href="@Url.Action("SenderContact","QuickLink" , new { area=""})">Contact Us</a></li>
+                            <li><a href="">FAQ</a></li>
+                        </ul>
+                    </div>
+                    <!-- /.widget footer -->
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!--
+    <div class="middle-footer">
+       <div class="container">
+        <div class="row">
+
+      <div class="col-lg-12">
+     <p>MoneyFex Ltd 64 Pearson Street Gradley Health West Midlanda B64 6EE | Company Registration Number : 10105032
+      <br>MoneyFex is Authorised and Regulated by the Financial Conduct Authority (FCA) under the Payment Service Regulations 2017 for the provision of payment services. Registration number: 745989</p>
+
+
+      </div>
+    </div>
+    </div>
+    </div>
+     -->
+    <!-- /.footer -->
+    <div class="tiny-footer">
+        <!-- small footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-6">
+                    <p>© MoneyFex <?php echo date("Y"); ?>, All Rights Reserved.</p>
+                </div>
+                <div class="col-md-6 col-sm-6 text-right col-xs-6">
+                    <a href="#"><i class="fa fa-facebook"></i>  </a>   <a href="#"><i class="fa fa-google-plus"></i>    </a>
+                    <a href="https://twitter.com/MoneyFex" target="_blank"><i class="fa fa-twitter"></i>  </a>  <a href="#"><i class="fa fa-linkedin"></i>  </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.small footer -->
+    <!-- back to top icon -->
+    <a href="#0" class="cd-top" title="Go to top">Top</a>
+    <script src="~/Areas/Agent/Content/js/jquery.min.js"></script>
+
+
+    @*<script src="~/Areas/Agent/Content/js/accordion.js"></script>*@
+
+    <script src="~/Areas/Agent/Content/js/bootstrap.min.js"></script>
+
+    <script src="~/Areas/Admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/menumaker.js"></script>
+
+    <!-- animsition -->
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/animsition.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/animsition-script.js"></script>
+    <!-- sticky header -->
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/jquery.sticky.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/sticky-header.js"></script>
+
+
+    <!-- slider script -->
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/slider-carousel.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/js/service-carousel.js"></script>
+    <!-- Back to top script -->
+    <script src="~/Areas/Agent/Content/js/back-to-top.js" type="text/javascript"></script>
+
+
+    <script src="~/Scripts/Riddha/knockout-2.3.0.js"></script>
+    <script src="~/Scripts/Riddha/Riddha.Globals.ko.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="~/Content/js/currency.js"></script>
+
+    <script src="~/Content/js/niceCountryInput.js"></script>
+    <script src="~/Areas/Agent/Content/js/bootstrap-select.min.js"></script>
+
+    <script src="~/Content/select2/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/Content/select2/js/select2.full.min.js"></script>
+    <script type="text/javascript" src="~/Content/select2/js/bootstrap-multiselect.js"></script>
+    <script type="text/javascript" src="~/Content/select2/js/jquery.multi-select.js"></script>
+    <script type="text/javascript" src="~/Content/select2/js/jquery.quicksearch.js"></script>
+    <script type="text/javascript" src="~/Content/select2/js/select2-custom.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+    <script>
+
+        function onChangeCallback(ctr) {
+            console.log("The country was changed: " + ctr);
+            //$("#selectionSpan").text(ctr);
+        }
+
+        $(document).ready(function () {
+            $(".niceCountryInputSelector").each(function (i, e) {
+                new NiceCountryInput(e).init();
+            });
+        });
+
+        $(document).ready(function () {
+            $("#searchcurency1").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#currencylist1 li").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+
+    </script>
+    <script type="text/javascript">
+
+        function getval(sel) {
+            $('#proceed_payment').attr('href', sel.value);
+        }
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+        $(document).ready(function () {
+
+            var $submit = $("#submit_prog").hide(),
+                $cbs = $('input[name="prog"]').click(function () {
+                    $submit.toggle($cbs.is(":checked"));
+                });
+
+        });
+
+        $("input[type=date]").on("change", function () {
+            this.setAttribute(
+                "data-date",
+                moment(this.value, "dd-mm-yyyy")
+                    .format(this.getAttribute("format"))
+            )
+        }).trigger("change");
+        $(window).load(function () {
+            $('#onload').modal('show');
+        });
+        $(window).on('load', function () {
+            $("#loader").fadeOut(1000);
+        });
+
+    </script>
+
+    @*<link rel="stylesheet" type="text/css" href="~/Areas/Agent/Content/datatables/css/dataTables.bootstrap.min.css">
+        <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/jquery.dataTables.min.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('#DataTable').DataTable();
+            });
+        </script>*@
+
+    <link rel="stylesheet" type="text/css" href="~/Areas/Agent/Content/datatables/css/dataTables.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Areas/Agent/Content/datatables/css/buttons.dataTables.min.css">
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/jquery.dataTables.min.js"></script>
+    <script src="~/Areas/Admin/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+
+    <script src="~/Areas/Agent/Content/daterangepicker/daterangepicker.min.js"></script>
+    <script src="~/Areas/Agent/Content/daterangepicker/moment.min.js"></script>
+
+    <script type="text/javascript">
+        $('input[name="datefilter"]').daterangepicker();
+        $('.datefilter').daterangepicker();
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#DataTable').DataTable({
+
+            });
+        });
+
+        var Title = "";
+        $(document).ready(function () {
+            $('.all-button').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+
+        $(document).ready(function () {
+            $('.pdf-print').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'pdf',
+                    'print',
+
+                ],
+
+            });
+        });
+        $(document).ready(function () {
+            $('.pdfcsv').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'pdf',
+                    'csv',
+
+                ],
+
+            });
+        });
+
+        $.fn.datepicker.defaults.format = "dd/mm/yyyy";
+        $('.date').datepicker();
+        $('.datepicker').datepicker();
+    </script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/jszip.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/pdfmake.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/vfs_fonts.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="~/Areas/Agent/Content/datatables/js/buttons.print.min.js"></script>
+
+
+    <div class="modal fade" id="verification" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">x</button>
+                    <h4 class="modal-title">MoneyFex Account Verification</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3 col-md-3 col-sm-3 col-xs-4">
+
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                            <h4>Verify your account</h4>
+                            <p>
+                                Before you can edit your address, we need to verify your account .This Will help to keep your information safe
+                            </p>
+                            <p>Please enter the verificaton code sent as SMS to your registered phone number!</p>
+
+                            <br />
+                            <label class="text-danger" id="InvalidVerificationCode"></label>
+                            <input type="text" class="form-control" id="verificationCode" name="verificationCode">
+                            <button type="button" class="btn btn-success btn-sm btn-ok">Verify</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary btn-sm" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Add Compliance Commissioner -->
+    <div class="modal " id="AddComplianceCommissioner" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body  ">
+                    <div class="form-group  pinside20 ">
+                        <h4>Select Compliance Commissioner</h4>
+                        <select name="" class="form-control">
+                            <option value="">Staff Name</option>
+
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="form-group">
+
+                        <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-primary pull-right">Add</button>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Add Compliance Commissioner -->
+    <!-- entercard -->
+    <div class="modal " id="entercard" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body  ">
+                    <div class="form-group  pinside20 ">
+                        <h4>Enter  Withdrawal Code</h4>
+                        <input type="text" name="" class="form-control" placeholder="Enter Code Here ">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary pull-left">Submit</button>
+                        <button type="submit" class="btn btn-danger pull-right" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- entercard -->
+    <!--    Withdrawal  Code -->
+    <div class="modal " id="withdrawalcode" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+
+                <div class="modal-body  ">
+                    <div class="form-group  pinside20 ">
+                        <h4> Enter Withdrawal  Code</h4>
+                        <input type="text" name="" class="form-control" placeholder="Withdrawal  Code Here ">
+                    </div>
+                    <hr>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary pull-left">Submit</button>
+                        <button type="submit" class="btn btn-default pull-right" data-dismiss="modal">Cancel</button>
+                    </div>
+                    <div class="clearfix">
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--   Withdrawal  Code -->
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>
+

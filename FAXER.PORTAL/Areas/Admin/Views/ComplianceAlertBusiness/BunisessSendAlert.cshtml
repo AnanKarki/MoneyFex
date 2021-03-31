@@ -1,0 +1,123 @@
+﻿
+@{
+    ViewBag.Title = "BunisessSendAlert";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@using (Html.BeginForm()) {
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Set Alert</h4>
+                                    <a href="@Url.Action("Index","ComplianceAlertBusiness")" class=" btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-eye m-r-5"></i> View Alert
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                        <div class="row">
+                                            <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>  Country</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Country</option>
+                                                        <option>United kingdom (GBP)</option>
+                                                        <option>Nigeria (NGN)</option>
+                                                        <option>Cameroon (XAF)</option>
+                                                        <option>Ghana (GHS)</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select City</option>
+                                                        <option>Delhi</option>
+                                                        <option>Kathmandu</option>
+
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Business</label>
+                                                    <select class="form-control form-control-lg form-control-round form-control-bold">
+                                                        <option>Select Business</option>
+                                                        <option>All</option>
+                                                        <option>LLB Ltd </option>
+                                                        <option>James Shop </option>
+
+                                                        <option>ABC Ltd</option>
+                                                        <option>Zenith PLC </option>
+                                                        <option>Ecobank</option>
+                                                    </select>
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Business Account Number</label>
+                                                    <input type="" class="form-control form-control-lg form-control-round form-control-bold" placeholder="MFBC58745" disabled>
+
+                                                </div>
+
+                                                <!--  -->
+                                                <!--  -->
+
+                                                <div class="form-group">
+                                                    <label>Message</label>
+                                                    <textarea class="form-control form-control-lg  form-control-bold" placeholder="Enter alert message" rows="5"></textarea>
+
+                                                </div>
+
+                                                <!--  -->
+
+                                            </div>
+
+                                        </div>
+
+                                    </form>
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <a href="@Url.Action("Index","ComplianceAlertBusiness")" class="btn btn-danger btn-round pull-left"><i class="fa fa-remove"></i> Cancel</a>
+
+                                            <button type="submit" class="btn btn-primary btn-round pull-right"><i class="fa fa-send"></i> Send</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+}

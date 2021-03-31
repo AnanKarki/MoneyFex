@@ -1,0 +1,95 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.PayoutProviderRateViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Payout Provider Rate</h4>
+                                    <a href="@Url.Action("SetPayoutProviderRate", "PayoutProviderRate")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set Payout Provider Rate
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class=" row m-t-20 m-b-20">
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>#SN</th>
+                                                    <th>Sending Currency</th>
+                                                    <th>Receving Currency</th>
+                                                    <th>Sending Country</th>
+                                                    <th>Receving Country</th>
+                                                    <th>Payout Provider</th>
+                                                    <th>Rate</th>
+                                                    <th>Action</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ int i = 1;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item.SendingCurrency</td>
+                                                        <td>@item.RecevingCurrency</td>
+                                                        <td>@item.SendingCountryName</td>
+                                                        <td>@item.RecevingCountryName</td>
+                                                        <td>@item.PayoutProviderName</td>
+                                                        <td>@item.Rate</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetPayoutProviderRate", "PayoutProviderRate", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                        @{i++;}
+                                                    </tr>
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/PayoutProviderRate/DeletePayoutProviderRate?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "Success!", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "Warning", 0);
+                        }
+                    });
+            });
+        }
+    </script>
+}

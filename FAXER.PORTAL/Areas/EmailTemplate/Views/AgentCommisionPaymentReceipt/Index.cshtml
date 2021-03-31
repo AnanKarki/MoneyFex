@@ -1,0 +1,64 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+
+    <h4 style="text-align:center">Admin - Agent Commision Payment Receipt </h4>
+
+    <center>
+        <table width="100%">
+            <thead>
+                
+            </thead>
+            <tbody>
+                <tr>
+                    <td><b> MF Receipt Number</b></td>
+                    <td><b>@ViewBag.ReceiptNumber</b></td>
+                </tr>
+                <tr>
+                    <td><b>Date</b></td>
+                    <td><b>@ViewBag.Date</b></td>
+
+                </tr>
+                <tr>
+                    <td><b>Time </b></td>
+                    <td><b>@ViewBag.Time</b></td>
+                </tr>
+                @*<tr>
+            <td><b>Agent Name </b></td>
+            <td><b>@ViewBag.AgentName</b></td>
+        </tr>*@
+                <tr>
+                    <td><b>Agent MF Code </b></td>
+                    <td><b>@ViewBag.AgentMFCode</b></td>
+                </tr>
+                <tr>
+                    <td><b>Transferred Commision</b></td>
+                    <td><b>@ViewBag.TransferredCommision</b></td>
+                </tr>
+                <tr>
+                    <td><b>Received Commision</b></td>
+                    <td><b>@ViewBag.ReceivedCommision</b></td>
+                </tr>
+                <tr>
+                    <td><b>Total Commision Amount</b></td>
+                    <td><b>@ViewBag.TotalCommision</b></td>
+                </tr>
+                <tr>
+                    <td><b>Name of Admin Staff</b></td>
+                    <td><b>@ViewBag.StaffName</b></td>
+                </tr>
+                <tr>
+                    <td><b>Commision Payment Type</b></td>
+                    <td><b>@ViewBag.CommisionPaymentType</b></td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+    </center>
+</div>
+

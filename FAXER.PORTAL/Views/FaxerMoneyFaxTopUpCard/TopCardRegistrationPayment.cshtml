@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "TopCardRegistrationPayment";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>MoneyFex Top-card Registration</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+                <h3>
+                    Confirmation of Card Registration
+                </h3>
+                <hr>
+                <form>
+
+
+                    <p>You have successfully registered a MoneyFex Top-up card, a confirmation SMS text and email messages have been sent to your card user. Also, a receipt to confirm this payment has been sent to your registered email address and added to your MoneyFax Service account.</p>
+
+                    <p>While waiting for the MoneyFex Card to be sent, your card user can now use the confirmation SMS text message or email sent to him/her together with his/her ID Card to withdraw money from one of our agents in their country of residence. </p>
+
+
+                    <center>
+                        <h3>What do you want to do next?</h3>
+
+                        <br>
+                        <a href="@Url.Action("FaxCardToTopUp")" class="btn btn-primary ">Top-up the registered MoneyFex Top-up Card</a>
+                        <p class="or_css">OR</p>
+                        <a href="@Url.Action("NonMoneyFaxTopUpCardUser")" class="btn btn-success">Start Sending Money to Non Card User</a>
+                    </center>
+
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->

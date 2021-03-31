@@ -1,0 +1,53 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "Error";
+    Layout = null;
+    var msg = Model != null ? Model.Exception.Message : "";
+    string baseUrl = HttpContext.Current.Request.Url.GetLeftPart(UriPartial.Authority);
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Error</title>
+</head>
+<body>
+    <div>
+        @*<h1>Oops</h1>
+            <h3>Something went wrong!!</h3>*@
+        @if (ViewBag.MessageDisplay != null)
+        {
+            <h2 class="text-danger">@ViewBag.MessageDisplay</h2>
+
+
+        }
+        else
+        {
+
+            <h1 class="text-danger">Error.</h1>
+            <h2 class="text-danger">@msg</h2>
+        }
+
+        <p>Please try again <a href="@baseUrl">Refresh</a></p>
+    </div>
+</body>
+</html>
+
+@*@if (ViewBag.MessageDisplay != null)
+    {
+        <h2 class="text-danger">@ViewBag.MessageDisplay</h2>
+
+
+    }
+    else
+    {
+
+    <h1 class="text-danger">Error.</h1>
+    <h2 class="text-danger">@msg</h2>
+    }
+    <a href="@Url.Action("Login", "Account")">Back</a>*@
+

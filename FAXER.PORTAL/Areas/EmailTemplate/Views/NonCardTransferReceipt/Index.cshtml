@@ -1,0 +1,75 @@
+﻿
+@{
+
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Receipt.cshtml";
+}
+
+<div style="padding:20px">
+
+    <h4 style="text-align:center">
+        Non-virtual account Money Transfer Confirmation of Payment Receipt
+    </h4>
+    <table width="100%">
+
+        <tbody>
+            <tr>
+                <td><b>MF Receipt Number</b></td>
+                <td><b>@ViewBag.MFReceiptNumber</b></td>
+            </tr>
+            <tr>
+                <td><b>Date</b></td>
+                <td><b>@ViewBag.TransactionDate</b></td>
+            </tr>
+            <tr>
+                <td><b>Time</b></td>
+                <td><b>@ViewBag.TransactionTime</b></td>
+            </tr>
+            <tr>
+                <td><b>Sender's Full Name</b></td>
+                <td><b>@ViewBag.FaxerFullName</b></td>
+            </tr>
+            <tr>
+                <td><b>Sender's Telephone Number</b></td>
+                <td><b>@ViewBag.SenderTelephoneNo</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Receiver's Full Name</b></td>
+                <td><b>@ViewBag.ReceiverFullName</b></td>
+            </tr>
+            <tr>
+                <td><b>Receiver's Telephone</b></td>
+                <td><b>@ViewBag.Telephone</b></td>
+            </tr>
+            <tr>
+                <td><b>MFCN Number</b></td>
+                <td><b>@ViewBag.MFCN</b></td>
+            </tr>
+            <tr>
+                <td><b>Amount Transferred</b></td>
+                <td><b>@ViewBag.AmountSent</b></td>
+
+            </tr>
+            <tr>
+                <td><b> Transfer Fees</b></td>
+                <td><b>@ViewBag.Fee</b></td>
+            </tr>
+            <tr>
+                <td><b>Exchange Rate</b></td>
+                <td><b>@ViewBag.ExchangeRate</b></td>
+            </tr>
+
+            <tr>
+                <td><b>Total Amount + Fees</b></td>
+                <td><b>@ViewBag.TotalSentAmount</b></td>
+            </tr>
+            <tr>
+                <td><b>Amount to be Received</b></td>
+                <td><b>@ViewBag.AmountReceived</b></td>
+
+            </tr>
+
+        </tbody>
+    </table>
+</div>
+

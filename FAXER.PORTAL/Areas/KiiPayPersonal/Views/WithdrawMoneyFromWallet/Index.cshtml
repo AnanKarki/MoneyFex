@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/KiiPayPersonal/Views/Shared/_Layout_KiiPayPersonal.cshtml";
+}
+
+
+
+<!--  -->
+<div class="real_form pattern2 pdt40 ">
+    <div class="container">
+        <div class="row">
+            <!-- Available balance -->
+            <div class="col-lg-4 col-lg-offset-4 ">
+                <div class="text-right wallet-balance  mb15">
+                    <h5>Available balance</h5>
+                    <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                </div>
+            </div>
+            <!-- Available balance -->
+
+            <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                <div class="login_signup mb50 clearfix text-center">
+                    <div class="flex-container amount-group flex-middle">
+                        <div>
+                            <div class="userimage  ">
+                                <img src="~/Areas/KiiPayPersonal/images/user.svg" alt="">
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-30 text-primary"> Ukesh Raj</span>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="clearfix">
+
+                    </div>
+
+
+
+                    <ul class="paymentmethod-list mt20 mb20">
+                        <h4 class="text-left">Select Bank Account</h4>
+                        <li>
+                            <label><input type="radio" name="radio"> <span class="cardsaved hidden-xs"><img src="~/Areas/KiiPayPersonal/images/icon/svg/bank.svg" width="40"></span> <span class="title">Barclays Bank</span> <span class="subtitle">Account No. **** 4547</span></label>
+                        </li>
+
+                        <li>
+                            <label><input type="radio" name="radio"> <span class="cardsaved hidden-xs"> <img src="~/Areas/KiiPayPersonal/images/icon/svg/bank.svg" width="40"></span> <span class="title"> Lloyds Bank  </span> <span class="subtitle">Account No. **** 4547</span></label>
+                        </li>
+
+
+                        <li>
+                            <label class="text-left">
+                                <a href="add-new-bank-account.php"><i class="fa fa-plus"></i> Add a New Bank Account</a>
+                            </label>
+                        </li>
+
+                    </ul>
+
+                    <div class="clearfix">  </div>
+
+
+                </div>
+                <div class="clearfix"></div>
+                <div class="text-center  clearfix">
+                    <hr>
+                    <a href="withdraw-money-from-wallet-enteramount.php" class="btn btn-primary btn-lg mb30">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    <!-- back btn -->
+                    <div class="clearfix ">
+
+                        <center>
+                            <a href="@Url.Action("AddAndWithdrawFromWallet","Dashboard")" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                        </center>
+                    </div>
+                    <!-- back btn end-->
+                </div>
+            </div>
+
+            <!--  -->
+
+        </div>
+
+    </div>
+</div>
+

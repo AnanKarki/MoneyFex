@@ -1,0 +1,14 @@
+﻿<div class="col-lg-3  hidden-xs hidden-sm col-md-4">
+    <div class="dashboard_sidebar">
+        <h3>My Messages</h3>
+        <ul>
+            <li><a href="@Url.Action("Compose","StaffMessage")">Compose </a></li>
+            <li><a href="@Url.Action("inbox","StaffMessage")">Inbox &nbsp <span class="badge pull-in" >@ViewBag.Count</span> </a></li>
+            <li><a href="@Url.Action("Sent","StaffMessage")">Sent</a></li>
+            <li><a href="@Url.Action("Drafts","StaffMessage")">Drafts &nbsp <span class="badge pull-in">@ViewBag.DraftCount</span></a></li>
+            <li><a href="@Url.Action("Archive","StaffMessage")">Archive</a></li>
+            <li><a href="@Url.Action("Junk","StaffMessage")">Junk</a></li>
+
+        </ul>
+    </div>
+</div>

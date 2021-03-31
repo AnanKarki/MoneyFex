@@ -1,0 +1,81 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.KiiPayBusinessLocalTransferEnterAmountVM
+@{
+    ViewBag.Title = "LocalTransferEnterAmount";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+                <!-- Available balance -->
+                <div class="col-lg-4 col-lg-offset-4 ">
+                    <div class="text-right wallet-balance  mb15">
+                        <h5>Available balance</h5>
+                        <h1 class="text-primary">$175.<small class="text-primary">86</small></h1>
+                    </div>
+                </div>
+                <!-- Available balance -->
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="flex-container amount-group flex-middle">
+                            <div>
+                                <div class="userimage  ">
+                                    <img src="~/Areas/KiiPayBusiness/images/icon/svg/buldings.svg" alt=""/>
+                                </div>
+                            </div>
+                            <div>
+                                <span class="font-30 text-primary">@Model.BusinessName</span>
+                                @Html.HiddenFor(model => model.BusinessName)
+                            </div>
+                        </div>
+
+
+
+                        <div class="amount-group  ">
+
+                            <div>
+
+                                <label>Enter Amount</label>
+                                @Html.TextBoxFor(model => model.Amount, new { @type = "number", @placeholder = Model.CurrencySymbol + "0.00", @class = "amount" })
+
+                            </div>
+                        </div>
+
+                        <div class="gbp">
+                            @Model.CurrencyCode
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text=danger" })
+
+                        @Html.HiddenFor(model => model.CurrencySymbol)
+                        @Html.HiddenFor(model => model.CurrencyCode)
+                        <div class="amount-group  ">
+                            @Html.TextBoxFor(model => model.PaymentReference, new { @class = "reference", @placeholder = "Enter Payment Reference" })
+                            @Html.ValidationMessageFor(model => model.PaymentReference, "", new { @class = "text-danger" })
+                        </div>
+
+                        <label class="label-checkbox ">Send SMS Notification ?  &nbsp;&nbsp;Yes&nbsp;&nbsp;@Html.CheckBoxFor(model => model.SendSMS)</label>
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+                        <button type="submit" class="btn btn-primary btn-lg   ">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        <div class="clearfix mb30"> </div>
+                        <a href=" " class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+}
+

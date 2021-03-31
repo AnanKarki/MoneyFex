@@ -1,0 +1,228 @@
+﻿@model FAXER.PORTAL.Areas.Agent.Models.StaffDetailsViewModel
+@{
+    ViewBag.Title = "StaaffDetails";
+    //Layout = "~/Areas/Agent/Views/Shared/_Layout_Agent.cshtml";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>Agent Admin User Registration </h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+
+@using (Html.BeginForm())
+{
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+                    <div class="login_signup">
+                        <h3>User Details</h3>
+                        @Html.ValidationMessage("InvalidAge", "", new { @class = "text-danger" })
+                        <hr>
+
+                        <!--  -->
+
+                        <div class="col-lg-4">
+                            <label> First Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-7 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.FirstName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <label>Middle Name </label>
+                        </div>
+
+                        <div class="col-lg-7 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.MiddleName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <label>Last Name <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-7 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(Model => Model.LastName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <label>Date of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-2 ">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Day, new { @class = "form-control", @type = "number", placeholder = "DD" })
+                                @Html.ValidationMessageFor(Model => Model.Day, "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3 ">
+                            <div class="form-group">
+
+                                @Html.EnumDropDownListFor(x => x.Month, new { @class = "form-control" })
+                                @Html.ValidationMessage("Month", "", new { @class = "text-danger" })
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                @Html.TextBoxFor(x => x.Year, new { @class = "form-control", placeholder = "YYYY", id = "Year" })
+                                @Html.ValidationMessageFor(Model => Model.Year, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="clearfix"></div>
+
+
+
+                        <div class="col-lg-offset-5 col-lg-6">
+                            <div class="form-group">
+                                @Html.ValidationMessage("DOB", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <label>Country of Birth <span class="required">*</span></label>
+                        </div>
+
+                        <div class="col-lg-7">
+                            <div class="form-group">
+                                @Html.DropDownListFor(model => model.BirthCountry, (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(Model => Model.BirthCountry, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                        <!--  -->
+                        <div class="col-lg-4">
+                            <label>Gender <span class="required">*</span></label>
+                        </div>
+
+
+                        <div class="col-lg-3">
+                            <div class="form-group">
+
+                                @*@Html.EnumDropDownListFor(x => x.Gender, "Gender", new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })*@
+
+                                <label>
+                                    @Html.RadioButtonFor(x => x.Gender, FAXER.PORTAL.Models.Gender.Male, new { @checked = true })
+                                    Male
+
+
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <div class="form-group">
+
+                                @*@Html.EnumDropDownListFor(x => x.Gender, "Gender", new { @class = "form-control" })
+                @Html.ValidationMessageFor(Model => Model.Gender, "", new { @class = "text-danger" })*@
+
+                                <label>
+
+                                    @Html.RadioButtonFor(x => x.Gender, FAXER.PORTAL.Models.Gender.Female, new { })
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <!--  -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2">
+
+                    @*<a href="staff-contact-details.php" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></a>*@
+                    <button type="submit" class="fbtn btn-next">Next <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+}
+
+
+@if (ViewBag.AgentResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.AgentResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Scripts{
+    
+    <script type="text/javascript">
+        $("#Year").val("");
+    </script>
+    }

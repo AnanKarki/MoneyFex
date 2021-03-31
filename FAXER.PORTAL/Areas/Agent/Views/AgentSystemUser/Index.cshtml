@@ -1,0 +1,285 @@
+﻿@model List<FAXER.PORTAL.Areas.Agent.Models.LoginTimeAndDayAccessVm>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Agent/Views/Shared/_New_Agent_Layout.cshtml";
+    int i = 0;
+}
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>
+                    Agent System Users
+                </h1>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pull-right text-right">
+                    <a href="@Url.Action("ComplianceCommissioner", "AgentSystemUser", new { area = "agent" })" class="btn btn-success ">Compliance Commissioner</a>&nbsp; &nbsp; &nbsp;
+                    <a href="@Url.Action("AgentUserRegistration", "AgentSystemUser", new { area = "agent" })" class="btn btn-primary pull-right">Register a System User</a>
+                    <div class="clearfix">
+                        <br>
+                    </div>
+                    </div>
+                <div class="col-lg-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <td rowspan="2">SN</td>
+                                    <td rowspan="2"><strong>  Staff Name   </strong></td>
+                                    <td rowspan="2"><strong> Staff Type   </strong></td>
+
+                                    <td colspan="4"><strong>Login Time and Day System Access      </strong></td>
+                                    <td rowspan="2">Status</td>
+
+                                    <td rowspan="2">Action</td>
+
+                                </tr>
+                                <tr>
+                                    <td><strong>Start Time</strong></td>
+                                    <td><strong>End Time</strong></td>
+                                    <td><strong>Start Day</strong></td>
+                                    <td><strong>End Day</strong></td>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+                                @foreach (var item in Model)
+                                {
+                                    i++;
+                                    <tr>
+                                        @Html.HiddenFor(x => item.Id, new { @id = "id" + i + "" })
+                                        <td>
+                                            @i
+                                        </td>
+                                        <td> @item.StaffName </td>
+                                        <td>@item.StaaffType</td>
+                                        <td> @Html.TextBoxFor(x => item.StartTime, new { @class = "", @type = "time", @id = "startTime" + i + "" })</td>
+                                        <td>@Html.TextBoxFor(x => item.EndTime, new { @class = "", @type = "time", @id = "endTime" + i + "" })</td>
+                                        <td>
+                                            @Html.EnumDropDownListFor(x => item.StartDay, new { @class = "", @id = "startDay" + i + "" })
+                                        </td>
+                                        <td>
+                                            @Html.EnumDropDownListFor(x => item.EndDay, new { @class = "", @id = "endDay" + i + "" })
+                                        </td>
+                                        <td>@item.Status</td>
+                                        <td>
+                                            <div class="btn-group m-r-10">
+                                                <button aria-expanded="false" data-toggle="dropdown" class="btn btn-success dropdown-toggle  " type="button">Action <span class="caret"></span></button>
+                                                <ul role="menu" class="dropdown-menu text-white ">
+
+                                                    <li><button type="button" onclick="updateTime(@i);" class="btn   btn-danger "><span class="" btn btn-primary mb1 black bg-yellow"><i class=" ti-pencil-alt"></i></span> Add Login Time</button></li>
+                                                    <li><a href="@Url.Action("AgentUserRegistration", "AgentSystemUser", new { AgentStaffLoginId = item.Id })" class="btn   btn-success "><span class="btn-label"><i class=" ti-pencil-alt"></i></span> Update</a></li>
+                                                    <li><a class="btn   btn-primary " onclick="activateOrDeactivateAccountModal(true ,'@item.Id')"><span class="btn-label"><i class="  ti-check-box"></i></span>Activate</a></li>
+                                                    <li><a class="btn   btn-warning " onclick="activateOrDeactivateAccountModal(false ,'@item.Id')"><span class="btn-label"><i class=" ti-na"></i></span>Deactivate</a></li>
+
+                                                    @*href="@Url.Action("Activate", "AgentSystemUser", new { AgentStaffLoginId = item.Id })" c
+                                        href="@Url.Action("DeActivate", "AgentSystemUser", new { AgentStaffLoginId = item.Id })"*@
+                                                </ul>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                }
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  -->
+    <!--  -->
+    <div class="dynamic_footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    @*<a href="dashboard.php" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>*@
+                    <a href="@Url.Action("GoToDashboard","AgentDashboard",new { area="agent"})" class="fbtn btn-back hidden-xs hidden-sm "><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  -->
+
+}
+
+
+
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="activateModal" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h4 class="modal-title">MoneyFex Service-Alert</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="icon_al">
+                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div class="col-lg-9">
+                        <span id="message"></span>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" onclick="activateAccount()" class="btn btn-success btn-sm" id="activateBtn">Yes</button>
+                <button type="button" onclick="deactivateAccount()" class="btn btn-success btn-sm " id="deactivateBtn">Yes</button>
+                <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No</button>
+
+            </div>
+        </div>
+    </div>
+</div>
+@*@if (ViewBag.ActivateMessage != "" || ViewBag.DeActivateMessage != "")
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">MoneyFex Service-Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+
+                            @if (ViewBag.ActivateMessage != "")
+                            {
+                                <h4>@ViewBag.ActivateMessage</h4>
+                            }
+                            else
+                            {
+                                <h4>@ViewBag.DeActivateMessage</h4>}
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @if (ViewBag.ActivateMessage != "")
+                    {
+                        <button type="button" onclick="activateAccount()" class="btn btn-success btn-sm">Yes</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No</button>
+                    }
+                    else
+                    {
+
+                        <button type="button" onclick="deActivateAccount()" class="btn btn-success btn-sm">Yes</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">No</button>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+}*@
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+
+        var model = {
+            Id: $("#id").val(),
+            StartTime: $("#startTime").val(),
+            EndTime: $("#endTime").val(),
+            StartDay: $("#startDay").val(),
+            EndDay: $("#endDay").val(),
+        };
+
+        //function Activaet() {
+
+        //}
+
+
+        function updateTime(index) {
+            debugger;
+            $.ajax({
+                type: "POST",
+                url: "/Agent/AgentSystemUser/Index",
+                data: {
+                    Id: $("#id" + index + "").val(),
+                    StartTime: $("#startTime" + index + "").val(),
+                    EndTime: $("#endTime" + index + "").val(),
+                    StartDay: $("#startDay" + index + "").val(),
+                    EndDay: $("#endDay" + index + "").val(),
+                },
+                success: function () {
+
+                },
+                error: function () {
+
+
+                }
+
+
+            });
+        }
+
+
+        var agentId = 0;
+        function activateAccount() {
+
+            window.location.href = "/Agent/AgentSystemUser/Activate?AgentStaffLoginId=" + agentId;
+
+
+        }
+
+        function deactivateAccount() {
+
+            window.location.href = "/Agent/AgentSystemUser/DeActivate?AgentStaffLoginId=" + agentId;
+
+
+        }
+        function activateOrDeactivateAccountModal(activate, agentid) {
+
+            agentId = agentid;
+
+            if (activate == true) {
+                $("#message").text(" Are you sure you want to activate this account? ");
+                $("#activateBtn").show();
+                $("#deactivateBtn").hide();
+            } else {
+                $("#deactivateBtn").show();
+                $("#activateBtn").hide();
+                $("#message").text(" Are you sure you want to deactivate this account? ");
+            }
+
+            $("#activateModal").modal('show');
+
+        }
+    </script>
+}

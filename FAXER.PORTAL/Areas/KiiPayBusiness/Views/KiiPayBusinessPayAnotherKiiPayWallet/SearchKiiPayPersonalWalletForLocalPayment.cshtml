@@ -1,0 +1,156 @@
+﻿@model FAXER.PORTAL.Areas.KiiPayBusiness.ViewModels.SearchKiiPayPersonalWalletForLocalPaymentVM
+@{
+    ViewBag.Title = "SearchKiiPayPersonalWalletForLocalPayment";
+    Layout = "~/Areas/KiiPayBusiness/Views/Shared/_Layout_KiiPayBusiness.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+
+                    <div class="login_signup mb50 clearfix text-center">
+                        <h3>Send Money to a KiiPay Wallet</h3>
+                        <hr>
+                        <div class="form-group">
+                            @Html.DropDownList("PersonalWallets" ,  (IEnumerable<SelectListItem> )ViewBag.RecenltyPaidMobileNo , "Select a Recent Mobile Number"  ,new {  @class="form-blue" , @id = "MobileNo" , @onChange="ChooseMobileNo()"})
+                         
+                        </div>
+
+                        <div class="form-group">
+                            <h2 class="text-primary text-center">OR</h2>
+                        </div>
+
+
+
+
+                        <!--  -->
+                        <div class="form-group contact-no-group">
+                          
+                            @Html.TextBoxFor(model => model.MobileNo, new { @class = "form-blue contact-no-lg", maxlength = "10", minlength = "10", placeholder = "Enter Mobile Number" })
+                            @*<input type="number" class="form-blue contact-no-lg" maxlength="10" minlength="10" placeholder="Enter Mobile Number ">*@
+
+                        </div>
+                        <!--  -->
+
+                        <h4 class="text-center mb30">Sending Money to another Country?   <a href="@Url.Action("SearchKiiPayPersonalWalletForInternatinalPayment")">Change</a></h4>
+
+
+                    </div>
+                    <div class="clearfix"></div>
+
+
+                    <div class="text-center   clearfix">
+                        <hr>
+
+                        <button type="submit" class="btn btn-primary btn-lg  mb30 ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                        
+                        <!-- back btn -->
+                        <div class="clearfix ">
+
+                            <center>
+                                <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                            </center>
+                        </div>
+                        <!-- back btn end-->
+                    </div>
+                </div>
+
+                <!--  -->
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+}
+
+@if (ViewBag.kiiPayBusinessResult.Status == FAXER.PORTAL.Common.ResultStatus.Warning)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">KiiPay Business Alert</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.kiiPayBusinessResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@if (ViewBag.kiiPayBusinessResult.Status == FAXER.PORTAL.Common.ResultStatus.OK)
+{
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true" id="onload" data-backdrop="static" data-keyboard="false">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">×</button>
+                    <h4 class="modal-title">KiiPay Business</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="icon_al">
+                                <i class="fa fa-check-circle" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <h4>@ViewBag.kiiPayBusinessResult.Message</h4>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal">Close alert window</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@section Scripts{
+
+    <script type="text/javascript">
+        
+        
+        function ChooseMobileNo()
+        {
+        
+            var MobileNo = $("#MobileNo").val();
+            $("[name=MobileNo]").val(MobileNo);
+
+        }
+
+    </script>
+    }

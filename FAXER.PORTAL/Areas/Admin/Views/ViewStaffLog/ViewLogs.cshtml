@@ -1,0 +1,98 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.ViewLogsViewModel>
+@{
+    ViewBag.Title = "ViewLogs";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ViewLogs</h2>
+
+
+<div id="page-wrapper">
+    <div class="container-fluid">
+        <div class="row bg-title">
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <h4 class="page-title">View View Logs</h4>
+            </div>
+            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+
+
+                <ol class="breadcrumb">
+                    <li><a href="/Admin/AdminDashboard">Dashboard</a></li>
+                    <li class="active">View View Logs</li>
+                </ol>
+
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="white-box">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped csvprint  " cellspacing="0" width="100%">
+
+
+                            <thead>
+                                <tr>
+                                    <td><strong>SN.</strong></td>
+                                    <td><strong>Staff Name</strong></td>
+                                    <td><strong>Country</strong></td>
+                                    <td><strong>City</strong></td>
+
+                                    <td><strong>Login Level</strong></td>
+                                    <td><strong>Login Date</strong></td>
+                                    <td><strong>Login Time</strong></td>
+                                    <td><strong>Login Location</strong></td>
+                                    <td><strong>Logout Date</strong></td>
+                                    <td><strong>Logout Time</strong></td>
+                                    <td><strong>Logout Location</strong></td>
+                                    <td><strong>Time login to the system (Hours)</strong></td>
+                                    <td><strong>Current staff login status</strong></td>
+
+                                    <td>Action</td>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{ int i = 0;}
+                                @foreach (var item in Model)
+                                        {
+                                            i++;
+
+
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.StaffName</td>
+                                        <td>@item.Country</td>
+                                        <td>@item.City</td>
+                                        <td>@item.LoginLevel</td>
+                                        <td>@item.LoginDate</td>
+                                        <td>@item.LoginTime</td>
+                                        <td>@item.LoginLocation</td>
+                                        <td>@item.LogoutDate</td>
+                                        <td>@item.LogoutTime</td>
+                                        <td>@item.LogoutLocation</td>
+                                        <td>@item.TDESystem</td>
+                                        <td>@item.CurrentLoginStatus</td>
+                                        <td>
+
+                                            <a href="@Url.Action("DeleteStaffLog","ViewStaffLog", new {@id=item.Id })" class="btn btn-danger btn-xs" >Delete</a>
+                                        </td>
+
+                                    </tr>
+                                }
+
+
+                            </tbody>
+                        </table>
+                        <div class="clearfix mt100"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    </div>
+

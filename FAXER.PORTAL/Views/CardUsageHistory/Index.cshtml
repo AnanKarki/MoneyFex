@@ -1,0 +1,317 @@
+﻿@model FAXER.PORTAL.Models.MFTCCardUsageHistoryViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_DashBoardLayout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>Virtual Account's Usage History</h1>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="form-group  row">
+                    <div class="col-lg-3 pull-right">
+                        @if (Model != null)
+                        {
+                            if (Model.MFTCCardId > 0)
+                            {
+                                <h4>Balance on Account @Model.MFTCCardCurrencySymbol @Model.CurrentBalance </h4>
+                            }
+                        }
+                        else
+                        {
+
+                        }
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            @Html.DropDownListFor(x => x.MFTCCardNumber, (IEnumerable<SelectListItem>)ViewBag.MFTCCard, "Select Receiver Virtual Account", htmlAttributes: new { @class = "form-control", id = "TopUpCard", @onchange = "getMFTCCard();" })
+                            @Html.ValidationMessageFor(model => model.MFTCCardNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label id="InvalidCardNumber" style="color:red;display:none;">Please Select Receiver Virtual Account</label>
+                        </div>
+                        <div class="form-group">
+                            @*<select class="form-control" name="CardHistoryOption" id="CardUsageOption">
+                    <option id="0">Select Card Usage History Option</option>
+                    <option id="1">Top-up History</option>
+                    <option id="2">Card Withdrawal History</option>
+                    <option id="3">Card Purchase History</option>
+
+
+                </select>*@
+                            @Html.EnumDropDownListFor(x => x.CardHistoryOption, new { @class = "form-control", id = "CardUsageOption", @onchange = "getMFTCCard();" })
+                            @Html.ValidationMessageFor(model => model.CardHistoryOption, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+
+                    @if (Model != null)
+                    {
+                        if (Model.CardHistoryOption != FAXER.PORTAL.Models.CardUsageHistoryOption.Select_Card_Usage_History_Option)
+                        {
+                            <div class="col-lg-7 pull-right">
+                                <label id="Validate" class="col-lg-4" style="color:red;display:none">Please Enter Valid Date</label>
+                            </div>
+                            <div class="col-lg-7 pull-right">
+
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class=" ">
+                                            From:
+                                        </label>
+                                        <input type="date" id="From" class="form-control">
+
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-lg-4">
+                                    <div class="form-group">
+                                        <label class=" ">
+                                            To:
+                                        </label>
+                                        <input type="date" id="To" class="form-control">
+
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-4">
+                                    <br />
+
+
+                                    <button type="button" class="btn btn-success btn-sm" onclick="Filter()">Search</button>
+                                    <button type="button" class="btn btn-warning btn-sm" onclick="getMFTCCard()">Refresh</button>
+
+                                </div>
+
+                            </div>
+                        }
+                    }
+                </div>
+                @if (Model != null)
+                {
+
+                    if (Model.CardHistoryOption == FAXER.PORTAL.Models.CardUsageHistoryOption.TopUp)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th rowspan="2"><strong>Sn.</strong></th>
+                                    <th colspan="3"><strong>Virtual Account No</strong></th>
+                                    @*<th colspan="3"><strong>Cash withdrawal</strong></th>
+                                        <th colspan="3"><strong>Agent</strong></th>*@
+
+                                </tr>
+                                <tr>
+
+                                    <td><strong>Amount</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Time</strong></td>
+                                    <td><strong>Payment Reference</strong></td>
+                                    
+                                </tr>
+
+                                @{ int J = 0;}
+                                @foreach (var item in Model.MFTCCardTopUpViewModel)
+                                {
+
+                                    J++;
+                                    <tr>
+                                        <td>@J</td>
+                                        <td>@item.TopUpAmount @item.ReceivingCurrency</td>
+                                        <td>@item.TopUpDate</td>
+                                        <td>@item.TopUpTime</td>
+                                        <td>@item.TopUpReference</td>
+
+                                    </tr>
+                                }
+
+
+                            </table>
+                        </div>
+
+                        <br>
+                    }
+                    else if (Model.CardHistoryOption == FAXER.PORTAL.Models.CardUsageHistoryOption.Card_withdrawl)
+                    {
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th rowspan="2"><strong>Sn.</strong></th>
+
+                                    <th colspan="3"><strong>Virtual Account Cash withdrawal</strong></th>
+                                    <th colspan="3"><strong>Agent</strong></th>
+
+                                </tr>
+                                <tr>
+
+                                    <td><strong>Amount</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Time</strong></td>
+                                    <td><strong>Name</strong></td>
+                                    <td><strong>Location</strong></td>
+                                    <td><strong>MF Code</strong></td>
+                                </tr>
+
+                                @{ int K = 0;}
+                                @foreach (var item2 in Model.MFTCCardwithdrawlViewModel)
+                                {
+                                    K++;
+                                    <tr>
+                                        <td>@K</td>
+                                        <td>@item2.WithdrawlAmount @Model.MFTCCardCurrency</td>
+                                        <td>@item2.WithdrawlDate</td>
+                                        <td>@item2.WithdrawlTime</td>
+                                        <td>@item2.AgentName</td>
+                                        <td>@item2.AgentLocation</td>
+                                        <td>@item2.AgentMFCode</td>
+                                    </tr>
+                                }
+
+
+                            </table>
+                        </div>
+                        <br>
+                    }
+                    if (Model.CardHistoryOption == FAXER.PORTAL.Models.CardUsageHistoryOption.Card_Purchase)
+                    {
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th rowspan="2"><strong>Sn.</strong></th>
+                                    <th colspan="5"><strong>Virtual Account Purchase And Payments</strong></th>
+
+
+                                </tr>
+                                <tr>
+                                    <td><strong>Amt</strong></td>
+                                    <td><strong>Name of Service Provider</strong></td>
+                                    <td><strong>Address</strong></td>
+                                    <td><strong>Business / Virtual Account No</strong></td>
+                                    <td><strong>Date</strong></td>
+                                    <td><strong>Time </strong></td>
+
+                                </tr>
+                                @{int i = 0;}
+                                @foreach (var item in Model.MFTCCardBusinessMerchantPaymentViewModel)
+                                {
+                                    i++;
+                                    <tr>
+                                        <td>@i</td>
+                                        <td>@item.BusinessMerchantName</td>
+                                        <td>@item.PaymentAmount @Model.MFTCCardCurrency</td>
+                                        <td>@item.BusinessLocation</td>
+                                        <td>@item.BusinessMFCode</td>
+                                        <td>@item.PaymentDate</td>
+                                        <td>@item.PaymentTime</td>
+
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                    }
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--  -->
+<!--  -->
+<div class="dynamic_footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2  ">
+                <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-sm hidden-xs"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+                <a id="proceed_payment" class="fbtn btn-next" onclick="TopUpMoneyFexCard()">Deposit Money <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                <br />
+                <a href="@FAXER.PORTAL.Common.FaxerSession.BackButtonURL" class="fbtn btn-back hidden-lg hidden-md"><i class="fa fa-chevron-left" aria-hidden="true"></i> Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function Filter() {
+
+
+            var MFTCCardId = document.getElementById("TopUpCard").value;
+            var cardHistoryOption = $("#CardUsageOption").val();
+            var from = $("#From").val();
+            var To = $("#To").val();
+            if (from == null || from == "") {
+                $("#Validate").show();
+            }
+            else if (To == null || To == "") {
+
+                $("#Validate").show();
+            }
+            else {
+                var fromParts = from.split('-');
+                var newDateFrom = new Date(fromParts[0], fromParts[1] - 1, fromParts[2]);
+                var ToParts = To.split('-');
+                var newDateTo = new Date(ToParts[0], ToParts[1] - 1, ToParts[2]);
+                if (newDateFrom.getFullYear().toString().length != "4" || newDateTo.getFullYear().toString().length != "4") {
+                    $("#Validate").show();
+
+                }
+                else if (newDateFrom > newDateTo) {
+
+                    $("#Validate").show();
+
+                }
+                else {
+                    $("#Validate").hide();
+                    window.location.href = "/CardUsageHistory/Index?mFTCCardInformationId=" + MFTCCardId + "&card_usage_HistoryOption=" + cardHistoryOption + "&FromDate=" + from + "&ToDate=" + To;
+                }
+            }
+
+        }
+        function getMFTCCard() {
+            var MFTCCardId = document.getElementById("TopUpCard").value;
+            var CardHistoryOption = document.getElementById("CardUsageOption").value;
+
+            $("#InvalidCardNumber").hide();
+            window.location.href = "/CardUsageHistory/Index?mFTCCardInformationId=" + MFTCCardId + "&card_usage_HistoryOption=" + CardHistoryOption;
+
+        }
+
+        function TopUpMoneyFexCard() {
+
+            var MFTCCardId = $("#TopUpCard").val();
+
+            if (MFTCCardId == 0) {
+
+                $("#InvalidCardNumber").show();
+            }
+            else {
+                $("#InvalidCardNumber").hide();
+                window.location.href = "/StartFaxingMoney/Index?mFTCCardInformationId=" + MFTCCardId;
+
+            }
+        }
+
+
+    </script>
+}

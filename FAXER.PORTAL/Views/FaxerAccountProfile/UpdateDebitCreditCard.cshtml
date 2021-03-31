@@ -1,0 +1,102 @@
+﻿@model  FAXER.PORTAL.Models.SenderAddMoneyCardViewModel
+@{
+    ViewBag.Title = "UpdateDebitCreditCard";
+    Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+
+}
+@using (Html.BeginForm())
+{
+    <!--  -->
+    <div class="real_form pattern2 pdt40 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+                    <div class="login_signup mb50 clearfix text-center">
+                        <div class="clearfix">
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <img src="~/images/icon/card/visa.png" alt="" width="35"> &nbsp;&nbsp; <img src="~/images/icon/card/master-card.png" alt="" width="35">
+                                @*&nbsp;&nbsp; <img src="~/images/icon/card/ae.png" alt="" width="35">
+                                &nbsp;&nbsp;<img src="~/images/icon/card/maestro.png" alt="" width="35">*@
+                            </div>
+                            <div class="panel-body text-left mt20">
+                                <div class="row">
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.EnumDropDownListFor(model => model.SelectCard, new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(model => model.SelectCard, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.EditorFor(model => model.CardNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "Card Number" } })
+                                            @Html.ValidationMessageFor(model => model.CardNumber, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.ExpiringDateMonth, new { htmlAttributes = new { @class = "form-control", @placeholder = "MM" } })
+                                            @Html.ValidationMessageFor(model => model.ExpiringDateMonth, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.ExpiringDateYear, new { htmlAttributes = new { @class = "form-control", @placeholder = "MM" } })
+                                            @Html.ValidationMessageFor(model => model.ExpiringDateYear, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.EditorFor(model => model.SecurityCode, new { htmlAttributes = new { @class = "form-control", @placeholder = "Security Code" } })
+                                            @Html.ValidationMessageFor(model => model.SecurityCode, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+                                    <!--  -->
+                                    <div class="col-lg-12">
+                                        <div class="form-group">
+
+                                            @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control", @placeholder = "Address" } })
+                                            @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+
+                                        </div>
+                                    </div>
+                                    <!--  -->
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="text-center  clearfix">
+                            <hr>
+                            <button type="submit" class="btn btn-primary btn-lg mb30">Confirm & Add <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+                    <!--  -->
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

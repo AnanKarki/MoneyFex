@@ -1,0 +1,35 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear HR Admin,
+    </p>
+    <br />
+    <p>
+        The candidate with the following information has submitted a application.
+    </p>
+    <p>
+        Job information is as follows:
+        <br />
+        Name of Canditate - @ViewBag.CandidateName
+        <br />
+        Canditate Telephone: @ViewBag.Telephone
+        <br />
+        Candidate Email: @ViewBag.Email
+        <br />
+        Candidate Country: @ViewBag.Country
+        <br />
+        Candidate City: @ViewBag.City
+        <br />
+        Job title: @ViewBag.JobTitle
+    </p>
+
+    <p>
+        Please see resume and Cover Letter attached.
+
+
+
+</div>

@@ -1,0 +1,288 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Transfer Calculator  </h4>
+                                    <button onclick="window.history.go(-1);" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-angle-left m-r-5"></i> Back
+                                    </button>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-lg-6  col-sm-12 col-xs-12 offset-lg-3">
+
+                                            <form action="set-commission_submit" method="get" accept-charset="utf-8">
+                                                <div class="row">
+                                                    <!--  -->
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-calculate" placeholder="Amount to be sent" id="SendingAmount1" name="SendingAmount1" onkeyup="GetPaymentSummary(false)" step=".03">
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <select class="form-calculate js-example-templating" id="SendingCountrydiv" onchange="GetPaymentSummary(false)">
+
+                                                                <option value="GB" selected>GBP United kingdom</option>
+                                                                <option value="NG" >NGN Nigeria</option>
+                                                                <option value="CM">XAF Cameroon</option>
+                                                                <option value="GH">GHS Ghana</option>
+
+                                                                <!--   <option value="GB">United kingdom (GBP)</option>
+                                                                <option value="NG">Nigeria (NGN)</option>
+                                                                <option value="CM">Cameroon (XAF)</option>
+                                                                <option value="GH">Ghana (GHS)</option> -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="clearfix"></div>
+                                                    <!--  -->
+                                                    <div class="col-lg-8">
+                                                        <div class="form-group">
+                                                            <input type="number" class="form-calculate" placeholder="Amount to be received" id="ReceivingAmount" name="ReceivingAmount" onkeyup="GetPaymentSummary(true)" step=".03">
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-4">
+                                                        <div class="form-group">
+                                                            <select class="form-calculate js-example-templating" id="ReceivingCountrydiv" onchange="GetPaymentSummary(false)">
+                                                                <option value="GB">GBP United kingdom</option>
+                                                                <option value="NG" selected>NGN Nigeria</option>
+                                                                <option value="CM">XAF Cameroon</option>
+                                                                <option value="GH">GHS Ghana</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <div class="clearfix"></div>
+
+                                                    <!--  -->
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <select class="form-calculate" id="TransferType" onchange="GetPaymentSummary(false)">
+                                                                <option value="0">Select Transfer Type</option>
+                                                                <option value="1">Online</option>
+                                                                <option value="2">Agent</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-12">
+                                                        <div class="form-group">
+                                                            <select class="form-calculate" id="TransferMethod" onchange="GetPaymentSummary(false)">
+                                                                <option value="7">Select Transfer Method</option>
+                                                                <option value="1">Cash Pickup</option>
+                                                                <option value="2">KiiPay Wallet</option>
+                                                                <option value="3">Other Mobile Wallets</option>
+                                                                <option value="4">Bank Deposit</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-lg-7">
+                                                        <div class="form-group m-t-10">
+                                                            <h5 class="text-dark ">Does the amount include fee? </h5>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-sm-5">
+                                                        <div class="form-radio">
+                                                            <div class="radio   radio-primary radio-inline">
+                                                                <label>
+                                                                    <input type="radio" name="primary" value="free" data-bv-field="member" class="input-danger" id="primary2" onclick="GetPaymentSummary(false)">
+                                                                    <i class="helper" for="primary2"></i>Yes
+                                                                </label>
+                                                            </div>
+                                                            <div class="radio   radio-primary radio-inline">
+                                                                <label>
+                                                                    <input type="radio" name="primary" value="personal" data-bv-field="member" class="input-danger" id="primary1" onclick="GetPaymentSummary(false)" checked>
+                                                                    <i class="helper" for="primary"></i>No
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!--  -->
+                                                    <!--  -->
+                                                    <div class="col-sm-12 m-t-20 m-b-20">
+                                                        Exchange rate <span data-outbound-currency="GBP" name="SendingCurrency"></span>1 = <span class="text-primary text-center" data-inbound-currency="GHS" name="ReceivingCurrency"></span>   <span name="ExchangeRate"> </span>
+
+                                                    </div>
+                                                    <!--  -->
+
+                                                    <div class="col-sm-12">
+                                                        <div class="estimate-calculator">
+
+                                                            <div class="wrapper">
+                                                                <dl>
+                                                                    <dt>Fee</dt>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="Fee"> </dd>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="SendingCurrencySymbol"> </dd>
+
+                                                                </dl>
+                                                                <dl>
+                                                                    <dt>You pay</dt>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="TotalAmount"> </dd>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="SendingCurrencySymbol"> </dd>
+                                                                </dl>
+                                                                <dl>
+                                                                    <dt>They receive</dt>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="ReceivingAmount"> </dd>
+                                                                    <dd class="fee" data-outbound-currency="USD" name="ReceivingCurrencySymbol">
+
+                                                                    </dd>
+                                                                </dl>
+                                                                <div class="clearfix"></div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer bg-light">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <button type="button" class="btn btn-lg btn-block btn-primary btn-round pull-right" onclick="TransferButton();"><i class="fa fa-send"></i> Transfer</button>
+
+
+                                            <button type="button" class="btn btn-lg btn-block text-primary btn-link btn-round pull-right" onclick="window.print();return false;"><i class="fa fa-print"></i> Print</button>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+    {
+
+    <script type="text/javascript">
+
+        var SendingCountry = "";
+        var ReceivingCountry = "";
+        $("#SendingAmount1").val(1);
+        $("#TransferType").val(1);
+        $("#TransferMethod").val(4);
+
+        function GetPaymentSummary(IsReceivingAmount) {
+
+            var IsFeeIncluded = $("input[name='primary']")[0].checked;
+            var SendingAmount = $("#SendingAmount1").val();
+            var ReceivingAmount = $("#ReceivingAmount").val();
+            
+            var SendingCountry = $("#SendingCountrydiv").val();
+            var ReceivingCountry = $("#ReceivingCountrydiv").val();
+            var IsReceivingAmount = IsReceivingAmount;
+
+            var TransferType = $("#TransferType").val();
+            var TransferMethod = $("#TransferMethod").val();
+
+
+            $.getJSON("/Admin/TransferCalculator/GetPaymentSummary?SendingAmount="
+                + SendingAmount +
+                "&ReceivingAmount=" + ReceivingAmount +
+                "&SendingCountry=" + SendingCountry +
+                "&ReceivingCountry=" + ReceivingCountry +
+                "&IsReceivingAmount=" + IsReceivingAmount +
+                "&IsFeeIncluded=" + IsFeeIncluded +
+                "&TransferType=" + TransferType +
+                "&TransferMethod=" + TransferMethod,
+                function (result) {
+
+                    for (var item in result) {
+
+                        var selector = '[name="' + item + '"]';
+                        $(selector).val(result[item]);
+                        $(selector).text(result[item]);
+                    }
+                })
+        }
+        $("#SendingAmount1").keyup();
+
+        $("#ReceivingCountrydiv").change(function () {
+
+            this.change
+            GetPaymentSummary(true);
+        })
+        $("#SendingCountrydiv").change(function () {
+
+            GetPaymentSummary(false);
+        })
+
+        $("#SendingAmount1").focus(function () {
+
+            if ($("#SendingAmount1").val() == 1) {
+
+                $("#SendingAmount1").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+
+        })
+
+        $("#ReceivingAmount").focus(function () {
+
+            if ($("#SendingAmount1").val() == 1) {
+
+                $("#SendingAmount1").val("");
+                $("#ReceivingAmount").val("");
+            }
+
+        })
+
+        $(document).on('data-selectedcountry', function () {
+
+            alert('Data changed to: ' + "");
+        });
+
+        function TransferButton() {
+          
+            var TransferMethod = $("#TransferMethod").val();
+            window.location.href = "/Admin/TransferCalculator/AgentSendMoneyNow?TransferMethod=" + TransferMethod;
+        }
+
+    </script>
+}

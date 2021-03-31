@@ -1,0 +1,58 @@
+﻿@model FAXER.PORTAL.Models.SearchKiiPayWalletVM
+
+    @{
+        /**/
+
+        ViewBag.Title = "Index";
+        Layout = "~/Views/Shared/_New_Dashboard_Layout.cshtml";
+    }
+
+    @using (Html.BeginForm())
+    {
+        <!--  -->
+        <div class="real_form pattern2 pdt40 ">
+            <div class="container">
+
+                <div class="row">
+
+                    <div class="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 ">
+
+
+                        <div class="login_signup mb50 clearfix ">
+                            <h3 class="text-center">Send Money to a Family & Friends</h3>
+                            <hr>
+
+                            <div class="form-group mb30">
+                                <label>Registered wallet</label>
+                                @Html.DropDownListFor(model => model.MobileNo, (IEnumerable<SelectListItem>)ViewBag.RegisteredWallets, "Select Wallet", new { @class = "form-blue" })
+                                @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "text-danger" })
+                            </div>
+
+
+                        </div>
+                        <div class="clearfix"></div>
+
+
+                        <div class="text-center   clearfix">
+                            <hr>
+
+                            <button type="submit" class="btn btn-primary btn-lg  mb30 ">Continue <i class="fa fa-chevron-right" aria-hidden="true"></i></button>
+                            <!-- back btn -->
+                            <div class="clearfix ">
+
+                                <center>
+                                    <a href="javascript:history.back()" class=" "><i class="fa fa-chevron-left" aria-hidden="true"></i> Go Back </a>
+                                </center>
+                            </div>
+                            <!-- back btn end-->
+                        </div>
+                    </div>
+
+                    <!--  -->
+
+                </div>
+
+            </div>
+        </div>
+
+    }

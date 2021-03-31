@@ -1,0 +1,150 @@
+﻿@model List<FAXER.PORTAL.Areas.Admin.ViewModels.PayoutFlowControlViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left m-t-5 m-b-0">Payount Flow Control</h4>
+                                    <a href="@Url.Action("SetPayoutFlowControl","PayoutFlowControl")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Set-up Flow
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table id="basic-btn" class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN.</th>
+                                                    <th>Sending Currency</th>
+                                                    <th>Receiving Currency</th>
+                                                    <th>Payout API</th>
+                                                    <th>Payout Provider</th>
+                                                    <th>Action 1</th>
+
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{ int i = 0;}
+                                                @foreach (var item in Model)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td> @item.Master.SendingCurrency</td>
+
+                                                        <td>@item.Master.ReceivingCurrency</td>
+                                                        <td>@item.Master.PayoutApi</td>
+                                                        <td>
+                                                            @foreach (var details in item.Details.Where(x => x.PayoutFlowControlId == item.Master.Id))
+                                                            {
+                                                                @details.PayoutProviderName
+                                                                <br />
+                                                            }
+
+                                                        </td>
+                                                        <td>
+                                                            <label class="toggleSwitch nolabel" onchange="EnablePayout('@item.Master.Id')">
+                                                                @Html.CheckBoxFor(x => item.Master.IsPayoutEnabled)
+
+                                                                <span>
+                                                                    <span>OFF</span>
+                                                                    <span>ON</span>
+                                                                </span>
+                                                                <a></a>
+                                                            </label>
+                                                        </td>
+
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("SetPayoutFlowControl","PayoutFlowControl" , new { id = item.Master.Id})" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="#" onclick="DeletePopUp(@item.Master.Id)" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            </tbody>
+
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal" id="EnablePayoutModal" role="dialog">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Payount Flow Control </h4>
+                <button type="button" class="close" onclick="ReloadPage()" id="CloseBtnHeader">×</button>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+
+                </div>
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-8">
+                    <p id="EnabledMessage"></p>
+
+                </div>
+                <button type="button" class="btn btn-danger btn-sm f-right btn-round" id="CloseBtnFooter" onclick="ReloadPage()">Ok</button>
+
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function EnablePayout(payoutFlowControlId) {
+            $.getJSON("/Admin/PayoutFlowControl/EnablePayout?PayoutFlowControlId=" + payoutFlowControlId, function (result) {
+                $("#EnablePayoutModal").modal('show');
+                $("#EnabledMessage").text(result.Data);
+            });
+        }
+        function ReloadPage() {
+            window.location.reload();
+        }
+
+        function DeletePopUp(id) {
+            Riddha.UI.Confirm("Are you sure you want to Delete?", function () {
+                Riddha.ajax.get("/Admin/PayoutFlowControl/Delete?id=" + id, null)
+                    .done(function (result) {
+                        if (result.Data == true) {
+                            Riddha.UI.SuccessPopUp(result.Message, "success", 0);
+                        }
+                        else {
+                            Riddha.UI.Alert(result.Message, "warning", 0);
+                        }
+                    });
+            });
+        }
+    </script>
+}

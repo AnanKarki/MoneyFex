@@ -1,0 +1,236 @@
+﻿@using PagedList;
+@using PagedList.Mvc
+@model IPagedList<FAXER.PORTAL.Areas.Agent.Models.AgentFundAccountViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">Account Funding</h4>
+                                    <a href="@Url.Action("SetFundAccount", "AUXAgentFundAccount")" class=" btn btn-primary f-right btn-round">
+                                        <i class="fa fa-plus m-r-5"></i>Fund Account
+                                    </a>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="row m-t-20 m-b-20">
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @*<input type="text" name="datefilter" class=" form-control form-control-round form-control-bold" value="" placeholder="From to Date" autocomplete="off" id="datefilter" onchange="filter();">*@
+
+                                                <input type="text" name="dates" class="form-control form-control-round form-control-bold" placeholder="From to Date" id="dates" onchange="filter();">
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Country", (IEnumerable<SelectListItem>)ViewBag.Country, "Select Country", new { @class = "form-control  form-control-round form-control-bold", @id = "Country", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <!--  -->
+                                        <div class="col-xl-4 col-md-6">
+                                            <div class="form-group">
+                                                @Html.DropDownList("Agent", (IEnumerable<SelectListItem>)ViewBag.Agent, "Select Agent", new { @class = "form-control  form-control-round form-control-bold", @id = "Agent", @onchange = "filter();" })
+
+                                            </div>
+                                        </div>
+                                        <!--  -->
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By AuX Agent Code  " class="form-control form-control-round form-control-bold" name="AuXAgentCode" id="AuXAgentCode" value="@ViewBag.AuXAgentCode" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Reference No " class="form-control form-control-round form-control-bold" name="Reference" id="Reference" value="@ViewBag.Reference" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Responsible Person" class="form-control form-control-round form-control-bold" name="ResponsiblePerson" id="ResponsiblePerson" value="@ViewBag.ResponsiblePerson" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Status " class="form-control form-control-round form-control-bold" name="Status" id="Status" value="@ViewBag.Status" onchange="filter();">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6">
+                                            <div class="form-group">
+                                                <input type="text" placeholder="Search By Details  " class="form-control form-control-round form-control-bold" name="Details" id="Details" value="@ViewBag.Details" onchange="filter();">
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="dt-responsive table-responsive">
+                                        <table class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+                                                    <th>SN.</th>
+                                                    <th>Country</th>
+                                                    <td>Agent</td>
+                                                    <th>AUX Agent Code</th>
+                                                    <th>Amount</th>
+                                                    <th>Reference</th>
+                                                    <th>Date</th>
+                                                    <th>Responsible Person</th>
+                                                    <th>Status</th>
+                                                    <th>Details</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                @{ int i = 0;}
+
+                                                @foreach (var item in Model)
+                                                {
+                                                    i++;
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td><i class="flag flag-icon flag-icon- @item.AgentCountryFlag"></i> @item.AgentCountry</td>
+                                                        <td><a href="@Url.Action("Index" ,"RegisteredAUXAgent" , new { @LoginCode =item.AgentCode})">@item.AgentName</a></td>
+                                                        <td>@item.AgentCode</td>
+                                                        <td>@item.Amount @item.AgentCountryCurrency</td>
+                                                        <td>@item.PaymentReference</td>
+                                                        <td>@item.Date</td>
+                                                        <td> @item.ResponsiblePerson</td>
+                                                        <td>@item.StatusName</td>
+                                                        <td>
+                                                            <a href="@Url.Action("FundDetails","AUXAgentFundAccount" , new { @id= item.Id})">
+                                                                @item.Receipt
+                                                            </a>
+                                                        </td>
+                                                        <td class="action-icon">
+
+                                                            @if (item.Status == FAXER.PORTAL.DB.AgentFundStatus.Processing)
+                                                            {
+                                                                if (item.SenderPaymentMode != FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard)
+                                                                {
+                                                                    <a href="@Url.Action("SetFundAccount","AUXAgentFundAccount" , new { @id= item.Id})" class="btn btn-sm btn-round btn-primary">Edit</a>
+                                                                }
+                                                                if (item.SenderPaymentMode == FAXER.PORTAL.Models.SenderPaymentMode.CreditDebitCard)
+                                                                {
+                                                                    <a onclick="CheckPaymentStatus('@item.Receipt')" class="btn btn-sm btn-round btn-primary">Check Payment</a>
+                                                                }
+                                                                <a href="@Url.Action("Approved","AUXAgentFundAccount" , new { @Id =item.Id })" class="btn btn-sm btn-round btn-success">Approve</a>
+                                                            }
+
+                                                        </td>
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+
+                                        </table>
+                                        Page @(Model.PageCount<Model.PageNumber?0:Model.PageNumber) of @Model.PageCount
+                                        @Html.PagedListPager(Model, page => Url.Action("Index", new { @page = page }))
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<div class="modal" id="TransactionStatus" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Card Payment</h5>
+                <a class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </a>
+            </div>
+            <div class="modal-body">
+                <div id="TransactionResult"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+
+        function filter() {
+
+            var Country = $("#Country").val();
+            var Agent = $("#Agent").val();
+            var date = $('input[name="dates"]').val();
+            var AuXAgentCode = $("#AuXAgentCode").val();
+            var Reference = $("#Reference").val();
+            var ResponsiblePerson = $("#ResponsiblePerson").val();
+            var Status = $("#Status").val();
+            var Details = $("#Details").val();
+            window.location.href = "/Admin/AUXAgentFundAccount/Index?DateRange=" + date + "&Country=" + Country + "&Agent=" + Agent +
+                "&AuXAgentCode=" + AuXAgentCode + " & Reference=" + Reference + " & ResponsiblePerson=" + ResponsiblePerson + " & Status=" + Status + " & Details=" + Details;
+        }
+
+        $(".applyBtn").click(function () {
+            var date = $('input[name="dates"]').val();
+
+            filter();
+        });
+            $('input[name="dates"]').val('@ViewBag.DateRange');
+
+
+            function TransactionStatusModel(item) {
+
+                var Transactionmodel = {
+                    Status: item.Status,
+                    Amount: item.Amount,
+                    Reference: item.Reference,
+                    Date: item.Date
+                }
+                return Transactionmodel;
+            };
+
+            function CheckPaymentStatus(identifier) {
+                $.getJSON("/Admin/AUXAgentFundAccount/CheckPaymentStatus?refno=" + identifier, function (result) {
+                    $("#TransactionResult p").remove();
+                    var Transactionmodel = TransactionStatusModel(result.Data);
+                    for (var item in Transactionmodel) {
+
+                        $("#TransactionResult").append('<p>' + '<b> ' + item + '</b> :' + Transactionmodel[item] + '</p>');
+                    }
+                    $("#TransactionStatus").modal('show');
+                });
+
+            }
+    </script>
+}

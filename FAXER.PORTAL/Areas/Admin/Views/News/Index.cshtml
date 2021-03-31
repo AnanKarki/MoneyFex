@@ -1,0 +1,171 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model FAXER.PORTAL.Areas.Admin.ViewModels.MasterNews
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/New_Layout.cshtml";
+}
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+        window.onload = function () {
+            Riddha.UI.Toast("@ViewBag.Message", 4);
+        };
+    </script>
+}
+
+<div class="pcoded-content">
+    <div class="pcoded-inner-content">
+
+        <div class="main-body">
+            <div class="page-wrapper">
+
+                <div class="page-body">
+                    <div class="row">
+
+                        <div class="col-sm-12">
+
+                            <div class="card">
+
+                                <div class="card-header border-bottom  ">
+                                    <h4 class="f-left f-left m-t-5 m-b-0">News</h4>
+
+
+                                    <a href="@Url.Action("AddNewNews", "News")" class="btn btn-primary f-right btn-round">
+                                        <i class="icofont icofont-plus m-r-5"></i> Add News
+                                    </a>
+
+
+
+                                </div>
+
+                                <div class="card-body">
+
+                                    <div class="row">
+                                        <div class="col-lg-4  col-sm-12 col-xs-12 offset-lg-4">
+                                            <div class="form-group  ">
+                                                <input type="text" class=" form-control form-control-round form-control-bold" value="" placeholder="Date From to" autocomplete="off" name="dates" id="dates" onchange="filter();">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="dt-responsive table-responsive">
+                                        <table @*id="basic-btn"*@ class="table table-striped table-bordered nowrap">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Headline</th>
+
+                                                    <th>Publish Date</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @foreach (var item in Model.NewsViewModel)
+                                                {
+                                                    <tr>
+                                                        <td>
+                                                            <a href="#" onclick="showNews(@item.Id, this);">@item.Headline </a>
+                                                        </td>
+
+                                                        <td>@item.Date @item.Time</td>
+                                                        <td class="action-icon">
+                                                            <a href="@Url.Action("AddNewNews", "News", new { @id = item.Id })" class="m-r-15 text-success" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit"><i class="icofont icofont-ui-edit"></i></a>
+                                                            <a href="@Url.Action("DeleteNews", "News", new { @id = item.Id })" class="text-red alert-confirm " data-toggle="tooltip" data-placement="top" title="" data-original-title="Delete"><i class="icofont icofont-delete-alt"></i></a>
+                                                        </td>
+
+                                                    </tr>
+
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                        Page @(Model.NewsViewModel.PageCount < Model.NewsViewModel.PageNumber ? 0 :
+                                                        Model.NewsViewModel.PageNumber) of @Model.NewsViewModel.PageCount
+
+                                                        @Html.PagedListPager(Model.NewsViewModel, page => Url.Action("Index",
+                                                            new { @page = page }))
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- popup -->
+                <div class="modal fade" id="show_message" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+
+                            <div class="modal-body text-justify">
+                                <div id="spa">
+                                    <img src="" id="ImageUrl" name="ImageUrl" alt=" " style="float: left; margin-right: 15px; width: 300px;">
+                                </div>
+
+                                <h5><span id="Title" name="Title"></span></h5>
+
+
+
+                                <p><span id="FullBody" name="FullBody"></span></p>
+                                <text style="display:none" id="IdForEdit"></text>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger btn-round" data-dismiss="modal"><i class="fa fa-remove"></i> Close</button>
+                                <a href="#" onclick="Edit()" class="btn btn-primary btn-round"><i class="icofont icofont-ui-edit"></i> Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @section scripts{
+                    <script type="text/javascript">
+
+
+        function filter() {
+            var date = $("#dates").val();
+            window.location.href = "/Admin/News/Index?Date=" +date;
+        }
+
+
+        $('input[name="dates"]').val('@ViewBag.DateRange');
+            function showNews(Id, control) {
+                $.getJSON("/Admin/News/showNews?id=" + Id, function (data) {
+                    document.getElementById("IdForEdit").innerHTML = data.Id;
+                    document.getElementById("Title").innerHTML = data.Title;
+                    document.getElementById("FullBody").innerHTML = data.FullBody;
+                    document.getElementById("spa").getElementsByTagName("img")[0].src = data.ImageUrl;
+                    if (data.ImageUrl == "" || data.ImageUrl == undefined) {
+                        $("#ImageUrl").hide();
+                    }
+                    else {
+
+                        $("#ImageUrl").show();
+                    }
+
+                });
+                $("#show_message").modal("show");
+            }
+
+            function Edit() {
+               var id= $("#IdForEdit").text();
+                window.location.href = "/Admin/News/AddNewNews?Id=" + id;
+
+        }
+
+        $(".applyBtn").click(function () {
+
+            var date = $('input[name="dates"]').val();
+            filter();
+        });
+                    </script>
+
+
+                }

@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "MFBCRegistrationConfirmation";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <h1>MFBC Registration Confirmation</h1>
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2">
+
+                <form>
+
+                    <p>You have successfully registered a MoneyFex Business Card, a confirmation SMS text and email messages have been sent to your card user.</p>
+                    <p>	While waiting for the MFBC to be sent, your card user can now use the confirmation SMS text message or email sent to him/her together with his/her ID Card to withdraw money form one of our agents in their country of residence.</p>
+
+                    <!--  -->
+                    <a href="@Url.Action("Index" , "BusinessHome")" class="btn btn-primary pull-right "> Go to Business dashboard</a>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->

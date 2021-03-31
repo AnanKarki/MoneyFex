@@ -1,0 +1,39 @@
+﻿
+@{
+    Layout = "~/Areas/EmailTemplate/Views/Shared/_Layout_Email.cshtml";
+}
+
+<div style="padding:20px">
+    <p>
+        Dear @ViewBag.FaxerName ,
+    </p>
+    <p>
+        This is to confirm that the following MoneyFex Virtual Account has been automatically Deposited:
+    </p>
+    <p>
+        Account User Name: <b> @ViewBag.CardUserName</b>
+    </p>
+    <p>
+        Account No:  <b>@ViewBag.CardNumber </b>
+    </p>
+    <p>
+        Accout User Country: <b> @ViewBag.CardUserCountry </b>
+    </p>
+    <p>
+        Account User City: <b> @ViewBag.CardUserCity </b>
+    </p>
+    <p>
+        Deposited Amount: <b> @ViewBag.TopUpAmount </b>
+    </p>
+
+    <p>
+        Please find attached a receipt to confirm this transaction.
+    </p>
+    <p>
+        You can view your auto Deposited payments in your dashboard
+    </p>
+    <br />
+
+ 
+
+</div>

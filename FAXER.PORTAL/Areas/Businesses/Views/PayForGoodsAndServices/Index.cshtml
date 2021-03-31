@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Businesses/Views/Shared/_Business_Layout.cshtml";
+}
+
+
+<!--  -->
+<div class="dynamic_bg_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h1>Pay for goods &  services</h1>
+
+
+
+
+            </div>
+
+
+
+
+
+        </div>
+    </div>
+
+
+</div>
+<!--  -->
+<!--  -->
+<div class="real_form">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 col-lg-offset-1">
+
+                <h3 class="">Select Payment Type</h3>
+                <br>
+                <form>
+
+
+                    <a href="@Url.Action("Index","MerchantNationalPayment")" class="btn btn-primary">National Payment</a>
+                    &nbsp; &nbsp;
+                    <div class="hidden-lg hidden-md"><br></div>
+                    <a href="@Url.Action("Index" ,"MerchantInternationalPayment")" class="btn btn-success">International Payment</a>
+
+
+                </form>
+                <div style="height:300px;"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+
